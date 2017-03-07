@@ -1,0 +1,10 @@
+pageObjectName,elementId,version,id
+LoginPageImpl,usernameField,1,UserName
+LoginPageImpl,passwordField,1,Password
+LoginPageImpl,submitButton,1,FormSubmitBtn
+DisclaimerNotificationImpl,disclaimerCheckbox,1,checkboxDisclaimer
+DisclaimerNotificationImpl,disclaimerSubmitBtn,1,disclaimer_submit
+TopNavigationPageImpl,loginBtn,1,login_btn
+TopNavigationPageImpl,myAccountBtn,1,myaccount_btn
+LoginErrorNotificationImpl,errorNotification,1,login_deposit_error
+LoginErrorNotificationImpl,errorCloseBtn,1,close_error_btn

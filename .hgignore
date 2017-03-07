@@ -1,0 +1,30 @@
+target/
+.mvn/
+mvnw
+mvnw.cmd
+test-output/
+upload-dir/
+public/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+^.*\.idea$
+^.+\.iml$
+^.*\.log$
+^.*\.iws
+^.*\.ipr$
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
