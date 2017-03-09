@@ -1,16 +1,17 @@
 package com.betamedia.qe.af.common.holder;
 
-import lombok.AllArgsConstructor;
-
 import java.util.Properties;
 
 /**
  * @author Maksym Tsybulskyy
  *         Date: 2/28/17.
  */
-@AllArgsConstructor
 public class SUTPropertiesHolderImpl implements SUTPropertiesHolder {
     private Properties properties;
+
+    public SUTPropertiesHolderImpl(Properties properties) {
+        this.properties = properties;
+    }
 
     @Override
     public <T> T get(String key) {
@@ -19,6 +20,6 @@ public class SUTPropertiesHolderImpl implements SUTPropertiesHolder {
 
     @Override
     public void set(Properties properties) {
-        this.properties=properties;
+        this.properties = properties;
     }
 }

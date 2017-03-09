@@ -67,7 +67,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
