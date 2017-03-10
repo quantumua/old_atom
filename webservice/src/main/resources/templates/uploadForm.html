@@ -2,12 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<div th:if="${message}">
-    <h2 th:text="${message}"/>
-</div>
-
 <div>
-    <form method="POST" enctype="multipart/form-data" action="/af/run/upload">
+    <form method="POST" enctype="multipart/form-data" action="/af/upload">
         <table>
             <tr><td>Properties to upload:</td><td><input type="file" name="properties" /></td></tr>
             <tr><td>Suite to upload:</td><td><input type="file" name="suites[]" th:multiple="true"/></td></tr>

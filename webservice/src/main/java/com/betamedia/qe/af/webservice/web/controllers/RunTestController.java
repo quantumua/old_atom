@@ -39,9 +39,6 @@ public class RunTestController {
     @Autowired
     private BeanFactory beanFactory;
 
-    @Autowired
-    private StorageService storageService;
-
     @RequestMapping(method = GET)
     public ResponseEntity<String> run(@Valid RunTestParams params) {
         try {
@@ -55,37 +52,6 @@ public class RunTestController {
             return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("properties") MultipartFile properties,
-                                                   @RequestParam("suites[]") MultipartFile[] suites,
-                                                   @RequestParam("dataSources[]") MultipartFile[] dataSources,
-                                                   RedirectAttributes redirectAttributes) throws IOException {
-        try {
-            SUTPropertiesHolder bean = (SUTPropertiesHolder) beanFactory.getBean("scopedTarget.sutPropertiesHolder", getProperties(properties));
-            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-            requestAttributes.setAttribute("sutPropertyHolder", bean, RequestAttributes.SCOPE_REQUEST);
-
-            List<String> suitePaths = Arrays.stream(suites)
-                    .map(storageService::store)
-                    .collect(Collectors.toList());
-
-            Arrays.stream(dataSources)
-                    .filter(d -> !d.isEmpty())
-                    .forEach(d -> {
-                        String path = storageService.store(d);
-                        requestAttributes.setAttribute(d.getOriginalFilename(), path, RequestAttributes.SCOPE_REQUEST);
-                    });
-
-            RequestContextHolder.setRequestAttributes(requestAttributes, true);
-
-            runTestHandler.handle(new RunTestParams(null, suitePaths, null));
-            return new ResponseEntity<>("success", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
 
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity handleStorageFileNotFound(StorageFileNotFoundException exc) {
@@ -117,11 +83,5 @@ public class RunTestController {
             }
         }
 
-    }
-
-    private Properties getProperties(MultipartFile uploadedProperties) throws IOException {
-        Properties properties = new Properties();
-        properties.load(uploadedProperties.getInputStream());
-        return properties;
     }
 }

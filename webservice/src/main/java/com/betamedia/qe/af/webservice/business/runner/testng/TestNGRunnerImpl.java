@@ -23,12 +23,10 @@ public class TestNGRunnerImpl implements TestRunner {
 
     @Override
     public void run(List<String> xmlNames) {
-        //read files
         ITestNGListener tla = new TestListenerAdapter();
         TestNG testng = new TestNG();
 
-//        List<String> xmlNames = args.getNonOptionArgs();
-
+        testng.setOutputDirectory("public/test-output");
         testng.setTestSuites(xmlNames);
 
         testng.addListener(tla);

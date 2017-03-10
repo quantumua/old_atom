@@ -14,6 +14,9 @@ public class PageElementLocation {
     private String elementId;
 
     @CsvBindByName
+    private String application;
+
+    @CsvBindByName
     private String version;
 
     @CsvBindByName
@@ -33,5 +36,9 @@ public class PageElementLocation {
 
     public String getId() {
         return id;
+    }
+
+    public String getApplication() {
+        return application;
     }
 }
