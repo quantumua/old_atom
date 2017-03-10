@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.webservice.configuration.webdriver.chrome;
+package com.betamedia.qe.af.webservice.configuration.webdriver;
 
 import com.betamedia.qe.af.common.holder.SUTPropertiesHolder;
 import org.openqa.selenium.WebDriver;
@@ -18,25 +18,22 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+
 /**
  * Created by mbelyaev on 2/24/17.
  */
 //TODO externalize parameter constants
 @Configuration
-public class ChromeDriverConfig {
+public class WebDriverConfig {
 
-    @Bean
-    @Lazy
-    public DesiredCapabilities chromeCapabilities() {
-        return DesiredCapabilities.chrome();
-    }
-
-    @Bean
-    @Lazy
-    public DesiredCapabilities firefoxCapabilities() {
-        return DesiredCapabilities.firefox();
-    }
-
+    /**
+     * Need to avoid unnecessarily restarting the ChromeDriver server with each instance, {@see CromeDriver}
+     * {@link RemoteWebDriver}
+     * @param sutPropertiesHolder
+     * @return
+     * @throws IOException
+     */
     @Bean(initMethod = "start", destroyMethod = "stop")
     @Lazy
     public ChromeDriverService chromeDriverService(SUTPropertiesHolder sutPropertiesHolder) throws IOException {
@@ -49,7 +46,7 @@ public class ChromeDriverConfig {
 
     //TODO refactor, need 2 beans WebDriver and WebDriverFactory, smth like: webdriver(){return factory.get()}
     @Bean
-    @Scope("prototype")
+    @Scope(SCOPE_PROTOTYPE)
     public WebDriver driver() throws IOException {
         SUTPropertiesHolder holder = (SUTPropertiesHolder) RequestContextHolder.getRequestAttributes().getAttribute("sutPropertyHolder", RequestAttributes.SCOPE_REQUEST);
         WebDriver driver = null;
@@ -73,8 +70,7 @@ public class ChromeDriverConfig {
         if (driver != null) {
             driver.get(domainUrl);
         }
-        return driver;
-    }
+        return driver;   }
 
     private DesiredCapabilities getCapabilities(String browserType) {
         switch (browserType) {
@@ -83,7 +79,20 @@ public class ChromeDriverConfig {
             case BrowserType.FIREFOX:
                 return firefoxCapabilities();
             default:
-                return null;
+                 throw new RuntimeException("Unknown browser type: " + browserType);
         }
     }
+
+    @Bean
+    @Lazy
+    public DesiredCapabilities chromeCapabilities() {
+        return DesiredCapabilities.chrome();
+    }
+
+    @Bean
+    @Lazy
+    public DesiredCapabilities firefoxCapabilities() {
+        return DesiredCapabilities.firefox();
+    }
+
 }

@@ -3,6 +3,7 @@ package com.betamedia.qe.af.webservice.configuration;
 import com.betamedia.qe.af.common.holder.SUTPropertiesHolder;
 import com.betamedia.qe.af.common.holder.SUTPropertiesHolderImpl;
 import org.springframework.context.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.Properties;
 
@@ -16,7 +17,7 @@ public class PerRequestConfiguration {
 
     @Bean
     @Lazy
-    @Scope(scopeName = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    @RequestScope
     public SUTPropertiesHolder sutPropertiesHolder(Properties properties) {
         return new SUTPropertiesHolderImpl(properties);
     }
