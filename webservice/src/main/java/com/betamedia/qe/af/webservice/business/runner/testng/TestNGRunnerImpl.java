@@ -59,12 +59,11 @@ public class TestNGRunnerImpl implements TestRunner {
     @Autowired
     private ClassLoaderInvocationHandler classLoaderInvocationHandler;
 
-    @PostConstruct
-    public void setUp() {
+    private void setContextClassLoader() {
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(ClassLoader.class);
         enhancer.setCallback(classLoaderInvocationHandler);
-        ClassHelper.addClassLoader((ClassLoader) enhancer.create());
+        Thread.currentThread().setContextClassLoader((ClassLoader) enhancer.create());
     }
 
     @Override
@@ -85,6 +84,7 @@ public class TestNGRunnerImpl implements TestRunner {
         TestNG testng = new TestNG();
         testng.setOutputDirectory("public/test-output");
         testng.setTestSuites(xmlNames);
+        setContextClassLoader();
         testng.run();
     }
 
