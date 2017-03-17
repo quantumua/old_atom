@@ -13,6 +13,7 @@ public interface SUTPropertiesHolder {
     String BROWSER_TYPE = "browser.type";
     String ID_VERSION = "id.version";
     String TARGET_APPLICATION = "target.application";
+    String TEST_TYPE = "test.type";
     <T> T get(String key);
     void set(Properties properties);
 }

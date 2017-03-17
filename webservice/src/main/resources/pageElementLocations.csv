@@ -7,4 +7,3 @@ DisclaimerNotificationImpl,disclaimerSubmitBtn,tp,1603,disclaimer_submit
 TopNavigationPageImpl,loginBtn,tp,1603,login_btn
 TopNavigationPageImpl,myAccountBtn,tp,1603,myaccount_btn
 LoginErrorNotificationImpl,errorNotification,tp,1603,login_deposit_error
-LoginErrorNotificationImpl,errorCloseBtn,tp,1603,close_error_btn

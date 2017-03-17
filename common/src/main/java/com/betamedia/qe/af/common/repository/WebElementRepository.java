@@ -1,72 +1,57 @@
 package com.betamedia.qe.af.common.repository;
 
 import com.betamedia.qe.af.common.entities.PageElementLocation;
-import com.betamedia.qe.af.common.holder.ApplicationVersionHolder;
-import com.betamedia.qe.af.common.holder.SUTPropertiesHolder;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by mbelyaev on 2/16/17.
  */
 @Repository
-@RequestScope
+//@RequestScope
 public class WebElementRepository {
 
-    private Map<Index, String> locations = new HashMap<>();
-
-    @Autowired
-    private ApplicationVersionHolder appVersionHolder;
+    private List<PageElementLocation> pageElements = null;
 
     @PostConstruct
     public void populateRepository() throws IOException {
-        SUTPropertiesHolder holder = (SUTPropertiesHolder) RequestContextHolder.getRequestAttributes().getAttribute("sutPropertyHolder", RequestAttributes.SCOPE_REQUEST);
-        String application = holder.get(SUTPropertiesHolder.TARGET_APPLICATION);
-        String version = holder.get(SUTPropertiesHolder.ID_VERSION);
-        if(version == null) {
-            version = appVersionHolder.getVersion();
-        }
+
 
         HeaderColumnNameMappingStrategy<PageElementLocation> strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(PageElementLocation.class);
         CsvToBean<PageElementLocation> csvToBean = new CsvToBean<>();
         try (InputStream resourceInputStream = new ClassPathResource("/pageElementLocations.csv").getInputStream();) {
-            String finalVersion = version;
-            csvToBean.parse(strategy, new CSVReader(new InputStreamReader(resourceInputStream))).stream()
-                    .filter(el -> matchesAppVersion(el, application, finalVersion))
-                    .forEach(el ->
-                            locations.put(
-                                    new Index(el.getPageObjectName(),
-                                            el.getElementId()),
-                                    el.getId())
-                    );
+            pageElements = csvToBean.parse(strategy, new CSVReader(new InputStreamReader(resourceInputStream)));
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to initialize web elements IDs store");
         }
     }
 
-    public String getId(String pageObjectName, String elementId) {
-        return locations.get(new Index(pageObjectName, elementId));
+    public Map<Index, String> getVersionedWebElements(String version) {
+        return getPageElements().filter(el -> matchesAppVersion(el, version))
+                .collect(Collectors.toMap(Index::new, PageElementLocation::getId));
     }
 
-    private boolean matchesAppVersion(PageElementLocation el, String application, String targetVersion) {
-        return el.getApplication().equals(application) && versionCompare(el.getVersion(), targetVersion) <= 0;
+    private boolean matchesAppVersion(PageElementLocation el, String targetVersion) {
+        return versionCompare(el.getVersion(), targetVersion) <= 0;
+    }
+
+    public Stream<PageElementLocation> getPageElements() {
+        return pageElements.stream();
     }
 
     /**
@@ -100,13 +85,18 @@ public class WebElementRepository {
         return Integer.signum(vals1.length - vals2.length);
     }
 
-    private class Index {
+    public static class Index {
         private String pageObjectName;
         private String elementId;
 
         Index(String pageObjectName, String elementId) {
             this.pageObjectName = pageObjectName;
             this.elementId = elementId;
+        }
+
+        Index(PageElementLocation pageElementLocation) {
+            this.pageObjectName = pageElementLocation.getPageObjectName();
+            this.elementId = pageElementLocation.getElementId();
         }
 
         @Override

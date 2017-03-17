@@ -1,27 +1,20 @@
 package com.betamedia.qe.af.webservice.web.controllers;
 
 import com.betamedia.qe.af.webservice.business.RunTestHandler;
-import com.betamedia.qe.af.common.holder.SUTPropertiesHolder;
-import com.betamedia.qe.af.webservice.web.entities.RunTestParams;
 import com.betamedia.qe.af.webservice.storage.StorageFileNotFoundException;
-import com.betamedia.qe.af.webservice.storage.StorageService;
+import com.betamedia.qe.af.webservice.web.entities.RunTestParams;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -42,11 +35,7 @@ public class RunTestController {
     @RequestMapping(method = GET)
     public ResponseEntity<String> run(@Valid RunTestParams params) {
         try {
-            SUTPropertiesHolder bean = (SUTPropertiesHolder) beanFactory.getBean("scopedTarget.sutPropertiesHolder", getProperties(params.getSut()));
-            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-            requestAttributes.setAttribute("sutPropertyHolder", bean, RequestAttributes.SCOPE_REQUEST);
-            RequestContextHolder.setRequestAttributes(requestAttributes, true);
-            runTestHandler.handle(params);
+            runTestHandler.handle(getProperties(params.getSut()), params.getSuite());
             return new ResponseEntity<>("success", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -82,6 +71,5 @@ public class RunTestController {
                 }
             }
         }
-
     }
 }

@@ -1,11 +1,16 @@
 package com.betamedia.qe.af.webservice.business;
 
+import com.betamedia.qe.af.common.holder.SUTPropertiesHolder;
 import com.betamedia.qe.af.webservice.business.runner.TestRunner;
-import com.betamedia.qe.af.webservice.web.entities.RunTestParams;
+import com.betamedia.qe.af.webservice.business.types.TestType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * @author Maksym Tsybulskyy
@@ -14,14 +19,23 @@ import java.util.List;
 @Service
 public class RunTestHandlerImpl implements RunTestHandler {
 
-    @Autowired
-    private List<TestRunner> runners;
+
+    private Map<TestType, TestRunner> runners;
 
     @Override
-    public void handle(RunTestParams params) {
-        runners.stream().filter(runner->runner.isAssignable(params))
-                .findFirst()
+    public void handle(Properties properties, List<String> suitesFileNames) {
+        Optional.ofNullable(runners.get(getType(properties)))
                 .orElseThrow(() -> new RuntimeException("No corresponding runner"))
-                .run(params.getSuite());
+                .run(properties, suitesFileNames);
+    }
+
+    @Autowired
+    private void setRunners(List<TestRunner> runnersList) {
+        this.runners = runnersList.stream()
+                .collect(Collectors.toMap(TestRunner::getType, m -> m));
+    }
+
+    private TestType getType(Properties properties) {
+        return TestType.parse((String) properties.get(SUTPropertiesHolder.TEST_TYPE));
     }
 }

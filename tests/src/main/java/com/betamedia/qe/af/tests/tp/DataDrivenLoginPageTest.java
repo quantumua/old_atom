@@ -24,7 +24,7 @@ public class DataDrivenLoginPageTest extends DataDrivenTPWebDriverTest{
             paramsInclude = {"username", "password"})
     public void loginWithExternalParams() {
         TPPages.loginPage().goTo().login(username, password);
-        TPPages.loginErrorNotification().dismiss();
+        TPPages.loginErrorNotification().isDisplayed();
     }
 
     @Test
@@ -41,7 +41,7 @@ public class DataDrivenLoginPageTest extends DataDrivenTPWebDriverTest{
     @TestProperties(name = "login failed with unauthorized user (hardcoded)", paramsInclude = {""})
     public void failedLoginTest() {
         TPPages.loginPage().goTo().login("randomname", "randompassword");
-        TPPages.loginErrorNotification().dismiss();
+        TPPages.loginErrorNotification().isDisplayed();
     }
 
     @ParameterProperties(description = "username for login")

@@ -1,5 +1,7 @@
 package com.betamedia.qe.af.core.pages.factory;
 
+import com.betamedia.qe.af.common.holder.ThreadLocalBeansHolder;
+import com.betamedia.qe.af.common.repository.VersionedWebElementRepository;
 import com.betamedia.qe.af.common.repository.WebElementRepository;
 import com.betamedia.qe.af.core.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.pages.annotation.StoredId;
@@ -9,25 +11,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 /**
  * @author Maksym Tsybulskyy
  *         Date: 2/24/17.
  */
 @Service
-@Scope("prototype")
+@Scope(SCOPE_PROTOTYPE)
 public class PageObjectCreatorImpl implements PageObjectCreator{
 
     private WebDriver driver;
-    private WebElementRepository repository;
+    private VersionedWebElementRepository repository;
 
     @Autowired
-    public PageObjectCreatorImpl(WebDriver driver, WebElementRepository repository) {
-        this.driver = driver;
-        this.repository = repository;
+    public PageObjectCreatorImpl( WebElementRepository repository) throws IOException {
+        this.driver = ThreadLocalBeansHolder.getWebDriverFactoryThreadLocal().get();
+        this.repository = ThreadLocalBeansHolder.getVersionedWebElementRepositoryThreadLocal();
     }
 
     public  <T extends AbstractPageObject> T getPage(Class<T> clazz) {

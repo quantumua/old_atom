@@ -13,9 +13,6 @@ public class LoginErrorNotificationImpl extends AbstractPageObject implements Lo
 
     @StoredId("errorNotification")
     private By errorNotification;
-    @StoredId("errorCloseBtn")
-    private By errorCloseBtn;
-
     public LoginErrorNotificationImpl(WebDriver webDriver) {
         super(webDriver);
     }
@@ -26,8 +23,8 @@ public class LoginErrorNotificationImpl extends AbstractPageObject implements Lo
     }
 
     @Override
-    public void dismiss() {
+    public boolean isDisplayed() {
         waitFor();
-        webDriver.findElement(errorCloseBtn).click();
+        return webDriver.findElement(errorNotification).isDisplayed();
     }
 }

@@ -1,7 +1,9 @@
 package com.betamedia.qe.af.common.holder;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.RequestScope;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,24 +12,21 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+
 /**
  * Created by mbelyaev on 3/10/17.
  */
 @Service
-@RequestScope
-public class ApplicationVersionHolderImpl implements ApplicationVersionHolder {
+@Scope(value = SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.INTERFACES)
+public class TPApplicationVersionHolderImpl implements ApplicationVersionHolder {
 
-    private String version = null;
+    public static final String VERSION_SOURCE = "http://192.168.5.47:8080/24option-eu/resources/lib/betamedia-min.js";
 
     @Override
     public String getVersion() throws IOException {
-        if (version == null){
-            //TODO get address in runtime
-            version = this.getVersion("https://eu-mit.24option.com/resources/lib/betamedia-min.js");
-        }
-        return version;
+        return getVersion(VERSION_SOURCE);
     }
-
 
 
     private String getVersion(String address) throws IOException {
