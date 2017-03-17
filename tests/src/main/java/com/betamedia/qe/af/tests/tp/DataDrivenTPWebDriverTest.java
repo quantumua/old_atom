@@ -2,7 +2,6 @@ package com.betamedia.qe.af.tests.tp;
 
 import com.betamedia.qe.af.common.holder.AppContextHolder;
 import com.betamedia.qe.af.core.dataprovider.DataProviderFactory;
-
 import com.betamedia.qe.af.core.tests.TPWebDriverTest;
 import org.testng.annotations.DataProvider;
 

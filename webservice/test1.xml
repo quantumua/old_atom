@@ -5,6 +5,7 @@
         <class name="com.betamedia.qe.af.tests.tp.LoginPageTest" >
           <methods>
             <include name="loginTest" />
+            <include name="failedLoginTest"/>
           </methods>
        </class>
     </classes>

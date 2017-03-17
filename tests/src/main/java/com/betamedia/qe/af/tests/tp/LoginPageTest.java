@@ -30,7 +30,7 @@ public class LoginPageTest extends TPWebDriverTest {
 
     @Parameters({"username", "password"})
     @Test
-    public void parameterizeLoginTest(String username, String password) {
+    public void parameterizedLoginTest(String username, String password){
         pages().topNavigationPage().logIn();
         pages().loginPage().login(username, password);
         Assert.assertTrue(pages().loginErrorNotification().isDisplayed());

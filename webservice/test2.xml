@@ -2,10 +2,10 @@
 <suite name="Suite 2" verbose="1" parallel="methods" thread-count="5">
   <test name="Tryouts 2">
     <classes>
-        <class name="com.betamedia.qe.af.tests.tp.LoginPageTest" >
-<!--           <methods>
-            <include name="loginTest" />
-          </methods> -->
+        <class name="com.betamedia.qe.af.tests.tp.AnotherLoginPageTest" >
+          <methods>
+            <include name="anotherLoginTest" />
+          </methods>
        </class>
     </classes>
   </test>

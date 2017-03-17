@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.pages.tp.login.impl;
 
-import com.betamedia.qe.af.core.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.pages.AbstractPageObject;
+import com.betamedia.qe.af.core.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.pages.tp.login.LoginErrorNotification;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +13,7 @@ public class LoginErrorNotificationImpl extends AbstractPageObject implements Lo
 
     @StoredId("errorNotification")
     private By errorNotification;
+
     public LoginErrorNotificationImpl(WebDriver webDriver) {
         super(webDriver);
     }

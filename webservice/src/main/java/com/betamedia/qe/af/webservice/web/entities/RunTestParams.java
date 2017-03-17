@@ -16,15 +16,13 @@ public class RunTestParams {
     //    @Pattern(regexp = "^.*\\.xml$", message = "Support only *.properties files for SUT parameters")
     @NotEmpty
     private List<String> suite;
-    private String data;
 
     public RunTestParams() {
     }
 
-    public RunTestParams(String sut, List<String> suite, String data) {
+    public RunTestParams(String sut, List<String> suite) {
         this.sut = sut;
         this.suite = suite;
-        this.data = data;
     }
 
     public String getSut() {
@@ -43,11 +41,4 @@ public class RunTestParams {
         this.suite = suite;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
 }

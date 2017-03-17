@@ -3,8 +3,12 @@ package com.betamedia.qe.af.webservice.utils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.betamedia.qe.af.webservice.utils.StringUtils.parseCommaDelimitedString;
 
@@ -21,47 +25,24 @@ public class PropertiesUtils {
      * @return
      */
     public static List<Properties> permute(Properties properties) {
-        List<Properties> resultPropertiesList = new ArrayList<>();
-        Set<Map.Entry<Object, Object>> singleValueSet = properties.entrySet();
-        Properties multipleValuesProperty = new Properties();
-        multipleValuesProperty.putAll(properties);
-        Set<Map.Entry<Object, Object>> multipleValuesSet = multipleValuesProperty.entrySet().stream()
-                .filter(entry -> parseCommaDelimitedString((String) entry.getValue())
-                        .size() > 1).collect(Collectors.toSet());
-        singleValueSet.removeAll(multipleValuesSet);
-        for (Map.Entry entry : multipleValuesSet) {
-            List<String> propertyValues = parseCommaDelimitedString((String) entry.getValue());
-            for (String value : propertyValues) {
-                update(resultPropertiesList, (String) entry.getKey(), value, singleValueSet);
-            }
-        }
-        return resultPropertiesList;
+        return cartesian(properties, properties.entrySet().iterator())
+                .collect(Collectors.toList());
     }
 
-    private static void update(List<Properties> resultPropertiesList, String key, String value, Set<Map.Entry<Object, Object>> singleValueEntrySet) {
-        if (resultPropertiesList.isEmpty()) {
-            addNew(resultPropertiesList, key, value, singleValueEntrySet);
-        } else {
-            List<Properties> newProps = new ArrayList<>();
-            Iterator<Properties> iter = resultPropertiesList.iterator();
-            while (iter.hasNext()) {
-                Properties prop = iter.next();
-                if (prop.containsKey(key)) {
-                    addNew(newProps, key, value, prop.entrySet());
-                } else {
-                    prop.put(key, value);
-                }
-            }
-            resultPropertiesList.addAll(newProps);
+    private static Stream<Properties> cartesian(Properties input, Iterator<Map.Entry<Object, Object>> iter) {
+        if (!iter.hasNext()) {
+            return Stream.of(new Properties());
         }
-    }
-
-    private static void addNew(List<Properties> resultPropertiesList, String key, String value, Set<Map.Entry<Object, Object>> initialProps) {
-        Properties prop = new Properties();
-        prop.putAll(initialProps.stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
-        prop.put(key, value);
-        resultPropertiesList.add(prop);
+        Map.Entry<Object, Object> next = iter.next();
+        Object k = next.getKey();
+        List<String> values = parseCommaDelimitedString((String) next.getValue());
+        Properties shallowCopy = new Properties();
+        input.entrySet().stream()
+                .filter(e -> !e.getKey().equals(k))
+                .forEach(e -> shallowCopy.setProperty((String) e.getKey(), (String) e.getValue()));
+        return values.stream()
+                .flatMap(v -> cartesian(shallowCopy, shallowCopy.entrySet().iterator())
+                        .peek(m -> m.put(k, v)));
     }
 
     public static Properties getProperties(MultipartFile uploadedProperties) throws IOException {
