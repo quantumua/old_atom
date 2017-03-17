@@ -3,6 +3,7 @@ package com.betamedia.qe.af.webservice.utils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -49,5 +50,32 @@ public class PropertiesUtils {
         Properties properties = new Properties();
         properties.load(uploadedProperties.getInputStream());
         return properties;
+    }
+
+    public static Properties getProperties(String fileName) throws IOException {
+        Properties prop = new Properties();
+        InputStream input = null;
+        try {
+            input = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+            if (input == null) {
+                throw new RuntimeException("Sorry, unable to find " + fileName);
+            }
+            //load a properties file from class path, inside static method
+            prop.load(input);
+            return prop;
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            throw ex;
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 }

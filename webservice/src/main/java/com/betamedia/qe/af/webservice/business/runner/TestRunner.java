@@ -13,5 +13,5 @@ public interface TestRunner {
 
     TestType getType();
 
-    void run(Properties properties, List<String> suitesFileNames);
+    List<String> run(Properties properties, List<String> suitesFileNames);
 }

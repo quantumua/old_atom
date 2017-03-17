@@ -4,6 +4,9 @@ import com.betamedia.qe.af.common.holder.AppContextHolder;
 import com.betamedia.qe.af.webservice.business.ClassLoaderInvocationHandler;
 import com.betamedia.qe.af.webservice.storage.StorageProperties;
 import com.betamedia.qe.af.webservice.storage.StorageService;
+import com.betamedia.qe.af.webservice.web.controllers.ViewController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,10 +23,7 @@ import java.nio.file.Paths;
 public class Application {
 
     public static void main(String[] args) {
-//        args = Arrays.asList("--spring.config.location=driver.properties", "tests.xml").toArray(args);
         SpringApplication.run(Application.class, args);
-//        RunTestHandler runTestHandler = context.getBean(RunTestHandler.class);
-//        runTestHandler.handle();
     }
 
     @Bean

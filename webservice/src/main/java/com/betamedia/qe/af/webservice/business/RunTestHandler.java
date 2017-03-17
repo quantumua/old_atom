@@ -9,5 +9,5 @@ import java.util.Properties;
  */
 public interface RunTestHandler {
 
-    void handle(Properties properties, List<String> suitesFileNames);
+    List<String> handle(Properties properties, List<String> suitesFileNames);
 }

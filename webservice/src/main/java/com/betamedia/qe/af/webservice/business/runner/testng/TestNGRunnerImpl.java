@@ -19,10 +19,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.TestNG;
-import org.testng.internal.ClassHelper;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -72,29 +71,34 @@ public class TestNGRunnerImpl implements TestRunner {
     }
 
     @Override
-    public void run(Properties properties, List<String> xmlNames) {
+    public List<String> run(Properties properties, List<String> xmlNames) {
         List<Properties> singleValuePerKeyProps = permute(properties);
-        singleValuePerKeyProps.forEach(props -> runnerTaskExecutor.execute(()
-                -> run(xmlNames, getWebDriverFactory(props), getAppVersion(props))));
+        return singleValuePerKeyProps.stream()
+                .map(props -> executeForProperties(props, xmlNames))
+                .collect(Collectors.toList());
     }
 
-    private void run(List<String> xmlNames, WebDriverFactory webDriverFactory, String version) {
+    private String executeForProperties(Properties props, List<String> xmlNames) {
+        String path = LocalDateTime.now().toString() + "." + props.hashCode();
+        runnerTaskExecutor.execute(() -> TestNGRunnerImpl.this.run(xmlNames, TestNGRunnerImpl.this.getWebDriverFactory(props), TestNGRunnerImpl.this.getAppVersion(props), "test-output/" + path));
+        return path + "/index.html";
+    }
+
+    private void run(List<String> xmlNames, WebDriverFactory webDriverFactory, String version, String outputDirectory) {
         ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(webDriverFactory);
         ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(version, webElementRepository));
         TestNG testng = new TestNG();
-        testng.setOutputDirectory("public/test-output");
+        testng.setOutputDirectory(outputDirectory);
         testng.setTestSuites(xmlNames);
         setContextClassLoader();
         testng.run();
     }
-
 
     @Autowired
     private void setCapabilities(List<BrowserDesiredCapabilities> browserDesiredCapabilities) {
         this.capabilities = browserDesiredCapabilities.stream()
                 .collect(Collectors.toMap(BrowserDesiredCapabilities::getType, m -> m));
     }
-
 
     private WebDriverFactory getWebDriverFactory(Properties properties) {
         String browserType = properties.getProperty(SUTPropertiesHolder.BROWSER_TYPE);

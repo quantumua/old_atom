@@ -23,8 +23,8 @@ public class RunTestHandlerImpl implements RunTestHandler {
     private Map<TestType, TestRunner> runners;
 
     @Override
-    public void handle(Properties properties, List<String> suitesFileNames) {
-        Optional.ofNullable(runners.get(getType(properties)))
+    public List<String> handle(Properties properties, List<String> suitesFileNames) {
+        return Optional.ofNullable(runners.get(getType(properties)))
                 .orElseThrow(() -> new RuntimeException("No corresponding runner"))
                 .run(properties, suitesFileNames);
     }
