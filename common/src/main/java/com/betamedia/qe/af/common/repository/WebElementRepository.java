@@ -21,7 +21,6 @@ import java.util.stream.Stream;
  * Created by mbelyaev on 2/16/17.
  */
 @Repository
-//@RequestScope
 public class WebElementRepository {
 
     private List<PageElementLocation> pageElements = null;

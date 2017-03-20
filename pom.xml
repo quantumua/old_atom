@@ -1,45 +1,89 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <name>Automation Framework Modules Project</name>
-  <groupId>com.betamedia.qe.af</groupId>
-  <artifactId>af-modules</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <name>Automation Framework Modules Project</name>
+    <groupId>com.betamedia.qe.af</groupId>
+    <artifactId>af-modules</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>1.8</java.version>
-  </properties>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <tp.version>2.5.9</tp.version>
+        <gs.version>10.2.1-14000-RELEASE</gs.version>
+    </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>Brussels-RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>Brussels-RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-  <!--<distributionManagement>-->
+    <!--<distributionManagement>-->
     <!--<repository>-->
-      <!--<id>nexus</id>-->
-      <!--<name>Internal Releases</name>-->
-      <!--<url>http://uconn:8081/nexus/content/repositories/snapshots/</url>-->
+    <!--<id>nexus</id>-->
+    <!--<name>Internal Releases</name>-->
+    <!--<url>http://uconn:8081/nexus/content/repositories/snapshots/</url>-->
     <!--</repository>-->
-  <!--</distributionManagement>-->
+    <!--</distributionManagement>-->
 
-  <modules>
-    <module>webservice</module>
-    <module>core</module>
-    <module>common</module>
-    <module>tests</module>
-  </modules>
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Internal Releases</name>
+            <url>http://uconn:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- betamedia dependencies -->
+        <dependency>
+            <groupId>com.betamedia.tp.api</groupId>
+            <artifactId>tp-api</artifactId>
+            <version>${tp.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.betamedia.common</groupId>
+            <artifactId>common</artifactId>
+            <version>${tp.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--logging-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Log4J2 logging -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <modules>
+        <module>webservice</module>
+        <module>core</module>
+        <module>common</module>
+        <module>tests</module>
+    </modules>
 </project>

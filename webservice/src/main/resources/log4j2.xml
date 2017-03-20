@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30">
+<Configuration status="WARN">
     <Properties>
-        <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
+        <Property name="LEVEL_ROOT">INFO</Property>
+        <Property name="LEVEL_AF">INFO</Property>
+        <Property name="LEVEL_SPRINGFRAMEWORK">WARN</Property>
+        <Property name="LEVEL_THYMELEAF">WARN</Property>
+        <Property name="PATTERN">%d %p [%c] [%t]- %msg%n%throwable</Property>
+        <Property name="FILENAME">${sys:user.dir}/automation-framework.log</Property>
     </Properties>
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="${LOG_PATTERN}"/>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}}"/>
         </Console>
+        <RollingFile name="RollingFile" fileName="${FILENAME}"
+                     filePattern="logs/automation_framework/$${date:yyyy-MM}/automation-framework-%d{dd-MM-yyyy}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="debug">
+        <Logger name="com.betamedia.qe.af" level="${LEVEL_AF}" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+        <Logger name="org.springframework" level="${LEVEL_SPRINGFRAMEWORK}" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+        <Logger name="org.thymeleaf" level="${LEVEL_THYMELEAF}" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+        <Root level="${LEVEL_ROOT}">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
