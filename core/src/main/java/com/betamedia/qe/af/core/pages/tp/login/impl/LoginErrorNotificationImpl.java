@@ -19,13 +19,8 @@ public class LoginErrorNotificationImpl extends AbstractPageObject implements Lo
     }
 
     @Override
-    public By getLocator() {
-        return errorNotification;
-    }
-
-    @Override
     public boolean isDisplayed() {
-        waitFor();
-        return webDriver.findElement(errorNotification).isDisplayed();
+        waitFor(errorNotification);
+        return find(errorNotification).isDisplayed();
     }
 }

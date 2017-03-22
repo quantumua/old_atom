@@ -22,13 +22,9 @@ public class DisclaimerNotificationImpl extends AbstractPageObject implements Di
 
     @Override
     public void accept() {
-        waitFor();
-        webDriver.findElement(disclaimerCheckbox).click();
-        webDriver.findElement(disclaimerSubmitBtn).click();
+        waitFor(disclaimerCheckbox);
+        find(disclaimerCheckbox).click();
+        find(disclaimerSubmitBtn).click();
     }
 
-    @Override
-    public By getLocator() {
-        return disclaimerCheckbox;
-    }
 }

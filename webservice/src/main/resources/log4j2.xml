@@ -10,7 +10,7 @@
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${PATTERN}}"/>
+            <PatternLayout pattern="${PATTERN}"/>
         </Console>
         <RollingFile name="RollingFile" fileName="${FILENAME}"
                      filePattern="logs/automation_framework/$${date:yyyy-MM}/automation-framework-%d{dd-MM-yyyy}-%i.log.gz">

@@ -25,9 +25,10 @@ public class LoginPageImpl extends AbstractPageObject implements LoginPage {
 
     @Override
     public void login(String username, String password) {
-        webDriver.findElement(usernameField).sendKeys(username);
-        webDriver.findElement(passwordField).sendKeys(password);
-        webDriver.findElement(submitButton).click();
+        waitFor(submitButton);
+        find(usernameField).sendKeys(username);
+        find(passwordField).sendKeys(password);
+        find(submitButton).click();
     }
 
 //    @Override
@@ -36,8 +37,4 @@ public class LoginPageImpl extends AbstractPageObject implements LoginPage {
 //        return this;
 //    }
 
-    @Override
-    public By getLocator() {
-        return submitButton;
-    }
 }

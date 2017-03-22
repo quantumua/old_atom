@@ -21,17 +21,13 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     }
 
     @Override
-    protected By getLocator() {
-        return null;
-    }
-
-    @Override
     public boolean isLoggedIn() {
-        return webDriver.findElement(myAccountBtn).isDisplayed();
+        return find(myAccountBtn).isDisplayed();
     }
 
     @Override
     public void logIn() {
-        webDriver.findElement(loginBtn).click();
+        waitFor(loginBtn);
+        find(loginBtn).click();
     }
 }

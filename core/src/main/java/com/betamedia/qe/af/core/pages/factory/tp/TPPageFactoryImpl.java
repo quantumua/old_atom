@@ -1,6 +1,8 @@
 package com.betamedia.qe.af.core.pages.factory.tp;
 
 import com.betamedia.qe.af.core.pages.factory.AbstractPageFactory;
+import com.betamedia.qe.af.core.pages.tp.bidder.Bidder;
+import com.betamedia.qe.af.core.pages.tp.bidder.impl.BidderImpl;
 import com.betamedia.qe.af.core.pages.tp.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.pages.tp.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.pages.tp.login.LoginPage;
@@ -40,6 +42,11 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     @Override
     public LoginErrorNotification loginErrorNotification() {
         return creator.getPage(LoginErrorNotificationImpl.class);
+    }
+
+    @Override
+    public Bidder bidder() {
+        return creator.getPage(BidderImpl.class);
     }
 
     @Override

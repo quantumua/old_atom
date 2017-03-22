@@ -1,6 +1,7 @@
 package com.betamedia.qe.af.core.pages.factory.tp;
 
 
+import com.betamedia.qe.af.core.pages.tp.bidder.Bidder;
 import com.betamedia.qe.af.core.pages.tp.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.pages.tp.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.pages.tp.login.LoginPage;
@@ -18,4 +19,6 @@ public interface TPPageFactory {
     DisclaimerNotification disclaimerNotification();
 
     LoginErrorNotification loginErrorNotification();
+
+    Bidder bidder();
 }
