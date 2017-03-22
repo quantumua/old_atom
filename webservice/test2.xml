@@ -1,12 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Suite 2" verbose="1" parallel="methods" thread-count="5">
-  <test name="Tryouts 2">
-    <classes>
-        <class name="com.betamedia.qe.af.tests.tp.AnotherLoginPageTest" >
-          <methods>
-            <include name="anotherLoginTest" />
-          </methods>
-       </class>
-    </classes>
-  </test>
+    <test name="BackEndTest">
+        <classes>
+            <class name="com.betamedia.qe.af.tests.tp.BonusTest">
+            </class>
+        </classes>
+    </test>
 </suite>

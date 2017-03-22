@@ -20,7 +20,6 @@ public class AFTPConnector extends ClientTPConnector {
     @Autowired
     private AFSpaceProperties afSpaceProperties;
 
-    //    @Autowired
     private ClientSessionIdHandler clientSessionIdHandler;
     private IUserService userService;
 

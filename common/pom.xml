@@ -63,5 +63,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--need for gs, orm and this dependencies can be replaced by spring-boot starter-jpa-->
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-validator</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
     </dependencies>
 </project>

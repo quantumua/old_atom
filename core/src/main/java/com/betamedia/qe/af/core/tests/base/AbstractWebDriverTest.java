@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.tests;
+package com.betamedia.qe.af.core.tests.base;
 
 
 import com.betamedia.qe.af.core.pages.factory.AbstractPageFactory;

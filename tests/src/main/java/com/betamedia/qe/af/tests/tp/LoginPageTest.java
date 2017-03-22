@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.tests.tp;
 
 
-import com.betamedia.qe.af.core.tests.TPWebDriverTest;
+import com.betamedia.qe.af.core.tests.tp.TPWebDriverTest;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
