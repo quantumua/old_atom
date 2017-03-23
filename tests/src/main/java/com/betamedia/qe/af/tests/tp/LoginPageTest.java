@@ -36,19 +36,6 @@ public class LoginPageTest extends TPWebDriverTest {
         Assert.assertTrue(pages().loginErrorNotification().isDisplayed());
     }
 
-    @Test
-    public void biddingTest(){
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login("vasichka", "123123");
-        pages().disclaimerNotification().accept();
-        pages().bidder()
-                .highLow()
-                .asset()
-                .setAmount("10.0")
-                .bidHigh()
-                .closePosition();
-    }
-
    /* @Test
     @TestProperties(name = "login with externally set username/password: username=${username}, password=${password}",
             paramsInclude = {"username", "password"})

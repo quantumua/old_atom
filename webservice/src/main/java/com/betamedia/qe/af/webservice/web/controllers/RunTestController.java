@@ -34,7 +34,7 @@ import static com.betamedia.qe.af.webservice.utils.PropertiesUtils.getProperties
 @RequestMapping
 public class RunTestController {
 
-    private static final Logger logger = LogManager.getLogger(ViewController.class);
+    private static final Logger logger = LogManager.getLogger(RunTestController.class);
 
     @Autowired
     private RunTestHandler runTestHandler;
@@ -59,14 +59,14 @@ public class RunTestController {
                 new URLClassLoader(
                         new URL[]{Paths.get(jarPath).toUri().toURL()},
                         Thread.currentThread().getContextClassLoader()));
-        return ResponseEntity.status(HttpStatus.OK).body("success");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PostMapping("/upload/suite")
     public List<String> handleFileUpload(@RequestParam("properties") MultipartFile properties,
-                                   @RequestParam("suites[]") MultipartFile[] suites,
-                                   @RequestParam("dataSources[]") MultipartFile[] dataSources,
-                                   RedirectAttributes redirectAttributes) throws IOException {
+                                         @RequestParam("suites[]") MultipartFile[] suites,
+                                         @RequestParam("dataSources[]") MultipartFile[] dataSources,
+                                         RedirectAttributes redirectAttributes) throws IOException {
         logger.info("Starting tests");
         List<String> suitePaths = Arrays.stream(suites)
                 .map(storageService::store)

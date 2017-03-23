@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 public class BonusTest extends TPBackEndTest {
 
     @Test
-    public void addLargBonus() {
+    public void addLargeBonus() {
         /*
          * Add a bonus with a very high sum to an account with CRM API --> get
          * account and verify the bonus was added and the sum is correct

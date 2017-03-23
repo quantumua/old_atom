@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <title>Test Framework Web UI</title>
+    <link href="css/angular-bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body ng-app="client">
+<div ng-controller="runner as runner" class="container">
+    <form role="form" ng-submit="runner.run()">
+        <div class="form-group">
+            <label for="properties">Properties:</label>
+            <input type="file" file-model="properties" class="form-control" id="properties" name="properties"/>
+        </div>
+        <div class="form-group">
+            <label for="suites">Suites:</label>
+            <input type="file" multiple file-model="suites" class="form-control" id="suites" name="suites"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Execute</button>
+        <table>
+            <tr ng-repeat="message in runner.messages">
+                <td><h3 ng-cloak>{{message}}</h3></td>
+            </tr>
+        </table>
+    </form>
+    <hr/>
+    <table>
+        <tr ng-repeat="report in runner.reports">
+            <td><a ng-href="{{report}}" ng-cloak>{{report}}</a></td>
+        </tr>
+    </table>
+</div>
+<hr/>
+<div ng-controller="jarUploader as jarUploader" class="container">
+    <form role="form" ng-submit="jarUploader.upload()">
+        <div class="form-group">
+            <label for="jar">JAR to upload:</label>
+            <input type="file" file-model="jar" class="form-control" id="jar" name="jar"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+        <h3 ng-cloak>{{jarUploader.message}}</h3>
+    </form>
+</div>
+
+<script src="js/angular-bootstrap.js" type="text/javascript"></script>
+<script src="js/client.js"></script>
+</body>
+</html>

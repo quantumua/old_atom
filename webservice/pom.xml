@@ -15,10 +15,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <wro4j.version>1.8.0</wro4j.version>
+        <angularjs.version>1.6.2</angularjs.version>
+        <bootstrap.version>3.3.7-1</bootstrap.version>
+        <jquery.version>3.1.1-1</jquery.version>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.betamedia.qe.af</groupId>
             <artifactId>common</artifactId>
@@ -33,41 +36,30 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -106,7 +98,7 @@
             <plugin>
                 <groupId>ro.isdc.wro4j</groupId>
                 <artifactId>wro4j-maven-plugin</artifactId>
-                <version>1.7.6</version>
+                <version>${wro4j.version}</version>
                 <executions>
                     <execution>
                         <phase>generate-resources</phase>
@@ -116,30 +108,28 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory
-                    </wroManagerFactory>
-                    <cssDestinationFolder>${project.build.directory}/generated-resources/static/css
-                    </cssDestinationFolder>
+                    <wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+                    <cssDestinationFolder>${project.build.directory}/generated-resources/static/css</cssDestinationFolder>
                     <jsDestinationFolder>${project.build.directory}/generated-resources/static/js</jsDestinationFolder>
                     <wroFile>${project.build.directory}/wro/wro.xml</wroFile>
-                    <extraConfigFile>${basedir}/src/main/wro/wro.properties</extraConfigFile>
-                    <contextFolder>${basedir}/src/main/wro</contextFolder>
+                    <extraConfigFile>${project.build.directory}/wro/wro.properties</extraConfigFile>
+                    <contextFolder>${project.build.directory}/wro</contextFolder>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.webjars</groupId>
                         <artifactId>jquery</artifactId>
-                        <version>3.1.1-1</version>
+                        <version>${jquery.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.webjars</groupId>
                         <artifactId>angularjs</artifactId>
-                        <version>1.6.2</version>
+                        <version>${angularjs.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.webjars</groupId>
                         <artifactId>bootstrap</artifactId>
-                        <version>3.3.7-1</version>
+                        <version>${bootstrap.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
