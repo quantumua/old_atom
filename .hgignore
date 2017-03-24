@@ -5,7 +5,7 @@ mvnw.cmd
 test-output/
 upload-dir/
 public/
-
+.log.gz
 ### STS ###
 .apt_generated
 .classpath
