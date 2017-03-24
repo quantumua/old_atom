@@ -11,6 +11,4 @@ public interface AccountGroupOperations {
     AccountGroup get();
 
     AccountGroup get(String id);
-
-    AccountGroup getOrCreate(String id);
 }

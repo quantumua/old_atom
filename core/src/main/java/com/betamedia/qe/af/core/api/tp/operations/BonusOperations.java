@@ -11,7 +11,7 @@ public interface BonusOperations {
 
     Bonus get(String id);
 
-    Bonus getByDisplaydId(String displayId);
+    Bonus getByDisplayId(String displayId);
 
     Bonus addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount);
 

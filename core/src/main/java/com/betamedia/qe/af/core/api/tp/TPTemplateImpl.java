@@ -28,10 +28,12 @@ public class TPTemplateImpl implements TPTemplate {
         return accountOperations;
     }
 
+    @Override
     public AccountGroupOperations accountGroupOperations() {
         return accountGroupOperations;
     }
 
+    @Override
     public BrandOperation brandOperation() {
         return brandOperation;
     }

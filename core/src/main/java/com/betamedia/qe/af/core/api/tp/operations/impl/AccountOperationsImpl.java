@@ -50,22 +50,8 @@ public class AccountOperationsImpl implements AccountOperations {
 
     @Override
     public Account get(String id) {
-        Account account = null;
-        try {
-            account = tpConnector.readById(Account.class, id);
-        } catch (Throwable e) {
-            logger.error("", e);
-        }
-        return account;
-    }
-
-    @Override
-    public Account getOrCreate(String id) {
-        Account account = get(id);
-        if (account == null) {
-            logger.error("No account with id '" + id + "' creating new account");
-            account = create();
-        }
+        Account account = tpConnector.readById(Account.class, id);
+        assertNotNull(account, "Account with id " + id + " is not available in GS");
         return account;
     }
 
@@ -91,6 +77,7 @@ public class AccountOperationsImpl implements AccountOperations {
         return account;
     }
 
+    @Override
     public Account update(Account account, Set<String> properties) {
 //        TODO add some verifications or make the method private
         return tpConnector.update(account, properties);
@@ -98,8 +85,7 @@ public class AccountOperationsImpl implements AccountOperations {
 
     @Override
     public Account updateBalance(String accountId, Double amount) {
-        Account account = tpConnector.readById(Account.class, accountId);
-        assertNotNull(account, "Account with id " + accountId + " is not available in GS");
+        Account account = get(accountId);
         account.setBalance(amount);
         account = update(account, CollectionUtils.toSet(Account.EP_ACCOUNT_BALANCE.getName()));
         assertEquals(account.getBalance(), amount, "The balance of account " + accountId + "was not updated");

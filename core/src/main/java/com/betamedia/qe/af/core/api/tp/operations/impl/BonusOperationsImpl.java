@@ -2,6 +2,8 @@ package com.betamedia.qe.af.core.api.tp.operations.impl;
 
 import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.adapters.CRMHTTPAdapter;
+import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
+import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.BonusOperations;
 import com.betamedia.tp.api.model.Bonus;
 import com.betamedia.tp.api.model.enums.BonusType;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 /**
  * @author Maksym Tsybulskyy
@@ -36,7 +39,7 @@ public class BonusOperationsImpl implements BonusOperations {
     }
 
     @Override
-    public Bonus getByDisplaydId(String displayedId) {
+    public Bonus getByDisplayId(String displayedId) {
         Bonus bonus = tpConnector.readByDisplayId(Bonus.class, displayedId);
         assertNotNull(bonus, "Bonus with displayId=" + displayedId + " is not available in GS");
         return bonus;
@@ -44,10 +47,13 @@ public class BonusOperationsImpl implements BonusOperations {
 
     @Override
     public Bonus addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount) {
-        String bonusDisplayId = crmHttpAdapter.addBonus(accountId, bonusType, amount, wagerAmount);
-        Bonus bonus = getByDisplaydId(bonusDisplayId);
+        TPCRMResponse<AddBonus> addBonusResponse = crmHttpAdapter.addBonus(accountId, bonusType, amount, wagerAmount);
+        assertTrue(addBonusResponse.getErrors().isEmpty(),
+                "Got errors while adding bonus for accountid = " + accountId + ", " + addBonusResponse.getErrors());
+        String bonusDisplayId = addBonusResponse.getResult().getBonusDisplayId();
+        Bonus bonus = getByDisplayId(bonusDisplayId);
         assertNotNull(bonus);
-        assertEquals(bonus.getAmount(), Double.valueOf(amount));
+        assertEquals(bonus.getAmount(), amount);
         logger.info("The bonus for account {} is added, {}", accountId, bonus);
         return bonus;
 

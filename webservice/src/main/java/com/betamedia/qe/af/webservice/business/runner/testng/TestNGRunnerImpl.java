@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
@@ -108,7 +109,9 @@ public class TestNGRunnerImpl implements TestRunner {
     }
 
     private DesiredCapabilities getCapabilities(String browserType) {
-        return capabilities.get(browserType).getCapabilities();
+        return Optional.ofNullable(capabilities.get(browserType))
+                .map(BrowserDesiredCapabilities::getCapabilities)
+                .orElse(null);
     }
 
     private String getAppVersion(Properties properties) {

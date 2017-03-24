@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+import static org.testng.Assert.assertNotNull;
+
 /**
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
@@ -27,7 +29,7 @@ public class AccountGroupOperationsImpl implements AccountGroupOperations {
     private AFTPConnector tpConnector;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         accountGroup = get(ACCOUNT_GROUP_ID);
     }
 
@@ -39,21 +41,11 @@ public class AccountGroupOperationsImpl implements AccountGroupOperations {
 
     @Override
     public AccountGroup get(String id) {
-        AccountGroup accountGroup = null;
-        try {
-            logger.info("Getting accountGroup for id {}", id);
-            accountGroup = tpConnector.readById(AccountGroup.class, id);
-            logger.info("Got accountGroup {}", accountGroup.toString());
-        } catch (Throwable e) {
-            logger.error("", e);
-        }
-        return accountGroup;
-    }
-
-    @Override
-    public AccountGroup getOrCreate(String id) {
-        //TODO Implement!
-        throw new NotImplementedException();
+        logger.info("Getting accountGroup for id {}", id);
+        AccountGroup accGroup = tpConnector.readById(AccountGroup.class, id);
+        assertNotNull(accGroup, "AccountGroup id={} is not available in GS");
+        logger.info("Got accountGroup {}", accGroup.toString());
+        return accGroup;
     }
 
     private AccountGroup create() {

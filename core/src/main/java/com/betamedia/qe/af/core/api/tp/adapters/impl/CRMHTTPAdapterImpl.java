@@ -1,16 +1,17 @@
 package com.betamedia.qe.af.core.api.tp.adapters.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.CRMHTTPAdapter;
+import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
+import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.BrandOperation;
 import com.betamedia.tp.api.model.enums.BonusType;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -32,12 +33,12 @@ public class CRMHTTPAdapterImpl implements CRMHTTPAdapter {
 
     private static final Logger logger = LogManager.getLogger(CRMHTTPAdapterImpl.class);
 
-    private final String CANCEL_BONUS_URL = "account/bonus/cancel";
-    private final String ADJUSTMENT_URL = "account/adjustment";
-    private final String ADD_BONUS_URL = "account/bonus/add";
-    private final String CANCEL_WITHDRAWAL_URL = "account/withdrawal/cancel";
-    private final String DEPOSIT_URL = "account/deposit";
-    private final String WITHDRAWAL_URL = "account/withdrawal/add";
+    private static final String CANCEL_BONUS_URL = "account/bonus/cancel";
+    private static final String ADJUSTMENT_URL = "account/adjustment";
+    private static final String ADD_BONUS_URL = "account/bonus/add";
+    private static final String CANCEL_WITHDRAWAL_URL = "account/withdrawal/cancel";
+    private static final String DEPOSIT_URL = "account/deposit";
+    private static final String WITHDRAWAL_URL = "account/withdrawal/add";
 
     @Autowired
     private BrandOperation brandOperation;
@@ -55,6 +56,7 @@ public class CRMHTTPAdapterImpl implements CRMHTTPAdapter {
 
     /**
      * Add bonus for account
+     *
      * @param accountId
      * @param bonusType
      * @param amount
@@ -62,7 +64,7 @@ public class CRMHTTPAdapterImpl implements CRMHTTPAdapter {
      * @return displayId for created bonus
      */
     @Override
-    public String addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount) {
+    public TPCRMResponse<AddBonus> addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount) {
         Map<String, String> params = new LinkedHashMap<>();
         params.put("userName", backOfficeUsername);
         params.put("userPassword", backOfficePassword);
@@ -74,29 +76,14 @@ public class CRMHTTPAdapterImpl implements CRMHTTPAdapter {
         String url = buildRequestUrl(ADD_BONUS_URL, params).build().toUriString();
         logger.info("Adding bonus, url={}", url);
         logger.info("Adding bonus {} to account {}", amount, accountId);
-//        CRMResponse<Object> crmResponse = restTemplate.exchange(crmUrl+ADD_BONUS_URL, HttpMethod.GET, null,
-//                new ParameterizedTypeReference<CRMResponse<Object>>() {
-//                }, params).getBody();
-//        logger.debug("Bonus for account {} succesfully added, {}",accountId, crmResponse);
-//        return crmResponse;
-        //     TODO add parameterized CRMResponse<Object> and return String directly
-//        Do not work - {"errors":[{"code":"generalError","message":"Required String parameter 'userName' is not present"}],"result":null}
-//        need to enable rest template logging
-//        String response = restTemplate.exchange(crmUrl + ADD_BONUS_URL, HttpMethod.GET, null, String.class, params).getBody();
-        String response = restTemplate.exchange(url, HttpMethod.GET, null, String.class).getBody();
+        TPCRMResponse<AddBonus> response = restTemplate.exchange(url, HttpMethod.GET, null,
+                new ParameterizedTypeReference<TPCRMResponse<AddBonus>>() {
+                }, params).getBody();
         logger.info("Bonus added, {}", response);
-        DocumentContext documentContext = JsonPath.parse(response);
-        /*ResponseExample
-        {
-            "errors": [],
-            "result": {
-                "bonusId": "B308"
-            }
-        }*/
-        return documentContext.read("$.result.bonusId");
+        return response;
     }
 
-//    TODO will be shared with TPHTTPAdapter, need to move to utils or base class
+    //    TODO will be shared with TPHTTPAdapter, need to move to utils or base class
     private UriComponentsBuilder buildRequestUrl(String url, Object paramsObject) {
         Map<String, String> params = objectMapper.convertValue(paramsObject, new TypeReference<LinkedHashMap<String, String>>() {
         });

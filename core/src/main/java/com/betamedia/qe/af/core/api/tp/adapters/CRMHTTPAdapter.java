@@ -1,5 +1,7 @@
 package com.betamedia.qe.af.core.api.tp.adapters;
 
+import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
+import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.tp.api.model.enums.BonusType;
 
 /**
@@ -8,5 +10,5 @@ import com.betamedia.tp.api.model.enums.BonusType;
  */
 public interface CRMHTTPAdapter {
 
-    String addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount);
+    TPCRMResponse<AddBonus> addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount);
 }

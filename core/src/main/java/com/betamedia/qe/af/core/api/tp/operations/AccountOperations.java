@@ -14,8 +14,6 @@ public interface AccountOperations {
 
     Account get(String id);
 
-    Account getOrCreate(String id);
-
     Account update(Account account, Set<String> properties);
 
     Account updateBalance(String accountId, Double amount);
