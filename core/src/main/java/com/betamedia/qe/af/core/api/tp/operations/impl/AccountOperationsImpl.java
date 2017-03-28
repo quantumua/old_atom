@@ -4,6 +4,10 @@ import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;
 import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.api.tp.adapters.CRMHTTPAdapter;
+import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.response.CustomerRegister;
+import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.AccountGroupOperations;
 import com.betamedia.qe.af.core.api.tp.operations.AccountOperations;
 import com.betamedia.qe.af.core.api.tp.operations.BrandOperation;
@@ -42,6 +46,9 @@ public class AccountOperationsImpl implements AccountOperations {
 
     @Autowired
     private BrandOperation brandOperation;
+
+    @Autowired
+    private CRMHTTPAdapter crmHttpAdapter;
 
     @Override
     public Account get() {
@@ -90,6 +97,21 @@ public class AccountOperationsImpl implements AccountOperations {
         account = update(account, CollectionUtils.toSet(Account.EP_ACCOUNT_BALANCE.getName()));
         assertEquals(account.getBalance(), amount, "The balance of account " + accountId + "was not updated");
         return account;
+    }
+
+    @Override
+    public Account register() {
+        return register(new CustomerBuilder().setBrandDisplayId(brandOperation.get().getDisplayId()));
+    }
+
+    @Override
+    public Account register(CustomerBuilder customerBuilder) {
+        if (customerBuilder.getBrandDisplayId() ==null ){
+            customerBuilder.setBrandDisplayId(brandOperation.get().getDisplayId());
+        }
+        TPCRMResponse<CustomerRegister> register = crmHttpAdapter.register(customerBuilder.createCustomer());
+        assertNotNull(register.getResult(), "The new customer wasn't created" + register.getErrors());
+        return get(register.getResult().getAccountId());
     }
 
 

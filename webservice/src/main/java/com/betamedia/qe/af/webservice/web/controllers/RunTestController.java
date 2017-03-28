@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.betamedia.qe.af.webservice.utils.PropertiesUtils.getProperties;
+import static com.betamedia.qe.af.core.utils.PropertiesUtils.getProperties;
 
 /**
  * @author Maksym Tsybulskyy

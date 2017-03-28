@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.webservice.utils;
+package com.betamedia.qe.af.core.utils;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,7 +11,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.betamedia.qe.af.webservice.utils.StringUtils.parseCommaDelimitedString;
+import static com.betamedia.qe.af.core.utils.StringUtils.parseCommaDelimitedString;
 
 /**
  * @author Maksym Tsybulskyy

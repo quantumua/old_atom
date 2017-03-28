@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.Properties;
 
-import static com.betamedia.qe.af.webservice.utils.PropertiesUtils.permute;
-import static com.betamedia.qe.af.webservice.utils.StringUtils.COMMA;
+import static com.betamedia.qe.af.core.utils.PropertiesUtils.permute;
+import static com.betamedia.qe.af.core.utils.StringUtils.COMMA;
 
 /**
  * @author Maksym Tsybulskyy

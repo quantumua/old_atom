@@ -17,6 +17,7 @@
         <tp.version>2.5.9</tp.version>
         <gs.version>10.2.1-14000-RELEASE</gs.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
+        <!--<selenium.version>3.3.1</selenium.version>-->
     </properties>
 
     <parent>

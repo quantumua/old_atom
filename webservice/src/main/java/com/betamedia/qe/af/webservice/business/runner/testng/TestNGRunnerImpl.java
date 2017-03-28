@@ -30,7 +30,7 @@ import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 import static com.betamedia.qe.af.webservice.business.types.TestType.TESTNG;
-import static com.betamedia.qe.af.webservice.utils.PropertiesUtils.permute;
+import static com.betamedia.qe.af.core.utils.PropertiesUtils.permute;
 
 
 /**

@@ -1,7 +1,9 @@
 package com.betamedia.qe.af.core.api.tp.adapters.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.CRMHTTPAdapter;
+import com.betamedia.qe.af.core.api.tp.entities.Customer;
 import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
+import com.betamedia.qe.af.core.api.tp.entities.response.CustomerRegister;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.BrandOperation;
 import com.betamedia.tp.api.model.enums.BonusType;
@@ -39,6 +41,7 @@ public class CRMHTTPAdapterImpl implements CRMHTTPAdapter {
     private static final String CANCEL_WITHDRAWAL_URL = "account/withdrawal/cancel";
     private static final String DEPOSIT_URL = "account/deposit";
     private static final String WITHDRAWAL_URL = "account/withdrawal/add";
+    private static final String REGISTER_ACCOUNT_URL = "account/create";
 
     @Autowired
     private BrandOperation brandOperation;
@@ -78,8 +81,19 @@ public class CRMHTTPAdapterImpl implements CRMHTTPAdapter {
         logger.info("Adding bonus {} to account {}", amount, accountId);
         TPCRMResponse<AddBonus> response = restTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<TPCRMResponse<AddBonus>>() {
-                }, params).getBody();
+                }).getBody();
         logger.info("Bonus added, {}", response);
+        return response;
+    }
+
+    @Override
+    public TPCRMResponse<CustomerRegister> register(Customer customer) {
+        String url = buildRequestUrl(REGISTER_ACCOUNT_URL, customer).build().toUriString();
+        logger.info("Register new customer, url={}", url);
+        TPCRMResponse<CustomerRegister> response = restTemplate.exchange(url, HttpMethod.GET, null,
+                new ParameterizedTypeReference<TPCRMResponse<CustomerRegister>>() {
+                }).getBody();
+        logger.info("Customer registered, {}", response);
         return response;
     }
 

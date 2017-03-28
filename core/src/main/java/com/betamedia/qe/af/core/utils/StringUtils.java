@@ -1,5 +1,7 @@
-package com.betamedia.qe.af.webservice.utils;
+package com.betamedia.qe.af.core.utils;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,5 +22,9 @@ public class StringUtils {
         return Arrays.stream(delimitedString.split(delimiter))
                 .map(String::trim)
                 .collect(Collectors.toList());
+    }
+
+    public static String generateRandomId(int length) {
+        return new BigInteger(length * 5, new SecureRandom()).toString(32);
     }
 }
