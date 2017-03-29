@@ -8,22 +8,24 @@ import com.betamedia.qe.af.common.repository.VersionedWebElementRepository;
  *         Date: 3/13/17.
  */
 public class ThreadLocalBeansHolder {
-    private final static InheritableThreadLocal<WebDriverFactory> webDriverFactoryThreadLocal = new InheritableThreadLocal<>();
-    private final static InheritableThreadLocal<VersionedWebElementRepository> versionedWebElementRepositoryThreadLocal = new InheritableThreadLocal<>();
+    private static final InheritableThreadLocal<WebDriverFactory> webDriverFactoryThreadLocal = new InheritableThreadLocal<>();
+    private static final InheritableThreadLocal<VersionedWebElementRepository> versionedWebElementRepositoryThreadLocal = new InheritableThreadLocal<>();
 
-    public final static WebDriverFactory getWebDriverFactoryThreadLocal() {
+    private ThreadLocalBeansHolder(){}
+
+    public static WebDriverFactory getWebDriverFactoryThreadLocal() {
         return webDriverFactoryThreadLocal.get();
     }
 
-    public final static void setWebDriverFactoryThreadLocal(WebDriverFactory webDriverFactory) {
+    public static void setWebDriverFactoryThreadLocal(WebDriverFactory webDriverFactory) {
         webDriverFactoryThreadLocal.set(webDriverFactory);
     }
 
-    public final static VersionedWebElementRepository getVersionedWebElementRepositoryThreadLocal() {
+    public static VersionedWebElementRepository getVersionedWebElementRepositoryThreadLocal() {
         return versionedWebElementRepositoryThreadLocal.get();
     }
 
-    public final static void setVersionedWebElementRepositoryThreadLocal(VersionedWebElementRepository versionedWebElementRepository) {
+    public static void setVersionedWebElementRepositoryThreadLocal(VersionedWebElementRepository versionedWebElementRepository) {
         versionedWebElementRepositoryThreadLocal.set(versionedWebElementRepository);
     }
 }

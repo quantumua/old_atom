@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.common.repository;
 
+import com.betamedia.qe.af.common.entities.FindBy;
 import com.betamedia.qe.af.common.entities.PageElementLocation;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
@@ -40,9 +41,9 @@ public class WebElementRepository {
         }
     }
 
-    public Map<Index, String> getVersionedWebElements(String version) {
+    public Map<Index, FindBy> getVersionedWebElements(String version) {
         return getPageElements().filter(el -> matchesAppVersion(el, version))
-                .collect(Collectors.toMap(Index::new, PageElementLocation::getId));
+                .collect(Collectors.toMap(Index::new, el -> new FindBy(el.getHow(), el.getValue())));
     }
 
     private boolean matchesAppVersion(PageElementLocation el, String targetVersion) {

@@ -6,7 +6,6 @@ import com.betamedia.qe.af.core.pages.tp.bidder.Bidder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -14,19 +13,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class BidderImpl extends AbstractPageObject implements Bidder {
 
-    @StoredId("bidderAmount")
-    private By bidderAmount;
-
-    //TODO page must have element IDs according to framework spec
-    private By highLowButton = By.cssSelector(".bmSelectItem.bmSelectHighLowGame.on");
-    private By shortTermButton = By.cssSelector(".bmSelectItem.bmSelectShortTermGame");
-    private By doubleProfitButton = By.cssSelector(".bmSelectItem.bmSelectDoubleProfitGame");
-    //TODO AUDJPY temp
-    private By assetSelector = By.className("bmIdAUDJPY");
-    private By assetDropdown = By.className("bmCurrentAsset");
-    private By lowButton = By.cssSelector(".bmButtonsWrapp.bmSelection2");
-    private By highButton = By.cssSelector(".bmButtonsWrapp.bmSelection1");
-    private By closePosition = By.cssSelector(".bmButtonWrapp.bmClosePositionDialog");
+    @StoredId
+    private By amountInput;
+    @StoredId
+    private By highLowButton;
+    @StoredId
+    private By shortTermButton;
+    @StoredId
+    private By doubleProfitButton;
+    @StoredId
+    private By assetSelector;
+    @StoredId
+    private By assetSearchBox;
+    @StoredId
+    private By assetDropdown;
+    @StoredId
+    private By lowButton;
+    @StoredId
+    private By highButton;
+    @StoredId
+    private By closePosition;
 
     public BidderImpl(WebDriver webDriver) {
         super(webDriver);
@@ -56,8 +62,12 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
     @Override
     public Bidder asset() {
         if (!find(assetSelector).isDisplayed()){
-            waitFor(assetDropdown);
-            find(assetDropdown).click();
+            if (!find(assetSearchBox).isDisplayed()){
+                waitFor(assetDropdown);
+                find(assetDropdown).click();
+            }
+            waitFor(assetSearchBox);
+            find(assetSearchBox).sendKeys("EUR/USD");
         }
         waitFor(assetSelector);
         find(assetSelector).click();
@@ -66,8 +76,8 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
 
     @Override
     public Bidder setAmount(String value) {
-        waitFor(bidderAmount);
-        WebElement inputField = find(bidderAmount);
+        waitFor(amountInput);
+        WebElement inputField = find(amountInput);
         inputField.clear();
         inputField.sendKeys(value);
         return this;
@@ -88,10 +98,10 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
     }
 
     @Override
-    public Bidder closePosition() {
+    public Bidder confirm() {
         waitFor(closePosition);
         WebDriverWait wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(closePosition));
+        wait.until(driver -> !driver.findElement(closePosition).isDisplayed());
         return this;
     }
 

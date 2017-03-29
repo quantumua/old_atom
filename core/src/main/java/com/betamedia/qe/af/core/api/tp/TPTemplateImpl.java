@@ -1,9 +1,6 @@
 package com.betamedia.qe.af.core.api.tp;
 
-import com.betamedia.qe.af.core.api.tp.operations.AccountGroupOperations;
-import com.betamedia.qe.af.core.api.tp.operations.AccountOperations;
-import com.betamedia.qe.af.core.api.tp.operations.BonusOperations;
-import com.betamedia.qe.af.core.api.tp.operations.BrandOperation;
+import com.betamedia.qe.af.core.api.tp.operations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +12,33 @@ import org.springframework.stereotype.Component;
 public class TPTemplateImpl implements TPTemplate {
 
     @Autowired
-    private AccountOperations accountOperations;
-    @Autowired
     private AccountGroupOperations accountGroupOperations;
     @Autowired
-    private BrandOperation brandOperation;
+    private AccountOperations accountOperations;
+    @Autowired
+    private AssetOperations assetOperations;
     @Autowired
     private BonusOperations bonusOperations;
+    @Autowired
+    private BrandOperations brandOperations;
+    @Autowired
+    private FeedOperations feedOperations;
+    @Autowired
+    private OptionOperations optionOperations;
+    @Autowired
+    private OptionTemplateOperations optionTemplateOperations;
+    @Autowired
+    private OrderOperations orderOperations;
+    @Autowired
+    private PositionOperations positionOperations;
+    @Autowired
+    private SchedulerOperations schedulerOperations;
+    @Autowired
+    private TimezoneOperations timezoneOperations;
+    @Autowired
+    private TradingCalendarOperations tradingCalendarOperations;
+    @Autowired
+    private VolatilityUnitOperations volatilityUnitOperations;
 
     @Override
     public AccountOperations accountOperations() {
@@ -34,12 +51,62 @@ public class TPTemplateImpl implements TPTemplate {
     }
 
     @Override
-    public BrandOperation brandOperation() {
-        return brandOperation;
+    public AssetOperations assetOperations() {
+        return assetOperations;
     }
 
     @Override
     public BonusOperations bonusOperations() {
         return bonusOperations;
+    }
+
+    @Override
+    public BrandOperations brandOperations() {
+        return brandOperations;
+    }
+
+    @Override
+    public OptionOperations optionOperations() {
+        return optionOperations;
+    }
+
+    @Override
+    public OptionTemplateOperations optionTemplateOperations() {
+        return optionTemplateOperations;
+    }
+
+    @Override
+    public SchedulerOperations schedulerOperations() {
+        return schedulerOperations;
+    }
+
+    @Override
+    public TimezoneOperations timezoneOperations() {
+        return timezoneOperations;
+    }
+
+    @Override
+    public TradingCalendarOperations tradingCalendarOperations() {
+        return tradingCalendarOperations;
+    }
+
+    @Override
+    public VolatilityUnitOperations volatilityUnitOperations() {
+        return volatilityUnitOperations;
+    }
+
+    @Override
+    public FeedOperations feedOperations() {
+        return feedOperations;
+    }
+
+    @Override
+    public OrderOperations orderOperations() {
+        return orderOperations;
+    }
+
+    @Override
+    public PositionOperations positionOperations() {
+        return positionOperations;
     }
 }

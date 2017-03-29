@@ -17,7 +17,8 @@
         <tp.version>2.5.9</tp.version>
         <gs.version>10.2.1-14000-RELEASE</gs.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
-        <!--<selenium.version>3.3.1</selenium.version>-->
+        <selenium.version>3.3.1</selenium.version>
+        <guava.version>21.0</guava.version>
     </properties>
 
     <parent>
@@ -28,15 +29,15 @@
     </parent>
 
     <!--<dependencyManagement>-->
-        <!--<dependencies>-->
-            <!--<dependency>-->
-                <!--<groupId>io.spring.platform</groupId>-->
-                <!--<artifactId>platform-bom</artifactId>-->
-                <!--<version>Brussels-RELEASE</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
-        <!--</dependencies>-->
+    <!--<dependencies>-->
+    <!--<dependency>-->
+    <!--<groupId>io.spring.platform</groupId>-->
+    <!--<artifactId>platform-bom</artifactId>-->
+    <!--<version>Brussels-RELEASE</version>-->
+    <!--<type>pom</type>-->
+    <!--<scope>import</scope>-->
+    <!--</dependency>-->
+    <!--</dependencies>-->
     <!--</dependencyManagement>-->
 
     <!--<distributionManagement>-->

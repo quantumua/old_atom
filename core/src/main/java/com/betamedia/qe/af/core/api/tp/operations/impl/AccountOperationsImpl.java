@@ -10,7 +10,7 @@ import com.betamedia.qe.af.core.api.tp.entities.response.AccountRegister;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.AccountGroupOperations;
 import com.betamedia.qe.af.core.api.tp.operations.AccountOperations;
-import com.betamedia.qe.af.core.api.tp.operations.BrandOperation;
+import com.betamedia.qe.af.core.api.tp.operations.BrandOperations;
 import com.betamedia.tp.api.model.Account;
 import com.betamedia.tp.api.model.enums.AccountLevel;
 import com.betamedia.tp.api.model.enums.AccountStatus;
@@ -45,7 +45,7 @@ public class AccountOperationsImpl implements AccountOperations {
     private AccountGroupOperations accountGroupOperations;
 
     @Autowired
-    private BrandOperation brandOperation;
+    private BrandOperations brandOperations;
 
     @Autowired
     private CRMHTTPAdapter crmHttpAdapter;
@@ -66,8 +66,8 @@ public class AccountOperationsImpl implements AccountOperations {
         Account account = new Account();
         account.setAccountGroup(accountGroupOperations.get());
         account.setAccountType(AccountType.REAL);
-        account.setAssetsUsage(new ArrayList<String>());
-        account.setBrand(brandOperation.get());
+        account.setAssetsUsage(new ArrayList<>());
+        account.setBrand(brandOperations.get());
         account.setCountry(Country.USA);
         account.setCreatedBy("Automation test");
         account.setCurrency(Currency.USD);
@@ -101,13 +101,13 @@ public class AccountOperationsImpl implements AccountOperations {
 
     @Override
     public Account getCRM() {
-        return getCRM(new AccountBuilder().setBrandDisplayId(brandOperation.get().getDisplayId()));
+        return getCRM(new AccountBuilder().setBrandDisplayId(brandOperations.get().getDisplayId()));
     }
 
     @Override
     public Account getCRM(AccountBuilder accountBuilder) {
-        if (accountBuilder.getBrandDisplayId() ==null ){
-            accountBuilder.setBrandDisplayId(brandOperation.get().getDisplayId());
+        if (accountBuilder.getBrandDisplayId() == null) {
+            accountBuilder.setBrandDisplayId(brandOperations.get().getDisplayId());
         }
         TPCRMResponse<AccountRegister> register = crmHttpAdapter.create(accountBuilder.createAccountRO());
         assertNotNull(register.getResult(), "The new customer wasn't created" + register.getErrors());

@@ -1,5 +1,7 @@
 package com.betamedia.qe.af.common.repository;
 
+import com.betamedia.qe.af.common.entities.FindBy;
+
 import java.util.Map;
 
 import static com.betamedia.qe.af.common.repository.WebElementRepository.Index;
@@ -10,14 +12,14 @@ import static com.betamedia.qe.af.common.repository.WebElementRepository.Index;
  */
 public class VersionedWebElementRepositoryImpl implements VersionedWebElementRepository {
 
-    private Map<WebElementRepository.Index, String> locations = null;
+    private Map<WebElementRepository.Index, FindBy> locations = null;
 
     public VersionedWebElementRepositoryImpl(String version, WebElementRepository webElementRepository) {
         locations = webElementRepository.getVersionedWebElements(version);
     }
 
     @Override
-    public String getId(String pageObjectName, String elementId) {
+    public FindBy get(String pageObjectName, String elementId) {
         return locations.get(new Index(pageObjectName, elementId));
     }
 }

@@ -6,6 +6,7 @@ import com.betamedia.qe.af.core.pages.tp.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.pages.tp.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.pages.tp.login.LoginPage;
 import com.betamedia.qe.af.core.pages.tp.navigation.TopNavigationPage;
+import com.betamedia.qe.af.core.pages.tp.orders.Positions;
 
 /**
  * @author Maksym Tsybulskyy
@@ -21,4 +22,6 @@ public interface TPPageFactory {
     LoginErrorNotification loginErrorNotification();
 
     Bidder bidder();
+
+    Positions positions();
 }

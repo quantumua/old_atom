@@ -18,5 +18,5 @@ public interface Bidder {
 
     Bidder bidHigh();
 
-    Bidder closePosition();
+    Bidder confirm();
 }

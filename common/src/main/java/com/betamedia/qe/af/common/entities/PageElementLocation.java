@@ -14,13 +14,13 @@ public class PageElementLocation {
     private String elementId;
 
     @CsvBindByName
-    private String application;
-
-    @CsvBindByName
     private String version;
 
     @CsvBindByName
-    private String id;
+    private String how;
+
+    @CsvBindByName
+    private String value;
 
     public String getPageObjectName() {
         return pageObjectName;
@@ -34,11 +34,11 @@ public class PageElementLocation {
         return version;
     }
 
-    public String getId() {
-        return id;
+    public String getValue() {
+        return value;
     }
 
-    public String getApplication() {
-        return application;
+    public String getHow() {
+        return how;
     }
 }

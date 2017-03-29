@@ -1,9 +1,10 @@
 package com.betamedia.qe.af.core.pages;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -21,8 +22,8 @@ public abstract class AbstractPageObject {
     }
 
     protected void waitFor(By element) {
-        WebDriverWait wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        Wait<WebDriver> wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
+        wait.until(driver -> driver.findElement(element).isDisplayed());
     }
 
     protected WebElement find(By by) {

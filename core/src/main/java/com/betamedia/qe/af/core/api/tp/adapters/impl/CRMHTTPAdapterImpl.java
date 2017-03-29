@@ -5,7 +5,7 @@ import com.betamedia.qe.af.core.api.tp.entities.AccountRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.AccountRegister;
 import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
-import com.betamedia.qe.af.core.api.tp.operations.BrandOperation;
+import com.betamedia.qe.af.core.api.tp.operations.BrandOperations;
 import com.betamedia.tp.api.model.enums.BonusType;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,19 +40,18 @@ public class CRMHTTPAdapterImpl implements CRMHTTPAdapter {
 
     private static final Logger logger = LogManager.getLogger(CRMHTTPAdapterImpl.class);
 
-    public static final String CANCEL_BONUS_URL = "account/bonus/cancel";
-    public static final String ADJUSTMENT_URL = "account/adjustment";
-    public static final String ADD_BONUS_URL = "account/bonus/add";
-    public static final String CANCEL_WITHDRAWAL_URL = "account/withdrawal/cancel";
-    public static final String DEPOSIT_URL = "account/deposit";
-    public static final String WITHDRAWAL_URL = "account/withdrawal/add";
-    public static final String CREATE_ACCOUNT_URL = "account/create";
-
-    public static final String PARAM_USERNAME = "userName";
-    public static final String PARAM_PASSWORD = "userPassword";
+    private static final String CANCEL_BONUS_URL = "account/bonus/cancel";
+    private static final String ADJUSTMENT_URL = "account/adjustment";
+    private static final String ADD_BONUS_URL = "account/bonus/add";
+    private static final String CANCEL_WITHDRAWAL_URL = "account/withdrawal/cancel";
+    private static final String DEPOSIT_URL = "account/deposit";
+    private static final String WITHDRAWAL_URL = "account/withdrawal/add";
+    private static final String CREATE_ACCOUNT_URL = "account/create";
+    private static final String PARAM_USERNAME = "userName";
+    private static final String PARAM_PASSWORD = "userPassword";
 
     @Autowired
-    private BrandOperation brandOperation;
+    private BrandOperations brandOperations;
 
     @Value("${af.crm.url}")
     private String crmUrl;
@@ -90,7 +89,7 @@ public class CRMHTTPAdapterImpl implements CRMHTTPAdapter {
     public TPCRMResponse<AddBonus> addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount) {
         Map<String, String> params = new LinkedHashMap<>();
         params.put("accountId", accountId);
-        params.put("brandId", brandOperation.get().getDisplayId());
+        params.put("brandId", brandOperations.get().getDisplayId());
         params.put("amount", amount.toString());
         params.put("wagerAmount", wagerAmount.toString());
         params.put("bonusType", bonusType.getName());

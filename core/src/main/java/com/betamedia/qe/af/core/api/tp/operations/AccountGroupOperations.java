@@ -11,4 +11,6 @@ public interface AccountGroupOperations {
     AccountGroup get();
 
     AccountGroup get(String id);
+
+    Integer getOpeningDelay(Double amount);
 }
