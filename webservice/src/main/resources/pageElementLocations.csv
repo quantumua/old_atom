@@ -7,7 +7,7 @@ DisclaimerNotificationImpl,disclaimerSubmitBtn,1603,ID,disclaimer_submit
 TopNavigationPageImpl,loginBtn,1603,ID,login_btn
 TopNavigationPageImpl,myAccountBtn,1603,ID,myaccount_btn
 LoginErrorNotificationImpl,errorNotification,1603,ID,login_deposit_error
-BidderImpl,amountInput,1603,id,bmBidAmountInput
+BidderImpl,amountInput,1603,ID,bmBidAmountInput
 BidderImpl,highLowButton,1603,CSS,.bmSelectItem.bmSelectHighLowGame
 BidderImpl,shortTermButton,1603,CSS,.bmSelectItem.bmSelectShortTermGame
 BidderImpl,doubleProfitButton,1603,CSS,.bmSelectItem.bmSelectDoubleProfitGame
