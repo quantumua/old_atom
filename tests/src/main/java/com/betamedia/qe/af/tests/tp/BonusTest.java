@@ -19,12 +19,12 @@ public class BonusTest extends TPBackEndTest {
      */
     @Test
     public void addLargeBonus() {
-        Account account = operations().accountOperations().get();
+        Account account = operations().accountOperations().getTP();
         double balanceBeforeBonus = account.getBalance();
         double bonusAmount = balanceBeforeBonus * 100;
         double wagerAmount = bonusAmount * 0.1;
         operations().bonusOperations().addBonus(account.getId(), BonusType.REGULAR, bonusAmount, wagerAmount);
-        account = operations().accountOperations().get(account.getId());
+        account = operations().accountOperations().getTP(account.getId());
         assertEquals(account.getBalance(), balanceBeforeBonus + bonusAmount);
     }
 }

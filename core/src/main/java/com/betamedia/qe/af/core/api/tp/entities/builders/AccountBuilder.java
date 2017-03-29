@@ -1,16 +1,14 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
-import com.betamedia.qe.af.core.api.tp.entities.Customer;
+import com.betamedia.qe.af.core.api.tp.entities.AccountRO;
 
 import static com.betamedia.qe.af.core.utils.StringUtils.generateRandomId;
 
-public class CustomerBuilder {
+public class AccountBuilder {
 
     public static final String TP_AUTOMATION_PREFIX = "tp_automation_";
     public static final int CHARS_IN_ID = 6;
 
-    private String userName;
-    private String userPassword = "1234";
     private String currency = "usd";
     private String accountType = "real";
     private String brandDisplayId;
@@ -24,72 +22,62 @@ public class CustomerBuilder {
     private String accountStatus;
     private String country;
 
-    public CustomerBuilder setUserName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    public CustomerBuilder setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-        return this;
-    }
-
-    public CustomerBuilder setCurrency(String currency) {
+    public AccountBuilder setCurrency(String currency) {
         this.currency = currency;
         return this;
     }
 
-    public CustomerBuilder setAccountType(String accountType) {
+    public AccountBuilder setAccountType(String accountType) {
         this.accountType = accountType;
         return this;
     }
 
-    public CustomerBuilder setBrandDisplayId(String brandDisplayId) {
+    public AccountBuilder setBrandDisplayId(String brandDisplayId) {
         this.brandDisplayId = brandDisplayId;
         return this;
     }
 
-    public CustomerBuilder setPriceType(String priceType) {
+    public AccountBuilder setPriceType(String priceType) {
         this.priceType = priceType;
         return this;
     }
 
-    public CustomerBuilder setAcountGroupId(String acountGroupId) {
+    public AccountBuilder setAcountGroupId(String acountGroupId) {
         this.acountGroupId = acountGroupId;
         return this;
     }
 
-    public CustomerBuilder setFirstName(String firstName) {
+    public AccountBuilder setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public CustomerBuilder setLastName(String lastName) {
+    public AccountBuilder setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public CustomerBuilder setDescription(String description) {
+    public AccountBuilder setDescription(String description) {
         this.description = description;
         return this;
     }
 
-    public CustomerBuilder setEmail(String email) {
+    public AccountBuilder setEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public CustomerBuilder setPhone(String phone) {
+    public AccountBuilder setPhone(String phone) {
         this.phone = phone;
         return this;
     }
 
-    public CustomerBuilder setAccountStatus(String accountStatus) {
+    public AccountBuilder setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
         return this;
     }
 
-    public CustomerBuilder setCountry(String country) {
+    public AccountBuilder setCountry(String country) {
         this.country = country;
         return this;
     }
@@ -98,9 +86,9 @@ public class CustomerBuilder {
         return brandDisplayId;
     }
 
-    public Customer createCustomer() {
+    public AccountRO createAccountRO() {
         final int charsInId = 6;
-        userName = userName!=null? userName : TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
-        return new Customer(userName, userPassword, currency, accountType, brandDisplayId, priceType, acountGroupId, firstName, lastName, description, email, phone, accountStatus, country);
+        firstName = firstName!=null? firstName : TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
+        return new AccountRO(currency, accountType, brandDisplayId, priceType, acountGroupId, firstName, lastName, description, email, phone, accountStatus, country);
     }
 }

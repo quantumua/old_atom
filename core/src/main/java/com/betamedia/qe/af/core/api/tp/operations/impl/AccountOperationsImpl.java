@@ -5,8 +5,8 @@ import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;
 import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.adapters.CRMHTTPAdapter;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.response.CustomerRegister;
+import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.response.AccountRegister;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.AccountGroupOperations;
 import com.betamedia.qe.af.core.api.tp.operations.AccountOperations;
@@ -51,18 +51,18 @@ public class AccountOperationsImpl implements AccountOperations {
     private CRMHTTPAdapter crmHttpAdapter;
 
     @Override
-    public Account get() {
-        return create();
+    public Account getTP() {
+        return createTP();
     }
 
     @Override
-    public Account get(String id) {
+    public Account getTP(String id) {
         Account account = tpConnector.readById(Account.class, id);
         assertNotNull(account, "Account with id " + id + " is not available in GS");
         return account;
     }
 
-    private Account create() {
+    private Account createTP() {
         Account account = new Account();
         account.setAccountGroup(accountGroupOperations.get());
         account.setAccountType(AccountType.REAL);
@@ -79,39 +79,39 @@ public class AccountOperationsImpl implements AccountOperations {
         account.setStatus(AccountStatus.ACTIVE);
         account = tpConnector.create(account);
         assertNotNull(account);
-        account = updateBalance(account.getId(), DEFAULT_ACCOUNT_BALANCE);
+        account = updateBalanceTP(account.getId(), DEFAULT_ACCOUNT_BALANCE);
         logger.info("Account '" + account.getDisplayId() + "'(" + account.getId() + "') created");
         return account;
     }
 
     @Override
-    public Account update(Account account, Set<String> properties) {
+    public Account updateTP(Account account, Set<String> properties) {
 //        TODO add some verifications or make the method private
         return tpConnector.update(account, properties);
     }
 
     @Override
-    public Account updateBalance(String accountId, Double amount) {
-        Account account = get(accountId);
+    public Account updateBalanceTP(String accountId, Double amount) {
+        Account account = getTP(accountId);
         account.setBalance(amount);
-        account = update(account, CollectionUtils.toSet(Account.EP_ACCOUNT_BALANCE.getName()));
+        account = updateTP(account, CollectionUtils.toSet(Account.EP_ACCOUNT_BALANCE.getName()));
         assertEquals(account.getBalance(), amount, "The balance of account " + accountId + "was not updated");
         return account;
     }
 
     @Override
-    public Account register() {
-        return register(new CustomerBuilder().setBrandDisplayId(brandOperation.get().getDisplayId()));
+    public Account getCRM() {
+        return getCRM(new AccountBuilder().setBrandDisplayId(brandOperation.get().getDisplayId()));
     }
 
     @Override
-    public Account register(CustomerBuilder customerBuilder) {
-        if (customerBuilder.getBrandDisplayId() ==null ){
-            customerBuilder.setBrandDisplayId(brandOperation.get().getDisplayId());
+    public Account getCRM(AccountBuilder accountBuilder) {
+        if (accountBuilder.getBrandDisplayId() ==null ){
+            accountBuilder.setBrandDisplayId(brandOperation.get().getDisplayId());
         }
-        TPCRMResponse<CustomerRegister> register = crmHttpAdapter.register(customerBuilder.createCustomer());
+        TPCRMResponse<AccountRegister> register = crmHttpAdapter.create(accountBuilder.createAccountRO());
         assertNotNull(register.getResult(), "The new customer wasn't created" + register.getErrors());
-        return get(register.getResult().getAccountId());
+        return getTP(register.getResult().getAccountId());
     }
 
 

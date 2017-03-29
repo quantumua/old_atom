@@ -6,9 +6,7 @@ import java.util.Objects;
  * @author Maksym Tsybulskyy
  *         Date: 3/28/17.
  */
-public class Customer {
-    private final String userName;
-    private final String userPassword;
+public class AccountRO {
     //    usd, eur or other
     private final String currency;
     //    demo/real
@@ -28,14 +26,10 @@ public class Customer {
     //    us - United States, it - Italy, jp -Japan ...
     private String country;
 
-    public Customer(String userName, String userPassword, String currency, String accountType, String brandId, String priceType, String acountGroupId, String firstName, String lastName, String description, String email, String phone, String accountStatus, String country) {
-        Objects.requireNonNull(userName);
-        Objects.requireNonNull(userPassword);
+    public AccountRO(String currency, String accountType, String brandId, String priceType, String acountGroupId, String firstName, String lastName, String description, String email, String phone, String accountStatus, String country) {
         Objects.requireNonNull(currency);
         Objects.requireNonNull(accountType);
         Objects.requireNonNull(brandId);
-        this.userName = userName;
-        this.userPassword = userPassword;
         this.currency = currency;
         this.accountType = accountType;
         this.brandId = brandId;
@@ -48,14 +42,6 @@ public class Customer {
         this.phone = phone;
         this.accountStatus = accountStatus;
         this.country = country;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
     }
 
     public String getCurrency() {
@@ -108,10 +94,8 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", currency='" + currency + '\'' +
+        return "AccountRO{" +
+                "currency='" + currency + '\'' +
                 ", accountType='" + accountType + '\'' +
                 ", brandId='" + brandId + '\'' +
                 ", priceType='" + priceType + '\'' +
