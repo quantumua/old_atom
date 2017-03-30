@@ -3,6 +3,7 @@ package com.betamedia.qe.af.common.factory.webdriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -44,7 +45,8 @@ public class WebDriverFactoryImpl implements WebDriverFactory {
                     driver = new RemoteWebDriver(chromeDriverService.getUrl(), capabilities);
                     break;
                 case BrowserType.FIREFOX:
-                    driver = new FirefoxDriver(capabilities);
+                    //currently targeting non-Gecko firefox versions
+                    driver = new FirefoxDriver(new FirefoxOptions().addDesiredCapabilities(capabilities).setLegacy(true));
                     break;
                 default:
             }

@@ -9,16 +9,14 @@ import org.testng.annotations.BeforeTest;
  */
 public abstract class AbstractBackEndTest<T extends BackEndOperationsTemplate> {
 
-    private T operationTemplate;
-
-    @BeforeTest
-    public void setUp() throws Exception {
-        operationTemplate = getOperationTemplate();
-    }
+    private T operationTemplate = null;
 
     public abstract T getOperationTemplate();
 
     public T operations() {
+        if (operationTemplate == null) {
+            operationTemplate = getOperationTemplate();
+        }
         return operationTemplate;
     }
 }

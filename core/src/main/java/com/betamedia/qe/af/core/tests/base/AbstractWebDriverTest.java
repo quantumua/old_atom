@@ -3,7 +3,6 @@ package com.betamedia.qe.af.core.tests.base;
 
 import com.betamedia.qe.af.core.pages.factory.AbstractPageFactory;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 
 /**
@@ -15,18 +14,18 @@ public abstract class AbstractWebDriverTest<T extends AbstractPageFactory> {
 
     public abstract T getPageFactory();
 
-    @BeforeMethod
-    public void setUp() throws Exception {
-        pages.set(getPageFactory());
-    }
-
     @AfterMethod
     public void tearDown() throws Exception {
-        pages.get().closeBrowser();
+        if (pages.get() != null) {
+            pages.get().closeBrowser();
+        }
     }
 
     public T pages() {
+        if (pages.get() == null) {
+            pages.set(getPageFactory());
+        }
         return pages.get();
     }
-    
+
 }
