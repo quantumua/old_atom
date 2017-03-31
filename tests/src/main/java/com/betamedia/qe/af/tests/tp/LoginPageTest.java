@@ -1,7 +1,9 @@
 package com.betamedia.qe.af.tests.tp;
 
 
-import com.betamedia.qe.af.core.tests.tp.TPWebDriverTest;
+import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
+import com.betamedia.qe.af.core.tests.tp.TPEndToEndTest;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -11,7 +13,7 @@ import org.testng.annotations.Test;
  *         Date: 2/15/17.
  */
 
-public class LoginPageTest extends TPWebDriverTest {
+public class LoginPageTest extends TPEndToEndTest {
 
     @Test
     public void loginTest() {
@@ -35,4 +37,16 @@ public class LoginPageTest extends TPWebDriverTest {
         pages().loginPage().login(username, password);
         Assert.assertTrue(pages().loginErrorNotification().isDisplayed());
     }
+
+    /**
+     * Register the new customer with mobile CRM api and then login with newly created customer's login/password
+     */
+    @Test
+    public void registerAndLoginTest() {
+        CRMCustomer customer = operations().customerOperations().register();
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+    }
+
 }

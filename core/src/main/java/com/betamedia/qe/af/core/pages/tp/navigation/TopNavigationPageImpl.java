@@ -22,6 +22,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public boolean isLoggedIn() {
+        waitFor(myAccountBtn);
         return find(myAccountBtn).isDisplayed();
     }
 

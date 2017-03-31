@@ -1,12 +1,12 @@
 package com.betamedia.qe.af.core.api.tp.adapters.impl;
 
-import com.betamedia.qe.af.core.api.tp.adapters.TPHTTPAdapter;
+import com.betamedia.qe.af.core.api.tp.adapters.TPHttpAdapter;
 
 /**
  * @author Maksym Tsybulskyy
  *         Date: 3/22/17.
  */
-public class TPHTTPAdapterImpl implements TPHTTPAdapter {
+public class TPHttpAdapterImpl implements TPHttpAdapter {
     private static final String LOGIN = "account/validate?";
     private static final String OPEN_ORDER = "order/open?";
     private static final String OPEN_POSITION = "position/open?";

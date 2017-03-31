@@ -39,6 +39,8 @@ public class TPTemplateImpl implements TPTemplate {
     private TradingCalendarOperations tradingCalendarOperations;
     @Autowired
     private VolatilityUnitOperations volatilityUnitOperations;
+    @Autowired
+    private CustomerOperations customerOperations;
 
     @Override
     public AccountOperations accountOperations() {
@@ -109,4 +111,11 @@ public class TPTemplateImpl implements TPTemplate {
     public PositionOperations positionOperations() {
         return positionOperations;
     }
+
+    @Override
+    public CustomerOperations customerOperations() {
+        return customerOperations;
+    }
+
+
 }

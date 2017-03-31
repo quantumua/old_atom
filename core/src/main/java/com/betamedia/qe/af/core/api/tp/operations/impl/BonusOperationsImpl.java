@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.api.tp.operations.impl;
 
 import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
-import com.betamedia.qe.af.core.api.tp.adapters.CRMHTTPAdapter;
+import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.BonusOperations;
@@ -29,7 +29,7 @@ public class BonusOperationsImpl implements BonusOperations {
     private AFTPConnector tpConnector;
 
     @Autowired
-    private CRMHTTPAdapter crmHttpAdapter;
+    private TPCRMHttpAdapter crmHttpAdapter;
 
     @Override
     public Bonus get(String id) {

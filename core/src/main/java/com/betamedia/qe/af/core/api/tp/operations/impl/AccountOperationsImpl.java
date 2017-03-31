@@ -4,9 +4,9 @@ import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;
 import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
-import com.betamedia.qe.af.core.api.tp.adapters.CRMHTTPAdapter;
+import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.response.AccountRegister;
+import com.betamedia.qe.af.core.api.tp.entities.response.AccountCreateCRM;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.AccountGroupOperations;
 import com.betamedia.qe.af.core.api.tp.operations.AccountOperations;
@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Set;
 
+import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.PASSWORD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -36,7 +37,6 @@ public class AccountOperationsImpl implements AccountOperations {
     private static final Logger logger = LogManager.getLogger(AccountOperationsImpl.class);
 
     public static final double DEFAULT_ACCOUNT_BALANCE = 1000.0d;
-    public static final String DEFAULT_ACCOUNT_PASSWORD = "123123";
 
     @Autowired
     private AFTPConnector tpConnector;
@@ -48,7 +48,7 @@ public class AccountOperationsImpl implements AccountOperations {
     private BrandOperations brandOperations;
 
     @Autowired
-    private CRMHTTPAdapter crmHttpAdapter;
+    private TPCRMHttpAdapter crmHttpAdapter;
 
     @Override
     public Account getTP() {
@@ -75,7 +75,7 @@ public class AccountOperationsImpl implements AccountOperations {
         account.setDescription(
                 "This account was created by automatic test.");
         account.setLevel(AccountLevel.REGULAR);
-        account.setPassword(DEFAULT_ACCOUNT_PASSWORD);
+        account.setPassword(PASSWORD);
         account.setStatus(AccountStatus.ACTIVE);
         account = tpConnector.create(account);
         assertNotNull(account);
@@ -109,8 +109,8 @@ public class AccountOperationsImpl implements AccountOperations {
         if (accountBuilder.getBrandDisplayId() == null) {
             accountBuilder.setBrandDisplayId(brandOperations.get().getDisplayId());
         }
-        TPCRMResponse<AccountRegister> register = crmHttpAdapter.create(accountBuilder.createAccountRO());
-        assertNotNull(register.getResult(), "The new customer wasn't created" + register.getErrors());
+        TPCRMResponse<AccountCreateCRM> register = crmHttpAdapter.create(accountBuilder.createAccountRO());
+        assertNotNull(register.getResult(), "The new account wasn't created" + register.getErrors());
         return getTP(register.getResult().getAccountId());
     }
 

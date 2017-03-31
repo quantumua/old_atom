@@ -2,12 +2,11 @@ package com.betamedia.qe.af.core.api.tp.entities.builders;
 
 import com.betamedia.qe.af.core.api.tp.entities.AccountRO;
 
+import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.CHARS_IN_ID;
+import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.TP_AUTOMATION_PREFIX;
 import static com.betamedia.qe.af.core.utils.StringUtils.generateRandomId;
 
 public class AccountBuilder {
-
-    public static final String TP_AUTOMATION_PREFIX = "tp_automation_";
-    public static final int CHARS_IN_ID = 6;
 
     private String currency = "usd";
     private String accountType = "real";
@@ -87,7 +86,6 @@ public class AccountBuilder {
     }
 
     public AccountRO createAccountRO() {
-        final int charsInId = 6;
         firstName = firstName!=null? firstName : TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
         return new AccountRO(currency, accountType, brandDisplayId, priceType, acountGroupId, firstName, lastName, description, email, phone, accountStatus, country);
     }

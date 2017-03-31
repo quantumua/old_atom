@@ -36,4 +36,6 @@ public interface TPTemplate extends BackEndOperationsTemplate {
     OrderOperations orderOperations();
 
     PositionOperations positionOperations();
+
+    CustomerOperations customerOperations();
 }
