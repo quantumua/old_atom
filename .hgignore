@@ -6,6 +6,10 @@ test-output/
 upload-dir/
 public/
 .log.gz
+.orig
+.jar
+.sh
+
 ### STS ###
 .apt_generated
 .classpath

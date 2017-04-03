@@ -25,16 +25,10 @@ public class LoginPageImpl extends AbstractPageObject implements LoginPage {
 
     @Override
     public void login(String username, String password) {
-        waitFor(submitButton);
+        waitUntilDisplayed(submitButton);
         find(usernameField).sendKeys(username);
         find(passwordField).sendKeys(password);
         find(submitButton).click();
     }
-
-//    @Override
-//    public LoginPage goTo() {
-//        TPPages.topNavigationPage().logIn();
-//        return this;
-//    }
 
 }

@@ -4,7 +4,7 @@
         <Property name="LEVEL_ROOT">INFO</Property>
         <Property name="LEVEL_AF">INFO</Property>
         <Property name="LEVEL_SPRINGFRAMEWORK">WARN</Property>
-        <Property name="LEVEL_THYMELEAF">WARN</Property>
+        <Property name="LEVEL_TOMCAT">DEBUG</Property>
         <Property name="PATTERN">%d %p [%c] [%t]- %msg%n%throwable</Property>
         <Property name="FILENAME">${sys:user.dir}/automation-framework.log</Property>
     </Properties>
@@ -31,7 +31,7 @@
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>
-        <Logger name="org.thymeleaf" level="${LEVEL_THYMELEAF}" additivity="false">
+        <Logger name="org.apache.tomcat" level="${LEVEL_TOMCAT}" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>

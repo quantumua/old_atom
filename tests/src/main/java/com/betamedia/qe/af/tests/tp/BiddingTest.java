@@ -27,7 +27,7 @@ public class BiddingTest extends TPEndToEndTest {
         pages().disclaimerNotification().accept();
         pages().bidder()
                 .highLow()
-                .asset()
+                .asset("EUR/USD")
                 .setAmount("10.0")
                 .bidHigh()
                 .confirm();

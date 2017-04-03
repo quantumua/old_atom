@@ -22,7 +22,7 @@ public class DisclaimerNotificationImpl extends AbstractPageObject implements Di
 
     @Override
     public void accept() {
-        waitFor(disclaimerCheckbox);
+        waitUntilDisplayed(disclaimerCheckbox);
         find(disclaimerCheckbox).click();
         find(disclaimerSubmitBtn).click();
     }

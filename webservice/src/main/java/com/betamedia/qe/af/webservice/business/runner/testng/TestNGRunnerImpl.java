@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.webservice.business.runner.testng;
 
 import com.betamedia.qe.af.common.factory.webdriver.WebDriverFactory;
-import com.betamedia.qe.af.common.factory.webdriver.WebDriverFactoryImpl;
+import com.betamedia.qe.af.common.factory.webdriver.WebDriverFactoryProvider;
 import com.betamedia.qe.af.common.holder.ApplicationVersionHolder;
 import com.betamedia.qe.af.common.holder.SUTPropertiesHolder;
 import com.betamedia.qe.af.common.holder.TPApplicationVersionHolderImpl;
@@ -11,11 +11,8 @@ import com.betamedia.qe.af.common.repository.WebElementRepository;
 import com.betamedia.qe.af.webservice.business.ClassLoaderInvocationHandler;
 import com.betamedia.qe.af.webservice.business.runner.TestRunner;
 import com.betamedia.qe.af.webservice.business.types.TestType;
-import com.betamedia.qe.af.webservice.configuration.webdriver.BrowserDesiredCapabilities;
 import com.google.common.base.Strings;
 import net.sf.cglib.proxy.Enhancer;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.testng.TestNG;
@@ -23,14 +20,12 @@ import org.testng.TestNG;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
-import static com.betamedia.qe.af.webservice.business.types.TestType.TESTNG;
 import static com.betamedia.qe.af.core.utils.PropertiesUtils.permute;
+import static com.betamedia.qe.af.webservice.business.types.TestType.TESTNG;
 
 
 /**
@@ -41,7 +36,7 @@ import static com.betamedia.qe.af.core.utils.PropertiesUtils.permute;
 public class TestNGRunnerImpl implements TestRunner {
 
     @Autowired
-    private ChromeDriverService chromeDriverService;
+    private WebDriverFactoryProvider webDriverFactoryProvider;
 
     @Autowired
     private Executor runnerTaskExecutor;
@@ -51,8 +46,6 @@ public class TestNGRunnerImpl implements TestRunner {
 
     @Autowired
     private ApplicationVersionHolder applicationVersionHolder;
-
-    private Map<String, BrowserDesiredCapabilities> capabilities;
 
     //TODO add input property validation
 
@@ -81,13 +74,13 @@ public class TestNGRunnerImpl implements TestRunner {
 
     private String executeForProperties(Properties props, List<String> xmlNames) {
         String path = LocalDateTime.now().toString() + "." + props.hashCode();
-        runnerTaskExecutor.execute(() -> TestNGRunnerImpl.this.run(xmlNames, TestNGRunnerImpl.this.getWebDriverFactory(props), TestNGRunnerImpl.this.getAppVersion(props), "test-output/" + path));
+        runnerTaskExecutor.execute(() -> run(xmlNames, props, "test-output/" + path));
         return path + "/index.html";
     }
 
-    private void run(List<String> xmlNames, WebDriverFactory webDriverFactory, String version, String outputDirectory) {
-        ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(webDriverFactory);
-        ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(version, webElementRepository));
+    private void run(List<String> xmlNames, Properties props, String outputDirectory) {
+        ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(getWebDriverFactory(props));
+        ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(getAppVersion(props), webElementRepository));
         TestNG testng = new TestNG();
         testng.setOutputDirectory(outputDirectory);
         testng.setTestSuites(xmlNames);
@@ -95,23 +88,11 @@ public class TestNGRunnerImpl implements TestRunner {
         testng.run();
     }
 
-    @Autowired
-    private void setCapabilities(List<BrowserDesiredCapabilities> browserDesiredCapabilities) {
-        this.capabilities = browserDesiredCapabilities.stream()
-                .collect(Collectors.toMap(BrowserDesiredCapabilities::getType, m -> m));
-    }
-
     private WebDriverFactory getWebDriverFactory(Properties properties) {
-        String browserType = properties.getProperty(SUTPropertiesHolder.BROWSER_TYPE);
-        String remoteDriverUrl = properties.getProperty(SUTPropertiesHolder.REMOTE_DRIVER_URL);
         String domainUrl = properties.getProperty(SUTPropertiesHolder.DOMAIN_URL);
-        return new WebDriverFactoryImpl(browserType, remoteDriverUrl, domainUrl, chromeDriverService, getCapabilities(browserType));
-    }
-
-    private DesiredCapabilities getCapabilities(String browserType) {
-        return Optional.ofNullable(capabilities.get(browserType))
-                .map(BrowserDesiredCapabilities::getCapabilities)
-                .orElse(null);
+        String remoteDriverUrl = properties.getProperty(SUTPropertiesHolder.REMOTE_DRIVER_URL);
+        String browserType = properties.getProperty(SUTPropertiesHolder.BROWSER_TYPE);
+        return webDriverFactoryProvider.get(browserType, remoteDriverUrl, domainUrl);
     }
 
     private String getAppVersion(Properties properties) {
@@ -123,4 +104,5 @@ public class TestNGRunnerImpl implements TestRunner {
             throw new RuntimeException("Failed to obtain app version from " + TPApplicationVersionHolderImpl.VERSION_SOURCE, e);
         }
     }
+
 }

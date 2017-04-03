@@ -20,7 +20,7 @@ public class LoginErrorNotificationImpl extends AbstractPageObject implements Lo
 
     @Override
     public boolean isDisplayed() {
-        waitFor(errorNotification);
+        waitUntilDisplayed(errorNotification);
         return find(errorNotification).isDisplayed();
     }
 }

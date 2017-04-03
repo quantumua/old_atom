@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.testng.Assert.assertTrue;
+
 /**
  * Created by mbelyaev on 3/21/17.
  */
@@ -40,43 +42,46 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
 
     @Override
     public Bidder highLow() {
-        waitFor(highLowButton);
+        waitUntilDisplayed(highLowButton);
         find(highLowButton).click();
         return this;
     }
 
     @Override
     public Bidder shortTerm() {
-        waitFor(shortTermButton);
+        waitUntilDisplayed(shortTermButton);
         find(shortTermButton).click();
         return this;
     }
 
     @Override
     public Bidder doubleProfit() {
-        waitFor(doubleProfitButton);
+        waitUntilDisplayed(doubleProfitButton);
         find(doubleProfitButton).click();
         return this;
     }
 
     @Override
-    public Bidder asset() {
-        if (!find(assetSelector).isDisplayed()){
-            if (!find(assetSearchBox).isDisplayed()){
-                waitFor(assetDropdown);
+    public Bidder asset(String searchString) {
+        waitUntilExists(assetSelector);
+        if (!find(assetSelector).isDisplayed()) {
+            if (!find(assetSearchBox).isDisplayed()) {
+                waitUntilDisplayed(assetDropdown);
                 find(assetDropdown).click();
             }
-            waitFor(assetSearchBox);
-            find(assetSearchBox).sendKeys("EUR/USD");
+            waitUntilDisplayed(assetSearchBox);
+            find(assetSearchBox).sendKeys(searchString);
         }
-        waitFor(assetSelector);
+        waitUntilDisplayed(assetSelector);
+        //TODO externalize the bmAvailable property (is it possible to use By locator for identity check?)
+        assertTrue(find(assetSelector).getAttribute("class").contains("bmAvailable"), "Selected asset must be available");
         find(assetSelector).click();
         return this;
     }
 
     @Override
     public Bidder setAmount(String value) {
-        waitFor(amountInput);
+        waitUntilDisplayed(amountInput);
         WebElement inputField = find(amountInput);
         inputField.clear();
         inputField.sendKeys(value);
@@ -84,24 +89,23 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
     }
 
     @Override
-    public Bidder bidLow(){
-        waitFor(lowButton);
+    public Bidder bidLow() {
+        waitUntilDisplayed(lowButton);
         find(lowButton).click();
         return this;
     }
 
     @Override
-    public Bidder bidHigh(){
-        waitFor(highButton);
+    public Bidder bidHigh() {
+        waitUntilDisplayed(highButton);
         find(highButton).click();
         return this;
     }
 
     @Override
     public Bidder confirm() {
-        waitFor(closePosition);
-        WebDriverWait wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
-        wait.until(driver -> !driver.findElement(closePosition).isDisplayed());
+        waitUntilDisplayed(closePosition);
+        waitUntil(driver -> !find(closePosition).isDisplayed());
         return this;
     }
 

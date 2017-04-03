@@ -17,3 +17,5 @@ BidderImpl,assetDropdown,1603,CLASS_NAME,bmCurrentAsset
 BidderImpl,lowButton,1603,CSS,.bmButtonsWrapp.bmSelection2
 BidderImpl,highButton,1603,CSS,.bmButtonsWrapp.bmSelection1
 BidderImpl,closePosition,1603,CSS,.bmButtonWrapp.bmClosePositionDialog
+PositionsImpl,positionList,1603,CSS,.bmPositionList.bmOptionList
+PositionsImpl,position,1603,CLASS_NAME,bmCellContent

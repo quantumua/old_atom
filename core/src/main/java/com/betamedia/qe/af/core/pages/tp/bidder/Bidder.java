@@ -10,7 +10,7 @@ public interface Bidder {
 
     Bidder doubleProfit();
 
-    Bidder asset();
+    Bidder asset(String searchString);
 
     Bidder setAmount(String value);
 

@@ -13,11 +13,11 @@ import java.util.concurrent.Executor;
 @Configuration
 public class ExecutorConfiguration {
 
-    private final int RUNNER_TREADS_NUMBER = 10;
+    private final int RUNNER_THREADS_NUMBER = 10;
 
     @Bean
     public Executor runnerTaskExecutor() {
-        return getThreadPoolTaskExecutor(RUNNER_TREADS_NUMBER, Thread.MAX_PRIORITY);
+        return getThreadPoolTaskExecutor(RUNNER_THREADS_NUMBER, Thread.MAX_PRIORITY);
     }
 
 

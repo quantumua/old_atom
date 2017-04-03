@@ -22,13 +22,13 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public boolean isLoggedIn() {
-        waitFor(myAccountBtn);
+        waitUntilExists(myAccountBtn);
         return find(myAccountBtn).isDisplayed();
     }
 
     @Override
     public void logIn() {
-        waitFor(loginBtn);
+        waitUntilDisplayed(loginBtn);
         find(loginBtn).click();
     }
 }
