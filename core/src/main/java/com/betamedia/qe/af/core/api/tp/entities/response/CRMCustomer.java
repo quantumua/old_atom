@@ -117,14 +117,14 @@ public class CRMCustomer {
         this.language = language;
     }
 
-    public CRMAccount getScipioAccount(){
+    public CRMAccount getBinaryAccount(){
         return Arrays.stream(getAccounts())
                 .filter(acc-> (SCIPIO.getValue()).equals(acc.getPlatform()))
                 .findFirst()
                 .orElse(null);
     }
 
-    public CRMAccount getPandaAccount(){
+    public CRMAccount getFXCFDAccount(){
         return Arrays.stream(getAccounts())
                 .filter(acc-> (PANDA.getValue()).equals(acc.getPlatform()))
                 .findFirst()

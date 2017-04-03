@@ -1,10 +1,16 @@
 package com.betamedia.qe.af.tests.tp;
 
+import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
+import com.betamedia.qe.af.core.api.tp.operations.TagOperations;
 import com.betamedia.qe.af.core.tests.tp.TPEndToEndTest;
+import com.betamedia.tp.api.feed.TickData;
+import com.betamedia.tp.api.model.Asset;
+import com.betamedia.tp.api.model.Option;
 import com.betamedia.tp.api.model.Position;
-import com.betamedia.tp.api.model.enums.OrderStatus;
+import com.betamedia.tp.api.model.enums.OptionType;
 import com.betamedia.tp.api.model.enums.PositionStatus;
-import com.betamedia.tp.api.model.order.Order;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -19,12 +25,13 @@ public class BiddingTest extends TPEndToEndTest {
     //WIP
     @Test
     public void biddingTest() {
-//        Asset asset = operations().assetOperations().get();
-//        Option option = operations().optionOperations().issue(asset.getValue(), OptionType.HILO, TagOperations.TagName.NO_CATEGORY);
-//        TickData tickData = operations().feedOperations().injectFeed(asset.getValue(), 5d);
+        Asset asset = operations().assetOperations().get();
+        Option option = operations().optionOperations().issue(asset.getId(), OptionType.HILO, TagOperations.TagName.NO_CATEGORY);
+        TickData tickData = operations().feedOperations().injectFeed(asset.getId(), 5d);
+        CRMCustomer customer = operations().customerOperations().register();
         pages().topNavigationPage().logIn();
-        pages().loginPage().login("vasichka", "123123");
-        pages().disclaimerNotification().accept();
+        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().bidder()
                 .highLow()
                 .asset("EUR/USD")

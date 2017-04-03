@@ -1,22 +1,29 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
 import com.betamedia.qe.af.core.api.tp.entities.CustomerRO;
+import com.google.common.base.Strings;
+
 import static com.betamedia.qe.af.core.utils.StringUtils.generateRandomId;
 
 public class CustomerBuilder {
 
     public static final int CHARS_IN_ID = 6;
-    public static final String TP_AUTOMATION_PREFIX = "tp_automation_@";
+    public static final String TP_AUTOMATION_PREFIX = "tp_automation_";
     public static final String PASSWORD = "123123";
+    public static final String EMAIL_TEMPLATE = "{userName}@automation.ru";
+    public static final String DYNAMIC_EMAIL_PART_REGEX = "\\{userName\\}";
     //should be unique
     private String userName;
     private String password = PASSWORD;
     private String firstName = "Automation";
-    private String email = "automation@test.ru";
+    private String email;
     private String phone = "12465555555";
     private String currency = "USD";
     private String countryCode = "JM";
 
+    //    every registration opens 2 Trading Accounts (Binary & FX), which the primary is FX/CFD by default.
+    //    set target as "binary" to have Binary as a primary TA
+    private String target = "binary";
     private String lastName;
     private String utcOffset;
     private String oftc;
@@ -41,7 +48,7 @@ public class CustomerBuilder {
     private String p3;
     private String p4;
     private String p5;
-    private String target;
+
 
     public CustomerBuilder setUserName(String userName) {
         this.userName = userName;
@@ -204,7 +211,24 @@ public class CustomerBuilder {
     }
 
     public CustomerRO createCustomerRO() {
-        userName = userName != null ? userName : TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
+        formDefaultUniqueFields();
         return new CustomerRO(userName, password, firstName, email, phone, currency, countryCode, lastName, utcOffset, oftc, birthOfDate, city, userAgent, lang, phoneTwo, registrationIp, stateCode, street, sreet2, title, zip, channel, campaign, kw, landingpage, siteid, p1, p2, p3, p4, p5, target);
+    }
+
+    private void formDefaultUniqueFields() {
+        if (!Strings.isNullOrEmpty(userName)) {
+            email = formMail(userName);
+        } else {
+            String uniqueId = generateRandomId(CHARS_IN_ID);
+            userName = TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
+            email = formMail(userName);
+        }
+    }
+
+    private String formMail(String userName) {
+        if (!Strings.isNullOrEmpty(email)) {
+            return email;
+        }
+        return EMAIL_TEMPLATE.replaceAll(DYNAMIC_EMAIL_PART_REGEX, userName);
     }
 }

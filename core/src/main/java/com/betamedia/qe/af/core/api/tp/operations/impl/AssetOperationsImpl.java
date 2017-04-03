@@ -48,9 +48,6 @@ public class AssetOperationsImpl implements AssetOperations {
 
     private Asset create() {
         Asset asset = new Asset();
-        asset.setId("QEAUTOTEST");
-        asset.setAssetName(asset.getId());
-        asset.setExchangeName(asset.getId());
         asset.setMarket(Market.INDICES);
         TradingCalendar tradingCalendar = tradingCalendarOperations.get();
         asset.setTradingCalendar(tradingCalendar);
@@ -60,6 +57,7 @@ public class AssetOperationsImpl implements AssetOperations {
         asset.setPipSize(0.001);
         asset.setRoundFactor(5);
         asset.setStatus(AssetStatus.ACTIVE);
+        asset.setAssetName("QEAUTOTEST");
         asset = tpConnector.create(asset);
         volatilityUnitOperations.generateForAsset(asset.getId(), 0.002d, 1.0d, 1.0d, 1.0d);
         feedGatewayConnector.serviceProxy(IFeedService.class).setRoundFactor(asset.getId(), asset.getRoundFactor());
