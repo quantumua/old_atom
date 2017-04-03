@@ -2,7 +2,7 @@ package com.betamedia.qe.af.core.api.tp.adapters.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.AbstractHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
-import com.betamedia.qe.af.core.api.tp.entities.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMResponse;
 import org.apache.logging.log4j.LogManager;

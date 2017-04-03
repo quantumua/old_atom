@@ -34,4 +34,12 @@ public interface AccountOperations {
      * @return
      */
     Account getCRM(AccountBuilder accountBuilder);
+
+    /**
+     * Deposit for account through TP CRM API
+     * @param accountId
+     * @param amount
+     * @return id of transaction
+     */
+    String depositCRM(String accountId, Double amount);
 }

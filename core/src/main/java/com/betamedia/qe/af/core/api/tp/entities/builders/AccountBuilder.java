@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
-import com.betamedia.qe.af.core.api.tp.entities.AccountRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.AccountRO;
 
 import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.CHARS_IN_ID;
 import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.TP_AUTOMATION_PREFIX;

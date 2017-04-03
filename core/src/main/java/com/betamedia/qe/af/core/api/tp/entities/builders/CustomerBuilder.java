@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
-import com.betamedia.qe.af.core.api.tp.entities.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.google.common.base.Strings;
 
 import static com.betamedia.qe.af.core.utils.StringUtils.generateRandomId;

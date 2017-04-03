@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
-import com.betamedia.qe.af.core.api.tp.entities.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

@@ -2,9 +2,10 @@ package com.betamedia.qe.af.core.api.tp.adapters.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.AbstractHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
-import com.betamedia.qe.af.core.api.tp.entities.AccountRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.AccountRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.AccountCreateCRM;
 import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
+import com.betamedia.qe.af.core.api.tp.entities.response.DepositCRM;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.BrandOperations;
 import com.betamedia.tp.api.model.enums.BonusType;
@@ -43,9 +44,6 @@ public class TPCRMHttpAdapterImpl extends AbstractHttpAdapter implements TPCRMHt
     private static final String PARAM_USERNAME = "userName";
     private static final String PARAM_PASSWORD = "userPassword";
 
-    @Autowired
-    private BrandOperations brandOperations;
-
     @Value("${af.crm.url}")
     private String crmUrl;
     @Value("${af.bo.username}")
@@ -67,10 +65,10 @@ public class TPCRMHttpAdapterImpl extends AbstractHttpAdapter implements TPCRMHt
     }
 
     @Override
-    public TPCRMResponse<AddBonus> addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount) {
+    public TPCRMResponse<AddBonus> addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount, String brandDisplayId) {
         Map<String, String> params = new LinkedHashMap<>();
         params.put("accountId", accountId);
-        params.put("brandId", brandOperations.get().getDisplayId());
+        params.put("brandId", brandDisplayId);
         params.put("amount", amount.toString());
         params.put("wagerAmount", wagerAmount.toString());
         params.put("bonusType", bonusType.getName());
@@ -80,18 +78,34 @@ public class TPCRMHttpAdapterImpl extends AbstractHttpAdapter implements TPCRMHt
         TPCRMResponse<AddBonus> response = restTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<TPCRMResponse<AddBonus>>() {
                 }).getBody();
-        logger.info("Bonus added, {}", response);
+        logger.info("Bonus adding result, {}", response);
         return response;
     }
 
     @Override
     public TPCRMResponse<AccountCreateCRM> create(AccountRO accountRO) {
         String url = buildRequestUrl(CREATE_ACCOUNT_URL, accountRO).build().toUriString();
-        logger.info("Creating new accountRO, url={}", url);
+        logger.info("Creating new account, url={}", url);
         TPCRMResponse<AccountCreateCRM> response = restTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<TPCRMResponse<AccountCreateCRM>>() {
                 }).getBody();
-        logger.info("AccountRO created, {}", response);
+        logger.info("Account creating result, {}", response);
+        return response;
+    }
+
+    @Override
+    public TPCRMResponse<DepositCRM> deposit(String accountId, Double amount, String displayBrandId) {
+        Map<String, String> params = new LinkedHashMap<>();
+        params.put("accountId", accountId);
+        params.put("brandId", displayBrandId);
+        params.put("amount", amount.toString());
+        String url = buildRequestUrl(DEPOSIT_URL, params).build().toUriString();
+        logger.info("Deposit, url={}", url);
+        logger.info("Deposit {} to account {}", amount, accountId);
+        TPCRMResponse<DepositCRM> response = restTemplate.exchange(url, HttpMethod.GET, null,
+                new ParameterizedTypeReference<TPCRMResponse<DepositCRM>>() {
+                }).getBody();
+        logger.info("Deposit result, {}", response);
         return response;
     }
 

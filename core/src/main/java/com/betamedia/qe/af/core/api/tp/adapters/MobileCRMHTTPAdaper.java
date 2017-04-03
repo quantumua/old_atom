@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.adapters;
 
-import com.betamedia.qe.af.core.api.tp.entities.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMResponse;
 

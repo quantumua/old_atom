@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.api.tp.entities;
+package com.betamedia.qe.af.core.api.tp.entities.request;
 
 /**
  * @author Maksym Tsybulskiy Date: 31/03/17.

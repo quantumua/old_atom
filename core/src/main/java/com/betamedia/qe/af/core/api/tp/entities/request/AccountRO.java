@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.api.tp.entities;
+package com.betamedia.qe.af.core.api.tp.entities.request;
 
 import java.util.Objects;
 
