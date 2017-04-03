@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.webservice.web.controllers;
 
-import com.betamedia.qe.af.webservice.business.ClassLoaderInvocationHandler;
-import com.betamedia.qe.af.webservice.business.RunTestHandler;
+import com.betamedia.qe.af.core.business.ClassLoaderInvocationHandler;
+import com.betamedia.qe.af.core.business.RunTestHandler;
 import com.betamedia.qe.af.webservice.storage.StorageFileNotFoundException;
 import com.betamedia.qe.af.webservice.storage.StorageService;
 import com.betamedia.qe.af.webservice.web.entities.RunTestParams;

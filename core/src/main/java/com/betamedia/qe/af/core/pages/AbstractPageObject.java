@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 /**
@@ -40,6 +42,18 @@ public abstract class AbstractPageObject {
 
     protected WebElement find(By by) {
         return webDriver.findElement(by);
+    }
+
+    protected WebElement find(By... by) {
+        List<By> bys = Arrays.asList(by);
+        return find(webDriver.findElement(bys.get(0)), bys.subList(1, bys.size()));
+    }
+
+    private WebElement find(WebElement webElement, List<By> bys) {
+        if (bys.isEmpty()) {
+            return webElement;
+        }
+        return find(webElement.findElement(bys.get(0)), bys.subList(1, bys.size()));
     }
 
 }

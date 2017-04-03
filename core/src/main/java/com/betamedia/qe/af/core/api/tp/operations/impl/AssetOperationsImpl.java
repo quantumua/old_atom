@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.api.tp.operations.impl;
 
-import com.betamedia.qe.af.common.connectors.feedgateway.AFFeedGatewayConnector;
-import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.connectors.tp.feedgateway.AFFeedGatewayConnector;
+import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.operations.AssetOperations;
 import com.betamedia.qe.af.core.api.tp.operations.TradingCalendarOperations;
 import com.betamedia.qe.af.core.api.tp.operations.VolatilityUnitOperations;
@@ -48,6 +48,7 @@ public class AssetOperationsImpl implements AssetOperations {
 
     private Asset create() {
         Asset asset = new Asset();
+        asset.setAssetName("QEAUTOTEST");
         asset.setMarket(Market.INDICES);
         TradingCalendar tradingCalendar = tradingCalendarOperations.get();
         asset.setTradingCalendar(tradingCalendar);
@@ -57,7 +58,6 @@ public class AssetOperationsImpl implements AssetOperations {
         asset.setPipSize(0.001);
         asset.setRoundFactor(5);
         asset.setStatus(AssetStatus.ACTIVE);
-        asset.setAssetName("QEAUTOTEST");
         asset = tpConnector.create(asset);
         volatilityUnitOperations.generateForAsset(asset.getId(), 0.002d, 1.0d, 1.0d, 1.0d);
         feedGatewayConnector.serviceProxy(IFeedService.class).setRoundFactor(asset.getId(), asset.getRoundFactor());

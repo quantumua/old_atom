@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.operations.impl;
 
-import com.betamedia.qe.af.common.connectors.feedgateway.AFFeedGatewayConnector;
+import com.betamedia.qe.af.core.connectors.tp.feedgateway.AFFeedGatewayConnector;
 import com.betamedia.qe.af.core.api.tp.operations.FeedOperations;
 import com.betamedia.tp.api.feed.TickData;
 import com.betamedia.tp.api.service.feedgateway.IFeedService;

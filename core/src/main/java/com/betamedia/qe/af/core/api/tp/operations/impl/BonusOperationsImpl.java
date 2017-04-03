@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.operations.impl;
 
-import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;

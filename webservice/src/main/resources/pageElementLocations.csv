@@ -19,3 +19,5 @@ BidderImpl,highButton,1603,CSS,.bmButtonsWrapp.bmSelection1
 BidderImpl,closePosition,1603,CSS,.bmButtonWrapp.bmClosePositionDialog
 PositionsImpl,positionList,1603,CSS,.bmPositionList.bmOptionList
 PositionsImpl,position,1603,CLASS_NAME,bmCellContent
+TopNavigationPageImpl,binaryBtn,1603,CLASS_NAME,product-binary
+TopNavigationPageImpl,mainMenu,1603,ID,mainMenu

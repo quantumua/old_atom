@@ -3,7 +3,7 @@ package com.betamedia.qe.af.core.api.tp.operations.impl;
 import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;
-import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.AccountCreateCRM;

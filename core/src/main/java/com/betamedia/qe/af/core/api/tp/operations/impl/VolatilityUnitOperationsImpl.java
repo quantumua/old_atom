@@ -3,7 +3,7 @@ package com.betamedia.qe.af.core.api.tp.operations.impl;
 import com.betamedia.common.search.SortOrder;
 import com.betamedia.common.search.Sorting;
 import com.betamedia.common.search.criteria.SearchCriteria;
-import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.operations.VolatilityUnitOperations;
 import com.betamedia.tp.api.model.volatility.VolatilityUnit;
 import org.apache.logging.log4j.LogManager;

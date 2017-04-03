@@ -11,10 +11,14 @@ import org.openqa.selenium.WebDriver;
  */
 public class TopNavigationPageImpl extends AbstractPageObject implements TopNavigationPage {
 
+    @StoredId
+    private By mainMenu;
     @StoredId("loginBtn")
     private By loginBtn;
     @StoredId("myAccountBtn")
     private By myAccountBtn;
+    @StoredId
+    private By binaryBtn;
 
     public TopNavigationPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -31,4 +35,11 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
         waitUntilDisplayed(loginBtn);
         find(loginBtn).click();
     }
+
+    @Override
+    public void binary() {
+        waitUntilDisplayed(mainMenu);
+        find(mainMenu, binaryBtn).click();
+    }
+
 }

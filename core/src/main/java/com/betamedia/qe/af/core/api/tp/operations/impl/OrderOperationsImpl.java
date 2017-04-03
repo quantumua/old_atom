@@ -1,16 +1,14 @@
 package com.betamedia.qe.af.core.api.tp.operations.impl;
 
-import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.operations.AccountGroupOperations;
 import com.betamedia.qe.af.core.api.tp.operations.OrderOperations;
-import com.betamedia.tp.api.feed.TickData;
 import com.betamedia.tp.api.model.enums.OrderStatus;
 import com.betamedia.tp.api.model.order.Order;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 

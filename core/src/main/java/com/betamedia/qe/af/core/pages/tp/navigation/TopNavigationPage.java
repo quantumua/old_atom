@@ -7,5 +7,7 @@ package com.betamedia.qe.af.core.pages.tp.navigation;
 public interface TopNavigationPage {
     void logIn();
 
+    void binary();
+
     boolean isLoggedIn();
 }

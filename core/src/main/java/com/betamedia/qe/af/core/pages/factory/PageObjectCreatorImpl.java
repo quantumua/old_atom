@@ -1,8 +1,8 @@
 package com.betamedia.qe.af.core.pages.factory;
 
-import com.betamedia.qe.af.common.entities.FindBy;
-import com.betamedia.qe.af.common.holder.ThreadLocalBeansHolder;
-import com.betamedia.qe.af.common.repository.VersionedWebElementRepository;
+import com.betamedia.qe.af.core.entities.FindBy;
+import com.betamedia.qe.af.core.holder.ThreadLocalBeansHolder;
+import com.betamedia.qe.af.core.repository.VersionedWebElementRepository;
 import com.betamedia.qe.af.core.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.pages.annotation.StoredId;
 import org.apache.logging.log4j.LogManager;

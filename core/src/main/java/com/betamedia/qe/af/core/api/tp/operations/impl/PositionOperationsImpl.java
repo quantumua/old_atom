@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.operations.impl;
 
-import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.operations.PositionOperations;
 import com.betamedia.tp.api.model.Position;
 import org.apache.logging.log4j.LogManager;

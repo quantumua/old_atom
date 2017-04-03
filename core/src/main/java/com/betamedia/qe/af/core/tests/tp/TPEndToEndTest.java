@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.tests.tp;
 
-import com.betamedia.qe.af.common.holder.AppContextHolder;
+import com.betamedia.qe.af.core.holder.AppContextHolder;
 import com.betamedia.qe.af.core.api.tp.TPTemplate;
 import com.betamedia.qe.af.core.pages.factory.tp.TPPageFactoryImpl;
 import com.betamedia.qe.af.core.tests.base.AbstractEndToEndTest;

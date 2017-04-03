@@ -8,6 +8,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.Iterator;
 
 /**
@@ -18,11 +19,13 @@ import java.util.Iterator;
 public class DataProviderFactory {
 
     public Iterator<Object[]> getData(String filename) throws IOException {
-        return new CSVReader(new FileReader((String) RequestContextHolder.getRequestAttributes().getAttribute(filename, RequestAttributes.SCOPE_REQUEST)))
-                .readAll()
-                .stream()
-                .map(s -> (Object[]) s)
-                .iterator();
+        try (Reader reader = new FileReader((String) RequestContextHolder.getRequestAttributes().getAttribute(filename, RequestAttributes.SCOPE_REQUEST))) {
+            return new CSVReader(reader)
+                    .readAll()
+                    .stream()
+                    .map(s -> (Object[]) s)
+                    .iterator();
+        }
     }
 
 }

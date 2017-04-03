@@ -25,13 +25,15 @@ public class BiddingTest extends TPEndToEndTest {
     //WIP
     @Test
     public void biddingTest() {
-        Asset asset = operations().assetOperations().get();
-        Option option = operations().optionOperations().issue(asset.getId(), OptionType.HILO, TagOperations.TagName.NO_CATEGORY);
-        TickData tickData = operations().feedOperations().injectFeed(asset.getId(), 5d);
+//        Asset asset = operations().assetOperations().get();
+//        Option option = operations().optionOperations().issue(asset.getId(), OptionType.HILO, TagOperations.TagName.NO_CATEGORY);
+//        TickData tickData = operations().feedOperations().injectFeed(asset.getId(), 5d);
         CRMCustomer customer = operations().customerOperations().register();
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        pages().topNavigationPage().binary();
+        pages().disclaimerNotification().accept();
         pages().bidder()
                 .highLow()
                 .asset("EUR/USD")

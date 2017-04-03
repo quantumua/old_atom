@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.api.tp.operations.impl;
 
 import com.betamedia.common.search.criteria.SearchCriteria;
-import com.betamedia.qe.af.common.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.operations.BrandOperations;
 import com.betamedia.tp.api.model.Brand;
 import org.apache.logging.log4j.LogManager;

@@ -26,6 +26,7 @@
     </dependencies>
     <build>
         <plugins>
+            <!-- This will copy output JAR to ../webservice/tests.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
