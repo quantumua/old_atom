@@ -7,7 +7,7 @@ import java.util.Properties;
  * @author Maksym Tsybulskyy
  *         Date: 2/24/17.
  */
-public interface RunTestHandler {
+public interface TestRunnerHandler {
 
     List<String> handle(Properties properties, List<String> suitesFileNames);
 }

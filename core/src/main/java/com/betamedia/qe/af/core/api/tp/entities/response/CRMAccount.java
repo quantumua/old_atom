@@ -24,11 +24,14 @@ public class CRMAccount {
     private String platform;
     private String product;
     private BigDecimal pendingAmount;
+    private String externalId;
 
 
+//    TODO Currerntly externalId and Id are mixed up in request. Revert after bug will be fixed on prod
     @JsonCreator
-    public CRMAccount(@JsonProperty("Id") String id, @JsonProperty("Currency") String currency, @JsonProperty("TradingAccountName") String displayId, @JsonProperty("AccountType") String accountType,
-                      @JsonProperty("Platform")  String platform, @JsonProperty("Product") String product, @JsonProperty("PendingAmount") BigDecimal pendingAmount) {
+    public CRMAccount(@JsonProperty("ExternalID") String id, @JsonProperty("Currency") String currency, @JsonProperty("TradingAccountName") String displayId, @JsonProperty("AccountType") String accountType,
+                      @JsonProperty("Platform")  String platform, @JsonProperty("Product") String product,
+                      @JsonProperty("PendingAmount") BigDecimal pendingAmount, @JsonProperty("Id") String externalId) {
         this.id = id;
         this.currency = currency;
         this.displayId = displayId;
@@ -37,6 +40,7 @@ public class CRMAccount {
         this.platform = platform;
         this.product = product;
         this.pendingAmount = pendingAmount;
+        this.externalId = externalId;
     }
 
     public String getId() {
@@ -103,6 +107,13 @@ public class CRMAccount {
         this.pendingAmount = pendingAmount;
     }
 
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
 
     @Override
     public String toString() {
@@ -115,6 +126,7 @@ public class CRMAccount {
                 ", platform='" + platform + '\'' +
                 ", product='" + product + '\'' +
                 ", pendingAmount=" + pendingAmount +
+                ", externalId='" + externalId + '\'' +
                 '}';
     }
 

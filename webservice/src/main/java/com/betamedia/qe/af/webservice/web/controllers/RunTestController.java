@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.webservice.web.controllers;
 
 import com.betamedia.qe.af.core.business.ClassLoaderInvocationHandler;
-import com.betamedia.qe.af.core.business.RunTestHandler;
+import com.betamedia.qe.af.core.business.TestRunnerHandler;
 import com.betamedia.qe.af.webservice.storage.StorageFileNotFoundException;
 import com.betamedia.qe.af.webservice.storage.StorageService;
 import com.betamedia.qe.af.webservice.web.entities.RunTestParams;
@@ -37,7 +37,7 @@ public class RunTestController {
     private static final Logger logger = LogManager.getLogger(RunTestController.class);
 
     @Autowired
-    private RunTestHandler runTestHandler;
+    private TestRunnerHandler testRunnerHandler;
     @Autowired
     private StorageService storageService;
     @Autowired
@@ -45,10 +45,9 @@ public class RunTestController {
 
     @GetMapping("/run")
     public List<String> run(@Valid RunTestParams params) throws IOException {
-        return runTestHandler.handle(getProperties(params.getSut()), params.getSuite());
+        return testRunnerHandler.handle(getProperties(params.getSut()), params.getSuite());
     }
 
-    //TODO better endpoint scheme
     @PostMapping("/upload/tests")
     public ResponseEntity<String> uploadTestJar(MultipartFile jar) throws MalformedURLException {
         if (jar.isEmpty()) {
@@ -72,7 +71,7 @@ public class RunTestController {
                 .map(storageService::store)
                 .collect(Collectors.toList());
 
-        return runTestHandler.handle(getProperties(properties), suitePaths);
+        return testRunnerHandler.handle(getProperties(properties), suitePaths);
     }
 
 

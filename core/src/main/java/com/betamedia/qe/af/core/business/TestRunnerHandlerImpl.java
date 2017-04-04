@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  *         Date: 2/24/17.
  */
 @Service
-public class RunTestHandlerImpl implements RunTestHandler {
+public class TestRunnerHandlerImpl implements TestRunnerHandler {
 
 
     private Map<TestType, TestRunner> runners;

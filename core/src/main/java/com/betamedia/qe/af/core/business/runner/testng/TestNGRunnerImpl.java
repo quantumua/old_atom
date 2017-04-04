@@ -47,8 +47,6 @@ public class TestNGRunnerImpl implements TestRunner {
     @Autowired
     private ApplicationVersionHolder applicationVersionHolder;
 
-    //TODO add input property validation
-
     @Autowired
     private ClassLoaderInvocationHandler classLoaderInvocationHandler;
 
