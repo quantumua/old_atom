@@ -81,6 +81,6 @@
     <modules>
         <module>webservice</module>
         <module>core</module>
-        <module>tests</module>
+        <module>testslibrary</module>
     </modules>
 </project>

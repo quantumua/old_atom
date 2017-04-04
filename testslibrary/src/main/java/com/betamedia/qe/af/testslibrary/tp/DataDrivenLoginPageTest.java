@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.tests.tp;
+package com.betamedia.qe.af.testslibrary.tp;
 
 
 import org.testng.Assert;

@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.tests.tp;
+package com.betamedia.qe.af.testslibrary.tp;
 
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;

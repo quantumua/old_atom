@@ -33,7 +33,7 @@ public class Application {
             AppContextHolder.setContext(ctx);
             classLoaderInvocationHandler.setClassLoader(
                     new URLClassLoader(
-                            new URL[]{Paths.get("./tests.jar").toUri().toURL()},
+                            new URL[]{Paths.get("./testslibrary.jar").toUri().toURL()},
                             Thread.currentThread().getContextClassLoader()));
         };
     }

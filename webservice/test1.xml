@@ -2,7 +2,7 @@
 <suite name="Suite 1" verbose="1" parallel="methods" thread-count="5">
   <test name="Tryouts 1">
     <classes>
-        <class name="com.betamedia.qe.af.tests.tp.BonusTest" >
+        <class name="com.betamedia.qe.af.testslibrary.tp.BonusTest" >
           <!--<methods>-->
             <!--<include name="loginTest" />-->
           <!--</methods>-->

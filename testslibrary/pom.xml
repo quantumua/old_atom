@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>tests</artifactId>
+    <artifactId>testslibrary</artifactId>
     <packaging>jar</packaging>
 
-    <name>tests</name>
+    <name>testslibrary</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -26,7 +26,7 @@
     </dependencies>
     <build>
         <plugins>
-            <!-- This will copy output JAR to ../webservice/tests.jar -->
+            <!-- This will copy output JAR to ../webservice/testslibrary.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -46,7 +46,7 @@
                             <artifactId>${project.artifactId}</artifactId>
                             <version>${project.version}</version>
                             <type>${project.packaging}</type>
-                            <destFileName>tests.jar</destFileName>
+                            <destFileName>testslibrary.jar</destFileName>
                         </artifactItem>
                     </artifactItems>
                     <outputDirectory>${project.build.directory}/../../webservice</outputDirectory>
