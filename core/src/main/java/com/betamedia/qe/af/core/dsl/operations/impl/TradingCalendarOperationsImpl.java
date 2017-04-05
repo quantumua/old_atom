@@ -7,6 +7,7 @@ import com.betamedia.qe.af.core.dsl.operations.TradingCalendarOperations;
 import com.betamedia.tp.api.model.scheduling.DayCalendarSchedule;
 import com.betamedia.tp.api.model.scheduling.Timezone;
 import com.betamedia.tp.api.model.scheduling.TradingCalendar;
+import com.betamedia.tp.api.service.ITradingCalendarService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,10 +14,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 
 /**
@@ -29,6 +31,8 @@ public class OptionTemplateOperationsImpl implements OptionTemplateOperations {
 
     @Autowired
     private AFTPConnector tpConnector;
+    @Autowired
+    private AccountGroupOperations accountGroupOperations;
     @Autowired
     private AssetOperations assetOperations;
     @Autowired
@@ -52,16 +56,16 @@ public class OptionTemplateOperationsImpl implements OptionTemplateOperations {
     }
 
     @Override
-    public OptionTemplate create(String assetId, AccountGroup accountGroup, OptionType type, TagOperations.TagName tagName) {
+    public OptionTemplate create(String assetId, OptionType type, TagOperations.TagName tagName) {
+        AccountGroup accountGroup = accountGroupOperations.get();
         String tagId = tagOperations.get(tagName).get(0).getId();
         Asset asset = assetOperations.get(assetId);
+        TradingCalendar tradingCalendar = tradingCalendarOperations.get(asset.getTradingCalendar().getId());
+        OptionTemplateScheduler scheduler = schedulerOperations.create(tradingCalendar.getTimezoneId(), tagName);
         OptionTemplate optionTemplate = getDefaultTemplate(type);
         optionTemplate.setActive(true);
         optionTemplate.setOptionConfiguration(getConfiguration(assetId, tagId, type, TagOperations.getOptionSubtype(tagName)));
-        TradingCalendar tradingCalendar = tradingCalendarOperations.get(asset.getTradingCalendar().getId());
-        String timezoneId = tradingCalendar.getTimezoneId();
-        List<OptionTemplateScheduler> schedulers = schedulerOperations.get(timezoneId, tagName);
-        optionTemplate.setScheduler(schedulers.get(0));
+        optionTemplate.setScheduler(scheduler);
         optionTemplate = tpConnector.create(optionTemplate);
         logger.info("Created option template id=" + optionTemplate.getId());
         tpConnector.serviceProxy(IOptionTemplateService.class).addRemoveAccountGroups(Collections.singletonList(accountGroup.getId()), null, optionTemplate);
@@ -69,13 +73,12 @@ public class OptionTemplateOperationsImpl implements OptionTemplateOperations {
     }
 
     @Override
-    public List<OptionTemplate> getOptionTemplates(String assetId, AccountGroup accountGroup, OptionType type, TagOperations.TagName tagName) {
+    public List<OptionTemplate> getOptionTemplates(String assetId, OptionType type, TagOperations.TagName tagName) {
+        AccountGroup accountGroup = accountGroupOperations.get();
         Asset asset = assetOperations.get(assetId);
         TradingCalendar tradingCalendar = tradingCalendarOperations.get(asset.getTradingCalendar().getId());
         List<OptionTemplateScheduler> schedulers = schedulerOperations.get(tradingCalendar.getTimezoneId(), tagName);
-        if (schedulers.isEmpty()) {
-            schedulers = Collections.singletonList(schedulerOperations.create(tradingCalendar.getTimezoneId(), tagName));
-        }
+        assertFalse(schedulers.isEmpty());
         String tagId = tagOperations.get(tagName).get(0).getId();
         SearchCriteria<OptionTemplate> criteria = forAssetOptionTypeOptionSubtypeTagScheduler(assetId, type, TagOperations.getOptionSubtype(tagName), tagId, schedulers.get(0).getId());
         return tpConnector.serviceProxy(IOptionTemplateService.class).readOptionTemplates(accountGroup, criteria, null, null).getContent();

@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.dsl.operations.impl;
 
-import com.betamedia.qe.af.core.connectors.tp.feedgateway.AFFeedGatewayConnector;
 import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
+import com.betamedia.qe.af.core.connectors.tp.feedgateway.AFFeedGatewayConnector;
 import com.betamedia.qe.af.core.dsl.operations.AssetOperations;
 import com.betamedia.qe.af.core.dsl.operations.TradingCalendarOperations;
 import com.betamedia.qe.af.core.dsl.operations.VolatilityUnitOperations;

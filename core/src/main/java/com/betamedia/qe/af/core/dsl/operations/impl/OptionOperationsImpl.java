@@ -2,27 +2,16 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.common.search.criteria.SearchCriteria;
 import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
-import com.betamedia.qe.af.core.dsl.operations.AccountGroupOperations;
 import com.betamedia.qe.af.core.dsl.operations.OptionOperations;
-import com.betamedia.qe.af.core.dsl.operations.OptionTemplateOperations;
-import com.betamedia.qe.af.core.dsl.operations.TagOperations;
-import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.Option;
-import com.betamedia.tp.api.model.OptionTemplate;
 import com.betamedia.tp.api.model.enums.OptionStatus;
-import com.betamedia.tp.api.model.enums.OptionType;
 import com.betamedia.tp.api.service.IOptionService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
-
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 
 /**
@@ -34,29 +23,6 @@ public class OptionOperationsImpl implements OptionOperations {
 
     @Autowired
     private AFTPConnector tpConnector;
-    @Autowired
-    private AccountGroupOperations accountGroupOperations;
-    @Autowired
-    private OptionTemplateOperations optionTemplateOperations;
-
-    @Override
-    public Option issue(String assetId, OptionType type, TagOperations.TagName tag) {
-        AccountGroup accountGroup = accountGroupOperations.get();
-        List<OptionTemplate> templates = optionTemplateOperations.getOptionTemplates(assetId, accountGroup, type, tag);
-        if (templates.isEmpty()) {
-            templates = Collections.singletonList(optionTemplateOperations.create(assetId, accountGroup, type, tag));
-        }
-        assertFalse(templates.isEmpty(), "Failed to get option templates");
-        long openTime = System.currentTimeMillis();
-        long closeTime = openTime + 1000 * 60;
-        tpConnector.serviceProxy(IOptionService.class)
-                .createOption(assetId, templates.get(0).getId(), openTime, closeTime);
-        logger.info("Issued option for asset id=" + assetId);
-        Option option = findOption(forStatusAndCloseTimeAndTemplate(OptionStatus.OPEN, closeTime, templates.get(0).getId())).get(0);
-        assertNotNull(option, "Failed to retrieve option for asset id=" + assetId);
-        logger.info("Retrieved option id='" + option.getId() + " for asset id=" + assetId);
-        return option;
-    }
 
     private List<Option> findOption(SearchCriteria<Option> criteria) {
         return tpConnector.serviceProxy(IOptionService.class)

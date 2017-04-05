@@ -25,7 +25,7 @@ public class BiddingTest extends TPEndToEndTest {
     @Test
     public void biddingTest() {
         Asset asset = operations().assetOperations().get();
-        operations().optionOperations().issue(asset.getId(), OptionType.HILO, TagOperations.TagName.NO_CATEGORY);
+        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.NO_CATEGORY);
         operations().feedOperations().injectFeed(asset.getId(), 1.5d);
         CRMCustomer customer = operations().customerOperations().register();
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -44,12 +44,6 @@ public class BiddingTest extends TPEndToEndTest {
         List<String> positionIds = pages().positions().get();
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
-//        order = operations().orderOperations().waitForStatusChange(order);
-//        assertEquals(order.getOrderStatus(), OrderStatus.EXECUTED);
-//        Position position = operations().positionOperations().get(order.getPosition().getValue());
-//        assertEquals(position.getStatus(), PositionStatus.OPEN);
-//        assertEquals(position.getBinarySelection(), BinarySelection.HIGH);
-
     }
 
 }
