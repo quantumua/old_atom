@@ -2,7 +2,10 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.common.search.criteria.SearchCriteria;
 import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
-import com.betamedia.qe.af.core.dsl.operations.*;
+import com.betamedia.qe.af.core.dsl.operations.AccountGroupOperations;
+import com.betamedia.qe.af.core.dsl.operations.OptionOperations;
+import com.betamedia.qe.af.core.dsl.operations.OptionTemplateOperations;
+import com.betamedia.qe.af.core.dsl.operations.TagOperations;
 import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.Option;
 import com.betamedia.tp.api.model.OptionTemplate;
@@ -16,6 +19,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
+
+import static org.testng.Assert.assertNotNull;
+
 
 /**
  * Created by mbelyaev on 3/24/17.
@@ -42,7 +48,11 @@ public class OptionOperationsImpl implements OptionOperations {
         long closeTime = openTime + 1000 * 60;
         tpConnector.serviceProxy(IOptionService.class)
                 .createOption(assetId, templates.get(0).getId(), openTime, closeTime);
-        return findOption(forStatusAndCloseTimeAndTemplate(OptionStatus.OPEN, closeTime, templates.get(0).getId())).get(0);
+        logger.info("Issued option for asset id=" + assetId);
+        Option option = findOption(forStatusAndCloseTimeAndTemplate(OptionStatus.OPEN, closeTime, templates.get(0).getId())).get(0);
+        assertNotNull(option, "Failed to retrieve option for asset id=" + assetId);
+        logger.info("Retrieved option id='" + option.getId() + " for asset id=" + assetId);
+        return option;
     }
 
     private List<Option> findOption(SearchCriteria<Option> criteria) {

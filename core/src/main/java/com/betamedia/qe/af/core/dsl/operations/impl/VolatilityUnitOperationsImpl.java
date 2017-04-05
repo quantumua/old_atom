@@ -29,11 +29,13 @@ public class VolatilityUnitOperationsImpl implements VolatilityUnitOperations {
 
     @Override
     public void generateForAsset(String assetId, double sigma, double factor, double threshold, double restriction) {
+        logger.info("Generating volatility units for asset id=" + assetId);
         IntStream.range(1, 8).forEach(day ->
                 IntStream.range(0, 24).forEach(hour -> {
                     List<VolatilityUnit> existingVolatilityUnits = getVolatilityUnits(forAssetDayHour(assetId, day, hour));
                     if (existingVolatilityUnits.isEmpty()) {
                         create(assetId, day, hour, sigma, factor, threshold, restriction);
+                        logger.info("Volatility unit created for asset id=" + assetId + ", day=" + day + ", hour=" + hour);
                     } else {
                         logger.debug("Volatility unit '" + assetId + " " + day + " " + hour + "' already exists");
                     }

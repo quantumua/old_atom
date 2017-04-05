@@ -23,6 +23,7 @@ public class FeedOperationsImpl implements FeedOperations {
     public TickData injectFeed(String assetId, double price) {
         TickData tickData = create(assetId, price);
         feedGatewayConnector.serviceProxy(IFeedService.class).simulateTicks(tickData);
+        logger.info("Injected dummy feed for asset id=" + assetId + ", price=" + price);
         return tickData;
     }
 

@@ -59,9 +59,9 @@ public class AssetOperationsImpl implements AssetOperations {
         asset.setRoundFactor(5);
         asset.setStatus(AssetStatus.ACTIVE);
         asset = tpConnector.create(asset);
+        logger.info("Asset '" + asset.getId() + "' created");
         volatilityUnitOperations.generateForAsset(asset.getId(), 0.002d, 1.0d, 1.0d, 1.0d);
         feedGatewayConnector.serviceProxy(IFeedService.class).setRoundFactor(asset.getId(), asset.getRoundFactor());
-        logger.info("Asset '" + asset.getId() + "' created");
         return asset;
     }
 }
