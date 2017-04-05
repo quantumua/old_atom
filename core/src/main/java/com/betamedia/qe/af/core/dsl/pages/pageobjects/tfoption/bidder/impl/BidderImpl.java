@@ -72,9 +72,7 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
             waitUntilDisplayed(assetSearchBox);
             find(assetSearchBox).sendKeys(assetName);
         }
-        waitUntilDisplayed(assetSelector);
-        //TODO externalize the bmAvailable property (is it possible to use By locator for identity check?)
-        assertTrue(find(assetSelector).getAttribute("class").contains("bmAvailable"), "Selected asset must be available");
+        waitUntil(() -> find(assetSelector).getAttribute("class").contains("bmAvailable"));
         find(assetSelector).click();
         return this;
     }
@@ -105,7 +103,7 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
     @Override
     public Bidder confirm() {
         waitUntilDisplayed(closePosition);
-        waitUntil(driver -> !find(closePosition).isDisplayed());
+        waitUntil(() -> !find(closePosition).isDisplayed());
         return this;
     }
 

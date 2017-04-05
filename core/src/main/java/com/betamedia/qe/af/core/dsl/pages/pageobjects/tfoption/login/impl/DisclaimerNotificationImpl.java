@@ -24,6 +24,7 @@ public class DisclaimerNotificationImpl extends AbstractPageObject implements Di
     public void accept() {
         waitUntilDisplayed(disclaimerCheckbox);
         find(disclaimerCheckbox).click();
+        waitUntilDisplayed(disclaimerSubmitBtn);
         find(disclaimerSubmitBtn).click();
     }
 

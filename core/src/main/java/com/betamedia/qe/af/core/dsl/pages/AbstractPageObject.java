@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * @author Maksym Tsybulskyy
@@ -35,9 +35,9 @@ public abstract class AbstractPageObject {
         wait.until(driver -> !driver.findElements(element).isEmpty());
     }
 
-    protected void waitUntil(Function<? super WebDriver, Boolean> isTrue) {
+    protected void waitUntil(Supplier<Boolean> isTrue) {
         Wait<WebDriver> wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
-        wait.until(isTrue);
+        wait.until(d -> isTrue.get());
     }
 
     protected WebElement find(By by) {
