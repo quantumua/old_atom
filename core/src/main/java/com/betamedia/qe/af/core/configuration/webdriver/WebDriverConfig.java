@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.configuration.webdriver;
 
-import com.betamedia.qe.af.core.webdriver.ParametrizedWebDriverFactory;
-import com.betamedia.qe.af.core.webdriver.ParametrizedWebDriverFactoryProvider;
+import com.betamedia.qe.af.core.fwservices.webdriver.ParametrizedWebDriverFactory;
+import com.betamedia.qe.af.core.fwservices.webdriver.ParametrizedWebDriverFactoryProvider;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;

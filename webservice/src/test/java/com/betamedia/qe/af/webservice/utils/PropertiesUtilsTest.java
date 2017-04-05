@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.webservice.utils;
 
-import com.betamedia.qe.af.core.holder.ConfigurationPropertyKey;
+import com.betamedia.qe.af.core.holders.ConfigurationPropertyKey;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -49,7 +49,7 @@ public class PropertiesUtilsTest {
         Properties properties = new Properties();
         properties.put(ConfigurationPropertyKey.BROWSER_TYPE, browser);
         properties.put(ConfigurationPropertyKey.ID_VERSION, version);
-        properties.put(ConfigurationPropertyKey.DOMAIN_URL, domain);
+        properties.put(ConfigurationPropertyKey.ENVIRONMENT_URL, domain);
         properties.put(ConfigurationPropertyKey.REMOTE_DRIVER_URL, remoteDriver);
         return properties;
     }

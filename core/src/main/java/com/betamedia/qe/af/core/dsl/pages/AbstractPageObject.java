@@ -1,0 +1,59 @@
+package com.betamedia.qe.af.core.dsl.pages;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+
+/**
+ * @author Maksym Tsybulskyy
+ *         Date: 2/24/17.
+ */
+public abstract class AbstractPageObject {
+
+    protected static final int MAX_WAIT_SEC = 60;
+
+    private WebDriver webDriver;
+
+    protected AbstractPageObject(WebDriver webDriver) {
+        this.webDriver = webDriver;
+    }
+
+    protected void waitUntilDisplayed(By element) {
+        Wait<WebDriver> wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
+        wait.until(driver -> driver.findElement(element).isDisplayed());
+    }
+
+    protected void waitUntilExists(By element) {
+        Wait<WebDriver> wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
+        wait.until(driver -> !driver.findElements(element).isEmpty());
+    }
+
+    protected void waitUntil(Function<? super WebDriver, Boolean> isTrue) {
+        Wait<WebDriver> wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
+        wait.until(isTrue);
+    }
+
+    protected WebElement find(By by) {
+        return webDriver.findElement(by);
+    }
+
+    protected WebElement find(By... by) {
+        List<By> bys = Arrays.asList(by);
+        return find(webDriver.findElement(bys.get(0)), bys.subList(1, bys.size()));
+    }
+
+    private WebElement find(WebElement webElement, List<By> bys) {
+        if (bys.isEmpty()) {
+            return webElement;
+        }
+        return find(webElement.findElement(bys.get(0)), bys.subList(1, bys.size()));
+    }
+
+}
