@@ -20,7 +20,9 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.List;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 
 /**
@@ -44,6 +46,7 @@ public class OptionOperationsImpl implements OptionOperations {
         if (templates.isEmpty()) {
             templates = Collections.singletonList(optionTemplateOperations.create(assetId, accountGroup, type, tag));
         }
+        assertFalse(templates.isEmpty(), "Failed to get option templates");
         long openTime = System.currentTimeMillis();
         long closeTime = openTime + 1000 * 60;
         tpConnector.serviceProxy(IOptionService.class)
