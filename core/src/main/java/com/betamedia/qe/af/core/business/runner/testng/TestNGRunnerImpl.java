@@ -10,7 +10,7 @@ import com.betamedia.qe.af.core.repository.VersionedWebElementRepositoryImpl;
 import com.betamedia.qe.af.core.repository.WebElementRepository;
 import com.betamedia.qe.af.core.business.ClassLoaderInvocationHandler;
 import com.betamedia.qe.af.core.business.runner.TestRunner;
-import com.betamedia.qe.af.core.business.types.TestType;
+import com.betamedia.qe.af.core.business.types.TestRunnerType;
 import com.google.common.base.Strings;
 import net.sf.cglib.proxy.Enhancer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 import static com.betamedia.qe.af.core.utils.PropertiesUtils.permute;
-import static com.betamedia.qe.af.core.business.types.TestType.TESTNG;
+import static com.betamedia.qe.af.core.business.types.TestRunnerType.TESTNG;
 
 
 /**
@@ -58,7 +58,7 @@ public class TestNGRunnerImpl implements TestRunner {
     }
 
     @Override
-    public TestType getType() {
+    public TestRunnerType getType() {
         return TESTNG;
     }
 

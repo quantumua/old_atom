@@ -13,7 +13,7 @@ import com.betamedia.qe.af.core.pages.tp.navigation.TopNavigationPage;
 import com.betamedia.qe.af.core.pages.tp.navigation.TopNavigationPageImpl;
 import com.betamedia.qe.af.core.pages.tp.orders.Positions;
 import com.betamedia.qe.af.core.pages.tp.orders.impl.PositionsImpl;
-import com.betamedia.qe.af.core.pages.type.AppType;
+import com.betamedia.qe.af.core.pages.type.ProductType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -57,7 +57,7 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public AppType getType() {
-        return AppType.TP;
+    public ProductType getType() {
+        return ProductType.TP;
     }
 }

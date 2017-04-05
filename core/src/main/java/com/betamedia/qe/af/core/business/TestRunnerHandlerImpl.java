@@ -1,8 +1,8 @@
 package com.betamedia.qe.af.core.business;
 
+import com.betamedia.qe.af.core.business.types.TestRunnerType;
 import com.betamedia.qe.af.core.holder.ConfigurationPropertyKey;
 import com.betamedia.qe.af.core.business.runner.TestRunner;
-import com.betamedia.qe.af.core.business.types.TestType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class TestRunnerHandlerImpl implements TestRunnerHandler {
 
 
-    private Map<TestType, TestRunner> runners;
+    private Map<TestRunnerType, TestRunner> runners;
 
     @Override
     public List<String> handle(Properties properties, List<String> suitesFileNames) {
@@ -35,7 +35,7 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
                 .collect(Collectors.toMap(TestRunner::getType, m -> m));
     }
 
-    private TestType getType(Properties properties) {
-        return TestType.parse((String) properties.get(ConfigurationPropertyKey.TEST_TYPE));
+    private TestRunnerType getType(Properties properties) {
+        return TestRunnerType.parse((String) properties.get(ConfigurationPropertyKey.TEST_TYPE));
     }
 }

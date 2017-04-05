@@ -10,14 +10,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *         Date: 4/3/17.
  */
 @JsonDeserialize(using = CRMDepositDeserializer.class)
-public class DepositCRM {
+public class CRMDeposit {
 
     public static final String TRANSACTION_ID = "transactionId";
 
     private String transactionId;
 
     @JsonCreator
-    public DepositCRM(@JsonProperty(TRANSACTION_ID) String transactionId) {
+    public CRMDeposit(@JsonProperty(TRANSACTION_ID) String transactionId) {
         this.transactionId = transactionId;
     }
 
@@ -27,7 +27,7 @@ public class DepositCRM {
 
     @Override
     public String toString() {
-        return "DepositCRM{" +
+        return "CRMDeposit{" +
                 "transactionId='" + transactionId + '\'' +
                 '}';
     }

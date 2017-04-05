@@ -1,9 +1,9 @@
 package com.betamedia.qe.af.core.api.tp.adapters;
 
 import com.betamedia.qe.af.core.api.tp.entities.request.AccountRO;
-import com.betamedia.qe.af.core.api.tp.entities.response.AccountCreateCRM;
-import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
-import com.betamedia.qe.af.core.api.tp.entities.response.DepositCRM;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccountCreate;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMAddBonus;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.tp.api.model.enums.BonusType;
 
@@ -24,7 +24,7 @@ public interface TPCRMHttpAdapter {
      * @param wagerAmount
      * @return displayId for created bonus
      */
-    TPCRMResponse<AddBonus> addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount, String brandDisplayId);
+    TPCRMResponse<CRMAddBonus> addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount, String brandDisplayId);
 
     /**
      * Create a new accounts
@@ -32,7 +32,7 @@ public interface TPCRMHttpAdapter {
      * @param accountRO
      * @return
      */
-    TPCRMResponse<AccountCreateCRM> create(AccountRO accountRO);
+    TPCRMResponse<CRMAccountCreate> create(AccountRO accountRO);
 
     /**
      * Deposit to account
@@ -40,7 +40,7 @@ public interface TPCRMHttpAdapter {
      * @param accountId
      * @param amount
      * @param displayBrandId
-     * @return transactionId inside DepositCRM object
+     * @return transactionId inside CRMDeposit object
      */
-    TPCRMResponse<DepositCRM> deposit(String accountId, Double amount, String displayBrandId);
+    TPCRMResponse<CRMDeposit> deposit(String accountId, Double amount, String displayBrandId);
 }

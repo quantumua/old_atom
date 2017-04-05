@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.response;
 
-import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.AccountCreateCRMDeserializer;
+import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMAccountCreateDeserializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,9 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Maksym Tsybulskyy
  *         Date: 3/28/17.
  */
-@JsonDeserialize(using = AccountCreateCRMDeserializer.class)
+@JsonDeserialize(using = CRMAccountCreateDeserializer.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AccountCreateCRM {
+public class CRMAccountCreate {
     public static final String ACCOUNT_ID = "accountId";
     public static final String ACCOUNT_DISPLAY_ID = "accountDisplayId";
     public static final String BRAND_DISPLAY_ID = "brandDisplayId";
@@ -21,7 +21,7 @@ public class AccountCreateCRM {
     private String brandDisplayId;
 
     @JsonCreator
-    public AccountCreateCRM(@JsonProperty(ACCOUNT_ID) String accountId, @JsonProperty(ACCOUNT_DISPLAY_ID) String accountDisplayId,
+    public CRMAccountCreate(@JsonProperty(ACCOUNT_ID) String accountId, @JsonProperty(ACCOUNT_DISPLAY_ID) String accountDisplayId,
                             @JsonProperty(BRAND_DISPLAY_ID) String brandDisplayId) {
         this.accountId = accountId;
         this.accountDisplayId = accountDisplayId;
@@ -38,7 +38,7 @@ public class AccountCreateCRM {
 
     @Override
     public String toString() {
-        return "AccountCreateCRM{" +
+        return "CRMAccountCreate{" +
                 "accountId='" + accountId + '\'' +
                 ", accountDisplayId='" + accountDisplayId + '\'' +
                 ", brandDisplayId='" + brandDisplayId + '\'' +

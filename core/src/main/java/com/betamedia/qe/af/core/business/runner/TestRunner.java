@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.business.runner;
 
-import com.betamedia.qe.af.core.business.types.TestType;
+import com.betamedia.qe.af.core.business.types.TestRunnerType;
 
 import java.util.List;
 import java.util.Properties;
@@ -11,7 +11,7 @@ import java.util.Properties;
  */
 public interface TestRunner {
 
-    TestType getType();
+    TestRunnerType getType();
 
     List<String> run(Properties properties, List<String> suitesFileNames);
 }

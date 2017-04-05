@@ -3,7 +3,7 @@ package com.betamedia.qe.af.core.api.tp.operations.impl;
 import com.betamedia.qe.af.core.api.tp.operations.BrandOperations;
 import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
-import com.betamedia.qe.af.core.api.tp.entities.response.AddBonus;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.BonusOperations;
 import com.betamedia.tp.api.model.Bonus;
@@ -51,7 +51,7 @@ public class BonusOperationsImpl implements BonusOperations {
 
     @Override
     public Bonus addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount) {
-        TPCRMResponse<AddBonus> addBonusResponse = crmHttpAdapter.addBonus(accountId, bonusType, amount, wagerAmount, brandOperations.get().getDisplayId());
+        TPCRMResponse<CRMAddBonus> addBonusResponse = crmHttpAdapter.addBonus(accountId, bonusType, amount, wagerAmount, brandOperations.get().getDisplayId());
         assertTrue(addBonusResponse.getErrors().isEmpty(),
                 "Got errors while adding bonus for accountid = " + accountId + ", " + addBonusResponse.getErrors());
         String bonusDisplayId = addBonusResponse.getResult().getBonusDisplayId();

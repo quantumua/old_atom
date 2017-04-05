@@ -4,12 +4,12 @@ package com.betamedia.qe.af.core.business.types;
  * @author Maksym Tsybulskyy
  *         Date: 3/14/17.
  */
-public enum TestType {
+public enum TestRunnerType {
     TESTNG("testng");
 
     private String value;
 
-    TestType(String value) {
+    TestRunnerType(String value) {
         this.value = value;
     }
 
@@ -17,14 +17,14 @@ public enum TestType {
         return value;
     }
 
-    public static TestType parse(String name) {
-        for (TestType value : values()) {
+    public static TestRunnerType parse(String name) {
+        for (TestRunnerType value : values()) {
             if (value.getValue().equals(name)) {
                 return value;
             }
         }
         throw new IllegalArgumentException(
-                "No TestType constant for " + name);
+                "No TestRunnerType constant for " + name);
     }
 
 

@@ -3,11 +3,11 @@ package com.betamedia.qe.af.core.api.tp.operations.impl;
 import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;
-import com.betamedia.qe.af.core.api.tp.entities.response.DepositCRM;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccountCreate;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.response.AccountCreateCRM;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.qe.af.core.api.tp.operations.AccountGroupOperations;
 import com.betamedia.qe.af.core.api.tp.operations.AccountOperations;
@@ -110,14 +110,14 @@ public class AccountOperationsImpl implements AccountOperations {
         if (accountBuilder.getBrandDisplayId() == null) {
             accountBuilder.setBrandDisplayId(brandOperations.get().getDisplayId());
         }
-        TPCRMResponse<AccountCreateCRM> register = crmHttpAdapter.create(accountBuilder.createAccountRO());
+        TPCRMResponse<CRMAccountCreate> register = crmHttpAdapter.create(accountBuilder.createAccountRO());
         assertNotNull(register.getResult(), "The new account wasn't created" + register.getErrors());
         return getTP(register.getResult().getAccountId());
     }
 
     @Override
     public String depositCRM(String accountId, Double amount) {
-        TPCRMResponse<DepositCRM> deposit = crmHttpAdapter.deposit(accountId, amount, brandOperations.get().getDisplayId());
+        TPCRMResponse<CRMDeposit> deposit = crmHttpAdapter.deposit(accountId, amount, brandOperations.get().getDisplayId());
         assertNotNull(deposit.getResult(), "The deposit operation wasn't success" + deposit.getErrors());
         return deposit.getResult().getTransactionId();
     }
