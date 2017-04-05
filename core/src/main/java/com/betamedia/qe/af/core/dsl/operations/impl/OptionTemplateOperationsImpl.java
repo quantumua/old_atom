@@ -63,6 +63,7 @@ public class OptionTemplateOperationsImpl implements OptionTemplateOperations {
         List<OptionTemplateScheduler> schedulers = schedulerOperations.get(timezoneId, tagName);
         optionTemplate.setScheduler(schedulers.get(0));
         optionTemplate = tpConnector.create(optionTemplate);
+        logger.info("Created option template id=" + optionTemplate.getId());
         tpConnector.serviceProxy(IOptionTemplateService.class).addRemoveAccountGroups(Collections.singletonList(accountGroup.getId()), null, optionTemplate);
         return optionTemplate;
     }
