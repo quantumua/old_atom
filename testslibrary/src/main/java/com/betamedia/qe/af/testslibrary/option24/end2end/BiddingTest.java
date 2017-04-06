@@ -21,7 +21,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class BiddingTest extends TPEndToEndTest {
 
-    //WIP
     @Test
     public void biddingTest() {
         Asset asset = operations().assetOperations().get();

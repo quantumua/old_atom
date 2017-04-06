@@ -18,6 +18,7 @@ public abstract class AbstractClientTest<T extends AbstractPageFactory> {
     public void tearDown() throws Exception {
         if (pages.get() != null) {
             pages.get().closeBrowser();
+            pages.set(null);
         }
     }
 

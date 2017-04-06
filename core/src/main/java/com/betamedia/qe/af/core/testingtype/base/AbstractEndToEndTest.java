@@ -22,6 +22,7 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
     public void tearDown() {
         if (pages.get() != null) {
             pages.get().closeBrowser();
+            pages.set(null);
         }
     }
 
