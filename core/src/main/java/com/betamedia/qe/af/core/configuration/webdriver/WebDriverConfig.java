@@ -2,6 +2,7 @@ package com.betamedia.qe.af.core.configuration.webdriver;
 
 import com.betamedia.qe.af.core.fwservices.webdriver.ParametrizedWebDriverFactory;
 import com.betamedia.qe.af.core.fwservices.webdriver.ParametrizedWebDriverFactoryProvider;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -80,7 +81,11 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> new FirefoxDriver(new FirefoxOptions().setLegacy(true).addDesiredCapabilities(dc));
+                return (dc, url) -> {
+                    WebDriver driver = new FirefoxDriver(new FirefoxOptions().setLegacy(true).addDesiredCapabilities(dc));
+                    driver.manage().window().maximize();
+                    return driver;
+                };
             }
         };
     }
