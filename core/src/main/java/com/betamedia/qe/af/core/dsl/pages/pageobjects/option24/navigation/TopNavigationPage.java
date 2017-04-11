@@ -7,7 +7,11 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation;
 public interface TopNavigationPage {
     void logIn();
 
+    void logOut();
+
     void binary();
 
     boolean isLoggedIn();
+
+    boolean isLoggedOut();
 }

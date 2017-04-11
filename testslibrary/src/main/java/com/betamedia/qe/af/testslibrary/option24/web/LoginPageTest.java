@@ -38,6 +38,15 @@ public class LoginPageTest extends TPEndToEndTest {
         Assert.assertTrue(pages().loginErrorNotification().isDisplayed());
     }
 
+    @Test(description = "Simple login test and logout for default rest user.")
+    public void logoutTest() {
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login("vasichka", "123123");
+        pages().disclaimerNotification().accept();
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        pages().topNavigationPage().logOut();
+    }
+
     /**
      * Register the new customer with mobile CRM api and then login with newly created customer's login/password
      */

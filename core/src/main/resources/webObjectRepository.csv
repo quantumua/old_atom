@@ -21,3 +21,5 @@ build,pageObjectName,locatorId,locatorType,value
 1603,PositionsImpl,position,CLASS_NAME,bmCellContent
 1603,TopNavigationPageImpl,binaryBtn,CLASS_NAME,product-binary
 1603,TopNavigationPageImpl,mainMenu,ID,mainMenu
+1603,TopNavigationPageImpl,userDetailsMenu,ID,user_details_menu
+1603,TopNavigationPageImpl,logoutLink,CSS,#user_details_menu > ul > li:nth-child(3) > a

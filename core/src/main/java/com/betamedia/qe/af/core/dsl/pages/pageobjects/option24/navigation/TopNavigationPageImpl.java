@@ -4,6 +4,7 @@ import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 /**
  * @author Maksym Tsybulskyy
@@ -19,6 +20,10 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By myAccountBtn;
     @StoredId
     private By binaryBtn;
+    @StoredId("userDetailsMenu")
+    private By userDetailsMenu;
+    @StoredId("logoutLink")
+    private By logoutLink;
 
     public TopNavigationPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -31,9 +36,23 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     }
 
     @Override
+    public boolean isLoggedOut() {
+        waitUntilDisplayed(loginBtn);
+        return find(loginBtn).isDisplayed();
+    }
+
+    @Override
     public void logIn() {
         waitUntilDisplayed(loginBtn);
         find(loginBtn).click();
+    }
+
+    @Override
+    public void logOut() {
+        find(userDetailsMenu).click();
+        find(logoutLink).click();
+        waitUntilDisplayed(loginBtn);
+        Assert.assertTrue(isLoggedOut());
     }
 
     @Override
