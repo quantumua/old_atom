@@ -20,6 +20,7 @@ import org.testng.TestNG;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
@@ -71,9 +72,14 @@ public class TestNGRunnerImpl implements TestRunner {
     }
 
     private String executeForProperties(Properties props, List<String> xmlNames) {
-        String path = LocalDateTime.now().toString() + "." + props.hashCode();
+        String path = getReportPath(props);
         runnerTaskExecutor.execute(() -> run(xmlNames, props, "test-output/" + path));
         return path + "/index.html";
+    }
+
+    private String getReportPath(Properties props) {
+        LocalDateTime now = LocalDateTime.now();
+        return now.toString() + "." + Objects.hash(props, now, Thread.currentThread());
     }
 
     private void run(List<String> xmlNames, Properties props, String outputDirectory) {

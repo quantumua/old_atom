@@ -1,5 +1,5 @@
 angular.module('client', [])
-    .controller('runner', function ($scope, $http, $window) {
+    .controller('runner', function ($scope, $http, $timeout, $interval) {
         var self = this;
         self.messages = [];
         self.reports = [];
@@ -15,9 +15,13 @@ angular.module('client', [])
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
                 self.messages.push('Upload successful');
-                Array.prototype.push.apply(self.reports, response.data.map(function (p) {
-                    return '/af/' + p
-                }));
+                var reports = response.data.map(function (p) {
+                    return {path: p, status: "N/A"}
+                });
+                reports.forEach(function (r) {
+                    pollForStatus(r, 5000, 600000)
+                });
+                Array.prototype.push.apply(self.reports, reports);
                 callback && callback();
             }, function (response) {
                 self.messages.push(response.body);
@@ -38,6 +42,22 @@ angular.module('client', [])
             if (badInput) return;
             runTests($scope.properties[0], Array.from($scope.suites), null)
         };
+
+        function pollForStatus(report, delay, timeout) {
+            var interval = $interval(
+                function () {
+                    $http.post('/af/exists', report.path)
+                        .then(function (r) {
+                            if (r.data === true) {
+                                report.status = 'DONE';
+                                $interval.cancel(interval);
+                            }
+                        })
+                }, delay);
+            $timeout(function () {
+                $interval.cancel(interval);
+            }, timeout);
+        }
 
     })
     .controller('jarUploader', function ($scope, $http) {
