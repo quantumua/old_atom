@@ -6,6 +6,7 @@
                 <methods>
                     <parameter name="username" value="maksym"/>
                     <parameter name="password" value="password"/>
+                    <include name="loginTest" />
                 </methods>
             </class>
         </classes>

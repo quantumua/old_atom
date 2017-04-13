@@ -66,7 +66,11 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> new RemoteWebDriver(driverService.getUrl(), dc);
+                return (dc, url) -> {
+                    WebDriver driver = new RemoteWebDriver(driverService.getUrl(), dc);
+                    driver.manage().window().maximize();
+                    return driver;
+                };
             }
         };
     }
@@ -100,7 +104,11 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> new InternetExplorerDriver(dc);
+                return (dc, url) -> {
+                    WebDriver driver = new InternetExplorerDriver(dc);
+                    driver.manage().window().maximize();
+                    return driver;
+                };
             }
         };
     }
