@@ -25,6 +25,10 @@
             <label for="suites">Suites:</label>
             <input type="file" multiple file-model="suites" class="form-control" id="suites" name="suites"/>
         </div>
+        <div class="form-group">
+            <label for="tempJar">JAR override:</label>
+            <input type="file" file-model="tempJar" class="form-control" id="tempJar" name="tempJar"/>
+        </div>
         <button type="submit" class="btn btn-primary">Execute</button>
         <table>
             <tr ng-repeat="message in runner.messages">

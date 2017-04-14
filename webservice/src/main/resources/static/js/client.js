@@ -3,13 +3,13 @@ angular.module('client', [])
         var self = this;
         self.messages = [];
         self.reports = [];
-        var runTests = function (properties, suites, callback) {
+        var runTests = function (properties, suites, tempJar, callback) {
             var fd = new FormData();
             fd.append('properties', properties);
             suites.forEach(function (s) {
                 fd.append('suites[]', s);
             });
-            fd.append('dataSources[]', []);
+            fd.append('tempJar', tempJar);
             $http.post('/af/upload/suite', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
@@ -39,8 +39,11 @@ angular.module('client', [])
                 self.messages.push('No suite XML files selected!');
                 badInput = true;
             }
+            if (angular.isUndefined($scope.tempJar) || !$scope.tempJar.length) {
+                $scope.tempJar = [null];
+            }
             if (badInput) return;
-            runTests($scope.properties[0], Array.from($scope.suites), null)
+            runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0], null)
         };
 
         function pollForStatus(report, delay, timeout) {

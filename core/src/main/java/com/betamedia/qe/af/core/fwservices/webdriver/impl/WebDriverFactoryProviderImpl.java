@@ -32,7 +32,6 @@ public class WebDriverFactoryProviderImpl implements WebDriverFactoryProvider {
     }
 
     @Override
-
     public WebDriverFactory get(String browserType, String remoteDriverUrl, String domainUrl) {
         String driverType = remoteDriverUrl == null ? browserType : "remote";
         ParametrizedWebDriverFactory webDriverFactory = providerMap.get(driverType);

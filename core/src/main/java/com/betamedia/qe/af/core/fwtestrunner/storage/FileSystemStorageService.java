@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.webservice.storage;
+package com.betamedia.qe.af.core.fwtestrunner.storage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -29,15 +29,29 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public String store(MultipartFile file) {
+        return store(file, file.getOriginalFilename());
+    }
+
+    @Override
+    public String store(MultipartFile file, String filename) {
         try {
             if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
+                throw new StorageException("Failed to store empty file " + filename);
             }
-            Path internalPath = this.rootLocation.resolve(file.getOriginalFilename());
+            Path internalPath = this.rootLocation.resolve(filename);
             Files.copy(file.getInputStream(), internalPath, StandardCopyOption.REPLACE_EXISTING);
             return internalPath.toString();
         } catch (IOException e) {
-            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
+            throw new StorageException("Failed to store file " + filename, e);
+        }
+    }
+
+    @Override
+    public void delete(String path) {
+        try {
+            Files.delete(Paths.get(path));
+        } catch (IOException e) {
+            throw new StorageException("Failed to delete file " + path, e);
         }
     }
 

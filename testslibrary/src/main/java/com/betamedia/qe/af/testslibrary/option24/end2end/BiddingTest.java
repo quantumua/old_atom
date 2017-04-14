@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by mbelyaev on 3/23/17.
@@ -42,7 +41,7 @@ public class BiddingTest extends TPEndToEndTest {
                 .confirm();
         List<String> positionIds = pages().positions().get();
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
-        assertEquals(position.getStatus(), PositionStatus.OPEN);
+        Assert.assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
 }

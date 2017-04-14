@@ -1,19 +1,15 @@
 package com.betamedia.qe.af;
 
+import com.betamedia.qe.af.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.qe.af.core.holders.AppContextHolder;
-import com.betamedia.qe.af.core.fwtestrunner.ClassLoaderInvocationHandler;
-import com.betamedia.qe.af.webservice.storage.StorageProperties;
-import com.betamedia.qe.af.webservice.storage.StorageService;
+import com.betamedia.qe.af.core.fwtestrunner.storage.StorageProperties;
+import com.betamedia.qe.af.core.fwtestrunner.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.Paths;
 
 @SpringBootApplication(scanBasePackages = {"com.betamedia.qe.af"})
 @EnableConfigurationProperties(StorageProperties.class)
@@ -26,15 +22,12 @@ public class Application {
     @Bean
     CommandLineRunner runner(StorageService storageService,
                              ConfigurableApplicationContext ctx,
-                             ClassLoaderInvocationHandler classLoaderInvocationHandler) {
+                             ContextClassLoaderManagingExecutor contextClassLoaderManagingExecutor) {
         return args -> {
             storageService.deleteAll();
             storageService.init();
             AppContextHolder.setContext(ctx);
-            classLoaderInvocationHandler.setClassLoader(
-                    new URLClassLoader(
-                            new URL[]{Paths.get("./testslibrary.jar").toUri().toURL()},
-                            Thread.currentThread().getContextClassLoader()));
+            contextClassLoaderManagingExecutor.setJarPath("testslibrary.jar");
         };
     }
 

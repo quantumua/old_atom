@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.webservice.storage;
+package com.betamedia.qe.af.core.fwtestrunner.storage;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +14,10 @@ public interface StorageService {
     void init();
 
     String store(MultipartFile file);
+
+    String store(MultipartFile file, String filename);
+
+    void delete(String path);
 
     Stream<Path> loadAll();
 

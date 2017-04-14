@@ -1,5 +1,7 @@
 package com.betamedia.qe.af.core.fwtestrunner;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Properties;
 
@@ -9,5 +11,5 @@ import java.util.Properties;
  */
 public interface TestRunnerHandler {
 
-    List<String> handle(Properties properties, List<String> suitesFileNames);
+    List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar);
 }

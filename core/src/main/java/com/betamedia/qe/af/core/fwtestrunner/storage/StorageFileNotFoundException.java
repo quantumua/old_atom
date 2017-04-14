@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.webservice.storage;
+package com.betamedia.qe.af.core.fwtestrunner.storage;
 
 /**
  * Created by mbelyaev on 2/28/17.
