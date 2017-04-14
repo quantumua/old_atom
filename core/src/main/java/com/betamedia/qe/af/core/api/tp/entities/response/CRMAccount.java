@@ -20,8 +20,7 @@ public class CRMAccount {
     private String currency;
     private String displayId;
     private String accountType;
-    private BigDecimal balance;
-    private String platform;
+     private String platform;
     private String product;
     private BigDecimal pendingAmount;
     private String externalId;
@@ -36,7 +35,6 @@ public class CRMAccount {
         this.currency = currency;
         this.displayId = displayId;
         this.accountType = accountType;
-        this.balance = new BigDecimal(0);
         this.platform = platform;
         this.product = product;
         this.pendingAmount = pendingAmount;
@@ -75,14 +73,6 @@ public class CRMAccount {
         this.accountType = accountType;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
     public String getPlatform() {
         return platform;
     }
@@ -116,13 +106,13 @@ public class CRMAccount {
     }
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "CRMAccount{" +
                 "id='" + id + '\'' +
                 ", currency='" + currency + '\'' +
                 ", displayId='" + displayId + '\'' +
                 ", accountType='" + accountType + '\'' +
-                ", balance=" + balance +
                 ", platform='" + platform + '\'' +
                 ", product='" + product + '\'' +
                 ", pendingAmount=" + pendingAmount +
