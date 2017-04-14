@@ -31,7 +31,7 @@ public class AccountBuilderTest {
     public void testDefaultUniqueFields() {
         AccountRO accountRO = getRequired().createAccountRO();
         assertTrue(accountRO.getFirstName().contains(TP_AUTOMATION_PREFIX));
-        assertEquals(TP_AUTOMATION_PREFIX.length() + CHARS_IN_ID, accountRO.getFirstName().length());
+        assertTrue(accountRO.getFirstName().length()>TP_AUTOMATION_PREFIX.length());
     }
 
     @Test()

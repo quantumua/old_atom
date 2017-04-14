@@ -219,7 +219,6 @@ public class CustomerBuilder {
         if (!Strings.isNullOrEmpty(userName)) {
             email = formMail(userName);
         } else {
-            String uniqueId = generateRandomId(CHARS_IN_ID);
             userName = TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
             email = formMail(userName);
         }
