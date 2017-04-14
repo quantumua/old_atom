@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import static com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount.PlatformType.*;
 
@@ -118,14 +120,18 @@ public class CRMCustomer {
     }
 
     public CRMAccount getBinaryAccount(){
-        return Arrays.stream(getAccounts())
+        return Optional.ofNullable(getAccounts())
+                .map(Arrays::stream)
+                .orElseGet(Stream::empty)
                 .filter(acc-> (SCIPIO.getValue()).equals(acc.getPlatform()))
                 .findFirst()
                 .orElse(null);
     }
 
     public CRMAccount getFXCFDAccount(){
-        return Arrays.stream(getAccounts())
+        return Optional.ofNullable(getAccounts())
+                .map(Arrays::stream)
+                .orElseGet(Stream::empty)
                 .filter(acc-> (PANDA.getValue()).equals(acc.getPlatform()))
                 .findFirst()
                 .orElse(null);
