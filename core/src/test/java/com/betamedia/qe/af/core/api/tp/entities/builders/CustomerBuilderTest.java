@@ -82,7 +82,7 @@ public class CustomerBuilderTest {
 		checkFields(actualCustomerRO, getCustomerRO());
 		assertEquals(actualCustomerRO.getEmail(),actualCustomerRO.getUserName() + DEFAULT_EMAIL);
 		assertTrue(actualCustomerRO.getUserName().contains(TP_AUTOMATION_PREFIX));
-		assertTrue(actualCustomerRO.getUserName().length()>TP_AUTOMATION_PREFIX.length());
+		assertTrue(actualCustomerRO.getUserName().length() > TP_AUTOMATION_PREFIX.length());
 	}
 	
 	@Test
