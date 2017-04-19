@@ -3,12 +3,12 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccountCreate;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
-import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccountCreate;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
+import com.betamedia.qe.af.core.connectors.tp.AFTPConnector;
 import com.betamedia.qe.af.core.dsl.operations.AccountGroupOperations;
 import com.betamedia.qe.af.core.dsl.operations.AccountOperations;
 import com.betamedia.qe.af.core.dsl.operations.BrandOperations;
@@ -29,8 +29,11 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 /**
+ * This class is designed to facilitate the execution of common operations related to account.
+ * It can be used as a "building block" when writing integration tests.
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
+ * @see Account
  */
 @Component
 public class AccountOperationsImpl implements AccountOperations {
@@ -51,11 +54,17 @@ public class AccountOperationsImpl implements AccountOperations {
     @Autowired
     private TPCRMHttpAdapter crmHttpAdapter;
 
+    /**
+     * Creates and returns default trading platform account.
+     */
     @Override
     public Account getTP() {
         return createTP();
     }
 
+    /**
+     * Returns trading platform account by id.
+     */
     @Override
     public Account getTP(String id) {
         Account account = tpConnector.readById(Account.class, id);
@@ -85,12 +94,24 @@ public class AccountOperationsImpl implements AccountOperations {
         return account;
     }
 
+    /**
+     * A method to update the specified trading platform account with given properties.
+     * @param account existing trading platfrom account
+     * @param properties properties to set
+     * @return updated account
+     */
     @Override
     public Account updateTP(Account account, Set<String> properties) {
 //        TODO add some verifications or make the method private
         return tpConnector.update(account, properties);
     }
 
+    /**
+     * A method to update account balance.
+     * @param accountId existing account id
+     * @param amount balance to set
+     * @return updated account
+     */
     @Override
     public Account updateBalanceTP(String accountId, Double amount) {
         Account account = getTP(accountId);
@@ -100,11 +121,21 @@ public class AccountOperationsImpl implements AccountOperations {
         return account;
     }
 
+    /**
+     * A method to register and get a CRM account.
+     * An account is created with current brand display id.
+     * @return crm account
+     */
     @Override
     public Account getCRM() {
         return getCRM(new AccountBuilder().setBrandDisplayId(brandOperations.get().getDisplayId()));
     }
 
+    /**
+     * A method to register and get a CRM account using the specified account builder.
+     * If the account builder's brand display id is not set, current display id will be used.
+     * @return crm account
+     */
     @Override
     public Account getCRM(AccountBuilder accountBuilder) {
         if (accountBuilder.getBrandDisplayId() == null) {
@@ -115,6 +146,11 @@ public class AccountOperationsImpl implements AccountOperations {
         return getTP(register.getResult().getAccountId());
     }
 
+    /**
+     * A method to make a CRM deposit for the given account.
+     * @param amount deposit amount
+     * @return deposit's transaction id
+     */
     @Override
     public String depositCRM(String accountId, Double amount) {
         TPCRMResponse<CRMDeposit> deposit = crmHttpAdapter.deposit(accountId, amount, brandOperations.get().getDisplayId());

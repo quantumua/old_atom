@@ -18,7 +18,12 @@ import org.springframework.stereotype.Component;
 import static org.testng.Assert.assertNotNull;
 
 /**
+ * This class is designed to facilitate the execution of common operations related to asset.
+ * It can be used as a "building block" when writing integration tests.
+ *
  * Created by mbelyaev on 3/23/17.
+ *
+ * @see Asset
  */
 @Component
 public class AssetOperationsImpl implements AssetOperations {
@@ -33,11 +38,17 @@ public class AssetOperationsImpl implements AssetOperations {
     @Autowired
     private VolatilityUnitOperations volatilityUnitOperations;
 
+    /**
+     * A method that creates and returns a default trading platform asset.
+     */
     @Override
     public Asset get() {
         return create();
     }
 
+    /**
+     * A method to get asset by id.
+     */
     @Override
     public Asset get(String id) {
         String internalId = id.replace("/", "");
