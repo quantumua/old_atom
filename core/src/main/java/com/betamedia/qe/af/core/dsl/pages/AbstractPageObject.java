@@ -46,7 +46,33 @@ public abstract class AbstractPageObject {
 
     protected WebElement find(By... by) {
         List<By> bys = Arrays.asList(by);
-        return find(webDriver.findElement(bys.get(0)), bys.subList(1, bys.size()));
+        return find(find(bys.get(0)), bys.subList(1, bys.size()));
+    }
+
+    protected <T> T inIFrame(Supplier<T> supplier, By iFrame) {
+        try {
+            switchToFrame(iFrame);
+            return supplier.get();
+        } finally {
+            leaveFrame();
+        }
+    }
+
+    protected <T> T inIFrame(Supplier<T> supplier, By... iFrames) {
+        try{
+            Arrays.stream(iFrames).forEach(this::switchToFrame);
+            return supplier.get();
+        } finally {
+            leaveFrame();
+        }
+    }
+
+    private void switchToFrame(By iFrame) {
+        webDriver.switchTo().frame(find(iFrame));
+    }
+
+    private void leaveFrame(){
+        webDriver.switchTo().defaultContent();
     }
 
     private WebElement find(WebElement webElement, List<By> bys) {

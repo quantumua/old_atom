@@ -1,8 +1,12 @@
 package com.betamedia.qe.af.core.dsl.pages.factory.tp;
 
 import com.betamedia.qe.af.core.dsl.pages.factory.AbstractPageFactory;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.assets.Assets;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.assets.impl.AssetsImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.Bidder;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.impl.BidderImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.BinarySelector;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.impl.BinarySelectorImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
@@ -51,6 +55,16 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     @Override
     public Bidder bidder() {
         return creator.getPage(BidderImpl.class);
+    }
+
+    @Override
+    public Assets assets() {
+        return creator.getPage(AssetsImpl.class);
+    }
+
+    @Override
+    public BinarySelector binarySelector() {
+        return creator.getPage(BinarySelectorImpl.class);
     }
 
     @Override

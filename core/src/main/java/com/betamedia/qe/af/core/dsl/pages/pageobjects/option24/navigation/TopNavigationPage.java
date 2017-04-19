@@ -11,6 +11,8 @@ public interface TopNavigationPage {
 
     void binary();
 
+    void cfd();
+
     boolean isLoggedIn();
 
     boolean isLoggedOut();

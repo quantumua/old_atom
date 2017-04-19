@@ -67,7 +67,7 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
 
     private String getReportPath(Properties props) {
         LocalDateTime now = LocalDateTime.now();
-        return now.toString() + "." + Objects.hash(props, now, Thread.currentThread());
+        return (now.toString() + "." + Objects.hash(props, now, Thread.currentThread())).replaceAll("[^a-zA-Z0-9]", "_");
     }
 
     private TestRunnerType getType(Properties properties) {

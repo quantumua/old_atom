@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.fwtestrunner.runner.testng;
 
-import com.betamedia.qe.af.core.fwdataaccess.repository.VersionedWebElementRepositoryImpl;
-import com.betamedia.qe.af.core.fwdataaccess.repository.WebElementRepository;
+import com.betamedia.qe.af.core.fwdataaccess.repository.impl.VersionedWebElementRepositoryImpl;
+import com.betamedia.qe.af.core.fwdataaccess.repository.impl.WebElementRepository;
 import com.betamedia.qe.af.core.fwdataaccess.repository.util.ApplicationVersionHolder;
 import com.betamedia.qe.af.core.fwdataaccess.repository.util.tp.TPApplicationVersionHolderImpl;
 import com.betamedia.qe.af.core.fwservices.webdriver.WebDriverFactory;
