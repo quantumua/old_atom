@@ -8,13 +8,14 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 
 import static com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMRegisterResultDeserializer.CUSTOMER_NODE_KEY;
-import static org.testng.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by Oleksandr Losiev on 4/14/17.
@@ -87,7 +88,8 @@ public class CRMRegisterResultDeserializerTest {
         CRMRegisterResult crmRegisterResult = (CRMRegisterResult)result;
 
         CRMCustomer actualCustomer = crmRegisterResult.getCustomer();
-        assertEquals(getExpectedCustomer(), actualCustomer);
+        assertThat(getExpectedCustomer(), new ReflectionEquals(actualCustomer, "accounts"));
+        assertThat(getExpectedCustomer().getAccounts(), new ReflectionEquals(actualCustomer.getAccounts(), "pendingAmount"));
     }
 
     @Test
@@ -97,7 +99,7 @@ public class CRMRegisterResultDeserializerTest {
         CRMRegisterResult crmRegisterResult = (CRMRegisterResult)result;
 
         CRMCustomer actualCustomer = crmRegisterResult.getCustomer();
-        assertEquals(getIncompleteExpectedCustomer(), actualCustomer);
+        assertThat(getIncompleteExpectedCustomer(), new ReflectionEquals(actualCustomer));
     }
 
     @Test (expectedExceptions = NullPointerException.class)

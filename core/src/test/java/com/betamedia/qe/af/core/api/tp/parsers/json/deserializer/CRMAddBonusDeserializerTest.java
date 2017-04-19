@@ -5,7 +5,7 @@ import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMAddBonusDese
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.betamedia.qe.af.core.api.tp.entities.response.CRMAddBonus.BONUS_ID;
@@ -24,7 +24,7 @@ public class CRMAddBonusDeserializerTest {
     private ObjectMapper mapper;
     private CRMAddBonusDeserializer deserializer;
 
-    @BeforeMethod
+    @BeforeClass
     public void setup() throws Exception {
         mapper = new ObjectMapper();
         deserializer = new CRMAddBonusDeserializer();
