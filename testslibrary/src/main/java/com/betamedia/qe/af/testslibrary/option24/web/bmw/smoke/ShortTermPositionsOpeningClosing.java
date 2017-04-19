@@ -7,17 +7,11 @@ import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.betamedia.common.exceptions.account.mismatch.AccountMismatchException;
-
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.dsl.operations.AccountGroupOperations;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.dsl.operations.TagOperations;
-//import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
-//import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.impl.BidderImpl;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
-import com.betamedia.tp.api.model.Account;
 import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.Position;
 import com.betamedia.tp.api.model.enums.OptionType;
@@ -29,7 +23,7 @@ import com.betamedia.tp.api.model.enums.PositionStatus;
  */
 public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
-	@Test
+	@Test	
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMinimumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
