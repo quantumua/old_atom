@@ -1,10 +1,9 @@
-package com.betamedia.qe.af.core.fwdataaccess.repository;
+package com.betamedia.qe.af.core.fwdataaccess.repository.impl;
 
 import com.betamedia.qe.af.core.fwdataaccess.entities.FindBy;
+import com.betamedia.qe.af.core.fwdataaccess.repository.VersionedWebElementRepository;
 
 import java.util.Map;
-
-import static com.betamedia.qe.af.core.fwdataaccess.repository.WebElementRepository.Index;
 
 /**
  * @author Maksym Tsybulskyy
@@ -20,6 +19,6 @@ public class VersionedWebElementRepositoryImpl implements VersionedWebElementRep
 
     @Override
     public FindBy get(String pageObjectName, String locatorId) {
-        return locations.get(new Index(pageObjectName, locatorId));
+        return locations.get(new WebElementRepository.Index(pageObjectName, locatorId));
     }
 }

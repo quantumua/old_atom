@@ -8,12 +8,11 @@ build,pageObjectName,locatorId,locatorType,value
 1603,TopNavigationPageImpl,myAccountBtn,ID,myaccount_btn
 1603,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
 1603,BidderImpl,amountInput,ID,bmBidAmountInput
-1603,BidderImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame
-1603,BidderImpl,shortTermButton,CSS,.bmSelectItem.bmSelectShortTermGame
-1603,BidderImpl,doubleProfitButton,CSS,.bmSelectItem.bmSelectDoubleProfitGame
-1603,BidderImpl,assetSelector,CLASS_NAME,bmIdEURUSD
-1603,BidderImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
-1603,BidderImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
+1603,BinarySelectorImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame
+1603,BinarySelectorImpl,shortTermButton,CSS,.bmSelectItem.bmSelectShortTermGame
+1603,BinarySelectorImpl,doubleProfitButton,CSS,.bmSelectItem.bmSelectDoubleProfitGame
+1603,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
+1603,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
 1603,BidderImpl,lowButton,CSS,.bmButtonsWrapp.bmSelection2
 1603,BidderImpl,highButton,CSS,.bmButtonsWrapp.bmSelection1
 1603,BidderImpl,closePosition,CSS,.bmButtonWrapp.bmClosePositionDialog
@@ -23,3 +22,7 @@ build,pageObjectName,locatorId,locatorType,value
 1603,TopNavigationPageImpl,mainMenu,ID,mainMenu
 1603,TopNavigationPageImpl,userDetailsMenu,ID,user_details_menu
 1603,TopNavigationPageImpl,logoutLink,CSS,ul > li:nth-child(3) > a
+1603,TopNavigationPageImpl,cfdBtn,CLASS_NAME,product-cfd
+1603,AssetsImpl,assetContainer,CLASS_NAME,assets-list-container
+1603,AssetsImpl,assetName,CLASS_NAME,list-asset
+1603,AssetsImpl,pandaIframe,ID,swPandaIframe

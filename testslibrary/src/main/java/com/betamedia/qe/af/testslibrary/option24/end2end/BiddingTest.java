@@ -31,11 +31,10 @@ public class BiddingTest extends TPEndToEndTest {
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().topNavigationPage().binary();
         pages().disclaimerNotification().accept();
+        pages().binarySelector().highLow();
+        pages().assets().asset(asset.getId(), asset.getAssetName());
         pages().bidder()
-                .highLow()
-                .asset(asset.getId(), asset.getAssetName())
                 .setAmount("10.0")
                 .bidHigh()
                 .confirm();

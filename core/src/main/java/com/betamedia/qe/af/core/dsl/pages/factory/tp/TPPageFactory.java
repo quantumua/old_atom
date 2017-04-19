@@ -1,7 +1,9 @@
 package com.betamedia.qe.af.core.dsl.pages.factory.tp;
 
 
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.assets.Assets;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.Bidder;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.BinarySelector;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
@@ -22,6 +24,10 @@ public interface TPPageFactory {
     LoginErrorNotification loginErrorNotification();
 
     Bidder bidder();
+
+    Assets assets();
+
+    BinarySelector binarySelector();
 
     Positions positions();
 }

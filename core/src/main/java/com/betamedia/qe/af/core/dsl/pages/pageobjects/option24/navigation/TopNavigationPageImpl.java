@@ -20,6 +20,8 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By myAccountBtn;
     @StoredId
     private By binaryBtn;
+    @StoredId
+    private By cfdBtn;
     @StoredId("userDetailsMenu")
     private By userDetailsMenu;
     @StoredId("logoutLink")
@@ -58,6 +60,12 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     public void binary() {
         waitUntilDisplayed(mainMenu);
         find(mainMenu, binaryBtn).click();
+    }
+
+    @Override
+    public void cfd() {
+        waitUntilDisplayed(mainMenu);
+        find(mainMenu, cfdBtn).click();
     }
 
 }

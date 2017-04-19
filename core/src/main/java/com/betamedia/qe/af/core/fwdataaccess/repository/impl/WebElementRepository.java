@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.fwdataaccess.repository;
+package com.betamedia.qe.af.core.fwdataaccess.repository.impl;
 
 import com.betamedia.qe.af.core.fwdataaccess.entities.FindBy;
 import com.betamedia.qe.af.core.fwdataaccess.entities.PageElementLocation;
@@ -28,12 +28,10 @@ public class WebElementRepository {
 
     @PostConstruct
     public void populateRepository() throws IOException {
-
-
         HeaderColumnNameMappingStrategy<PageElementLocation> strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(PageElementLocation.class);
         CsvToBean<PageElementLocation> csvToBean = new CsvToBean<>();
-        try (InputStream resourceInputStream = new ClassPathResource("/webObjectRepository.csv").getInputStream();) {
+        try (InputStream resourceInputStream = new ClassPathResource("/webobjects/webObjectRepository.csv").getInputStream();) {
             pageElements = csvToBean.parse(strategy, new CSVReader(new InputStreamReader(resourceInputStream)));
         } catch (IOException e) {
             e.printStackTrace();
