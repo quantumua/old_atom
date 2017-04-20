@@ -43,7 +43,7 @@ public class AccountGroupOperationsImplTest {
     private AccountGroup accountGroup;
 
     @BeforeClass
-    public void setup() throws Exception {
+    public void setupClass() throws Exception {
         accountGroup = new AccountGroup();
         accountGroup.setName(accountGroupName);
         accountGroup.setDescription(accountGroupDescription);
@@ -51,7 +51,7 @@ public class AccountGroupOperationsImplTest {
     }
 
     @BeforeMethod
-    public void initMocks() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
 
         when(tpConnector.readById(AccountGroup.class, accountGroupId)).thenReturn(accountGroup);

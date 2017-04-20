@@ -54,19 +54,14 @@ public class BonusOperationsImplTest {
     private Brand brand;
 
     @BeforeClass
-    public void setup() throws Exception {
-        MockitoAnnotations.initMocks(this);
-
-        when(tpConnector.readById(Bonus.class, bonusId)).thenReturn(getExpectedBonus());
-        when(tpConnector.readByDisplayId(Bonus.class, bonusDisplayId)).thenReturn(getExpectedBonus());
-
+    public void setupClass() throws Exception {
         brand = new Brand();
         brand.setId(brandId);
         brand.setDisplayId(brandDisplayId);
     }
 
     @BeforeMethod
-    public void initMocks() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
 
         when(tpConnector.readById(Bonus.class, bonusId)).thenReturn(getExpectedBonus());

@@ -30,7 +30,7 @@ public class CRMDataDeserializerTest {
     private CRMDataDeserializer<Integer> deserializer;
 
     @BeforeClass
-    public void setup() throws Exception{
+    public void setupClass() throws Exception{
         mapper = new ObjectMapper();
         deserializer = new CRMDataDeserializer<Integer>() {
             @Override

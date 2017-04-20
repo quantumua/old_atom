@@ -74,19 +74,17 @@ public class AccountOperationsImplTest {
     private String transactionId = "testTransactionId";
 
     @BeforeClass
-    public void setup() throws Exception {
+    public void setupClass() throws Exception {
         accountGroup = new AccountGroup();
         accountGroup.setId(accountGroupId);
         accountGroup.setDisplayId(accountGroupDisplayId);
         brand = new Brand();
         brand.setId(brandId);
         brand.setDisplayId(brandDisplayId);
-
-
     }
 
     @BeforeMethod
-    public void initMocks() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
 
         when(accountGroupOperations.get()).thenReturn(accountGroup);

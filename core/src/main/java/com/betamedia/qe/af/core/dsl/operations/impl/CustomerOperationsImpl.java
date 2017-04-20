@@ -13,8 +13,11 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 /**
+ * This class is designed to facilitate the execution of common operations related to customer operations.
+ * It can be used as a "building block" when writing integration tests.
  * @author Maksym Tsybulskyy
  *         Date: 3/31/17.
+ * @see CRMCustomer
  */
 @Component
 public class CustomerOperationsImpl implements CustomerOperations {
@@ -24,11 +27,17 @@ public class CustomerOperationsImpl implements CustomerOperations {
     @Autowired
     private MobileCRMHTTPAdaper mobileCRMHTTPAdaper;
 
+    /**
+     * Registers new CRM customer with default customer builder
+     */
     @Override
     public CRMCustomer register() {
         return register(new CustomerBuilder());
     }
 
+    /**
+     * Registers new CRM customer with given customer builder
+     */
     @Override
     public CRMCustomer register(CustomerBuilder customerBuilder) {
         CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO());

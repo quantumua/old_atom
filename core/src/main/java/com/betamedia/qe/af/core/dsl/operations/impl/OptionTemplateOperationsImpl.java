@@ -14,7 +14,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +22,12 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 
 /**
+ * This class is designed to facilitate the execution of common operations related to option template operations.
+ * It can be used as a "building block" when writing integration tests.
+ *
  * Created by mbelyaev on 3/24/17.
+ *
+ * @see OptionTemplate
  */
 @Component
 public class OptionTemplateOperationsImpl implements OptionTemplateOperations {
@@ -48,6 +52,9 @@ public class OptionTemplateOperationsImpl implements OptionTemplateOperations {
         return null;
     }
 
+    /**
+     * Returns an template found by id
+     */
     @Override
     public OptionTemplate get(String id) {
         OptionTemplate optionTemplate = tpConnector.readById(OptionTemplate.class, id);
@@ -55,6 +62,13 @@ public class OptionTemplateOperationsImpl implements OptionTemplateOperations {
         return optionTemplate;
     }
 
+    /**
+     * Creates a new option template with a given id, type and tag name.
+     * @param assetId used to get trading calendar
+     * @param type determines a type of default template to use
+     * @param tagName used to determine tag id
+     * @return created option template
+     */
     @Override
     public OptionTemplate create(String assetId, OptionType type, TagOperations.TagName tagName) {
         AccountGroup accountGroup = accountGroupOperations.get();
@@ -72,6 +86,13 @@ public class OptionTemplateOperationsImpl implements OptionTemplateOperations {
         return optionTemplate;
     }
 
+    /**
+     * Returns a list of found option templates for given criteria.
+     * @param assetId used to get trading calendar
+     * @param type option template type to search for
+     * @param tagName used to determine tag id
+     * @return list of option templates for given criteria
+     */
     @Override
     public List<OptionTemplate> getOptionTemplates(String assetId, OptionType type, TagOperations.TagName tagName) {
         AccountGroup accountGroup = accountGroupOperations.get();

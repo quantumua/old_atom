@@ -40,7 +40,7 @@ public class BrandOperationsImplTest {
     private String brandDescription = "testBrandDescription";
 
     @BeforeMethod
-    public void initMocks() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
         ReflectionTestUtils.setField(brandOperations, "brandId", brandId);
 

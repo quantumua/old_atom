@@ -15,7 +15,12 @@ import java.util.List;
 
 
 /**
+ * This class was designed to provide means to execute option operations, but now it is deprecated.
+ *
  * Created by mbelyaev on 3/24/17.
+ *
+ * @deprecated Replaced by {@link OptionTemplateOperationsImpl}
+ * @see Option
  */
 @Component
 public class OptionOperationsImpl implements OptionOperations {

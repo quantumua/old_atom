@@ -57,7 +57,7 @@ public class AssetOperationsImplTest {
     private double restriction = 1.0;
 
     @BeforeMethod
-    public void initMocks() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
 
         when(tradingCalendarOperations.get()).thenReturn(getExpectedTradingCalendar());
