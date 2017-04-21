@@ -23,7 +23,7 @@ import com.betamedia.tp.api.model.enums.PositionStatus;
  */
 public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
-	@Test	
+	@Test()	
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMinimumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -49,7 +49,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
 	}
 	
-	@Test
+	@Test()
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMaximumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -62,6 +62,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().topNavigationPage().binary();
+        pages().binarySelector().highLow();
         pages().disclaimerNotification().accept();
         
         int investedAmount = 15; 		//TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
@@ -101,6 +102,84 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         
 //        List<String> positionIds = pages().positions().get();
         position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
+        assertEquals(position.getStatus(), PositionStatus.OPEN);
+	}
+	
+	@Test
+	public void OpenAPositionThatExpiresIn60SecondsBasicFunctionality() {
+		Asset asset = operations().assetOperations().get();
+        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
+        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
+        CRMCustomer customer = operations().customerOperations().register();
+        CRMAccount binaryAccount = customer.getBinaryAccount();
+        operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        pages().disclaimerNotification().accept();
+        pages().binarySelector().highLow();
+        pages().assets().asset(asset.getId(), asset.getAssetName());
+        
+        String minInvestment = "15.0"; 	//TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
+        pages().bidder()
+                .bidLow()
+                .setAmount(minInvestment)
+                .confirm();
+
+        List<String> positionIds = pages().positions().get();
+        Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
+        assertEquals(position.getStatus(), PositionStatus.OPEN);
+	}
+	
+	@Test
+	public void OpenAPositionThatEexpiresIn2MinutesBasicFunctionality(){
+		Asset asset = operations().assetOperations().get();
+        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_2_MIN_GAME_H3_TEXT);
+        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
+        CRMCustomer customer = operations().customerOperations().register();
+        CRMAccount binaryAccount = customer.getBinaryAccount();
+        operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        pages().disclaimerNotification().accept();
+        pages().binarySelector().highLow();
+        pages().assets().asset(asset.getId(), asset.getAssetName());
+        
+        String minInvestment = "15.0"; 	//TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
+        pages().bidder()
+                .bidLow()
+                .setAmount(minInvestment)
+                .confirm();
+
+        List<String> positionIds = pages().positions().get();
+        Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
+        assertEquals(position.getStatus(), PositionStatus.OPEN);
+	}
+	
+	@Test
+	public void OpenAPositionThatEexpiresIn5MinutesBasicFunctionality(){
+		Asset asset = operations().assetOperations().get();
+        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_5_MIN_GAME_H3_TEXT);
+        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
+        CRMCustomer customer = operations().customerOperations().register();
+        CRMAccount binaryAccount = customer.getBinaryAccount();
+        operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        pages().disclaimerNotification().accept();
+        pages().binarySelector().highLow();
+        pages().assets().asset(asset.getId(), asset.getAssetName());
+        
+        String minInvestment = "15.0"; 	//TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
+        pages().bidder()
+                .bidLow()
+                .setAmount(minInvestment)
+                .confirm();
+
+        List<String> positionIds = pages().positions().get();
+        Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
 	}
 }
