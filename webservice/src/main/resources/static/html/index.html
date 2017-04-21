@@ -15,6 +15,9 @@
 </head>
 
 <body ng-app="client">
+<a href="/af/">Run tests</a> |
+<a href="/af/schedule">Schedule test execution</a> |
+<a href="/af/upload">Upload JAR</a>
 <div ng-controller="runner as runner" class="container">
     <form role="form" ng-submit="runner.run()">
         <div class="form-group">
@@ -40,20 +43,10 @@
     <table>
         <tr ng-repeat="report in runner.reports">
             <td><span><a target="_blank" ng-href="/af/{{report.path}}" ng-cloak>{{report.path}}</a></span></td>
-            <td><span  style="padding:0 15px 0 15px;" ng-class="{highlight: report.status === 'DONE'}">{{report.status}}</span></td>
+            <td><span style="padding:0 15px 0 15px;"
+                      ng-class="{highlight: report.status === 'DONE'}" ng-cloak>{{report.status}}</span></td>
         </tr>
     </table>
-</div>
-<hr/>
-<div ng-controller="jarUploader as jarUploader" class="container">
-    <form role="form" ng-submit="jarUploader.upload()">
-        <div class="form-group">
-            <label for="jar">JAR to upload:</label>
-            <input type="file" file-model="jar" class="form-control" id="jar" name="jar"/>
-        </div>
-        <button type="submit" class="btn btn-primary">Upload</button>
-        <h3 ng-cloak>{{jarUploader.message}}</h3>
-    </form>
 </div>
 
 <script src="js/angular-bootstrap.js" type="text/javascript"></script>

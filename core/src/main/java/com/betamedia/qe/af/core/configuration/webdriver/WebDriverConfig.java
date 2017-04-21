@@ -51,7 +51,11 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> new RemoteWebDriver(new URL(url), dc);
+                return (dc, url) -> {
+                    WebDriver driver = new RemoteWebDriver(new URL(url), dc);
+                    driver.manage().window().maximize();
+                    return driver;
+                };
             }
         };
     }

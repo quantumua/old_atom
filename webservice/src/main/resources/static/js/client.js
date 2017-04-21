@@ -3,7 +3,7 @@ angular.module('client', [])
         var self = this;
         self.messages = [];
         self.reports = [];
-        var runTests = function (properties, suites, tempJar, callback) {
+        function runTests(properties, suites, tempJar) {
             var fd = new FormData();
             fd.append('properties', properties);
             suites.forEach(function (s) {
@@ -19,15 +19,14 @@ angular.module('client', [])
                     return {path: p, status: "N/A"}
                 });
                 reports.forEach(function (r) {
-                    pollForStatus(r, 5000, 600000)
+                    pollForStatus(r, 5000, 600000);
                 });
                 Array.prototype.push.apply(self.reports, reports);
-                callback && callback();
             }, function (response) {
                 self.messages.push(response.body);
-                callback && callback();
-            })
-        };
+            });
+        }
+
         self.run = function () {
             self.messages = [];
             var badInput = false;
@@ -43,7 +42,7 @@ angular.module('client', [])
                 $scope.tempJar = [null];
             }
             if (badInput) return;
-            runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0], null)
+            runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0], null);
         };
 
         function pollForStatus(report, delay, timeout) {
@@ -66,10 +65,10 @@ angular.module('client', [])
     .controller('jarUploader', function ($scope, $http) {
         var self = this;
         self.message = '';
-        var uploadJar = function (jar, callback) {
+        function uploadJar(jar, callback) {
             var fd = new FormData();
             fd.append('jar', jar);
-            $http.post('/af/upload/tests', fd, {
+            $http.post('/af/upload/library', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
@@ -78,8 +77,9 @@ angular.module('client', [])
             }, function (response) {
                 self.message = response.body;
                 callback && callback();
-            })
-        };
+            });
+        }
+
         self.upload = function () {
             self.message = '';
             var badInput = false;
@@ -88,7 +88,88 @@ angular.module('client', [])
                 badInput = true;
             }
             if (badInput) return;
-            uploadJar($scope.jar[0], null)
+            uploadJar($scope.jar[0], null);
+        };
+    })
+    .controller('scheduler', function ($scope, $http) {
+        var self = this;
+        self.messages = [];
+        self.tests = [];
+        function scheduleCronTests(name, properties, suites, cron) {
+            var fd = new FormData();
+            fd.append('name', name);
+            fd.append('properties', properties);
+            suites.forEach(function (s) {
+                fd.append('suites[]', s);
+            });
+            fd.append('cronExpression', cron);
+            $http.post('/af/upload/suite/scheduled', fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).then(function (response) {
+                self.messages.push('Scheduled job successfully');
+            }, function (response) {
+                self.messages.push(response.body);
+            });
+        }
+
+        function scheduleRepeatingTests(name, properties, suites) {
+            var fd = new FormData();
+            fd.append('name', name);
+            fd.append('properties', properties);
+            suites.forEach(function (s) {
+                fd.append('suites[]', s);
+            });
+            $http.post('/af/upload/suite/repeating', fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).then(function (response) {
+                self.messages.push('Scheduled job successfully');
+            }, function (response) {
+                self.messages.push(response.body);
+            });
+        }
+
+        self.schedule = function () {
+            self.messages = [];
+            var badInput = false;
+            if (angular.isUndefined($scope.name) || !$scope.name.length) {
+                self.messages.push('No name specified!');
+                badInput = true;
+            }
+            if (angular.isUndefined($scope.properties) || !$scope.properties.length) {
+                self.messages.push('No property file selected!');
+                badInput = true;
+            }
+            if (angular.isUndefined($scope.suites) || !$scope.suites.length) {
+                self.messages.push('No suite XML files selected!');
+                badInput = true;
+            }
+            if ((angular.isUndefined($scope.isRepeating) || !$scope.isRepeating) && angular.isUndefined($scope.cron)) {
+                self.messages.push('No scheduling behavior specified!');
+                badInput = true;
+            }
+            if (badInput) return;
+            if ($scope.isRepeating) {
+                scheduleRepeatingTests($scope.name, $scope.properties[0], Array.from($scope.suites), null);
+            } else {
+                scheduleCronTests($scope.name, $scope.properties[0], Array.from($scope.suites), $scope.cron, null)
+            }
+        };
+        self.stop = function (name) {
+            self.messages = [];
+            $http.delete('/af/scheduled/' + name + '/stop').then(function (response) {
+                self.messages.push('Stopped job successfully');
+            }, function (response) {
+                self.messages.push(response.body);
+            });
+        };
+        self.getScheduledTests = function () {
+            self.messages = [];
+            self.tests = [];
+            $http.get('/af/scheduled').then(function (response) {
+                Array.prototype.push.apply(self.tests, response.data);
+            })
         }
     })
     .directive('fileModel', ['$parse', function ($parse) {

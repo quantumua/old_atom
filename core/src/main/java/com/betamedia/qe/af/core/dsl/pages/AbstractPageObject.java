@@ -4,6 +4,7 @@ package com.betamedia.qe.af.core.dsl.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -47,6 +48,10 @@ public abstract class AbstractPageObject {
     protected WebElement find(By... by) {
         List<By> bys = Arrays.asList(by);
         return find(find(bys.get(0)), bys.subList(1, bys.size()));
+    }
+
+    protected Actions makeActions(){
+        return new Actions(webDriver);
     }
 
     protected <T> T inIFrame(Supplier<T> supplier, By iFrame) {

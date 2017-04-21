@@ -2,6 +2,8 @@ package com.betamedia.qe.af.core.fwtestrunner;
 
 import com.betamedia.qe.af.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.qe.af.core.fwtestrunner.runner.TestRunner;
+import com.betamedia.qe.af.core.fwtestrunner.scheduling.ExecutionListener;
+import com.betamedia.qe.af.core.fwtestrunner.scheduling.ObservableRunnable;
 import com.betamedia.qe.af.core.fwtestrunner.types.TestRunnerType;
 import com.betamedia.qe.af.core.holders.ConfigurationPropertyKey;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,41 +35,36 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     }
 
     @Override
-    public List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar) {
-        List<ExecutionArguments> argsList = getExecutionArguments(properties);
-
-        List<Runnable> executions = argsList.stream()
-                .map(args -> (Runnable) () -> run(args, suites))
-                .collect(Collectors.toList());
+    public List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar, ExecutionListener listener) {
+        List<ExecutionArguments> argsList = getExecutionArguments(properties, suites);
         if (tempJar != null) {
-            execute(() -> classLoaderExecutor.run(executions, tempJar));
+            execute(() -> classLoaderExecutor.run(getExecutions(argsList), tempJar), listener);
         } else {
-            execute(() -> classLoaderExecutor.run(executions));
+            execute(() -> classLoaderExecutor.run(getExecutions(argsList)), listener);
         }
-
-        return argsList.stream().map(args -> args.reportPath + "/index.html").collect(Collectors.toList());
+        return argsList.stream().map(ExecutionArguments::getReportUrl).collect(Collectors.toList());
     }
 
-    private void execute(Runnable runnable) {
-        Executors.newSingleThreadExecutor().execute(runnable);
+    private List<ExecutionArguments> getExecutionArguments(Properties properties, List<String> suites) {
+        return permute(properties).stream()
+                .map(p -> new ExecutionArguments(p, suites))
+                .collect(Collectors.toList());
     }
 
-    private void run(ExecutionArguments args, List<String> suites) {
+    private void execute(Runnable runnable, ExecutionListener listener) {
+        Executors.newSingleThreadExecutor().execute(new ObservableRunnable(runnable, listener));
+    }
+
+    private List<Runnable> getExecutions(List<ExecutionArguments> argsList) {
+        return argsList.stream()
+                .map(args -> (Runnable) () -> run(args))
+                .collect(Collectors.toList());
+    }
+
+    private void run(ExecutionArguments args) {
         Optional.ofNullable(runners.get(getType(args.properties)))
                 .orElseThrow(() -> new RuntimeException("No corresponding runner"))
-                .run(args.properties, suites, args.reportPath);
-    }
-
-    private List<ExecutionArguments> getExecutionArguments(Properties properties) {
-        List<Properties> executionProperties = permute(properties);
-        return executionProperties.stream()
-                .map(p -> new ExecutionArguments(p, getReportPath(p)))
-                .collect(Collectors.toList());
-    }
-
-    private String getReportPath(Properties props) {
-        LocalDateTime now = LocalDateTime.now();
-        return (now.toString() + "." + Objects.hash(props, now, Thread.currentThread())).replaceAll("[^a-zA-Z0-9]", "_");
+                .run(args.properties, args.suites, args.reportPath);
     }
 
     private TestRunnerType getType(Properties properties) {
@@ -77,10 +74,21 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     private class ExecutionArguments {
         public final Properties properties;
         public final String reportPath;
+        public final List<String> suites;
 
-        ExecutionArguments(Properties properties, String reportPath) {
+        ExecutionArguments(Properties properties, List<String> suites) {
             this.properties = properties;
-            this.reportPath = reportPath;
+            this.reportPath = getReportPath(properties);
+            this.suites = suites;
+        }
+
+        public String getReportUrl() {
+            return reportPath + "/index.html";
+        }
+
+        private String getReportPath(Properties props) {
+            LocalDateTime now = LocalDateTime.now();
+            return (now.toString() + "." + Objects.hash(props, now, Thread.currentThread())).replaceAll("[^a-zA-Z0-9]", "_");
         }
     }
 }

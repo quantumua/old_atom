@@ -51,8 +51,10 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public void logOut() {
-        find(userDetailsMenu).click();
-        find(userDetailsMenu, logoutLink).click();
+        makeActions()
+                .moveToElement(find(userDetailsMenu))
+                .moveToElement(find(userDetailsMenu, logoutLink))
+                .click().build().perform();
         Assert.assertTrue(isLoggedOut());
     }
 
