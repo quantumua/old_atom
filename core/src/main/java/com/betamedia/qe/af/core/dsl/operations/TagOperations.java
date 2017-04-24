@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.core.dsl.operations;
 
+import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import com.betamedia.tp.api.model.Tag;
 import com.betamedia.tp.api.model.enums.OptionSubType;
 
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * Created by mbelyaev on 3/27/17.
  */
-public interface TagOperations {
+public interface TagOperations<T extends EnvironmentDependent> extends EnvironmentDependent {
     List<Tag> get(TagOperations.TagName tagName);
 
     enum TagName {

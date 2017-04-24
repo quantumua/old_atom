@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.core.dsl.operations;
 
+import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import com.betamedia.tp.api.model.Bonus;
 import com.betamedia.tp.api.model.enums.BonusType;
 
@@ -7,7 +8,7 @@ import com.betamedia.tp.api.model.enums.BonusType;
  * @author Maksym Tsybulskyy
  *         Date: 3/22/17.
  */
-public interface BonusOperations {
+public interface BonusOperations <T extends EnvironmentDependent> extends EnvironmentDependent{
 
     Bonus get(String id);
 

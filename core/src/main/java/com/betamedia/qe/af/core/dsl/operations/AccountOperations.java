@@ -1,6 +1,7 @@
 package com.betamedia.qe.af.core.dsl.operations;
 
 import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
+import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import com.betamedia.tp.api.model.Account;
 
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.Set;
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
  */
-public interface AccountOperations {
+public interface AccountOperations <T extends EnvironmentDependent> extends EnvironmentDependent {
 
     /**
      * Create new account with default params through GS

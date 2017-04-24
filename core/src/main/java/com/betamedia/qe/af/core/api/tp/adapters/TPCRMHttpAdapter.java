@@ -5,6 +5,7 @@ import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccountCreate;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
+import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import com.betamedia.tp.api.model.enums.BonusType;
 
 /**
@@ -13,7 +14,7 @@ import com.betamedia.tp.api.model.enums.BonusType;
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
  */
-public interface TPCRMHttpAdapter {
+public interface TPCRMHttpAdapter<T extends EnvironmentDependent> {
 
     /**
      * Add bonus for account

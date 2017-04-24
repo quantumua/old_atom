@@ -11,6 +11,7 @@ public final class ConfigurationPropertyKey {
     public static final String BROWSER_TYPE = "browser.type";
     public static final String ID_VERSION = "id.version";
     public static final String RUNNER_TYPE = "runner.type";
+    public static final String ENVIRONMENT = "environment";
 
     private ConfigurationPropertyKey() {
     }

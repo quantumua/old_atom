@@ -3,6 +3,7 @@ package com.betamedia.qe.af.core.testingtype.tp;
 import com.betamedia.qe.af.core.holders.AppContextHolder;
 import com.betamedia.qe.af.core.dsl.templates.tp.TPTemplate;
 import com.betamedia.qe.af.core.dsl.pages.factory.tp.TPPageFactoryImpl;
+import com.betamedia.qe.af.core.holders.ThreadLocalBeansHolder;
 import com.betamedia.qe.af.core.testingtype.base.AbstractEndToEndTest;
 
 /**
@@ -12,7 +13,7 @@ import com.betamedia.qe.af.core.testingtype.base.AbstractEndToEndTest;
 public class TPEndToEndTest extends AbstractEndToEndTest<TPTemplate, TPPageFactoryImpl> {
     @Override
     public TPTemplate getOperationTemplate() {
-        return AppContextHolder.getBean(TPTemplate.class);
+        return ThreadLocalBeansHolder.getOperationsTemplateThreadLocal();
     }
 
     @Override

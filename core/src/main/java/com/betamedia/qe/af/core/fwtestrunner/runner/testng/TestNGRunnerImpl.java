@@ -1,5 +1,8 @@
 package com.betamedia.qe.af.core.fwtestrunner.runner.testng;
 
+import com.betamedia.qe.af.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.qe.af.core.dsl.templates.tp.TPTemplate;
+import com.betamedia.qe.af.core.dsl.templates.tp.TPTemplateProvider;
 import com.betamedia.qe.af.core.fwdataaccess.repository.impl.VersionedWebElementRepositoryImpl;
 import com.betamedia.qe.af.core.fwdataaccess.repository.impl.WebElementRepository;
 import com.betamedia.qe.af.core.fwdataaccess.repository.util.ApplicationVersionHolder;
@@ -33,6 +36,9 @@ public class TestNGRunnerImpl implements TestRunner {
     private WebDriverFactoryProvider webDriverFactoryProvider;
 
     @Autowired
+    private TPTemplateProvider templateProvider;
+
+    @Autowired
     private WebElementRepository webElementRepository;
 
     @Autowired
@@ -47,10 +53,16 @@ public class TestNGRunnerImpl implements TestRunner {
     public void run(Properties props, List<String> suites, String outputDirectory) {
         ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(getWebDriverFactory(props));
         ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(getAppVersion(props), webElementRepository));
+        ThreadLocalBeansHolder.setOperationsTemplateThreadLocal(getOperationsTemplate(props));
         TestNG testng = new TestNG();
         testng.setOutputDirectory("test-output/" + outputDirectory);
         testng.setTestSuites(suites);
         testng.run();
+    }
+
+    private TPTemplate getOperationsTemplate(Properties properties) {
+        String environment = properties.getProperty(ConfigurationPropertyKey.ENVIRONMENT, EnvironmentType.QA.getValue());
+        return templateProvider.get(EnvironmentType.parse(environment));
     }
 
     private WebDriverFactory getWebDriverFactory(Properties properties) {

@@ -21,6 +21,7 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 @Scope(value = SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.INTERFACES)
 public class TPApplicationVersionHolderImpl implements ApplicationVersionHolder {
 
+//    TODO environment dependent link, need to externalise
     public static final String VERSION_SOURCE = "http://192.168.5.47:8080/24option-eu/resources/lib/betamedia-min.js";
 
     @Override
