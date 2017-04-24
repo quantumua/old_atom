@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
-import com.betamedia.qe.af.core.api.tp.adapters.impl.MobileCRMHTTPAdapterImpl;
+import com.betamedia.qe.af.core.api.tp.adapters.impl.AbstractMobileCRMHTTPAdapter;
 import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 
 /**
@@ -9,7 +9,7 @@ import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
  * Created by Oleksandr Losiev on 4/21/17.
  *
  * @see MobileDepositRO
- * @see MobileCRMHTTPAdapterImpl
+ * @see AbstractMobileCRMHTTPAdapter
  */
 public class MobileDepositBuilder {
 
@@ -30,6 +30,7 @@ public class MobileDepositBuilder {
     private String holderLastName = "Kramer";
 
     private String tradingAccountId = "E8DE6CAC-A800-E611-A726-005056B73B53";
+    private String tradingAccountName = null;
 
     public MobileDepositBuilder setLanguage(String language) {
         this.language = language;
@@ -101,9 +102,14 @@ public class MobileDepositBuilder {
         return this;
     }
 
+    public MobileDepositBuilder setTradingAccountName(String tradingAccountName) {
+        this.tradingAccountName = tradingAccountName;
+        return this;
+    }
+
     public MobileDepositRO createMobileDepositRO() {
         return new MobileDepositRO(language, currency, amount.toString(), address, city, countryCode, zipCode.toString(),
                 creditCardNumber.toString(), cvv2.toString(), expiryMonth.toString(), expiryYear.toString(),
-                holderFirstName, holderLastName, tradingAccountId);
+                holderFirstName, holderLastName, tradingAccountId, tradingAccountName);
     }
 }

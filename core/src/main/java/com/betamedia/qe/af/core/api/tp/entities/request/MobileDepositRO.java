@@ -28,10 +28,11 @@ public class MobileDepositRO {
     private String holderLastName;
 
     private String tradingAccountId;
+    private String tradingAccountName;
 
     public MobileDepositRO(String lang, String currency, String amount, String address, String city, String countryCode,
                            String zip, String ccNumber, String cvv2, String expMonth, String expYear,
-                           String holderFirstName, String holderLastName, String tradingAccountId) {
+                           String holderFirstName, String holderLastName, String tradingAccountId, String tradingAccountName) {
         this.lang = lang;
         this.currency = currency;
         this.amount = amount;
@@ -46,6 +47,7 @@ public class MobileDepositRO {
         this.holderFirstName = holderFirstName;
         this.holderLastName = holderLastName;
         this.tradingAccountId = tradingAccountId;
+        this.tradingAccountName = tradingAccountName;
     }
 
     public String getLang() {
@@ -102,5 +104,9 @@ public class MobileDepositRO {
 
     public String getTradingAccountId() {
         return tradingAccountId;
+    }
+
+    public String getTradingAccountName() {
+        return tradingAccountName;
     }
 }

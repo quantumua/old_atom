@@ -2,9 +2,6 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMResponse;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
 import com.betamedia.qe.af.core.dsl.operations.CustomerOperations;
@@ -12,7 +9,6 @@ import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -92,9 +88,37 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         return depositResult;
     }
 
+    /**
+     * Performs a deposit and expects errors.
+     */
     @Override
     public List<CRMError>  depositWithErrors(MobileDepositBuilder depositBuilder) {
         CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(depositBuilder.createMobileDepositRO());
+        List<CRMError> depositErrors = depositResponse.getErrors();
+        assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
+        return depositErrors;
+    }
+
+    /**
+     * Performs a deposit by name with given deposit builder.
+     */
+    @Override
+    public CRMDeposit depositByName(MobileDepositBuilder depositBuilder) {
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(depositBuilder.createMobileDepositRO());
+        CRMDeposit depositResult = depositResponse.getResult();
+        List<CRMError> depositErrors = depositResponse.getErrors();
+
+        assertNotNull(depositResult, "Deposit by name wasn't made" + depositErrors);
+        assertTrue(depositErrors.isEmpty(), "There were errors when performing the deposit by name:" + depositErrors);
+        return depositResult;
+    }
+
+    /**
+     * Performs a deposit by name and expects errors.
+     */
+    @Override
+    public List<CRMError>  depositByNameWithErrors(MobileDepositBuilder depositBuilder) {
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(depositBuilder.createMobileDepositRO());
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
         return depositErrors;

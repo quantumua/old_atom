@@ -4,8 +4,8 @@ import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMResponse;
-import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import com.betamedia.qe.af.core.api.tp.entities.response.MobileCRMDeposit;
+import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 
 /**
  * @author Maksym Tsybulskyy
@@ -25,4 +25,6 @@ public interface MobileCRMHTTPAdaper<T extends EnvironmentDependent> extends Env
     CRMResponse logout(String customerId);
 
     CRMResponse<MobileCRMDeposit> deposit(MobileDepositRO depositRO);
+
+    CRMResponse<MobileCRMDeposit> depositByName(MobileDepositRO depositRO);
 }
