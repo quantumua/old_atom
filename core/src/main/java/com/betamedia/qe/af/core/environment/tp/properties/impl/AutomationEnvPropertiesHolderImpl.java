@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
  *         Date: 4/14/17.
  */
 @Component
-@PropertySource("automation-env.properties")
+@PropertySource("/env/automation-env.properties")
 public class AutomationEnvPropertiesHolderImpl extends AbstractEnvPropertiesHolder<AutomationEnvironment> implements AutomationEnvironment {
 }

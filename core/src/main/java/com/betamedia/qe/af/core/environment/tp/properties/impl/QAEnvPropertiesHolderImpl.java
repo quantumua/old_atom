@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  *         Date: 4/14/17.
  */
 @Component
-@PropertySource("qa-env.properties")
+@PropertySource("/env/qa-env.properties")
 public class QAEnvPropertiesHolderImpl extends AbstractEnvPropertiesHolder implements QAEnvironment {
 
 }
