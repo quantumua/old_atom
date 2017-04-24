@@ -15,8 +15,11 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
+ * This class is designed to facilitate the execution of common operations related to brand.
+ * It can be used as a "building block" when writing integration tests.
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
+ * @see Brand
  */
 @Component
 public class BrandOperationsImpl implements BrandOperations {
@@ -34,17 +37,26 @@ public class BrandOperationsImpl implements BrandOperations {
         brand = get(brandId);
     }
 
+    /**
+     * A method to get a brand by default id.
+     */
     @Override
     public Brand get() {
         return brand;
     }
 
+    /**
+     * A method to get brand by given id.
+     */
     @Override
     public Brand get(String brandId) {
         return tpConnector.readById(Brand.class, brandId);
     }
 
-
+    /**
+     * A method to get brand by name.
+     * It is assumed that there is one and only one brand with the specified name.
+     */
     @Override
     public Brand getByName(String brandName) {
         // Replacing '-' in case 24option-eu is under test

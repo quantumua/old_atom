@@ -5,10 +5,14 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.IOException;
 
 /**
+ * This class is provides base template functionality to deserialize CRMResponse results.
+ * Its concrete subclasses should be used via the {@link JsonDeserialize} annotation.
+ *
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
  *         <p>
@@ -18,6 +22,10 @@ import java.io.IOException;
  */
 public abstract class CRMDataDeserializer<T> extends JsonDeserializer<T> {
 
+    /**
+     * Deserialization template method entry point.
+     * It should be called by Jackson during object deserialization.
+     */
     @Override
     public T deserialize(JsonParser jp, DeserializationContext deserializationContext) throws IOException {
         ObjectCodec oc = jp.getCodec();

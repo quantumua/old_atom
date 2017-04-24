@@ -18,8 +18,12 @@ import java.util.stream.Stream;
 import static org.testng.Assert.assertNotNull;
 
 /**
+ *
+ * This class is designed to facilitate the execution of common operations related to account group.
+ * It can be used as a "building block" when writing integration tests.
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
+ * @see AccountGroup
  */
 @Component
 public class AccountGroupOperationsImpl implements AccountGroupOperations {
@@ -37,12 +41,17 @@ public class AccountGroupOperationsImpl implements AccountGroupOperations {
         accountGroup = get(ACCOUNT_GROUP_ID);
     }
 
-
+    /**
+     * This method is used to get account group by default id.
+     */
     @Override
     public AccountGroup get() {
         return accountGroup;
     }
 
+    /**
+     * This method is used to get account group by id.
+     */
     @Override
     public AccountGroup get(String id) {
         logger.info("Getting accountGroup for id {}", id);
@@ -52,7 +61,13 @@ public class AccountGroupOperationsImpl implements AccountGroupOperations {
         return accGroup;
     }
 
-    @Override
+    /**
+     * This method is used to calculate the opening delay based on deal amount and configurations.
+     * A deal, which has the highest amount below threshold, is selected among group's market and deal approval configurations.
+     * Then its opening delay is returned.
+     * @param amount threshold amount
+     * @return opening delay
+     */
     public Integer getOpeningDelay(Double amount) {
         return Stream.of(accountGroup.getMarketDealApprovalConfigurations(),
                 accountGroup.getDealApprovalConfigurations())

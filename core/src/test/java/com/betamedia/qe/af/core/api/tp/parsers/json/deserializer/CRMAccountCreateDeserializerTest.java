@@ -5,7 +5,7 @@ import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMAccountCreat
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Field;
@@ -25,12 +25,11 @@ public class CRMAccountCreateDeserializerTest {
 
     private String validJson;
     private String incompleteJson;
-
     private ObjectMapper mapper;
     private CRMAccountCreateDeserializer deserializer;
 
-    @BeforeMethod
-    public void setup() throws Exception {
+    @BeforeClass
+    public void setupClass() throws Exception {
         mapper = new ObjectMapper();
         deserializer = new CRMAccountCreateDeserializer();
 

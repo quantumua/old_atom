@@ -5,7 +5,7 @@ import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMDepositDeser
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit.TRANSACTION_ID;
@@ -24,8 +24,8 @@ public class CRMDepositDeserializerTest {
     private ObjectMapper mapper;
     private CRMDepositDeserializer deserializer;
 
-    @BeforeMethod
-    public void setup() throws Exception {
+    @BeforeClass
+    public void setupClass() throws Exception {
         mapper = new ObjectMapper();
         deserializer = new CRMDepositDeserializer();
 

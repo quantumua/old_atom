@@ -10,7 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * This class is designed to facilitate the execution of common operations related to feed operations.
+ * It can be used as a "building block" when writing integration tests.
+ *
  * Created by mbelyaev on 3/27/17.
+ * @see TickData
  */
 @Component
 public class FeedOperationsImpl implements FeedOperations {

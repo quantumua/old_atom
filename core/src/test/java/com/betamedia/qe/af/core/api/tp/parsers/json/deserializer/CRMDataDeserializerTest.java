@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -29,8 +29,8 @@ public class CRMDataDeserializerTest {
     private ObjectMapper mapper;
     private CRMDataDeserializer<Integer> deserializer;
 
-    @BeforeMethod
-    public void setup() throws Exception{
+    @BeforeClass
+    public void setupClass() throws Exception{
         mapper = new ObjectMapper();
         deserializer = new CRMDataDeserializer<Integer>() {
             @Override

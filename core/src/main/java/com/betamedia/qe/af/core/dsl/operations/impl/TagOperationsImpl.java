@@ -12,7 +12,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * This class is designed to facilitate the execution of common operations related to tag operations.
+ * It can be used as a "building block" when writing integration tests.
+ *
  * Created by mbelyaev on 3/27/17.
+ *
+ * @see Tag
  */
 @Component
 public class TagOperationsImpl implements TagOperations {
@@ -21,6 +26,9 @@ public class TagOperationsImpl implements TagOperations {
     @Autowired
     private AFTPConnector tpConnector;
 
+    /**
+     * Returns tag for a given tag name.
+     */
     @Override
     public List<Tag> get(TagName tagName) {
         return tpConnector.readMultiple(forTagName(tagName), null, null).getContent();

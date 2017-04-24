@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <title>Test Framework Web UI</title>
+    <link href="css/angular-bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none !important;
+        }
+
+        .highlight {
+            color: limegreen !important;
+        }
+    </style>
+</head>
+
+<body ng-app="client">
+<a href="/af/">Run tests</a> |
+<a href="/af/schedule">Schedule test execution</a> |
+<a href="/af/upload">Upload JAR</a>
+<div ng-controller="scheduler as scheduler" class="container">
+    <form role="form" ng-submit="scheduler.schedule()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" ng-model="name" class="form-control" id="name" name="name"/>
+        </div>
+        <div class="form-group">
+            <label for="schProperties">Properties:</label>
+            <input type="file" file-model="properties" class="form-control" id="schProperties" name="properties"/>
+        </div>
+        <div class="form-group">
+            <label for="schSuites">Suites:</label>
+            <input type="file" multiple file-model="suites" class="form-control" id="schSuites" name="suites"/>
+        </div>
+        <div class="form-group">
+            <label for="isRepeating">Is repeating:</label>
+            <input type="checkbox" ng-model="isRepeating" class="form-control" id="isRepeating" name="isRepeating"/>
+        </div>
+        <div class="form-group">
+            <label for="cron">Cron expression:</label>
+            <input type="text" ng-model="cron" class="form-control" id="cron" name="cron"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Schedule</button>
+        <table>
+            <tr ng-repeat="message in scheduler.messages">
+                <td><h3 ng-cloak>{{message}}</h3></td>
+            </tr>
+        </table>
+    </form>
+    <hr/>
+    <button type="button" ng-click="scheduler.getScheduledTests()" class="btn btn-primary btn-sm">Get scheduled tests
+    </button>
+    <table>
+        <tr ng-repeat="test in scheduler.tests">
+            <td><span ng-cloak>{{test.name}}</span></td>
+            <td><span  style="padding:0 15px 0 15px;" ng-cloak>{{test.cronExpression}}</span></td>
+            <td>
+                <button type="button" ng-click="scheduler.stop(test.name)" class="btn btn-danger btn-sm" ng-cloak>Stop</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="js/angular-bootstrap.js" type="text/javascript"></script>
+<script src="js/client.js"></script>
+</body>
+</html>

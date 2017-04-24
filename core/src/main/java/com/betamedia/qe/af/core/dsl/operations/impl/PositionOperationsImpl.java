@@ -11,7 +11,12 @@ import org.springframework.stereotype.Component;
 import static org.testng.Assert.assertNotNull;
 
 /**
+ * This class is designed to facilitate the execution of common operations related to position operations.
+ * It can be used as a "building block" when writing integration tests.
+ *
  * Created by mbelyaev on 3/27/17.
+ *
+ * @see Position
  */
 @Component
 public class PositionOperationsImpl implements PositionOperations {
@@ -20,6 +25,9 @@ public class PositionOperationsImpl implements PositionOperations {
     @Autowired
     private AFTPConnector tpConnector;
 
+    /**
+     * Returns position by given id.
+     */
     @Override
     public Position get(String id) {
         Position position = tpConnector.readById(Position.class, id);
@@ -27,6 +35,9 @@ public class PositionOperationsImpl implements PositionOperations {
         return position;
     }
 
+    /**
+     * Returns position by given display id.
+     */
     @Override
     public Position getByDisplayId(String displayId) {
         Position position = tpConnector.readByDisplayId(Position.class, displayId);
