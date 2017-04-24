@@ -18,13 +18,13 @@ public class CustomerBuilder {
     private String firstName = "Automation";
     private String email;
     private String phone = "12465555555";
-    private String currency = "USD";
+    private String currency = "EUR";
     private String countryCode = "JM";
 
     //    every registration opens 2 Trading Accounts (Binary & FX), which the primary is FX/CFD by default.
     //    set target as "binary" to have Binary as a primary TA
-    private String target = "binary";
-    private String lastName;
+    private String target;
+    private String lastName = "Automation";
     private String utcOffset;
     private String oftc;
     private String birthOfDate;

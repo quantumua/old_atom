@@ -1,10 +1,10 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
-import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.CHARS_IN_ID;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import org.testng.annotations.Test;
+
 import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.TP_AUTOMATION_PREFIX;
 import static org.testng.Assert.*;
-import org.testng.annotations.Test;
-import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 
 /**
  * @author Maksym Tsybulskyy
@@ -46,13 +46,13 @@ public class CustomerBuilderTest {
 	private static final String ZIP				= "zip";
 	
 	private static final String DEFAULT_FIRST_NAME	= "Automation";
-	private static final String DEFAULT_CURENCY		= "USD";
+	private static final String DEFAULT_LAST_NAME	= "Automation";
+	private static final String DEFAULT_CURENCY		= "EUR";
 	private static final String DEFAULT_COUNTRY_CODE= "JM";
 	private static final String DEFAULT_PASSWORD	= "123123";
 	private static final String DEFAULT_PHONE		= "12465555555";
 	private static final String DEFAULT_EMAIL 		= "@automation.ru";
 	private static final String DEFAULT_USER_NAME 	= "tp_automation";
-	private static final String DEFAULT_BINARY	 	= "binary";
 	
     @Test
     public void testCreateDefaultCustomerRO() {
@@ -102,7 +102,7 @@ public class CustomerBuilderTest {
 		customerRO.setEmail(DEFAULT_EMAIL);
 		customerRO.setUserName(DEFAULT_USER_NAME);
 		customerRO.setFirstName(DEFAULT_FIRST_NAME);
-		customerRO.setTarget(DEFAULT_BINARY);
+		customerRO.setLastName(DEFAULT_LAST_NAME);
 		return customerRO;
 	}
 	
