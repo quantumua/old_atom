@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Mobile CRM test" verbose="1" parallel="methods" thread-count="5">
+    <!--<test name="registrationTest">
+        <classes>
+            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMRegistrationTest">
+            </class>
+        </classes>
+    </test>-->
+    <test name="loginTest">
+        <classes>
+            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMLoginTest" >
+                <methods>
+                    <parameter name="username" value="dansha2609@test.ru"/>
+                    <parameter name="password" value="123123"/>
+                    <parameter name="customerId" value="EB64D3D8-A784-E611-9F17-005056B73B53"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="depositTest">
+        <classes>
+            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMDepositTest">
+            </class>
+        </classes>
+    </test>
+</suite>
