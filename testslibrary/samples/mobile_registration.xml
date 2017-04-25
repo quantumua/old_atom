@@ -20,6 +20,9 @@
     <test name="depositTest">
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMDepositTest">
+                <methods>
+                    <parameter name="tradingAccountId" value="E8DE6CAC-A800-E611-A726-005056B73B53"/>
+                </methods>
             </class>
         </classes>
     </test>

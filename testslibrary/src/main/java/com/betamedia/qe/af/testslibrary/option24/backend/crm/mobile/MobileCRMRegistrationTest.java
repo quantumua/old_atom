@@ -61,11 +61,10 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
 
     @Test
     public void testRegistrationSymbolsNotEncoded() {
-        final String encodedName = "%C3%99%C2%81%C3%99%C2%87%C3%98%C2%AF%C3%98%C2%A7%C3%99%C2%84%C3%98%C2%A8%C3%98%C2%B1%C3%98%C2%A7%C3%99%C2%83";
         final String decodedName = "Ù\u0081Ù\u0087Ø¯Ø§Ù\u0084Ø¨Ø±Ø§Ù\u0083";
         CustomerBuilder customerBuilder = new CustomerBuilder();
-        customerBuilder.setFirstName(encodedName);
-        customerBuilder.setLastName(encodedName);
+        customerBuilder.setFirstName(decodedName);
+        customerBuilder.setLastName(decodedName);
 
         CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder);
         assertNotNull(registeredCustomer);

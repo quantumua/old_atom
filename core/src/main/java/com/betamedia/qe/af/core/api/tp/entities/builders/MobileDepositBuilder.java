@@ -29,8 +29,12 @@ public class MobileDepositBuilder {
     private String holderFirstName = "Cosmo";
     private String holderLastName = "Kramer";
 
-    private String tradingAccountId = "E8DE6CAC-A800-E611-A726-005056B73B53";
-    private String tradingAccountName = null;
+    private String tradingAccountId;
+    private String tradingAccountName;
+
+    public MobileDepositBuilder(String tradingAccountId) {
+        this.tradingAccountId = tradingAccountId;
+    }
 
     public MobileDepositBuilder setLanguage(String language) {
         this.language = language;
