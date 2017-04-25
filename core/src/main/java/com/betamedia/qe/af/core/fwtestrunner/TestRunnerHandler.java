@@ -12,5 +12,5 @@ import java.util.Properties;
  */
 public interface TestRunnerHandler {
 
-    List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar, ExecutionListener listener);
+    List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar, ExecutionListener<List<RunnerResult>> listener);
 }

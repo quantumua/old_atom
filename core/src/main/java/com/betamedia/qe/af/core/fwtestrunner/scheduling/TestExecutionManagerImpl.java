@@ -1,7 +1,11 @@
 package com.betamedia.qe.af.core.fwtestrunner.scheduling;
 
+import com.betamedia.qe.af.core.fwtestrunner.RunnerResult;
 import com.betamedia.qe.af.core.fwtestrunner.TestRunnerHandler;
+import com.betamedia.qe.af.core.fwtestrunner.reporting.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -17,17 +21,32 @@ import java.util.stream.Collectors;
 public class TestExecutionManagerImpl implements TestExecutionManager {
     @Autowired
     private TestRunnerHandler handler;
+    @Autowired
+    private TaskScheduler taskScheduler;
+    @Autowired
+    private TaskExecutor asyncTaskExecutor;
+    @Autowired
+    private EmailService emailService;
 
     private ConcurrentMap<String, TestExecution> executions = new ConcurrentHashMap<>();
 
     @Override
-    public void createRepeatingTest(String name, Properties properties, List<String> suites) {
-        addTestExecution(name, new RepeatingTestExecution(getExecution(properties, suites)));
+    public void createRepeatingTest(String name, String mailAddress, Properties properties, List<String> suites) {
+        addTestExecution(
+                name,
+                new RepeatingTestExecution<>(
+                        getExecutionWithCallback(properties, suites, sender(mailAddress)),
+                        asyncTaskExecutor));
     }
 
     @Override
-    public void createScheduledTest(String name, Properties properties, List<String> suites, String cronExpression) {
-        addTestExecution(name, new ScheduledTestExecution(getExecution(properties, suites), cronExpression));
+    public void createScheduledTest(String name, String mailAddress, Properties properties, List<String> suites, String cronExpression) {
+        addTestExecution(
+                name,
+                new ScheduledTestExecution<>(
+                        getExecutionWithCallback(properties, suites, sender(mailAddress)),
+                        cronExpression,
+                        taskScheduler));
     }
 
     @Override
@@ -54,8 +73,22 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
         execution.start();
     }
 
-    private Consumer<ExecutionListener> getExecution(Properties properties, List<String> suites) {
+    private Consumer<ExecutionListener<List<RunnerResult>>> getExecution(Properties properties, List<String> suites) {
         return executionListener -> handler.handle(properties, suites, null, executionListener);
     }
 
+    private Consumer<ExecutionListener<List<RunnerResult>>> getExecutionWithCallback(Properties properties, List<String> suites, Consumer<RunnerResult> callback) {
+        return executionListener -> handler.handle(properties, suites, null, result -> {
+            result.forEach(callback);
+            executionListener.onCompletion(result);
+        });
+    }
+
+    private Consumer<RunnerResult> sender(String mailAddress) {
+        return result -> {
+            if (result.hasNotPassed() && mailAddress != null && !mailAddress.isEmpty()) {
+                emailService.sendLocalFile(mailAddress, "testReport", result.getPathToOutput());
+            }
+        };
+    }
 }

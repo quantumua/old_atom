@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.core.fwtestrunner.runner;
 
+import com.betamedia.qe.af.core.fwtestrunner.RunnerResult;
 import com.betamedia.qe.af.core.fwtestrunner.types.TestRunnerType;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface TestRunner {
 
     TestRunnerType getType();
 
-    void run(Properties properties, List<String> suites, String outputDirectory);
+    RunnerResult run(Properties properties, List<String> suites, String outputDirectory);
 }

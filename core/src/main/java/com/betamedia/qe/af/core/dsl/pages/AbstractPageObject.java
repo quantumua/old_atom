@@ -26,19 +26,20 @@ public abstract class AbstractPageObject {
         this.webDriver = webDriver;
     }
 
-    protected void waitUntilDisplayed(By element) {
-        Wait<WebDriver> wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
-        wait.until(driver -> driver.findElement(element).isDisplayed());
+    protected boolean waitUntilDisplayed(By element) {
+        return getWait().until(driver -> driver.findElement(element).isDisplayed());
     }
 
-    protected void waitUntilExists(By element) {
-        Wait<WebDriver> wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
-        wait.until(driver -> !driver.findElements(element).isEmpty());
+    protected boolean waitUntilDisplayed(By... elements) {
+        return getWait().until(driver -> find(elements).isDisplayed());
     }
 
-    protected void waitUntil(Supplier<Boolean> isTrue) {
-        Wait<WebDriver> wait = new WebDriverWait(webDriver, MAX_WAIT_SEC);
-        wait.until(d -> isTrue.get());
+    protected boolean waitUntilExists(By element) {
+        return getWait().until(driver -> !driver.findElements(element).isEmpty());
+    }
+
+    protected boolean waitUntil(Supplier<Boolean> isTrue) {
+        return getWait().until(d -> isTrue.get());
     }
 
     protected WebElement find(By by) {
@@ -50,7 +51,7 @@ public abstract class AbstractPageObject {
         return find(find(bys.get(0)), bys.subList(1, bys.size()));
     }
 
-    protected Actions makeActions(){
+    protected Actions makeActions() {
         return new Actions(webDriver);
     }
 
@@ -64,7 +65,7 @@ public abstract class AbstractPageObject {
     }
 
     protected <T> T inIFrame(Supplier<T> supplier, By... iFrames) {
-        try{
+        try {
             Arrays.stream(iFrames).forEach(this::switchToFrame);
             return supplier.get();
         } finally {
@@ -72,11 +73,15 @@ public abstract class AbstractPageObject {
         }
     }
 
+    private Wait<WebDriver> getWait() {
+        return new WebDriverWait(webDriver, MAX_WAIT_SEC);
+    }
+
     private void switchToFrame(By iFrame) {
         webDriver.switchTo().frame(find(iFrame));
     }
 
-    private void leaveFrame(){
+    private void leaveFrame() {
         webDriver.switchTo().defaultContent();
     }
 

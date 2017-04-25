@@ -45,6 +45,7 @@ public class LoginPageTest extends TPEndToEndTest {
         pages().disclaimerNotification().accept();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().topNavigationPage().logOut();
+        Assert.assertTrue(pages().landingPage().isOnPage());
     }
 
     /**

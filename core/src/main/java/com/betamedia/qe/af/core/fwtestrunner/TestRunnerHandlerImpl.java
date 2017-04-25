@@ -3,16 +3,17 @@ package com.betamedia.qe.af.core.fwtestrunner;
 import com.betamedia.qe.af.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.qe.af.core.fwtestrunner.runner.TestRunner;
 import com.betamedia.qe.af.core.fwtestrunner.scheduling.ExecutionListener;
-import com.betamedia.qe.af.core.fwtestrunner.scheduling.ObservableRunnable;
+import com.betamedia.qe.af.core.fwtestrunner.scheduling.ObservableSupplier;
 import com.betamedia.qe.af.core.fwtestrunner.types.TestRunnerType;
 import com.betamedia.qe.af.core.holders.ConfigurationPropertyKey;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.Executors;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static com.betamedia.qe.af.core.utils.PropertiesUtils.permute;
@@ -25,6 +26,8 @@ import static com.betamedia.qe.af.core.utils.PropertiesUtils.permute;
 public class TestRunnerHandlerImpl implements TestRunnerHandler {
     @Autowired
     private ContextClassLoaderManagingExecutor classLoaderExecutor;
+    @Autowired
+    private TaskExecutor asyncTaskExecutor;
 
     private Map<TestRunnerType, TestRunner> runners;
 
@@ -35,7 +38,7 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     }
 
     @Override
-    public List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar, ExecutionListener listener) {
+    public List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar, ExecutionListener<List<RunnerResult>> listener) {
         List<ExecutionArguments> argsList = getExecutionArguments(properties, suites);
         if (tempJar != null) {
             execute(() -> classLoaderExecutor.run(getExecutions(argsList), tempJar), listener);
@@ -51,18 +54,18 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
                 .collect(Collectors.toList());
     }
 
-    private void execute(Runnable runnable, ExecutionListener listener) {
-        Executors.newSingleThreadExecutor().execute(new ObservableRunnable(runnable, listener));
+    private void execute(Supplier<List<RunnerResult>> supplier, ExecutionListener<List<RunnerResult>> listener) {
+        asyncTaskExecutor.execute(() -> new ObservableSupplier(supplier, listener).get());
     }
 
-    private List<Runnable> getExecutions(List<ExecutionArguments> argsList) {
+    private List<Supplier<RunnerResult>> getExecutions(List<ExecutionArguments> argsList) {
         return argsList.stream()
-                .map(args -> (Runnable) () -> run(args))
+                .map(args -> (Supplier<RunnerResult>) () -> run(args))
                 .collect(Collectors.toList());
     }
 
-    private void run(ExecutionArguments args) {
-        Optional.ofNullable(runners.get(getType(args.properties)))
+    private RunnerResult run(ExecutionArguments args) {
+        return Optional.ofNullable(runners.get(getType(args.properties)))
                 .orElseThrow(() -> new RuntimeException("No corresponding runner"))
                 .run(args.properties, args.suites, args.reportPath);
     }
