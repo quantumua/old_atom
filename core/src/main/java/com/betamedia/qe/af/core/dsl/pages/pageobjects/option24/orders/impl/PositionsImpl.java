@@ -33,11 +33,27 @@ public class PositionsImpl extends AbstractPageObject implements Positions {
                 .map(id -> id.substring(id.lastIndexOf('#') + 1))
                 .collect(Collectors.toList());
     }
-    
+
+    @Override
+    public String getLast() {
+        List<String> positionIds = get();
+        return positionIds.get(positionIds.size() - 1);
+    }
+
     @Override
     public WebElement getTradeRow(String positionDisplayId) {
-    	// TODO: Move implementation of getting trade rows by position id from legacy framework: com.scipio.tptesting.pom.def.getTradeRow(...)
-    	return null;
+        // TODO: Move implementation of getting trade rows by position id from legacy framework: com.scipio.tptesting.pom.def.getTradeRow(...)
+        return null;
     }
-    
+
+    @Override
+    public void checkWin(String displayedId) {
+
+    }
+
+    @Override
+    public void checkLose(String displayedId) {
+
+    }
+
 }

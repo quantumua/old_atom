@@ -12,8 +12,6 @@ import com.betamedia.tp.api.model.enums.PositionStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 
 /**
  * Created by mbelyaev on 3/23/17.
@@ -38,8 +36,8 @@ public class BiddingTest extends TPEndToEndTest {
                 .setAmount("10.0")
                 .bidHigh()
                 .confirm();
-        List<String> positionIds = pages().positions().get();
-        Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
+        String openedPositionId = pages().positions().getLast();
+        Position position = operations().positionOperations().getByDisplayId(openedPositionId);
         Assert.assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 

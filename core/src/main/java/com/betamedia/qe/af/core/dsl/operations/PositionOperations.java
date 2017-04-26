@@ -10,6 +10,11 @@ public interface PositionOperations<T extends EnvironmentDependent> extends Envi
     Position get(String id);
 
     Position getByDisplayId(String displayId);
-    
-    Position waitTradeToExpire(Position position);
+
+    /**
+     * Wait until position will be closed and return the final value
+     * @param position opened position
+     * @return
+     */
+    Position getExpired(Position position);
 }
