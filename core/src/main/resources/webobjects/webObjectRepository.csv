@@ -26,3 +26,4 @@ build,pageObjectName,locatorId,locatorType,value
 1603,AssetsImpl,assetContainer,CLASS_NAME,assets-list-container
 1603,AssetsImpl,assetName,CLASS_NAME,list-asset
 1603,AssetsImpl,pandaIframe,ID,swPandaIframe
+1603,LandingPageImpl,homepage,CLASS_NAME,homepage-balanced-template

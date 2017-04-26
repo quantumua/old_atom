@@ -3,6 +3,7 @@ package com.betamedia.qe.af.core.configuration.webdriver;
 import com.betamedia.qe.af.core.fwservices.webdriver.ParametrizedWebDriverFactory;
 import com.betamedia.qe.af.core.fwservices.webdriver.ParametrizedWebDriverFactoryProvider;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -21,12 +22,10 @@ import java.net.URL;
 /**
  * Created by mbelyaev on 2/24/17.
  */
-//TODO externalize parameter constants
 @Configuration
 public class WebDriverConfig {
     /**
-     * Need to avoid unnecessarily restarting the ChromeDriver server with each instance, {@see CromeDriver}
-     * {@link RemoteWebDriver}
+     * Need to avoid unnecessarily restarting the ChromeDriver server with each instance (see {@link ChromeDriver})
      *
      * @param chromeDriverPath
      * @return

@@ -13,6 +13,8 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.impl.DisclaimerNotificationImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.impl.LoginErrorNotificationImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.impl.LoginPageImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPageImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.Positions;
@@ -70,6 +72,11 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     @Override
     public Positions positions() {
         return creator.getPage(PositionsImpl.class);
+    }
+
+    @Override
+    public LandingPage landingPage() {
+        return creator.getPage(LandingPageImpl.class);
     }
 
     @Override

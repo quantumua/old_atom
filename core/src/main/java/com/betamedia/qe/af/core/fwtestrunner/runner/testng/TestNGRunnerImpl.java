@@ -9,6 +9,7 @@ import com.betamedia.qe.af.core.fwdataaccess.repository.util.ApplicationVersionH
 import com.betamedia.qe.af.core.fwdataaccess.repository.util.tp.TPApplicationVersionHolderImpl;
 import com.betamedia.qe.af.core.fwservices.webdriver.WebDriverFactory;
 import com.betamedia.qe.af.core.fwservices.webdriver.WebDriverFactoryProvider;
+import com.betamedia.qe.af.core.fwtestrunner.RunnerResult;
 import com.betamedia.qe.af.core.fwtestrunner.runner.TestRunner;
 import com.betamedia.qe.af.core.fwtestrunner.types.TestRunnerType;
 import com.betamedia.qe.af.core.holders.ConfigurationPropertyKey;
@@ -50,7 +51,7 @@ public class TestNGRunnerImpl implements TestRunner {
     }
 
     @Override
-    public void run(Properties props, List<String> suites, String outputDirectory) {
+    public RunnerResult run(Properties props, List<String> suites, String outputDirectory) {
         ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(getWebDriverFactory(props));
         ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(getAppVersion(props), webElementRepository));
         ThreadLocalBeansHolder.setOperationsTemplateThreadLocal(getOperationsTemplate(props));
@@ -58,6 +59,7 @@ public class TestNGRunnerImpl implements TestRunner {
         testng.setOutputDirectory("test-output/" + outputDirectory);
         testng.setTestSuites(suites);
         testng.run();
+        return new RunnerResult(testng.getOutputDirectory()+"/emailable-report.html", testng.hasFailure() || testng.hasSkip());
     }
 
     private TPTemplate getOperationsTemplate(Properties properties) {

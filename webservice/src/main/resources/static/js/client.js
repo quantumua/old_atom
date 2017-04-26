@@ -42,7 +42,7 @@ angular.module('client', [])
                 $scope.tempJar = [null];
             }
             if (badInput) return;
-            runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0], null);
+            runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0]);
         };
 
         function pollForStatus(report, delay, timeout) {
@@ -88,16 +88,17 @@ angular.module('client', [])
                 badInput = true;
             }
             if (badInput) return;
-            uploadJar($scope.jar[0], null);
+            uploadJar($scope.jar[0]);
         };
     })
     .controller('scheduler', function ($scope, $http) {
         var self = this;
         self.messages = [];
         self.tests = [];
-        function scheduleCronTests(name, properties, suites, cron) {
+        function scheduleCronTests(name, emailAddress, properties, suites, cron) {
             var fd = new FormData();
             fd.append('name', name);
+            fd.append('emailAddress', emailAddress);
             fd.append('properties', properties);
             suites.forEach(function (s) {
                 fd.append('suites[]', s);
@@ -113,9 +114,10 @@ angular.module('client', [])
             });
         }
 
-        function scheduleRepeatingTests(name, properties, suites) {
+        function scheduleRepeatingTests(name, emailAddress, properties, suites) {
             var fd = new FormData();
             fd.append('name', name);
+            fd.append('emailAddress', emailAddress);
             fd.append('properties', properties);
             suites.forEach(function (s) {
                 fd.append('suites[]', s);
@@ -151,9 +153,9 @@ angular.module('client', [])
             }
             if (badInput) return;
             if ($scope.isRepeating) {
-                scheduleRepeatingTests($scope.name, $scope.properties[0], Array.from($scope.suites), null);
+                scheduleRepeatingTests($scope.name, $scope.emailAddress, $scope.properties[0], Array.from($scope.suites));
             } else {
-                scheduleCronTests($scope.name, $scope.properties[0], Array.from($scope.suites), $scope.cron, null)
+                scheduleCronTests($scope.name, $scope.emailAddress, $scope.properties[0], Array.from($scope.suites), $scope.cron)
             }
         };
         self.stop = function (name) {

@@ -1,38 +1,42 @@
 package com.betamedia.qe.af.core.fwtestrunner.scheduling;
 
+import org.springframework.core.task.TaskExecutor;
+
 import java.util.Collections;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 
 /**
  * Created by mbelyaev on 4/19/17.
  */
-public class RepeatingTestExecution implements TestExecution, ExecutionListener {
+public class RepeatingTestExecution<T> implements TestExecution, ExecutionListener<T> {
 
-    private final Consumer<ExecutionListener> consumer;
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final AtomicBoolean isActive = new AtomicBoolean(true);
+    private final Consumer<ExecutionListener<T>> consumer;
+    private final TaskExecutor executor;
 
-
-    public RepeatingTestExecution(Consumer<ExecutionListener> consumer) {
+    public RepeatingTestExecution(Consumer<ExecutionListener<T>> consumer, TaskExecutor executor) {
         this.consumer = consumer;
+        this.executor = executor;
     }
 
     @Override
     public void start() {
-        executor.submit(() -> consumer.accept(this));
+        executor.execute(() -> consumer.accept(this));
     }
 
     @Override
     public void stop() {
-        executor.shutdown();
+        isActive.set(false);
     }
 
     @Override
-    public void onCompletion() {
-        start();
+    public void onCompletion(T results) {
+        if (isActive.get()) {
+            start();
+        }
     }
 
     @Override

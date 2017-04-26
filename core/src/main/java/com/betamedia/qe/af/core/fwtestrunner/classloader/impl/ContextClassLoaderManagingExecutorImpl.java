@@ -6,17 +6,20 @@ import com.betamedia.qe.af.core.fwtestrunner.storage.StorageService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * Created by mbelyaev on 4/10/17.
@@ -39,6 +42,8 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
 
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private TaskExecutor asyncTaskExecutor;
     @Autowired
     private URLClassLoaderFactory classLoaderFactory;
 
@@ -76,7 +81,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
             } else {
                 String oldJarPath = jarPath;
                 ReadWriteLock oldJarLock = jarLock;
-                Executors.newSingleThreadExecutor().execute(() -> {
+                asyncTaskExecutor.execute(() -> {
                     oldJarLock.writeLock().lock();
                     try {
                         storageService.delete(oldJarPath);
@@ -127,10 +132,10 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
      * After finishing execution, JAR file read lock is released and original context classloader for thread is restored.
      * </p>
      *
-     * @param runnables List of Runnable objects to execute
+     * @param suppliers List of Supplier objects to execute
      */
     @Override
-    public void run(List<Runnable> runnables) {
+    public <T> List<T> run(List<Supplier<T>> suppliers) {
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
         ClassLoader classLoader;
         pathLock.readLock().lock();
@@ -147,7 +152,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
                     pathLock.readLock().unlock();
                 }
                 Thread.currentThread().setContextClassLoader(classLoader);
-                executeInPool(runnables);
+                return executeInPool(suppliers);
             } finally {
                 jarLock.readLock().unlock();
             }
@@ -164,36 +169,40 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
      * This allows users to temporarily override configured JAR library with their own without interfering with other threads.
      * </p>
      *
-     * @param runnables List of Runnable objects to execute
+     * @param suppliers List of Supplier objects to execute
      * @param jar       The uploaded JAR binary
      */
     @Override
-    public void run(List<Runnable> runnables, MultipartFile jar) {
+    public <T> List<T> run(List<Supplier<T>> suppliers, MultipartFile jar) {
         String jarPath = storageService.store(jar, "temp-" + UUID.randomUUID() + ".jar");
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
         try {
             ClassLoader classLoader = classLoaderFactory.get(jarPath, parent);
             Thread.currentThread().setContextClassLoader(classLoader);
-            executeInPool(runnables);
+            return executeInPool(suppliers);
         } catch (MalformedURLException e) {
             logger.error("", e);
             throw new RuntimeException(e);
         } finally {
             Thread.currentThread().setContextClassLoader(parent);
-        }
-        storageService.delete(jarPath);
-    }
-
-    private void executeInPool(List<Runnable> runnables) {
-        try {
-            ExecutorService pool = Executors.newCachedThreadPool();
-            runnables.forEach(pool::execute);
-            pool.shutdown();
-            pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            logger.error("", e);
-            Thread.currentThread().interrupt();
+            storageService.delete(jarPath);
         }
     }
 
+    private <T> List<T> executeInPool(List<Supplier<T>> suppliers) {
+        ExecutorService pool = Executors.newCachedThreadPool();
+        List<CompletableFuture<T>> futures = suppliers.stream()
+                .map(s -> CompletableFuture.supplyAsync(s, pool))
+                .collect(Collectors.toList());
+        pool.shutdown();
+        return all(futures).join();
+    }
+
+    private <T> CompletableFuture<List<T>> all(List<CompletableFuture<T>> futures) {
+        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[futures.size()]))
+                .thenApply(v -> futures.stream()
+                        .map(CompletableFuture::join)
+                        .collect(Collectors.toList())
+                );
+    }
 }

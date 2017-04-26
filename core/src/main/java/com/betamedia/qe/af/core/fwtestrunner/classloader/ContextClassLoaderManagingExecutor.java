@@ -2,9 +2,8 @@ package com.betamedia.qe.af.core.fwtestrunner.classloader;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.MalformedURLException;
 import java.util.List;
-import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 
 /**
@@ -15,8 +14,8 @@ public interface ContextClassLoaderManagingExecutor {
 
     void setJarPath(String jarPath);
 
-    void run(List<Runnable> runnable);
+    <T> List<T> run(List<Supplier<T>> suppliers);
 
-    void run(List<Runnable> runnable, MultipartFile jar);
+    <T> List<T> run(List<Supplier<T>> suppliers, MultipartFile jar);
 
 }

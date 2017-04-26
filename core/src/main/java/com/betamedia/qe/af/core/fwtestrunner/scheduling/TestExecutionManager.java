@@ -9,9 +9,10 @@ import java.util.Set;
  * Created by mbelyaev on 4/20/17.
  */
 public interface TestExecutionManager {
-    void createRepeatingTest(String name, Properties properties, List<String> suites);
 
-    void createScheduledTest(String name, Properties properties, List<String> suites, String cronExpression);
+    void createRepeatingTest(String name, String mailAddress, Properties properties, List<String> suites);
+
+    void createScheduledTest(String name, String mailAddress, Properties properties, List<String> suites, String cronExpression);
 
     void stopTask(String name);
 
