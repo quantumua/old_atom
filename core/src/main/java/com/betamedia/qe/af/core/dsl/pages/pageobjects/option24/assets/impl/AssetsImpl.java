@@ -47,7 +47,7 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
 
     @Override
     public List<String> assetNames() {
-        waitUntilExists(assetContainer);
+        waitUntil(() -> !find(assetContainer).findElements(By.tagName("tr")).isEmpty());
         return find(assetContainer)
                 .findElements(By.tagName("tr"))
                 .stream()

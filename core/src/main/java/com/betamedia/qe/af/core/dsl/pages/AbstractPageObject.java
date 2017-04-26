@@ -27,7 +27,7 @@ public abstract class AbstractPageObject {
     }
 
     protected boolean waitUntilDisplayed(By element) {
-        return getWait().until(driver -> driver.findElement(element).isDisplayed());
+        return getWait().until(driver -> find(element).isDisplayed());
     }
 
     protected boolean waitUntilDisplayed(By... elements) {
