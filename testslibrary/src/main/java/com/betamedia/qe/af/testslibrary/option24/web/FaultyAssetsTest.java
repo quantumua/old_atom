@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by mbelyaev on 4/18/17.
  */
-public class CfdAssetsTest extends TPResourceAwareClientTest {
+public class FaultyAssetsTest extends TPResourceAwareClientTest {
 
     //expected to fail
     @Test
@@ -22,7 +22,4 @@ public class CfdAssetsTest extends TPResourceAwareClientTest {
         List<String> expectedAssets = getContent("expectedCfdAssets.txt");
         Assert.assertEqualsNoOrder(assets.toArray(), expectedAssets.toArray());
     }
-
-    @Test
-    public void
 }
