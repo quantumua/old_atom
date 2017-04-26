@@ -3,6 +3,7 @@ package com.betamedia.qe.af.core.api.tp.adapters.impl;
 import com.betamedia.qe.af.core.api.tp.adapters.AbstractHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
 import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMResponse;
@@ -42,9 +43,25 @@ public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependen
         return crmPropertiesHolder.getMobileCRMUrl();
     }
 
+    /**
+     * Registers a new customer with a given request object.
+     */
     @Override
     public CRMResponse<CRMRegisterResult> register(CustomerRO customerRO) {
         String url = buildRequestUrl(REGISTER_CUSTOMER_URL, customerRO).build().toUriString();
+        return register(url);
+    }
+
+    /**
+     * Registers a new customer with a marketing parameters.
+     */
+    @Override
+    public CRMResponse<CRMRegisterResult> register(CustomerRO customerRO, MarketingParametersRO marketingParametersRO) {
+        String url = buildRequestUrl(REGISTER_CUSTOMER_URL, customerRO, marketingParametersRO).build().toUriString();
+        return register(url);
+    }
+
+    private CRMResponse<CRMRegisterResult> register(String url) {
         logger.info("Registering new customer, url={}, {}", url, getEnvironment());
         CRMResponse<CRMRegisterResult> response = restTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<CRMResponse<CRMRegisterResult>>() {
@@ -96,12 +113,16 @@ public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependen
     @Override
     public CRMResponse<MobileCRMDeposit> deposit(MobileDepositRO depositRO) {
         String url = buildRequestUrl(DEPOSIT_URL, depositRO).build().toUriString();
-        logger.info("Making a deposit, url={}", url, getEnvironment());
-        CRMResponse<MobileCRMDeposit> response = restTemplate.exchange(url, HttpMethod.GET, null,
-                new ParameterizedTypeReference<CRMResponse<MobileCRMDeposit>>() {
-                }).getBody();
-        logger.info("Deposit result, {}", response, getEnvironment());
-        return response;
+        return deposit(url);
+    }
+
+    /**
+     * Performs a mobile CRM deposit with marketing parameters for a given deposit RO.
+     */
+    @Override
+    public CRMResponse<MobileCRMDeposit> deposit(MobileDepositRO depositRO, MarketingParametersRO marketingParametersRO) {
+        String url = buildRequestUrl(DEPOSIT_URL, depositRO, marketingParametersRO).build().toUriString();
+        return deposit(url);
     }
 
     /**
@@ -110,7 +131,11 @@ public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependen
     @Override
     public CRMResponse<MobileCRMDeposit> depositByName(MobileDepositRO depositRO) {
         String url = buildRequestUrl(DEPOSIT_BY_NAME_URL, depositRO).build().toUriString();
-        logger.info("Making a deposit by name, url={}", url, getEnvironment());
+        return deposit(url);
+    }
+
+    private CRMResponse<MobileCRMDeposit> deposit(String url) {
+        logger.info("Making a deposit, url={}", url, getEnvironment());
         CRMResponse<MobileCRMDeposit> response = restTemplate.exchange(url, HttpMethod.GET, null,
                 new ParameterizedTypeReference<CRMResponse<MobileCRMDeposit>>() {
                 }).getBody();

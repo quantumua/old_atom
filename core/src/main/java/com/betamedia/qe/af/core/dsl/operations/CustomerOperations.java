@@ -1,6 +1,7 @@
 package com.betamedia.qe.af.core.dsl.operations;
 
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
@@ -19,11 +20,15 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     CRMCustomer register(CustomerBuilder customerBuilder);
 
+    CRMCustomer register(CustomerBuilder customerBuilder, MarketingParametersBuilder marketingParametersBuilder);
+
     CRMCustomer login(String username, String password);
 
     void logout(String customerId);
 
     CRMDeposit deposit(MobileDepositBuilder depositBuilder);
+
+    CRMDeposit deposit(MobileDepositBuilder depositBuilder, MarketingParametersBuilder marketingParametersBuilder);
 
     List<CRMError> depositWithErrors(MobileDepositBuilder depositBuilder);
 

@@ -1,6 +1,7 @@
 package com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile;
 
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.testingtype.tp.TPBackEndTest;
@@ -32,6 +33,32 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
     @Test
     public void testDefaultRegistration() {
         CRMCustomer registeredCustomer = operations().customerOperations().register();
+        assertNotNull(registeredCustomer);
+    }
+
+    @Test
+    public void testRegistrationWithParamXAliases() {
+        CustomerBuilder customerBuilder = new CustomerBuilder();
+        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
+        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder, marketingParametersBuilder);
+        assertNotNull(registeredCustomer);
+    }
+
+    @Test
+    public void testRegistrationWithPXAliases() {
+        CustomerBuilder customerBuilder = new CustomerBuilder();
+        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(false);
+        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder, marketingParametersBuilder);
+        assertNotNull(registeredCustomer);
+    }
+
+    @Test
+    public void testRegistrationWithAfSiteId() {
+        CustomerBuilder customerBuilder = new CustomerBuilder();
+        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
+        marketingParametersBuilder.setAf_siteid("https://www.24option.com/");
+        marketingParametersBuilder.setSiteId(null);
+        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder, marketingParametersBuilder);
         assertNotNull(registeredCustomer);
     }
 

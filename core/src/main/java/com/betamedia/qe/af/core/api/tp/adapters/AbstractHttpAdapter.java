@@ -29,12 +29,15 @@ public abstract class AbstractHttpAdapter {
         requiredParams = getRequiredParams();
     }
 
-    protected UriComponentsBuilder buildRequestUrl(String url, Object paramsObject) {
-        Map<String, String> params = objectMapper.convertValue(paramsObject, new TypeReference<LinkedHashMap<String, String>>() {
-        });
-        params.values().removeAll(singleton(null));
+    protected UriComponentsBuilder buildRequestUrl(String url, Object... paramsObjects) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.setAll(params);
+        for (Object paramsObject : paramsObjects) {
+            Map<String, String> params = objectMapper.convertValue(paramsObject, new TypeReference<LinkedHashMap<String, String>>() {
+            });
+            params.values().removeAll(singleton(null));
+            map.setAll(params);
+        }
+
         map.setAll(requiredParams);
         return UriComponentsBuilder.fromUriString(getBaseUrl() + url).queryParams(map);
     }

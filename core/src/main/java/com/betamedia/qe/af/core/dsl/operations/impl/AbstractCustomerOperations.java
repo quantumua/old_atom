@@ -2,6 +2,7 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
 import com.betamedia.qe.af.core.dsl.operations.CustomerOperations;
@@ -37,11 +38,25 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     }
 
     /**
-     * Registers new CRM customer with given customer builder
+     * Registers new CRM customer with given customer builder.
      */
     @Override
     public CRMCustomer register(CustomerBuilder customerBuilder) {
         CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO());
+        return verifyAndReturnCRMCustomer(register);
+    }
+
+    /**
+     * Registers new CRM customer with marketing parameters.
+     */
+    @Override
+    public CRMCustomer register(CustomerBuilder customerBuilder, MarketingParametersBuilder marketingParametersBuilder) {
+        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO(),
+                marketingParametersBuilder.createMarketingRO());
+        return verifyAndReturnCRMCustomer(register);
+    }
+
+    private CRMCustomer verifyAndReturnCRMCustomer(CRMResponse<CRMRegisterResult> register) {
         CRMRegisterResult registrationResult = register.getResult();
         List<CRMError> registrationErrors = register.getErrors();
 
@@ -80,6 +95,19 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public CRMDeposit deposit(MobileDepositBuilder depositBuilder) {
         CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(depositBuilder.createMobileDepositRO());
+        return verifyAndReturnDepositResult(depositResponse);
+    }
+
+    /**
+     * Performs a deposit with marketing parameters.
+     */
+    @Override
+    public CRMDeposit deposit(MobileDepositBuilder depositBuilder, MarketingParametersBuilder marketingParametersBuilder) {
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(depositBuilder.createMobileDepositRO(), marketingParametersBuilder.createMarketingRO());
+        return verifyAndReturnDepositResult(depositResponse);
+    }
+
+    private CRMDeposit verifyAndReturnDepositResult(CRMResponse<MobileCRMDeposit> depositResponse) {
         CRMDeposit depositResult = depositResponse.getResult();
         List<CRMError> depositErrors = depositResponse.getErrors();
 

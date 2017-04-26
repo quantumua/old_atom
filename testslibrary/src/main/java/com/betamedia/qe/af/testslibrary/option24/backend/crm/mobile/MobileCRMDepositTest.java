@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile;
 
+import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
@@ -20,6 +21,8 @@ public class MobileCRMDepositTest extends TPBackEndTest {
     private final String expiryErrorMessage = "The credit card expired";
     private final String missingAccountErrorCode = "DepositProviderEx";
     private final String missingAccountErrorMessage = "Your deposit attempt could not be completed - please contact our support team";
+    private final String systemExceptionErrorCode = "SystemEx";
+    private final String unknownErrorMessage = "Unknown error occurred.";
 
     @Test
     @Parameters("tradingAccountId")
@@ -70,6 +73,37 @@ public class MobileCRMDepositTest extends TPBackEndTest {
 
         List<CRMError> depositErrors = operations().customerOperations().depositByNameWithErrors(depositBuilder);
         verifyErrorCodeAndMessage(depositErrors, missingAccountErrorCode, missingAccountErrorMessage);
+    }
+
+    @Test
+    @Parameters("tradingAccountId")
+    public void testDepositWithParamXAliases(String tradingAccountId) {
+        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
+        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
+        CRMDeposit deposit = operations().customerOperations().deposit(depositBuilder, marketingParametersBuilder);
+        assertNotNull(deposit);
+    }
+
+    @Test
+    @Parameters("tradingAccountId")
+    public void testDepositWithPXAliases(String tradingAccountId) {
+        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
+        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
+        CRMDeposit deposit = operations().customerOperations().deposit(depositBuilder, marketingParametersBuilder);
+        assertNotNull(deposit);
+    }
+
+    @Test
+    @Parameters("tradingAccountId")
+    public void testDepositWithAddressLengthOverLimit(String tradingAccountId) {
+        final String longAddress = "lvAk3XNLV49AAjSURGCDfNHuxgilbNm3thmo6SqKBLF7YC9Nb0DWcsoJJvlBY57VuhbpQvcclSpmhrX" +
+                "q0zDXicgEJPSP33jnqAVugmL1RRXDwR0ajxpOP2zO8kLqBLvlMisEMV0DzremhEX8YYKcNX5qqGeYtGAub2tQpimQCGXo2SxJKzw" +
+                "WYrFisOJj0K0UtHBMW6k0lUUrlUSluLVUaA67muD301vOoAbo5evVV3itGx7OlS4uwS6mSBigVYMFmrc5hOE31VIjlN0l6BI4Dhj" +
+                "huyKbO94pGbX0W4nbzPZL";
+        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
+        depositBuilder.setAddress(longAddress);
+        List<CRMError> depositErrors = operations().customerOperations().depositWithErrors(depositBuilder);
+        verifyErrorCodeAndMessage(depositErrors, systemExceptionErrorCode, unknownErrorMessage);
     }
 
     private void verifyErrorCodeAndMessage(List<CRMError> depositErrors, String expectedErrorCode, String expectedErrorMessage) {
