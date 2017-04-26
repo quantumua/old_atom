@@ -33,4 +33,11 @@ public class PositionsImpl extends AbstractPageObject implements Positions {
                 .map(id -> id.substring(id.lastIndexOf('#') + 1))
                 .collect(Collectors.toList());
     }
+    
+    @Override
+    public WebElement getTradeRow(String positionDisplayId) {
+    	// TODO: Move implementation of getting trade rows by position id from legacy framework: com.scipio.tptesting.pom.def.getTradeRow(...)
+    	return null;
+    }
+    
 }

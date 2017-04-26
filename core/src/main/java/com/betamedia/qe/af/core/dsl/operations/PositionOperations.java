@@ -10,4 +10,6 @@ public interface PositionOperations<T extends EnvironmentDependent> extends Envi
     Position get(String id);
 
     Position getByDisplayId(String displayId);
+    
+    Position waitTradeToExpire(Position position);
 }

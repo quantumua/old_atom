@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -181,5 +182,56 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         List<String> positionIds = pages().positions().get();
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
+	}
+	
+	@Test	
+    public void PositionIndicationCheckThatTheColorOfTheCursorChangesSuccessfullyOnWinAndLose() {
+        Asset asset = operations().assetOperations().get();
+        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
+        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
+        CRMCustomer customer = operations().customerOperations().register();
+        CRMAccount binaryAccount = customer.getBinaryAccount();
+        operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+
+        pages().disclaimerNotification().accept();
+        pages().binarySelector().highLow();
+        pages().assets().asset(asset.getId(), asset.getAssetName());
+        String minInvestment = "15.0"; 	//TODO GetMinInvestment for Game and Category
+        
+        pages().bidder()
+                .bidLow()
+                .setAmount(minInvestment)
+                .confirm();
+
+      List<String> positionIds = pages().positions().get();
+      String lowPositionDisplayId =  positionIds.get(positionIds.size() - 1);
+      Position lowPosition = operations().positionOperations().getByDisplayId(lowPositionDisplayId);
+        
+      pages().bidder()
+       		.bidHigh()
+       		.setAmount(minInvestment)
+       		.confirm();
+      positionIds = pages().positions().get();
+      
+      String highPositionDisplayId = positionIds.get(positionIds.size() - 1);
+      Position highPosition = operations().positionOperations().getByDisplayId(highPositionDisplayId);
+        
+      double spread = lowPosition.getSpread() != null ? lowPosition.getSpread() : 0;
+      operations().feedOperations().injectFeed(asset.getId(), spread - 0.5d);
+      
+      operations().positionOperations().waitTradeToExpire(lowPosition);
+      operations().positionOperations().waitTradeToExpire(highPosition);
+      
+      WebElement lowPosRow = pages().positions().getTradeRow(lowPositionDisplayId);
+      WebElement highPosRow = pages().positions().getTradeRow(highPositionDisplayId);
+
+      Assert.assertEquals(lowPosRow.getAttribute("class").contains("bmPositive"), true);
+      Assert.assertEquals(lowPosRow.getAttribute("class").contains("bmWin"), true);
+      Assert.assertEquals(highPosRow.getAttribute("class").contains("bmNegative"), true);
+      Assert.assertEquals(highPosRow.getAttribute("class").contains("bmLose"), true);
+
 	}
 }

@@ -7,4 +7,7 @@ import java.util.List;
  */
 public interface Positions {
     List<String> get();
+
+	WebElement getTradeRow(String positionDisplayId);
+    
 }

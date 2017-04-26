@@ -44,4 +44,14 @@ public abstract class AbstractPositionOperations<T extends EnvironmentDependent>
         assertNotNull(position, "Position displayId=" + displayId + " is not available in GS");
         return position;
     }
+    
+    /**
+     * Waits until trade is expired against to given position
+     */
+    @Override
+	public Position waitTradeToExpire(Position position) {
+    	// TODO: Move implementation of waiting trade expirity from legacy framework: com.scipio.tptesting.util.Suspension.waitTradeToExpire
+		return position;
+    	
+    }
 }
