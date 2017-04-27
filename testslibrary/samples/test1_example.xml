@@ -3,9 +3,9 @@
   <test name="Tryouts 1">
     <classes>
         <class name="com.betamedia.qe.af.testslibrary.option24.web.FaultyAssetsTest" >
-          <!--<methods>-->
-            <!--<include name="loginTest" />-->
-          <!--</methods>-->
+          <methods>
+            <include name="currencyTest" />
+          </methods>
        </class>
     </classes>
   </test>

@@ -7,6 +7,8 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.Bidder;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.impl.BidderImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.BinarySelector;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.impl.BinarySelectorImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.impl.ControlPanelImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
@@ -82,5 +84,10 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     @Override
     public ProductType getType() {
         return ProductType.TP;
+    }
+
+    @Override
+    public ControlPanel controlPanel() {
+        return creator.getPage(ControlPanelImpl.class);
     }
 }

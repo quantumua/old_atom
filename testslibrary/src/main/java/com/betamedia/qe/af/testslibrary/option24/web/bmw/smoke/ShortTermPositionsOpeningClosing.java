@@ -215,7 +215,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         Position highPosition = operations().positionOperations().getByDisplayId(highPositionDisplayId);
 //the logic of forming lower and hire then position value should be inside appropriate operations
         double spread = lowPosition.getSpread() != null ? lowPosition.getSpread() : 0;
-//        TODO: why did you brake the original logic? UISyncTesting.tradeRowDisplayAfterWinOrLose: 1455
+//        TODO: why did you break the original logic? UISyncTesting.tradeRowDisplayAfterWinOrLose: 1455
 //        you'll get a wrong result
 /*        we need two methods in feed operations
  feedOperations().injectFeedHire(assetId, position)
@@ -227,7 +227,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         operations().positionOperations().getExpired(lowPosition);
         operations().positionOperations().getExpired(highPosition);
 
-//        TODO logic and assertions should be inside approppriate methods checkWin(...) and checkLose(....), also you are breaking the incapsulation of webElements inside pageObjects
+//        TODO logic and assertions should be inside appropriate methods checkWin(...) and checkLose(....), also you are breaking the incapsulation of webElements inside pageObjects
         WebElement lowPosRow = pages().positions().getTradeRow(lowPositionDisplayId);
         WebElement highPosRow = pages().positions().getTradeRow(highPositionDisplayId);
 

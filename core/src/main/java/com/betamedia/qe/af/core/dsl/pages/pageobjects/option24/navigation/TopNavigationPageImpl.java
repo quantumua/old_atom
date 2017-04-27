@@ -21,10 +21,6 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By binaryBtn;
     @StoredId
     private By cfdBtn;
-    @StoredId("userDetailsMenu")
-    private By userDetailsMenu;
-    @StoredId("logoutLink")
-    private By logoutLink;
 
     public TopNavigationPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -44,14 +40,6 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     public void logIn() {
         waitUntilDisplayed(loginBtn);
         find(loginBtn).click();
-    }
-
-    @Override
-    public void logOut() {
-        makeActions()
-                .moveToElement(find(userDetailsMenu))
-                .moveToElement(find(userDetailsMenu, logoutLink))
-                .click().perform();
     }
 
     @Override

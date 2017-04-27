@@ -32,7 +32,7 @@ public class DataDrivenLoginPageTest extends DataDrivenTPClientTest {
     public void loginTest() {
         report.report("Start successful login test");
         TPPages.loginPage().goTo().login("vasichka", "123123");
-        TPPages.disclaimerNotification().accept();
+        TPPages.disclaimerNotification().tryAccept();
         assertThat(TPPages.topNavigationPage().isLoggedIn(), is(true));
         report.report("Finish successful login test");
     }
