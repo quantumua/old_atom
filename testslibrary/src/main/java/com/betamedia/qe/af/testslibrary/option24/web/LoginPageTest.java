@@ -19,7 +19,7 @@ public class LoginPageTest extends TPEndToEndTest {
     public void loginTest() {
         pages().topNavigationPage().logIn();
         pages().loginPage().login("vasichka", "123123");
-        pages().disclaimerNotification().accept();
+        pages().disclaimerNotification().tryAccept();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
     }
 
@@ -42,7 +42,7 @@ public class LoginPageTest extends TPEndToEndTest {
     public void logoutTest() {
         pages().topNavigationPage().logIn();
         pages().loginPage().login("vasichka", "123123");
-        pages().disclaimerNotification().accept();
+        pages().disclaimerNotification().tryAccept();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().topNavigationPage().logOut();
         Assert.assertTrue(pages().landingPage().isOnPage());

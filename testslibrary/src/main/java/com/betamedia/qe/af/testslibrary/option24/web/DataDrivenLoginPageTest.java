@@ -15,7 +15,7 @@ public class DataDrivenLoginPageTest extends DataDrivenTPClientTest {
     public void loginTest(String username, String password) {
         pages().topNavigationPage().logIn();
         pages().loginPage().login(username, password);
-        pages().disclaimerNotification().accept();
+        pages().disclaimerNotification().tryAccept();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
     }
 

@@ -13,17 +13,25 @@ public interface TagOperations<T extends EnvironmentDependent> extends Environme
     List<Tag> get(TagOperations.TagName tagName);
 
     enum TagName {
-        NO_CATEGORY("INTRA DAY"),
-        SHORT_TERM_2_MIN_GAME_H3_TEXT("SHORT 2MIN"),
-        SHORT_TERM_30_SEC_GAME_H3_TEXT("SHORT 0.5MIN"),
-        SHORT_TERM_5_MIN_GAME_H3_TEXT("SHORT 5MIN"),
-        SHORT_TERM_60_SEC_GAME_H3_TEXT("SHORT 1MIN");
+        NO_CATEGORY("INTRA DAY", null),
+        SHORT_TERM_2_MIN_GAME_H3_TEXT("SHORT 2MIN", 120),
+        SHORT_TERM_30_SEC_GAME_H3_TEXT("SHORT 0.5MIN", 30),
+        SHORT_TERM_5_MIN_GAME_H3_TEXT("SHORT 5MIN", 300),
+        SHORT_TERM_60_SEC_GAME_H3_TEXT("SHORT 1MIN", 60);
         public final String value;
+        public final Integer shortTermDuration;
 
-        TagName(String value) {
+        TagName(String value, Integer shortTermDuration) {
             this.value = value;
+            this.shortTermDuration = shortTermDuration;
+        }
+
+        public Integer getShortTermDuration() {
+            return shortTermDuration;
         }
     }
+
+
 
     static OptionSubType getOptionSubtype(TagName tagName) {
         if (tagName == TagName.NO_CATEGORY) {

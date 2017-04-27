@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -60,6 +61,7 @@ public abstract class AbstractOptionTemplateOperations<T extends EnvironmentDepe
         assertNotNull(optionTemplate, "OptionTemplate id=" + id + " is not available in GS");
         return optionTemplate;
     }
+//    TODO incapsulate logic of optionTemplate creating to builder. Methods should accept builder instead optionTemplate's params
 
     /**
      * Creates a new option template with a given id, type and tag name.
@@ -70,6 +72,7 @@ public abstract class AbstractOptionTemplateOperations<T extends EnvironmentDepe
      * @return created option template
      */
     @Override
+//    TODO code is not safe.  tagName is null for non hilo types
     public OptionTemplate create(String assetId, OptionType type, TagOperations.TagName tagName) {
         AccountGroup accountGroup = accountGroupOperations.get();
         String tagId = tagOperations.get(tagName).get(0).getId();
@@ -78,7 +81,7 @@ public abstract class AbstractOptionTemplateOperations<T extends EnvironmentDepe
         OptionTemplateScheduler scheduler = schedulerOperations.create(tradingCalendar.getTimezoneId(), tagName);
         OptionTemplate optionTemplate = getDefaultTemplate(type);
         optionTemplate.setActive(true);
-        optionTemplate.setOptionConfiguration(getConfiguration(assetId, tagId, type, TagOperations.getOptionSubtype(tagName)));
+        optionTemplate.setOptionConfiguration(getConfiguration(assetId, tagId, type, tagName));
         optionTemplate.setScheduler(scheduler);
         optionTemplate = tpConnector.create(optionTemplate);
         logger.info("Created option template id=" + optionTemplate.getId());
@@ -131,7 +134,7 @@ public abstract class AbstractOptionTemplateOperations<T extends EnvironmentDepe
         return spreadTemplate;
     }
 
-    private OptionConfiguration getConfiguration(String assetId, String tagId, OptionType type, OptionSubType subType) {
+    private OptionConfiguration getConfiguration(String assetId, String tagId, OptionType type, TagOperations.TagName tagName) {
         OptionConfiguration configuration = new OptionConfiguration();
         configuration.setAssetId(assetId);
         configuration.setCategoryTagId(tagId);
@@ -139,8 +142,21 @@ public abstract class AbstractOptionTemplateOperations<T extends EnvironmentDepe
         configuration.setIsMarketPriceOnly(true);
         configuration.setNoMoreTrades(5);
         configuration.setType(type);
-        configuration.setSubType(subType);
+        configuration.setSubType(getSubType(tagName));
+        configuration.setShortTermDuration(getShortTermDuration(tagName));
         return configuration;
+    }
+
+    private Integer getShortTermDuration(TagOperations.TagName tagName) {
+        return Optional.ofNullable(tagName)
+                .map(TagOperations.TagName::getShortTermDuration)
+                .orElse(null);
+    }
+
+    private OptionSubType getSubType(TagOperations.TagName tagName) {
+        return Optional.ofNullable(tagName)
+                .map(TagOperations::getOptionSubtype)
+                .orElse(null);
     }
 
     private SearchCriteria<OptionTemplate> forAssetOptionTypeOptionSubtypeTagScheduler(String assetId,

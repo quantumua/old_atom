@@ -33,7 +33,6 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().disclaimerNotification().accept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
@@ -43,8 +42,8 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
                 .setAmount(minInvestment)
                 .confirm();
 
-        List<String> positionIds = pages().positions().get();
-        Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
+        String lastPosId = pages().positions().getLast();
+        Position position = operations().positionOperations().getByDisplayId(lastPosId);
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
@@ -62,7 +61,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().topNavigationPage().binary();
         pages().binarySelector().highLow();
-        pages().disclaimerNotification().accept();
+        pages().disclaimerNotification().tryAccept();
 
         int investedAmount = 15;        //TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
         Double maxInvestment = 150.0;    //TODO it must equal to this function from legacy framework: GetMaxInvestment for Game and Category
@@ -116,7 +115,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().disclaimerNotification().accept();
+        pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
@@ -142,7 +141,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().disclaimerNotification().accept();
+        pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
@@ -168,7 +167,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().disclaimerNotification().accept();
+        pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
@@ -195,7 +194,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 
-        pages().disclaimerNotification().accept();
+        pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
         String minInvestment = "15.0";    //TODO GetMinInvestment for Game and Category
