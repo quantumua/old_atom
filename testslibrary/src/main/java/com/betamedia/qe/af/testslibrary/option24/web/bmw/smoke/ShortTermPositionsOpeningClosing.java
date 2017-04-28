@@ -5,6 +5,7 @@ import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.dsl.operations.TagOperations;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
+import com.betamedia.tp.api.feed.TickData;
 import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.Position;
 import com.betamedia.tp.api.model.enums.OptionType;
@@ -22,7 +23,7 @@ import static org.testng.Assert.assertEquals;
  */
 public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
-    @Test()
+	@Test()	// TP-4330:Open a position that expires in 60 seconds with invested amount = minimum allowed
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMinimumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -33,10 +34,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
-
-        String minInvestment = "15.0";    //TODO GetMinInvestment for Game and Category
+        
+        String minInvestment = "15.0"; 	//TODO GetMinInvestment for Game and Category, see https://devredmine/issues/65353
         pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
@@ -47,7 +49,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
-    @Test()
+	@Test() // TP-4326:Open a position that expires in 60 seconds with invested amount = maximum allowed
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMaximumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -63,8 +65,9 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().binarySelector().highLow();
         pages().disclaimerNotification().tryAccept();
 
+        // see https://devredmine/issues/65353
         int investedAmount = 15;        //TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
-        Double maxInvestment = 150.0;    //TODO it must equal to this function from legacy framework: GetMaxInvestment for Game and Category
+        Double maxInvestment = 150.0;   //     it must equal to this function from legacy framework: GetMaxInvestment for Game and Category
 
 //		Legacy framework calls:
 //        String baseCurrenacyPositionDisplayId = pomHolder.bidder().openPosition(webDriver, asset.getAssetName(), testCaseOption, BinarySelection.LOW, String.valueOf(investedAmount), game, category, true);
@@ -74,12 +77,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size()));
 //?????????????
         //PositionTestingManager.getInstance().cancelPosition(position, "Test '" + testCaseDisplayId + "'");
-
         double baseCurrencyMinAmout = position.getBaseCurrencyAmount();
         double conversionRate = baseCurrencyMinAmout / investedAmount;
         int baseCurrencyMaxInvestmentLimit = (int) (maxInvestment * conversionRate * 2);
-
-//		TODO: This can be done after method completenes: com.betamedia.qe.af.core.dsl.operations.impl.AccountGroupOperationsImpl.Create()  
+        //		TODO: This can be done after method completenes: com.betamedia.qe.af.core.dsl.operations.impl.AccountGroupOperationsImpl.Create()
+        // Redmine task: https://devredmine/issues/65354
 /*    if (operations().accountGroupOperations().getExposureLimit() <= baseCurrencyMaxInvestmentLimit) {     
         //if (accountGroup.getExposureLimit() <= baseCurrencyMaxInvestmentLimit) {
         	accountGroup.setExposureLimit(baseCurrencyMaxInvestmentLimit);
@@ -103,7 +105,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
-    @Test
+	@Test //  TP-3759:Open a position that expires in 60 seconds - Basic Functionality
 //TODO    fully duplicates the code of the first test
     public void OpenAPositionThatExpiresIn60SecondsBasicFunctionality() {
         Asset asset = operations().assetOperations().get();
@@ -118,8 +120,8 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
-
-        String minInvestment = "15.0";    //TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
+        // see https://devredmine/issues/65353
+        String minInvestment = "15.0"; 	//TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
         pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
@@ -130,7 +132,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
-    @Test
+	@Test //  TP-3758:Open a position that expires in 2 minutes - Basic Functionality
     public void OpenAPositionThatEexpiresIn2MinutesBasicFunctionality() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_2_MIN_GAME_H3_TEXT);
@@ -145,7 +147,8 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
-        String minInvestment = "15.0";    //TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
+        // see https://devredmine/issues/65353
+        String minInvestment = "15.0"; 	//TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
         pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
@@ -156,9 +159,9 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
-    @Test
-    public void OpenAPositionThatEexpiresIn5MinutesBasicFunctionality() {
-        Asset asset = operations().assetOperations().get();
+	@Test // TP-3757:Open a position that expires in 5 minutes - Basic Functionality
+	public void OpenAPositionThatEexpiresIn5MinutesBasicFunctionality(){
+		Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_5_MIN_GAME_H3_TEXT);
         operations().feedOperations().injectFeed(asset.getId(), 1.5d);
         CRMCustomer customer = operations().customerOperations().register();
@@ -171,7 +174,8 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
-        String minInvestment = "15.0";    //TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
+        // see https://devredmine/issues/65353
+        String minInvestment = "15.0"; 	//TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
         pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
@@ -180,13 +184,13 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         List<String> positionIds = pages().binaryPositions().get();
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
-    }
-
-    @Test(description = "Check that the color of the cursor changes successfully on win and lose")
+	}
+	
+    @Test(description = "TP-3686:Position Indication - check that the color of the cursor changes successfully on win and lose")
     public void PositionIndicationCheckThatTheColorOfTheCursorChangesSuccessfullyOnWinAndLose() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
+        TickData tickData = operations().feedOperations().injectFeed(asset.getId(), 1.5d);
         CRMCustomer customer = operations().customerOperations().register();
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
@@ -197,7 +201,9 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
-        String minInvestment = "15.0";    //TODO GetMinInvestment for Game and Category
+        
+        // see https://devredmine/issues/65353
+        String minInvestment = "15.0"; 	//TODO GetMinInvestment for Game and Category
         pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
@@ -213,17 +219,20 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
         String highPositionDisplayId = pages().binaryPositions().getLatest();
         Position highPosition = operations().positionOperations().getByDisplayId(highPositionDisplayId);
+      
+      // Task for LeonidA: https://devredmine/issues/65355
+      // Task for VadimS: https://devredmine/issues/65324
 //the logic of forming lower and hire then position value should be inside appropriate operations
         double spread = lowPosition.getSpread() != null ? lowPosition.getSpread() : 0;
 //        TODO: why did you break the original logic? UISyncTesting.tradeRowDisplayAfterWinOrLose: 1455
 //        you'll get a wrong result
 /*        we need two methods in feed operations
- feedOperations().injectFeedHire(assetId, position)
+ feedOperations().injectFeedHigher(assetId, position)
  feedOperations().injectFeedLower(....)
  the logic should be incapsulated inside
 * */
-        operations().feedOperations().injectFeed(asset.getId(), spread - 0.5d);
-
+      operations().feedOperations().injectFeed(asset.getId(), tickData.getSpot() - spread - 0.5d);
+      
         operations().positionOperations().getExpired(lowPosition);
         operations().positionOperations().getExpired(highPosition);
 

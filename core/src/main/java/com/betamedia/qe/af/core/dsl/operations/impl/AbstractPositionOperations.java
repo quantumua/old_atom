@@ -50,6 +50,7 @@ public abstract class AbstractPositionOperations<T extends EnvironmentDependent>
      */
     @Override
 	public Position getExpired(Position position) {
+    	// see https://devredmine/issues/65323
     	// TODO: Move implementation of waiting trade expirity from legacy framework: com.scipio.tptesting.util.Suspension.waitTradeToExpire
 		return position;
     	
