@@ -3,10 +3,11 @@ package com.betamedia.qe.af.webservice.web.controllers;
 import com.betamedia.qe.af.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.qe.af.webservice.holders.DependenciesInfoHolder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Maksym Tsybulskyy
@@ -20,13 +21,17 @@ public class VersionController {
     private DependenciesInfoHolder dependenciesInfoHolder;
 
     @GetMapping("/version/core")
-    public ResponseEntity<String> getCoreVersion() {
-        return new ResponseEntity<>(dependenciesInfoHolder.getCoreVersion(), HttpStatus.OK);
+    public Map<String, String> getCoreVersion() {
+        Map<String, String> response = new HashMap<>();
+        response.put("core.version", dependenciesInfoHolder.getCoreVersion());
+        return response;
     }
 
     @GetMapping("/version/testslibrary")
-    public ResponseEntity<String> getTestsLibraryVersion() {
-        contextClassLoaderManagingExecutor.getJarVersion();
-        return new ResponseEntity<>(contextClassLoaderManagingExecutor.getJarVersion(), HttpStatus.OK);
+    public Map<String, String> getTestsLibraryVersion() {
+        Map<String, String> response = new HashMap<>();
+        response.put("testslibrary.version", contextClassLoaderManagingExecutor.getJarVersion());
+        return response;
+
     }
 }
