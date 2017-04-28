@@ -7,15 +7,15 @@ build,pageObjectName,locatorId,locatorType,value
 1603,TopNavigationPageImpl,loginBtn,ID,login_btn
 1603,TopNavigationPageImpl,myAccountBtn,ID,myaccount_btn
 1603,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
-1603,BidderImpl,amountInput,ID,bmBidAmountInput
+1603,BinaryBidderImpl,amountInput,ID,bmBidAmountInput
 1603,BinarySelectorImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame
 1603,BinarySelectorImpl,shortTermButton,CSS,.bmSelectItem.bmSelectShortTermGame
 1603,BinarySelectorImpl,doubleProfitButton,CSS,.bmSelectItem.bmSelectDoubleProfitGame
 1603,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
 1603,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
-1603,BidderImpl,lowButton,CSS,.bmButtonsWrapp.bmSelection2
-1603,BidderImpl,highButton,CSS,.bmButtonsWrapp.bmSelection1
-1603,BidderImpl,closePosition,CSS,.bmButtonWrapp.bmClosePositionDialog
+1603,BinaryBidderImpl,lowButton,CSS,.bmButtonsWrapp.bmSelection2
+1603,BinaryBidderImpl,highButton,CSS,.bmButtonsWrapp.bmSelection1
+1603,BinaryBidderImpl,closePosition,CSS,.bmButtonWrapp.bmClosePositionDialog
 1603,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
 1603,PositionsImpl,position,CLASS_NAME,bmCellContent
 1603,TopNavigationPageImpl,binaryBtn,CLASS_NAME,product-binary
@@ -40,3 +40,11 @@ build,pageObjectName,locatorId,locatorType,value
 1603,AssetsImpl,secondRow,CSS,div:nth-of-type(2)
 1603,AssetsImpl,toolTipName,CSS,span[data-bind='text: toolTipName']
 1603,AssetsImpl,selectedAssetCurrency,CSS,span[data-bind='text: $root.assetsListViewModel.selectedAsset().currency']
+1603,CfdBidderImpl,volumeInput,CLASS_NAME,investInsert
+1603,CfdBidderImpl,buyButton,CLASS_NAME,buyBTN
+1603,CfdBidderImpl,sellButton,CLASS_NAME,sellBTN
+1603,CfdBidderImpl,tradeButton,CLASS_NAME,buyTrade
+1603,MessageBoxImpl,messageBox,CLASS_NAME,messageBox
+1603,MessageBoxImpl,okButton,CLASS_NAME,ok-button
+1603,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
+1603,CfdPositionsImpl,assetName,CLASS_NAME,assetname

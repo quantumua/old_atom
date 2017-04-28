@@ -37,12 +37,12 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
         String minInvestment = "15.0";    //TODO GetMinInvestment for Game and Category
-        pages().bidder()
+        pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
                 .confirm();
 
-        String lastPosId = pages().positions().getLast();
+        String lastPosId = pages().binaryPositions().getLatest();
         Position position = operations().positionOperations().getByDisplayId(lastPosId);
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
@@ -70,7 +70,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 //        String baseCurrenacyPositionDisplayId = pomHolder.bidder().openPosition(webDriver, asset.getAssetName(), testCaseOption, BinarySelection.LOW, String.valueOf(investedAmount), game, category, true);
 //        Position position = PositionTestingManager.getInstance().getPosition(baseCurrenacyPositionDisplayId);
 //?????????????
-        List<String> positionIds = pages().positions().get();
+        List<String> positionIds = pages().binaryPositions().get();
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size()));
 //?????????????
         //PositionTestingManager.getInstance().cancelPosition(position, "Test '" + testCaseDisplayId + "'");
@@ -93,12 +93,12 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
             operations().accountOperations().updateBalanceTP(accountId, (double) maxInvestment + 200);
         }
 
-        pages().bidder()
+        pages().binaryBidder()
                 .setAmount(maxInvestment.toString())
                 .bidLow()
                 .confirm();
 
-//        List<String> positionIds = pages().positions().get();
+//        List<String> positionIds = pages().binaryPositions().get();
         position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
@@ -120,12 +120,12 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
         String minInvestment = "15.0";    //TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
-        pages().bidder()
+        pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
                 .confirm();
 
-        List<String> positionIds = pages().positions().get();
+        List<String> positionIds = pages().binaryPositions().get();
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
@@ -146,12 +146,12 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
         String minInvestment = "15.0";    //TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
-        pages().bidder()
+        pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
                 .confirm();
 
-        List<String> positionIds = pages().positions().get();
+        List<String> positionIds = pages().binaryPositions().get();
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
@@ -172,12 +172,12 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
         String minInvestment = "15.0";    //TODO it must equal to this function from legacy framework: AssetTestingUtils.getMinInvestment(game, category);
-        pages().bidder()
+        pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
                 .confirm();
 
-        List<String> positionIds = pages().positions().get();
+        List<String> positionIds = pages().binaryPositions().get();
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
@@ -198,20 +198,20 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
         String minInvestment = "15.0";    //TODO GetMinInvestment for Game and Category
-        pages().bidder()
+        pages().binaryBidder()
                 .bidLow()
                 .setAmount(minInvestment)
                 .confirm();
 
-        String lowPositionDisplayId = pages().positions().getLast();
+        String lowPositionDisplayId = pages().binaryPositions().getLatest();
         Position lowPosition = operations().positionOperations().getByDisplayId(lowPositionDisplayId);
 
-        pages().bidder()
+        pages().binaryBidder()
                 .bidHigh()
                 .setAmount(minInvestment)
                 .confirm();
 
-        String highPositionDisplayId = pages().positions().getLast();
+        String highPositionDisplayId = pages().binaryPositions().getLatest();
         Position highPosition = operations().positionOperations().getByDisplayId(highPositionDisplayId);
 //the logic of forming lower and hire then position value should be inside appropriate operations
         double spread = lowPosition.getSpread() != null ? lowPosition.getSpread() : 0;
@@ -228,8 +228,8 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         operations().positionOperations().getExpired(highPosition);
 
 //        TODO logic and assertions should be inside appropriate methods checkWin(...) and checkLose(....), also you are breaking the incapsulation of webElements inside pageObjects
-        WebElement lowPosRow = pages().positions().getTradeRow(lowPositionDisplayId);
-        WebElement highPosRow = pages().positions().getTradeRow(highPositionDisplayId);
+        WebElement lowPosRow = pages().binaryPositions().getTradeRow(lowPositionDisplayId);
+        WebElement highPosRow = pages().binaryPositions().getTradeRow(highPositionDisplayId);
 
         Assert.assertEquals(lowPosRow.getAttribute("class").contains("bmPositive"), true);
         Assert.assertEquals(lowPosRow.getAttribute("class").contains("bmWin"), true);

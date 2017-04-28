@@ -25,18 +25,18 @@ public class BiddingTest extends TPEndToEndTest {
         operations().feedOperations().injectFeed(asset.getId(), 1.5d);
         CRMCustomer customer = operations().customerOperations().register();
         CRMAccount binaryAccount = customer.getBinaryAccount();
-        operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
+        operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
-        pages().bidder()
+        pages().binaryBidder()
                 .setAmount("10.0")
                 .bidHigh()
                 .confirm();
-        String openedPositionId = pages().positions().getLast();
+        String openedPositionId = pages().binaryPositions().getLatest();
         Position position = operations().positionOperations().getByDisplayId(openedPositionId);
         Assert.assertEquals(position.getStatus(), PositionStatus.OPEN);
     }

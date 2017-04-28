@@ -2,17 +2,15 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.impl;
 
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.Bidder;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.BinaryBidder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static org.testng.Assert.assertTrue;
-
 /**
  * Created by mbelyaev on 3/21/17.
  */
-public class BidderImpl extends AbstractPageObject implements Bidder {
+public class BinaryBidderImpl extends AbstractPageObject implements BinaryBidder {
 
     @StoredId
     private By amountInput;
@@ -23,12 +21,12 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
     @StoredId
     private By closePosition;
 
-    public BidderImpl(WebDriver webDriver) {
+    public BinaryBidderImpl(WebDriver webDriver) {
         super(webDriver);
     }
 
     @Override
-    public Bidder setAmount(String value) {
+    public BinaryBidder setAmount(String value) {
         waitUntilDisplayed(amountInput);
         WebElement inputField = find(amountInput);
         inputField.clear();
@@ -37,21 +35,21 @@ public class BidderImpl extends AbstractPageObject implements Bidder {
     }
 
     @Override
-    public Bidder bidLow() {
+    public BinaryBidder bidLow() {
         waitUntilDisplayed(lowButton);
         find(lowButton).click();
         return this;
     }
 
     @Override
-    public Bidder bidHigh() {
+    public BinaryBidder bidHigh() {
         waitUntilDisplayed(highButton);
         find(highButton).click();
         return this;
     }
 
     @Override
-    public Bidder confirm() {
+    public BinaryBidder confirm() {
         waitUntilDisplayed(closePosition);
         waitUntil(() -> !find(closePosition).isDisplayed());
         return this;

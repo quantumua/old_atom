@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by mbelyaev on 3/27/17.
  */
-public interface Positions {
+public interface BinaryPositions {
     List<String> get();
 
     /**
@@ -15,7 +15,7 @@ public interface Positions {
      *
      * @return displayedId of the last opened position
      */
-    String getLast();
+    String getLatest();
 
     //TODO you are breaking the incapsulating of webElements inside page objects
     WebElement getTradeRow(String positionDisplayId);
