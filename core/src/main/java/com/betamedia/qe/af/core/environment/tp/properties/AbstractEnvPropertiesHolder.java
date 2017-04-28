@@ -2,7 +2,6 @@ package com.betamedia.qe.af.core.environment.tp.properties;
 
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
@@ -12,7 +11,7 @@ import javax.annotation.PostConstruct;
  *         Date: 4/14/17.
  */
 public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent> implements EnvironmentDependent, SpacePropertiesHolder<T>, EntityPropertiesHolder<T>,
-        FeedGatewayPropertiesHolder<T>, CRMPropertiesHolder<T> {
+        FeedGatewayPropertiesHolder<T>, CRMPropertiesHolder<T>, PersistenceProperties<T> {
 
     public static final String DOT = ".";
     public static final String TP_SPACE_LOCATORS = "tp.spaceLocators";
@@ -35,6 +34,11 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
     public static final String CRM_URL = "crm.url";
     public static final String BACKOFFICE_USERNAME = "bo.username";
     public static final String BACKOFFICE_PASSWORD = "bo.password";
+
+    public static final String DRIVER_CLASS_NAME = "db.driverClassName";
+    public static final String DATABASE_URL = "db.url";
+    public static final String DATABASE_USERNAME = "db.user";
+    public static final String DATABASE_PASSWORD = "db.password";
 
     @Autowired
     private Environment env;
@@ -62,6 +66,11 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
     private String backOfficeUsername;
     private String backOfficePassword;
 
+    private String driverClassName;
+    private String databaseUrl;
+    private String databaseUsername;
+    private String databasePassword;
+
     @PostConstruct
     public void init() {
         spaceLocators = getProperty(TP_SPACE_LOCATORS);
@@ -84,6 +93,11 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
         crmUrl = getProperty(CRM_URL);
         backOfficeUsername = getProperty(BACKOFFICE_USERNAME);
         backOfficePassword = getProperty(BACKOFFICE_PASSWORD);
+
+        driverClassName = getProperty(DRIVER_CLASS_NAME);
+        databaseUrl = getProperty(DATABASE_URL);
+        databaseUsername = getProperty(DATABASE_USERNAME);
+        databasePassword = getProperty(DATABASE_PASSWORD);
     }
 
     private String getProperty(String postfix) {
@@ -182,5 +196,25 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
     @Override
     public String getBackOffPwd() {
         return backOfficePassword;
+    }
+
+    @Override
+    public String getDriverClassName() {
+        return driverClassName;
+    }
+
+    @Override
+    public String getDatabaseUrl() {
+        return databaseUrl;
+    }
+
+    @Override
+    public String getDatabaseUsername() {
+        return databaseUsername;
+    }
+
+    @Override
+    public String getDatabasePassword() {
+        return databasePassword;
     }
 }

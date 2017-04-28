@@ -3,7 +3,6 @@ package com.betamedia.qe.af.core.api.tp.parsers.json.deserializer;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
-import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMRegisterResultDeserializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
@@ -14,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 
-import static com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMRegisterResultDeserializer.CUSTOMER_NODE_KEY;
+import static com.betamedia.qe.af.core.api.tp.parsers.json.deserializer.CRMRegisterResultDeserializer.CUSTOMER_NODE_KEY;
 import static org.junit.Assert.assertThat;
 
 /**

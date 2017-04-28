@@ -7,6 +7,10 @@ import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
 import com.betamedia.qe.af.core.dsl.operations.CustomerOperations;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
+import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
+import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoExtensionRepository;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,12 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Autowired
     private MobileCRMHTTPAdaper<T> mobileCRMHTTPAdaper;
+
+    @Autowired
+    public AbstractTrackingInfoRepository<T> trackingInfoRepository;
+
+    @Autowired
+    public AbstractTrackingInfoExtensionRepository<T> trackingInfoExtensionRepository;
 
     /**
      * Registers new CRM customer with default customer builder
@@ -150,5 +160,37 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
         return depositErrors;
+    }
+
+    /**
+     * Performs a database query to find customer tracking info extension by a given customer id.
+     */
+    @Override
+    public TrackingInfoExtension getCustomerTrackingInfoExtensionByCustomerId(String customerId) {
+        List<TrackingInfoExtension> infoExtensions =
+                trackingInfoExtensionRepository.findByCustomerIdOrderByCookieCreationTimeDesc(customerId);
+        assertFalse(infoExtensions.isEmpty());
+        return infoExtensions.get(0);
+    }
+
+    /**
+     * Performs a database query to find customer tracking extension info by keyword.
+     */
+    @Override
+    public TrackingInfoExtension getCustomerTrackingInfoExtensionByKeyword(String keyword) {
+        List<TrackingInfoExtension> infoExtensions =
+                trackingInfoExtensionRepository.findByKeywordOrderByCookieCreationTimeDesc(keyword);
+        assertFalse(infoExtensions.isEmpty());
+        return infoExtensions.get(0);
+    }
+
+    /**
+     * Performs a database query to find customer tracking info by tracking info id.
+     */
+    @Override
+    public TrackingInfo getCustomerTrackingInfo(String trackingInfoId) {
+        TrackingInfo trackingInfo = trackingInfoRepository.findOne(trackingInfoId);
+        assertNotNull(trackingInfo);
+        return trackingInfo;
     }
 }

@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser;
+package com.betamedia.qe.af.core.api.tp.parsers.json.deserializer;
 
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAddBonus;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -7,6 +7,8 @@ import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
+import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
+import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
 
 import java.util.List;
 
@@ -35,4 +37,10 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
     CRMDeposit depositByName(MobileDepositBuilder depositBuilder);
 
     List<CRMError>  depositByNameWithErrors(MobileDepositBuilder depositBuilder);
+
+    TrackingInfoExtension getCustomerTrackingInfoExtensionByCustomerId(String customerId);
+
+    TrackingInfoExtension getCustomerTrackingInfoExtensionByKeyword(String keyword);
+
+    TrackingInfo getCustomerTrackingInfo(String trackingInfoId);
 }

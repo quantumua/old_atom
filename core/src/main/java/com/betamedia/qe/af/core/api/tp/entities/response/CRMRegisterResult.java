@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.response;
 
-import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMRegisterResultDeserializer;
+import com.betamedia.qe.af.core.api.tp.parsers.json.deserializer.CRMRegisterResultDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**

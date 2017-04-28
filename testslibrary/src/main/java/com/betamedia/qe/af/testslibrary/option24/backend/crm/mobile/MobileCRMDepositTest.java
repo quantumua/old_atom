@@ -1,6 +1,5 @@
 package com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
@@ -73,24 +72,6 @@ public class MobileCRMDepositTest extends TPBackEndTest {
 
         List<CRMError> depositErrors = operations().customerOperations().depositByNameWithErrors(depositBuilder);
         verifyErrorCodeAndMessage(depositErrors, missingAccountErrorCode, missingAccountErrorMessage);
-    }
-
-    @Test
-    @Parameters("tradingAccountId")
-    public void testDepositWithParamXAliases(String tradingAccountId) {
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
-        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
-        CRMDeposit deposit = operations().customerOperations().deposit(depositBuilder, marketingParametersBuilder);
-        assertNotNull(deposit);
-    }
-
-    @Test
-    @Parameters("tradingAccountId")
-    public void testDepositWithPXAliases(String tradingAccountId) {
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
-        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
-        CRMDeposit deposit = operations().customerOperations().deposit(depositBuilder, marketingParametersBuilder);
-        assertNotNull(deposit);
     }
 
     @Test

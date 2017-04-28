@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.response;
 
-import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMAccountCreateDeserializer;
+import com.betamedia.qe.af.core.api.tp.parsers.json.deserializer.CRMAccountCreateDeserializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

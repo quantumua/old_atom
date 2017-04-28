@@ -1,9 +1,10 @@
 package com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile;
 
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
+import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
+import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
 import com.betamedia.qe.af.core.testingtype.tp.TPBackEndTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -33,32 +34,6 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
     @Test
     public void testDefaultRegistration() {
         CRMCustomer registeredCustomer = operations().customerOperations().register();
-        assertNotNull(registeredCustomer);
-    }
-
-    @Test
-    public void testRegistrationWithParamXAliases() {
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
-        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder, marketingParametersBuilder);
-        assertNotNull(registeredCustomer);
-    }
-
-    @Test
-    public void testRegistrationWithPXAliases() {
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(false);
-        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder, marketingParametersBuilder);
-        assertNotNull(registeredCustomer);
-    }
-
-    @Test
-    public void testRegistrationWithAfSiteId() {
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
-        marketingParametersBuilder.setAf_siteid("https://www.24option.com/");
-        marketingParametersBuilder.setSiteId(null);
-        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder, marketingParametersBuilder);
         assertNotNull(registeredCustomer);
     }
 
@@ -97,5 +72,18 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
         assertNotNull(registeredCustomer);
         assertEquals(decodedName, registeredCustomer.getFirstName());
         assertEquals(decodedName, registeredCustomer.getLastName());
+    }
+
+    @Test
+    public void testRegistrationTimeEqualsToCookieCreationTime() {
+        CRMCustomer registeredCustomer = operations().customerOperations().register();
+        assertNotNull(registeredCustomer);
+
+        TrackingInfoExtension infoExtension = operations().customerOperations().getCustomerTrackingInfoExtensionByCustomerId(registeredCustomer.getId());
+        assertNotNull(infoExtension);
+        TrackingInfo trackingInfo = operations().customerOperations().getCustomerTrackingInfo(infoExtension.getId());
+        assertNotNull(trackingInfo);
+
+        assertEquals(trackingInfo.getCreatedOn(), infoExtension.getCookieCreationTime());
     }
 }

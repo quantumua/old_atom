@@ -26,4 +26,13 @@
             </class>
         </classes>
     </test>
+    <test name="marketingTest">
+        <classes>
+            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMMarketingParametersTest">
+                <methods>
+                    <parameter name="tradingAccountId" value="E8DE6CAC-A800-E611-A726-005056B73B53"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

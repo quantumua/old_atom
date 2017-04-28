@@ -1,6 +1,5 @@
 package com.betamedia.qe.af.core.api.tp.parsers.json.deserializer;
 
-import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMDataDeserializer;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

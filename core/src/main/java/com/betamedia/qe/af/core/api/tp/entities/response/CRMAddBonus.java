@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.response;
 
-import com.betamedia.qe.af.core.api.tp.parsers.json.deserialiser.CRMAddBonusDeserializer;
+import com.betamedia.qe.af.core.api.tp.parsers.json.deserializer.CRMAddBonusDeserializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
