@@ -149,10 +149,14 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
     private void validateAsset(WebElement assetElement, ExpectedCfdAsset expectedCfdAsset, String expectedCurrency) {
         Assert.assertNotNull(expectedCfdAsset, "Expected asset data not found for " + assetElement.getText());
         assetElement.click();
-        Assert.assertEquals(find(assetNameTitle).getText(), expectedCfdAsset.getSymbol());
+        Assert.assertEquals(find(assetNameTitle).getText(),
+                expectedCfdAsset.getSymbol(),
+                "Bidding widget asset title mismatch");
         makeActions().moveToElement(find(assetTooltipIcon)).perform();
         waitUntilDisplayed(assetTooltipContent);
-        Assert.assertEquals(find(assetTooltipContent, underlyingAssetName, toolTipName).getText(), expectedCfdAsset.getTooltipName());
+        Assert.assertEquals(find(assetTooltipContent, underlyingAssetName, toolTipName).getText(),
+                expectedCfdAsset.getTooltipName(),
+                "Asset tooltip name mismatch");
         if (exists(assetTooltipContent, userDataCurrency)) {
             validateTooltipCurrency(userDataCurrency, expectedCurrency);
         } else {

@@ -1,8 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.web;
 
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.fwdataaccess.entities.ExpectedCfdAsset;
 import com.betamedia.qe.af.core.testingtype.tp.TPResourceAwareEndToEndTest;
 import org.testng.Assert;
@@ -10,7 +8,12 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 
 /**
  * Created by mbelyaev on 4/18/17.
@@ -27,50 +30,22 @@ public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
         pages().loginPage().login("tp_automation_spjlto", CustomerBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         List<String> assets = pages().assets().cfdAssetNames();
-        Assert.assertEqualsNoOrder(
-                assets.toArray(),
-                getResources(ExpectedCfdAsset.class)
-                        .stream()
-                        .map(ExpectedCfdAsset::getSymbol)
-                        .collect(Collectors.toList())
-                        .toArray());
+        assets.removeAll(getExpected());
+        assertThat("Found unexpected assets:" + String.join(",", assets), assets, is(empty()));
     }
-
 
     /**
      * expected to fail <br/>
      * currently provided list of expected assets does not match the data on the page
      **/
     @Test
-    public void assetValidationAndCurrencyConversionTest() {
-        CRMCustomer customer = operations().customerOperations().register();
-        CRMAccount cfdAccount = customer.getFXCFDAccount();
-        operations().accountOperations().depositCRM(cfdAccount.getExternalId(), 1000d);
+    @Parameters({"username", "password"})
+    public void assetValidationAndCurrencyConversionTest(String username, String password) {
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().loginPage().login(username, password);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         String expectedCurrency = pages().controlPanel().getCurrency();
         pages().assets().cfdValidateAssets(getResources(ExpectedCfdAsset.class), expectedCurrency);
-    }
-
-    /**
-     * expected to fail <br/>
-     * currently there is no way to set CFD/Panda account balance for the customer - we are unable to test proper trading flow
-     **/
-    @Test
-    public void tradingTest() {
-        CRMCustomer customer = operations().customerOperations().register();
-        CRMAccount cfdAccount = customer.getFXCFDAccount();
-        operations().accountOperations().depositCRM(cfdAccount.getExternalId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().assets().forEachAssetClicked(symbol -> {
-            pages().cfdBidder().setAmount("0.01").buy().confirm();
-            pages().messageBox().ok();
-            Assert.assertEquals(pages().cfdPositions().getSymbolForLatest(), symbol);
-        });
-
     }
 
     /**
@@ -88,6 +63,13 @@ public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
                     Assert.assertEquals(pages().cfdPositions().getSymbolForLatest(), symbol);
                 }
         );
+    }
+
+    private Set<String> getExpected() {
+        return getResources(ExpectedCfdAsset.class)
+                .stream()
+                .map(ExpectedCfdAsset::getSymbol)
+                .collect(Collectors.toSet());
     }
 
 }
