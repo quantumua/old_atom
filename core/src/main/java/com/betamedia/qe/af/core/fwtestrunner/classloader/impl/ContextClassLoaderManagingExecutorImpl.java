@@ -19,6 +19,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Supplier;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 import java.util.stream.Collectors;
 
 /**
@@ -48,6 +51,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
     private URLClassLoaderFactory classLoaderFactory;
 
     private volatile String jarPath;
+    private volatile String jarVersion;
 
     private final ReadWriteLock pathLock = new ReentrantReadWriteLock(true);
     private volatile ReadWriteLock jarLock = new ReentrantReadWriteLock(true);
@@ -92,6 +96,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
                 setJarPath(storageService.store(jar, "testslibrary-" + UUID.randomUUID() + ".jar"));
                 this.jarLock = new ReentrantReadWriteLock(true);
             }
+            setJarVersion();
         } finally {
             pathLock.writeLock().unlock();
         }
@@ -110,6 +115,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
         pathLock.writeLock().lock();
         try {
             this.jarPath = jarPath;
+            setJarVersion();
         } finally {
             pathLock.writeLock().unlock();
         }
@@ -204,5 +210,28 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
                         .map(CompletableFuture::join)
                         .collect(Collectors.toList())
                 );
+    }
+
+    private void setJarVersion() {
+        pathLock.writeLock().lock();
+        try (JarFile jar = new JarFile(jarPath)) {
+            Manifest manifest = jar.getManifest();
+            Attributes attributes = manifest.getMainAttributes();
+            jarVersion = attributes.getValue("Implementation-Version");
+        } catch (Exception ex) {
+            logger.warn("Couldn't get testslibrary version", ex.getMessage());
+        } finally {
+            pathLock.writeLock().unlock();
+        }
+    }
+
+    public String getJarVersion() {
+        pathLock.readLock().lock();
+        try {
+            return jarVersion;
+        } finally {
+            pathLock.readLock().unlock();
+        }
+
     }
 }
