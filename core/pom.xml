@@ -92,7 +92,6 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>RELEASE</version>
         </dependency>
     </dependencies>
 </project>

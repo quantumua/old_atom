@@ -51,6 +51,14 @@
             <artifactId>tp-api</artifactId>
             <version>${tp.version}</version>
             <scope>compile</scope>
+            <exclusions>
+                <!--is excluded for compatibility with jpa -->
+                <exclusion>
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
+
         </dependency>
         <dependency>
             <groupId>com.betamedia.common</groupId>
