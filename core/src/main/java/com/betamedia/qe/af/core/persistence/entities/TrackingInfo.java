@@ -13,6 +13,13 @@ import java.util.Date;
 @Table(name = "bt_trackinginfobase")
 public class TrackingInfo {
 
+    public TrackingInfo() {
+    }
+
+    public TrackingInfo(String id) {
+        this.id = id;
+    }
+
     @Id
     @Column(name = "bt_trackinginfoid")
     private String id;

@@ -12,6 +12,15 @@ import java.util.Date;
 @Entity
 @Table(name = "bt_trackinginfoextensionbase")
 public class TrackingInfoExtension {
+
+    public TrackingInfoExtension() {
+    }
+
+    public TrackingInfoExtension(String id, String customerId) {
+        this.id = id;
+        this.customerId = customerId;
+    }
+
     @Id
     @Column(name = "bt_trackinginfoid")
     private String id;

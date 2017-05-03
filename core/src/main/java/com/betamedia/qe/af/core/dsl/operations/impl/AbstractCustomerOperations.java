@@ -96,7 +96,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     public void logout(String customerId) {
         CRMResponse logoutResponse = mobileCRMHTTPAdaper.logout(customerId);
         List<CRMError> logoutErrors = logoutResponse == null? null : logoutResponse.getErrors();
-        assertNull(logoutResponse, "There were errors during customer registration:" + logoutErrors);
+        assertNull(logoutResponse, "There were errors during customer logout:" + logoutErrors);
     }
 
     /**

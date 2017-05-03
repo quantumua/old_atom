@@ -3,12 +3,16 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMResponse;
+import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
+import com.betamedia.qe.af.core.api.tp.entities.response.*;
+import com.betamedia.qe.af.core.environment.tp.QAEnvironment;
+import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
+import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoExtensionRepository;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoRepository;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,9 +23,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,16 +35,27 @@ import static org.mockito.Mockito.when;
  */
 public class CustomerOperationsTest {
 
-    private final String id = "1243";
+    private final String customerId = "1243";
     private final String displayId = "535";
     private final String firstName = "firstName";
     private final String lastName = "lastName";
     private final String email = "firstName.lastName@gmail.com";
     private final String userName = "testUsername";
     private final String password = "testPassword";
+    private final String transactionId = "testTransactionId";
+    private final String tradingAccountId = "testTradingAccountId";
+    private final String siteId = "24options";
+    private final String keyword = "testKeyword";
+    private final String trackingId = "testTrackingId";
 
-    private CRMResponse<CRMRegisterResult> expectedResponse;
+    private CRMResponse<CRMRegisterResult> expectedCustomerResponse;
+    private CRMResponse<CRMDeposit> expectedDepositResponse;
+    private CRMResponse<CRMDeposit> errorDepositResponse;
     private CRMCustomer expectedCustomer;
+    private CRMDeposit expectedDeposit;
+    private CRMError expectedError;
+    private TrackingInfo expectedTrackingInfo;
+    private TrackingInfoExtension expectedTrackingInfoExtension;
 
     @InjectMocks
     private QAEnvCustomerOperationsImpl customerOperations;
@@ -48,19 +63,37 @@ public class CustomerOperationsTest {
     @Mock
     private MobileCRMHTTPAdaper mobileCRMHTTPAdaper;
 
+    @Mock
+    private AbstractTrackingInfoRepository<QAEnvironment> trackingInfoRepository;
+
+    @Mock
+    private AbstractTrackingInfoExtensionRepository<QAEnvironment> trackingInfoExtensionRepository;
+
     @BeforeClass
     public void setupClass() {
-        expectedResponse = getExpectedResponse();
+        expectedCustomerResponse = getExpectedCustomerResponse();
         expectedCustomer = getExpectedCustomer();
+        expectedDeposit = getExpectedDeposit();
+        expectedDepositResponse = getExpectedDepositResponse();
+        errorDepositResponse = getErrorDepositResponse();
+        expectedTrackingInfo = getExpectedTrackingInfo();
+        expectedTrackingInfoExtension = getExpectedTrackingInfoExtension();
+        expectedError = getExpectedError();
     }
 
     @BeforeMethod
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        when(mobileCRMHTTPAdaper.register(any())).thenReturn(expectedResponse);
-        when(mobileCRMHTTPAdaper.login(userName, password)).thenReturn(expectedResponse);
-
+        when(mobileCRMHTTPAdaper.register(any())).thenReturn(expectedCustomerResponse);
+        when(mobileCRMHTTPAdaper.login(userName, password)).thenReturn(expectedCustomerResponse);
+        when(mobileCRMHTTPAdaper.deposit(any())).thenReturn(expectedDepositResponse);
+        when(mobileCRMHTTPAdaper.depositByName(any())).thenReturn(expectedDepositResponse);
+        when(trackingInfoRepository.findOne(trackingId)).thenReturn(expectedTrackingInfo);
+        when(trackingInfoExtensionRepository.findByCustomerIdOrderByCookieCreationTimeDesc(customerId))
+                .thenReturn(Collections.singletonList(expectedTrackingInfoExtension));
+        when(trackingInfoExtensionRepository.findByKeywordOrderByCookieCreationTimeDesc(keyword))
+                .thenReturn(Collections.singletonList(expectedTrackingInfoExtension));
     }
 
     @Test
@@ -91,9 +124,7 @@ public class CustomerOperationsTest {
 
     @Test
     public void testRegisterCustomerWithMarketingParameters() {
-        final String siteId = "24options";
-        final String keyword = "testKeyword";
-        when(mobileCRMHTTPAdaper.register(any(CustomerRO.class), any(MarketingParametersRO.class))).thenReturn(expectedResponse);
+        when(mobileCRMHTTPAdaper.register(any(CustomerRO.class), any(MarketingParametersRO.class))).thenReturn(expectedCustomerResponse);
 
         ArgumentCaptor<MarketingParametersRO> argumentCaptor = ArgumentCaptor.forClass(MarketingParametersRO.class);
         CustomerBuilder customerBuilder = new CustomerBuilder();
@@ -120,47 +151,118 @@ public class CustomerOperationsTest {
 
     @Test
     public void testLogin() {
-        CRMCustomer actualCustomer = customerOperations.register();
+        CRMCustomer actualCustomer = customerOperations.login(userName, password);
         assertThat(expectedCustomer, new ReflectionEquals(actualCustomer));
     }
 
-    @Test(enabled = false)
+    @Test
     public void testLogout() {
+        final String customerId = "testId";
+        when(mobileCRMHTTPAdaper.logout(customerId)).thenReturn(null);
 
+        customerOperations.logout(customerId);
+
+        verify(mobileCRMHTTPAdaper).logout(customerId);
     }
 
-    @Test(enabled = false)
+    @Test
     public void testDeposit() {
-
+        CRMDeposit actualDeposit = customerOperations.deposit(new MobileDepositBuilder(tradingAccountId));
+        assertThat(expectedDeposit, new ReflectionEquals(actualDeposit));
     }
 
-    @Test(enabled = false)
+    @Test
     public void testDepositWithMarketingParameters() {
+        when(mobileCRMHTTPAdaper.deposit(any(MobileDepositRO.class), any(MarketingParametersRO.class))).thenReturn(expectedDepositResponse);
 
+        ArgumentCaptor<MarketingParametersRO> argumentCaptor = ArgumentCaptor.forClass(MarketingParametersRO.class);
+        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
+        marketingParametersBuilder.setSiteId(siteId);
+        marketingParametersBuilder.setKeyword(keyword);
+
+        CRMDeposit actualDeposit = customerOperations.deposit(new MobileDepositBuilder(tradingAccountId), marketingParametersBuilder);
+
+        verify(mobileCRMHTTPAdaper).deposit(any(MobileDepositRO.class), argumentCaptor.capture());
+        assertEquals(siteId, argumentCaptor.getValue().getSiteId());
+        assertEquals(keyword, argumentCaptor.getValue().getKeyword());
+        assertThat(expectedDeposit, new ReflectionEquals(actualDeposit));
     }
 
-    @Test(expectedExceptions = AssertionError.class, enabled = false)
+    @Test(expectedExceptions = AssertionError.class)
     public void testDepositWithUnxepectedErrors() {
-
+        when(mobileCRMHTTPAdaper.deposit(any())).thenReturn(errorDepositResponse);
+        customerOperations.deposit(new MobileDepositBuilder(tradingAccountId));
     }
 
-    @Test(enabled = false)
+    @Test
     public void testDeposithWithExpectedErrors() {
-
+        when(mobileCRMHTTPAdaper.deposit(any())).thenReturn(errorDepositResponse);
+        List<CRMError> actualErrors = customerOperations.depositWithErrors(new MobileDepositBuilder(tradingAccountId));
+        assertTrue(actualErrors.size() == 1);
+        assertThat(expectedError, new ReflectionEquals(actualErrors.get(0)));
     }
 
-    private CRMResponse<CRMRegisterResult> getExpectedResponse() {
+    @Test()
+    public void testDepositByName() {
+        CRMDeposit actualDeposit = customerOperations.depositByName(new MobileDepositBuilder(tradingAccountId));
+        assertThat(expectedDeposit, new ReflectionEquals(actualDeposit));
+    }
+
+    @Test
+    public void testGetTrackingInfo() {
+        TrackingInfo actualInfo = customerOperations.getCustomerTrackingInfo(trackingId);
+        assertThat(expectedTrackingInfo, new ReflectionEquals(actualInfo));
+    }
+
+    @Test
+    public void testGetTrackingInfoExtensionByKeyword() {
+        TrackingInfoExtension actualInfo = customerOperations.getCustomerTrackingInfoExtensionByKeyword(keyword);
+        assertThat(expectedTrackingInfoExtension, new ReflectionEquals(actualInfo));
+    }
+
+    @Test
+    public void testGetTrackingInfoExtensionById() {
+        TrackingInfoExtension actualInfo = customerOperations.getCustomerTrackingInfoExtensionByCustomerId(customerId);
+        assertThat(expectedTrackingInfoExtension, new ReflectionEquals(actualInfo));
+    }
+
+    private CRMResponse<CRMRegisterResult> getExpectedCustomerResponse() {
         return new CRMResponse<>(Collections.emptyList(),
                 new CRMRegisterResult(getExpectedCustomer()), Collections.emptyList(), "", "");
     }
 
+    private CRMResponse<CRMDeposit> getExpectedDepositResponse() {
+        return new CRMResponse<>(Collections.emptyList(), getExpectedDeposit(), Collections.emptyList(), "", "");
+    }
+
+    private CRMResponse<CRMDeposit> getErrorDepositResponse() {
+        return new CRMResponse<>(null, null,
+                Collections.singletonList(getExpectedError()), null, null);
+    }
+
+    private CRMError getExpectedError() {
+        return new CRMError("errorCode", "errorMessage");
+    }
+
     private CRMCustomer getExpectedCustomer() {
         CRMCustomer crmCustomer = new CRMCustomer();
-        crmCustomer.setId(id);
+        crmCustomer.setId(customerId);
         crmCustomer.setDisplayId(displayId);
         crmCustomer.setFirstName(firstName);
         crmCustomer.setLastName(lastName);
         crmCustomer.setEmail(email);
         return crmCustomer;
+    }
+
+    private CRMDeposit getExpectedDeposit() {
+        return new CRMDeposit(transactionId);
+    }
+
+    private TrackingInfo getExpectedTrackingInfo() {
+        return new TrackingInfo(trackingId);
+    }
+
+    private TrackingInfoExtension getExpectedTrackingInfoExtension() {
+        return new TrackingInfoExtension(trackingId, customerId);
     }
 }
