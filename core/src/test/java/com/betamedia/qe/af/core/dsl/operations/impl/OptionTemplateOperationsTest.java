@@ -31,12 +31,11 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verify;
 
 /**
  * Created by Oleksandr Losiev on 4/20/17.
  */
-public class AbstractOptionTemplateOperationsTest {
+public class OptionTemplateOperationsTest {
 
     @InjectMocks
     private QAEnvOptionTemplateOperationsImpl optionTemplateOperations;

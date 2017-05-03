@@ -16,9 +16,10 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Oleksandr Losiev on 4/20/17.
  */
-public class AbstractPositionOperationsTest {
+public class PositionOperationsTest {
+
     @InjectMocks
-    private AbstractPositionOperations positionOperations;
+    private QAEnvPositionOperationsImpl positionOperations;
 
     @Mock
     private FWTPConnector tpConnector;

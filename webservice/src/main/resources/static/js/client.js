@@ -174,6 +174,31 @@ angular.module('client', [])
             })
         }
     })
+    .controller('version', function ($http, $interval) {
+        var self = this;
+        self.core = null;
+        self.tests = null;
+        function getCoreVersion() {
+            $http.get('/af/version/core')
+                .then(function (r) {
+                    self.core = r.data['core.version'];
+                })
+        }
+
+        function getTestsVersion() {
+            $interval(
+                function () {
+                    $http.get('/af/version/testslibrary')
+                        .then(function (r) {
+                            self.tests = r.data['testslibrary.version'];
+                        })
+                }, 5000);
+        }
+
+        getCoreVersion();
+        getTestsVersion();
+
+    })
     .directive('fileModel', ['$parse', function ($parse) {
         return {
             restrict: 'A',

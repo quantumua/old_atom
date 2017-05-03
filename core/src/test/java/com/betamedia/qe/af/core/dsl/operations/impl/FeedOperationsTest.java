@@ -20,10 +20,10 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Oleksandr Losiev on 4/20/17.
  */
-public class AbstractFeedOperationsTest {
+public class FeedOperationsTest {
 
     @InjectMocks
-    private AbstractFeedOperations feedOperations;
+    private QAEnvFeedOperationsImpl feedOperations;
 
     @Mock
     private FWFeedGatewayConnector feedGatewayConnector;

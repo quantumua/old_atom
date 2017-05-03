@@ -18,6 +18,7 @@
 <a href="/af/">Run tests</a> |
 <a href="/af/schedule">Schedule test execution</a> |
 <a href="/af/upload">Upload JAR</a>
+
 <div ng-controller="runner as runner" class="container">
     <form role="form" ng-submit="runner.run()">
         <div class="form-group">
@@ -48,7 +49,16 @@
         </tr>
     </table>
 </div>
-
+<div ng-controller="version as version" class="container">
+    <table>
+        <tr>
+            <td><span ng-cloak>Core: {{version.core}}</span></td>
+        </tr>
+        <tr>
+            <td><span ng-cloak>TestsLibrary: {{version.tests}}</span></td>
+        </tr>
+    </table>
+</div>
 <script src="js/angular-bootstrap.js" type="text/javascript"></script>
 <script src="js/client.js"></script>
 </body>

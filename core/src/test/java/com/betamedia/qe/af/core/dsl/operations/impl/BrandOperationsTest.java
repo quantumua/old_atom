@@ -2,12 +2,12 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.common.search.Page;
 import com.betamedia.qe.af.core.connectors.tp.FWTPConnector;
+import com.betamedia.qe.af.core.environment.tp.properties.EntityPropertiesHolder;
 import com.betamedia.tp.api.model.Brand;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -24,16 +24,19 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Oleksandr Losiev on 4/19/17.
  */
-public class AbstractBrandOperationsTest {
+public class BrandOperationsTest {
 
     @InjectMocks
-    private AbstractBrandOperations brandOperations;
+    private QAEnvBrandOperationsImpl brandOperations;
 
     @Mock
     private FWTPConnector tpConnector;
 
     @Mock
     private Page<Brand> brandPage;
+
+    @Mock
+    private EntityPropertiesHolder entityPropertiesHolder;
 
     private String brandId = "testBrandId";
     private String brandName = "testBrandName";
@@ -42,8 +45,7 @@ public class AbstractBrandOperationsTest {
     @BeforeMethod
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        ReflectionTestUtils.setField(brandOperations, "brandId", brandId);
-
+        when(entityPropertiesHolder.getBrandId()).thenReturn(brandId);
         when(tpConnector.readById(Brand.class, brandId)).thenReturn(getExpectedBrand());
         doReturn(brandPage).when(tpConnector).readMultiple(any(), any(), any());
 

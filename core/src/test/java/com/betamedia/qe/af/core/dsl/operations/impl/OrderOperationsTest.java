@@ -19,10 +19,10 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Oleksandr Losiev on 4/20/17.
  */
-public class AbstractOrderOperationsTest {
+public class OrderOperationsTest {
 
     @InjectMocks
-    private AbstractOrderOperations orderOperations;
+    private QAEnvOrderOperationsImpl orderOperations;
 
     @Mock
     private FWTPConnector tpConnector;

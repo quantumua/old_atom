@@ -42,10 +42,10 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Oleksandr Losiev on 4/18/17.
  */
-public class AbstractAccountOperationsTest {
+public class AccountOperationsTest {
 
     @InjectMocks
-    private AbstractAccountOperations accountOperations;
+    private QAEnvAccountOperationsImpl accountOperations;
 
     @Mock
     private FWTPConnector tpConnector;
