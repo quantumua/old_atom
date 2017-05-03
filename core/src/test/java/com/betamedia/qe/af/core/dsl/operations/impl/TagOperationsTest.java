@@ -29,10 +29,10 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by Oleksandr Losiev on 4/20/17.
  */
-public class AbstractTagOperationsTest {
+public class TagOperationsTest {
 
     @InjectMocks
-    private AbstractTagOperations tagOperations;
+    private QAEnvTagOperationsImpl tagOperations;
 
     @Mock
     private FWTPConnector tpConnector;

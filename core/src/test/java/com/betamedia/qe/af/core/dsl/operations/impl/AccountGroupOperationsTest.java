@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Oleksandr Losiev on 4/18/17.
  */
-public class AbstractAccountGroupOperationsTest {
+public class AccountGroupOperationsTest {
 
     @InjectMocks
     private QAEnvAccountGroupOperationsImpl accountGroupOperations;

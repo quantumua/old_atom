@@ -25,10 +25,10 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Oleksandr Losiev on 4/19/17.
  */
-public class AbstractAssetOperationsTest {
+public class AssetOperationsTest {
 
     @InjectMocks
-    private AbstractAssetOperations assetOperations;
+    private QAEnvAssetOperationsImpl assetOperations;
 
     @Mock
     private FWTPConnector tpConnector;

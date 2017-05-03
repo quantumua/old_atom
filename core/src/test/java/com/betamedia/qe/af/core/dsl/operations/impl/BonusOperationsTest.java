@@ -25,10 +25,10 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Oleksandr Losiev on 4/19/17.
  */
-public class AbstractBonusOperationsTest {
+public class BonusOperationsTest {
 
     @InjectMocks
-    private AbstractBonusOperations bonusOperations;
+    private QAEnvBonusOperationsImpl bonusOperations;
 
     @Mock
     private FWTPConnector tpConnector;

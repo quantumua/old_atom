@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
  *         Date: 4/21/17.
  */
 @Component
-public class QAtAccountOperationsImpl extends AbstractAccountOperations<QAEnvironment> implements QAEnvironment {
+public class QAEnvBonusOperationsImpl extends AbstractBonusOperations<QAEnvironment> implements QAEnvironment {
 }
