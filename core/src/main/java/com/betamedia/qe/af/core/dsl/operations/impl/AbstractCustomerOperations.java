@@ -66,6 +66,17 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         return verifyAndReturnCRMCustomer(register);
     }
 
+    /**
+     * Registers new CRM customer and expects errors.
+     */
+    @Override
+    public List<CRMError>  registerWithErrors(CustomerBuilder customerBuilder) {
+        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO());
+        List<CRMError> registerErrors = register.getErrors();
+        assertFalse(registerErrors.isEmpty(), "Registration errors were expected, but there were none.");
+        return registerErrors;
+    }
+
     private CRMCustomer verifyAndReturnCRMCustomer(CRMResponse<CRMRegisterResult> register) {
         CRMRegisterResult registrationResult = register.getResult();
         List<CRMError> registrationErrors = register.getErrors();

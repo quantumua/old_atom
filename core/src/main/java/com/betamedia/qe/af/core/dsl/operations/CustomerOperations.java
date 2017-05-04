@@ -24,6 +24,8 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     CRMCustomer register(CustomerBuilder customerBuilder, MarketingParametersBuilder marketingParametersBuilder);
 
+    List<CRMError>  registerWithErrors(CustomerBuilder customerBuilder);
+
     CRMCustomer login(String username, String password);
 
     void logout(String customerId);

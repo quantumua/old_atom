@@ -150,6 +150,14 @@ public class CustomerOperationsTest {
     }
 
     @Test
+    public void testRegisterCustomerWithExpectedErrors() {
+        when(mobileCRMHTTPAdaper.register(any())).thenReturn(errorDepositResponse);
+        List<CRMError> actualErrors = customerOperations.registerWithErrors(new CustomerBuilder());
+        assertTrue(actualErrors.size() == 1);
+        assertThat(expectedError, new ReflectionEquals(actualErrors.get(0)));
+    }
+
+    @Test
     public void testLogin() {
         CRMCustomer actualCustomer = customerOperations.login(userName, password);
         assertThat(expectedCustomer, new ReflectionEquals(actualCustomer));
@@ -189,13 +197,13 @@ public class CustomerOperationsTest {
     }
 
     @Test(expectedExceptions = AssertionError.class)
-    public void testDepositWithUnxepectedErrors() {
+    public void testDepositWithUnexepectedErrors() {
         when(mobileCRMHTTPAdaper.deposit(any())).thenReturn(errorDepositResponse);
         customerOperations.deposit(new MobileDepositBuilder(tradingAccountId));
     }
 
     @Test
-    public void testDeposithWithExpectedErrors() {
+    public void testDepositWithExpectedErrors() {
         when(mobileCRMHTTPAdaper.deposit(any())).thenReturn(errorDepositResponse);
         List<CRMError> actualErrors = customerOperations.depositWithErrors(new MobileDepositBuilder(tradingAccountId));
         assertTrue(actualErrors.size() == 1);

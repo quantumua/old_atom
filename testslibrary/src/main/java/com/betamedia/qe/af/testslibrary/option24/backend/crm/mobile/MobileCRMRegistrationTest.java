@@ -3,14 +3,16 @@ package com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
+import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
 import com.betamedia.qe.af.core.testingtype.tp.TPBackEndTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 
 /**
@@ -23,11 +25,17 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
         return new Object[][] {
                 {"CHF", "CHF"},
                 {"JPY", "JPY"},
-                {"BRL", "EUR"},
                 {"USD", "EUR"},
+                {"", "EUR"}
+        };
+    }
+
+    @DataProvider(name = "notSupportedCurrencies")
+    public static Object[][] notSupportedCurrencies() {
+        return new Object[][] {
+                {"BRL", "EUR"},
                 {"VER", "EUR"},
                 {"NULL", "EUR"},
-                {"", "EUR"}
         };
     }
 
@@ -48,6 +56,22 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
         for (CRMAccount account : accounts) {
             assertEquals(expectedCurrency, account.getCurrency());
         }
+    }
+
+    @Test(dataProvider = "notSupportedCurrencies")
+    public void testNotSupportedCurrencies(String registrationCurrency, String expectedCurrency) {
+        final String expectedErrorCode = "CurrencyNotSupported";
+        final String expectedErrorMessage = "Currency is not supported";
+
+        CustomerBuilder customerBuilder = new CustomerBuilder();
+        customerBuilder.setCurrency(registrationCurrency);
+
+        List<CRMError> registrationErrors = operations().customerOperations().registerWithErrors(customerBuilder);
+
+        assertTrue(registrationErrors.size() == 1);
+        CRMError error = registrationErrors.get(0);
+        assertEquals(expectedErrorCode, error.getCode());
+        assertEquals(expectedErrorMessage, error.getMessage());
     }
 
     @Test
