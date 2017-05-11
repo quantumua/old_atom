@@ -94,11 +94,11 @@ public abstract class AbstractPageObject {
         return new WebDriverWait(webDriver, MAX_WAIT_SEC);
     }
 
-    private void switchToFrame(By iFrame) {
+    protected void switchToFrame(By iFrame) {
         webDriver.switchTo().frame(find(iFrame));
     }
 
-    private void leaveFrame() {
+    protected void leaveFrame() {
         webDriver.switchTo().defaultContent();
     }
 
@@ -110,7 +110,7 @@ public abstract class AbstractPageObject {
                 consumer.accept(find(bys));
             } catch (StaleElementReferenceException e) {
                 logger.debug(DOM_UPDATE_MESSAGE, e);
-                Reporter.log(DOM_UPDATE_MESSAGE);
+                Reporter.log(DOM_UPDATE_MESSAGE + '\n');
             }
         } while (System.currentTimeMillis() - start < AbstractPageObject.MAX_WAIT_SEC * 1000);
     }
@@ -123,7 +123,7 @@ public abstract class AbstractPageObject {
                 return function.apply(find(bys));
             } catch (StaleElementReferenceException e) {
                 logger.debug(DOM_UPDATE_MESSAGE, e);
-                Reporter.log(DOM_UPDATE_MESSAGE + "\n");
+                Reporter.log(DOM_UPDATE_MESSAGE + '\n');
             }
         } while (System.currentTimeMillis() - start < AbstractPageObject.MAX_WAIT_SEC * 1000);
         return null;
@@ -135,7 +135,7 @@ public abstract class AbstractPageObject {
             return true;
         } catch (NoSuchElementException e) {
             logger.debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
-            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + "\n");
+            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
             return false;
         }
     }

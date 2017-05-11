@@ -4,15 +4,15 @@ import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.assets.Assets;
 import com.betamedia.qe.af.core.fwdataaccess.entities.ExpectedCfdAsset;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.Reporter;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static javax.swing.text.html.HTML.Attribute.CLASS;
@@ -22,8 +22,11 @@ import static javax.swing.text.html.HTML.Tag.TR;
  * Created by mbelyaev on 4/18/17.
  */
 public class AssetsImpl extends AbstractPageObject implements Assets {
+    private static final Logger logger = LogManager.getLogger(AssetsImpl.class);
+
     private static final String ASSET_AVAILABLE_CLASS = "bmAvailable";
     private static final String ASSETID_CLASS_PREFIX = "bmId";
+    private static final String ASSET_NOT_FOUND_MESSAGE = "Asset not found on page";
 
     @StoredId
     private By assetSearchBox;
@@ -95,67 +98,48 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
         return inIFrame(this::assetNames, pandaIframe);
     }
 
-    @Override
-    public void cfdValidateAssets(List<ExpectedCfdAsset> expectedAssets, String expectedCurrency) {
-        inIFrame(() -> {
-            validateAssets(expectedAssets, expectedCurrency);
-            return null;
-        }, pandaIframe);
-    }
-
     /**
-     * WIP
+     * Attempts to find the corresponding asset on product page and validate its info. <br/>
      * TODO must confirm which expected data fields are matched to which page elements. <br/>
-     * expectedCfdAsset is retrieved by {@link ExpectedCfdAsset#listBidderName} for each element of asset list on UI. <br/>
-     * {@link ExpectedCfdAsset#tooltipName} is used to match "Underlying asset name" in tooltip <br/>
-     * {@link ExpectedCfdAsset#listBidderName} is used to match asset title on bidding widget <br/>
      * Provided list of expected CFD assets does not match the product data - TEST WILL FAIL
+     *
+     * @param listName expected name in asset list; used to locate the asset
+     * @param symbol expected symbol
+     * @param tooltipName expected tooltip
+     * @param expectedCurrency user currency
+     * @return <code>true</code> if asset was found on page and validated,<br/> <code>false</code> otherwise (failure to locate asset is expected and is not a test failure)
      **/
     @Override
-    public void validateAssets(List<ExpectedCfdAsset> expectedAssets, String expectedCurrency) {
-        Map<String, ExpectedCfdAsset> expectedAssetMap = createMapByAssetListName(expectedAssets);
+    public boolean tryValidateAsset(String listName, String symbol, String tooltipName, String expectedCurrency) {
         waitUntil(() -> !find(assetContainer).findElements(By.tagName(TR.toString())).isEmpty());
-        find(assetContainer)
-                .findElements(By.tagName(TR.toString()))
-                .forEach(assetElement -> validateAsset(
-                        assetElement,
-                        expectedAssetMap.get(assetElement.findElement(assetName).getText()),
-                        expectedCurrency
-                ));
+        List<WebElement> assetElement = find(assetContainer).findElements(byText(listName));
+        if (assetElement.isEmpty()) {
+            logger.debug(ASSET_NOT_FOUND_MESSAGE);
+            Reporter.log(ASSET_NOT_FOUND_MESSAGE + '\n');
+            return false;
+        }
+        validateFoundAsset(assetElement.get(0), listName, symbol, tooltipName, expectedCurrency);
+        return true;
+    }
+
+    private By byText(String listBidderName) {
+        return By.xpath(".//td[text() = '" + listBidderName + "']");
     }
 
     @Override
-    public void forEachAssetClicked(Consumer<String> forSymbol) {
-        waitUntil(() -> !find(assetContainer).findElements(By.tagName(TR.toString())).isEmpty());
-        find(assetContainer)
-                .findElements(By.tagName(TR.toString()))
-                .stream()
-                .peek(WebElement::click)
-                .forEach(assetElement -> forSymbol.accept(assetElement.findElement(assetName).getText()));
+    public void switchToPanda() {
+        switchToFrame(pandaIframe);
     }
 
-    @Override
-    public void forEachCfdAssetClicked(Consumer<String> forSymbol) {
-        inIFrame(() -> {
-            forEachAssetClicked(forSymbol);
-            return null;
-        }, pandaIframe);
-    }
-
-    private Map<String, ExpectedCfdAsset> createMapByAssetListName(List<ExpectedCfdAsset> expectedAssets) {
-        return expectedAssets.stream().collect(Collectors.toMap(ExpectedCfdAsset::getListBidderName, asset -> asset));
-    }
-
-    private void validateAsset(WebElement assetElement, ExpectedCfdAsset expectedCfdAsset, String expectedCurrency) {
-        Assert.assertNotNull(expectedCfdAsset, "Expected asset data not found for " + assetElement.getText());
+    private void validateFoundAsset(WebElement assetElement, String listName, String symbol, String tooltipName, String expectedCurrency) {
         assetElement.click();
         Assert.assertEquals(find(assetNameTitle).getText(),
-                expectedCfdAsset.getSymbol(),
+                listName,
                 "Bidding widget asset title mismatch");
         makeActions().moveToElement(find(assetTooltipIcon)).perform();
         waitUntilDisplayed(assetTooltipContent);
         Assert.assertEquals(find(assetTooltipContent, underlyingAssetName, toolTipName).getText(),
-                expectedCfdAsset.getTooltipName(),
+                symbol,
                 "Asset tooltip name mismatch");
         if (exists(assetTooltipContent, userDataCurrency)) {
             validateTooltipCurrency(userDataCurrency, expectedCurrency);

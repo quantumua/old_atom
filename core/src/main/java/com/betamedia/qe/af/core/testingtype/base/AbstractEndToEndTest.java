@@ -18,7 +18,7 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
 
     public abstract P getPageFactory();
 
-    @AfterMethod
+    @AfterMethod(lastTimeOnly = true)
     public void tearDown() {
         if (pages.get() != null) {
             pages.get().closeBrowser();

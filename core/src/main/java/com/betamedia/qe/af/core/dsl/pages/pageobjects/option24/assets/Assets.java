@@ -3,7 +3,6 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.assets;
 import com.betamedia.qe.af.core.fwdataaccess.entities.ExpectedCfdAsset;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * Created by mbelyaev on 4/18/17.
@@ -15,11 +14,7 @@ public interface Assets {
 
     List<String> cfdAssetNames();
 
-    void cfdValidateAssets(List<ExpectedCfdAsset> expectedAssets, String expectedCurrency);
+    boolean tryValidateAsset(String listName, String symbol, String tooltipName, String expectedCurrency);
 
-    void validateAssets(List<ExpectedCfdAsset> expectedAssets, String expectedCurrency);
-
-    void forEachAssetClicked(Consumer<String> forSymbol);
-
-    void forEachCfdAssetClicked(Consumer<String> forSymbol);
+    void switchToPanda();
 }
