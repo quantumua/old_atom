@@ -139,4 +139,25 @@ public abstract class AbstractPageObject {
             return false;
         }
     }
+
+    protected void deleteAllCookies() {
+        webDriver.manage().deleteAllCookies();
+    }
+
+    protected void get(String url) {
+        webDriver.get(url);
+    }
+
+    protected void maximizeWindow() {
+        webDriver.manage().window().maximize();
+    }
+
+    protected void closeBrowser() {
+        webDriver.quit();
+    }
+
+    protected void refreshPage() {
+        webDriver.navigate().refresh();
+    }
+
 }

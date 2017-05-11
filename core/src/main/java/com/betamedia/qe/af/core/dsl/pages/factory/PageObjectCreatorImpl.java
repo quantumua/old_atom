@@ -75,11 +75,6 @@ public class PageObjectCreatorImpl implements PageObjectCreator {
         }
     }
 
-    @Override
-    public void closeBrowser() {
-        driver.quit();
-    }
-
     private By by(FindBy findBy) {
         How how = How.valueOf(findBy.locatorType);
         return byProducer(how).apply(findBy.value);

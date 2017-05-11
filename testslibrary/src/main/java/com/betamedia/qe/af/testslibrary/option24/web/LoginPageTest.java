@@ -59,4 +59,20 @@ public class LoginPageTest extends TPEndToEndTest {
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
     }
 
+    /**
+     * login, clean cookies, refresh page and login again
+     */
+    @Test
+    public void loginCleanCookiesLoginAgainTest() {
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login("vasichka", "123123");
+        pages().disclaimerNotification().tryAccept();
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login("vasichka", "123123");
+        pages().disclaimerNotification().tryAccept();
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+    }
+
 }

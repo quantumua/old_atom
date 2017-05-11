@@ -52,7 +52,6 @@ public class WebDriverConfig {
             public ParametrizedWebDriverFactory get() {
                 return (dc, url) -> {
                     WebDriver driver = new RemoteWebDriver(new URL(url), dc);
-                    driver.manage().window().maximize();
                     return driver;
                 };
             }
@@ -71,7 +70,6 @@ public class WebDriverConfig {
             public ParametrizedWebDriverFactory get() {
                 return (dc, url) -> {
                     WebDriver driver = new RemoteWebDriver(driverService.getUrl(), dc);
-                    driver.manage().window().maximize();
                     return driver;
                 };
             }
@@ -90,7 +88,6 @@ public class WebDriverConfig {
             public ParametrizedWebDriverFactory get() {
                 return (dc, url) -> {
                     WebDriver driver = new FirefoxDriver(new FirefoxOptions().setLegacy(true).addDesiredCapabilities(dc));
-                    driver.manage().window().maximize();
                     return driver;
                 };
             }
@@ -109,7 +106,6 @@ public class WebDriverConfig {
             public ParametrizedWebDriverFactory get() {
                 return (dc, url) -> {
                     WebDriver driver = new InternetExplorerDriver(dc);
-                    driver.manage().window().maximize();
                     return driver;
                 };
             }

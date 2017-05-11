@@ -21,14 +21,16 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
     @AfterMethod(lastTimeOnly = true)
     public void tearDown() {
         if (pages.get() != null) {
-            pages.get().closeBrowser();
+            pages.get().browser().closeBrowser();
             pages.set(null);
         }
     }
 
     public P pages() {
         if (pages.get() == null) {
-            pages.set(getPageFactory());
+            P pageFactory = getPageFactory();
+            pageFactory.browser().maximizeWindow();
+            pages.set(pageFactory);
         }
         return pages.get();
     }

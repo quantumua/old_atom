@@ -8,5 +8,4 @@ import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
  */
 public interface PageObjectCreator {
      <T extends AbstractPageObject> T getPage(Class<T> clazz);
-     void closeBrowser();
 }

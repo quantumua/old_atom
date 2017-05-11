@@ -1,5 +1,7 @@
 package com.betamedia.qe.af.core.dsl.pages.factory;
 
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.browser.BrowserOperations;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.browser.impl.BrowserOperationsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -12,7 +14,6 @@ public abstract class AbstractPageFactory implements PageFactory {
     protected PageObjectCreator creator;
 
     @Override
-    public void closeBrowser() {
-        creator.closeBrowser();
-    }
+    public BrowserOperations browser(){
+        return creator.getPage(BrowserOperationsImpl.class);}
 }

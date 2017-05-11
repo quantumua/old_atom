@@ -17,14 +17,16 @@ public abstract class AbstractClientTest<T extends AbstractPageFactory> {
     @AfterMethod
     public void tearDown() throws Exception {
         if (pages.get() != null) {
-            pages.get().closeBrowser();
+            pages.get().browser().closeBrowser();
             pages.set(null);
         }
     }
 
     public T pages() {
         if (pages.get() == null) {
-            pages.set(getPageFactory());
+            T pageFactory = getPageFactory();
+            pageFactory.browser().maximizeWindow();
+            pages.set(pageFactory);
         }
         return pages.get();
     }
