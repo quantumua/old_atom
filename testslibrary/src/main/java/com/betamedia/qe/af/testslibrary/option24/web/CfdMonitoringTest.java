@@ -19,11 +19,14 @@ import static org.hamcrest.Matchers.is;
  * Created by mbelyaev on 4/18/17.
  */
 public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
-    private final static String USERNAME = "tp_automation_spjlto";
+    private final static String USERNAME = "QENirShuTest@Test.ru";
     private final static String PASSWORD = CustomerBuilder.PASSWORD;
     private final static String DATA_DRIVEN_MONITORING_TEST_GROUP = "data_driven_monitoring_test_group";
     private String expectedCurrency;
 
+    /**
+     * One-time setup for asset validation test cycle (logs in and gets expected currency)
+     */
     @BeforeGroups(DATA_DRIVEN_MONITORING_TEST_GROUP)
     public void prepareOnce() {
         pages().topNavigationPage().logIn();
@@ -34,9 +37,8 @@ public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
     }
 
     /**
-     * expected to fail <br/>
-     * currently provided list of expected assets does not match the data on the page
-     **/
+     * Fails if the asset list on CFD page has entries not contained in list of expected assets
+     */
     @Test
     public void unexpectedAssetsTest() {
         pages().topNavigationPage().logIn();
@@ -48,9 +50,9 @@ public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
     }
 
     /**
-     * expected to fail <br/>
-     * currently provided list of expected assets does not match the data on the page
-     **/
+     * For each entry in list of expected CFD assets, find it on product page, validate symbols and currency and try to open a trade <br/>
+     * Product page is expected to not contain every expected CFD asset.
+     */
     @Test(dataProvider = "ExpectedCfdAssetDataProvider", groups = DATA_DRIVEN_MONITORING_TEST_GROUP)
     public void assetValidationTest(String listName, String symbol, String tooltipName) {
         if (!pages().assets().tryValidateAsset(listName, symbol, tooltipName, expectedCurrency)) {
@@ -61,10 +63,13 @@ public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
         pages().cfdPositions().validateLatestPosition(listName);
     }
 
+    /**
+     * Get list of list names of expected assets
+     */
     private Set<String> getExpected() {
         return getResources(ExpectedCfdAsset.class)
                 .stream()
-                .map(ExpectedCfdAsset::getSymbol)
+                .map(ExpectedCfdAsset::getListBidderName)
                 .collect(Collectors.toSet());
     }
 

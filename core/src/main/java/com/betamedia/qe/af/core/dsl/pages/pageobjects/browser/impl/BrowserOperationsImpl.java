@@ -5,6 +5,8 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.browser.BrowserOperations;
 import org.openqa.selenium.WebDriver;
 
 /**
+ * Pseudo-PageObject that exposes browser-related operations on current {@link WebDriver}
+ *
  * Created by vsnigur on 5/10/17.
  */
 public class BrowserOperationsImpl extends AbstractPageObject implements BrowserOperations {

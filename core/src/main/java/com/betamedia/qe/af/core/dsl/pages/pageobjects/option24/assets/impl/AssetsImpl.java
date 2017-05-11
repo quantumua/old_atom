@@ -60,6 +60,8 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
     private By secondRow;
     @StoredId
     private By toolTipName;
+    @StoredId
+    private By tooltipClose;
 
 
     public AssetsImpl(WebDriver webDriver) {
@@ -98,17 +100,7 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
         return inIFrame(this::assetNames, pandaIframe);
     }
 
-    /**
-     * Attempts to find the corresponding asset on product page and validate its info. <br/>
-     * TODO must confirm which expected data fields are matched to which page elements. <br/>
-     * Provided list of expected CFD assets does not match the product data - TEST WILL FAIL
-     *
-     * @param listName expected name in asset list; used to locate the asset
-     * @param symbol expected symbol
-     * @param tooltipName expected tooltip
-     * @param expectedCurrency user currency
-     * @return <code>true</code> if asset was found on page and validated,<br/> <code>false</code> otherwise (failure to locate asset is expected and is not a test failure)
-     **/
+
     @Override
     public boolean tryValidateAsset(String listName, String symbol, String tooltipName, String expectedCurrency) {
         waitUntil(() -> !find(assetContainer).findElements(By.tagName(TR.toString())).isEmpty());
@@ -119,6 +111,7 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
             return false;
         }
         validateFoundAsset(assetElement.get(0), listName, symbol, tooltipName, expectedCurrency);
+        find(tooltipClose).click();
         return true;
     }
 
