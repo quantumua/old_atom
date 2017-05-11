@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.betamedia.qe.af.core.utils.PropertiesUtils.getProperties;
@@ -48,7 +49,7 @@ public class RunTestController {
                                          @RequestParam(value = "dataSources[]", required = false) MultipartFile[] dataSources,
                                          @RequestParam(value = "tempJar", required = false) MultipartFile tempJar) throws IOException {
         logger.info("Starting tests");
-        return testRunnerHandler.handle(getProperties(properties), storageService.store(suites), tempJar, ExecutionListener.nullListener());
+        return testRunnerHandler.handle(getProperties(properties), storageService.store(suites, UUID.randomUUID().toString()), tempJar, ExecutionListener.nullListener());
     }
 
     @PostMapping(value = "/exists")
