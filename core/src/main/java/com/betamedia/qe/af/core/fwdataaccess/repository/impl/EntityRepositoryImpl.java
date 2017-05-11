@@ -1,6 +1,7 @@
 package com.betamedia.qe.af.core.fwdataaccess.repository.impl;
 
 import com.betamedia.qe.af.core.fwdataaccess.annotations.ClasspathLocation;
+import com.betamedia.qe.af.core.fwdataaccess.entities.ExpectedCfdAsset;
 import com.betamedia.qe.af.core.fwdataaccess.repository.EntityRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
@@ -9,11 +10,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,23 +30,32 @@ public class EntityRepositoryImpl implements EntityRepository {
 
     @Override
     public <T> List<T> get(Class<T> entity) {
-        if (!repository.containsKey(entity)) {
-            repository.putIfAbsent(entity, generateContents(entity));
-        }
-        return repository.get(entity);
+        return repository.computeIfAbsent(entity, this::getDefaultContents);
     }
 
-    private <T> List<T> generateContents(Class<T> entity) {
-        List<T> contents = Collections.emptyList();
+    @Override
+    public void updateExpectedCfdAssets(MultipartFile expectedCfdAssets){
+        try(InputStream inputStream = expectedCfdAssets.getInputStream()){
+            repository.put(ExpectedCfdAsset.class, parseToEntities(ExpectedCfdAsset.class, inputStream));
+        } catch (IOException e) {
+            logger.error("",e);
+            throw new RuntimeException("Failed to update repository for ExpectedCfdAssets");
+        }
+    }
+
+    private <T> List<T> getDefaultContents(Class<T> entity) {
+        try (InputStream inputStream = new ClassPathResource(entity.getAnnotation(ClasspathLocation.class).value()).getInputStream()) {
+            return parseToEntities(entity, inputStream);
+        } catch (IOException e) {
+            logger.error("",e);
+            throw new RuntimeException("Failed to get contents for " + entity);
+        }
+    }
+
+    private <T> List<T> parseToEntities(Class<T> entity, InputStream inputStream) {
         HeaderColumnNameMappingStrategy<T> strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(entity);
         CsvToBean<T> csvToBean = new CsvToBean<>();
-        try (InputStream resourceInputStream = new ClassPathResource(entity.getAnnotation(ClasspathLocation.class).value()).getInputStream()) {
-            contents = csvToBean.parse(strategy, new CSVReader(new InputStreamReader(resourceInputStream)));
-        } catch (IOException e) {
-            logger.error("",e);
-            throw new RuntimeException("Failed to populate repository for " + entity);
-        }
-        return contents;
+        return csvToBean.parse(strategy, new CSVReader(new InputStreamReader(inputStream)));
     }
 }

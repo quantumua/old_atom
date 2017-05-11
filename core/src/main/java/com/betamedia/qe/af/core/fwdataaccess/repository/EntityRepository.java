@@ -1,5 +1,7 @@
 package com.betamedia.qe.af.core.fwdataaccess.repository;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -8,4 +10,6 @@ import java.util.List;
 public interface EntityRepository {
 
     <T> List<T> get(Class<T> entity);
+
+    void updateExpectedCfdAssets(MultipartFile expectedCfdAssets);
 }
