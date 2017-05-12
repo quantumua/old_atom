@@ -6,6 +6,7 @@ import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.dsl.operations.TagOperations;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 import com.betamedia.tp.api.feed.TickData;
+import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.Position;
 import com.betamedia.tp.api.model.enums.OptionType;
@@ -14,7 +15,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
@@ -82,14 +85,14 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         int baseCurrencyMaxInvestmentLimit = (int) (maxInvestment * conversionRate * 2);
         //		TODO: This can be done after method completenes: com.betamedia.qe.af.core.dsl.operations.impl.AccountGroupOperationsImpl.Create()
         // Redmine task: https://devredmine/issues/65354
-/*    if (operations().accountGroupOperations().getExposureLimit() <= baseCurrencyMaxInvestmentLimit) {     
+    if (operations().accountGroupOperations().get().getExposureLimit() <= baseCurrencyMaxInvestmentLimit) {     
         //if (accountGroup.getExposureLimit() <= baseCurrencyMaxInvestmentLimit) {
-        	accountGroup.setExposureLimit(baseCurrencyMaxInvestmentLimit);
+    	operations().accountGroupOperations().get().setExposureLimit(baseCurrencyMaxInvestmentLimit);
             Set<String> propertiesSet = new HashSet<String>();
             propertiesSet.add(AccountGroup.EP_EXPOSURE_LIMIT.getName());
-            AccountGroupTestingManager.getInstance().updateEntity(accountGroup, propertiesSet);
+            //AccountGroupTestingManager.getInstance().updateEntity(accountGroup, propertiesSet);
         }
-  */
+  
         Double accountBalance = operations().accountOperations().getTP(accountId).getBalance();
         if (accountBalance <= maxInvestment) {
             operations().accountOperations().updateBalanceTP(accountId, (double) maxInvestment + 200);
