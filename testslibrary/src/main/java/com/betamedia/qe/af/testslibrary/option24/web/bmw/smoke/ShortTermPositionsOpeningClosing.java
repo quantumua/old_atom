@@ -26,7 +26,12 @@ import static org.testng.Assert.assertEquals;
  */
 public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
-	@Test()	// TP-4330:Open a position that expires in 60 seconds with invested amount = minimum allowed
+	/*
+	 * [TestLink] TP-4330:Open a position that expires in 60 seconds with invested amount = minimum allowed
+     * Open a position with invested amount that is equals to the minimum
+     * allowed
+     */
+	@Test()	
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMinimumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -52,7 +57,12 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
-	@Test() // TP-4326:Open a position that expires in 60 seconds with invested amount = maximum allowed
+	/*
+	 * [TestLink] TP-4326:Open a position that expires in 60 seconds with invested amount = maximum allowed
+     * Open a position with invested amount that is equals to the allowed
+     * maximum
+     */
+	@Test() 
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMaximumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -108,7 +118,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
-	@Test //  TP-3759:Open a position that expires in 60 seconds - Basic Functionality
+	/*
+	 * [TestLink] TP-3759:Open a position that expires in 60 seconds - Basic Functionality
+    * Open a position with a valid amount, check correct display on site.
+    */
+	@Test 
 //TODO    fully duplicates the code of the first test
     public void OpenAPositionThatExpiresIn60SecondsBasicFunctionality() {
         Asset asset = operations().assetOperations().get();
@@ -134,8 +148,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
-
-	@Test //  TP-3758:Open a position that expires in 2 minutes - Basic Functionality
+	/*
+	 * [TestLink] TP-3758:Open a position that expires in 2 minutes - Basic Functionality
+    * Open a position with a valid amount, check correct display on site.
+    */
+	@Test 
     public void OpenAPositionThatEexpiresIn2MinutesBasicFunctionality() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_2_MIN_GAME_H3_TEXT);
@@ -161,8 +178,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
-
-	@Test // TP-3757:Open a position that expires in 5 minutes - Basic Functionality
+	/*
+	 * [TestLink] TP-3757:Open a position that expires in 5 minutes - Basic Functionality
+    * Open a position with a valid amount, check correct display on site.
+    */
+	@Test 
 	public void OpenAPositionThatEexpiresIn5MinutesBasicFunctionality(){
 		Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_5_MIN_GAME_H3_TEXT);
@@ -189,6 +209,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
 	}
 	
+	/*
+	 * [TestLink] TP-3686:Position Indication - check that the color of the cursor changes successfully on win and lose
+     * Position Indication - check that the color of the cursor changes
+     * successfully on win and lose Winning - Green. Loosing - Red.
+     */
     @Test(description = "TP-3686:Position Indication - check that the color of the cursor changes successfully on win and lose")
     public void PositionIndicationCheckThatTheColorOfTheCursorChangesSuccessfullyOnWinAndLose() {
         Asset asset = operations().assetOperations().get();

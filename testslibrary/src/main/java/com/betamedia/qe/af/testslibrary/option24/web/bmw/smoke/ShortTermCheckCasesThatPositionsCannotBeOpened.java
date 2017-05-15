@@ -30,10 +30,11 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	private static final Logger logger = LogManager.getLogger(AbstractPageObject.class);
 	
 	/*
-   * Open a position in allowed invested range but with invested amount
-   * that is bigger than client balance by 1 (balance+1)
-   */
-	@Test() // TP-4508:Invested amount above = TA balance+1
+	 * [TestLink] TP-4508:Invested amount above = TA balance+1
+     * Open a position in allowed invested range but with invested amount
+     * that is bigger than client balance by 1 (balance+1)
+    */
+	@Test() 
 	public void InvestedAmountAboveTABalancePlusOne() {
 		
 		Asset asset = operations().assetOperations().get();
@@ -66,7 +67,11 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         //Redmine task: https://devredmine/issues/65351
 	}
 	
-	@Test() //  TP-4502:Invested amount maximum+1
+	/*
+	 * [TestLink] TP-4502:Invested amount maximum+1
+	 * Open a position with invested amount that is bigger then allowed maximum by 1 (maximumAllowed+1)
+	 */
+	@Test() 
 	public void InvestedAmountMaximumPlusOne() {
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -101,7 +106,12 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         //Redmine task: https://devredmine/issues/65352
 	}
 	
-	@Test() //  TP-4341:Insert valid characters in an invalid form (200.2.5)
+	/*
+	 * [TestLink] TP-4341:Insert valid characters in an invalid form (200.2.5)
+     * Try to open a position and insert valid characters in an invalid form
+     * (200.1.1)
+     */
+	@Test()
 	public void InsertValidCharactersInAnInvalidForm()  {  
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -131,7 +141,11 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         //Redmine task: https://devredmine/issues/65352
 	}
 	
-	@Test() // TP-4334:Invest negative amount (-X)
+	/*
+	 * [TestLink] TP-4334:Invest negative amount (-X)
+     * Open a position with invested amount that is negative (-1)
+     */
+	@Test() 
 	public void InvestNegativeAmount()	{
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -160,9 +174,10 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         //Redmine task: https://devredmine/issues/65352
 	}
 	/*
+	 * [TestLink] TP-4319:Invest zero amount
      * Open a position with invested amount of 0)
      */
-	@Test() //  TP-4319:Invest zero amount
+	@Test() 
 	public void InvestZeroAmount()	{
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -192,9 +207,10 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         //Redmine task: https://devredmine/issues/65352
 	}
 	/*
+	* [TestLink] TP-3687: Amount > Max exposure
     * try to open a position that is above the Account group Max exposure
     */
-	@Test() //TP-3687: Amount > Max exposure
+	@Test() 
 	public void aboveMaxExposureLimit(){
 		CRMCustomer customer = operations().customerOperations().register();
 		CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -253,10 +269,11 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	}
 	
 	/*
+	 * [TestLink] TP-3688:Buying without invested amount
      * Try to open a position and insert an empty String into the invested
      * amount text field
      */
-	@Test() // TP-3688:Buying without invested amount
+	@Test() 
 	public void BuyingWithoutInvestedAmount()	{
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -288,9 +305,10 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	}
 	
 	/*
+	 * [TestLink] TP-3689:Invalid invested amount
      * Try to open a position and insert characters to the invested amount
      */
-	@Test() // TP-3689:Invalid invested amount
+	@Test() 
 	public void InvalidIinvestedAmount()	{
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -319,10 +337,11 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	}
 
 	/*
+	 * [TestLink] TP-3693: Invested amount above maximum
      * Open a position with invested amount that is bigger then allowed
      * maximum by 999 (maximumAllowed+999)
      */	
-	@Test() //TP-3693:Invested amount above maximum
+	@Test() 
 	public void InvestedAmountAboveMmaximum() {
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -338,7 +357,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
-		int maxInvestment =48000; //TODO getMaxInvestment();
+		int maxInvestment = 48000; //TODO getMaxInvestment();
 		int aboveMaxInvestment = maxInvestment + 50;
 		
 		//Making sure that I have enough money
@@ -359,12 +378,13 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		}
 
 	/*
+	 * [TestLink] TP-3694:Invested amount below minimum
      * Open a position with invested amount that is half then allowed
      * minimum. (minimumAllowed/2) I chose to invest half (dividing
      * operation) cause i don't wont the investment amount to become
      * negative.
      */	
-	@Test() //TP-3694:Invested amount below minimum
+	@Test() 
 	public void InvestedAmountBelowMinimum() {
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -395,10 +415,11 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	}
 	
 	/*
+	 * [TestLink] TP-3695:Invested amount above TA balance
      * Open a position in allowed invested range and with invested amount
      * that is bigger then client balance by 999 (balance+999)
      */	
-	@Test() //TP-3695:Invested amount above TA balance
+	@Test() 
 	public void InvestedAmountAboveTABalance() {
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
