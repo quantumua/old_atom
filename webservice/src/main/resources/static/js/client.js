@@ -91,6 +91,35 @@ angular.module('client', [])
             uploadJar($scope.jar[0]);
         };
     })
+    .controller('fileUploader', function ($scope, $http) {
+        var self = this;
+        self.message = '';
+        function uploadJar(expectedCfdAssets, callback) {
+            var fd = new FormData();
+            fd.append('expectedCfdAssets', expectedCfdAssets);
+            $http.post('/af/upload/expectedCfdAssets', fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).then(function (response) {
+                self.message = 'Upload successful';
+                callback && callback();
+            }, function (response) {
+                self.message = response.body;
+                callback && callback();
+            });
+        }
+
+        self.uploadExpectedCfdAssets = function () {
+            self.message = '';
+            var badInput = false;
+            if (angular.isUndefined($scope.expectedCfdAssets) || !$scope.expectedCfdAssets) {
+                self.message = 'No file selected!';
+                badInput = true;
+            }
+            if (badInput) return;
+            uploadJar($scope.expectedCfdAssets[0]);
+        };
+    })
     .controller('scheduler', function ($scope, $http) {
         var self = this;
         self.messages = [];

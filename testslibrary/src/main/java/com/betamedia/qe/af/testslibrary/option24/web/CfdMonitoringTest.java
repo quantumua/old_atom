@@ -4,7 +4,7 @@ import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.fwdataaccess.entities.ExpectedCfdAsset;
 import com.betamedia.qe.af.core.testingtype.tp.TPResourceAwareEndToEndTest;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -19,15 +19,30 @@ import static org.hamcrest.Matchers.is;
  * Created by mbelyaev on 4/18/17.
  */
 public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
+    private final static String USERNAME = "QENirShuTest@Test.ru";
+    private final static String PASSWORD = CustomerBuilder.PASSWORD;
+    private final static String DATA_DRIVEN_MONITORING_TEST_GROUP = "data_driven_monitoring_test_group";
+    private String expectedCurrency;
 
     /**
-     * expected to fail <br/>
-     * currently provided list of expected assets does not match the data on the page
-     **/
-    @Test
-    public void faultyAssetsTest() {
+     * One-time setup for asset validation test cycle (logs in and gets expected currency)
+     */
+    @BeforeGroups(DATA_DRIVEN_MONITORING_TEST_GROUP)
+    public void prepareOnce() {
         pages().topNavigationPage().logIn();
-        pages().loginPage().login("tp_automation_spjlto", CustomerBuilder.PASSWORD);
+        pages().loginPage().login(USERNAME, PASSWORD);
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        expectedCurrency = pages().controlPanel().getCurrency();
+        pages().assets().switchToPanda();
+    }
+
+    /**
+     * Fails if the asset list on CFD page has entries not contained in list of expected assets
+     */
+    @Test
+    public void unexpectedAssetsTest() {
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login(USERNAME, PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         List<String> assets = pages().assets().cfdAssetNames();
         assets.removeAll(getExpected());
@@ -35,40 +50,26 @@ public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
     }
 
     /**
-     * expected to fail <br/>
-     * currently provided list of expected assets does not match the data on the page
-     **/
-    @Test
-    @Parameters({"username", "password"})
-    public void assetValidationAndCurrencyConversionTest(String username, String password) {
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(username, password);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        String expectedCurrency = pages().controlPanel().getCurrency();
-        pages().assets().cfdValidateAssets(getResources(ExpectedCfdAsset.class), expectedCurrency);
+     * For each entry in list of expected CFD assets, find it on product page, validate symbols and currency and try to open a trade <br/>
+     * Product page is expected to not contain every expected CFD asset.
+     */
+    @Test(dataProvider = "ExpectedCfdAssetDataProvider", groups = DATA_DRIVEN_MONITORING_TEST_GROUP)
+    public void assetValidationTest(String listName, String symbol, String tooltipName) {
+        if (!pages().assets().tryValidateAsset(listName, symbol, tooltipName, expectedCurrency)) {
+            return;
+        }
+        pages().cfdBidder().setAmount("0.01").buy().confirm();
+        pages().messageBox().ok();
+        pages().cfdPositions().validateLatestPosition(listName);
     }
 
     /**
-     * parametrized trading test that uses pre-existing credentials for account that is able to make CFD trades
-     **/
-    @Test
-    @Parameters({"username", "password"})
-    public void parametrizedBiddingTest(String username, String password) {
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(username, password);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().assets().forEachCfdAssetClicked(symbol -> {
-                    pages().cfdBidder().setAmount("0.01").buy().confirm();
-                    pages().messageBox().ok();
-                    Assert.assertEquals(pages().cfdPositions().getSymbolForLatest(), symbol);
-                }
-        );
-    }
-
+     * Get list of list names of expected assets
+     */
     private Set<String> getExpected() {
         return getResources(ExpectedCfdAsset.class)
                 .stream()
-                .map(ExpectedCfdAsset::getSymbol)
+                .map(ExpectedCfdAsset::getListBidderName)
                 .collect(Collectors.toSet());
     }
 

@@ -20,6 +20,8 @@ public interface StorageService {
 
     List<String> store(MultipartFile[] files);
 
+    List<String> store(MultipartFile[] files, String postfix);
+
     void delete(String path);
 
     Stream<Path> loadAll();

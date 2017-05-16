@@ -49,6 +49,7 @@ build,pageObjectName,locatorId,locatorType,value
 1603,MessageBoxImpl,okButton,CLASS_NAME,ok-button
 1603,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
 1603,CfdPositionsImpl,assetName,CLASS_NAME,assetname
+1603,AssetsImpl,tooltipClose,CSS,.tooltip-close > .icon
 1603,RegistrationPageImpl,firstnameField,ID,FirstName
 1603,RegistrationPageImpl,lastnameField,ID,LastName
 1603,RegistrationPageImpl,emailField,ID,Email

@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
@@ -32,6 +34,7 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 public class PageObjectCreatorImpl implements PageObjectCreator {
     private static final Logger logger = LogManager.getLogger(PageObjectCreatorImpl.class);
 
+    private final Map<Class, AbstractPageObject> pageObjectCache = new ConcurrentHashMap<>();
 
     private WebDriver driver;
     private VersionedWebElementRepository repository;
@@ -44,6 +47,11 @@ public class PageObjectCreatorImpl implements PageObjectCreator {
 
     @Override
     public <T extends AbstractPageObject> T getPage(Class<T> clazz) {
+        return (T) pageObjectCache.computeIfAbsent(clazz, this::makePage);
+
+    }
+
+    private <T extends AbstractPageObject> T makePage(Class<T> clazz) {
         T page;
         try {
             page = clazz.getConstructor(WebDriver.class).newInstance(driver);
@@ -65,11 +73,6 @@ public class PageObjectCreatorImpl implements PageObjectCreator {
                 setField(field, page, by(findBy));
             }
         }
-    }
-
-    @Override
-    public void closeBrowser() {
-        driver.quit();
     }
 
     private By by(FindBy findBy) {

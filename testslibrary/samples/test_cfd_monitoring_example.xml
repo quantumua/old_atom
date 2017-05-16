@@ -3,13 +3,6 @@
     <test name="Monitoring Tryouts">
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.web.CfdMonitoringTest">
-                <methods>
-                    <parameter name="username" value="tp_automation_spjlto"/>
-                    <parameter name="password" value="123123"/>
-                    <include name="faultyAssetsTest" />
-                    <include name="assetValidationAndCurrencyConversionTest" />
-                    <include name="parametrizedBiddingTest"/>
-                </methods>
             </class>
         </classes>
     </test>

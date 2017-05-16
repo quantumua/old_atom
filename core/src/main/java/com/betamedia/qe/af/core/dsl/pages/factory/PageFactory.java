@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.factory;
 
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.browser.BrowserOperations;
 import com.betamedia.qe.af.core.dsl.pages.type.ProductType;
 
 /**
@@ -10,6 +11,5 @@ public interface PageFactory<E extends ProductType> {
 
     E getType();
 
-    void closeBrowser();
-
+    BrowserOperations browser();
 }

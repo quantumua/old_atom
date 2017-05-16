@@ -50,11 +50,7 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> {
-                    WebDriver driver = new RemoteWebDriver(new URL(url), dc);
-                    driver.manage().window().maximize();
-                    return driver;
-                };
+                return (dc, url) -> (WebDriver) new RemoteWebDriver(new URL(url), dc);
             }
         };
     }
@@ -69,11 +65,7 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> {
-                    WebDriver driver = new RemoteWebDriver(driverService.getUrl(), dc);
-                    driver.manage().window().maximize();
-                    return driver;
-                };
+                return (dc, url) -> (WebDriver) new RemoteWebDriver(driverService.getUrl(), dc);
             }
         };
     }
@@ -88,11 +80,7 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> {
-                    WebDriver driver = new FirefoxDriver(new FirefoxOptions().setLegacy(true).addDesiredCapabilities(dc));
-                    driver.manage().window().maximize();
-                    return driver;
-                };
+                return (dc, url) -> (WebDriver) new FirefoxDriver(new FirefoxOptions().setLegacy(true).addDesiredCapabilities(dc));
             }
         };
     }
@@ -107,11 +95,7 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> {
-                    WebDriver driver = new InternetExplorerDriver(dc);
-                    driver.manage().window().maximize();
-                    return driver;
-                };
+                return (dc, url) -> (WebDriver) new InternetExplorerDriver(dc);
             }
         };
     }

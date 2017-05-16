@@ -2,12 +2,7 @@
 <suite name="Suite 1" verbose="1" parallel="methods" thread-count="5">
     <test name="Tryouts 1">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.web.CfdMonitoringTest">
-                <methods>
-                    <parameter name="username" value="tp_automation_spjlto"/>
-                    <parameter name="password" value="123123"/>
-                    <include name="parametrizedBiddingTest"/>
-                </methods>
+            <class name="com.betamedia.qe.af.testslibrary.option24.web.LoginPageTest">
             </class>
         </classes>
     </test>

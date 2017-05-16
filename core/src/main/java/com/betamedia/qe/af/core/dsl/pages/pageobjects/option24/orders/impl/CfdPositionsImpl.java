@@ -3,9 +3,11 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.impl;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
+import com.betamedia.qe.af.core.fwdataaccess.entities.ExpectedCfdAsset;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import static javax.swing.text.html.HTML.Tag.UL;
 
@@ -24,12 +26,9 @@ public class CfdPositionsImpl extends AbstractPageObject implements CfdPositions
     }
 
     @Override
-    public String getSymbolForLatest() {
+    public void validateLatestPosition(String expectedName) {
         waitUntilDisplayed(openPositions);
-        return find(openPositions).findElements(By.tagName(UL.toString())).stream()
-                .map(e -> e.findElement(assetName))
-                .map(WebElement::getText)
-                .findFirst()
-                .orElse("");
+        WebElement latestPosition = find(openPositions, By.tagName(UL.toString()), assetName);
+        Assert.assertEquals(latestPosition.getText(), expectedName);
     }
 }

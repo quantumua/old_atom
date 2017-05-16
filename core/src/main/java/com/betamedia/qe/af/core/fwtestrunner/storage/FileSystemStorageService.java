@@ -57,6 +57,13 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
+    public List<String> store(MultipartFile[] files, String postfix) {
+        return Arrays.stream(files)
+                .map(file -> store(file, file.getOriginalFilename() + postfix))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void delete(String path) {
         try {
             Files.delete(Paths.get(path));

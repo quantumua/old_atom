@@ -6,6 +6,7 @@ import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.dsl.operations.TagOperations;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 import com.betamedia.tp.api.feed.TickData;
+import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.Position;
 import com.betamedia.tp.api.model.enums.OptionType;
@@ -14,7 +15,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
@@ -23,7 +26,12 @@ import static org.testng.Assert.assertEquals;
  */
 public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
-	@Test()	// TP-4330:Open a position that expires in 60 seconds with invested amount = minimum allowed
+	/*
+	 * [TestLink] TP-4330:Open a position that expires in 60 seconds with invested amount = minimum allowed
+     * In this test we will check that when we are opening a Short term (60 sec)  position with invested
+     * amount that is equals to the minimum allowed, a position is opened and the  functionality is valid.
+     */
+	@Test()	
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMinimumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -49,7 +57,12 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
-	@Test() // TP-4326:Open a position that expires in 60 seconds with invested amount = maximum allowed
+	/*
+	 * [TestLink] TP-4326:Open a position that expires in 60 seconds with invested amount = maximum allowed
+     * In this test we will check that when we are opening a Short term (60 sec)  position with invested
+     * amount that is equals to the maximum allowed, a position is opened and the  functionality is valid.
+     */
+	@Test() 
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMaximumAllowed() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -82,14 +95,14 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         int baseCurrencyMaxInvestmentLimit = (int) (maxInvestment * conversionRate * 2);
         //		TODO: This can be done after method completenes: com.betamedia.qe.af.core.dsl.operations.impl.AccountGroupOperationsImpl.Create()
         // Redmine task: https://devredmine/issues/65354
-/*    if (operations().accountGroupOperations().getExposureLimit() <= baseCurrencyMaxInvestmentLimit) {     
+    if (operations().accountGroupOperations().get().getExposureLimit() <= baseCurrencyMaxInvestmentLimit) {     
         //if (accountGroup.getExposureLimit() <= baseCurrencyMaxInvestmentLimit) {
-        	accountGroup.setExposureLimit(baseCurrencyMaxInvestmentLimit);
+    	operations().accountGroupOperations().get().setExposureLimit(baseCurrencyMaxInvestmentLimit);
             Set<String> propertiesSet = new HashSet<String>();
             propertiesSet.add(AccountGroup.EP_EXPOSURE_LIMIT.getName());
-            AccountGroupTestingManager.getInstance().updateEntity(accountGroup, propertiesSet);
+            //AccountGroupTestingManager.getInstance().updateEntity(accountGroup, propertiesSet);
         }
-  */
+  
         Double accountBalance = operations().accountOperations().getTP(accountId).getBalance();
         if (accountBalance <= maxInvestment) {
             operations().accountOperations().updateBalanceTP(accountId, (double) maxInvestment + 200);
@@ -105,7 +118,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
 
-	@Test //  TP-3759:Open a position that expires in 60 seconds - Basic Functionality
+	/*
+	 * [TestLink] TP-3759:Open a position that expires in 60 seconds - Basic Functionality
+    * In this test we will check that when we are opening a Short Term position, the basic functionality is valid.
+    */
+	@Test 
 //TODO    fully duplicates the code of the first test
     public void OpenAPositionThatExpiresIn60SecondsBasicFunctionality() {
         Asset asset = operations().assetOperations().get();
@@ -131,8 +148,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
-
-	@Test //  TP-3758:Open a position that expires in 2 minutes - Basic Functionality
+	/*
+	 * [TestLink] TP-3758:Open a position that expires in 2 minutes - Basic Functionality
+    * In this test we will check that when we are opening a Short Term position, the basic functionality is valid.
+    */
+	@Test 
     public void OpenAPositionThatEexpiresIn2MinutesBasicFunctionality() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_2_MIN_GAME_H3_TEXT);
@@ -158,8 +178,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         Position position = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size() - 1));
         assertEquals(position.getStatus(), PositionStatus.OPEN);
     }
-
-	@Test // TP-3757:Open a position that expires in 5 minutes - Basic Functionality
+	/*
+	 * [TestLink] TP-3757:Open a position that expires in 5 minutes - Basic Functionality
+    * In this test we will check that when we are opening a Short Term position, the basic functionality is valid.
+    */
+	@Test 
 	public void OpenAPositionThatEexpiresIn5MinutesBasicFunctionality(){
 		Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_5_MIN_GAME_H3_TEXT);
@@ -186,6 +209,11 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         assertEquals(position.getStatus(), PositionStatus.OPEN);
 	}
 	
+	/*
+	 * [TestLink] TP-3686:Position Indication - check that the color of the cursor changes successfully on win and lose
+     * Position Indication - check that the color of the cursor changes
+     * successfully on win and lose Winning - Green. Loosing - Red.
+     */
     @Test(description = "TP-3686:Position Indication - check that the color of the cursor changes successfully on win and lose")
     public void PositionIndicationCheckThatTheColorOfTheCursorChangesSuccessfullyOnWinAndLose() {
         Asset asset = operations().assetOperations().get();
