@@ -68,7 +68,7 @@ public abstract class AbstractPageObject {
         return find(webElement.findElement(bys.get(0)), bys.subList(1, bys.size()));
     }
 
-    protected Actions makeActions() {
+    protected Actions makeActions(){
         return new Actions(webDriver);
     }
 

@@ -19,6 +19,7 @@ build,pageObjectName,locatorId,locatorType,value
 1603,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
 1603,PositionsImpl,position,CLASS_NAME,bmCellContent
 1603,TopNavigationPageImpl,binaryBtn,CLASS_NAME,product-binary
+1603,TopNavigationPageImpl,signUpBtn,XPATH,"//li[contains(class,'menu-item')]//a[@href='/redirects/open-account/']"
 1603,TopNavigationPageImpl,mainMenu,ID,mainMenu
 1603,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
 1603,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
@@ -48,3 +49,13 @@ build,pageObjectName,locatorId,locatorType,value
 1603,MessageBoxImpl,okButton,CLASS_NAME,ok-button
 1603,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
 1603,CfdPositionsImpl,assetName,CLASS_NAME,assetname
+1603,RegistrationPageImpl,firstnameField,ID,FirstName
+1603,RegistrationPageImpl,lastnameField,ID,LastName
+1603,RegistrationPageImpl,emailField,ID,Email
+1603,RegistrationPageImpl,phoneNumberField,NAME,PhoneNumber.Number
+1603,RegistrationPageImpl,selectedFlagField,CLASS_NAME,selected-flag
+1603,RegistrationPageImpl,selecCountry,XPATH,.//ul[@class='country-list']//li[@data-country-code='de']
+1603,RegistrationPageImpl,passwordRegField,ID,Password
+1603,RegistrationPageImpl,reenterPasswordRegField,ID,ReEnterPassword
+1603,RegistrationPageImpl,accountAgreeField,ID,AccountAgreeLabel
+1603,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
