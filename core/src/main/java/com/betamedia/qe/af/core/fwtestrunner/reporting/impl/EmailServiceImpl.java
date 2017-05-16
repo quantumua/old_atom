@@ -4,12 +4,9 @@ import com.betamedia.qe.af.core.fwtestrunner.reporting.EmailService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,21 +19,16 @@ public class EmailServiceImpl implements EmailService {
     private static final Logger logger = LogManager.getLogger(EmailServiceImpl.class);
 
     @Autowired
-    private JavaMailSender emailSender;
+    private HtmlEmailSenderMsg emailSender;
 
     @Override
     public void sendLocalFile(String to, String subject, String pathToFile) {
-        MimeMessage message = emailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(getContent(pathToFile), true);
+            emailSender.sendHtmlEmail(to, subject, getContent(pathToFile), null);
         } catch (MessagingException | IOException e) {
             logger.error("", e);
             return;
         }
-        emailSender.send(message);
     }
 
     private String getContent(String pathToFile) throws IOException {
