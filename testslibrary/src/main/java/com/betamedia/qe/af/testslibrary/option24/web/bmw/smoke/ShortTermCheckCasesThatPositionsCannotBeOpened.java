@@ -31,8 +31,9 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	
 	/*
 	 * [TestLink] TP-4508:Invested amount above = TA balance+1
-     * Open a position in allowed invested range but with invested amount
-     * that is bigger than client balance by 1 (balance+1)
+     * Select an asset --> Try to open a position (60 sec) with an invested amount that 
+     * is equals to account's (balance+1) --> There's a message the position cannot be
+     * opened because there's not enough funds.
     */
 	@Test() 
 	public void InvestedAmountAboveTABalancePlusOne() {
@@ -69,7 +70,9 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	
 	/*
 	 * [TestLink] TP-4502:Invested amount maximum+1
-	 * Open a position with invested amount that is bigger then allowed maximum by 1 (maximumAllowed+1)
+	 * Select an asset --> Try to open a position with an invested amount that is equals to (maximum +1) -->
+	 * There's a message the position cannot be opened because the invested amount is above the maximum.
+	 * Result: There will be a pop up as designed.
 	 */
 	@Test() 
 	public void InvestedAmountMaximumPlusOne() {
@@ -108,8 +111,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	
 	/*
 	 * [TestLink] TP-4341:Insert valid characters in an invalid form (200.2.5)
-     * Try to open a position and insert valid characters in an invalid form
-     * (200.1.1)
+     * Select an asset  for 60 sec category --> Try to open a position with valid characters in an invalid form (200.2.5)
+     * Result: There will an error message "Please enter a valid amount." in the input with a red border
      */
 	@Test()
 	public void InsertValidCharactersInAnInvalidForm()  {  
@@ -143,7 +146,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	
 	/*
 	 * [TestLink] TP-4334:Invest negative amount (-X)
-     * Open a position with invested amount that is negative (-1)
+     * Select an asset --> Try to open a position with a negative invested amount ( example: -500 )
+     * Result: There will an error message "Please enter a valid amount." in the input with a red border
      */
 	@Test() 
 	public void InvestNegativeAmount()	{
@@ -175,7 +179,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	}
 	/*
 	 * [TestLink] TP-4319:Invest zero amount
-     * Open a position with invested amount of 0)
+     * Select an asset --> Try to open a position with an invested amount of 0 (zero)
+     * Result: There will an error message in the input with a red border
      */
 	@Test() 
 	public void InvestZeroAmount()	{
@@ -208,7 +213,9 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	}
 	/*
 	* [TestLink] TP-3687: Amount > Max exposure
-    * try to open a position that is above the Account group Max exposure
+    * Select an asset --> Open few positions till you reach a total amount which is above the total threshold (Max exposure in
+    * the account group) --> There's an error message that the position cannot be opened because of maximum exposure.
+    * Result: There will be a pop up as designed.
     */
 	@Test() 
 	public void aboveMaxExposureLimit(){
@@ -270,8 +277,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	
 	/*
 	 * [TestLink] TP-3688:Buying without invested amount
-     * Try to open a position and insert an empty String into the invested
-     * amount text field
+     * Select an asset --> Try to open a position without entering an invested amount--> There's a message: "Please enter a valid amount."
+     * Result: There will an error message in the input with a red border
      */
 	@Test() 
 	public void BuyingWithoutInvestedAmount()	{
@@ -306,7 +313,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	
 	/*
 	 * [TestLink] TP-3689:Invalid invested amount
-     * Try to open a position and insert characters to the invested amount
+     * Select an asset --> Try to open a position with an invalid value in invested amount-
+     * Result: There will an error message in the input with a red border
      */
 	@Test() 
 	public void InvalidIinvestedAmount()	{
@@ -338,8 +346,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 
 	/*
 	 * [TestLink] TP-3693: Invested amount above maximum
-     * Open a position with invested amount that is bigger then allowed
-     * maximum by 999 (maximumAllowed+999)
+     * Select an asset --> Try to open a position with an invested amount above the maximum -->
+     * There's a message the position cannot be opened because the invested amount is above the maximum (maximumAllowed+999).
      */	
 	@Test() 
 	public void InvestedAmountAboveMmaximum() {
@@ -379,10 +387,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 
 	/*
 	 * [TestLink] TP-3694:Invested amount below minimum
-     * Open a position with invested amount that is half then allowed
-     * minimum. (minimumAllowed/2) I chose to invest half (dividing
-     * operation) cause i don't wont the investment amount to become
-     * negative.
+     * Select an asset --> Try to open a position with an invested amount below the minimum --> 
+     * There's a message the position cannot be opened because the invested amount is below the minimum.
      */	
 	@Test() 
 	public void InvestedAmountBelowMinimum() {
@@ -416,8 +422,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	
 	/*
 	 * [TestLink] TP-3695:Invested amount above TA balance
-     * Open a position in allowed invested range and with invested amount
-     * that is bigger then client balance by 999 (balance+999)
+     * Select an asset --> Try to open a position with an invested amount above the account's balance -->
+     * There's a message the position cannot be opened because there's not enough funds.
      */	
 	@Test() 
 	public void InvestedAmountAboveTABalance() {

@@ -28,8 +28,8 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
 	/*
 	 * [TestLink] TP-4330:Open a position that expires in 60 seconds with invested amount = minimum allowed
-     * Open a position with invested amount that is equals to the minimum
-     * allowed
+     * In this test we will check that when we are opening a Short term (60 sec)  position with invested
+     * amount that is equals to the minimum allowed, a position is opened and the  functionality is valid.
      */
 	@Test()	
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMinimumAllowed() {
@@ -59,8 +59,8 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
 	/*
 	 * [TestLink] TP-4326:Open a position that expires in 60 seconds with invested amount = maximum allowed
-     * Open a position with invested amount that is equals to the allowed
-     * maximum
+     * In this test we will check that when we are opening a Short term (60 sec)  position with invested
+     * amount that is equals to the maximum allowed, a position is opened and the  functionality is valid.
      */
 	@Test() 
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMaximumAllowed() {
@@ -120,7 +120,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
 
 	/*
 	 * [TestLink] TP-3759:Open a position that expires in 60 seconds - Basic Functionality
-    * Open a position with a valid amount, check correct display on site.
+    * In this test we will check that when we are opening a Short Term position, the basic functionality is valid.
     */
 	@Test 
 //TODO    fully duplicates the code of the first test
@@ -150,7 +150,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
     }
 	/*
 	 * [TestLink] TP-3758:Open a position that expires in 2 minutes - Basic Functionality
-    * Open a position with a valid amount, check correct display on site.
+    * In this test we will check that when we are opening a Short Term position, the basic functionality is valid.
     */
 	@Test 
     public void OpenAPositionThatEexpiresIn2MinutesBasicFunctionality() {
@@ -180,7 +180,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
     }
 	/*
 	 * [TestLink] TP-3757:Open a position that expires in 5 minutes - Basic Functionality
-    * Open a position with a valid amount, check correct display on site.
+    * In this test we will check that when we are opening a Short Term position, the basic functionality is valid.
     */
 	@Test 
 	public void OpenAPositionThatEexpiresIn5MinutesBasicFunctionality(){
