@@ -1,11 +1,15 @@
 package com.betamedia.qe.af.core.fwtestrunner.reporting.impl;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.mail.*;
-import javax.mail.internet.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
@@ -17,24 +21,22 @@ import java.util.Properties;
 @Component
 public class HtmlEmailSenderMsg {
 
-    @Value("${spring.mail.host}")
-    private String host;
-    @Value("${spring.mail.port}")
-    private String port;
-    @Value("${spring.mail.username}")
-    private String userName;
-    @Value("${spring.mail.password}")
-    private String password;
-    @Value("${spring.mail.properties.mail.smtp.auth}")
-    private String smtpAuth;
-    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
-    private String smtpStarttls;
+    @Autowired
+    private Environment environment;
 
+    private String userName;
     private Session session;
 
 
     @PostConstruct
     public void init() {
+        String host = environment.getRequiredProperty("spring.mail.host");
+        String port =  environment.getRequiredProperty("spring.mail.port");
+        userName = environment.getRequiredProperty("spring.mail.username");
+        String password = environment.getRequiredProperty("spring.mail.password");
+        String smtpAuth =  environment.getRequiredProperty("spring.mail.properties.mail.smtp.auth");
+        String smtpStarttls = environment.getRequiredProperty("spring.mail.properties.mail.smtp.starttls.enable");
+
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", port);
