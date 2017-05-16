@@ -11,6 +11,7 @@ import org.testng.Reporter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -103,6 +104,23 @@ public abstract class AbstractPageObject {
     protected WebElement find(By... by) {
         return find(Arrays.asList(by));
     }
+
+    /**
+     * Tries to find the first {@link WebElement} using the by locator chain of {@link By}
+     *
+     * @param by element locator chain
+     * @return an {@code Optional} with a present element if found, otherwise an empty {@code Optional}
+     */
+    protected Optional<WebElement> tryFind(By... by) {
+        WebElement result = null;
+        try {
+            result = find(by);
+        } catch (NoSuchElementException e) {
+            logger.debug("", e);
+        }
+        return Optional.ofNullable(result);
+    }
+
 
     /**
      * Create {@link Actions} object to construct complex gestures

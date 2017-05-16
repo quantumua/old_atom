@@ -3,7 +3,6 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.assets.impl;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.assets.Assets;
-import com.betamedia.qe.af.core.fwdataaccess.entities.ExpectedCfdAsset;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
