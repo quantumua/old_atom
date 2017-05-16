@@ -1,11 +1,14 @@
 package com.betamedia.qe.af.core.utils;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import org.testng.annotations.Test;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * These tests check logic for StringUtil methods
@@ -68,5 +71,16 @@ public class StringUtilsTest {
     @Test(expectedExceptions = NullPointerException.class)
     public void shouldThrowNPEForNullDelimiter() {
         StringUtils.parseDelimitedString(String.join(AT, STRINGS), null);
+    }
+
+    @Test
+    public void shouldGenerateRandomStringNumber() {
+        int signsNumber = 11;
+        String digitsSeq1 = StringUtils.generateNumbersSequence(signsNumber);
+        String digitsSeq2 = StringUtils.generateNumbersSequence(signsNumber);
+        assertNotEquals(digitsSeq1, digitsSeq2);
+        assertEquals(digitsSeq1.length(), signsNumber);
+        assertEquals(digitsSeq2.length(), signsNumber);
+        System.out.println(digitsSeq1 + ", " + digitsSeq2);
     }
 }
