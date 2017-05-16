@@ -35,8 +35,8 @@ public class HtmlEmailSenderMsg {
         userName = environment.getRequiredProperty("spring.mail.username");
 //        TODO: when run on autolin1 there is no spring.mail.password property in environment!!!. Temporary hardcoded.
         String password = "4zp5hYBS";//environment.getRequiredProperty("spring.mail.password");
-        String smtpAuth =  environment.getRequiredProperty("spring.mail.properties.mail.smtp.auth");
-        String smtpStarttls = environment.getRequiredProperty("spring.mail.properties.mail.smtp.starttls.enable");
+        String smtpAuth =  "true"; //environment.getRequiredProperty("spring.mail.properties.mail.smtp.auth");
+        String smtpStarttls = "true";//environment.getRequiredProperty("spring.mail.properties.mail.smtp.starttls.enable");
 
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
