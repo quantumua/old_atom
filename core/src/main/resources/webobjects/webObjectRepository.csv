@@ -49,3 +49,7 @@ build,pageObjectName,locatorId,locatorType,value
 1603,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
 1603,CfdPositionsImpl,assetName,CLASS_NAME,assetname
 1603,AssetsImpl,tooltipClose,CSS,.tooltip-close > .icon
+1603,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
+1603,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
+1603,DialogBoxImpl,closeButton,XPATH,//*[@id="tradeManagerContainer"]/div/div[3]/div/div/div[3]
+1603,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
