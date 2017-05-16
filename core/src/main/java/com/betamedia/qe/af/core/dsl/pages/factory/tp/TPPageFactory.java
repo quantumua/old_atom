@@ -9,6 +9,7 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.Cont
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.DialogBox;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.MessageBox;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
@@ -45,4 +46,6 @@ public interface TPPageFactory {
     MessageBox messageBox();
 
     CfdPositions cfdPositions();
+
+    DialogBox dialogBox();
 }

@@ -85,6 +85,15 @@ public abstract class AbstractPageObject {
     }
 
     /**
+     * ind the list of elements using the by locator {@link By}
+     * @param by element locator
+     * @return list of detected elements
+     */
+    protected List<WebElement> findElements(By by) {
+        return webDriver.findElements(by);
+    }
+
+    /**
      * Find the first {@link WebElement} using the by locator chain of {@link By}
      *
      * @param by element locator chain
