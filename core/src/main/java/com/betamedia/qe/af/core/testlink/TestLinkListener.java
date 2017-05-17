@@ -1,16 +1,19 @@
 package com.betamedia.qe.af.core.testlink;
 
+import com.betamedia.qe.af.core.holders.AppContextHolder;
 import com.betamedia.qe.af.core.testlink.annotations.TestLinkDisplayId;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 /**
+ * Listener for TestLink integration.
+ * It is required to report test run results to TestLink.
  * Created by Oleksandr Losiev on 5/16/17.
  */
 public class TestLinkListener implements ITestListener{
 
-    private TestLinkService testLinkService = TestLinkServiceLocator.getTestLinkService();
+    private TestLinkService testLinkService = AppContextHolder.getBean(TestLinkService.class);
 
     @Override
     public void onTestStart(ITestResult iTestResult) {

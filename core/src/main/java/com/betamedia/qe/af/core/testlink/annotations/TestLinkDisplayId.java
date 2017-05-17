@@ -6,6 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Annotation that specifies a TestLink display id (e.g. CRM-8831) that corresponds to a test method.
+ * It should be specified on test cases for TestLink integration.
  * Created by Oleksandr Losiev on 5/16/17.
  */
 @Retention(RetentionPolicy.RUNTIME)

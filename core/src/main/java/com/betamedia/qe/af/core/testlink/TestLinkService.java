@@ -16,6 +16,9 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
+ * Service to provide TestLink integration.
+ * It is used to update test result status in conjunction with {@link TestLinkListener}.
+ *
  * Created by Oleksandr Losiev on 5/16/17.
  */
 @Service
