@@ -1,13 +1,18 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
 import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.utils.StringUtils;
 import com.google.common.base.Strings;
 
+import java.util.Optional;
+
+import static com.betamedia.qe.af.core.utils.StringUtils.generateNumbersSequence;
 import static com.betamedia.qe.af.core.utils.StringUtils.generateRandomId;
 
 public class CustomerBuilder {
 
     public static final int CHARS_IN_ID = 6;
+    public static final int CHARS_IN_PHONE_NUMBER = 11;
     public static final String TP_AUTOMATION_PREFIX = "tp_automation_";
     public static final String PASSWORD = "123123";
     public static final String EMAIL_TEMPLATE = "{userName}@automation.ru";
@@ -17,7 +22,7 @@ public class CustomerBuilder {
     private String password = PASSWORD;
     private String firstName = "Automation";
     private String email;
-    private String phone = "12465555555";
+    private String phone;
     private String currency = "EUR";
     private String countryCode = "JM";
 
@@ -222,6 +227,7 @@ public class CustomerBuilder {
             userName = TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
             email = formMail(userName);
         }
+        phone = formPhoneNumber();
     }
 
     private String formMail(String userName) {
@@ -229,5 +235,9 @@ public class CustomerBuilder {
             return email;
         }
         return EMAIL_TEMPLATE.replaceAll(DYNAMIC_EMAIL_PART_REGEX, userName);
+    }
+
+    private String formPhoneNumber(){
+        return Optional.ofNullable(phone).orElse(generateNumbersSequence(CHARS_IN_PHONE_NUMBER));
     }
 }

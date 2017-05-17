@@ -50,9 +50,9 @@ public class CustomerBuilderTest {
 	private static final String DEFAULT_CURENCY		= "EUR";
 	private static final String DEFAULT_COUNTRY_CODE= "JM";
 	private static final String DEFAULT_PASSWORD	= "123123";
-	private static final String DEFAULT_PHONE		= "12465555555";
 	private static final String DEFAULT_EMAIL 		= "@automation.ru";
 	private static final String DEFAULT_USER_NAME 	= "tp_automation";
+	private static final String CUSTOM_PHONE = "12465555555";
 	
     @Test
     public void testCreateDefaultCustomerRO() {
@@ -79,7 +79,7 @@ public class CustomerBuilderTest {
 	@Test
 	public void testDefaultCustomerRO() {
 		CustomerRO actualCustomerRO = new CustomerBuilder().createCustomerRO();
-		checkFields(actualCustomerRO, getCustomerRO());
+		checkDefault(actualCustomerRO, getDefaultCustomerRO());
 		assertEquals(actualCustomerRO.getEmail(),actualCustomerRO.getUserName() + DEFAULT_EMAIL);
 		assertTrue(actualCustomerRO.getUserName().contains(TP_AUTOMATION_PREFIX));
 		assertTrue(actualCustomerRO.getUserName().length() > TP_AUTOMATION_PREFIX.length());
@@ -88,17 +88,17 @@ public class CustomerBuilderTest {
 	@Test
     public void testCustomCustomerRO() {
 		CustomerRO actualCustomerRO = getCustomCustomerBuilder().createCustomerRO();
-		checkFields(actualCustomerRO, getCustomCustomerRO());
+		checkCustom(actualCustomerRO, getCustomCustomerRO());
 		assertEquals(actualCustomerRO.getEmail(),EMAIL);
 		assertTrue(actualCustomerRO.getUserName().contains(USER_NAME));
 	}
 
-	private CustomerRO getCustomerRO() {
+	private CustomerRO getDefaultCustomerRO() {
 		CustomerRO customerRO = new CustomerRO();
 		customerRO.setCountryCode(DEFAULT_COUNTRY_CODE);
 		customerRO.setCurrency(DEFAULT_CURENCY);
 		customerRO.setPassword(DEFAULT_PASSWORD);
-		customerRO.setPhone(DEFAULT_PHONE);
+		customerRO.setPhone(CUSTOM_PHONE);
 		customerRO.setEmail(DEFAULT_EMAIL);
 		customerRO.setUserName(DEFAULT_USER_NAME);
 		customerRO.setFirstName(DEFAULT_FIRST_NAME);
@@ -142,6 +142,16 @@ public class CustomerBuilderTest {
 				.setUserName(USER_NAME);
 	}
 
+	private void checkDefault(CustomerRO actualCustomerRO, CustomerRO expectedCustomerRO){
+		assertEquals(actualCustomerRO.getPhone().length(),CustomerBuilder.CHARS_IN_PHONE_NUMBER);
+		checkFields(actualCustomerRO, expectedCustomerRO);
+	}
+
+	private void checkCustom(CustomerRO actualCustomerRO, CustomerRO expectedCustomerRO){
+		assertEquals(actualCustomerRO.getPhone(),expectedCustomerRO.getPhone());
+		checkFields(actualCustomerRO, expectedCustomerRO);
+	}
+
 	private void checkFields(CustomerRO actualCustomerRO, CustomerRO expectedCustomerRO) {
 		//assertThat(actualCustomerRO, is(samePropertyValuesAs(expectedCustomerRO)));
 		//assertThat(defaultCustomer, samePropertyValuesAs(customerRO));
@@ -163,7 +173,6 @@ public class CustomerBuilderTest {
 		assertEquals(actualCustomerRO.getP4(),expectedCustomerRO.getP4());
 		assertEquals(actualCustomerRO.getP5(),expectedCustomerRO.getP5());
 		assertEquals(actualCustomerRO.getPassword(),expectedCustomerRO.getPassword());
-		assertEquals(actualCustomerRO.getPhone(),expectedCustomerRO.getPhone());
 		assertEquals(actualCustomerRO.getPhoneTwo(),expectedCustomerRO.getPhoneTwo());
 		assertEquals(actualCustomerRO.getRegistrationIp(),expectedCustomerRO.getRegistrationIp());
 		assertEquals(actualCustomerRO.getSiteid(),expectedCustomerRO.getSiteid());

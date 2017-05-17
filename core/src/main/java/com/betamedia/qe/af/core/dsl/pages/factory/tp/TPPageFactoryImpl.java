@@ -17,7 +17,9 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.impl.DisclaimerNotificationImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.impl.LoginErrorNotificationImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.impl.LoginPageImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.DialogBox;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.MessageBox;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.impl.DialogBoxImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.impl.MessageBoxImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPageImpl;
@@ -45,6 +47,11 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     @Override
     public LoginPage loginPage() {
         return creator.getPage(LoginPageImpl.class);
+    }
+
+    @Override
+    public DialogBox dialogBox() {
+        return creator.getPage(DialogBoxImpl.class);
     }
 
     @Override

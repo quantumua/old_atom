@@ -11,6 +11,7 @@ import org.testng.Reporter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -40,7 +41,7 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> when element is displayed
      */
     protected boolean waitUntilDisplayed(By element) {
-        return getWait().until(driver -> find(element).isDisplayed());
+        return getWait().until(driver -> ignoringStale(() -> find(element).isDisplayed()));
     }
 
     /**
@@ -50,7 +51,7 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> when element is displayed
      */
     protected boolean waitUntilDisplayed(By... elements) {
-        return getWait().until(driver -> find(elements).isDisplayed());
+        return getWait().until(driver -> ignoringStale(() -> find(elements).isDisplayed()));
     }
 
     /**
@@ -60,7 +61,7 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> when element is found
      */
     protected boolean waitUntilExists(By element) {
-        return getWait().until(driver -> !driver.findElements(element).isEmpty());
+        return getWait().until(driver ->!driver.findElements(element).isEmpty());
     }
 
     /**
@@ -70,7 +71,7 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> when condition is true
      */
     protected boolean waitUntil(Supplier<Boolean> isTrue) {
-        return getWait().until(d -> isTrue.get());
+        return getWait().until(d -> ignoringStale(isTrue));
     }
 
     /**
@@ -85,6 +86,15 @@ public abstract class AbstractPageObject {
     }
 
     /**
+     * ind the list of elements using the by locator {@link By}
+     * @param by element locator
+     * @return list of detected elements
+     */
+    protected List<WebElement> findElements(By by) {
+        return webDriver.findElements(by);
+    }
+
+    /**
      * Find the first {@link WebElement} using the by locator chain of {@link By}
      *
      * @param by element locator chain
@@ -96,6 +106,22 @@ public abstract class AbstractPageObject {
     }
 
     /**
+     * Tries to find the first {@link WebElement} using the by locator chain of {@link By}
+     *
+     * @param by element locator chain
+     * @return an {@code Optional} with a present element if found, otherwise an empty {@code Optional}
+     */
+    protected Optional<WebElement> tryFind(By... by) {
+        WebElement result = null;
+        try {
+            result = find(by);
+        } catch (NoSuchElementException e) {
+            logger.debug("", e);
+        }
+        return Optional.ofNullable(result);
+    }
+
+    /**
      * Create {@link Actions} object to construct complex gestures
      *
      * @return {@link Actions} object for active {@link WebDriver}
@@ -103,6 +129,7 @@ public abstract class AbstractPageObject {
     protected Actions makeActions() {
         return new Actions(webDriver);
     }
+
 
     /**
      * Evaluate {@link Supplier} value for given iFrame located with a {@link By}
@@ -278,6 +305,14 @@ public abstract class AbstractPageObject {
             return webElement;
         }
         return find(webElement.findElement(bys.get(0)), bys.subList(1, bys.size()));
+    }
+
+    private static <T> T ignoringStale(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (StaleElementReferenceException e) {
+            return null;
+        }
     }
 
 }

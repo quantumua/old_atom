@@ -3,6 +3,10 @@
     <test name="Tryouts 1">
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.web.LoginPageTest">
+                <methods>
+                    <parameter name="username" value="maksym"/>
+                    <parameter name="password" value="password"/>
+                </methods>
             </class>
         </classes>
     </test>

@@ -50,6 +50,16 @@ build,pageObjectName,locatorId,locatorType,value
 1603,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
 1603,CfdPositionsImpl,assetName,CLASS_NAME,assetname
 1603,AssetsImpl,tooltipClose,CSS,.tooltip-close > .icon
+1603,ChartImpl,highChartsRoot,CLASS_NAME,highcharts-root
+1603,ChartImpl,candleSticks,CLASS_NAME,highcharts-candlestick-series
+1603,ChartImpl,candle,TAG,path
+1603,MessageBoxImpl,requoteTrade,CLASS_NAME,requote-trade
+1603,MessageBoxImpl,buttonsBlock,CLASS_NAME,buttons-block
+1603,MessageBoxImpl,firstButton,CSS,button:nth-of-type(1)
+1603,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
+1603,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
+1603,DialogBoxImpl,closeButton,XPATH,//*[@id="tradeManagerContainer"]/div/div[3]/div/div/div[3]
+1603,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
 1603,RegistrationPageImpl,firstnameField,ID,FirstName
 1603,RegistrationPageImpl,lastnameField,ID,LastName
 1603,RegistrationPageImpl,emailField,ID,Email
