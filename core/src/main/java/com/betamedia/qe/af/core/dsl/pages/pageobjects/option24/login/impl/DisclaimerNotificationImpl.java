@@ -6,6 +6,7 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerN
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
 
 /**
@@ -13,9 +14,9 @@ import org.testng.Reporter;
  */
 public class DisclaimerNotificationImpl extends AbstractPageObject implements DisclaimerNotification {
 
-    @StoredId("disclaimerCheckbox")
+    @StoredId
     private By disclaimerCheckbox;
-    @StoredId("disclaimerSubmitBtn")
+    @StoredId
     private By disclaimerSubmitBtn;
 
     public DisclaimerNotificationImpl(WebDriver webDriver) {

@@ -41,7 +41,7 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> when element is displayed
      */
     protected boolean waitUntilDisplayed(By element) {
-        return getWait().until(driver -> find(element).isDisplayed());
+        return getWait().until(driver -> ignoringStale(() -> find(element).isDisplayed()));
     }
 
     /**
@@ -51,7 +51,7 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> when element is displayed
      */
     protected boolean waitUntilDisplayed(By... elements) {
-        return getWait().until(driver -> find(elements).isDisplayed());
+        return getWait().until(driver -> ignoringStale(() -> find(elements).isDisplayed()));
     }
 
     /**
@@ -61,7 +61,7 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> when element is found
      */
     protected boolean waitUntilExists(By element) {
-        return getWait().until(driver -> !driver.findElements(element).isEmpty());
+        return getWait().until(driver ->!driver.findElements(element).isEmpty());
     }
 
     /**
@@ -71,7 +71,7 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> when condition is true
      */
     protected boolean waitUntil(Supplier<Boolean> isTrue) {
-        return getWait().until(d -> isTrue.get());
+        return getWait().until(d -> ignoringStale(isTrue));
     }
 
     /**
@@ -121,7 +121,6 @@ public abstract class AbstractPageObject {
         return Optional.ofNullable(result);
     }
 
-
     /**
      * Create {@link Actions} object to construct complex gestures
      *
@@ -130,6 +129,7 @@ public abstract class AbstractPageObject {
     protected Actions makeActions() {
         return new Actions(webDriver);
     }
+
 
     /**
      * Evaluate {@link Supplier} value for given iFrame located with a {@link By}
@@ -305,6 +305,14 @@ public abstract class AbstractPageObject {
             return webElement;
         }
         return find(webElement.findElement(bys.get(0)), bys.subList(1, bys.size()));
+    }
+
+    private static <T> T ignoringStale(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (StaleElementReferenceException e) {
+            return null;
+        }
     }
 
 }
