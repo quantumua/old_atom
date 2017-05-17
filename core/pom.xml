@@ -84,6 +84,19 @@
             <artifactId>jtds</artifactId>
             <version>1.3.1</version>
         </dependency>
+        <!-- MySQL driver -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+        <!-- Test Link API -->
+        <dependency>
+            <groupId>com.github.shabana-parveen</groupId>
+            <artifactId>testlink-api-java-client</artifactId>
+            <version>5b52a17</version>
+        </dependency>
+
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>

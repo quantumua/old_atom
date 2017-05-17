@@ -10,7 +10,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.betamedia.qe.af.core.persistence.repositories.impl.automation"
+        basePackages = "com.betamedia.qe.af.core.persistence.repositories.impl.automation",
+        entityManagerFactoryRef = "entityManager",
+        transactionManagerRef = "transactionManager"
 )
 public class AutomationEnvPersistenceConfig extends AbstractPersistenceConfig<AutomationEnvironment> implements AutomationEnvironment {
 }
