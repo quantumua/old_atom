@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.testslibrary.option24.web;
+package com.betamedia.qe.af.testslibrary.option24.web.monitoring;
 
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.fwdataaccess.entities.ExpectedCfdAsset;
