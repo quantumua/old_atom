@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.testslibrary.option24.backend;
+package com.betamedia.qe.af.testslibrary.option24.backend.crm;
 
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;

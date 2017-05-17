@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.testslibrary.option24.end2end;
+package com.betamedia.qe.af.testslibrary.option24.end2end.tp;
 
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
