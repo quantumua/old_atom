@@ -3,12 +3,13 @@ package com.betamedia.qe.af.testslibrary.option24.web;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  * Created by vsnigur on 5/16/17.
  */
-public class HandleMessages  extends TPEndToEndTest {
+public class HandleBinaryBiddingMessages extends TPEndToEndTest {
     @Test(description = "Handle error if user with zero balance try to trade.")
     public void bidDuringZeroBalanceTest() {
         CRMCustomer customer = operations().customerOperations().register();
@@ -42,5 +43,22 @@ public class HandleMessages  extends TPEndToEndTest {
         pages().binaryBidder().bidLow();
         pages().dialogBox().assertTitle("Error");
         pages().dialogBox().assertMessage("Your account doesn't have enough funds.");
+    }
+
+    @Test(description = "Handle error amount messages for high, low, incorrect bid input.")
+    public void checkAmountErrorMessagesTest() {
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login("vasichka", "123123");
+        pages().disclaimerNotification().tryAccept();
+        pages().binarySelector().highLow();
+        pages().binaryBidder().setAmount("1");
+        pages().binaryBidder().bidLow();
+        pages().binaryBidder().assertMinAmountMessage("Min. amount\n€\n10  ");
+        pages().binaryBidder().setAmount("500000");
+        pages().binaryBidder().bidHigh();
+        Assert.assertTrue(pages().binaryBidder().getMaxAmountMessage().contains("Max. amount"));
+        pages().binaryBidder().setAmount("-1");
+        pages().binaryBidder().bidHigh();
+        pages().binaryBidder().assertValidAmountMessage("Please enter a valid amount.");
     }
 }

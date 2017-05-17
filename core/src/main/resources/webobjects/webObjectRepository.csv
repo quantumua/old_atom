@@ -59,3 +59,6 @@ build,pageObjectName,locatorId,locatorType,value
 1603,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
 1603,DialogBoxImpl,closeButton,XPATH,//*[@id="tradeManagerContainer"]/div/div[3]/div/div/div[3]
 1603,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
+1603,BinaryBidderImpl,errorMinAmount,CSS,.bmMessage.bmError.bmMessageMinAmount
+1603,BinaryBidderImpl,errorMaxAmount,CSS,.bmMessage.bmError.bmMessageMaxAmount
+1603,BinaryBidderImpl,errorValidAmount,CSS,.bmMessage.bmError.bmMessageEnterValidAmount

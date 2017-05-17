@@ -6,6 +6,7 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.BinaryBidd
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 /**
  * Created by mbelyaev on 3/21/17.
@@ -20,6 +21,12 @@ public class BinaryBidderImpl extends AbstractPageObject implements BinaryBidder
     private By highButton;
     @StoredId
     private By closePosition;
+    @StoredId
+    private By errorMinAmount;
+    @StoredId
+    private By errorMaxAmount;
+    @StoredId
+    private By errorValidAmount;
 
     public BinaryBidderImpl(WebDriver webDriver) {
         super(webDriver);
@@ -55,4 +62,39 @@ public class BinaryBidderImpl extends AbstractPageObject implements BinaryBidder
         return this;
     }
 
+    @Override
+    public String getMaxAmountMessage() {
+        waitUntilDisplayed(errorMaxAmount);
+        return find(errorMaxAmount).getText();
+    }
+
+    @Override
+    public String getMinAmountMessage() {
+        waitUntilDisplayed(errorMinAmount);
+        return find(errorMinAmount).getText();
+    }
+
+    @Override
+    public String getNotValidAmountMessage() {
+        waitUntilDisplayed(errorValidAmount);
+        return find(errorValidAmount).getText();
+    }
+
+    @Override
+    public void assertMaxAmountMessage(String message) {
+        Assert.assertTrue(find(errorMaxAmount).isDisplayed());
+        Assert.assertEquals(find(errorMaxAmount).getText(),message);
+    }
+
+    @Override
+    public void assertMinAmountMessage(String message) {
+        Assert.assertTrue(find(errorMinAmount).isDisplayed());
+        Assert.assertEquals(find(errorMinAmount).getText(),message);
+    }
+
+    @Override
+    public void assertValidAmountMessage(String message) {
+        Assert.assertTrue(find(errorValidAmount).isDisplayed());
+        Assert.assertEquals(find(errorValidAmount).getText(),message);
+    }
 }
