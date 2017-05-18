@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl;
 
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
@@ -13,7 +14,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class RegistrationPageImpl extends AbstractPageObject implements RegistrationPage {
 
-   
+	CustomerRO dataCustomer = CustomerDataSet.dataCustomerReg();
+	
     @StoredId
     private By registrationWidget;
     @StoredId
@@ -22,54 +24,54 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
     private By lastnameField;
     @StoredId
     private By emailField;
+    @StoredId
+    private By phoneNumberField;
+    @StoredId
+    private By selecCountry;
+    @StoredId
+    private By passwordRegField;
+    @StoredId
+    private By reenterPasswordRegField;
+    
 
     public RegistrationPageImpl(WebDriver webDriver) {
     	 super(webDriver);
     }
 
-    @Override
-    public void firstName() {
-    	 waitUntilDisplayed(registrationWidget); 
-    	 find(registrationWidget, firstnameField).sendKeys("test");
-    	 
-    }
-
-    @Override
-    public void lastName() {
-    	 waitUntilDisplayed(registrationWidget); 
-    	 find(registrationWidget, lastnameField).sendKeys("test");
-        
-    }
-
-    @Override
-    public void email() {
-    	 waitUntilDisplayed(registrationWidget); 
-    	 find(registrationWidget, emailField).sendKeys("Hol6@a.com");
-    }
-
-    @Override
-    public void phoneNumber() {
-      
-    }
-
-    @Override
-    public void password() {
-       
-    }
-    
-    @Override
-    public void reenterPassword() {
-       
-    }
-    
-    @Override
-    public void checkboxAccountAgree() {
-      
-    }
 
 	@Override
-	public void country() {
+	public void fillLongRegistration() {
+		
+		/* firstName */
+		waitUntilDisplayed(registrationWidget); 
+   	    find(registrationWidget, firstnameField).sendKeys(dataCustomer.getFirstName());
 		// TODO Auto-generated method stub
+    
+   	    /* lastName */
+   	    
+	    find(registrationWidget, lastnameField).sendKeys(dataCustomer.getLastName());
+	    
+	    /* Email */
+	    
+   	    find(registrationWidget, emailField).sendKeys(dataCustomer.getEmail());
+   	    
+   	    /* Phone Number */
+   	    find(registrationWidget, phoneNumberField).sendKeys(dataCustomer.getPhone());
+   	    
+   	    /* Password */
+   	    find(registrationWidget, passwordRegField).click();
+   	    find(registrationWidget, passwordRegField).sendKeys(dataCustomer.getPassword());
+   	    
+   	    /* Re- enter password */
+    	 waitUntilDisplayed(reenterPasswordRegField); 
+   	     find(registrationWidget, reenterPasswordRegField).sendKeys(dataCustomer.getPassword());
+   	     
+   	    
+   	  System.out.println("EMAIL  " + dataCustomer.getEmail());
+ 	  System.out.println("Phone  " + dataCustomer.getPhone());
+ 	  System.out.println("passwod  " + dataCustomer.getPassword());
+   
+   	    
 		
 	}
 

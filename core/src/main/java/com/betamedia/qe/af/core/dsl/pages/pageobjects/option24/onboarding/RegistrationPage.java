@@ -5,13 +5,7 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding;
  */
 public interface RegistrationPage {
 
-    void firstName();
-    void lastName();
-    void email();
-    void phoneNumber();
-    void country();
-    void password();
-    void reenterPassword();
-    void checkboxAccountAgree();   
+
+    void fillLongRegistration();
     
   }
