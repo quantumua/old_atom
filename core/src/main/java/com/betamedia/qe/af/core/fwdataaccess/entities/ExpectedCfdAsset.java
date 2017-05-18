@@ -29,4 +29,13 @@ public class ExpectedCfdAsset {
     public String getListBidderName() {
         return listBidderName;
     }
+
+    @Override
+    public String toString() {
+        return "ExpectedCfdAsset{" +
+                "symbol='" + symbol + '\'' +
+                ", tooltipName='" + tooltipName + '\'' +
+                ", listBidderName='" + listBidderName + '\'' +
+                '}';
+    }
 }

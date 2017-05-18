@@ -11,6 +11,12 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.Bi
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.impl.BinarySelectorImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.impl.ControlPanelImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmLoginPage;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmNavigation;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.CrmLoginPageImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.CrmNavigationImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsTradingExperienceImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
@@ -110,11 +116,27 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public MessageBox messageBox(){
-        return creator.getPage(MessageBoxImpl.class);}
+    public MessageBox messageBox() {
+        return creator.getPage(MessageBoxImpl.class);
+    }
 
     @Override
-    public CfdPositions cfdPositions(){
+    public CfdPositions cfdPositions() {
         return creator.getPage(CfdPositionsImpl.class);
+    }
+
+    @Override
+    public CrmNavigation crmNavigation() {
+        return creator.getPage(CrmNavigationImpl.class);
+    }
+
+    @Override
+    public FnsTradingExperience fnsTradingExperience() {
+        return creator.getPage(FnsTradingExperienceImpl.class);
+    }
+
+    @Override
+    public CrmLoginPage crmLoginPage(){
+        return creator.getPage(CrmLoginPageImpl.class);
     }
 }

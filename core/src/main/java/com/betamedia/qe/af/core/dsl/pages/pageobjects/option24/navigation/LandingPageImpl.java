@@ -18,6 +18,6 @@ public class LandingPageImpl extends AbstractPageObject implements LandingPage {
 
     @Override
     public boolean isOnPage() {
-        return waitUntilDisplayed(homepage);
+        return waitUntilDisplayed(homepage) != null;
     }
 }

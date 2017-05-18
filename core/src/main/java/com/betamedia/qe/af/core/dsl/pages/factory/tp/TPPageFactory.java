@@ -6,6 +6,9 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.BinaryBidd
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.CfdBidder;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.BinarySelector;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmLoginPage;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmNavigation;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
@@ -48,4 +51,10 @@ public interface TPPageFactory {
     CfdPositions cfdPositions();
 
     DialogBox dialogBox();
+
+    CrmNavigation crmNavigation();
+
+    FnsTradingExperience fnsTradingExperience();
+
+    CrmLoginPage crmLoginPage();
 }
