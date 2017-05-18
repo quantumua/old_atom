@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
@@ -40,8 +41,8 @@ public abstract class AbstractPageObject {
      * @param element locator for element
      * @return <code>true</code> when element is displayed
      */
-    protected boolean waitUntilDisplayed(By element) {
-        return getWait().until(driver -> ignoringStale(() -> find(element).isDisplayed()));
+    protected WebElement waitUntilDisplayed(By element) {
+        return getWait().until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
     /**
@@ -50,8 +51,8 @@ public abstract class AbstractPageObject {
      * @param elements locator chain for element
      * @return <code>true</code> when element is displayed
      */
-    protected boolean waitUntilDisplayed(By... elements) {
-        return getWait().until(driver -> ignoringStale(() -> find(elements).isDisplayed()));
+    protected WebElement waitUntilDisplayed(By... elements) {
+        return getWait().until(driver -> ignoringStale(() -> elementIfVisible(find(elements))));
     }
 
     /**
@@ -60,18 +61,18 @@ public abstract class AbstractPageObject {
      * @param element locator for element
      * @return <code>true</code> when element is found
      */
-    protected boolean waitUntilExists(By element) {
-        return getWait().until(driver ->!driver.findElements(element).isEmpty());
+    protected WebElement waitUntilExists(By element) {
+        return getWait().until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
     /**
-     * Wait until arbitrary condition is true
+     * Wait until arbitrary condition is not null or false
      *
-     * @param isTrue condition to evaluate
-     * @return <code>true</code> when condition is true
+     * @param isValid condition to evaluate
+     * @return return value of condition
      */
-    protected boolean waitUntil(Supplier<Boolean> isTrue) {
-        return getWait().until(d -> ignoringStale(isTrue));
+    protected <T> T waitUntil(Supplier<T> isValid) {
+        return getWait().until(d -> ignoringStale(isValid));
     }
 
     /**
@@ -247,6 +248,24 @@ public abstract class AbstractPageObject {
     }
 
     /**
+     * Wait until element is displayed and perform {@link WebElement#click()} on it
+     *
+     * @param by element locator
+     */
+    protected void click(By by) {
+        waitUntilDisplayed(by).click();
+    }
+
+    /**
+     * Wait until element is displayed and perform {@link WebElement#click()} on it
+     *
+     * @param by element locator chain
+     */
+    protected void click(By... by) {
+        waitUntilDisplayed(by).click();
+    }
+
+    /**
      * Delete all the cookies for the current domain.
      *
      * @see WebDriver.Options#deleteAllCookies
@@ -315,4 +334,7 @@ public abstract class AbstractPageObject {
         }
     }
 
+    private static WebElement elementIfVisible(WebElement element) {
+        return element.isDisplayed() ? element : null;
+    }
 }

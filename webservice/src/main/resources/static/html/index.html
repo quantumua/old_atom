@@ -11,13 +11,18 @@
         .highlight {
             color: limegreen !important;
         }
+        .form-control {
+            height:auto;
+        }
     </style>
 </head>
 
 <body ng-app="client">
-<a href="/af/">Run tests</a> |
-<a href="/af/schedule">Schedule test execution</a> |
-<a href="/af/upload">Upload data</a>
+<div id = "memu" style='margin-left: 20%;'>
+    <a href="/af/">Run tests</a> |
+    <a href="/af/schedule">Schedule test execution</a> |
+    <a href="/af/upload">Upload data</a>
+</div>
 
 <div ng-controller="runner as runner" class="container">
     <form role="form" ng-submit="runner.run()">

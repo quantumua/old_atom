@@ -28,12 +28,12 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public boolean isLoggedIn() {
-        return waitUntilDisplayed(myAccountBtn);
+        return waitUntilDisplayed(myAccountBtn) != null;
     }
 
     @Override
     public boolean isLoggedOut() {
-        return waitUntilDisplayed(loginBtn);
+        return waitUntilDisplayed(loginBtn) != null;
     }
 
     @Override

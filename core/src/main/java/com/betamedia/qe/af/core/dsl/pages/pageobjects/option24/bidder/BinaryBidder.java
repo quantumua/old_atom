@@ -12,4 +12,16 @@ public interface BinaryBidder {
     BinaryBidder bidHigh();
 
     BinaryBidder confirm();
+
+    String getMaxAmountMessage();
+
+    String getMinAmountMessage();
+
+    String getNotValidAmountMessage();
+
+    void assertMaxAmountMessage(String message);
+
+    void assertMinAmountMessage(String message);
+
+    void assertValidAmountMessage(String message);
 }
