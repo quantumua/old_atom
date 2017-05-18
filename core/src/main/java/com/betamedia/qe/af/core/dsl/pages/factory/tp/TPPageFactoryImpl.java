@@ -13,9 +13,11 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.Cont
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.impl.ControlPanelImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmLoginPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmNavigation;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.CrmLoginPageImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.CrmNavigationImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsPersonalInformationImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsTradingExperienceImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
@@ -136,7 +138,12 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public CrmLoginPage crmLoginPage(){
+    public FnsPersonalInformation fnsPersonalInformation() {
+        return creator.getPage(FnsPersonalInformationImpl.class);
+    }
+
+    @Override
+    public CrmLoginPage crmLoginPage() {
         return creator.getPage(CrmLoginPageImpl.class);
     }
 }

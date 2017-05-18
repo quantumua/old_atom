@@ -6,8 +6,6 @@ import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by mbelyaev on 5/17/17.
@@ -30,6 +28,30 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     @StoredId
     private By cfdBinaryKnowledge;
     @StoredId
+    private By mainFactorKnowledge;
+    @StoredId
+    private By howToCloseKnowledge;
+    @StoredId
+    private By cfdLeverageKnowledge;
+    @StoredId
+    private By stopLossKnowledge;
+    @StoredId
+    private By requiredMarginKnowledge;
+    @StoredId
+    private By marginLevelDropKnowledge;
+    @StoredId
+    private By automaticStopKnowledge;
+    @StoredId
+    private By lossOn1to50Knowledge;
+    @StoredId
+    private By lossOn1to200Knowledge;
+    @StoredId
+    private By binaryInvestProfitKnowledge;
+    @StoredId
+    private By binaryInvestLossKnowledge;
+    @StoredId
+    private By binaryProbabilityKnowledge;
+    @StoredId
     private By submit;
 
     public FnsTradingExperienceImpl(WebDriver webDriver) {
@@ -40,22 +62,26 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     public void submit(TradingExperienceInfo info) {
         in(sharesExperience).selectByValue(info.sharesExperience);
         in(binaryExperience).selectByValue(info.binaryExperience);
-        in(averageYearlyBinaryVolume).selectByValue(info.averageYearlyBinaryVolume);
+//        in(averageYearlyBinaryVolume).selectByValue(info.averageYearlyBinaryVolume);
         in(forExExperience).selectByValue(info.forExExperience);
-        in(averageYearlyForExVolume).selectByValue(info.averageYearlyForExVolume);
-        in(commonLeverage).selectByValue(info.commonLeverage);
+//        in(averageYearlyForExVolume).selectByValue(info.averageYearlyForExVolume);
+//        in(commonLeverage).selectByValue(info.commonLeverage);
         in(financialWorkExperience).selectByValue(info.financialWorkExperience);
         in(cfdBinaryKnowledge).selectByValue(info.cfdBinaryKnowledge);
+        in(mainFactorKnowledge).selectByValue(info.mainFactorKnowledge);
+        in(howToCloseKnowledge).selectByValue(info.howToCloseKnowledge);
+        in(cfdLeverageKnowledge).selectByValue(info.cfdLeverageKnowledge);
+        in(stopLossKnowledge).selectByValue(info.stopLossKnowledge);
+        in(requiredMarginKnowledge).selectByValue(info.requiredMarginKnowledge);
+        in(marginLevelDropKnowledge).selectByValue(info.marginLevelDropKnowledge);
+        in(automaticStopKnowledge).selectByValue(info.automaticStopKnowledge);
+        in(lossOn1to50Knowledge).selectByValue(info.lossOn1to50Knowledge);
+        in(lossOn1to200Knowledge).selectByValue(info.lossOn1to200Knowledge);
+        in(binaryInvestProfitKnowledge).selectByValue(info.binaryInvestProfitKnowledge);
+        in(binaryInvestLossKnowledge).selectByValue(info.binaryInvestLossKnowledge);
+        in(binaryProbabilityKnowledge).selectByValue(info.binaryProbabilityKnowledge);
         click(submit);
     }
 
-    private Select in(By element) {
-        return in(waitUntilDisplayed(element));
-    }
-
-
-    private Select in(WebElement element) {
-        return new Select(element);
-    }
 
 }

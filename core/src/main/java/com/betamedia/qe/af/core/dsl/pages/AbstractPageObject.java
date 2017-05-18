@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
@@ -87,7 +88,8 @@ public abstract class AbstractPageObject {
     }
 
     /**
-     * ind the list of elements using the by locator {@link By}
+     * Find the list of elements using the by locator {@link By}
+     *
      * @param by element locator
      * @return list of detected elements
      */
@@ -263,6 +265,27 @@ public abstract class AbstractPageObject {
      */
     protected void click(By... by) {
         waitUntilDisplayed(by).click();
+    }
+
+    /**
+     * Retrieves a <code>select</code> element at the locator and wraps it in {@link Select}
+     *
+     * @param by element locator
+     * @return {@link Select} for the element
+     */
+
+    protected Select in(By by) {
+        return in(waitUntilDisplayed(by));
+    }
+
+    /**
+     * Creates {@link Select} for a given {@link WebElement}
+     *
+     * @param element source <code>WebElement</code>
+     * @return {@link Select} for the element
+     */
+    protected static Select in(WebElement element) {
+        return new Select(element);
     }
 
     /**

@@ -8,6 +8,7 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.Bi
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmLoginPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmNavigation;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
@@ -55,6 +56,8 @@ public interface TPPageFactory {
     CrmNavigation crmNavigation();
 
     FnsTradingExperience fnsTradingExperience();
+
+    FnsPersonalInformation fnsPersonalInformation();
 
     CrmLoginPage crmLoginPage();
 }
