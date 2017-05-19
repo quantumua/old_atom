@@ -4,6 +4,6 @@ import com.betamedia.qe.af.core.api.crm.form.builders.AccountAdditionalDetailsBu
 
 public interface AccountAdditionalDetails {
 
-    void update(AccountAdditionalDetailsBuilder.AccountAdditionalDetailsBuilderInfo info);
+    void update(AccountAdditionalDetailsBuilder.AccountAdditionalDetails info);
 
 }

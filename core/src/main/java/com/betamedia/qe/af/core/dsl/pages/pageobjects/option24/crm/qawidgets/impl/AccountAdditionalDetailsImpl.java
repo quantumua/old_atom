@@ -31,7 +31,7 @@ public class AccountAdditionalDetailsImpl extends AbstractPageObject implements 
     }
 
     @Override
-    public void update(AccountAdditionalDetailsBuilder.AccountAdditionalDetailsBuilderInfo info) {
+    public void update(AccountAdditionalDetailsBuilder.AccountAdditionalDetails info) {
         waitUntilDisplayed(birthDateDay);
         in(birthDateDay).selectByValue(info.birthDateDay);
         in(birthDateMonth).selectByValue(info.birthDateMonth);
