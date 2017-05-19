@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.testng.Assert.assertNotNull;
 
+import java.util.Collections;
+
 /**
  * This class is designed to facilitate the execution of common operations related to asset.
  * It can be used as a "building block" when writing integration tests.
@@ -37,25 +39,6 @@ public abstract class AbstractAssetOperations<T extends EnvironmentDependent> im
     @Autowired
     private VolatilityUnitOperations<T> volatilityUnitOperations;
 
-    /**
-     * A method that creates and returns a default trading platform asset.
-     */
-    @Override
-    public Asset get() {
-        return create();
-    }
-
-    /**
-     * A method to get asset by id.
-     */
-    @Override
-    public Asset get(String id) {
-        String internalId = id.replace("/", "");
-        Asset asset = tpConnector.readById(Asset.class, internalId);
-        assertNotNull(asset, "Asset id=" + internalId + " is not available in GS");
-        return asset;
-    }
-
     private Asset create() {
         Asset asset = new Asset();
         asset.setAssetName("QEAUTOTEST");
@@ -74,4 +57,34 @@ public abstract class AbstractAssetOperations<T extends EnvironmentDependent> im
         feedGatewayConnector.serviceProxy(IFeedService.class).setRoundFactor(asset.getId(), asset.getRoundFactor());
         return asset;
     }
+
+    /**
+     * A method that creates and returns a default trading platform asset.
+     */
+    @Override
+    public Asset get() {
+        return create();
+    }
+
+    /**
+     * A method to get asset by id.
+     */
+    @Override
+    public Asset get(String id) {
+        String internalId = id.replace("/", "");
+        Asset asset = tpConnector.readById(Asset.class, internalId);
+        assertNotNull(asset, "Asset id=" + internalId + " is not available in GS");
+        return asset;
+    }
+    
+    /**
+     * A method to set timeout and timeout alert for asset. It also cleans asset's data
+     */
+    @Override
+    public Asset setTimeout(Asset asset, Integer timeout, Integer timeoutAlert) {
+        asset.setFeedTimeout(timeout);
+        asset.setFeedTimeoutAlert(timeoutAlert);
+        return tpConnector.update(asset, Collections.emptySet());
+    }
+
 }

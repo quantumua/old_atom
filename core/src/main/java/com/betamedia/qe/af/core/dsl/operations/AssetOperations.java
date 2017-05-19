@@ -11,4 +11,6 @@ public interface AssetOperations <T extends EnvironmentDependent> extends Enviro
 
     Asset get(String id);
 
+    Asset setTimeout(Asset asset, Integer timeout, Integer timeoutAlert);
+
 }

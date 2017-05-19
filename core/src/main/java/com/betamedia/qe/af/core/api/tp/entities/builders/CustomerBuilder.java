@@ -221,12 +221,10 @@ public class CustomerBuilder {
     }
 
     private void formDefaultUniqueFields() {
-        if (!Strings.isNullOrEmpty(userName)) {
-            email = formMail(userName);
-        } else {
+        if (Strings.isNullOrEmpty(userName)) {
             userName = TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
-            email = formMail(userName);
         }
+        email = formMail(userName);
         phone = formPhoneNumber();
     }
 
