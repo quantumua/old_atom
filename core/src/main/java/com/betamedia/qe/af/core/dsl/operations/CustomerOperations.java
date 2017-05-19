@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.core.dsl.operations;
 
+import com.betamedia.qe.af.core.api.tp.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
@@ -45,4 +46,6 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
     TrackingInfoExtension getCustomerTrackingInfoExtensionByKeyword(String keyword);
 
     TrackingInfo getCustomerTrackingInfo(String trackingInfoId);
+
+    CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions);
 }

@@ -1,14 +1,19 @@
 package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
+import com.betamedia.qe.af.core.api.tp.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
 import com.betamedia.qe.af.core.dsl.operations.CustomerOperations;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
+import com.betamedia.qe.af.core.persistence.entities.ContactExtension;
+import com.betamedia.qe.af.core.persistence.entities.RiskLimits;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractContactExtensionRepository;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractRiskLimitsRepository;
 import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoExtensionRepository;
 import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoRepository;
 import org.apache.logging.log4j.LogManager;
@@ -38,6 +43,12 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Autowired
     public AbstractTrackingInfoExtensionRepository<T> trackingInfoExtensionRepository;
+
+    @Autowired
+    public AbstractContactExtensionRepository<T> contactExtensionRepository;
+
+    @Autowired
+    public AbstractRiskLimitsRepository<T> riskLimitsRepository;
 
     /**
      * Registers new CRM customer with default customer builder
@@ -203,5 +214,71 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         TrackingInfo trackingInfo = trackingInfoRepository.findOne(trackingInfoId);
         assertNotNull(trackingInfo);
         return trackingInfo;
+    }
+
+    @Override
+    public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
+        CustomerBuilder customerBuilder = createCustomerBuilderForWizard(wizardConditions.hasAdditionalDetails());
+        CRMCustomer registeredCustomer = register(customerBuilder);
+        ContactExtension contactExtension = saveAndReturnContactExtension(registeredCustomer.getId(), wizardConditions);
+
+        String tradingAccountId = registeredCustomer.getBinaryAccount().getExternalId();
+        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
+        if (wizardConditions.hasDeposit()) {
+            deposit(depositBuilder);
+        }
+
+        if (wizardConditions.hasPendingDeposit()) {
+            double maxLimit = findMaximumDepositLimit(contactExtension);
+            depositBuilder.setAmount((long)maxLimit + 1000);
+            depositWithErrors(depositBuilder);
+        }
+
+        return registeredCustomer;
+    }
+
+    private CustomerBuilder createCustomerBuilderForWizard(boolean hasAdditionalDetails) {
+        final String defaultBirthDate = "1982-02-03";
+
+        CustomerBuilder customerBuilder = new CustomerBuilder();
+        if (hasAdditionalDetails) {
+            customerBuilder.setBirthOfDate(defaultBirthDate);
+        }
+        return customerBuilder;
+    }
+
+    private ContactExtension saveAndReturnContactExtension(String contactId, OnboardingWizardConditions wizardConditions) {
+        final Integer defaultBirthCountry = 100000207;
+        final Integer defaultNationality = 100000207;
+
+        ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
+        assertNotNull(contactExtension);
+
+        contactExtension.setExperienceLevel(wizardConditions.getExperienceLevel().getLevel());
+        contactExtension.setPoiStatus(wizardConditions.getPoiStatus().getStatus());
+        contactExtension.setPorStatus(wizardConditions.getPorStatus().getStatus());
+        contactExtension.setAccountType(wizardConditions.getAccountType().getType());
+
+        contactExtension.setFnsPersonal(wizardConditions.isFnsPersonal());
+        contactExtension.setFnsTrading(wizardConditions.isFnsTrading());
+        contactExtension.setRiskWarning(wizardConditions.hasRiskWarning());
+        contactExtension.setHasRegulationAnswers(wizardConditions.hasRegulationAnswers());
+
+        if (wizardConditions.hasAdditionalDetails()) {
+            contactExtension.setCountryOfBirth(defaultBirthCountry);
+            contactExtension.setNationality(defaultNationality);
+        }
+
+        contactExtensionRepository.save(contactExtension);
+        return contactExtension;
+    }
+
+    private double findMaximumDepositLimit(ContactExtension contactExtension) {
+        String riskLimitsId = contactExtension.getRiskLimitsId();
+
+        RiskLimits riskLimits = riskLimitsRepository.findOne(riskLimitsId);
+        assertNotNull(riskLimits);
+
+        return riskLimits.getDailyLimit();
     }
 }
