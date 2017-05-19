@@ -142,23 +142,23 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public AccountDetails accountDetails() {
-        return creator.getPage(AccountDetailsImpl.class);
+    public AccountDetailsPage accountDetails() {
+        return creator.getPage(AccountDetailsPageImpl.class);
     }
 
     @Override
-    public AccountAdditionalDetails accountAdditionalDetails() {
-        return creator.getPage(AccountAdditionalDetailsImpl.class);
+    public AccountAdditionalDetailsPage accountAdditionalDetails() {
+        return creator.getPage(AccountAdditionalDetailsPageImpl.class);
     }
 
     @Override
-    public CreditCardDeposit creditCardDeposit() {
-        return creator.getPage(CreditCardDepositImpl.class);
+    public CreditCardDepositPage creditCardDeposit() {
+        return creator.getPage(CreditCardDepositPageImpl.class);
     }
 
     @Override
-    public Register register() {
-        return creator.getPage(RegisterImpl.class);
+    public RegisterPage register() {
+        return creator.getPage(RegisterPageImpl.class);
     }
 
 }

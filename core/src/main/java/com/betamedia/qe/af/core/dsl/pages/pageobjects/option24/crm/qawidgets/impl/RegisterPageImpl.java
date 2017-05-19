@@ -3,13 +3,14 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.im
 import com.betamedia.qe.af.core.api.crm.form.builders.RegisterBuilder;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.RegisterPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Created by vsnigur on 5/19/17.
  */
-public class RegisterImpl extends AbstractPageObject implements com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.Register {
+public class RegisterPageImpl extends AbstractPageObject implements RegisterPage {
 
     @StoredId
     private By title;
@@ -42,7 +43,7 @@ public class RegisterImpl extends AbstractPageObject implements com.betamedia.qe
     @StoredId
     private By resultPlaceHolder;
 
-    public RegisterImpl(WebDriver webDriver) {
+    public RegisterPageImpl(WebDriver webDriver) {
         super(webDriver);
     }
 

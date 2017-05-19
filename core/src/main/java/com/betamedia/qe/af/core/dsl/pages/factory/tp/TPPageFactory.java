@@ -58,13 +58,13 @@ public interface TPPageFactory {
 
     CrmLoginPage crmLoginPage();
 
-    AccountDetails accountDetails();
+    AccountDetailsPage accountDetails();
 
-    AccountAdditionalDetails accountAdditionalDetails();
+    AccountAdditionalDetailsPage accountAdditionalDetails();
 
-    CreditCardDeposit creditCardDeposit();
+    CreditCardDepositPage creditCardDeposit();
 
-    Register register();
+    RegisterPage register();
 
 
 }

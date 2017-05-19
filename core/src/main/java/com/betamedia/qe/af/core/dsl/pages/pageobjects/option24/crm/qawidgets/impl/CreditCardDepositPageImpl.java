@@ -3,13 +3,14 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.im
 import com.betamedia.qe.af.core.api.crm.form.builders.CreditCardDepositBuilder;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class CreditCardDepositImpl extends AbstractPageObject implements com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDeposit {
+public class CreditCardDepositPageImpl extends AbstractPageObject implements CreditCardDepositPage {
 
     @StoredId
     private By depositAmount;
@@ -37,7 +38,7 @@ public class CreditCardDepositImpl extends AbstractPageObject implements com.bet
     private By submit;
 
 
-    public CreditCardDepositImpl(WebDriver webDriver) {
+    public CreditCardDepositPageImpl(WebDriver webDriver) {
         super(webDriver);
     }
 

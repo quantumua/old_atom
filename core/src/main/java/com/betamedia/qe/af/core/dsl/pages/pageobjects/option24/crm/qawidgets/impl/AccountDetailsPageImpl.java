@@ -3,13 +3,14 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.im
 import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsBuilder;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountDetailsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class AccountDetailsImpl extends AbstractPageObject implements com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountDetails {
+public class AccountDetailsPageImpl extends AbstractPageObject implements AccountDetailsPage {
 
     @StoredId
     private By title;
@@ -33,7 +34,7 @@ public class AccountDetailsImpl extends AbstractPageObject implements com.betame
     private By update;
 
 
-    public AccountDetailsImpl(WebDriver webDriver) {
+    public AccountDetailsPageImpl(WebDriver webDriver) {
         super(webDriver);
     }
 
