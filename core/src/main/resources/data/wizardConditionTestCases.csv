@@ -1,0 +1,3 @@
+fnsPersonal,fnsTrading,hasAdditionalDetails,riskWarning,experienceLevel,hasDeposit,accountType,poiStatus,porStatus,hasPendingDeposit
+true,true,true,true,LOW_EXPERIENCE,true,DEMO,VERIFIED,NOT_VERIFIED,true
+false,true,false,true,LOW_EXPERIENCE,false,REAL,VERIFIED,NOT_VERIFIED,false
