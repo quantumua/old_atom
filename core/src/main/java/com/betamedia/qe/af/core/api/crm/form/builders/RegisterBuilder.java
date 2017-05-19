@@ -3,7 +3,7 @@ package com.betamedia.qe.af.core.api.crm.form.builders;
 /**
  * Created by vsnigur on 5/19/17.
  */
-public class RegisterInfoBuilder {
+public class RegisterBuilder {
     private String title;
     private String firstName;
     private String lastName;
@@ -17,8 +17,8 @@ public class RegisterInfoBuilder {
     private String accountBaseCurrency;
     private String password;
 
-    public RegisterBuilderInfo build() {
-        return new RegisterBuilderInfo(
+    public Register build() {
+        return new Register(
                 title,
                 firstName,
                 lastName,
@@ -34,67 +34,67 @@ public class RegisterInfoBuilder {
         );
     }
 
-    public RegisterInfoBuilder withTitle(String title) {
+    public RegisterBuilder withTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public RegisterInfoBuilder withFirstName(String firstName) {
+    public RegisterBuilder withFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public RegisterInfoBuilder withLastName(String lastName) {
+    public RegisterBuilder withLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public RegisterInfoBuilder withEmail(String email) {
+    public RegisterBuilder withEmail(String email) {
         this.email = email;
         return this;
     }
 
-    public RegisterInfoBuilder withCountry(String country) {
+    public RegisterBuilder withCountry(String country) {
         this.country = country;
         return this;
     }
 
-    public RegisterInfoBuilder withTelephonePrefix(String telephonePrefix) {
+    public RegisterBuilder withTelephonePrefix(String telephonePrefix) {
         this.telephonePrefix = telephonePrefix;
         return this;
     }
 
-    public RegisterInfoBuilder withTelephoneNumber(String telephoneNumber) {
+    public RegisterBuilder withTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
         return this;
     }
 
-    public RegisterInfoBuilder withBirthDateDay(String birthDateDay) {
+    public RegisterBuilder withBirthDateDay(String birthDateDay) {
         this.birthDateDay = birthDateDay;
         return this;
     }
 
-    public RegisterInfoBuilder withBirthDateMonth(String birthDateMonth) {
+    public RegisterBuilder withBirthDateMonth(String birthDateMonth) {
         this.birthDateMonth = birthDateMonth;
         return this;
     }
 
-    public RegisterInfoBuilder withBirthDateYear(String birthDateYear) {
+    public RegisterBuilder withBirthDateYear(String birthDateYear) {
         this.birthDateYear = birthDateYear;
         return this;
     }
 
-    public RegisterInfoBuilder withAccountBaseCurrency(String accountBaseCurrency) {
+    public RegisterBuilder withAccountBaseCurrency(String accountBaseCurrency) {
         this.accountBaseCurrency = accountBaseCurrency;
         return this;
     }
 
-    public RegisterInfoBuilder withPassword(String password) {
+    public RegisterBuilder withPassword(String password) {
         this.password = password;
         return this;
     }
 
-    public class RegisterBuilderInfo {
+    public class Register {
         public final String title;
         public final String firstName;
         public final String lastName;
@@ -108,7 +108,7 @@ public class RegisterInfoBuilder {
         public final String accountBaseCurrency;
         public final String password;
 
-        public RegisterBuilderInfo(String title, String firstName, String lastName, String email, String country, String telephonePrefix, String telephoneNumber, String birthDateDay, String birthDateMonth, String birthDateYear, String accountBaseCurrency, String password) {
+        private Register(String title, String firstName, String lastName, String email, String country, String telephonePrefix, String telephoneNumber, String birthDateDay, String birthDateMonth, String birthDateYear, String accountBaseCurrency, String password) {
             this.title = title;
             this.firstName = firstName;
             this.lastName = lastName;

@@ -1,8 +1,7 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountAdditionalDetailsInfoBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsInfoBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.RegisterInfoBuilder;
+import com.betamedia.qe.af.core.api.crm.form.builders.AccountAdditionalDetailsBuilder;
+import com.betamedia.qe.af.core.api.crm.form.builders.RegisterBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.testingtype.tp.TPResourceAwareEndToEndTest;
 import com.betamedia.qe.af.core.utils.StringUtils;
@@ -20,7 +19,7 @@ public class AccountAdditionalDetailsTest extends TPResourceAwareEndToEndTest{
         makeAUser();
         pages().crmNavigation().accountAdditionalDetails();
         pages().accountAdditionalDetails().update(
-                (new AccountAdditionalDetailsInfoBuilder()
+                (new AccountAdditionalDetailsBuilder()
                 .withBirthDateDay("1")
                 .withBirthDateMonth("2")
                 .withBirthDateYear("1990")
@@ -33,7 +32,7 @@ public class AccountAdditionalDetailsTest extends TPResourceAwareEndToEndTest{
     private void makeAUser() {
         pages().crmNavigation().register();
         pages().register().update(
-                (new RegisterInfoBuilder()
+                (new RegisterBuilder()
                         .withTitle("Mr")
                         .withFirstName(USERNAME)
                         .withLastName(USERNAME+"lastName")

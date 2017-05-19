@@ -1,16 +1,15 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.RegisterInfoBuilder;
+import com.betamedia.qe.af.core.api.crm.form.builders.RegisterBuilder;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.Register;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Created by vsnigur on 5/19/17.
  */
-public class RegisterImpl extends AbstractPageObject implements Register {
+public class RegisterImpl extends AbstractPageObject implements com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.Register {
 
     @StoredId
     private By title;
@@ -48,7 +47,7 @@ public class RegisterImpl extends AbstractPageObject implements Register {
     }
 
     @Override
-    public void update(RegisterInfoBuilder.RegisterBuilderInfo info) {
+    public void update(RegisterBuilder.Register info) {
         waitUntilDisplayed(title);
         in(title).selectByVisibleText(info.title);
         find(firstName).sendKeys(info.firstName);

@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsInfoBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.RegisterInfoBuilder;
+import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsBuilder;
+import com.betamedia.qe.af.core.api.crm.form.builders.RegisterBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.testingtype.tp.TPResourceAwareEndToEndTest;
 import com.betamedia.qe.af.core.utils.StringUtils;
@@ -19,7 +19,7 @@ public class AccountDetailsTest extends TPResourceAwareEndToEndTest{
         makeAUser();
         pages().crmNavigation().accountDetails();
         pages().accountDetails().update(
-                (new AccountDetailsInfoBuilder()
+                (new AccountDetailsBuilder()
                 .withTitle("Mr")
                 .withStreet("street")
                 .withStreetNumber("streetNumber")
@@ -36,7 +36,7 @@ public class AccountDetailsTest extends TPResourceAwareEndToEndTest{
     private void makeAUser() {
         pages().crmNavigation().register();
         pages().register().update(
-                (new RegisterInfoBuilder()
+                (new RegisterBuilder()
                         .withTitle("Mr")
                         .withFirstName(USERNAME)
                         .withLastName(USERNAME+"lastName")

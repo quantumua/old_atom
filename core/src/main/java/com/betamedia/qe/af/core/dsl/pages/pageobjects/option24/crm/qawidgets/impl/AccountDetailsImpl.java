@@ -1,18 +1,15 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsInfoBuilder;
+import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsBuilder;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountDetails;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class AccountDetailsImpl extends AbstractPageObject implements AccountDetails {
+public class AccountDetailsImpl extends AbstractPageObject implements com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountDetails {
 
     @StoredId
     private By title;
@@ -41,7 +38,7 @@ public class AccountDetailsImpl extends AbstractPageObject implements AccountDet
     }
 
     @Override
-    public void update(AccountDetailsInfoBuilder.AccountDetailsBuilderInfo info) {
+    public void update(AccountDetailsBuilder.AccountDetails info) {
         waitUntilDisplayed(title);
         in(title).selectByVisibleText(info.title);
         find(street).sendKeys(info.street);

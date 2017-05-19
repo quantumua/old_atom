@@ -1,14 +1,11 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountAdditionalDetailsInfoBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsInfoBuilder;
+import com.betamedia.qe.af.core.api.crm.form.builders.AccountAdditionalDetailsBuilder;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetails;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by vsnigur on 5/18/17.
@@ -34,7 +31,7 @@ public class AccountAdditionalDetailsImpl extends AbstractPageObject implements 
     }
 
     @Override
-    public void update(AccountAdditionalDetailsInfoBuilder.AccountAdditionalDetailsBuilderInfo info) {
+    public void update(AccountAdditionalDetailsBuilder.AccountAdditionalDetailsBuilderInfo info) {
         waitUntilDisplayed(birthDateDay);
         in(birthDateDay).selectByValue(info.birthDateDay);
         in(birthDateMonth).selectByValue(info.birthDateMonth);
