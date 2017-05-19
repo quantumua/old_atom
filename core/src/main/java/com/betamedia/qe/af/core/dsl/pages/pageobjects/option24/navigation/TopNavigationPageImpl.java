@@ -46,6 +46,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     public void binary() {
         waitUntilDisplayed(mainMenu);
         find(mainMenu, binaryBtn).click();
+        waitUntilDisplayed(mainMenu);
     }
 
     @Override
