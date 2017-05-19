@@ -39,10 +39,16 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     private MobileCRMHTTPAdaper<T> mobileCRMHTTPAdaper;
 
     @Autowired
-    public AbstractTrackingInfoRepository<T> trackingInfoRepository;
+    private AbstractTrackingInfoRepository<T> trackingInfoRepository;
 
     @Autowired
-    public AbstractTrackingInfoExtensionRepository<T> trackingInfoExtensionRepository;
+    private AbstractTrackingInfoExtensionRepository<T> trackingInfoExtensionRepository;
+
+    @Autowired
+    public AbstractContactExtensionRepository<T> contactExtensionRepository;
+
+    @Autowired
+    public AbstractRiskLimitsRepository<T> riskLimitsRepository;
 
     @Autowired
     public AbstractContactExtensionRepository<T> contactExtensionRepository;
@@ -81,7 +87,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Registers new CRM customer and expects errors.
      */
     @Override
-    public List<CRMError>  registerWithErrors(CustomerBuilder customerBuilder) {
+    public List<CRMError> registerWithErrors(CustomerBuilder customerBuilder) {
         CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO());
         List<CRMError> registerErrors = register.getErrors();
         assertFalse(registerErrors.isEmpty(), "Registration errors were expected, but there were none.");
@@ -117,7 +123,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public void logout(String customerId) {
         CRMResponse logoutResponse = mobileCRMHTTPAdaper.logout(customerId);
-        List<CRMError> logoutErrors = logoutResponse == null? null : logoutResponse.getErrors();
+        List<CRMError> logoutErrors = logoutResponse == null ? null : logoutResponse.getErrors();
         assertNull(logoutResponse, "There were errors during customer logout:" + logoutErrors);
     }
 
@@ -152,7 +158,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit and expects errors.
      */
     @Override
-    public List<CRMError>  depositWithErrors(MobileDepositBuilder depositBuilder) {
+    public List<CRMError> depositWithErrors(MobileDepositBuilder depositBuilder) {
         CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(depositBuilder.createMobileDepositRO());
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
@@ -177,7 +183,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit by name and expects errors.
      */
     @Override
-    public List<CRMError>  depositByNameWithErrors(MobileDepositBuilder depositBuilder) {
+    public List<CRMError> depositByNameWithErrors(MobileDepositBuilder depositBuilder) {
         CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(depositBuilder.createMobileDepositRO());
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");

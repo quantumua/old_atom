@@ -39,4 +39,6 @@ public interface TPTemplate<T extends EnvironmentDependent> extends BackEndOpera
     PositionOperations positionOperations();
 
     CustomerOperations customerOperations();
+
+    OnBoardingOperations onBoardingOperations();
 }

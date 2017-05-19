@@ -41,6 +41,8 @@ public abstract class AbstractTPTemplate<T extends EnvironmentDependent> impleme
     private VolatilityUnitOperations<T> volatilityUnitOperations;
     @Autowired
     private CustomerOperations<T> customerOperations;
+    @Autowired
+    private OnBoardingOperations<T> onBoardingOperations;
 
     @Override
     public AccountOperations accountOperations() {
@@ -115,6 +117,11 @@ public abstract class AbstractTPTemplate<T extends EnvironmentDependent> impleme
     @Override
     public CustomerOperations customerOperations() {
         return customerOperations;
+    }
+
+    @Override
+    public OnBoardingOperations onBoardingOperations() {
+        return onBoardingOperations;
     }
 
 

@@ -62,10 +62,10 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     public void submit(TradingExperienceInfo info) {
         in(sharesExperience).selectByValue(info.sharesExperience);
         in(binaryExperience).selectByValue(info.binaryExperience);
-//        in(averageYearlyBinaryVolume).selectByValue(info.averageYearlyBinaryVolume);
+        if(notNull(info.averageYearlyBinaryVolume)) in(averageYearlyBinaryVolume).selectByValue(info.averageYearlyBinaryVolume);
         in(forExExperience).selectByValue(info.forExExperience);
-//        in(averageYearlyForExVolume).selectByValue(info.averageYearlyForExVolume);
-//        in(commonLeverage).selectByValue(info.commonLeverage);
+        if(notNull(info.averageYearlyForExVolume)) in(averageYearlyForExVolume).selectByValue(info.averageYearlyForExVolume);
+        if(notNull(info.commonLeverage)) in(commonLeverage).selectByValue(info.commonLeverage);
         in(financialWorkExperience).selectByValue(info.financialWorkExperience);
         in(cfdBinaryKnowledge).selectByValue(info.cfdBinaryKnowledge);
         in(mainFactorKnowledge).selectByValue(info.mainFactorKnowledge);
@@ -84,4 +84,7 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     }
 
 
+    private static boolean notNull(Object o) {
+        return o != null;
+    }
 }
