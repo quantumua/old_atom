@@ -7,5 +7,6 @@ public interface RegistrationPage {
 
 
     void fillLongRegistration();
+    void SubmitRegistration();
     
   }

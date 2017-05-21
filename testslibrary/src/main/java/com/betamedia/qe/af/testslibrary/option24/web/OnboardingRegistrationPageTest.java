@@ -14,7 +14,9 @@ public class OnboardingRegistrationPageTest extends WEBEndToEndTest {
 
     @Test
     public void registrationTest() {
-        pages().registrationPage().fillLongRegistration();;
+     	pages().topNavigationPage().signUp();
+        pages().registrationPage().fillLongRegistration();
+        pages().registrationPage().SubmitRegistration();
        
         
     }

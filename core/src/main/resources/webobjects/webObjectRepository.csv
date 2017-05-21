@@ -19,7 +19,6 @@ build,pageObjectName,locatorId,locatorType,value
 1603,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
 1603,PositionsImpl,position,CLASS_NAME,bmCellContent
 1603,TopNavigationPageImpl,binaryBtn,CLASS_NAME,product-binary
-1603,TopNavigationPageImpl,signUpBtn,XPATH,"//li[contains(class,'menu-item')]//a[@href='/redirects/open-account/']"
 1603,TopNavigationPageImpl,mainMenu,ID,mainMenu
 1603,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
 1603,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
@@ -58,7 +57,7 @@ build,pageObjectName,locatorId,locatorType,value
 1603,MessageBoxImpl,firstButton,CSS,button:nth-of-type(1)
 1603,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
 1603,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
-1603,DialogBoxImpl,closeButton,XPATH,//*[@id="tradeManagerContainer"]/div/div[3]/div/div/div[3]
+1603,DialogBoxImpl,closeButton,XPATH,"//*[@id=""tradeManagerContainer""]/div/div[3]/div/div/div[3]"
 1603,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
 1603,BinaryBidderImpl,errorMinAmount,CSS,.bmMessage.bmError.bmMessageMinAmount
 1603,BinaryBidderImpl,errorMaxAmount,CSS,.bmMessage.bmError.bmMessageMaxAmount
@@ -88,3 +87,5 @@ build,pageObjectName,locatorId,locatorType,value
 1603,RegistrationPageImpl,reenterPasswordRegField,ID,ReEnterPassword
 1603,RegistrationPageImpl,accountAgreeField,ID,AccountAgreeLabel
 1603,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
+1603,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
+1603,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']

@@ -14,4 +14,6 @@ public interface TopNavigationPage {
     boolean isLoggedIn();
 
     boolean isLoggedOut();
+    
+    void signUp();
 }

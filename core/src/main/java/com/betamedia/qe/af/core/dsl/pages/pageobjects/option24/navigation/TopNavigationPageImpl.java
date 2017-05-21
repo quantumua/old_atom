@@ -21,11 +21,20 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By binaryBtn;
     @StoredId
     private By cfdBtn;
-
+    @StoredId
+    private By signUpBtn;
+    
+    
     public TopNavigationPageImpl(WebDriver webDriver) {
         super(webDriver);
     }
 
+    @Override
+    public void signUp() {
+    	waitUntilDisplayed(signUpBtn);
+         find(mainMenu, signUpBtn).click();
+    }
+    
     @Override
     public boolean isLoggedIn() {
         return waitUntilDisplayed(myAccountBtn) != null;

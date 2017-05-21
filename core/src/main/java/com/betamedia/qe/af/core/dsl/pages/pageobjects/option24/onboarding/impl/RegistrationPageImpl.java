@@ -5,6 +5,8 @@ import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -32,7 +34,10 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
     private By passwordRegField;
     @StoredId
     private By reenterPasswordRegField;
-    
+    @StoredId("submitButtonReg")
+    private By submitButtonReg;
+    @StoredId("accountAgreeField")
+    private By accountAgreeField;
 
     public RegistrationPageImpl(WebDriver webDriver) {
     	 super(webDriver);
@@ -65,14 +70,50 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
    	    /* Re- enter password */
     	 waitUntilDisplayed(reenterPasswordRegField); 
    	     find(registrationWidget, reenterPasswordRegField).sendKeys(dataCustomer.getPassword());
+   	        	  
    	     
+   	    /*Account Agree */
+  	     find(accountAgreeField).click();
    	    
    	  System.out.println("EMAIL  " + dataCustomer.getEmail());
  	  System.out.println("Phone  " + dataCustomer.getPhone());
  	  System.out.println("passwod  " + dataCustomer.getPassword());
-   
-   	    
+ 	  
+ 	 
+      	    
 		
 	}
+
+
+	@Override
+	public void SubmitRegistration() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		waitUntilDisplayed(submitButtonReg); 	
+	    find(registrationWidget, submitButtonReg).click();
+	try {
+		Thread.sleep(100000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	}
+
+	
+//	@Override
+//	public void waitforNext() {
+//	find(registrationWidget, submitButtonReg).click();
+//	}
+
+//	@Override
+//	public void SubmitRegistration() {
+//		find(submitButton).click();
+//		
+//	}
 
 }
