@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.RegisterBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.CustomerRO;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
@@ -51,28 +51,6 @@ public class RegisterPageImpl extends AbstractPageObject implements RegisterPage
     }
 
     @Override
-    public void update(RegisterBuilder.Register info) {
-        waitUntilDisplayed(title);
-        in(title).selectByVisibleText(info.title);
-        find(firstName).sendKeys(info.firstName);
-        find(lastName).sendKeys(info.lastName);
-        find(email).sendKeys(info.email);
-        in(country).selectByVisibleText(info.country);
-        if (info.telephonePrefix != "") {
-            find(telephonePrefix).clear();
-            find(telephonePrefix).sendKeys(info.telephonePrefix);
-        }
-        find(telephoneNumber).sendKeys(info.telephoneNumber);
-        in(birthDateDay).selectByValue(info.birthDateDay);
-        in(birthDateMonth).selectByValue(info.birthDateMonth);
-        in(birthDateYear).selectByValue(info.birthDateYear);
-        in(accountBaseCurrency).selectByValue(info.accountBaseCurrency);
-        find(password).sendKeys(info.password);
-        find(startTrading).click();
-        waitUntilDisplayed(resultPlaceHolder);
-    }
-
-    @Override
     public void register(CustomerRO customer) {
         waitUntilDisplayed(title);
         in(title).selectByValue(customer.getTitle());
@@ -89,5 +67,10 @@ public class RegisterPageImpl extends AbstractPageObject implements RegisterPage
         find(password).sendKeys(customer.getPassword());
         find(startTrading).click();
         waitUntilDisplayed(resultPlaceHolder);
+    }
+
+    @Override
+    public void register() {
+        register(new CustomerBuilder().createCustomerRO());
     }
 }

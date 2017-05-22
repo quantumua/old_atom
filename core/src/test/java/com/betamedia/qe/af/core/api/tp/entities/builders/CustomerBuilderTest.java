@@ -134,7 +134,7 @@ public class CustomerBuilderTest {
 				.setPhoneTwo(PHONE_TWO)
 				.setRegistrationIp(REGISTRATION_IP)
 				.setSiteid(SITE_ID)
-				.setSreet2(SREET2)
+				.setStreet2(SREET2)
 				.setStateCode(STATE_CODE)
 				.setStreet(STREET)
 				.setTarget(TARGET)

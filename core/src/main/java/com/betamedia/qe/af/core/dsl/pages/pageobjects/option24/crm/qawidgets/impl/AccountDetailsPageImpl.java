@@ -21,6 +21,7 @@ public class AccountDetailsPageImpl extends AbstractPageObject implements Accoun
     @StoredId
     private By city;
     @StoredId
+    //autoselected after choosing the country
     private By countryPhonePrefix2;
     @StoredId
     private By phone2;
@@ -45,7 +46,6 @@ public class AccountDetailsPageImpl extends AbstractPageObject implements Accoun
         find(street).sendKeys(info.street);
         find(streetNumber).sendKeys(info.streetNumber);
         find(city).sendKeys(info.city);
-        find(countryPhonePrefix2).sendKeys(info.countryPhonePrefix2);
         find(phone2).sendKeys(info.phone2);
         in(birthdayDay).selectByValue(info.birthdayDay);
         in(birthdayMonth).selectByValue(info.birthdayMonth);

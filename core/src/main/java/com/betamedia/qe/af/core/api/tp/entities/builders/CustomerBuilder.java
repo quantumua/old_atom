@@ -2,6 +2,7 @@ package com.betamedia.qe.af.core.api.tp.entities.builders;
 
 import com.google.common.base.Strings;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static com.betamedia.qe.af.core.utils.StringUtils.generateNumbersSequence;
@@ -38,7 +39,7 @@ public class CustomerBuilder {
     private String registrationIp;
     private String stateCode;
     private String street;
-    private String sreet2;
+    private String street2;
     private String title = "Mr";
     private String zip;
     private String channel;
@@ -143,8 +144,8 @@ public class CustomerBuilder {
         return this;
     }
 
-    public CustomerBuilder setSreet2(String sreet2) {
-        this.sreet2 = sreet2;
+    public CustomerBuilder setStreet2(String street2) {
+        this.street2 = street2;
         return this;
     }
 
@@ -215,7 +216,7 @@ public class CustomerBuilder {
 
     public CustomerRO createCustomerRO() {
         formDefaultUniqueFields();
-        return new CustomerRO(userName, password, firstName, email, phone, currency, countryCode, lastName, utcOffset, oftc, birthOfDate, city, userAgent, lang, phoneTwo, registrationIp, stateCode, street, sreet2, title, zip, channel, campaign, kw, landingpage, siteid, p1, p2, p3, p4, p5, target);
+        return new CustomerRO(userName, password, firstName, email, phone, currency, countryCode, lastName, utcOffset, oftc, birthOfDate, city, userAgent, lang, phoneTwo, registrationIp, stateCode, street, street2, title, zip, channel, campaign, kw, landingpage, siteid, p1, p2, p3, p4, p5, target);
     }
 
     private void formDefaultUniqueFields() {
@@ -591,6 +592,21 @@ public class CustomerBuilder {
             this.userName = userName;
         }
 
+        public String getBirthdayYear(){
+            LocalDate dateOfBirth = LocalDate.parse(getBirthOfDate());
+            return Integer.toString(dateOfBirth.getYear());
+        }
+
+        public String getBirthdayMonth(){
+            LocalDate dateOfBirth = LocalDate.parse(getBirthOfDate());
+            return Integer.toString(dateOfBirth.getMonthValue());
+        }
+
+        public String getBirthdayDayOfMonth(){
+            LocalDate dateOfBirth = LocalDate.parse(getBirthOfDate());
+            return Integer.toString(dateOfBirth.getDayOfMonth());
+        }
+
         @Override
         public String toString() {
             return "CustomerRO{" +
@@ -612,7 +628,7 @@ public class CustomerBuilder {
                     ", registrationIp='" + registrationIp + '\'' +
                     ", stateCode='" + stateCode + '\'' +
                     ", street='" + street + '\'' +
-                    ", sreet2='" + sreet2 + '\'' +
+                    ", street2='" + sreet2 + '\'' +
                     ", title='" + title + '\'' +
                     ", zip='" + zip + '\'' +
                     ", channel='" + channel + '\'' +
