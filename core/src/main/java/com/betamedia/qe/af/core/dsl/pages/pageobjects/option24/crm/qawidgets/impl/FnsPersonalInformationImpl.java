@@ -55,6 +55,8 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     private By purposeOfTradingOther;
     @StoredId
     private By submit;
+    @StoredId
+    private By resultPlaceholder;
 
     public FnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);
@@ -84,6 +86,7 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         in(purposeOfTrading).selectByValue(info.purposeOfTrading);
         if(notNull(info.purposeOfTradingOther)) find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
         click(submit);
+        waitUntilDisplayed(resultPlaceholder);
     }
 
     private static boolean notNull(Object o) {

@@ -10,10 +10,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ContactExtensionBase")
-public class UserExperienceInfo {
+public class ContactExtensionInfo {
     @Id
     @Column(name = "ContactId")
     private String contactId;
+    @Column(name = "bt_username")
+    private String username;
+    @Column(name = "bt_access")
+    private Integer access;
     @Column(name = "bt_ExperienceLevel")
     private Integer experienceLevel;
     @Column(name = "bt_ExperienceScore")
@@ -25,5 +29,9 @@ public class UserExperienceInfo {
 
     public Double getExperienceScore() {
         return experienceScore;
+    }
+
+    public Integer getAccess() {
+        return access;
     }
 }

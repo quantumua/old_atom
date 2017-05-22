@@ -150,7 +150,7 @@ public class TradingExperienceInfoBuilder {
         );
     }
 
-    public class TradingExperienceInfo {
+    public static class TradingExperienceInfo {
         public final String sharesExperience;
         public final String binaryExperience;
         public final String averageYearlyBinaryVolume;

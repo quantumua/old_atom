@@ -53,6 +53,8 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     private By binaryProbabilityKnowledge;
     @StoredId
     private By submit;
+    @StoredId
+    private By resultPlaceholder;
 
     public FnsTradingExperienceImpl(WebDriver webDriver) {
         super(webDriver);
@@ -81,6 +83,7 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         in(binaryInvestLossKnowledge).selectByValue(info.binaryInvestLossKnowledge);
         in(binaryProbabilityKnowledge).selectByValue(info.binaryProbabilityKnowledge);
         click(submit);
+        waitUntilDisplayed(resultPlaceholder);
     }
 
 

@@ -157,7 +157,7 @@ public class PersonalInformationBuilder {
                 purposeOfTradingOther);
     }
 
-    public class PersonalInformation {
+    public static class PersonalInformation {
         public final String employmentStatus;
         public final String industry;
         public final String industryOther;
