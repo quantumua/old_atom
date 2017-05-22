@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.adapters;
 
-import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
@@ -19,9 +19,9 @@ public interface MobileCRMHTTPAdaper<T extends EnvironmentDependent> extends Env
      * @param customerRO
      * @return
      */
-    CRMResponse<CRMRegisterResult> register(CustomerRO customerRO);
+    CRMResponse<CRMRegisterResult> register(CustomerBuilder.CustomerRO customerRO);
 
-    CRMResponse<CRMRegisterResult> register(CustomerRO customerRO, MarketingParametersRO marketingParametersRO);
+    CRMResponse<CRMRegisterResult> register(CustomerBuilder.CustomerRO customerRO, MarketingParametersRO marketingParametersRO);
 
     CRMResponse<CRMRegisterResult> login(String username, String password);
 

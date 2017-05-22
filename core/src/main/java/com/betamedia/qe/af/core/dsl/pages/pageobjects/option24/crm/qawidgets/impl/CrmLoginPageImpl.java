@@ -16,6 +16,8 @@ public class CrmLoginPageImpl extends AbstractPageObject implements CrmLoginPage
     private By passwordField;
     @StoredId
     private By loginButton;
+    @StoredId
+    private By resultPlaceholder;
 
     public CrmLoginPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -26,5 +28,7 @@ public class CrmLoginPageImpl extends AbstractPageObject implements CrmLoginPage
         waitUntilDisplayed(usernameField).sendKeys(username);
         waitUntilDisplayed(passwordField).sendKeys(password);
         click(loginButton);
+        waitUntilDisplayed(resultPlaceholder);
     }
+
 }

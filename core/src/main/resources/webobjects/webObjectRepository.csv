@@ -158,3 +158,6 @@ build,pageObjectName,locatorId,locatorType,value
 1603,RegisterPageImpl,startTrading,NAME,swRegisterBtn
 1603,RegisterPageImpl,swProgressImg,ID,swProgressImg
 1603,RegisterPageImpl,resultPlaceHolder,ID,resultPlaceHolder
+1603,CrmLoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
+1603,FnsTradingExperienceImpl,resultPlaceholder,ID,resultPlaceHolder
+1603,FnsPersonalInformationImpl,resultPlaceholder,ID,resultPlaceHolder

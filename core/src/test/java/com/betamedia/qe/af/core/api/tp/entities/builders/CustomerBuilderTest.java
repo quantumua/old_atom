@@ -1,6 +1,5 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
-import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import org.testng.annotations.Test;
 
 import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.TP_AUTOMATION_PREFIX;
@@ -11,7 +10,7 @@ import static org.testng.Assert.*;
  *         Date: 4/3/17.
  */
 public class CustomerBuilderTest {
-	
+
 	private static final String BIRTH_OF_DATE 	= "birthOfDate";
 	private static final String CAMPAIGN		= "campaign";
 	private static final String CHANNEL			= "channel";
@@ -44,7 +43,7 @@ public class CustomerBuilderTest {
 	private static final String USER_NAME		= "userName";
 	private static final String UTC_OFFSET		= "utcOffset";
 	private static final String ZIP				= "zip";
-	
+
 	private static final String DEFAULT_FIRST_NAME	= "Automation";
 	private static final String DEFAULT_LAST_NAME	= "Automation";
 	private static final String DEFAULT_CURENCY		= "EUR";
@@ -52,19 +51,20 @@ public class CustomerBuilderTest {
 	private static final String DEFAULT_PASSWORD	= "123123";
 	private static final String DEFAULT_EMAIL 		= "@automation.ru";
 	private static final String DEFAULT_USER_NAME 	= "tp_automation";
+	private static final String DEFAULT_TITLE = "Mr";
 	private static final String DEFAULT_BIRTH_OF_DATE 	= "1982-02-03";
 	private static final String CUSTOM_PHONE = "12465555555";
-	
-    @Test
+
+	@Test
     public void testCreateDefaultCustomerRO() {
-		CustomerRO customerRO = new CustomerBuilder().createCustomerRO();
+		CustomerBuilder.CustomerRO customerRO = new CustomerBuilder().createCustomerRO();
         assertTrue(customerRO.getEmail().contains(customerRO.getUserName()));
     }
 
     @Test
     public void shouldGenerateEmailByFirstNameIfNotSet() {
         String customUserName = "customUserName";
-		CustomerRO customerRO = new CustomerBuilder().setUserName(customUserName).createCustomerRO();
+		CustomerBuilder.CustomerRO customerRO = new CustomerBuilder().setUserName(customUserName).createCustomerRO();
         assertTrue(customUserName.equals(customerRO.getUserName()));
         assertTrue(customerRO.getEmail().contains(customerRO.getUserName()));
     }
@@ -73,29 +73,29 @@ public class CustomerBuilderTest {
 	public void shouldUseSetEmail() {
 		String customUserName = "customUserName";
 		String email = "dontMatchFirstName@email.com";
-		CustomerRO customerRO = new CustomerBuilder().setUserName(customUserName).setEmail(email).createCustomerRO();
+		CustomerBuilder.CustomerRO customerRO = new CustomerBuilder().setUserName(customUserName).setEmail(email).createCustomerRO();
 		assertFalse(customerRO.getEmail().contains(customerRO.getUserName()));
 	}
 
 	@Test
 	public void testDefaultCustomerRO() {
-		CustomerRO actualCustomerRO = new CustomerBuilder().createCustomerRO();
+		CustomerBuilder.CustomerRO actualCustomerRO = new CustomerBuilder().createCustomerRO();
 		checkDefault(actualCustomerRO, getDefaultCustomerRO());
 		assertEquals(actualCustomerRO.getEmail(),actualCustomerRO.getUserName() + DEFAULT_EMAIL);
 		assertTrue(actualCustomerRO.getUserName().contains(TP_AUTOMATION_PREFIX));
 		assertTrue(actualCustomerRO.getUserName().length() > TP_AUTOMATION_PREFIX.length());
 	}
-	
+
 	@Test
     public void testCustomCustomerRO() {
-		CustomerRO actualCustomerRO = getCustomCustomerBuilder().createCustomerRO();
+		CustomerBuilder.CustomerRO actualCustomerRO = getCustomCustomerBuilder().createCustomerRO();
 		checkCustom(actualCustomerRO, getCustomCustomerRO());
 		assertEquals(actualCustomerRO.getEmail(),EMAIL);
 		assertTrue(actualCustomerRO.getUserName().contains(USER_NAME));
 	}
 
-	private CustomerRO getDefaultCustomerRO() {
-		CustomerRO customerRO = new CustomerRO();
+	private CustomerBuilder.CustomerRO getDefaultCustomerRO() {
+		CustomerBuilder.CustomerRO customerRO = new CustomerBuilder().createCustomerRO();
 		customerRO.setCountryCode(DEFAULT_COUNTRY_CODE);
 		customerRO.setCurrency(DEFAULT_CURENCY);
 		customerRO.setPassword(DEFAULT_PASSWORD);
@@ -104,10 +104,11 @@ public class CustomerBuilderTest {
 		customerRO.setUserName(DEFAULT_USER_NAME);
 		customerRO.setFirstName(DEFAULT_FIRST_NAME);
 		customerRO.setLastName(DEFAULT_LAST_NAME);
+		customerRO.setTitle(DEFAULT_TITLE);
 		customerRO.setBirthOfDate(DEFAULT_BIRTH_OF_DATE);
 		return customerRO;
 	}
-	
+
 	private CustomerBuilder getCustomCustomerBuilder() {
 		return new CustomerBuilder()
 				.setBirthOfDate(BIRTH_OF_DATE)
@@ -144,17 +145,17 @@ public class CustomerBuilderTest {
 				.setUserName(USER_NAME);
 	}
 
-	private void checkDefault(CustomerRO actualCustomerRO, CustomerRO expectedCustomerRO){
+	private void checkDefault(CustomerBuilder.CustomerRO actualCustomerRO, CustomerBuilder.CustomerRO expectedCustomerRO){
 		assertEquals(actualCustomerRO.getPhone().length(),CustomerBuilder.CHARS_IN_PHONE_NUMBER);
 		checkFields(actualCustomerRO, expectedCustomerRO);
 	}
 
-	private void checkCustom(CustomerRO actualCustomerRO, CustomerRO expectedCustomerRO){
+	private void checkCustom(CustomerBuilder.CustomerRO actualCustomerRO, CustomerBuilder.CustomerRO expectedCustomerRO){
 		assertEquals(actualCustomerRO.getPhone(),expectedCustomerRO.getPhone());
 		checkFields(actualCustomerRO, expectedCustomerRO);
 	}
 
-	private void checkFields(CustomerRO actualCustomerRO, CustomerRO expectedCustomerRO) {
+	private void checkFields(CustomerBuilder.CustomerRO actualCustomerRO, CustomerBuilder.CustomerRO expectedCustomerRO) {
 		//assertThat(actualCustomerRO, is(samePropertyValuesAs(expectedCustomerRO)));
 		//assertThat(defaultCustomer, samePropertyValuesAs(customerRO));
 		assertEquals(actualCustomerRO.getBirthOfDate(),expectedCustomerRO.getBirthOfDate());
@@ -188,8 +189,8 @@ public class CustomerBuilderTest {
 		assertEquals(actualCustomerRO.getZip(),expectedCustomerRO.getZip());
 	}
 
-	private CustomerRO getCustomCustomerRO() {
-		CustomerRO customerRO = new CustomerRO();
+	private CustomerBuilder.CustomerRO getCustomCustomerRO() {
+		CustomerBuilder.CustomerRO customerRO = new CustomerBuilder().createCustomerRO();
 		customerRO.setBirthOfDate(BIRTH_OF_DATE);
 		customerRO.setCampaign(CAMPAIGN);
 		customerRO.setChannel(CHANNEL);
