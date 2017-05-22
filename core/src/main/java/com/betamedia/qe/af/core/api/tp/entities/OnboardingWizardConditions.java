@@ -96,6 +96,7 @@ public class OnboardingWizardConditions {
     }
 
     public enum ExperienceLevel {
+        UNKNOWN(1000010),
         NO_EXPERIENCE(1000030),
         LOW_EXPERIENCE(1000000),
         HIGH_EXPERIENCE(1000040),
@@ -114,6 +115,7 @@ public class OnboardingWizardConditions {
 
     public enum DocumentVerificationStatus {
         NOT_UPLOADED(1000030),
+        UPLOADED(1000030),
         NOT_VERIFIED(1000000),
         VERIFIED(1000040);
 
