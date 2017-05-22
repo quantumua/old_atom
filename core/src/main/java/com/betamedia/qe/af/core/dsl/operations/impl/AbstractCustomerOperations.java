@@ -45,16 +45,10 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     private AbstractTrackingInfoExtensionRepository<T> trackingInfoExtensionRepository;
 
     @Autowired
-    public AbstractContactExtensionRepository<T> contactExtensionRepository;
+    private AbstractContactExtensionRepository<T> contactExtensionRepository;
 
     @Autowired
-    public AbstractRiskLimitsRepository<T> riskLimitsRepository;
-
-    @Autowired
-    public AbstractContactExtensionRepository<T> contactExtensionRepository;
-
-    @Autowired
-    public AbstractRiskLimitsRepository<T> riskLimitsRepository;
+    private AbstractRiskLimitsRepository<T> riskLimitsRepository;
 
     /**
      * Registers new CRM customer with default customer builder
