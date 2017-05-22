@@ -2,7 +2,7 @@ package com.betamedia.qe.af.core.api.tp.adapters.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.AbstractHttpAdapter;
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
-import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMRegisterResult;
@@ -47,7 +47,7 @@ public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependen
      * Registers a new customer with a given request object.
      */
     @Override
-    public CRMResponse<CRMRegisterResult> register(CustomerRO customerRO) {
+    public CRMResponse<CRMRegisterResult> register(CustomerBuilder.CustomerRO customerRO) {
         String url = buildRequestUrl(REGISTER_CUSTOMER_URL, customerRO).build().toUriString();
         return register(url);
     }
@@ -56,7 +56,7 @@ public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependen
      * Registers a new customer with a marketing parameters.
      */
     @Override
-    public CRMResponse<CRMRegisterResult> register(CustomerRO customerRO, MarketingParametersRO marketingParametersRO) {
+    public CRMResponse<CRMRegisterResult> register(CustomerBuilder.CustomerRO customerRO, MarketingParametersRO marketingParametersRO) {
         String url = buildRequestUrl(REGISTER_CUSTOMER_URL, customerRO, marketingParametersRO).build().toUriString();
         return register(url);
     }

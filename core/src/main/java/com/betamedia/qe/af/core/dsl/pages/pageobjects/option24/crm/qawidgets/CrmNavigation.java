@@ -7,4 +7,8 @@ public interface CrmNavigation {
     void login();
     void fnsPersonalInformation();
     void fnsTradingExperience();
+    void accountDetails();
+    void accountAdditionalDetails();
+    void creditCardDeposit();
+    void register();
 }

@@ -12,6 +12,18 @@ public class TradingExperienceInfoBuilder {
     private String commonLeverage;
     private String financialWorkExperience;
     private String cfdBinaryKnowledge;
+    private String mainFactorKnowledge;
+    private String howToCloseKnowledge;
+    private String cfdLeverageKnowledge;
+    private String stopLossKnowledge;
+    private String requiredMarginKnowledge;
+    private String marginLevelDropKnowledge;
+    private String automaticStopKnowledge;
+    private String lossOn1to50Knowledge;
+    private String lossOn1to200Knowledge;
+    private String binaryInvestProfitKnowledge;
+    private String binaryInvestLossKnowledge;
+    private String binaryProbabilityKnowledge;
 
     public TradingExperienceInfoBuilder withSharesExperience(String sharesExperience) {
         this.sharesExperience = sharesExperience;
@@ -53,6 +65,65 @@ public class TradingExperienceInfoBuilder {
         return this;
     }
 
+    public TradingExperienceInfoBuilder withMainFactorKnowledge(String mainFactorKnowledge) {
+        this.mainFactorKnowledge = mainFactorKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withHowToCloseKnowledge(String howToCloseKnowledge) {
+        this.howToCloseKnowledge = howToCloseKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withCfdLeverageKnowledge(String cfdLeverageKnowledge) {
+        this.cfdLeverageKnowledge = cfdLeverageKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withStopLossKnowledge(String stopLossKnowledge) {
+        this.stopLossKnowledge = stopLossKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withRequiredMarginKnowledge(String requiredMarginKnowledge) {
+        this.requiredMarginKnowledge = requiredMarginKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withMarginLevelDropKnowledge(String marginLevelDropKnowledge) {
+        this.marginLevelDropKnowledge = marginLevelDropKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withAutomaticStopKnowledge(String automaticStopKnowledge) {
+        this.automaticStopKnowledge = automaticStopKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withLossOn1to50Knowledge(String lossOn1to50Knowledge) {
+        this.lossOn1to50Knowledge = lossOn1to50Knowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withLossOn1to200Knowledge(String lossOn1to200Knowledge) {
+        this.lossOn1to200Knowledge = lossOn1to200Knowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withBinaryInvestProfitKnowledge(String binaryInvestProfitKnowledge) {
+        this.binaryInvestProfitKnowledge = binaryInvestProfitKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withBinaryInvestLossKnowledge(String binaryInvestLossKnowledge) {
+        this.binaryInvestLossKnowledge = binaryInvestLossKnowledge;
+        return this;
+    }
+
+    public TradingExperienceInfoBuilder withBinaryProbabilityKnowledge(String binaryProbabilityKnowledge) {
+        this.binaryProbabilityKnowledge = binaryProbabilityKnowledge;
+        return this;
+    }
 
     public TradingExperienceInfo build() {
         return new TradingExperienceInfo(
@@ -63,10 +134,23 @@ public class TradingExperienceInfoBuilder {
                 averageYearlyForExVolume,
                 commonLeverage,
                 financialWorkExperience,
-                cfdBinaryKnowledge);
+                cfdBinaryKnowledge,
+                mainFactorKnowledge,
+                howToCloseKnowledge,
+                cfdLeverageKnowledge,
+                stopLossKnowledge,
+                requiredMarginKnowledge,
+                marginLevelDropKnowledge,
+                automaticStopKnowledge,
+                lossOn1to50Knowledge,
+                lossOn1to200Knowledge,
+                binaryInvestProfitKnowledge,
+                binaryInvestLossKnowledge,
+                binaryProbabilityKnowledge
+        );
     }
 
-    public class TradingExperienceInfo {
+    public static class TradingExperienceInfo {
         public final String sharesExperience;
         public final String binaryExperience;
         public final String averageYearlyBinaryVolume;
@@ -75,8 +159,20 @@ public class TradingExperienceInfoBuilder {
         public final String commonLeverage;
         public final String financialWorkExperience;
         public final String cfdBinaryKnowledge;
+        public final String mainFactorKnowledge;
+        public final String howToCloseKnowledge;
+        public final String cfdLeverageKnowledge;
+        public final String stopLossKnowledge;
+        public final String requiredMarginKnowledge;
+        public final String marginLevelDropKnowledge;
+        public final String automaticStopKnowledge;
+        public final String lossOn1to50Knowledge;
+        public final String lossOn1to200Knowledge;
+        public final String binaryInvestProfitKnowledge;
+        public final String binaryInvestLossKnowledge;
+        public final String binaryProbabilityKnowledge;
 
-        private TradingExperienceInfo(String sharesExperience, String binaryExperience, String averageYearlyBinaryVolume, String forExExperience, String averageYearlyForExVolume, String commonLeverage, String financialWorkExperience, String cfdBinaryKnowledge) {
+        private TradingExperienceInfo(String sharesExperience, String binaryExperience, String averageYearlyBinaryVolume, String forExExperience, String averageYearlyForExVolume, String commonLeverage, String financialWorkExperience, String cfdBinaryKnowledge, String mainFactorKnowledge, String howToCloseKnowledge, String cfdLeverageKnowledge, String stopLossKnowledge, String requiredMarginKnowledge, String marginLevelDropKnowledge, String automaticStopKnowledge, String lossOn1to50Knowledge, String lossOn1to200Knowledge, String binaryInvestProfitKnowledge, String binaryInvestLossKnowledge, String binaryProbabilityKnowledge) {
             this.sharesExperience = sharesExperience;
             this.binaryExperience = binaryExperience;
             this.averageYearlyBinaryVolume = averageYearlyBinaryVolume;
@@ -85,6 +181,18 @@ public class TradingExperienceInfoBuilder {
             this.commonLeverage = commonLeverage;
             this.financialWorkExperience = financialWorkExperience;
             this.cfdBinaryKnowledge = cfdBinaryKnowledge;
+            this.mainFactorKnowledge = mainFactorKnowledge;
+            this.howToCloseKnowledge = howToCloseKnowledge;
+            this.cfdLeverageKnowledge = cfdLeverageKnowledge;
+            this.stopLossKnowledge = stopLossKnowledge;
+            this.requiredMarginKnowledge = requiredMarginKnowledge;
+            this.marginLevelDropKnowledge = marginLevelDropKnowledge;
+            this.automaticStopKnowledge = automaticStopKnowledge;
+            this.lossOn1to50Knowledge = lossOn1to50Knowledge;
+            this.lossOn1to200Knowledge = lossOn1to200Knowledge;
+            this.binaryInvestProfitKnowledge = binaryInvestProfitKnowledge;
+            this.binaryInvestLossKnowledge = binaryInvestLossKnowledge;
+            this.binaryProbabilityKnowledge = binaryProbabilityKnowledge;
         }
 
         @Override
@@ -98,6 +206,18 @@ public class TradingExperienceInfoBuilder {
                     ", commonLeverage='" + commonLeverage + '\'' +
                     ", financialWorkExperience='" + financialWorkExperience + '\'' +
                     ", cfdBinaryKnowledge='" + cfdBinaryKnowledge + '\'' +
+                    ", mainFactorKnowledge='" + mainFactorKnowledge + '\'' +
+                    ", howToCloseKnowledge='" + howToCloseKnowledge + '\'' +
+                    ", cfdLeverageKnowledge='" + cfdLeverageKnowledge + '\'' +
+                    ", stopLossKnowledge='" + stopLossKnowledge + '\'' +
+                    ", requiredMarginKnowledge='" + requiredMarginKnowledge + '\'' +
+                    ", marginLevelDropKnowledge='" + marginLevelDropKnowledge + '\'' +
+                    ", automaticStopKnowledge='" + automaticStopKnowledge + '\'' +
+                    ", lossOn1to50Knowledge='" + lossOn1to50Knowledge + '\'' +
+                    ", lossOn1to200Knowledge='" + lossOn1to200Knowledge + '\'' +
+                    ", binaryInvestProfitKnowledge='" + binaryInvestProfitKnowledge + '\'' +
+                    ", binaryInvestLossKnowledge='" + binaryInvestLossKnowledge + '\'' +
+                    ", binaryProbabilityKnowledge='" + binaryProbabilityKnowledge + '\'' +
                     '}';
         }
     }

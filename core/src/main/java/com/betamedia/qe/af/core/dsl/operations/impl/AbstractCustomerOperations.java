@@ -1,14 +1,19 @@
 package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
+import com.betamedia.qe.af.core.api.tp.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
 import com.betamedia.qe.af.core.dsl.operations.CustomerOperations;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
+import com.betamedia.qe.af.core.persistence.entities.ContactExtension;
+import com.betamedia.qe.af.core.persistence.entities.RiskLimits;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractContactExtensionRepository;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractRiskLimitsRepository;
 import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoExtensionRepository;
 import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoRepository;
 import org.apache.logging.log4j.LogManager;
@@ -34,10 +39,16 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     private MobileCRMHTTPAdaper<T> mobileCRMHTTPAdaper;
 
     @Autowired
-    public AbstractTrackingInfoRepository<T> trackingInfoRepository;
+    private AbstractTrackingInfoRepository<T> trackingInfoRepository;
 
     @Autowired
-    public AbstractTrackingInfoExtensionRepository<T> trackingInfoExtensionRepository;
+    private AbstractTrackingInfoExtensionRepository<T> trackingInfoExtensionRepository;
+
+    @Autowired
+    private AbstractContactExtensionRepository<T> contactExtensionRepository;
+
+    @Autowired
+    private AbstractRiskLimitsRepository<T> riskLimitsRepository;
 
     /**
      * Registers new CRM customer with default customer builder
@@ -70,7 +81,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Registers new CRM customer and expects errors.
      */
     @Override
-    public List<CRMError>  registerWithErrors(CustomerBuilder customerBuilder) {
+    public List<CRMError> registerWithErrors(CustomerBuilder customerBuilder) {
         CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO());
         List<CRMError> registerErrors = register.getErrors();
         assertFalse(registerErrors.isEmpty(), "Registration errors were expected, but there were none.");
@@ -106,7 +117,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public void logout(String customerId) {
         CRMResponse logoutResponse = mobileCRMHTTPAdaper.logout(customerId);
-        List<CRMError> logoutErrors = logoutResponse == null? null : logoutResponse.getErrors();
+        List<CRMError> logoutErrors = logoutResponse == null ? null : logoutResponse.getErrors();
         assertNull(logoutResponse, "There were errors during customer logout:" + logoutErrors);
     }
 
@@ -141,7 +152,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit and expects errors.
      */
     @Override
-    public List<CRMError>  depositWithErrors(MobileDepositBuilder depositBuilder) {
+    public List<CRMError> depositWithErrors(MobileDepositBuilder depositBuilder) {
         CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(depositBuilder.createMobileDepositRO());
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
@@ -166,7 +177,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit by name and expects errors.
      */
     @Override
-    public List<CRMError>  depositByNameWithErrors(MobileDepositBuilder depositBuilder) {
+    public List<CRMError> depositByNameWithErrors(MobileDepositBuilder depositBuilder) {
         CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(depositBuilder.createMobileDepositRO());
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
@@ -203,5 +214,60 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         TrackingInfo trackingInfo = trackingInfoRepository.findOne(trackingInfoId);
         assertNotNull(trackingInfo);
         return trackingInfo;
+    }
+
+    @Override
+    public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
+        CRMCustomer registeredCustomer = register(new CustomerBuilder());
+        ContactExtension contactExtension = saveAndReturnContactExtension(registeredCustomer.getId(), wizardConditions);
+
+        String tradingAccountId = registeredCustomer.getBinaryAccount().getExternalId();
+        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
+        if (wizardConditions.hasDeposit()) {
+            deposit(depositBuilder);
+        }
+
+        if (wizardConditions.hasPendingDeposit()) {
+            double maxLimit = findMaximumDepositLimit(contactExtension);
+            depositBuilder.setAmount((long)maxLimit + 1000);
+            depositWithErrors(depositBuilder);
+        }
+
+        return registeredCustomer;
+    }
+
+    private ContactExtension saveAndReturnContactExtension(String contactId, OnboardingWizardConditions wizardConditions) {
+        final Integer defaultBirthCountry = 100000207;
+        final Integer defaultNationality = 100000207;
+
+        ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
+        assertNotNull(contactExtension);
+
+        contactExtension.setExperienceLevel(wizardConditions.getExperienceLevel().getLevel());
+        contactExtension.setPoiStatus(wizardConditions.getPoiStatus().getStatus());
+        contactExtension.setPorStatus(wizardConditions.getPorStatus().getStatus());
+        contactExtension.setAccountType(wizardConditions.getAccountType().getType());
+
+        contactExtension.setFnsPersonal(wizardConditions.isFnsPersonal());
+        contactExtension.setFnsTrading(wizardConditions.isFnsTrading());
+        contactExtension.setRiskWarning(wizardConditions.hasRiskWarning());
+        contactExtension.setHasRegulationAnswers(wizardConditions.hasRegulationAnswers());
+
+        if (wizardConditions.hasAdditionalDetails()) {
+            contactExtension.setCountryOfBirth(defaultBirthCountry);
+            contactExtension.setNationality(defaultNationality);
+        }
+
+        contactExtensionRepository.save(contactExtension);
+        return contactExtension;
+    }
+
+    private double findMaximumDepositLimit(ContactExtension contactExtension) {
+        String riskLimitsId = contactExtension.getRiskLimitsId();
+
+        RiskLimits riskLimits = riskLimitsRepository.findOne(riskLimitsId);
+        assertNotNull(riskLimits);
+
+        return riskLimits.getDailyLimit();
     }
 }

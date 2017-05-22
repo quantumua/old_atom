@@ -16,6 +16,14 @@ public class CrmNavigationImpl extends AbstractPageObject implements CrmNavigati
     private By fnsPersonalInformationButton;
     @StoredId
     private By fnsTradingExperienceButton;
+    @StoredId
+    private By accountDetailsButton;
+    @StoredId
+    private By accountAdditionalDetailsButton;
+    @StoredId
+    private By creditCardDepositButton;
+    @StoredId
+    private By registerButton;
 
     public CrmNavigationImpl(WebDriver webDriver) {
         super(webDriver);
@@ -34,5 +42,25 @@ public class CrmNavigationImpl extends AbstractPageObject implements CrmNavigati
     @Override
     public void fnsTradingExperience() {
         click(fnsTradingExperienceButton);
+    }
+
+    @Override
+    public void accountDetails() {
+        click(accountDetailsButton);
+    }
+
+    @Override
+    public void accountAdditionalDetails() {
+        click(accountAdditionalDetailsButton);
+    }
+
+    @Override
+    public void creditCardDeposit() {
+        click(creditCardDepositButton);
+    }
+
+    @Override
+    public void register() {
+        click(registerButton);
     }
 }

@@ -4,7 +4,6 @@ import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
@@ -104,7 +103,7 @@ public class CustomerOperationsTest {
 
     @Test
     public void testRegisterCustomerWithCustomerBuilder() {
-        ArgumentCaptor<CustomerRO> argumentCaptor = ArgumentCaptor.forClass(CustomerRO.class);
+        ArgumentCaptor<CustomerBuilder.CustomerRO> argumentCaptor = ArgumentCaptor.forClass(CustomerBuilder.CustomerRO.class);
         String newEmail = "newEmail";
         CustomerBuilder customerBuilder = new CustomerBuilder();
         customerBuilder.setEmail(newEmail);
@@ -124,7 +123,7 @@ public class CustomerOperationsTest {
 
     @Test
     public void testRegisterCustomerWithMarketingParameters() {
-        when(mobileCRMHTTPAdaper.register(any(CustomerRO.class), any(MarketingParametersRO.class))).thenReturn(expectedCustomerResponse);
+        when(mobileCRMHTTPAdaper.register(any(CustomerBuilder.CustomerRO.class), any(MarketingParametersRO.class))).thenReturn(expectedCustomerResponse);
 
         ArgumentCaptor<MarketingParametersRO> argumentCaptor = ArgumentCaptor.forClass(MarketingParametersRO.class);
         CustomerBuilder customerBuilder = new CustomerBuilder();
@@ -134,7 +133,7 @@ public class CustomerOperationsTest {
 
         CRMCustomer actualCustomer = customerOperations.register(customerBuilder, marketingParametersBuilder);
 
-        verify(mobileCRMHTTPAdaper).register(any(CustomerRO.class), argumentCaptor.capture());
+        verify(mobileCRMHTTPAdaper).register(any(CustomerBuilder.CustomerRO.class), argumentCaptor.capture());
         assertEquals(siteId, argumentCaptor.getValue().getSiteId());
         assertEquals(keyword, argumentCaptor.getValue().getKeyword());
         assertThat(expectedCustomer, new ReflectionEquals(actualCustomer));
@@ -144,7 +143,7 @@ public class CustomerOperationsTest {
     public void testRegisterCustomerWithUnexpectedErrors() {
         CRMResponse<CRMRegisterResult> errorResponse = new CRMResponse<>(null, null,
                 Collections.singletonList(new CRMError("errorCode", "errorMessage")), null, null);
-        when(mobileCRMHTTPAdaper.register(any(CustomerRO.class))).thenReturn(errorResponse);
+        when(mobileCRMHTTPAdaper.register(any(CustomerBuilder.CustomerRO.class))).thenReturn(errorResponse);
 
         customerOperations.register();
     }

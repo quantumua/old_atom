@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite: sequential execution of tests" verbose="1">
+    <test name="Test scenarios for register and update user information in the CRM widgets">
+        <classes>
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.AccountAdditionalDetailsTest" />
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.RegisterTest" />
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.AccountDetailsTest" />
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.CreditCardDepositTest" />
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.RegisterTest" />
+        </classes>
+    </test>
+</suite>

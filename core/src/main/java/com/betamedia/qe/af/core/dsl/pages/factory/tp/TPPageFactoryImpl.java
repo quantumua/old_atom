@@ -11,12 +11,8 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.Bi
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.impl.BinarySelectorImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.impl.ControlPanelImpl;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmLoginPage;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CrmNavigation;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.CrmLoginPageImpl;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.CrmNavigationImpl;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsTradingExperienceImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.*;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.*;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
@@ -136,7 +132,33 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public CrmLoginPage crmLoginPage(){
+    public FnsPersonalInformation fnsPersonalInformation() {
+        return creator.getPage(FnsPersonalInformationImpl.class);
+    }
+
+    @Override
+    public CrmLoginPage crmLoginPage() {
         return creator.getPage(CrmLoginPageImpl.class);
     }
+
+    @Override
+    public AccountDetailsPage accountDetails() {
+        return creator.getPage(AccountDetailsPageImpl.class);
+    }
+
+    @Override
+    public AccountAdditionalDetailsPage accountAdditionalDetails() {
+        return creator.getPage(AccountAdditionalDetailsPageImpl.class);
+    }
+
+    @Override
+    public CreditCardDepositPage creditCardDeposit() {
+        return creator.getPage(CreditCardDepositPageImpl.class);
+    }
+
+    @Override
+    public RegisterPage register() {
+        return creator.getPage(RegisterPageImpl.class);
+    }
+
 }

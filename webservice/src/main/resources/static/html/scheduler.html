@@ -3,6 +3,9 @@
 <head>
     <title>Test Framework Web UI</title>
     <link href="css/angular-bootstrap.css" rel="stylesheet">
+    <script src="js/angular-bootstrap.js" type="text/javascript"></script>
+    <script src="js/client.js"></script>
+
     <style type="text/css">
         [ng\:cloak], [ng-cloak], .ng-cloak {
             display: none !important;
@@ -23,7 +26,7 @@
     <a href="/af/schedule">Schedule test execution</a> |
     <a href="/af/upload">Upload data</a>
 </div>
-
+<hr width="60%"/>
 <div ng-controller="scheduler as scheduler" class="container">
     <form role="form" ng-submit="scheduler.schedule()">
         <div class="form-group">
@@ -71,7 +74,6 @@
     </table>
 </div>
 
-<script src="js/angular-bootstrap.js" type="text/javascript"></script>
-<script src="js/client.js"></script>
+<hr width="60%"/>
 </body>
 </html>
