@@ -1,7 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
 import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.qe.af.core.utils.StringUtils;
 import com.google.common.base.Strings;
 
 import java.util.Optional;
@@ -32,7 +31,7 @@ public class CustomerBuilder {
     private String lastName = "Automation";
     private String utcOffset;
     private String oftc;
-    private String birthOfDate;
+    private String birthOfDate = "1982-02-03";
     private String city;
     private String userAgent;
     private String lang;

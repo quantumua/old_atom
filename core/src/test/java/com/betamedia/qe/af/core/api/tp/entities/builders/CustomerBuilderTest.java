@@ -52,6 +52,7 @@ public class CustomerBuilderTest {
 	private static final String DEFAULT_PASSWORD	= "123123";
 	private static final String DEFAULT_EMAIL 		= "@automation.ru";
 	private static final String DEFAULT_USER_NAME 	= "tp_automation";
+	private static final String DEFAULT_BIRTH_OF_DATE 	= "1982-02-03";
 	private static final String CUSTOM_PHONE = "12465555555";
 	
     @Test
@@ -103,6 +104,7 @@ public class CustomerBuilderTest {
 		customerRO.setUserName(DEFAULT_USER_NAME);
 		customerRO.setFirstName(DEFAULT_FIRST_NAME);
 		customerRO.setLastName(DEFAULT_LAST_NAME);
+		customerRO.setBirthOfDate(DEFAULT_BIRTH_OF_DATE);
 		return customerRO;
 	}
 	

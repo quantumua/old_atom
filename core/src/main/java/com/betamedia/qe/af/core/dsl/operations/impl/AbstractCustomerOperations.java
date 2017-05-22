@@ -224,8 +224,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Override
     public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
-        CustomerBuilder customerBuilder = createCustomerBuilderForWizard(wizardConditions.hasAdditionalDetails());
-        CRMCustomer registeredCustomer = register(customerBuilder);
+        CRMCustomer registeredCustomer = register(new CustomerBuilder());
         ContactExtension contactExtension = saveAndReturnContactExtension(registeredCustomer.getId(), wizardConditions);
 
         String tradingAccountId = registeredCustomer.getBinaryAccount().getExternalId();
@@ -241,16 +240,6 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         }
 
         return registeredCustomer;
-    }
-
-    private CustomerBuilder createCustomerBuilderForWizard(boolean hasAdditionalDetails) {
-        final String defaultBirthDate = "1982-02-03";
-
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        if (hasAdditionalDetails) {
-            customerBuilder.setBirthOfDate(defaultBirthDate);
-        }
-        return customerBuilder;
     }
 
     private ContactExtension saveAndReturnContactExtension(String contactId, OnboardingWizardConditions wizardConditions) {
