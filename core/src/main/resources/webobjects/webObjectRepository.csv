@@ -57,7 +57,7 @@ build,pageObjectName,locatorId,locatorType,value
 1603,MessageBoxImpl,firstButton,CSS,button:nth-of-type(1)
 1603,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
 1603,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
-1603,DialogBoxImpl,closeButton,XPATH,//*[@id="tradeManagerContainer"]/div/div[3]/div/div/div[3]
+1603,DialogBoxImpl,closeButton,XPATH,"//*[@id=""tradeManagerContainer""]/div/div[3]/div/div/div[3]"
 1603,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
 1603,BinaryBidderImpl,errorMinAmount,CSS,.bmMessage.bmError.bmMessageMinAmount
 1603,BinaryBidderImpl,errorMaxAmount,CSS,.bmMessage.bmError.bmMessageMaxAmount
@@ -161,3 +161,15 @@ build,pageObjectName,locatorId,locatorType,value
 1603,CrmLoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
 1603,FnsTradingExperienceImpl,resultPlaceholder,ID,resultPlaceHolder
 1603,FnsPersonalInformationImpl,resultPlaceholder,ID,resultPlaceHolder
+1603,RegistrationPageImpl,firstnameField,ID,FirstName
+1603,RegistrationPageImpl,lastnameField,ID,LastName
+1603,RegistrationPageImpl,emailField,ID,Email
+1603,RegistrationPageImpl,phoneNumberField,NAME,PhoneNumber.Number
+1603,RegistrationPageImpl,selectedFlagField,CLASS_NAME,selected-flag
+1603,RegistrationPageImpl,selecCountry,XPATH,.//ul[@class='country-list']//li[@data-country-code='de']
+1603,RegistrationPageImpl,passwordRegField,ID,Password
+1603,RegistrationPageImpl,reenterPasswordRegField,ID,ReEnterPassword
+1603,RegistrationPageImpl,accountAgreeField,ID,AccountAgreeLabel
+1603,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
+1603,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
+1603,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']

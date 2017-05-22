@@ -6,5 +6,6 @@ package com.betamedia.qe.af.core.dsl.pages.type;
  */
 public enum ProductType {
     TP,
-    CRM;
+    CRM,
+	WEB;
 }
