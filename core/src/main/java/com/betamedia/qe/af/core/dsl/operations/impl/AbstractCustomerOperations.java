@@ -229,7 +229,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
         if (wizardConditions.hasPendingDeposit()) {
             double maxLimit = findMaximumDepositLimit(contactExtension);
-            depositBuilder.setAmount((long)maxLimit + 10);
+            depositBuilder.setAmount((long)maxLimit + 3000);
             depositWithErrors(depositBuilder);
         }
 
@@ -247,11 +247,14 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         contactExtension.setPoiStatus(wizardConditions.getPoiStatus().getStatus());
         contactExtension.setPorStatus(wizardConditions.getPorStatus().getStatus());
         contactExtension.setAccountType(wizardConditions.getAccountType().getType());
+        contactExtension.setPoiOcrStatus(wizardConditions.getPoiOcrStatus().getStatus());
+        contactExtension.setPorOcrStatus(wizardConditions.getPorOcrStatus().getStatus());
 
         contactExtension.setFnsPersonal(wizardConditions.isFnsPersonal());
         contactExtension.setFnsTrading(wizardConditions.isFnsTrading());
         contactExtension.setRiskWarning(wizardConditions.hasRiskWarning());
         contactExtension.setHasRegulationAnswers(wizardConditions.hasRegulationAnswers());
+        contactExtension.setCustomerCompliant(wizardConditions.isCustomerCompliant());
 
         if (wizardConditions.hasAdditionalDetails()) {
             contactExtension.setCountryOfBirth(defaultBirthCountry);
