@@ -60,6 +60,7 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         super(webDriver);
     }
 
+    //TODO extract method for send-keys-if-not-null scenario
     @Override
     public void submit(TradingExperienceInfo info) {
         in(sharesExperience).selectByValue(info.sharesExperience);

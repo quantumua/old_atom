@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
-import com.betamedia.qe.af.core.api.tp.entities.OnboardingWizardConditions;
+import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;

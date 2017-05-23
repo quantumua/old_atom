@@ -2,15 +2,16 @@ package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
 import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
+
+import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Questions.*;
 
 /**
  * Created by mbelyaev on 5/17/17.
  */
 public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
 
-    @Test
+    @Test(description = "ID:9029")
     public void score31CustomerExperienceTest() {
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
@@ -18,26 +19,24 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 new TradingExperienceInfoBuilder()
-                        .withSharesExperience("sharesNever")
-                        .withBinaryExperience("binaryNever")
-                        .withAverageYearlyBinaryVolume("financialProducts1VolumeAbove10k")
-                        .withForExExperience("forexNever")
-                        .withAverageYearlyForExVolume("financialProducts2VolumeUnder50k")
-                        .withCommonLeverage("financialProducts2LeverageUnder1to50")
-                        .withFinancialWorkExperience("selectIfApplicableNeither")
-                        .withCfdBinaryKnowledge("knowledgeCfdsBinariesPhysicallyDelivering")
-                        .withMainFactorKnowledge("knowledgeMainFactorAnnouncement")
-                        .withHowToCloseKnowledge("knowledgeIfYouOpenLondonStock")
-                        .withCfdLeverageKnowledge("knowledgeLeverageCFDNone")
-                        .withStopLossKnowledge("knowledgeStoplossBuy")
-                        .withRequiredMarginKnowledge("knowledgeRequiredMargin1k")
-                        .withMarginLevelDropKnowledge("knowledgeMarginLevelDropWarningCall")
-                        .withAutomaticStopKnowledge("knowledgeAutomaticStopEquityFalls")
-                        .withLossOn1to50Knowledge("knowledgePositionLoss1to50A2")
-                        .withLossOn1to200Knowledge("knowledgePositionLoss1to200A3")
-                        .withBinaryInvestProfitKnowledge("knowledgeInvestBinaryProfit75")
-                        .withBinaryInvestLossKnowledge("knowledgeInvestBinaryLoss100")
-                        .withBinaryProbabilityKnowledge("knowledgeBinaryInTheMoney25")
+                        .withSharesExperience(SharesExperience.NEVER.get())
+                        .withBinaryExperience(BinaryExperience.REGULARLY.get())
+                        .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
+                        .withForExExperience(ForExExperience.NEVER.get())
+                        .withFinancialWorkExperience(FinancialWorkExperience.NEITHER.get())
+                        .withCfdBinaryKnowledge(CfdBinaryKnowledge.PHYSICALLY_DELIVERING.get())
+                        .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
+                        .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK.get())
+                        .withCfdLeverageKnowledge(CfdLeverageKnowledge.NONE.get())
+                        .withStopLossKnowledge(StopLossKnowledge.BUY.get())
+                        .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K.get())
+                        .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL.get())
+                        .withAutomaticStopKnowledge(AutomaticStopKnowledge.EQUITY_FALLS.get())
+                        .withLossOn1to50Knowledge(LossOn1to50Knowledge.A2_450.get())
+                        .withLossOn1to200Knowledge(LossOn1to200Knowledge.A3_1000.get())
+                        .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75.get())
+                        .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_100.get())
+                        .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25.get())
                         .build()
         );
         pages().crmNavigation().fnsPersonalInformation();
@@ -45,7 +44,7 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameLowExperience(customer.getEmail());
     }
 
-    @Test
+    @Test(description = "ID:9071")
     public void score45CustomerExperienceTest() {
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
@@ -53,26 +52,24 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 new TradingExperienceInfoBuilder()
-                        .withSharesExperience("sharesRegularly")
-                        .withBinaryExperience("binaryNever")
-                        .withAverageYearlyBinaryVolume("financialProducts1VolumeUnder500")
-                        .withForExExperience("forexNever")
-                        .withAverageYearlyForExVolume("financialProducts2VolumeUnder50k")
-                        .withCommonLeverage("financialProducts2LeverageUnder1to50")
-                        .withFinancialWorkExperience("selectIfApplicableNeither")
-                        .withCfdBinaryKnowledge("knowledgeCfdsBinariesSpeculative")
-                        .withMainFactorKnowledge("knowledgeMainFactorInterestRates")
-                        .withHowToCloseKnowledge("knowledgeIfYouOpenOnlyPlatform")
-                        .withCfdLeverageKnowledge("knowledgeLeverageCFDMagnifies")
-                        .withStopLossKnowledge("knowledgeStoplossMinimize")
-                        .withRequiredMarginKnowledge("knowledgeRequiredMargin1k")
-                        .withMarginLevelDropKnowledge("knowledgeMarginLevelDropWarningCall")
-                        .withAutomaticStopKnowledge("knowledgeAutomaticStopEquityFalls")
-                        .withLossOn1to50Knowledge("knowledgePositionLoss1to50A2")
-                        .withLossOn1to200Knowledge("knowledgePositionLoss1to200A1")
-                        .withBinaryInvestProfitKnowledge("knowledgeInvestBinaryProfit75")
-                        .withBinaryInvestLossKnowledge("knowledgeInvestBinaryLoss100")
-                        .withBinaryProbabilityKnowledge("knowledgeBinaryInTheMoney25")
+                        .withSharesExperience(SharesExperience.REGULARLY.get())
+                        .withBinaryExperience(BinaryExperience.REGULARLY.get())
+                        .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_UNDER_500.get())
+                        .withForExExperience(ForExExperience.NEVER.get())
+                        .withFinancialWorkExperience(FinancialWorkExperience.NEITHER.get())
+                        .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE.get())
+                        .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
+                        .withHowToCloseKnowledge(HowToCloseKnowledge.ONLY_PLATFORM.get())
+                        .withCfdLeverageKnowledge(CfdLeverageKnowledge.MAGNIFIES.get())
+                        .withStopLossKnowledge(StopLossKnowledge.MINIMIZE.get())
+                        .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K.get())
+                        .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL.get())
+                        .withAutomaticStopKnowledge(AutomaticStopKnowledge.EQUITY_FALLS.get())
+                        .withLossOn1to50Knowledge(LossOn1to50Knowledge.A2_450.get())
+                        .withLossOn1to200Knowledge(LossOn1to200Knowledge.A1_1800.get())
+                        .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75.get())
+                        .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_100.get())
+                        .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25.get())
                         .build()
         );
         pages().crmNavigation().fnsPersonalInformation();
@@ -80,7 +77,7 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameLowExperience(customer.getEmail());
     }
 
-    @Test
+    @Test(description = "ID:9032")
     public void score50CustomerExperienceTest() {
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
@@ -88,26 +85,24 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 new TradingExperienceInfoBuilder()
-                        .withSharesExperience("sharesRegularly")
-                        .withBinaryExperience("binaryNever")
-                        .withAverageYearlyBinaryVolume("financialProducts1VolumeUnder500")
-                        .withForExExperience("forexNever")
-                        .withAverageYearlyForExVolume("financialProducts2VolumeUnder50k")
-                        .withCommonLeverage("financialProducts2LeverageUnder1to50")
-                        .withFinancialWorkExperience("selectIfApplicableNeither")
-                        .withCfdBinaryKnowledge("knowledgeCfdsBinariesSpeculative")
-                        .withMainFactorKnowledge("knowledgeMainFactorInterestRates")
-                        .withHowToCloseKnowledge("knowledgeIfYouOpenOnlyPlatform")
-                        .withCfdLeverageKnowledge("knowledgeLeverageCFDMagnifies")
-                        .withStopLossKnowledge("knowledgeStoplossMinimize")
-                        .withRequiredMarginKnowledge("knowledgeRequiredMargin1k")
-                        .withMarginLevelDropKnowledge("knowledgeMarginLevelDropWarningCall")
-                        .withAutomaticStopKnowledge("knowledgeAutomaticStopEquityFalls")
-                        .withLossOn1to50Knowledge("knowledgePositionLoss1to50A2")
-                        .withLossOn1to200Knowledge("knowledgePositionLoss1to200A1")
-                        .withBinaryInvestProfitKnowledge("knowledgeInvestBinaryProfit75")
-                        .withBinaryInvestLossKnowledge("knowledgeInvestBinaryLoss100")
-                        .withBinaryProbabilityKnowledge("knowledgeBinaryInTheMoney25")
+                        .withSharesExperience(SharesExperience.REGULARLY.get())
+                        .withBinaryExperience(BinaryExperience.REGULARLY.get())
+                        .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_UNDER_500.get())
+                        .withForExExperience(ForExExperience.NEVER.get())
+                        .withFinancialWorkExperience(FinancialWorkExperience.NEITHER.get())
+                        .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE.get())
+                        .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
+                        .withHowToCloseKnowledge(HowToCloseKnowledge.ONLY_PLATFORM.get())
+                        .withCfdLeverageKnowledge(CfdLeverageKnowledge.MAGNIFIES.get())
+                        .withStopLossKnowledge(StopLossKnowledge.MINIMIZE.get())
+                        .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K.get())
+                        .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL.get())
+                        .withAutomaticStopKnowledge(AutomaticStopKnowledge.EQUITY_FALLS.get())
+                        .withLossOn1to50Knowledge(LossOn1to50Knowledge.A2_450.get())
+                        .withLossOn1to200Knowledge(LossOn1to200Knowledge.A1_1800.get())
+                        .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75.get())
+                        .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_100.get())
+                        .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25.get())
                         .build()
         );
         pages().crmNavigation().fnsPersonalInformation();

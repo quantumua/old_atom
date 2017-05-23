@@ -8,7 +8,7 @@ import org.testng.annotations.AfterMethod;
  * @author Maksym Tsybulskyy
  *         Date: 3/22/17.
  */
-public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, P extends AbstractPageFactory> {
+public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, P extends AbstractPageFactory> extends AbstractTest {
 
     private ThreadLocal<P> pages = new ThreadLocal<>();
 
@@ -41,4 +41,6 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
         }
         return operationTemplate;
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.api.tp.entities;
+package com.betamedia.qe.af.core.api.crm.form.entities;
 
 import com.betamedia.qe.af.core.dataprovider.csv.converters.AccountTypeConverter;
 import com.betamedia.qe.af.core.dataprovider.csv.converters.DocumentVerificationStatusConverter;
@@ -115,6 +115,7 @@ public class OnboardingWizardConditions {
 
     public enum ExperienceLevel {
         UNKNOWN(1000010),
+        REJECTED(1000020),
         NO_EXPERIENCE(1000030),
         LOW_EXPERIENCE(1000000),
         HIGH_EXPERIENCE(1000040),
@@ -136,13 +137,13 @@ public class OnboardingWizardConditions {
         NOT_VERIFIED(1000000),
         VERIFIED(1000040);
 
-        private int status;
+        private Integer status;
 
-        DocumentVerificationStatus(int status) {
+        DocumentVerificationStatus(Integer status) {
             this.status = status;
         }
 
-        public int getStatus() {
+        public Integer getStatus() {
             return status;
         }
     }
@@ -151,13 +152,13 @@ public class OnboardingWizardConditions {
         REAL(100000000),
         DEMO(100000001);
 
-        private int type;
+        private Integer type;
 
-        AccountType(int type) {
+        AccountType(Integer type) {
             this.type = type;
         }
 
-        public int getType() {
+        public Integer getType() {
             return type;
         }
     }

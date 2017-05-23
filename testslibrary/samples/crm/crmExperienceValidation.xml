@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="CRM Experience Validation Suite" verbose="1">
+<suite name="CRM Experience Validation Suite" verbose="1" parallel="methods" thread-count="4">
     <test name="CRM Experience Validation Tests">
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.CrmUserExperienceTest">

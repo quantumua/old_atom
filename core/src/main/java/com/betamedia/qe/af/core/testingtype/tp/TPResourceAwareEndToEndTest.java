@@ -25,11 +25,12 @@ public class TPResourceAwareEndToEndTest extends TPEndToEndTest {
         return getEntityRepository().get(entity);
     }
 
-    @DataProvider(name="ExpectedCfdAssetDataProvider")
-    public Iterator<Object[]> getExpectedCfdAssets(){
+    @DataProvider(name = "ExpectedCfdAssetDataProvider")
+    public Iterator<Object[]> getExpectedCfdAssets() {
         return getResources(ExpectedCfdAsset.class)
                 .stream()
                 .map(a -> new Object[]{a.getListBidderName(), a.getSymbol(), a.getTooltipName()})
                 .iterator();
     }
+hg
 }

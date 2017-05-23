@@ -17,21 +17,20 @@ public class ContactExtensionInfo {
     @Column(name = "bt_username")
     private String username;
     @Column(name = "bt_access")
-    private Integer access;
+    private int access;
     @Column(name = "bt_ExperienceLevel")
-    private Integer experienceLevel;
+    private int experienceLevel;
     @Column(name = "bt_ExperienceScore")
-    private Double experienceScore;
+    private double experienceScore;
 
-    public Integer getExperienceLevel() {
+    public int getExperienceLevel() {
         return experienceLevel;
     }
 
-    public Double getExperienceScore() {
+    public double getExperienceScore() {
         return experienceScore;
     }
 
-    public Integer getAccess() {
-        return access;
-    }
+    public int getAccess(){
+        return access;}
 }

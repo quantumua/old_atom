@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
-import com.betamedia.qe.af.core.api.tp.entities.OnboardingWizardConditions;
+import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;

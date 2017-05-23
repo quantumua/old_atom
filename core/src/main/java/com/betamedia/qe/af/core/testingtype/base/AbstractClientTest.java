@@ -8,7 +8,7 @@ import org.testng.annotations.AfterMethod;
 /**
  * Created by mbelyaev on 2/21/17.
  */
-public abstract class AbstractClientTest<T extends AbstractPageFactory> {
+public abstract class AbstractClientTest<T extends AbstractPageFactory> extends AbstractTest {
 
     private ThreadLocal<T> pages = new ThreadLocal<>();
 

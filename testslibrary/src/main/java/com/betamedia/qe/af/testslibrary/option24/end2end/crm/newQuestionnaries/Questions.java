@@ -9,7 +9,7 @@ public class Questions {
      * FNS Personal experience answers
      */
 
-    public enum FnsEmploymentStatus {
+    public enum EmploymentStatus {
         SALARIED_EMPLOYEE("employmentStatusSalariedEmployee"),
         SELF_EMPLOYED("employmentStatusSelfEmployed"),
         STUDENT("employmentStatusStudent"),
@@ -18,16 +18,16 @@ public class Questions {
 
         private String answer;
 
-        FnsEmploymentStatus(String answer) {
+        EmploymentStatus(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsIndustry {
+    public enum Industry {
         ACCOUNTING("industryAccounting"),
         FINANCE("industryFinance"),
         FUNDS("industryFunds"),
@@ -37,46 +37,46 @@ public class Questions {
 
         private String answer;
 
-        FnsIndustry(String answer) {
+        Industry(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsHaveTin {
+    public enum HasTaxIdentificationNumber {
         YES("tinYes"),
         NO("tinNo");
 
         private String answer;
 
-        FnsHaveTin(String answer) {
+        HasTaxIdentificationNumber(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsIsUSReportablePerson {
+    public enum IsUSReportable {
         YES("usReportableYes"),
         NO("usReportableNo");
 
         private String answer;
 
-        FnsIsUSReportablePerson(String answer) {
+        IsUSReportable(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsLevelOfEducation {
+    public enum EducationLevel {
         POST_GRADUATE("levelOfEducationPostGraduate"),
         BACHELOR("levelOfEducationBachelor"),
         SECONDARY("levelOfEducationSecondary"),
@@ -85,16 +85,16 @@ public class Questions {
 
         private String answer;
 
-        FnsLevelOfEducation(String answer) {
+        EducationLevel(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsFieldOfStudy {
+    public enum EducationField {
         ACCOUNTING("fieldOfStudyAccounting"),
         LAW("fieldOfStudyLaw"),
         COMPUTER("fieldOfStudyComputer"),
@@ -103,31 +103,31 @@ public class Questions {
 
         private String answer;
 
-        FnsFieldOfStudy(String answer) {
+        EducationField(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsPoliticallyExposed {
+    public enum IsPoliticallyExposed {
         NO("politicallyExposedNo"),
         YES("politicallyExposedYes");
 
         private String answer;
 
-        FnsPoliticallyExposed(String answer) {
+        IsPoliticallyExposed(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsSourceOfFunds {
+    public enum SourceOfFunds {
         EMPLOYMENT("sourceOfFundsEmployment"),
         SAVINGS("sourceOfFundsSavings"),
         RETIREMENT("sourceOfFundsRetirement"),
@@ -136,17 +136,17 @@ public class Questions {
 
         private String answer;
 
-        FnsSourceOfFunds(String answer) {
+        SourceOfFunds(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsTotalAnnualIncome {
-        INCOME_OVER100K("totalAnnualIncomeOver100k"),
+    public enum AnnualIncome {
+        INCOME_OVER_100K("totalAnnualIncomeOver100k"),
         INCOME_50K_100K("totalAnnualIncome50k-100k"),
         INCOME_25K_50K("totalAnnualIncome25k-50k"),
         INCOME_15K_25K("totalAnnualIncome15k-25k"),
@@ -154,16 +154,16 @@ public class Questions {
 
         private String answer;
 
-        FnsTotalAnnualIncome(String answer) {
+        AnnualIncome(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsNetWealth {
+    public enum NetWealth {
         NET_WEALTH_OVER_300K("netWealthOver300k"),
         NET_WEALTH_150K_300K("netWealth150k-300k"),
         NET_WEALTH_50K_150K("netWealth50k-150k"),
@@ -172,17 +172,17 @@ public class Questions {
 
         private String answer;
 
-        FnsNetWealth(String answer) {
+        NetWealth(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsExpectedDeposits {
-        DEPOSITS_OVER50K("expectedDepositsOver50k"),
+    public enum ExpectedDepositsPerYear {
+        DEPOSITS_OVER_50K("expectedDepositsOver50k"),
         DEPOSITS_25K_50K("expectedDeposits25k-50k"),
         DEPOSITS_15K_25K("expectedDeposits15k-25k"),
         DEPOSITS_10K_15K("expectedDeposits10k-15k"),
@@ -190,16 +190,16 @@ public class Questions {
 
         private String answer;
 
-        FnsExpectedDeposits(String answer) {
+        ExpectedDepositsPerYear(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsPurposeOfTrading {
+    public enum PurposeOfTrading {
         SPECULATIVE("purposeOfTradingSpeculative"),
         ADDITIONAL_INCOME("purposeOfTradingAdditionalIncome"),
         HEDGING("purposeOfTradingHedging"),
@@ -207,11 +207,11 @@ public class Questions {
 
         private String answer;
 
-        FnsPurposeOfTrading(String answer) {
+        PurposeOfTrading(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
@@ -219,7 +219,7 @@ public class Questions {
     /**
      * FNS Experience Level answers
      */
-    public enum FnsFinancialProducts1Shares {
+    public enum SharesExperience {
         FREQUENTLY("sharesFrequently"),
         REGULARLY("sharesRegularly"),
         OCCASIONALLY("sharesOccasionally"),
@@ -227,16 +227,16 @@ public class Questions {
 
         private String answer;
 
-        FnsFinancialProducts1Shares(String answer) {
+        SharesExperience(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsFinancialProducts1Binary {
+    public enum BinaryExperience {
         FREQUENTLY("binaryFrequently"),
         REGULARLY("binaryRegularly"),
         OCCASIONALLY("binaryOccasionally"),
@@ -244,16 +244,16 @@ public class Questions {
 
         private String answer;
 
-        FnsFinancialProducts1Binary(String answer) {
+        BinaryExperience(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsFinancialProducts2Forex {
+    public enum ForExExperience {
         FREQUENTLY("forexFrequently"),
         REGULARLY("forexRegularly"),
         OCCASIONALLY("forexOccasionally"),
@@ -261,18 +261,18 @@ public class Questions {
 
         private String answer;
 
-        FnsFinancialProducts2Forex(String answer) {
+        ForExExperience(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
     public enum AverageYearlyBinaryVolume {
         VOLUME_ABOVE_10K("financialProducts1VolumeAbove10k"),
-        VOLUME_5K_10k("financialProducts1Volume5k-10k"),
+        VOLUME_5K_10K("financialProducts1Volume5k-10k"),
         VOLUME_500_5K("financialProducts1Volume500-5k"),
         VOLUME_UNDER_500("financialProducts1VolumeUnder500");
 
@@ -282,7 +282,7 @@ public class Questions {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
@@ -299,13 +299,13 @@ public class Questions {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
     public enum CommonLeverageForExVolume {
-        LEVERAGE_ABOVE1TO500("financialProducts2LeverageAbove1to500"),
+        LEVERAGE_ABOVE_1TO500("financialProducts2LeverageAbove1to500"),
         LEVERAGE_1TO200_1TO500("financialProducts2Leverage1to200-1to500"),
         LEVERAGE_1TO50_1TO200("financialProducts2Leverage1to50-1to200"),
         LEVERAGE_UNDER_1TO50("financialProducts2LeverageUnder1to50");
@@ -321,7 +321,7 @@ public class Questions {
         }
     }
 
-    public enum FnsFinancialProducts2Leverage {
+    public enum CommonLeverage {
         LEVERAGE_ABOVE_1TO500("financialProducts2LeverageAbove1to500"),
         LEVERAGE_1TO200_1TO500("financialProducts2Leverage1to200-1to500"),
         LEVERAGE_1TO50_1TO200("financialProducts2Leverage1to50-1to200"),
@@ -329,16 +329,16 @@ public class Questions {
 
         private String answer;
 
-        FnsFinancialProducts2Leverage(String answer) {
+        CommonLeverage(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsSelectIfApplicable {
+    public enum FinancialWorkExperience {
         WORKED("selectIfApplicableWorked"),
         ATTENDED("selectIfApplicableAttended"),
         BOTH("selectIfApplicableBoth"),
@@ -346,219 +346,219 @@ public class Questions {
 
         private String answer;
 
-        FnsSelectIfApplicable(String answer) {
+        FinancialWorkExperience(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeCfdsBinaries {
+    public enum CfdBinaryKnowledge {
         SPECULATIVE("knowledgeCfdsBinariesSpeculative"),
         NON_RISKY("knowledgeCfdsBinariesNonRisky"),
         PHYSICALLY_DELIVERING("knowledgeCfdsBinariesPhysicallyDelivering");
 
         private String answer;
 
-        FnsKnowledgeCfdsBinaries(String answer) {
+        CfdBinaryKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeMainFactor {
+    public enum MainFactorKnowledge {
         INTEREST_RATES("knowledgeMainFactorInterestRates"),
         ANNOUNCEMENT("knowledgeMainFactorAnnouncement"),
         EMPLOYEE_LAYOFFS("knowledgeMainFactorEmployeeLayoffs");
 
         private String answer;
 
-        FnsKnowledgeMainFactor(String answer) {
+        MainFactorKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeIfYouOpen {
+    public enum HowToCloseKnowledge {
         ONLY_PLATFORM("knowledgeIfYouOpenOnlyPlatform"),
         LONDON_STOCK("knowledgeIfYouOpenLondonStock"),
         CANNOT_SELL("knowledgeIfYouOpenCannotSell");
 
         private String answer;
 
-        FnsKnowledgeIfYouOpen(String answer) {
+        HowToCloseKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeLeverageCFD {
+    public enum CfdLeverageKnowledge {
         MAGNIFIES("knowledgeLeverageCFDMagnifies"),
         PROVIDES("knowledgeLeverageCFDProvides"),
         NONE("knowledgeLeverageCFDNone");
 
         private String answer;
 
-        FnsKnowledgeLeverageCFD(String answer) {
+        CfdLeverageKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeStoploss {
+    public enum StopLossKnowledge {
         MINIMIZE("knowledgeStoplossMinimize"),
         BUY("knowledgeStoplossBuy"),
         TAKE("knowledgeStoplossTake");
 
         private String answer;
 
-        FnsKnowledgeStoploss(String answer) {
+        StopLossKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeRequiredMargin {
-        MARGIN1K("knowledgeRequiredMargin1k"),
-        MARGIN10K("knowledgeRequiredMargin10k"),
-        MARGIN100K("knowledgeRequiredMargin100k");
+    public enum RequiredMarginKnowledge {
+        MARGIN_1K("knowledgeRequiredMargin1k"),
+        MARGIN_10K("knowledgeRequiredMargin10k"),
+        MARGIN_100K("knowledgeRequiredMargin100k");
 
         private String answer;
 
-        FnsKnowledgeRequiredMargin(String answer) {
+        RequiredMarginKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeMarginLevelDrop {
+    public enum MarginLevelDropKnowledge {
         MARGIN_CALL("knowledgeMarginLevelDropMarginCall"),
         WARNING_CALL("knowledgeMarginLevelDropWarningCall"),
         MARGIN_UPGRADE("knowledgeMarginLevelDropMarginUpgrade");
 
         private String answer;
 
-        FnsKnowledgeMarginLevelDrop(String answer) {
+        MarginLevelDropKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeAutomaticStop {
+    public enum AutomaticStopKnowledge {
         EQUITY_FALLS("knowledgeAutomaticStopEquityFalls"),
         EARNINGS("knowledgeAutomaticStopEarnings"),
         OPEN_POSITION("knowledgeAutomaticStopOpenPosition");
 
         private String answer;
 
-        FnsKnowledgeAutomaticStop(String answer) {
+        AutomaticStopKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgePositionLoss1to50 {
-        LOSS1TO50A1_800("knowledgePositionLoss1to50A1"),
-        LOSS1TO50A2_450("knowledgePositionLoss1to50A2"),
-        LOSS1TO50A3_200("knowledgePositionLoss1to50A3");
+    public enum LossOn1to50Knowledge {
+        A1_800("knowledgePositionLoss1to50A1"),
+        A2_450("knowledgePositionLoss1to50A2"),
+        A3_200("knowledgePositionLoss1to50A3");
 
         private String answer;
 
-        FnsKnowledgePositionLoss1to50(String answer) {
+        LossOn1to50Knowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgePositionLoss1to200 {
-        LOSS1TO200A1_1800("knowledgePositionLoss1to200A1"),
-        LOSS1TO200A2_1200("knowledgePositionLoss1to200A2"),
-        LOSS1TO200A3_1000("knowledgePositionLoss1to200A3");
+    public enum LossOn1to200Knowledge {
+        A1_1800("knowledgePositionLoss1to200A1"),
+        A2_1200("knowledgePositionLoss1to200A2"),
+        A3_1000("knowledgePositionLoss1to200A3");
 
         private String answer;
 
-        FnsKnowledgePositionLoss1to200(String answer) {
+        LossOn1to200Knowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeInvestBinaryProfit {
-        BINARY_PROFIT_75("knowledgeInvestBinaryProfit75"),
-        BINARY_PROFIT_60("knowledgeInvestBinaryProfit60"),
-        BINARY_PROFIT_100("knowledgeInvestBinaryProfit100");
+    public enum BinaryInvestProfitKnowledge {
+        PROFIT_75("knowledgeInvestBinaryProfit75"),
+        PROFIT_60("knowledgeInvestBinaryProfit60"),
+        PROFIT_100("knowledgeInvestBinaryProfit100");
 
         private String answer;
 
-        FnsKnowledgeInvestBinaryProfit(String answer) {
+        BinaryInvestProfitKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeInvestBinaryLoss {
-        LOSS100("knowledgeInvestBinaryLoss100"),
-        LOSS75("knowledgeInvestBinaryLoss75"),
-        LOSS50("knowledgeInvestBinaryLoss50");
+    public enum BinaryInvestLossKnowledge {
+        LOSS_100("knowledgeInvestBinaryLoss100"),
+        LOSS_75("knowledgeInvestBinaryLoss75"),
+        LOSS_50("knowledgeInvestBinaryLoss50");
 
         private String answer;
 
-        FnsKnowledgeInvestBinaryLoss(String answer) {
+        BinaryInvestLossKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
 
-    public enum FnsKnowledgeBinaryInTheMoney {
-        MONEY25("knowledgeBinaryInTheMoney25"),
-        MONEY35("knowledgeBinaryInTheMoney35"),
-        MONEY45("knowledgeBinaryInTheMoney45");
+    public enum BinaryProbabilityKnowledge {
+        MONEY_25("knowledgeBinaryInTheMoney25"),
+        MONEY_35("knowledgeBinaryInTheMoney35"),
+        MONEY_45("knowledgeBinaryInTheMoney45");
 
         private String answer;
 
-        FnsKnowledgeBinaryInTheMoney(String answer) {
+        BinaryProbabilityKnowledge(String answer) {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }
