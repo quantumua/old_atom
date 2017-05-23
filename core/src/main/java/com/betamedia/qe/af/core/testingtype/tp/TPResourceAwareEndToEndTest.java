@@ -32,5 +32,4 @@ public class TPResourceAwareEndToEndTest extends TPEndToEndTest {
                 .map(a -> new Object[]{a.getListBidderName(), a.getSymbol(), a.getTooltipName()})
                 .iterator();
     }
-hg
 }
