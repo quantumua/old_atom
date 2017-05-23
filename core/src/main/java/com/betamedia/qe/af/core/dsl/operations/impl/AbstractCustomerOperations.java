@@ -229,7 +229,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
         if (wizardConditions.hasPendingDeposit()) {
             double maxLimit = findMaximumDepositLimit(contactExtension);
-            depositBuilder.setAmount((long)maxLimit + 1000);
+            depositBuilder.setAmount((long)maxLimit + 10);
             depositWithErrors(depositBuilder);
         }
 
@@ -268,6 +268,6 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         RiskLimits riskLimits = riskLimitsRepository.findOne(riskLimitsId);
         assertNotNull(riskLimits);
 
-        return riskLimits.getDailyLimit();
+        return riskLimits.getVerifySettleFrom();
     }
 }

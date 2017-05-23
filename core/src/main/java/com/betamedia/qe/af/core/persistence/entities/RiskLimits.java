@@ -23,18 +23,18 @@ public class RiskLimits {
     @Column(name = "bt_risklimitsid")
     private String id;
 
-    @Column(name = "bt_maxsumdaily")
-    private double dailyLimit;
+    @Column(name = "bt_verifysettlefrom")
+    private double verifySettleFrom;
 
     public String getId() {
         return id;
     }
 
-    public double getDailyLimit() {
-        return dailyLimit;
+    public double getVerifySettleFrom() {
+        return verifySettleFrom;
     }
 
-    public void setDailyLimit(double dailyLimit) {
-        this.dailyLimit = dailyLimit;
+    public void setVerifySettleFrom(double verifySettleFrom) {
+        this.verifySettleFrom = verifySettleFrom;
     }
 }
