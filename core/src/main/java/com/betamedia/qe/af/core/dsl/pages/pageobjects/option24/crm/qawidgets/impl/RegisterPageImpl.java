@@ -59,10 +59,9 @@ public class RegisterPageImpl extends AbstractPageObject implements RegisterPage
         find(email).sendKeys(customer.getEmail());
         in(country).selectByValue(customer.getCountryCode());
         find(telephoneNumber).sendKeys(customer.getPhone());
-        LocalDate dateOfBirth = LocalDate.parse(customer.getBirthOfDate());
-        in(birthDateDay).selectByValue(Integer.toString(dateOfBirth.getDayOfMonth()));
-        in(birthDateMonth).selectByValue(Integer.toString(dateOfBirth.getMonthValue()));
-        in(birthDateYear).selectByValue(Integer.toString(dateOfBirth.getYear()));
+        in(birthDateDay).selectByValue(customer.getBirthdayDayOfMonth());
+        in(birthDateMonth).selectByValue(customer.getBirthdayMonth());
+        in(birthDateYear).selectByValue(customer.getBirthdayYear());
         in(accountBaseCurrency).selectByValue(customer.getCurrency());
         find(password).sendKeys(customer.getPassword());
         find(startTrading).click();
