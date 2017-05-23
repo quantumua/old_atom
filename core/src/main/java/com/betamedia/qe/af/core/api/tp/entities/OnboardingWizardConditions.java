@@ -30,6 +30,12 @@ public class OnboardingWizardConditions {
     private DocumentVerificationStatus porStatus;
     @CsvBindByName
     private boolean hasPendingDeposit;
+    @CsvBindByName
+    private boolean customerCompliant;
+    @CsvCustomBindByName(converter = DocumentVerificationStatusConverter.class)
+    private DocumentVerificationStatus poiOcrStatus;
+    @CsvCustomBindByName(converter = DocumentVerificationStatusConverter.class)
+    private DocumentVerificationStatus porOcrStatus;
 
     private boolean hasRegulationAnswers = true;
 
@@ -95,6 +101,18 @@ public class OnboardingWizardConditions {
         return hasRegulationAnswers;
     }
 
+    public boolean isCustomerCompliant() {
+        return customerCompliant;
+    }
+
+    public DocumentVerificationStatus getPoiOcrStatus() {
+        return poiOcrStatus;
+    }
+
+    public DocumentVerificationStatus getPorOcrStatus() {
+        return porOcrStatus;
+    }
+
     public enum ExperienceLevel {
         UNKNOWN(1000010),
         NO_EXPERIENCE(1000030),
@@ -114,8 +132,7 @@ public class OnboardingWizardConditions {
     }
 
     public enum DocumentVerificationStatus {
-        NOT_UPLOADED(1000030),
-        UPLOADED(1000030),
+        EMPTY(1000030),
         NOT_VERIFIED(1000000),
         VERIFIED(1000040);
 

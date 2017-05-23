@@ -1,0 +1,2 @@
+fnsPersonal,fnsTrading,hasAdditionalDetails,riskWarning,experienceLevel,hasDeposit,accountType,poiStatus,porStatus,hasPendingDeposit,username,showWizard,showWelcomeBack,showDeposit,showRiskWarning,showPoiPor,showStartWizard,showAdditionalDetails,showFnsPersonal,showFnsTrading,customerCompliant,poiOcrStatus,poiStatusValue,porOcrStatus,porStatusValue
+true,true,true,true,HIGH_EXPERIENCE,false,REAL,NOT_VERIFIED,NOT_VERIFIED,true,tc1@a.com,true,true,true,false,true,false,false,false,false,false,EMPTY,NOT_VERIFIED,NOT_VERIFIED,NOT_VERIFIED

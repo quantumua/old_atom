@@ -56,6 +56,15 @@ public class ContactExtension {
     @Column(name = "bt_risklimits")
     private String riskLimitsId;
 
+    @Column(name = "bt_compliant")
+    private boolean customerCompliant;
+
+    @Column(name = "bt_poiocrstatus")
+    private Integer poiOcrStatus;
+
+    @Column(name = "bt_porocrstatus")
+    private Integer porOcrStatus;
+
     public void setFnsPersonal(boolean fnsPersonal) {
         this.fnsPersonal = fnsPersonal;
     }
@@ -100,51 +109,26 @@ public class ContactExtension {
         this.riskLimitsId = riskLimitsId;
     }
 
+    public void setCustomerCompliant(boolean customerCompliant) {
+        this.customerCompliant = customerCompliant;
+    }
+
+    public void setPoiOcrStatus(Integer poiOcrStatus) {
+        this.poiOcrStatus = poiOcrStatus;
+    }
+
+    public void setPorOcrStatus(Integer porOcrStatus) {
+        this.porOcrStatus = porOcrStatus;
+    }
+
     public String getId() {
         return id;
     }
 
-    public boolean isFnsPersonal() {
-        return fnsPersonal;
-    }
-
-    public boolean isFnsTrading() {
-        return fnsTrading;
-    }
-
-    public boolean isRiskWarning() {
-        return riskWarning;
-    }
-
-    public Integer getExperienceLevel() {
-        return experienceLevel;
-    }
-
-    public Integer getAccountType() {
-        return accountType;
-    }
-
-    public Integer isPoiStatus() {
-        return poiStatus;
-    }
-
-    public Integer isPorStatus() {
-        return porStatus;
-    }
-
-    public Integer getCountryOfBirth() {
-        return countryOfBirth;
-    }
-
-    public Integer getNationality() {
-        return nationality;
-    }
-
-    public boolean getHasRegulationAnswers() {
-        return hasRegulationAnswers;
-    }
 
     public String getRiskLimitsId() {
         return riskLimitsId;
     }
+
+
 }
