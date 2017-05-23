@@ -161,12 +161,12 @@ build,pageObjectName,locatorId,locatorType,value
 1603,CrmLoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
 1603,FnsTradingExperienceImpl,resultPlaceholder,ID,resultPlaceHolder
 1603,FnsPersonalInformationImpl,resultPlaceholder,ID,resultPlaceHolder
-1603,RegistrationPageImpl,firstnameField,ID,FirstName
-1603,RegistrationPageImpl,lastnameField,ID,LastName
+1603,RegistrationPageImpl,firstNameField,ID,FirstName
+1603,RegistrationPageImpl,lastNameField,ID,LastName
 1603,RegistrationPageImpl,emailField,ID,Email
 1603,RegistrationPageImpl,phoneNumberField,NAME,PhoneNumber.Number
 1603,RegistrationPageImpl,selectedFlagField,CLASS_NAME,selected-flag
-1603,RegistrationPageImpl,selecCountry,XPATH,.//ul[@class='country-list']//li[@data-country-code='de']
+1603,RegistrationPageImpl,selectCountry,XPATH,.//ul[@class='country-list']//li[@data-country-code='de']
 1603,RegistrationPageImpl,passwordRegField,ID,Password
 1603,RegistrationPageImpl,reenterPasswordRegField,ID,ReEnterPassword
 1603,RegistrationPageImpl,accountAgreeField,ID,AccountAgreeLabel
