@@ -89,4 +89,9 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
         assertEquals(userExperienceInfoRepository.findByUsername(username).getExperienceLevel(), expectedExperience);
     }
 
+    @Override
+    public void assertUsernameScore(String username, Double expectedScore) {
+        assertEquals(userExperienceInfoRepository.findByUsername(username).getExperienceScore(), expectedScore);
+    }
+
 }

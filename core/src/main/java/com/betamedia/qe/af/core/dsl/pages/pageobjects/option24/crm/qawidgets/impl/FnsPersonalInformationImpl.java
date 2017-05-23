@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Created by mbelyaev on 5/18/17.
+ * Created by vadimsn on 5/18/17.
  */
 public class FnsPersonalInformationImpl extends AbstractPageObject implements FnsPersonalInformation {
     @StoredId
