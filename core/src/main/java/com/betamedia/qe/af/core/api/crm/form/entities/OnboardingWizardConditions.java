@@ -133,9 +133,9 @@ public class OnboardingWizardConditions {
     }
 
     public enum DocumentVerificationStatus {
-        EMPTY(1000030),
-        NOT_VERIFIED(1000000),
-        VERIFIED(1000040);
+        EMPTY(100000001),
+        NOT_VERIFIED(100000002),
+        VERIFIED(100000003);
 
         private Integer status;
 

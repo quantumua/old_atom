@@ -27,6 +27,10 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.Landin
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPageImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl.RiskWarningImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomePageImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.impl.BinaryPositionsImpl;
@@ -161,4 +165,13 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
         return creator.getPage(RegisterPageImpl.class);
     }
 
+    @Override
+    public WelcomePage welcomePage() {
+        return creator.getPage(WelcomePageImpl.class);
+    }
+
+    @Override
+    public RiskWarning riskWarningPage() {
+        return creator.getPage(RiskWarningImpl.class);
+    }
 }

@@ -14,6 +14,8 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.DialogBo
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.MessageBox;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
 
@@ -66,5 +68,7 @@ public interface TPPageFactory {
 
     RegisterPage register();
 
+    WelcomePage welcomePage();
 
+    RiskWarning riskWarningPage();
 }

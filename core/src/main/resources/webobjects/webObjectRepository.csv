@@ -173,3 +173,6 @@ build,pageObjectName,locatorId,locatorType,value
 1603,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
 1603,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
 1603,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
+1603,WelcomePageImpl,startButton,XPATH,//*[@id="wizard-message"]/div[3]/button
+1603,RiskWarningImpl,iAmOver18CheckBox,CLASS_NAME,swRiskWarningAccountAgree
+1603,RiskWarningImpl,updateButton,XPATH,//*[@id="risk-warning-form-space"]/div/input
