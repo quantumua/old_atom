@@ -99,7 +99,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withSharesExperience(SharesExperience.REGULARLY.get())
                 .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                 .withForExExperience(ForExExperience.REGULARLY.get())
-                .withFinancialWorkExperience(FinancialWorkExperience.ATTENDED.get())
+                .withFinancialWorkExperience(FinancialWorkExperience.SEMINARS.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY.get())
                 .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
                 .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK.get())

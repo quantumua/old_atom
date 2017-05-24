@@ -340,7 +340,7 @@ public class Questions {
 
     public enum FinancialWorkExperience {
         WORKED("selectIfApplicableWorked"),
-        ATTENDED("selectIfApplicableAttended"),
+        SEMINARS("selectIfApplicableAttended"),
         BOTH("selectIfApplicableBoth"),
         NEITHER("selectIfApplicableNeither");
 

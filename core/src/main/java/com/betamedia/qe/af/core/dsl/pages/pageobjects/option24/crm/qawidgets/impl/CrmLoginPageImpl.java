@@ -10,10 +10,14 @@ import org.openqa.selenium.WebDriver;
  * Created by mbelyaev on 5/17/17.
  */
 public class CrmLoginPageImpl extends AbstractPageObject implements CrmLoginPage {
+    private static final String AUTHENTICATION_EXCEPTION = "AutenticationEX";
+
     @StoredId
     private By usernameField;
     @StoredId
     private By passwordField;
+    @StoredId
+    private By loginSubmit;
     @StoredId
     private By loginButton;
     @StoredId
@@ -25,10 +29,15 @@ public class CrmLoginPageImpl extends AbstractPageObject implements CrmLoginPage
 
     @Override
     public void login(String username, String password) {
-        waitUntilDisplayed(usernameField).sendKeys(username);
-        waitUntilDisplayed(passwordField).sendKeys(password);
-        click(loginButton);
-        waitUntilDisplayed(resultPlaceholder);
+        waitUntil(() -> {
+            waitUntilDisplayed(usernameField).sendKeys(username);
+            waitUntilDisplayed(passwordField).sendKeys(password);
+            click(loginSubmit);
+            if(waitUntilDisplayed(resultPlaceholder).getText().contains(AUTHENTICATION_EXCEPTION)){
+                click(loginButton);
+                return false;
+            }
+            return true;
+        });
     }
-
 }

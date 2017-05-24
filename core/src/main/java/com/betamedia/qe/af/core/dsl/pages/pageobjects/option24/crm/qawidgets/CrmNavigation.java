@@ -5,10 +5,16 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets;
  */
 public interface CrmNavigation {
     void login();
+
     void fnsPersonalInformation();
+
     void fnsTradingExperience();
+
     void accountDetails();
+
     void accountAdditionalDetails();
+
     void creditCardDeposit();
+
     void register();
 }

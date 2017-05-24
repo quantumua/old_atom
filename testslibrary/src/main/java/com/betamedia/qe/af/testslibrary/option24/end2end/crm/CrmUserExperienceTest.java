@@ -12,11 +12,16 @@ import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionn
  */
 public class CrmUserExperienceTest extends AbstractUserExperienceTest {
 
-    @Test(description = "ID:9082")
-    public void newCustomerExperienceTest() {
+    private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
         pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        return customer;
+    }
+
+    @Test(description = "ID:9082")
+    public void newCustomerExperienceTest() {
+        CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertCustomerUnknown(customer.getId());
@@ -24,9 +29,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
 
     @Test(description = "ID:9083")
     public void score10CustomerExperienceTest() {
-        CRMCustomer customer = operations().customerOperations().register();
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 new TradingExperienceInfoBuilder()
@@ -57,14 +60,12 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
 
     @Test(description = "ID:9084")
     public void score25CustomerExperienceTest() {
-        CRMCustomer customer = operations().customerOperations().register();
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 new TradingExperienceInfoBuilder()
                         .withSharesExperience(SharesExperience.NEVER.get())
-                        .withBinaryExperience(BinaryExperience.REGULARLY.get())
+                        .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K.get())
                         .withForExExperience(ForExExperience.NEVER.get())
                         .withFinancialWorkExperience(FinancialWorkExperience.NEITHER.get())
@@ -90,13 +91,11 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
 
     @Test(description = "ID:9085")
     public void score45CustomerExperienceTest() {
-        CRMCustomer customer = operations().customerOperations().register();
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 new TradingExperienceInfoBuilder()
-                        .withSharesExperience(SharesExperience.NEVER.get())
+                        .withSharesExperience(SharesExperience.REGULARLY.get())
                         .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K.get())
                         .withForExExperience(ForExExperience.NEVER.get())
@@ -123,15 +122,13 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
 
     @Test(description = "ID:9086")
     public void score65CustomerExperienceTest() {
-        CRMCustomer customer = operations().customerOperations().register();
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 new TradingExperienceInfoBuilder()
                         .withSharesExperience(SharesExperience.REGULARLY.get())
                         .withBinaryExperience(BinaryExperience.NEVER.get())
-                        .withForExExperience(ForExExperience.REGULARLY.get())
+                        .withForExExperience(ForExExperience.FREQUENTLY.get())
                         .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_UNDER_50K.get())
                         .withCommonLeverage(CommonLeverage.LEVERAGE_1TO50_1TO200.get())
                         .withFinancialWorkExperience(FinancialWorkExperience.NEITHER.get())
@@ -157,9 +154,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
 
     @Test(description = "ID:9087")
     public void score85CustomerExperienceTest() {
-        CRMCustomer customer = operations().customerOperations().register();
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 new TradingExperienceInfoBuilder()
@@ -169,7 +164,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
                         .withForExExperience(ForExExperience.FREQUENTLY.get())
                         .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
                         .withCommonLeverage(CommonLeverage.LEVERAGE_ABOVE_1TO500.get())
-                        .withFinancialWorkExperience(FinancialWorkExperience.BOTH.get())
+                        .withFinancialWorkExperience(FinancialWorkExperience.SEMINARS.get())
                         .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE.get())
                         .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
                         .withHowToCloseKnowledge(HowToCloseKnowledge.ONLY_PLATFORM.get())
@@ -186,7 +181,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
                         .build()
         );
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(personalInfoScore10());
+        pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertCustomerExpert(customer.getId());
     }
 
