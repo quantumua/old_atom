@@ -248,7 +248,6 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         contactExtension.setPorStatus(wizardConditions.getPorStatus().getStatus());
         contactExtension.setAccountType(wizardConditions.getAccountType().getType());
         contactExtension.setPoiOcrStatus(wizardConditions.getPoiOcrStatus().getStatus());
-        contactExtension.setPorOcrStatus(wizardConditions.getPorOcrStatus().getStatus());
 
         contactExtension.setFnsPersonal(wizardConditions.isFnsPersonal());
         contactExtension.setFnsTrading(wizardConditions.isFnsTrading());

@@ -34,8 +34,6 @@ public class OnboardingWizardConditions {
     private boolean customerCompliant;
     @CsvCustomBindByName(converter = DocumentVerificationStatusConverter.class)
     private DocumentVerificationStatus poiOcrStatus;
-    @CsvCustomBindByName(converter = DocumentVerificationStatusConverter.class)
-    private DocumentVerificationStatus porOcrStatus;
     @CsvBindByName
     private boolean showWizard;
     @CsvBindByName
@@ -125,10 +123,6 @@ public class OnboardingWizardConditions {
 
     public DocumentVerificationStatus getPoiOcrStatus() {
         return poiOcrStatus;
-    }
-
-    public DocumentVerificationStatus getPorOcrStatus() {
-        return porOcrStatus;
     }
 
     public boolean isShowWizard() {

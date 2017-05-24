@@ -62,9 +62,6 @@ public class ContactExtension {
     @Column(name = "bt_poiocrstatus")
     private Integer poiOcrStatus;
 
-    @Column(name = "bt_porocrstatus")
-    private Integer porOcrStatus;
-
     public void setFnsPersonal(boolean fnsPersonal) {
         this.fnsPersonal = fnsPersonal;
     }
@@ -115,10 +112,6 @@ public class ContactExtension {
 
     public void setPoiOcrStatus(Integer poiOcrStatus) {
         this.poiOcrStatus = poiOcrStatus;
-    }
-
-    public void setPorOcrStatus(Integer porOcrStatus) {
-        this.porOcrStatus = porOcrStatus;
     }
 
     public String getId() {
