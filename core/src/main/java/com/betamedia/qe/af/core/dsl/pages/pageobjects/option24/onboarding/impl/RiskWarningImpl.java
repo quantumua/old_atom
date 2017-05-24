@@ -23,8 +23,8 @@ public class RiskWarningImpl extends AbstractPageObject implements RiskWarning {
 
     @Override
     public void accept() {
-        waitUntilDisplayed(iAmOver18CheckBox);
-        find(iAmOver18CheckBox).click();
+        waitUntilDisplayed(updateButton);
+        makeActions().moveToElement(find(iAmOver18CheckBox)).click().build().perform();
         find(updateButton).click();
     }
 }
