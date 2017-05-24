@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.dsl.operations.impl;
 
-import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
+import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
@@ -229,8 +229,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
         if (wizardConditions.hasPendingDeposit()) {
             double maxLimit = findMaximumDepositLimit(contactExtension);
-            depositBuilder.setAmount((long)maxLimit + 3000);
-            depositWithErrors(depositBuilder);
+            depositBuilder.setAmount((long)maxLimit + 3001);
+            deposit(depositBuilder);
         }
 
         return registeredCustomer;

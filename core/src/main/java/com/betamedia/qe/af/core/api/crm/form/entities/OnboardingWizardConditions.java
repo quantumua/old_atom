@@ -36,6 +36,24 @@ public class OnboardingWizardConditions {
     private DocumentVerificationStatus poiOcrStatus;
     @CsvCustomBindByName(converter = DocumentVerificationStatusConverter.class)
     private DocumentVerificationStatus porOcrStatus;
+    @CsvBindByName
+    private boolean showWizard;
+    @CsvBindByName
+    private boolean showWelcomeBack;
+    @CsvBindByName
+    private boolean showDeposit;
+    @CsvBindByName
+    private boolean showRiskWarning;
+    @CsvBindByName
+    private boolean showStartWizard;
+    @CsvBindByName
+    private boolean showAdditionalDetails;
+    @CsvBindByName
+    private boolean showFnsPersonal;
+    @CsvBindByName
+    private boolean showFnsTrading;
+
+
 
     private boolean hasRegulationAnswers = true;
 
@@ -111,6 +129,38 @@ public class OnboardingWizardConditions {
 
     public DocumentVerificationStatus getPorOcrStatus() {
         return porOcrStatus;
+    }
+
+    public boolean isShowWizard() {
+        return showWizard;
+    }
+
+    public boolean isShowWelcomeBack() {
+        return showWelcomeBack;
+    }
+
+    public boolean isShowDeposit() {
+        return showDeposit;
+    }
+
+    public boolean isShowRiskWarning() {
+        return showRiskWarning;
+    }
+
+    public boolean isShowStartWizard() {
+        return showStartWizard;
+    }
+
+    public boolean isShowAdditionalDetails() {
+        return showAdditionalDetails;
+    }
+
+    public boolean isShowFnsPersonal() {
+        return showFnsPersonal;
+    }
+
+    public boolean isShowFnsTrading() {
+        return showFnsTrading;
     }
 
     public enum ExperienceLevel {
