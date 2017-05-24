@@ -316,7 +316,7 @@ public class Questions {
             this.answer = answer;
         }
 
-        public String getAnswer() {
+        public String get() {
             return answer;
         }
     }

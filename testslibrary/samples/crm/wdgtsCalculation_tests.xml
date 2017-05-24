@@ -4,7 +4,7 @@
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.NewQuestionnaireTests" >
                 <methods>
-                    <include name="calculationOfScore77Test"/>
+                    <!--<include name="calculationOfScore77Test"/>-->
                     <!--<include name="calculationOfScore26Test"/>-->
                     <!--<include name="calculationOfScore29Test"/>-->
                     <!--<include name="calculationOfScore50Test"/>-->

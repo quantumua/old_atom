@@ -48,7 +48,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
                 .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
-                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.getAnswer())
+                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                 .withForExExperience(ForExExperience.FREQUENTLY.get())
                 .withFinancialWorkExperience(FinancialWorkExperience.WORKED.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE.get())
@@ -188,14 +188,17 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withNetWealth(NetWealth.NET_WEALTH_15K_50K.get())
                 .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_10K_15K.get())
                 .withPurposeOfTrading(PurposeOfTrading.OTHER.get())
+                .withPurposeOfTradingOther(FREE_TEXT)
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                 .withSharesExperience(SharesExperience.NEVER.get())
                 .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
+                //.withAverageYearlyBinaryVolume(null)
                 .withForExExperience(ForExExperience.NEVER.get())
-                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                //.withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                //.withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                 .withFinancialWorkExperience(FinancialWorkExperience.NEITHER.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE.get())
                 .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
@@ -213,5 +216,270 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(50));
+    }
+
+    @Test(description = "ID:9133")
+    public void calculationOfScore35Test(){
+        pages().crmNavigation().register();
+        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        pages().register().register(customer);
+        pages().crmNavigation().fnsPersonalInformation();
+        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+                .withEmploymentStatus(EmploymentStatus.SELF_EMPLOYED.get())
+                .withIndustry(Industry.COMPUTER.get())
+                .withEmployerName(FREE_TEXT)
+                .withTaxResidenceCountry(COUNTRY)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES.get())
+                .withTaxIdentificationNumber(TAX_ID)
+                .withUSReportabilityStatus(IsUSReportable.NO.get())
+                .withEducationLevel(EducationLevel.NONE.get())
+                .withEducationField(EducationField.OTHER.get())
+                .withEducationFieldOther(FREE_TEXT)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO.get())
+                .withSourceOfFunds(SourceOfFunds.OTHER.get())
+                .withSourceOfFundsOther(FREE_TEXT)
+                .withAnnualIncome(AnnualIncome.INCOME_15KLESS.get())
+                .withNetWealth(NetWealth.NET_WEALTH_UNDER_15K.get())
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_UNDER_10K.get())
+                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE.get())
+                .build()
+        );
+        pages().crmNavigation().fnsTradingExperience();
+        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+                .withSharesExperience(SharesExperience.NEVER.get())
+                .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_UNDER_500.get())
+                .withForExExperience(ForExExperience.FREQUENTLY.get())
+                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_UNDER_50K.get())
+                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_1TO50_1TO200.get())
+                .withFinancialWorkExperience(FinancialWorkExperience.WORKED.get())
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.PHYSICALLY_DELIVERING.get())
+                .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
+                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK.get())
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.MAGNIFIES.get())
+                .withStopLossKnowledge(StopLossKnowledge.BUY.get())
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K.get())
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.MARGIN_CALL.get())
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EQUITY_FALLS.get())
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800.get())
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200.get())
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75.get())
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_50.get())
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
+                .build()
+        );
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(35));
+    }
+
+    @Test(description = "ID:9134")
+    public void calculationOfScore42Test(){
+        pages().crmNavigation().register();
+        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        pages().register().register(customer);
+        pages().crmNavigation().fnsPersonalInformation();
+        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE.get())
+                .withIndustry(Industry.OTHER.get())
+                .withEmployerName(FREE_TEXT)
+                .withTaxResidenceCountry(COUNTRY)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES.get())
+                .withTaxIdentificationNumber(TAX_ID)
+                .withUSReportabilityStatus(IsUSReportable.NO.get())
+                .withEducationLevel(EducationLevel.POST_GRADUATE.get())
+                .withEducationField(EducationField.ACCOUNTING.get())
+                //.withEducationFieldOther(null)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO.get())
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT.get())
+                //.withSourceOfFundsOther(null)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K.get())
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K.get())
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
+                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE.get())
+                .build()
+        );
+        pages().crmNavigation().fnsTradingExperience();
+        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+                .withSharesExperience(SharesExperience.NEVER.get())
+                .withBinaryExperience(BinaryExperience.NEVER.get())
+                //.withAverageYearlyBinaryVolume(null)
+                .withForExExperience(ForExExperience.FREQUENTLY.get())
+                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
+                .withFinancialWorkExperience(FinancialWorkExperience.WORKED.get())
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.PHYSICALLY_DELIVERING.get())
+                .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
+                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK.get())
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.MAGNIFIES.get())
+                .withStopLossKnowledge(StopLossKnowledge.BUY.get())
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K.get())
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.MARGIN_CALL.get())
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EQUITY_FALLS.get())
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800.get())
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200.get())
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75.get())
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_50.get())
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
+                .build()
+        );
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(42));
+    }
+
+    @Test(description = "ID:9135")
+    public void calculationOfScore36Test(){
+        pages().crmNavigation().register();
+        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        pages().register().register(customer);
+        pages().crmNavigation().fnsPersonalInformation();
+        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+                .withEmploymentStatus(EmploymentStatus.UNEMPLOYED.get())
+                .withIndustry(Industry.ATTORNEYS.get())
+                .withEmployerName(FREE_TEXT)
+                .withTaxResidenceCountry(COUNTRY)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES.get())
+                .withTaxIdentificationNumber(TAX_ID)
+                .withUSReportabilityStatus(IsUSReportable.NO.get())
+                .withEducationLevel(EducationLevel.BACHELOR.get())
+                .withEducationField(EducationField.LAW.get())
+                //.withEducationFieldOther(null)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO.get())
+                .withSourceOfFunds(SourceOfFunds.SAVINGS.get())
+                //.withSourceOfFundsOther(null)
+                .withAnnualIncome(AnnualIncome.INCOME_50K_100K.get())
+                .withNetWealth(NetWealth.NET_WEALTH_150K_300K.get())
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_25K_50K.get())
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME.get())
+                .build()
+        );
+        pages().crmNavigation().fnsTradingExperience();
+        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+                .withSharesExperience(SharesExperience.FREQUENTLY.get())
+                .withBinaryExperience(BinaryExperience.NEVER.get())
+//                .withAverageYearlyBinaryVolume(null)
+                .withForExExperience(ForExExperience.NEVER.get())
+//                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+//                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
+                .withFinancialWorkExperience(FinancialWorkExperience.BOTH.get())
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY.get())
+                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
+                .withHowToCloseKnowledge(HowToCloseKnowledge.ONLY_PLATFORM.get())
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES.get())
+                .withStopLossKnowledge(StopLossKnowledge.MINIMIZE.get())
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_10K.get())
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL.get())
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS.get())
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800.get())
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200.get())
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75.get())
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75.get())
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
+                .build()
+        );
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(42));
+    }
+
+    @Test(description = "ID:9136")
+    public void calculationOfScore44Test(){
+        pages().crmNavigation().register();
+        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        pages().register().register(customer);
+        pages().crmNavigation().fnsPersonalInformation();
+        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+                .withEmploymentStatus(EmploymentStatus.RETIRED.get())
+                .withIndustry(Industry.FINANCE.get())
+                .withEmployerName(FREE_TEXT)
+                .withTaxResidenceCountry(COUNTRY)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES.get())
+                .withTaxIdentificationNumber(TAX_ID)
+                .withUSReportabilityStatus(IsUSReportable.NO.get())
+                .withEducationLevel(EducationLevel.BACHELOR.get())
+                .withEducationField(EducationField.LAW.get())
+                //.withEducationFieldOther(null)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO.get())
+                .withSourceOfFunds(SourceOfFunds.SAVINGS.get())
+                //.withSourceOfFundsOther(null)
+                .withAnnualIncome(AnnualIncome.INCOME_50K_100K.get())
+                .withNetWealth(NetWealth.NET_WEALTH_150K_300K.get())
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_25K_50K.get())
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME.get())
+                .build()
+        );
+        pages().crmNavigation().fnsTradingExperience();
+        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+                        .withSharesExperience(SharesExperience.FREQUENTLY.get())
+                        .withBinaryExperience(BinaryExperience.NEVER.get())
+//                .withAverageYearlyBinaryVolume(null)
+                        .withForExExperience(ForExExperience.NEVER.get())
+//                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+//                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
+                        .withFinancialWorkExperience(FinancialWorkExperience.BOTH.get())
+                        .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY.get())
+                        .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
+                        .withHowToCloseKnowledge(HowToCloseKnowledge.ONLY_PLATFORM.get())
+                        .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES.get())
+                        .withStopLossKnowledge(StopLossKnowledge.MINIMIZE.get())
+                        .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_10K.get())
+                        .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL.get())
+                        .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS.get())
+                        .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800.get())
+                        .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200.get())
+                        .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75.get())
+                        .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75.get())
+                        .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
+                        .build()
+        );
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(44));
+    }
+
+    @Test(description = "ID:9137")
+    public void calculationOfScore49Test(){
+        pages().crmNavigation().register();
+        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        pages().register().register(customer);
+        pages().crmNavigation().fnsPersonalInformation();
+        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+                .withEmploymentStatus(EmploymentStatus.RETIRED.get())
+                .withIndustry(Industry.FINANCE.get())
+                .withEmployerName(FREE_TEXT)
+                .withTaxResidenceCountry(COUNTRY)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES.get())
+                .withTaxIdentificationNumber(TAX_ID)
+                .withUSReportabilityStatus(IsUSReportable.NO.get())
+                .withEducationLevel(EducationLevel.BACHELOR.get())
+                .withEducationField(EducationField.LAW.get())
+                //.withEducationFieldOther(null)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO.get())
+                .withSourceOfFunds(SourceOfFunds.SAVINGS.get())
+                //.withSourceOfFundsOther(null)
+                .withAnnualIncome(AnnualIncome.INCOME_50K_100K.get())
+                .withNetWealth(NetWealth.NET_WEALTH_150K_300K.get())
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_25K_50K.get())
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME.get())
+                .build()
+        );
+        pages().crmNavigation().fnsTradingExperience();
+        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+                        .withSharesExperience(SharesExperience.FREQUENTLY.get())
+                        .withBinaryExperience(BinaryExperience.NEVER.get())
+//                .withAverageYearlyBinaryVolume(null)
+                        .withForExExperience(ForExExperience.NEVER.get())
+//                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+//                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
+                        .withFinancialWorkExperience(FinancialWorkExperience.BOTH.get())
+                        .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY.get())
+                        .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
+                        .withHowToCloseKnowledge(HowToCloseKnowledge.ONLY_PLATFORM.get())
+                        .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES.get())
+                        .withStopLossKnowledge(StopLossKnowledge.MINIMIZE.get())
+                        .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_10K.get())
+                        .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL.get())
+                        .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS.get())
+                        .withLossOn1to50Knowledge(LossOn1to50Knowledge.A2_450.get())
+                        .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200.get())
+                        .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75.get())
+                        .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75.get())
+                        .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
+                        .build()
+        );
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(49));
     }
 }
