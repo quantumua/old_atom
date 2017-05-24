@@ -30,10 +30,10 @@ public class CrmLoginPageImpl extends AbstractPageObject implements CrmLoginPage
     @Override
     public void login(String username, String password) {
         waitUntil(() -> {
-            waitUntilDisplayed(usernameField).sendKeys(username);
-            waitUntilDisplayed(passwordField).sendKeys(password);
+            find(usernameField).sendKeys(username);
+            find(passwordField).sendKeys(password);
             click(loginSubmit);
-            if(waitUntilDisplayed(resultPlaceholder).getText().contains(AUTHENTICATION_EXCEPTION)){
+            if(find(resultPlaceholder).getText().contains(AUTHENTICATION_EXCEPTION)){
                 click(loginButton);
                 return false;
             }

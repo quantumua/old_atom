@@ -50,6 +50,10 @@ public class OnboardingWizardConditions {
     private boolean showFnsPersonal;
     @CsvBindByName
     private boolean showFnsTrading;
+    @CsvBindByName
+    private boolean showPoiPor;
+    @CsvBindByName
+    private String testId;
 
 
 
@@ -157,6 +161,10 @@ public class OnboardingWizardConditions {
         return showFnsTrading;
     }
 
+    public boolean isShowPoiPor() {
+        return showPoiPor;
+    }
+
     public enum ExperienceLevel {
         UNKNOWN(1000010),
         REJECTED(1000020),
@@ -205,5 +213,34 @@ public class OnboardingWizardConditions {
         public Integer getType() {
             return type;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "OnboardingWizardConditions{" +
+                "fnsPersonal=" + fnsPersonal +
+                ", fnsTrading=" + fnsTrading +
+                ", hasAdditionalDetails=" + hasAdditionalDetails +
+                ", riskWarning=" + riskWarning +
+                ", experienceLevel=" + experienceLevel +
+                ", hasDeposit=" + hasDeposit +
+                ", accountType=" + accountType +
+                ", poiStatus=" + poiStatus +
+                ", porStatus=" + porStatus +
+                ", hasPendingDeposit=" + hasPendingDeposit +
+                ", customerCompliant=" + customerCompliant +
+                ", poiOcrStatus=" + poiOcrStatus +
+                ", showWizard=" + showWizard +
+                ", showWelcomeBack=" + showWelcomeBack +
+                ", showDeposit=" + showDeposit +
+                ", showRiskWarning=" + showRiskWarning +
+                ", showStartWizard=" + showStartWizard +
+                ", showAdditionalDetails=" + showAdditionalDetails +
+                ", showFnsPersonal=" + showFnsPersonal +
+                ", showFnsTrading=" + showFnsTrading +
+                ", showPoiPor=" + showPoiPor +
+                ", testId='" + testId + '\'' +
+                ", hasRegulationAnswers=" + hasRegulationAnswers +
+                '}';
     }
 }

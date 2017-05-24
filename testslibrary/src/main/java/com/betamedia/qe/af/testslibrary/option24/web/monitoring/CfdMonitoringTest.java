@@ -73,4 +73,8 @@ public class CfdMonitoringTest extends TPResourceAwareEndToEndTest {
                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public boolean keepBrowser(){
+        return true;
+    }
 }

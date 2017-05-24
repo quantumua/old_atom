@@ -45,4 +45,8 @@ public abstract class AbstractTest {
             throw new RuntimeException("Failed to get contents for questionnaire data");
         }
     }
+
+    public boolean keepBrowser(){
+        return false;
+    }
 }

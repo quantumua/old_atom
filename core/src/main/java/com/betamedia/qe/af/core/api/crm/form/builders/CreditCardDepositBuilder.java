@@ -4,16 +4,18 @@ package com.betamedia.qe.af.core.api.crm.form.builders;
  * Created by vsnigur on 5/18/17.
  */
 public class CreditCardDepositBuilder {
-    private String depositAmount;
-    private String creditCardNumber;
-    private String cvv2;
-    private String expiryDateMonth;
-    private String expiryDateYear;
-    private String cardHoldersFirstName;
-    private String cardHoldersLastName;
-    private String billingAddress;
-    private String city;
-    private String zipCode;
+    private static final String DEFAULT_CREDIT_CARD_VISA = "4000020951595032";
+
+    private String depositAmount = "100";
+    private String creditCardNumber = DEFAULT_CREDIT_CARD_VISA;
+    private String cvv2 = "123";
+    private String expiryDateMonth = "1";
+    private String expiryDateYear = "2020";
+    private String cardHoldersFirstName = "Automation";
+    private String cardHoldersLastName = "Automation";
+    private String billingAddress = "Test Address";
+    private String city = "Test City";
+    private String zipCode = "00000";
     private String country;
 
     public CreditCardDeposit build() {
@@ -73,17 +75,17 @@ public class CreditCardDepositBuilder {
     }
 
     public CreditCardDepositBuilder withCity(String city) {
-        this.city= city;
+        this.city = city;
         return this;
     }
 
     public CreditCardDepositBuilder withZipCode(String zipCode) {
-        this.zipCode= zipCode;
+        this.zipCode = zipCode;
         return this;
     }
 
     public CreditCardDepositBuilder withCountry(String country) {
-        this.country= country;
+        this.country = country;
         return this;
     }
 

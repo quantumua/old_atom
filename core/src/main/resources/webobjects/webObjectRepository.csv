@@ -177,3 +177,6 @@ build,pageObjectName,locatorId,locatorType,value
 1603,RiskWarningImpl,iAmOver18CheckBox,ID,IsChecked
 1603,RiskWarningImpl,updateButton,XPATH,//*[@id="risk-warning-form-space"]/div/input
 1603,CrmLoginPageImpl,loginButton,NAME,btnLoginWidget
+1603,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
+1603,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
+1603,OnBoardingWizardImpl,button,CLASS_NAME,btn

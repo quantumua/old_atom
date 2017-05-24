@@ -5,6 +5,7 @@ import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created by Oleksandr Losiev on 5/24/17.
@@ -27,4 +28,5 @@ public class RiskWarningImpl extends AbstractPageObject implements RiskWarning {
         makeActions().moveToElement(find(iAmOver18CheckBox)).click().build().perform();
         find(updateButton).click();
     }
+
 }

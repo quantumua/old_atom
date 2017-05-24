@@ -4,11 +4,11 @@ package com.betamedia.qe.af.core.api.crm.form.builders;
  * Created by vsnigur on 5/18/17.
  */
 public class AccountAdditionalDetailsBuilder {
-    private String birthDateDay;
-    private String birthDateMonth;
-    private String birthDateYear;
-    private String countryOfBirth;
-    private String nationality;
+    private String birthDateDay = "2";
+    private String birthDateMonth = "2";
+    private String birthDateYear = "1992";
+    private String countryOfBirth = "TG";
+    private String nationality = "TG";
 
     public AccountAdditionalDetailsBuilder withBirthDateDay(String birthDateDay) {
         this.birthDateDay = birthDateDay;

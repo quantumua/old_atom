@@ -1,6 +1,9 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
+import com.betamedia.qe.af.core.api.crm.form.builders.AccountAdditionalDetailsBuilder;
+import com.betamedia.qe.af.core.api.crm.form.builders.CreditCardDepositBuilder;
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
+import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 import org.testng.annotations.Test;
@@ -14,10 +17,50 @@ public class MobileCRMOnboardingWizardConditionsTest extends TPEndToEndTest {
     public void testWizard(OnboardingWizardConditions wizardConditions) {
         CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(wizardConditions);
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), "123123");
+        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
 
+        pages().creditCardDeposit().submit(new CreditCardDepositBuilder().build());
         pages().welcomePage().start();
         pages().riskWarningPage().accept();
+    }
+
+    @Test(dataProvider = "GenericDataProvider")
+    public void demoTest(OnboardingWizardConditions conditions) throws Exception {
+        CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
+
+        pages().topNavigationPage().logIn();
+        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+
+        if (!conditions.isShowWizard()){
+            pages().onBoardingWizard().confirmMessage();
+            return;
+        }
+        if(conditions.isShowWelcomeBack()){
+            pages().welcomePage().start();
+        }
+        if (conditions.isShowRiskWarning()) {
+            pages().riskWarningPage().accept();
+        }
+        if (conditions.isShowAdditionalDetails()) {
+            pages().accountAdditionalDetails().update(new AccountAdditionalDetailsBuilder()
+                    .build()
+            );
+        }
+        if (conditions.isShowFnsPersonal()) {
+//TODO  pages().fnsPersonalInformation().submitForWizard();
+        }
+        if (conditions.isShowFnsTrading()) {
+//TODO pages().fnsTradingExperience().submitForWizard();
+        }
+        if (conditions.isShowDeposit()) {
+            pages().creditCardDeposit().submit(new CreditCardDepositBuilder().build());
+        }
+        if (conditions.isShowPoiPor()) {
+            pages().onBoardingWizard().assertOnPOI();
+            return;
+        }
+
+        pages().onBoardingWizard().confirmMessage();
     }
 
     @Override
@@ -27,6 +70,7 @@ public class MobileCRMOnboardingWizardConditionsTest extends TPEndToEndTest {
 
     @Override
     protected String getDataSourcePath() {
-        return "/data/wizardConditionTestCases.csv";
+        return "/data/demoWizardTestCases.csv";
     }
+
 }
