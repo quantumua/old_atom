@@ -1,5 +1,6 @@
 package com.betamedia.qe.af.core.testingtype.base;
 
+import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -7,9 +8,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
 
+import static org.testng.Assert.fail;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
