@@ -49,4 +49,27 @@ public abstract class AbstractTest {
     public boolean keepBrowser(){
         return false;
     }
+    
+    @DataProvider(name = "demoWizardConditions")
+    public static Object[][] conditions() {
+        List<OnboardingWizardConditions> wizardConditionsList = new ArrayList<>();
+        HeaderColumnNameMappingStrategy<OnboardingWizardConditions> strategy = new HeaderColumnNameMappingStrategy<>();
+        strategy.setType(OnboardingWizardConditions.class);
+        CsvToBean<OnboardingWizardConditions> csvToBean = new CsvToBean<>();
+
+        try (InputStream resourceInputStream = new ClassPathResource("/data/demoWizardTestCases.csv").getInputStream();) {
+            wizardConditionsList = csvToBean.parse(strategy, new CSVReader(new InputStreamReader(resourceInputStream)));
+        } catch (Exception e) {
+            fail("Failed to initialize wizard condition tests");
+        }
+
+        Object[][] result = new Object[wizardConditionsList.size()][1];
+        for (int i = 0; i < wizardConditionsList.size(); i++) {
+            result[i][0] = wizardConditionsList.get(i);
+        }
+        return result;
+
+    }
+    
+    
 }

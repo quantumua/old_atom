@@ -54,7 +54,8 @@ public class OnboardingWizardConditions {
     private boolean showPoiPor;
     @CsvBindByName
     private String testId;
-
+    @CsvBindByName
+    private String username;
 
 
     private boolean hasRegulationAnswers = true;
@@ -64,7 +65,7 @@ public class OnboardingWizardConditions {
 
     public OnboardingWizardConditions(boolean fnsPersonal, boolean fnsTrading, boolean hasAdditionalDetails, boolean riskWarning,
                                       ExperienceLevel experienceLevel, boolean hasDeposit, AccountType accountType,
-                                      DocumentVerificationStatus poiStatus, DocumentVerificationStatus porStatus, boolean hasPendingDeposit) {
+                                      DocumentVerificationStatus poiStatus, DocumentVerificationStatus porStatus, boolean hasPendingDeposit, String username) {
         this.fnsPersonal = fnsPersonal;
         this.fnsTrading = fnsTrading;
         this.hasAdditionalDetails = hasAdditionalDetails;
@@ -75,6 +76,7 @@ public class OnboardingWizardConditions {
         this.poiStatus = poiStatus;
         this.porStatus = porStatus;
         this.hasPendingDeposit = hasPendingDeposit;
+        this.username = username;
     }
 
     public boolean isFnsPersonal() {
@@ -163,6 +165,10 @@ public class OnboardingWizardConditions {
 
     public boolean isShowPoiPor() {
         return showPoiPor;
+    }
+    
+    public String username() {
+        return username;
     }
 
     public enum ExperienceLevel {
