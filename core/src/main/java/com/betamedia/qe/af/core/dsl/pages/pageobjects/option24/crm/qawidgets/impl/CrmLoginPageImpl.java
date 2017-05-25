@@ -32,6 +32,7 @@ public class CrmLoginPageImpl extends AbstractPageObject implements CrmLoginPage
         waitUntil(() -> {
             find(usernameField).sendKeys(username);
             find(passwordField).sendKeys(password);
+            click(loginSubmit);
 
             //TODO: Temporary workaround, without pause a "connection exception" is thrown in the widget.
             try {
@@ -39,7 +40,7 @@ public class CrmLoginPageImpl extends AbstractPageObject implements CrmLoginPage
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            click(loginSubmit);
+
             if(find(resultPlaceholder).getText().contains(AUTHENTICATION_EXCEPTION)){
                 click(loginButton);
                 return false;
