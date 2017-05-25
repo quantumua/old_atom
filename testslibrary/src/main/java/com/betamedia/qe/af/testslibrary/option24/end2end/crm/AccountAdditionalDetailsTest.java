@@ -14,7 +14,6 @@ public class AccountAdditionalDetailsTest extends TPResourceAwareEndToEndTest{
         pages().register().register();
         pages().crmNavigation().accountAdditionalDetails();
         pages().accountAdditionalDetails().update(
-//                TODO set default value in builder
                 (new AccountAdditionalDetailsBuilder()
                 .withBirthDateDay("1")
                 .withBirthDateMonth("2")

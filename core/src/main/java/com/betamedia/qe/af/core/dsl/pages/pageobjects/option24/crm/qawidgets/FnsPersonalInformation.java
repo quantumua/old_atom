@@ -7,4 +7,5 @@ import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder
  */
 public interface FnsPersonalInformation {
     void submit(PersonalInformation info);
+    void submitOnWizard(String dataValue);
 }

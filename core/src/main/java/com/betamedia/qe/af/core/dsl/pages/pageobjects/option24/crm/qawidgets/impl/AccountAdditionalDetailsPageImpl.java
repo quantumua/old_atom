@@ -36,8 +36,8 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
         in(birthDateDay).selectByValue(info.birthDateDay);
         in(birthDateMonth).selectByValue(info.birthDateMonth);
         in(birthDateYear).selectByValue(info.birthDateYear);
-        in(countryOfBirth).selectByVisibleText(info.countryOfBirth);
-        in(nationality).selectByVisibleText(info.nationality);
+        in(countryOfBirth).selectByValue(info.countryOfBirth);
+        in(nationality).selectByValue(info.nationality);
         find(update).click();
     }
 }

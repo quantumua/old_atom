@@ -19,10 +19,12 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
     private final static String TAX_ID = "1234567890";
 
     @Test(description = "ID:9129")
-    public void calculationOfScore77Test(){
+    public void calculationOfScore86Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
+//        pages().crmNavigation().login();
+//        pages().crmLoginPage().login(customer.getEmail(),"123123");
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE.get())
@@ -47,9 +49,9 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withSharesExperience(SharesExperience.FREQUENTLY.get())
                 .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
+                .withForExExperience(ForExExperience.FREQUENTLY.get())
                 .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
                 .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
-                .withForExExperience(ForExExperience.FREQUENTLY.get())
                 .withFinancialWorkExperience(FinancialWorkExperience.WORKED.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE.get())
                 .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
@@ -66,11 +68,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(77));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(86));
     }
 
     @Test(description = "ID:9130")
-    public void calculationOfScore26Test(){
+    public void calculationOfScore49Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -98,7 +100,10 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                 .withSharesExperience(SharesExperience.REGULARLY.get())
                 .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
                 .withForExExperience(ForExExperience.REGULARLY.get())
+                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                 .withFinancialWorkExperience(FinancialWorkExperience.SEMINARS.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY.get())
                 .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
@@ -115,10 +120,10 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(26));    }
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(49));    }
 
     @Test(description = "ID:9131")
-    public void calculationOfScore29Test(){
+    public void calculationOfScore48Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -145,7 +150,10 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                 .withSharesExperience(SharesExperience.OCCASIONALLY.get())
                 .withBinaryExperience(BinaryExperience.REGULARLY.get())
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
                 .withForExExperience(ForExExperience.OCCASIONALLY.get())
+                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                 .withFinancialWorkExperience(FinancialWorkExperience.BOTH.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.PHYSICALLY_DELIVERING.get())
                 .withMainFactorKnowledge(MainFactorKnowledge.EMPLOYEE_LAYOFFS.get())
@@ -162,12 +170,12 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(29));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(48));
     }
 
 
     @Test(description = "ID:9132")
-    public void calculationOfScore50Test(){
+    public void calculationOfScore681Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -194,11 +202,8 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                 .withSharesExperience(SharesExperience.NEVER.get())
-                .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
-                //.withAverageYearlyBinaryVolume(null)
+                .withBinaryExperience(BinaryExperience.NEVER.get())
                 .withForExExperience(ForExExperience.NEVER.get())
-                //.withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
-                //.withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                 .withFinancialWorkExperience(FinancialWorkExperience.NEITHER.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE.get())
                 .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
@@ -215,11 +220,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(50));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(68));
     }
 
     @Test(description = "ID:9133")
-    public void calculationOfScore35Test(){
+    public void calculationOfScore61Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -248,10 +253,10 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                 .withSharesExperience(SharesExperience.NEVER.get())
                 .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
-                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_UNDER_500.get())
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
                 .withForExExperience(ForExExperience.FREQUENTLY.get())
-                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_UNDER_50K.get())
-                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_1TO50_1TO200.get())
+                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                 .withFinancialWorkExperience(FinancialWorkExperience.WORKED.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.PHYSICALLY_DELIVERING.get())
                 .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES.get())
@@ -268,11 +273,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(35));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(61));
     }
 
     @Test(description = "ID:9134")
-    public void calculationOfScore42Test(){
+    public void calculationOfScore70Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -300,8 +305,8 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                 .withSharesExperience(SharesExperience.NEVER.get())
-                .withBinaryExperience(BinaryExperience.NEVER.get())
-                //.withAverageYearlyBinaryVolume(null)
+                .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
                 .withForExExperience(ForExExperience.FREQUENTLY.get())
                 .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
                 .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
@@ -321,11 +326,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(42));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(70));
     }
 
     @Test(description = "ID:9135")
-    public void calculationOfScore36Test(){
+    public void calculationOfScore65Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -353,11 +358,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                 .withSharesExperience(SharesExperience.FREQUENTLY.get())
-                .withBinaryExperience(BinaryExperience.NEVER.get())
-//                .withAverageYearlyBinaryVolume(null)
-                .withForExExperience(ForExExperience.NEVER.get())
-//                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
-//                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
+                .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
+                .withForExExperience(ForExExperience.FREQUENTLY.get())
+                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                 .withFinancialWorkExperience(FinancialWorkExperience.BOTH.get())
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY.get())
                 .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
@@ -374,11 +379,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(42));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(65));
     }
 
     @Test(description = "ID:9136")
-    public void calculationOfScore44Test(){
+    public void calculationOfScore68Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -406,11 +411,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                         .withSharesExperience(SharesExperience.FREQUENTLY.get())
-                        .withBinaryExperience(BinaryExperience.NEVER.get())
-//                .withAverageYearlyBinaryVolume(null)
-                        .withForExExperience(ForExExperience.NEVER.get())
-//                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
-//                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
+                        .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
+                        .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
+                        .withForExExperience(ForExExperience.FREQUENTLY.get())
+                        .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                        .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                         .withFinancialWorkExperience(FinancialWorkExperience.BOTH.get())
                         .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY.get())
                         .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
@@ -427,11 +432,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                         .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(44));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(68));
     }
 
     @Test(description = "ID:9137")
-    public void calculationOfScore49Test(){
+    public void calculationOfScore66Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -459,11 +464,11 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
                         .withSharesExperience(SharesExperience.FREQUENTLY.get())
-                        .withBinaryExperience(BinaryExperience.NEVER.get())
-//                .withAverageYearlyBinaryVolume(null)
-                        .withForExExperience(ForExExperience.NEVER.get())
-//                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
-//                .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
+                        .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
+                        .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
+                        .withForExExperience(ForExExperience.FREQUENTLY.get())
+                        .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                        .withCommonLeverage(CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
                         .withFinancialWorkExperience(FinancialWorkExperience.BOTH.get())
                         .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY.get())
                         .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT.get())
@@ -480,6 +485,6 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                         .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(49));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(66));
     }
 }

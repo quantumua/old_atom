@@ -6,11 +6,17 @@ import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Reporter;
+
+import java.util.List;
 
 /**
  * Created by vadimsn on 5/18/17.
  */
 public class FnsPersonalInformationImpl extends AbstractPageObject implements FnsPersonalInformation {
+
     @StoredId
     private By employmentStatus;
     @StoredId
@@ -87,6 +93,12 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         if(notNull(info.purposeOfTradingOther)) find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
         click(submit);
         waitUntilDisplayed(resultPlaceholder);
+    }
+
+    public void submitOnWizard(String dataValue) {
+        By elementLocator = By.cssSelector("li[data-value='"+dataValue+"']");
+        waitUntilExists(elementLocator);
+        find(elementLocator).click();
     }
 
     private static boolean notNull(Object o) {
