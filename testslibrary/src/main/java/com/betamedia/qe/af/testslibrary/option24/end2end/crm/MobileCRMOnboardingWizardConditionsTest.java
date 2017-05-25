@@ -14,18 +14,7 @@ import org.testng.annotations.Test;
 public class MobileCRMOnboardingWizardConditionsTest extends TPEndToEndTest {
 
     @Test(dataProvider = "GenericDataProvider")
-    public void testWizard(OnboardingWizardConditions wizardConditions) {
-        CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(wizardConditions);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
-
-        pages().creditCardDeposit().submit(new CreditCardDepositBuilder().build());
-        pages().welcomePage().start();
-        pages().riskWarningPage().accept();
-    }
-
-    @Test(dataProvider = "GenericDataProvider")
-    public void demoTest(OnboardingWizardConditions conditions) throws Exception {
+    public void testWizard(OnboardingWizardConditions conditions) throws Exception {
         CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
 
         pages().topNavigationPage().logIn();

@@ -54,7 +54,11 @@ public class CreditCardDepositPageImpl extends AbstractPageObject implements Cre
         find(billingAddress).sendKeys(info.billingAddress);
         find(city).sendKeys(info.city);
         find(zipCode).sendKeys(info.zipCode);
-        find(country).sendKeys(info.country);
+
+        if (info.country != null) {
+            find(country).sendKeys(info.country);
+        }
+
         find(submit).click();
     }
 }
