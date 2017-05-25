@@ -175,7 +175,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
 
 
     @Test(description = "ID:9132")
-    public void calculationOfScore681Test(){
+    public void calculationOfScore32Test(){
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -220,7 +220,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(68));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(32));
     }
 
     @Test(description = "ID:9133")
