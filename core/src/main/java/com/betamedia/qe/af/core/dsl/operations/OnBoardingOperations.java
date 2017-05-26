@@ -31,4 +31,6 @@ public interface OnBoardingOperations<T extends EnvironmentDependent> extends En
     void assertUsernameExpert(String username);
 
     void assertUsernameScore(String username, Double expectedScore);
+
+    void assertUsernameLoginType(String username, int expectedScore);
 }

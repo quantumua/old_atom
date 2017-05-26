@@ -3,17 +3,17 @@
     <test name="Test scenario for register accounts in the CRM">
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.NewQuestionnaireTests" >
-                <!--<methods>-->
-                    <!--<include name="calculationOfScore86Test"/>-->
-                    <!--<include name="calculationOfScore49Test"/>-->
-                    <!--<include name="calculationOfScore48Test"/>-->
-                    <!--<include name="calculationOfScore32Test"/>-->
-                    <!--<include name="calculationOfScore61Test"/>-->
-                    <!--<include name="calculationOfScore70Test"/>-->
-                    <!--<include name="calculationOfScore65Test"/>-->
-                    <!--<include name="calculationOfScore68Test"/>-->
-                    <!--<include name="calculationOfScore66Test"/>-->
-                <!--</methods>-->
+                <methods>
+                    <include name="calculationOfScore86Test"/>
+                    <include name="calculationOfScore49Test"/>
+                    <include name="calculationOfScore48Test"/>
+                    <include name="calculationOfScore32Test"/>
+                    <include name="calculationOfScore61Test"/>
+                    <include name="calculationOfScore70Test"/>
+                    <include name="calculationOfScore65Test"/>
+                    <include name="calculationOfScore68Test"/>
+                    <include name="calculationOfScore66Test"/>
+                </methods>
             </class>
         </classes>
     </test>

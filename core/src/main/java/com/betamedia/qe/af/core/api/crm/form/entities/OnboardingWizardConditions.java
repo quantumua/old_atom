@@ -220,6 +220,25 @@ public class OnboardingWizardConditions {
         }
     }
 
+    public enum AccessType {
+        ACTIVE(100000000),
+        NODEPOSIT(100000001),
+        NOTRADE(100000002),
+        NOTRADENODEPOSIT(100000003),
+        NOLOGIN(100000004);
+
+
+        private Integer type;
+
+        AccessType(Integer type) {
+            this.type = type;
+        }
+
+        public Integer getType() {
+            return type;
+        }
+    }
+
     @Override
     public String toString() {
         return "OnboardingWizardConditions{" +
