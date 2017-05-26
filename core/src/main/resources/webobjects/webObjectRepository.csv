@@ -6,6 +6,7 @@ build,pageObjectName,locatorId,locatorType,value
 1603,DisclaimerNotificationImpl,disclaimerSubmitBtn,ID,disclaimer_submit
 1603,TopNavigationPageImpl,loginBtn,ID,login_btn
 1603,TopNavigationPageImpl,myAccountBtn,ID,myaccount_btn
+1603,TopNavigationPageImpl,homePageLink,XPATH,//*[@id="header"]/div[2]/div[1]/a/img
 1603,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
 1603,BinaryBidderImpl,amountInput,ID,bmBidAmountInput
 1603,BinarySelectorImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame

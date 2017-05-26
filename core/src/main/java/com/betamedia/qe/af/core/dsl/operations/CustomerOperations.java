@@ -8,6 +8,7 @@ import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
+import com.betamedia.qe.af.core.persistence.entities.ContactExtension;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
 
@@ -48,4 +49,8 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
     TrackingInfo getCustomerTrackingInfo(String trackingInfoId);
 
     CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions);
+
+    ContactExtension updateOnboardingConditionsInDatabase(String contactId, OnboardingWizardConditions wizardConditions);
+
+    double findMaximumDepositLimit(String contactId);
 }

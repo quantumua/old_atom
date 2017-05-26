@@ -23,6 +23,8 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By cfdBtn;
     @StoredId
     private By signUpBtn;
+    @StoredId
+    private By homePageLink;
     
     
     public TopNavigationPageImpl(WebDriver webDriver) {
@@ -62,6 +64,12 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     public void cfd() {
         waitUntilDisplayed(mainMenu);
         find(mainMenu, cfdBtn).click();
+    }
+
+    @Override
+    public void goToHomePage() {
+        waitUntilDisplayed(homePageLink);
+        find(homePageLink).click();
     }
 
 }

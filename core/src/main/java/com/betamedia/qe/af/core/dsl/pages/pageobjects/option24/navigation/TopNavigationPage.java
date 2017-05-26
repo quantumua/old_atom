@@ -16,4 +16,6 @@ public interface TopNavigationPage {
     boolean isLoggedOut();
     
     void signUp();
+
+    void goToHomePage();
 }

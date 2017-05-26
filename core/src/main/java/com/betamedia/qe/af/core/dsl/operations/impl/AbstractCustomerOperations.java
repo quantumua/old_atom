@@ -219,7 +219,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
         CRMCustomer registeredCustomer = register(new CustomerBuilder());
-        ContactExtension contactExtension = saveAndReturnContactExtension(registeredCustomer.getId(), wizardConditions);
+        updateOnboardingConditionsInDatabase(registeredCustomer.getId(), wizardConditions);
 
         String tradingAccountId = registeredCustomer.getBinaryAccount().getExternalId();
         MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
@@ -227,16 +227,11 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
             deposit(depositBuilder);
         }
 
-        if (wizardConditions.hasPendingDeposit()) {
-            double maxLimit = findMaximumDepositLimit(contactExtension);
-            depositBuilder.setAmount((long)maxLimit + 3001);
-            deposit(depositBuilder);
-        }
-
         return registeredCustomer;
     }
 
-    private ContactExtension saveAndReturnContactExtension(String contactId, OnboardingWizardConditions wizardConditions) {
+    @Override
+    public ContactExtension updateOnboardingConditionsInDatabase(String contactId, OnboardingWizardConditions wizardConditions) {
         final Integer defaultBirthCountry = 100000207;
         final Integer defaultNationality = 100000207;
 
@@ -264,7 +259,9 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         return contactExtension;
     }
 
-    private double findMaximumDepositLimit(ContactExtension contactExtension) {
+    @Override
+    public double findMaximumDepositLimit(String contactId) {
+        ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
         String riskLimitsId = contactExtension.getRiskLimitsId();
 
         RiskLimits riskLimits = riskLimitsRepository.findOne(riskLimitsId);

@@ -63,9 +63,7 @@ public class OnboardingWizardConditions {
     public OnboardingWizardConditions() {
     }
 
-    public OnboardingWizardConditions(boolean fnsPersonal, boolean fnsTrading, boolean hasAdditionalDetails, boolean riskWarning,
-                                      ExperienceLevel experienceLevel, boolean hasDeposit, AccountType accountType,
-                                      DocumentVerificationStatus poiStatus, DocumentVerificationStatus porStatus, boolean hasPendingDeposit, String username) {
+    public OnboardingWizardConditions(boolean fnsPersonal, boolean fnsTrading, boolean hasAdditionalDetails, boolean riskWarning, ExperienceLevel experienceLevel, boolean hasDeposit, AccountType accountType, DocumentVerificationStatus poiStatus, DocumentVerificationStatus porStatus, boolean hasPendingDeposit, boolean customerCompliant, DocumentVerificationStatus poiOcrStatus) {
         this.fnsPersonal = fnsPersonal;
         this.fnsTrading = fnsTrading;
         this.hasAdditionalDetails = hasAdditionalDetails;
@@ -76,7 +74,8 @@ public class OnboardingWizardConditions {
         this.poiStatus = poiStatus;
         this.porStatus = porStatus;
         this.hasPendingDeposit = hasPendingDeposit;
-        this.username = username;
+        this.customerCompliant = customerCompliant;
+        this.poiOcrStatus = poiOcrStatus;
     }
 
     public boolean isFnsPersonal() {
