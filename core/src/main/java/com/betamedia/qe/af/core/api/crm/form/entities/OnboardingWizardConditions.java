@@ -37,7 +37,7 @@ public class OnboardingWizardConditions {
     @CsvBindByName
     private boolean showWizard;
     @CsvBindByName
-    private boolean showWelcomeBack;
+    private boolean showWelcome;
     @CsvBindByName
     private boolean showDeposit;
     @CsvBindByName
@@ -134,8 +134,8 @@ public class OnboardingWizardConditions {
         return showWizard;
     }
 
-    public boolean isShowWelcomeBack() {
-        return showWelcomeBack;
+    public boolean isShowWelcome() {
+        return showWelcome;
     }
 
     public boolean isShowDeposit() {
@@ -255,7 +255,7 @@ public class OnboardingWizardConditions {
                 ", customerCompliant=" + customerCompliant +
                 ", poiOcrStatus=" + poiOcrStatus +
                 ", showWizard=" + showWizard +
-                ", showWelcomeBack=" + showWelcomeBack +
+                ", showWelcome=" + showWelcome +
                 ", showDeposit=" + showDeposit +
                 ", showRiskWarning=" + showRiskWarning +
                 ", showStartWizard=" + showStartWizard +

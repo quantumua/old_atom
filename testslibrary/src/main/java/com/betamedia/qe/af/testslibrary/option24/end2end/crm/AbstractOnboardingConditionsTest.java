@@ -12,10 +12,9 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
     protected void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
         if (!conditions.isShowWizard()){
-            pages().onBoardingWizard().confirmMessage();
             return;
         }
-        if(conditions.isShowWelcomeBack()){
+        if(conditions.isShowWelcome()){
             pages().welcomePage().start();
         }
         if (conditions.isShowRiskWarning()) {
