@@ -95,10 +95,9 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         waitUntilDisplayed(resultPlaceholder);
     }
 
+    @Override
     public void submitOnWizard(String dataValue) {
-        By elementLocator = By.cssSelector("li[data-value='"+dataValue+"']");
-        waitUntilExists(elementLocator);
-        find(elementLocator).click();
+        waitUntilExists(By.cssSelector("li[data-value='"+dataValue+"']")).click();
     }
 
     private static boolean notNull(Object o) {

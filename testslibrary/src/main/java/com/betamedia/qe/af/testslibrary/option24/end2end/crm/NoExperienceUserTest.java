@@ -66,9 +66,8 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
 
         operations().onBoardingOperations().assertUsernameLoginType(
                 customer.getUserName(),
-                OnboardingWizardConditions.AccessType.ACTIVE.getType()
+                OnboardingWizardConditions.AccessType.NOTRADE.getType()
         );
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
     }
 
     private TradingExperienceInfoBuilder.TradingExperienceInfo tradingExperienceInfoWith16Score() {

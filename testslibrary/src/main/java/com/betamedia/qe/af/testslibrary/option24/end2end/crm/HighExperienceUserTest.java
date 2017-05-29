@@ -65,9 +65,8 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
 
         operations().onBoardingOperations().assertUsernameLoginType(
                 customer.getUserName(),
-                OnboardingWizardConditions.AccessType.ACTIVE.getType()
+                OnboardingWizardConditions.AccessType.NOTRADE.getType()
         );
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
     }
 
     private TradingExperienceInfoBuilder.TradingExperienceInfo tradingExperienceInfoWith51Score() {

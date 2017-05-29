@@ -7,7 +7,7 @@
                     <include name = "checkCustomerWithScore0IsRejectedTest"/>
                     <include name = "checkCustomerWithScore10IsRejectedTest"/>
                     <include name = "checkCustomerWithScore15IsRejectedTest"/>
-                    <include name = "checkRejectedCustomerNoLoginTest"/>
+                    <include name = "checkRejectedCustomerAccessNoLoginTest"/>
                 </methods>
             </class>
             <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.NoExperienceUserTest" >
@@ -37,6 +37,14 @@
             <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.UnknownExperienceUserTest" >
                 <methods>
                     <include name = "checkCustomerWithScore16IsUnknownExperienceTest"/>
+                </methods>
+            </class>
+
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.WebsiteUserExperienceTest">
+                <methods>
+                    <include name = "score31CustomerExperienceTest"/>
+                    <include name = "score45CustomerExperienceTest"/>
+                    <include name = "score50CustomerExperienceTest"/>
                 </methods>
             </class>
         </classes>

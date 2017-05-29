@@ -31,7 +31,7 @@ public class UnknownExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameUnknown(customer.getUserName());
         operations().onBoardingOperations().assertUsernameLoginType(
                 customer.getUserName(),
-                OnboardingWizardConditions.AccessType.ACTIVE.getType()
+                OnboardingWizardConditions.AccessType.NOTRADE.getType()
         );
     }
 
