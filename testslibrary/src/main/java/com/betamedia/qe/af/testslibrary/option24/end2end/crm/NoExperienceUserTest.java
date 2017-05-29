@@ -66,7 +66,7 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
 
         operations().onBoardingOperations().assertUsernameLoginType(
                 customer.getUserName(),
-                OnboardingWizardConditions.AccessType.NOTRADE.getType()
+                OnboardingWizardConditions.AccessType.NOTRADE
         );
     }
 

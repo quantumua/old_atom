@@ -65,7 +65,7 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
 
         operations().onBoardingOperations().assertUsernameLoginType(
                 customer.getUserName(),
-                OnboardingWizardConditions.AccessType.NOLOGIN.getType()
+                OnboardingWizardConditions.AccessType.NOLOGIN
         );
     }
 

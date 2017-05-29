@@ -12,7 +12,7 @@ import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionn
 public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
 
     @Test(description = "ID:9029")
-    public void score31CustomerExperienceTest() {
+    public void checkCustomerWithScore31IsLowExperienceTest() {
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -45,7 +45,7 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
     }
 
     @Test(description = "ID:9071")
-    public void score45CustomerExperienceTest() {
+    public void checkCustomerWithScore45IsLowExperienceTest() {
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);
@@ -78,7 +78,7 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
     }
 
     @Test(description = "ID:9032")
-    public void score50CustomerExperienceTest() {
+    public void checkCustomerWithScore50IsLowExperienceTest() {
         pages().crmNavigation().register();
         CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
         pages().register().register(customer);

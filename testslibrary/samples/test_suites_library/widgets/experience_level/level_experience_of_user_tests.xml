@@ -36,15 +36,15 @@
             </class>
             <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.UnknownExperienceUserTest" >
                 <methods>
-                    <include name = "checkCustomerWithScore16IsUnknownExperienceTest"/>
+                    <include name = "checkCustomerWithNoScoreIsUnknownExperienceTest"/>
                 </methods>
             </class>
 
             <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.WebsiteUserExperienceTest">
                 <methods>
-                    <include name = "score31CustomerExperienceTest"/>
-                    <include name = "score45CustomerExperienceTest"/>
-                    <include name = "score50CustomerExperienceTest"/>
+                    <include name = "checkCustomerWithScore31IsLowExperienceTest"/>
+                    <include name = "checkCustomerWithScore45IsLowExperienceTest"/>
+                    <include name = "checkCustomerWithScore50IsLowExperienceTest"/>
                 </methods>
             </class>
         </classes>

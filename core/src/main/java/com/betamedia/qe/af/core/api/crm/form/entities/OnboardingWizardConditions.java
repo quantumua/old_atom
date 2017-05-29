@@ -178,13 +178,13 @@ public class OnboardingWizardConditions {
         HIGH_EXPERIENCE(1000040),
         EXPERT(1000001);
 
-        private int level;
+        private Integer level;
 
-        ExperienceLevel(int level) {
+        ExperienceLevel(Integer level) {
             this.level = level;
         }
 
-        public int getLevel() {
+        public Integer getLevel() {
             return level;
         }
     }

@@ -1,6 +1,9 @@
 package com.betamedia.qe.af.core.dsl.operations;
 
+import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
+
+import static com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions.*;
 
 /**
  * Created by mbelyaev on 5/19/17.
@@ -32,5 +35,5 @@ public interface OnBoardingOperations<T extends EnvironmentDependent> extends En
 
     void assertUsernameScore(String username, Double expectedScore);
 
-    void assertUsernameLoginType(String username, int expectedScore);
+    void assertUsernameLoginType(String username, AccessType accessType);
 }
