@@ -18,7 +18,7 @@ import java.util.List;
  */
 public abstract class AbstractTest {
 
-    @DataProvider(name = "GenericDataProvider")
+    @DataProvider(name = "GenericDataProvider", parallel = true)
     public Iterator<Object[]> genericDataProvider() {
         return getData(getDataSourceEntity(), getDataSourcePath())
                 .stream()
