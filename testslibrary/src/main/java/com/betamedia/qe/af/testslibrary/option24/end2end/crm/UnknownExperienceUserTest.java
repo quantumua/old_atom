@@ -1,10 +1,8 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
 import org.testng.annotations.Test;
 
 /**
@@ -20,40 +18,11 @@ public class UnknownExperienceUserTest extends AbstractUserExperienceTest {
     }
 
     @Test(description = "ID:9143")
-    public void checkCustomerWithScore16IsUnknownExperienceTest() {
+    public void checkCustomerWithNoScoreIsUnknownExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(tradingExperienceInfoWith16Score());
-        pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(personalInfoScore0());
-
-        operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(16));
-        operations().onBoardingOperations().assertUsernameUnknown(customer.getUserName());
         operations().onBoardingOperations().assertUsernameLoginType(
                 customer.getUserName(),
-                OnboardingWizardConditions.AccessType.NOTRADE.getType()
+                OnboardingWizardConditions.AccessType.NOTRADE
         );
-    }
-
-    private TradingExperienceInfoBuilder.TradingExperienceInfo tradingExperienceInfoWith16Score() {
-        return  new TradingExperienceInfoBuilder()
-                .withSharesExperience(Questions.SharesExperience.NEVER.get())
-                .withBinaryExperience(Questions.BinaryExperience.NEVER.get())
-                .withForExExperience(Questions.ForExExperience.NEVER.get())
-                .withFinancialWorkExperience(Questions.FinancialWorkExperience.SEMINARS.get())
-                .withCfdBinaryKnowledge(Questions.CfdBinaryKnowledge.NON_RISKY.get())
-                .withMainFactorKnowledge(Questions.MainFactorKnowledge.ANNOUNCEMENT.get())
-                .withHowToCloseKnowledge(Questions.HowToCloseKnowledge.LONDON_STOCK.get())
-                .withCfdLeverageKnowledge(Questions.CfdLeverageKnowledge.PROVIDES.get())
-                .withStopLossKnowledge(Questions.StopLossKnowledge.BUY.get())
-                .withRequiredMarginKnowledge(Questions.RequiredMarginKnowledge.MARGIN_10K.get())
-                .withMarginLevelDropKnowledge(Questions.MarginLevelDropKnowledge.WARNING_CALL.get())
-                .withAutomaticStopKnowledge(Questions.AutomaticStopKnowledge.EARNINGS.get())
-                .withLossOn1to50Knowledge(Questions.LossOn1to50Knowledge.A1_800.get())
-                .withLossOn1to200Knowledge(Questions.LossOn1to200Knowledge.A1_1800.get())
-                .withBinaryInvestProfitKnowledge(Questions.BinaryInvestProfitKnowledge.PROFIT_75.get())
-                .withBinaryInvestLossKnowledge(Questions.BinaryInvestLossKnowledge.LOSS_100.get())
-                .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_25.get())
-                .build();
     }
 }

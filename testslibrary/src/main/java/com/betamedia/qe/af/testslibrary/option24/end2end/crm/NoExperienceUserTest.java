@@ -4,7 +4,6 @@ import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuild
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.qe.af.core.utils.StringUtils;
 import com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
 import org.testng.annotations.Test;
 
@@ -66,7 +65,7 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
 
         operations().onBoardingOperations().assertUsernameLoginType(
                 customer.getUserName(),
-                OnboardingWizardConditions.AccessType.NOTRADE.getType()
+                OnboardingWizardConditions.AccessType.NOTRADE
         );
     }
 

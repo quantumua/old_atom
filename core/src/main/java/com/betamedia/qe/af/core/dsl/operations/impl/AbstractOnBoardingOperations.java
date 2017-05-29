@@ -6,6 +6,7 @@ import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import com.betamedia.qe.af.core.persistence.repositories.AbstractUserExperienceInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions.AccessType;
 import static com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.*;
 import static org.testng.Assert.assertEquals;
 
@@ -90,8 +91,8 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
     }
 
     @Override
-    public void assertUsernameLoginType(String username, int expectedType) {
-        assertEquals(userExperienceInfoRepository.findByUsername(username).getAccess(), expectedType);
+    public void assertUsernameLoginType(String username, AccessType expectedAccessType) {
+        assertEquals(userExperienceInfoRepository.findByUsername(username).getAccess(), expectedAccessType.getType());
     }
 
 }
