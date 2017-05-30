@@ -9,58 +9,44 @@ import javax.persistence.Table;
  * Created by Oleksandr Losiev on 4/27/17.
  */
 @Entity
-@Table(name = "contactextensionbase")
+@Table(name = "ContactExtensionBase")
 public class ContactExtension {
 
-    public ContactExtension() {
-    }
-
-    public ContactExtension(String id) {
-        this.id = id;
-    }
-
     @Id
-    @Column(name = "contactid")
-    private String id;
-
+    @Column(name = "ContactId")
+    private String contactId;
+    @Column(name = "bt_username")
+    private String username;
     @Column(name = "bt_haspersonalinformationanswers")
-    private boolean fnsPersonal;
-
+    private Boolean fnsPersonal;
     @Column(name = "bt_hastradingexperienceanswers")
-    private boolean fnsTrading;
-
+    private Boolean fnsTrading;
     @Column(name = "bt_riskwarning")
-    private boolean riskWarning;
-
-    @Column(name = "bt_experiencelevel")
-    private Integer experienceLevel;
-
+    private Boolean riskWarning;
     @Column(name = "bt_Accounttype")
     private Integer accountType;
-
     @Column(name = "bt_poistatus")
     private Integer poiStatus;
-
     @Column(name = "bt_porstatus")
     private Integer porStatus;
-
     @Column(name = "bt_countryofbirth")
     private Integer countryOfBirth;
-
     @Column(name = "bt_nationality")
     private Integer nationality;
-
     @Column(name = "bt_hasregulationanswers")
-    private boolean hasRegulationAnswers;
-
+    private Boolean hasRegulationAnswers;
     @Column(name = "bt_risklimits")
     private String riskLimitsId;
-
     @Column(name = "bt_compliant")
-    private boolean customerCompliant;
-
+    private Boolean customerCompliant;
     @Column(name = "bt_poiocrstatus")
     private Integer poiOcrStatus;
+    @Column(name = "bt_access")
+    private Integer access;
+    @Column(name = "bt_ExperienceLevel")
+    private Integer experienceLevel;
+    @Column(name = "bt_ExperienceScore")
+    private Double experienceScore;
 
     public void setFnsPersonal(boolean fnsPersonal) {
         this.fnsPersonal = fnsPersonal;
@@ -114,8 +100,8 @@ public class ContactExtension {
         this.poiOcrStatus = poiOcrStatus;
     }
 
-    public String getId() {
-        return id;
+    public String getContactId() {
+        return contactId;
     }
 
 
@@ -123,5 +109,15 @@ public class ContactExtension {
         return riskLimitsId;
     }
 
+    public Integer getExperienceLevel() {
+        return experienceLevel;
+    }
 
+    public Double getExperienceScore() {
+        return experienceScore;
+    }
+
+    public Integer getAccess() {
+        return access;
+    }
 }

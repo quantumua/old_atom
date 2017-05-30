@@ -3,7 +3,7 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
 import com.betamedia.qe.af.core.dsl.operations.OnBoardingOperations;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
-import com.betamedia.qe.af.core.persistence.repositories.AbstractUserExperienceInfoRepository;
+import com.betamedia.qe.af.core.persistence.repositories.AbstractContactExtensionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions.AccessType;
@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
  */
 public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependent> implements OnBoardingOperations<T> {
     @Autowired
-    private AbstractUserExperienceInfoRepository<T> userExperienceInfoRepository;
+    private AbstractContactExtensionRepository<T> contactExtensionRepository;
 
     @Override
     public void assertCustomerRejected(String customerId) {
@@ -78,21 +78,21 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
     }
 
     private void assertCustomerExperience(String customerId, ExperienceLevel expectedExperience) {
-        assertEquals(userExperienceInfoRepository.findOne(customerId).getExperienceLevel(), expectedExperience.getLevel());
+        assertEquals(contactExtensionRepository.findOne(customerId).getExperienceLevel(), expectedExperience.getLevel());
     }
 
     private void assertUsernameExperience(String username, ExperienceLevel expectedExperience) {
-        assertEquals(userExperienceInfoRepository.findByUsername(username).getExperienceLevel(), expectedExperience.getLevel());
+        assertEquals(contactExtensionRepository.findByUsername(username).getExperienceLevel(), expectedExperience.getLevel());
     }
 
     @Override
     public void assertUsernameScore(String username, Double expectedScore) {
-        assertEquals(userExperienceInfoRepository.findByUsername(username).getExperienceScore(), expectedScore);
+        assertEquals(contactExtensionRepository.findByUsername(username).getExperienceScore(), expectedScore);
     }
 
     @Override
     public void assertUsernameLoginType(String username, AccessType expectedAccessType) {
-        assertEquals(userExperienceInfoRepository.findByUsername(username).getAccess(), expectedAccessType.getType());
+        assertEquals(contactExtensionRepository.findByUsername(username).getAccess(), expectedAccessType.getType());
     }
 
 }

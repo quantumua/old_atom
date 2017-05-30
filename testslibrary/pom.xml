@@ -50,7 +50,7 @@
                             <destFileName>testslibrary.jar</destFileName>
                         </artifactItem>
                     </artifactItems>
-                    <outputDirectory>${project.build.directory}/../../webservice</outputDirectory>
+                    <outputDirectory>${project.build.directory}/../..</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
