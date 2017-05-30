@@ -24,6 +24,7 @@ import static com.betamedia.qe.af.core.utils.PropertiesUtils.permute;
  */
 @Service
 public class TestRunnerHandlerImpl implements TestRunnerHandler {
+
     @Autowired
     private ContextClassLoaderManagingExecutor classLoaderExecutor;
     @Autowired
@@ -91,7 +92,7 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
 
         private String getReportPath(Properties props) {
             LocalDateTime now = LocalDateTime.now();
-            return (now.toString() + "." + Objects.hash(props, now, Thread.currentThread())).replaceAll("[^a-zA-Z0-9]", "_");
+            return TEST_OUTPUT_DIRECTORY + (now.toString() + "." + Objects.hash(props, now, Thread.currentThread())).replaceAll("[^a-zA-Z0-9]", "_");
         }
     }
 }

@@ -1,26 +1,20 @@
 package com.betamedia.qe.af.webservice.web.controllers;
 
 import com.betamedia.qe.af.core.fwtestrunner.TestRunnerHandler;
-import com.betamedia.qe.af.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.qe.af.core.fwtestrunner.scheduling.ExecutionListener;
 import com.betamedia.qe.af.core.fwtestrunner.storage.StorageService;
 import com.betamedia.qe.af.webservice.web.entities.RunTestParams;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.betamedia.qe.af.core.utils.PropertiesUtils.getProperties;
 
@@ -54,7 +48,7 @@ public class RunTestController {
 
     @PostMapping(value = "/exists")
     public Boolean getReportStatus(@RequestBody String path) {
-        return Paths.get("test-output/" + path).toFile().exists();
+        return Paths.get(path).toFile().exists();
     }
 
 }

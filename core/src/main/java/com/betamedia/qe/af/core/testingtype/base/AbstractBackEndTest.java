@@ -6,7 +6,7 @@ import com.betamedia.qe.af.core.dsl.templates.BackEndOperationsTemplate;
  * @author Maksym Tsybulskyy
  *         Date: 3/22/17.
  */
-public abstract class AbstractBackEndTest<T extends BackEndOperationsTemplate> extends AbstractTest{
+public abstract class AbstractBackEndTest<T extends BackEndOperationsTemplate> extends AbstractTest implements BackEndTest<T> {
 
     private T operationTemplate = null;
 

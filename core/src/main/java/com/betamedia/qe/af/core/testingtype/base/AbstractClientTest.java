@@ -4,11 +4,13 @@ package com.betamedia.qe.af.core.testingtype.base;
 import com.betamedia.qe.af.core.dsl.pages.factory.AbstractPageFactory;
 import org.testng.annotations.AfterMethod;
 
+import java.util.Optional;
+
 
 /**
  * Created by mbelyaev on 2/21/17.
  */
-public abstract class AbstractClientTest<T extends AbstractPageFactory> extends AbstractTest {
+public abstract class AbstractClientTest<T extends AbstractPageFactory> extends AbstractTest implements WebDriverTest<T>{
 
     private ThreadLocal<T> pages = new ThreadLocal<>();
 
@@ -22,6 +24,7 @@ public abstract class AbstractClientTest<T extends AbstractPageFactory> extends 
         }
     }
 
+    @Override
     public T pages() {
         if (pages.get() == null) {
             T pageFactory = getPageFactory();
@@ -31,4 +34,8 @@ public abstract class AbstractClientTest<T extends AbstractPageFactory> extends 
         return pages.get();
     }
 
+    @Override
+    public Optional<T> optPages() {
+        return Optional.ofNullable(pages.get());
+    }
 }

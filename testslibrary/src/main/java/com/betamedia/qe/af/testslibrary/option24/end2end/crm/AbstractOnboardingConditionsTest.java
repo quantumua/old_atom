@@ -11,10 +11,10 @@ import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
     protected void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
-        if (!conditions.isShowWizard()){
+        if (!conditions.isShowWizard()) {
             return;
         }
-        if(conditions.isShowWelcome()){
+        if (conditions.isShowWelcome()) {
             pages().welcomePage().start();
         }
         if (conditions.isShowRiskWarning()) {
@@ -46,6 +46,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
     protected Class getDataSourceEntity() {
         return OnboardingWizardConditions.class;
     }
+
     @Override
     protected String getDataSourcePath() {
         return "/data/demoWizardTestCases.csv";

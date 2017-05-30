@@ -1,14 +1,16 @@
 package com.betamedia.qe.af.core.testingtype.base;
 
-import com.betamedia.qe.af.core.dsl.templates.BackEndOperationsTemplate;
 import com.betamedia.qe.af.core.dsl.pages.factory.AbstractPageFactory;
+import com.betamedia.qe.af.core.dsl.templates.BackEndOperationsTemplate;
 import org.testng.annotations.AfterMethod;
+
+import java.util.Optional;
 
 /**
  * @author Maksym Tsybulskyy
  *         Date: 3/22/17.
  */
-public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, P extends AbstractPageFactory> extends AbstractTest {
+public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, P extends AbstractPageFactory> extends AbstractTest implements WebDriverTest<P>, BackEndTest<T> {
 
     private ThreadLocal<P> pages = new ThreadLocal<>();
 
@@ -27,6 +29,7 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
         }
     }
 
+    @Override
     public P pages() {
         if (pages.get() == null) {
             P pageFactory = getPageFactory();
@@ -43,4 +46,8 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
         return operationTemplate;
     }
 
+    @Override
+    public Optional<P> optPages() {
+        return Optional.ofNullable(pages.get());
+    }
 }

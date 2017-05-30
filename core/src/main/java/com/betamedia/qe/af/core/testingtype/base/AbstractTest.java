@@ -26,12 +26,26 @@ public abstract class AbstractTest {
                 .iterator();
     }
 
+    /**
+     * Override this method in implementing test class to pass the required entity to GenericDataProvider
+     */
     protected Class getDataSourceEntity() {
         return null;
     }
 
+    /**
+     * Override this method in implementing test class to pass the data source path to GenericDataProvider
+     */
     protected String getDataSourcePath() {
         return null;
+    }
+
+    /**
+     * Override this method in implementing test class to enable (<code>true</code>) or disable (<code>false</code>)
+     * browser restart between test methods (default <code>false</code>)
+     */
+    public boolean keepBrowser() {
+        return false;
     }
 
     private static <T> List<T> getData(Class<T> tClass, String path) {
@@ -46,10 +60,6 @@ public abstract class AbstractTest {
         }
     }
 
-    public boolean keepBrowser(){
-        return false;
-    }
-    
     //TODO: Should be removed shortly. Generic data provider should be used instead.
     /*@DataProvider(name = "demoWizardConditions")
     public static Object[][] conditions() {
@@ -71,6 +81,6 @@ public abstract class AbstractTest {
         return result;
 
     }*/
-    
-    
+
+
 }

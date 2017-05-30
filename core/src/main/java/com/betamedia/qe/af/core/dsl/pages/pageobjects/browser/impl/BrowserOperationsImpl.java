@@ -4,6 +4,8 @@ import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.browser.BrowserOperations;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+
 /**
  * Pseudo-PageObject that exposes browser-related operations on current {@link WebDriver}
  *
@@ -54,5 +56,14 @@ public class BrowserOperationsImpl extends AbstractPageObject implements Browser
     @Override
     public void refreshPage() {
         super.refreshPage();
+    }
+
+    /**
+     * Take screenshot of page
+     * @return {@link File} screen shot object
+     */
+    @Override
+    public File takeScreenShot() {
+        return super.takeScreenShot();
     }
 }

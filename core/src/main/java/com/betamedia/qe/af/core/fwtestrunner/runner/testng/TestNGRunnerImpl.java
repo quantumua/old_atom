@@ -10,6 +10,7 @@ import com.betamedia.qe.af.core.fwdataaccess.repository.util.tp.TPApplicationVer
 import com.betamedia.qe.af.core.fwservices.webdriver.WebDriverFactory;
 import com.betamedia.qe.af.core.fwservices.webdriver.WebDriverFactoryProvider;
 import com.betamedia.qe.af.core.fwtestrunner.RunnerResult;
+import com.betamedia.qe.af.core.fwtestrunner.listeners.ConfigurableListenerFactory;
 import com.betamedia.qe.af.core.fwtestrunner.runner.TestRunner;
 import com.betamedia.qe.af.core.fwtestrunner.types.TestRunnerType;
 import com.betamedia.qe.af.core.holders.ConfigurationPropertyKey;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.testng.TestNG;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 
@@ -45,6 +47,9 @@ public class TestNGRunnerImpl implements TestRunner {
     @Autowired
     private ApplicationVersionHolder applicationVersionHolder;
 
+    @Autowired
+    private Collection<ConfigurableListenerFactory> listenerFactories;
+
     @Override
     public TestRunnerType getType() {
         return TESTNG;
@@ -52,14 +57,21 @@ public class TestNGRunnerImpl implements TestRunner {
 
     @Override
     public RunnerResult run(Properties props, List<String> suites, String outputDirectory) {
+        setThreadLocalBeans(props);
+        TestNG testng = new TestNG();
+        testng.setOutputDirectory(outputDirectory);
+        listenerFactories.stream()
+                .map(f -> f.get(outputDirectory))
+                .forEach(testng::addListener);
+        testng.setTestSuites(suites);
+        testng.run();
+        return new RunnerResult(testng.getOutputDirectory() + "/emailable-report.html", testng.hasFailure() || testng.hasSkip());
+    }
+
+    private void setThreadLocalBeans(Properties props) {
         ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(getWebDriverFactory(props));
         ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(getAppVersion(props), webElementRepository));
         ThreadLocalBeansHolder.setOperationsTemplateThreadLocal(getOperationsTemplate(props));
-        TestNG testng = new TestNG();
-        testng.setOutputDirectory("test-output/" + outputDirectory);
-        testng.setTestSuites(suites);
-        testng.run();
-        return new RunnerResult(testng.getOutputDirectory()+"/emailable-report.html", testng.hasFailure() || testng.hasSkip());
     }
 
     private TPTemplate getOperationsTemplate(Properties properties) {

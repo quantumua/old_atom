@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,6 @@ public abstract class AbstractPageObject {
 
     private static final String DOM_UPDATE_MESSAGE = "DOM updated when retrieving value";
     private static final String EXPECTED_LOOKUP_FAILURE_MESSAGE = "Could not find element";
-
     private static final int MAX_WAIT_SEC = 60;
 
     private WebDriver webDriver;
@@ -332,6 +332,16 @@ public abstract class AbstractPageObject {
      */
     protected void refreshPage() {
         webDriver.navigate().refresh();
+    }
+
+    /**
+     * Take screen shot of page
+     *
+     * @see TakesScreenshot#getScreenshotAs(OutputType)
+     * @return {@link File} screen shot object
+     */
+    protected File takeScreenShot() {
+        return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
     }
 
     private Wait<WebDriver> getWait() {

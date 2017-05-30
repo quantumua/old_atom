@@ -12,5 +12,7 @@ import java.util.Properties;
  */
 public interface TestRunnerHandler {
 
+    String TEST_OUTPUT_DIRECTORY = "test-output/";
+
     List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar, ExecutionListener<List<RunnerResult>> listener);
 }
