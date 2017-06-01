@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CRM Widget Sanity of Experience Level Validation Suite" verbose="1" parallel="methods" thread-count="4">
+    <test name="CRM Widget Sanity Experience Level Validation">
+        <classes>
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.ExperienceLevels.CrmUserExperienceTest">
+            </class>
+        </classes>
+    </test>
+</suite>
