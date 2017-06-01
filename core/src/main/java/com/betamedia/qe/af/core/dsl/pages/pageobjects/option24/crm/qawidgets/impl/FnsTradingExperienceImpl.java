@@ -87,6 +87,36 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         waitUntilDisplayed(resultPlaceholder);
     }
 
+    @Override
+    public void submitOnWizard(TradingExperienceInfo info) {
+        submitOnWizard(info.sharesExperience);
+        submitOnWizard(info.binaryExperience);
+        submitOnWizard(info.averageYearlyBinaryVolume);
+        submitOnWizard(info.forExExperience);
+        submitOnWizard(info.averageYearlyForExVolume);
+        submitOnWizard(info.commonLeverage);
+        submitOnWizard(info.financialWorkExperience);
+        submitOnWizard(info.cfdBinaryKnowledge);
+        submitOnWizard(info.mainFactorKnowledge);
+        submitOnWizard(info.howToCloseKnowledge);
+        submitOnWizard(info.cfdLeverageKnowledge);
+        submitOnWizard(info.stopLossKnowledge);
+        submitOnWizard(info.requiredMarginKnowledge);
+        submitOnWizard(info.marginLevelDropKnowledge);
+        submitOnWizard(info.automaticStopKnowledge);
+        submitOnWizard(info.lossOn1to50Knowledge);
+        submitOnWizard(info.lossOn1to200Knowledge);
+        submitOnWizard(info.binaryInvestProfitKnowledge);
+        submitOnWizard(info.binaryInvestLossKnowledge);
+        submitOnWizard(info.binaryProbabilityKnowledge);
+        waitUntilDisplayed(By.xpath("//*[@id=\"wizard-message\"]/div[3]/button")).click();
+    }
+
+    @Override
+    public void submitOnWizard(String dataValue) {
+        waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
+    }
+
 
     private static boolean notNull(Object o) {
         return o != null;
