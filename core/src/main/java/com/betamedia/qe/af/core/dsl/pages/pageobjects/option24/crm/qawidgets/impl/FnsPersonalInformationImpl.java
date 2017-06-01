@@ -7,10 +7,6 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.Fns
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Reporter;
-
-import java.util.List;
 
 /**
  * Created by vadimsn on 5/18/17.
@@ -96,8 +92,39 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     }
 
     @Override
+    public void submitOnWizard(PersonalInformation info) {
+        submitOnWizard(info.employmentStatus);
+        submitOnWizard(info.industry);
+
+        waitUntilDisplayed(employerName);
+        find(employerName).sendKeys(info.employerName);
+
+        waitUntilDisplayed(taxResidenceCountry);
+        in(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
+
+        submitOnWizard(info.isUSReportable);
+        submitOnWizard(info.hasTaxIdentificationNumber);
+
+        waitUntilDisplayed(taxIdentificationNumber);
+        find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
+
+        WebElement submitButton = find(By.xpath("//*[@id=\"fns-pi-form-space\"]/div/div[2]/div/div[3]/input"));
+        executeScript("arguments[0].scrollIntoView(true)", submitButton);
+        makeActions().moveToElement(submitButton).click().build().perform();
+
+        submitOnWizard(info.educationLevel);
+        submitOnWizard(info.educationField);
+        submitOnWizard(info.isPoliticallyExposed);
+        submitOnWizard(info.sourceOfFunds);
+        submitOnWizard(info.annualIncome);
+        submitOnWizard(info.netWealth);
+        submitOnWizard(info.expectedDepositsPerYear);
+        submitOnWizard(info.purposeOfTrading);
+    }
+
+    @Override
     public void submitOnWizard(String dataValue) {
-        waitUntilExists(By.cssSelector("li[data-value='"+dataValue+"']")).click();
+        waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
     }
 
     private static boolean notNull(Object o) {

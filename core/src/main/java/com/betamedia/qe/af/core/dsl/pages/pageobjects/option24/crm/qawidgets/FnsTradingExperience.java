@@ -8,4 +8,8 @@ import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuild
 public interface FnsTradingExperience {
 
     void submit(TradingExperienceInfo info);
+
+    void submitOnWizard(TradingExperienceInfo info);
+
+    void submitOnWizard(String dataValue);
 }

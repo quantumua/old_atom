@@ -335,6 +335,15 @@ public abstract class AbstractPageObject {
     }
 
     /**
+     * Executes the given script
+     *
+     * @see JavascriptExecutor#executeScript(String, Object...)
+     */
+    protected void executeScript(String script, Object... arguments) {
+        ((JavascriptExecutor) webDriver).executeScript(script, arguments);
+    }
+
+    /**
      * Take screen shot of page
      *
      * @see TakesScreenshot#getScreenshotAs(OutputType)

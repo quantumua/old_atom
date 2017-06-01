@@ -1,6 +1,7 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
 import com.google.common.base.Strings;
+import org.testng.Reporter;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -216,7 +217,9 @@ public class CustomerBuilder {
 
     public CustomerRO createCustomerRO() {
         formDefaultUniqueFields();
-        return new CustomerRO(userName, password, firstName, email, phone, currency, countryCode, lastName, utcOffset, oftc, birthOfDate, city, userAgent, lang, phoneTwo, registrationIp, stateCode, street, street2, title, zip, channel, campaign, kw, landingpage, siteid, p1, p2, p3, p4, p5, target);
+        CustomerRO customerRO =  new CustomerRO(userName, password, firstName, email, phone, currency, countryCode, lastName, utcOffset, oftc, birthOfDate, city, userAgent, lang, phoneTwo, registrationIp, stateCode, street, street2, title, zip, channel, campaign, kw, landingpage, siteid, p1, p2, p3, p4, p5, target);
+        addUserDetailsToReport(customerRO);
+        return customerRO;
     }
 
     private void formDefaultUniqueFields() {
@@ -236,6 +239,11 @@ public class CustomerBuilder {
 
     private String formPhoneNumber(){
         return Optional.ofNullable(phone).orElse(generateNumbersSequence(CHARS_IN_PHONE_NUMBER));
+    }
+
+    private void addUserDetailsToReport(CustomerRO customerRO) {
+        Reporter.log("Customer details:");
+        Reporter.log(customerRO.toString());
     }
 
     /**
