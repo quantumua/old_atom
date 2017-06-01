@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
+package com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels;
 
 import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;

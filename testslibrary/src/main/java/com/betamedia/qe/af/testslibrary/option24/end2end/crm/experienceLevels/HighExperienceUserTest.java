@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
+package com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels;
 
 import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
