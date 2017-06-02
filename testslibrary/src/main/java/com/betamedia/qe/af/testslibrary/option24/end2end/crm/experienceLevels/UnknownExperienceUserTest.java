@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels;
 
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
 
@@ -13,7 +13,7 @@ public class UnknownExperienceUserTest extends AbstractUserExperienceTest {
     private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         return customer;
     }
 

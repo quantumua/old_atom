@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.TradingExperienceInfo;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import org.testng.annotations.Test;
 
 import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Questions.*;
@@ -14,11 +14,11 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9029")
     public void checkCustomerWithScore31IsLowExperienceTest() {
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
-                new TradingExperienceInfoBuilder()
+                TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.NEVER.get())
                         .withBinaryExperience(BinaryExperience.REGULARLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -47,11 +47,11 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9071")
     public void checkCustomerWithScore45IsLowExperienceTest() {
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
-                new TradingExperienceInfoBuilder()
+                TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.REGULARLY.get())
                         .withBinaryExperience(BinaryExperience.REGULARLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_UNDER_500.get())
@@ -80,11 +80,11 @@ public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9032")
     public void checkCustomerWithScore50IsLowExperienceTest() {
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
-                new TradingExperienceInfoBuilder()
+                TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.REGULARLY.get())
                         .withBinaryExperience(BinaryExperience.REGULARLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_UNDER_500.get())

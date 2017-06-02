@@ -1,0 +1,16 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
+1.5.0,2017-06-01 00:00 +0000,TestObject1,testLocator1,ID,V1.5.0D1
+1.5.5,2017-06-01 00:00 +0000,TestObject1,testLocator1,ID,V1.5.5D1
+1.0.0,2017-06-01 00:00 +0000,TestObject1,testLocator1,ID,V1.0.0D1
+1.6.0,2017-06-01 00:00 +0000,TestObject1,testLocator1,ID,V1.6.0D1
+2.0.0,2017-06-01 00:00 +0000,TestObject1,testLocator1,ID,V2.0.0D1
+1.0.0,2017-06-02 00:00 +0000,TestObject1,testLocator1,ID,V1.0.0D2
+1.0.0,2017-06-03 00:00 +0000,TestObject1,testLocator1,ID,V1.0.0D3
+1.5.0,2017-06-02 00:00 +0000,TestObject1,testLocator1,ID,V1.5.0D2
+1.5.0,2017-06-03 00:00 +0000,TestObject1,testLocator1,ID,V1.5.0D3
+1.5.5,2017-06-02 00:00 +0000,TestObject1,testLocator1,ID,V1.5.5D2
+1.5.5,2017-06-03 00:00 +0000,TestObject1,testLocator1,ID,V1.5.5D3
+1.6.0,2017-06-02 00:00 +0000,TestObject1,testLocator1,ID,V1.6.0D2
+1.6.0,2017-06-03 00:00 +0000,TestObject1,testLocator1,ID,V1.6.0D3
+2.0.0,2017-06-02 00:00 +0000,TestObject1,testLocator1,ID,V2.0.0D2
+2.0.0,2017-06-03 00:00 +0000,TestObject1,testLocator1,ID,V2.0.0D3

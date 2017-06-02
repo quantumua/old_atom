@@ -2,9 +2,9 @@ package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
 import com.betamedia.qe.af.core.dsl.operations.CustomerOperations;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
@@ -55,15 +55,15 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public CRMCustomer register() {
-        return register(new CustomerBuilder());
+        return register(CustomerRO.builder().build());
     }
 
     /**
-     * Registers new CRM customer with given customer builder.
+     * Registers new CRM customer for given CustomerRO object.
      */
     @Override
-    public CRMCustomer register(CustomerBuilder customerBuilder) {
-        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO());
+    public CRMCustomer register(CustomerRO customerRO) {
+        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerRO);
         return verifyAndReturnCRMCustomer(register);
     }
 
@@ -71,9 +71,9 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Registers new CRM customer with marketing parameters.
      */
     @Override
-    public CRMCustomer register(CustomerBuilder customerBuilder, MarketingParametersBuilder marketingParametersBuilder) {
-        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO(),
-                marketingParametersBuilder.createMarketingRO());
+    public CRMCustomer register(CustomerRO customerRO, MarketingParametersRO marketingParametersRO) {
+        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerRO,
+                marketingParametersRO);
         return verifyAndReturnCRMCustomer(register);
     }
 
@@ -81,8 +81,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Registers new CRM customer and expects errors.
      */
     @Override
-    public List<CRMError> registerWithErrors(CustomerBuilder customerBuilder) {
-        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerBuilder.createCustomerRO());
+    public List<CRMError> registerWithErrors(CustomerRO customerRO) {
+        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerRO);
         List<CRMError> registerErrors = register.getErrors();
         assertFalse(registerErrors.isEmpty(), "Registration errors were expected, but there were none.");
         return registerErrors;
@@ -125,8 +125,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit with given deposit builder.
      */
     @Override
-    public CRMDeposit deposit(MobileDepositBuilder depositBuilder) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(depositBuilder.createMobileDepositRO());
+    public CRMDeposit deposit(MobileDepositRO deposit) {
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(deposit);
         return verifyAndReturnDepositResult(depositResponse);
     }
 
@@ -134,8 +134,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit with marketing parameters.
      */
     @Override
-    public CRMDeposit deposit(MobileDepositBuilder depositBuilder, MarketingParametersBuilder marketingParametersBuilder) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(depositBuilder.createMobileDepositRO(), marketingParametersBuilder.createMarketingRO());
+    public CRMDeposit deposit(MobileDepositRO deposit, MarketingParametersRO marketingParametersRO) {
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(deposit, marketingParametersRO);
         return verifyAndReturnDepositResult(depositResponse);
     }
 
@@ -152,8 +152,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit and expects errors.
      */
     @Override
-    public List<CRMError> depositWithErrors(MobileDepositBuilder depositBuilder) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(depositBuilder.createMobileDepositRO());
+    public List<CRMError> depositWithErrors(MobileDepositRO deposit) {
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(deposit);
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
         return depositErrors;
@@ -163,8 +163,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit by name with given deposit builder.
      */
     @Override
-    public CRMDeposit depositByName(MobileDepositBuilder depositBuilder) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(depositBuilder.createMobileDepositRO());
+    public CRMDeposit depositByName(MobileDepositRO deposit) {
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(deposit);
         CRMDeposit depositResult = depositResponse.getResult();
         List<CRMError> depositErrors = depositResponse.getErrors();
 
@@ -177,8 +177,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      * Performs a deposit by name and expects errors.
      */
     @Override
-    public List<CRMError> depositByNameWithErrors(MobileDepositBuilder depositBuilder) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(depositBuilder.createMobileDepositRO());
+    public List<CRMError> depositByNameWithErrors(MobileDepositRO deposit) {
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(deposit);
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
         return depositErrors;
@@ -218,13 +218,12 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Override
     public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
-        CRMCustomer registeredCustomer = register(new CustomerBuilder());
+        CRMCustomer registeredCustomer = register();
         updateOnboardingConditionsInDB(registeredCustomer.getId(), wizardConditions);
 
         String tradingAccountId = registeredCustomer.getBinaryAccount().getExternalId();
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
         if (wizardConditions.hasDeposit()) {
-            deposit(depositBuilder);
+            deposit(MobileDepositRO.builder(tradingAccountId).build());
         }
 
         return registeredCustomer;

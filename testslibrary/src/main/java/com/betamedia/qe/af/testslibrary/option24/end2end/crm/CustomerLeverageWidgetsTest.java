@@ -1,8 +1,8 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.CreditCardDepositBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -74,7 +74,7 @@ public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTes
     public void checkThatUnknownCustomerCanSelectLeverage() {
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         pages().crmNavigation().setLeverage();
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),1);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
@@ -85,11 +85,12 @@ public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTes
         CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions);
         operations().customerOperations().updateExperienceScoreInDB(crmCustomer.getId(), experienceScore.get());
         pages().crmNavigation().login();
-        pages().crmLoginPage().login(crmCustomer.getUserName(), CustomerBuilder.PASSWORD);
-        CreditCardDepositBuilder ccDepositBuilder = new CreditCardDepositBuilder();
-        ccDepositBuilder.withDepositAmount("100");
+        pages().crmLoginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         pages().crmNavigation().creditCardDeposit();
-        pages().creditCardDeposit().submit(ccDepositBuilder.build());
+        pages().creditCardDeposit().submit(
+                CreditCardDeposit.builder()
+                        .withDepositAmount("100")
+                        .build());
         return crmCustomer;
     }
 

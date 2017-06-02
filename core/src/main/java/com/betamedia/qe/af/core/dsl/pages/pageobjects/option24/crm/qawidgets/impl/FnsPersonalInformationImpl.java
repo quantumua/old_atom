@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder.PersonalInformation;
+import com.betamedia.qe.af.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;

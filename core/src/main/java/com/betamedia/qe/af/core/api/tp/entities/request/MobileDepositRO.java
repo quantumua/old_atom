@@ -1,13 +1,13 @@
 package com.betamedia.qe.af.core.api.tp.entities.request;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
+import com.betamedia.qe.af.core.api.tp.adapters.impl.AbstractMobileCRMHTTPAdapter;
 
 /**
  * Request object for mobile CRM deposit.
  *
  * Created by Oleksandr Losiev on 4/21/17.
  *
- * @see MobileDepositBuilder
+ * @see MobileDepositROBuilder
  */
 public class MobileDepositRO {
 
@@ -30,7 +30,7 @@ public class MobileDepositRO {
     private String tradingAccountId;
     private String tradingAccountName;
 
-    public MobileDepositRO(String lang, String currency, String amount, String address, String city, String countryCode,
+    private MobileDepositRO(String lang, String currency, String amount, String address, String city, String countryCode,
                            String zip, String ccNumber, String cvv2, String expMonth, String expYear,
                            String holderFirstName, String holderLastName, String tradingAccountId, String tradingAccountName) {
         this.lang = lang;
@@ -108,5 +108,124 @@ public class MobileDepositRO {
 
     public String getTradingAccountName() {
         return tradingAccountName;
+    }
+
+    public static MobileDepositROBuilder builder(String tradingAccountId){
+        return new MobileDepositROBuilder(tradingAccountId);
+    }
+
+    /**
+     * This is a builder for MobileDepositRO, which, in turn, is used by mobile crm adatper.
+     *
+     * Created by Oleksandr Losiev on 4/21/17.
+     *
+     * @see MobileDepositRO
+     * @see AbstractMobileCRMHTTPAdapter
+     */
+    public static class MobileDepositROBuilder {
+
+        private String language = "en";
+        private String currency = "USD";
+        private Long amount = 100L;
+
+        private String address = "301E45";
+        private String city = "NYC";
+        private String countryCode = "AR";
+        private Integer zipCode = 10017;
+
+        private Long creditCardNumber = 4444436501403986L;
+        private Integer cvv2 = 685;
+        private Integer expiryMonth = 12;
+        private Integer expiryYear = 2022;
+        private String holderFirstName = "Cosmo";
+        private String holderLastName = "Kramer";
+
+        private String tradingAccountId;
+        private String tradingAccountName;
+
+        private MobileDepositROBuilder(String tradingAccountId) {
+            this.tradingAccountId = tradingAccountId;
+        }
+
+        public MobileDepositROBuilder setLanguage(String language) {
+            this.language = language;
+            return this;
+        }
+
+        public MobileDepositROBuilder setCurrency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        public MobileDepositROBuilder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+        }
+
+        public MobileDepositROBuilder setAddress(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public MobileDepositROBuilder setCity(String city) {
+            this.city = city;
+            return this;
+        }
+
+        public MobileDepositROBuilder setCountryCode(String countryCode) {
+            this.countryCode = countryCode;
+            return this;
+        }
+
+        public MobileDepositROBuilder setZipCode(Integer zipCode) {
+            this.zipCode = zipCode;
+            return this;
+        }
+
+        public MobileDepositROBuilder setCreditCardNumber(Long creditCardNumber) {
+            this.creditCardNumber = creditCardNumber;
+            return this;
+        }
+
+        public MobileDepositROBuilder setCvv2(Integer cvv2) {
+            this.cvv2 = cvv2;
+            return this;
+        }
+
+        public MobileDepositROBuilder setExpiryMonth(Integer expiryMonth) {
+            this.expiryMonth = expiryMonth;
+            return this;
+        }
+
+        public MobileDepositROBuilder setExpiryYear(Integer expiryYear) {
+            this.expiryYear = expiryYear;
+            return this;
+        }
+
+        public MobileDepositROBuilder setHolderFirstName(String holderFirstName) {
+            this.holderFirstName = holderFirstName;
+            return this;
+        }
+
+        public MobileDepositROBuilder setHolderLastName(String holderLastName) {
+            this.holderLastName = holderLastName;
+            return this;
+        }
+
+        public MobileDepositROBuilder setTradingAccountId(String tradingAccountId) {
+            this.tradingAccountId = tradingAccountId;
+            return this;
+        }
+
+        public MobileDepositROBuilder setTradingAccountName(String tradingAccountName) {
+            this.tradingAccountName = tradingAccountName;
+            return this;
+        }
+
+        public MobileDepositRO build() {
+            return new MobileDepositRO(language, currency, amount.toString(), address, city, countryCode, zipCode.toString(),
+                    creditCardNumber.toString(), cvv2.toString(), expiryMonth.toString(), expiryYear.toString(),
+                    holderFirstName, holderLastName, tradingAccountId, tradingAccountName);
+        }
     }
 }

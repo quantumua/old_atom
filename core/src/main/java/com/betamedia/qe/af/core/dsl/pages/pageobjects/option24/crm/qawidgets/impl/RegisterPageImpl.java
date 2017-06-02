@@ -1,7 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.RegisterPage;
@@ -73,6 +72,6 @@ public class RegisterPageImpl extends AbstractPageObject implements RegisterPage
 
     @Override
     public void register() {
-        register(new CustomerBuilder().createCustomerRO());
+        register(CustomerRO.builder().build());
     }
 }

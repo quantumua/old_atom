@@ -4,7 +4,7 @@ import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;
 import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
-import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.AccountRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccountCreate;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.TPCRMResponse;
@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Set;
 
-import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.PASSWORD;
+import static com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.PASSWORD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -127,20 +127,22 @@ public abstract class AbstractAccountOperations<T extends EnvironmentDependent> 
      */
     @Override
     public Account getCRM() {
-        return getCRM(new AccountBuilder().setBrandDisplayId(brandOperations.get().getDisplayId()));
+        return getCRM(AccountRO.builder().setBrandDisplayId(brandOperations.get().getDisplayId()));
     }
 
     /**
+     * TODO: work with AccountRO instead of builder (implement clone builder for mutating state)<br/>
+     *
      * A method to register and get a CRM account using the specified account builder.
      * If the account builder's brand display id is not set, current display id will be used.
      * @return crm account
      */
     @Override
-    public Account getCRM(AccountBuilder accountBuilder) {
-        if (accountBuilder.getBrandDisplayId() == null) {
-            accountBuilder.setBrandDisplayId(brandOperations.get().getDisplayId());
+    public Account getCRM(AccountRO.AccountROBuilder accountROBuilder) {
+        if (accountROBuilder.getBrandDisplayId() == null) {
+            accountROBuilder.setBrandDisplayId(brandOperations.get().getDisplayId());
         }
-        TPCRMResponse<CRMAccountCreate> register = crmHttpAdapter.create(accountBuilder.createAccountRO());
+        TPCRMResponse<CRMAccountCreate> register = crmHttpAdapter.create(accountROBuilder.build());
         assertNotNull(register.getResult(), "The new account wasn't created" + register.getErrors());
         return getTP(register.getResult().getAccountId());
     }

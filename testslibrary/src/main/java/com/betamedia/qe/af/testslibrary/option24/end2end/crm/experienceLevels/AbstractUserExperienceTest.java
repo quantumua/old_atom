@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 
 import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Questions.*;
@@ -9,8 +9,8 @@ import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionn
  * Created by mbelyaev on 5/22/17.
  */
 public abstract class AbstractUserExperienceTest extends TPEndToEndTest {
-    protected PersonalInformationBuilder.PersonalInformation personalInfoScore10() {
-        return new PersonalInformationBuilder()
+    protected PersonalInformation personalInfoScore10() {
+        return PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE.get())
                 .withIndustry(Industry.FINANCE.get())
                 .withEmployerName("fgsfds")
@@ -29,8 +29,8 @@ public abstract class AbstractUserExperienceTest extends TPEndToEndTest {
                 .build();
     }
 
-    protected PersonalInformationBuilder.PersonalInformation personalInfoScore0() {
-        return new PersonalInformationBuilder()
+    protected PersonalInformation personalInfoScore0() {
+        return PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE.get())
                 .withIndustry(Industry.COMPUTER.get())
                 .withEmployerName("fgsfds")
@@ -49,8 +49,8 @@ public abstract class AbstractUserExperienceTest extends TPEndToEndTest {
                 .build();
     }
 
-    protected PersonalInformationBuilder.PersonalInformation personalInfoScore5() {
-        return new PersonalInformationBuilder()
+    protected PersonalInformation personalInfoScore5() {
+        return PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE.get())
                 .withIndustry(Industry.FINANCE.get())
                 .withEmployerName("fgsfds")

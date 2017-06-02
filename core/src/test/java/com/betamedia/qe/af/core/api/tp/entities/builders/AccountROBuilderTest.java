@@ -1,13 +1,12 @@
 package com.betamedia.qe.af.core.api.tp.entities.builders;
 
-import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.CHARS_IN_ID;
-import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.TP_AUTOMATION_PREFIX;
+import static com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.TP_AUTOMATION_PREFIX;
 import static org.testng.Assert.*;
 
 import org.testng.annotations.Test;
 import com.betamedia.qe.af.core.api.tp.entities.request.AccountRO;
 
-public class AccountBuilderTest {
+public class AccountROBuilderTest {
 
     private final String ACCOUNTSTATUS = "accountStatus";
     private final String ACCOUNTTYPE = "accountType";
@@ -24,24 +23,24 @@ public class AccountBuilderTest {
 
     @Test(expectedExceptions = NullPointerException.class)
     public void testNPEWhenNoBrandId() {
-        new AccountBuilder().createAccountRO();
+        AccountRO.builder().build();
     }
 
     @Test()
     public void testDefaultUniqueFields() {
-        AccountRO accountRO = getRequired().createAccountRO();
+        AccountRO accountRO = getRequired();
         assertTrue(accountRO.getFirstName().contains(TP_AUTOMATION_PREFIX));
         assertTrue(accountRO.getFirstName().length()>TP_AUTOMATION_PREFIX.length());
     }
 
     @Test()
     public void testCreateAccountRO() {
-        checkFieldsValues(getAll().createAccountRO());
+        checkFieldsValues(getAll().build());
     }
 
 
-    private AccountBuilder getAll() {
-        return new AccountBuilder()
+    private AccountRO.AccountROBuilder getAll() {
+        return AccountRO.builder()
                 .setAccountStatus(ACCOUNTSTATUS)
                 .setAccountType(ACCOUNTTYPE)
                 .setAcountGroupId(ACOUNTGROUPID)
@@ -72,9 +71,7 @@ public class AccountBuilderTest {
         assertEquals(accountRO.getPriceType(), PRICETYPE);
     }
 
-    private AccountBuilder getRequired() {
-        AccountBuilder acountBuilder = new AccountBuilder();
-        acountBuilder.setBrandDisplayId(BRANDDISPLAYID);
-        return acountBuilder;
+    private AccountRO getRequired() {
+        return AccountRO.builder().setBrandDisplayId(BRANDDISPLAYID).build();
     }
 }

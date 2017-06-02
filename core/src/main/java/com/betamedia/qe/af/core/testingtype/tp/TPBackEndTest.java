@@ -8,10 +8,10 @@ import com.betamedia.qe.af.core.testingtype.base.AbstractBackEndTest;
  * @author Maksym Tsybulskyy
  *         Date: 3/22/17.
  */
-public class TPBackEndTest extends AbstractBackEndTest<TPTemplate> {
+public abstract class TPBackEndTest extends AbstractBackEndTest<TPTemplate> {
 
     @Override
-    public TPTemplate getOperationTemplate() {
+    public final TPTemplate getOperationTemplate() {
         return ThreadLocalBeansHolder.getOperationsTemplateThreadLocal();
     }
 }

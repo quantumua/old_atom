@@ -48,7 +48,7 @@ public class PropertiesUtilsTest {
     private Properties get(String browser, String version, String domain, String remoteDriver) {
         Properties properties = new Properties();
         properties.put(ConfigurationPropertyKey.BROWSER_TYPE, browser);
-        properties.put(ConfigurationPropertyKey.ID_VERSION, version);
+        properties.put(ConfigurationPropertyKey.IMPLEMENTATION_VERSION, version);
         properties.put(ConfigurationPropertyKey.ENVIRONMENT_URL, domain);
         properties.put(ConfigurationPropertyKey.REMOTE_DRIVER_URL, remoteDriver);
         return properties;

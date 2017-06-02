@@ -16,11 +16,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
 /**
- * Created by mbelyaev on 2/24/17.
+ * @author mbelyaev
+ * @since 2/24/17
  */
 @Configuration
 public class WebDriverConfig {
@@ -29,11 +29,10 @@ public class WebDriverConfig {
      *
      * @param chromeDriverPath
      * @return
-     * @throws IOException
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
     @Lazy
-    public ChromeDriverService chromeDriverService(@Value("${chrome.driver.path}") String chromeDriverPath) throws IOException {
+    public ChromeDriverService chromeDriverService(@Value("${chrome.driver.path}") String chromeDriverPath) {
         return new ChromeDriverService.Builder()
                 .usingDriverExecutable(new File(chromeDriverPath))
                 .usingAnyFreePort()

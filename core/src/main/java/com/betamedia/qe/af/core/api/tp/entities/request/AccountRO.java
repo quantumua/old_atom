@@ -2,6 +2,10 @@ package com.betamedia.qe.af.core.api.tp.entities.request;
 
 import java.util.Objects;
 
+import static com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.CHARS_IN_ID;
+import static com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.TP_AUTOMATION_PREFIX;
+import static com.betamedia.qe.af.core.utils.StringUtils.generateRandomId;
+
 /**
  * @author Maksym Tsybulskyy
  *         Date: 3/28/17.
@@ -26,7 +30,7 @@ public class AccountRO {
     //    us - United States, it - Italy, jp -Japan ...
     private String country;
 
-    public AccountRO(String currency, String accountType, String brandId, String priceType, String acountGroupId, String firstName, String lastName, String description, String email, String phone, String accountStatus, String country) {
+    private AccountRO(String currency, String accountType, String brandId, String priceType, String acountGroupId, String firstName, String lastName, String description, String email, String phone, String accountStatus, String country) {
         Objects.requireNonNull(currency);
         Objects.requireNonNull(accountType);
         Objects.requireNonNull(brandId);
@@ -108,5 +112,96 @@ public class AccountRO {
                 ", accountStatus='" + accountStatus + '\'' +
                 ", country='" + country + '\'' +
                 '}';
+    }
+
+    public static AccountROBuilder builder(){
+        return new AccountROBuilder();
+    }
+
+    public static class AccountROBuilder {
+
+        private String currency = "usd";
+        private String accountType = "real";
+        private String brandDisplayId;
+        private String priceType;
+        private String acountGroupId;
+        private String firstName;
+        private String lastName;
+        private String description;
+        private String email;
+        private String phone;
+        private String accountStatus;
+        private String country;
+
+        private AccountROBuilder(){}
+
+        public AccountROBuilder setCurrency(String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        public AccountROBuilder setAccountType(String accountType) {
+            this.accountType = accountType;
+            return this;
+        }
+
+        public AccountROBuilder setBrandDisplayId(String brandDisplayId) {
+            this.brandDisplayId = brandDisplayId;
+            return this;
+        }
+
+        public AccountROBuilder setPriceType(String priceType) {
+            this.priceType = priceType;
+            return this;
+        }
+
+        public AccountROBuilder setAcountGroupId(String acountGroupId) {
+            this.acountGroupId = acountGroupId;
+            return this;
+        }
+
+        public AccountROBuilder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public AccountROBuilder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public AccountROBuilder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public AccountROBuilder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public AccountROBuilder setPhone(String phone) {
+            this.phone = phone;
+            return this;
+        }
+
+        public AccountROBuilder setAccountStatus(String accountStatus) {
+            this.accountStatus = accountStatus;
+            return this;
+        }
+
+        public AccountROBuilder setCountry(String country) {
+            this.country = country;
+            return this;
+        }
+
+        public String getBrandDisplayId() {
+            return brandDisplayId;
+        }
+
+        public AccountRO build() {
+            firstName = firstName!=null? firstName : TP_AUTOMATION_PREFIX + generateRandomId(CHARS_IN_ID);
+            return new AccountRO(currency, accountType, brandDisplayId, priceType, acountGroupId, firstName, lastName, description, email, phone, accountStatus, country);
+        }
     }
 }

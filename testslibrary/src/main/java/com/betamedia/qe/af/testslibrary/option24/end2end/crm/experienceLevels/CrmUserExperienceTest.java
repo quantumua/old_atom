@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.TradingExperienceInfo;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
 
@@ -15,7 +15,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
     private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         return customer;
     }
 
@@ -32,7 +32,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
         CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
-                new TradingExperienceInfoBuilder()
+                TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.NEVER.get())
                         .withBinaryExperience(BinaryExperience.REGULARLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_UNDER_500.get())
@@ -63,7 +63,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
         CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
-                new TradingExperienceInfoBuilder()
+                TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.NEVER.get())
                         .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K.get())
@@ -94,7 +94,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
         CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
-                new TradingExperienceInfoBuilder()
+                TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.REGULARLY.get())
                         .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K.get())
@@ -125,7 +125,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
         CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
-                new TradingExperienceInfoBuilder()
+                TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.REGULARLY.get())
                         .withBinaryExperience(BinaryExperience.NEVER.get())
                         .withForExExperience(ForExExperience.FREQUENTLY.get())
@@ -157,7 +157,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
         CRMCustomer customer = crmRegisterAndLogIn();
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
-                new TradingExperienceInfoBuilder()
+                TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.FREQUENTLY.get())
                         .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())

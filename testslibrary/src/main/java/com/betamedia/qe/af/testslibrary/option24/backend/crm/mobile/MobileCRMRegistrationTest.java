@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
@@ -22,7 +22,7 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
 
     @DataProvider(name = "registrationCurrencies")
     public static Object[][] currencies() {
-        return new Object[][] {
+        return new Object[][]{
                 {"CHF", "CHF"},
                 {"JPY", "JPY"},
                 {"USD", "EUR"},
@@ -32,7 +32,7 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
 
     @DataProvider(name = "notSupportedCurrencies")
     public static Object[][] notSupportedCurrencies() {
-        return new Object[][] {
+        return new Object[][]{
                 {"BRL", "EUR"},
                 {"VER", "EUR"},
                 {"NULL", "EUR"},
@@ -47,10 +47,11 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
 
     @Test(dataProvider = "registrationCurrencies")
     public void testRegistrationCurrencies(String registrationCurrency, String expectedCurrency) {
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        customerBuilder.setCurrency(registrationCurrency);
 
-        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder);
+        CRMCustomer registeredCustomer = operations().customerOperations().register(
+                CustomerRO.builder()
+                        .setCurrency(registrationCurrency)
+                        .build());
 
         CRMAccount[] accounts = registeredCustomer.getAccounts();
         for (CRMAccount account : accounts) {
@@ -63,10 +64,11 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
         final String expectedErrorCode = "CurrencyNotSupported";
         final String expectedErrorMessage = "Currency is not supported";
 
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        customerBuilder.setCurrency(registrationCurrency);
-
-        List<CRMError> registrationErrors = operations().customerOperations().registerWithErrors(customerBuilder);
+        List<CRMError> registrationErrors = operations().customerOperations().registerWithErrors(
+                CustomerRO.builder()
+                        .setCurrency(registrationCurrency)
+                        .build()
+        );
 
         assertTrue(registrationErrors.size() == 1);
         CRMError error = registrationErrors.get(0);
@@ -78,21 +80,24 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
     public void testRegistrationWithTargetForex() {
         final String targetForex = "forex";
 
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        customerBuilder.setTarget(targetForex);
-
-        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder);
+        CRMCustomer registeredCustomer = operations().customerOperations().register(
+                CustomerRO.builder()
+                        .setTarget(targetForex)
+                        .build()
+        );
         assertNotNull(registeredCustomer);
     }
 
     @Test
     public void testRegistrationSymbolsNotEncoded() {
         final String decodedName = "Ù\u0081Ù\u0087Ø¯Ø§Ù\u0084Ø¨Ø±Ø§Ù\u0083";
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        customerBuilder.setFirstName(decodedName);
-        customerBuilder.setLastName(decodedName);
 
-        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder);
+        CRMCustomer registeredCustomer = operations().customerOperations().register(
+                CustomerRO.builder()
+                        .setFirstName(decodedName)
+                        .setLastName(decodedName)
+                        .build()
+        );
         assertNotNull(registeredCustomer);
         assertEquals(decodedName, registeredCustomer.getFirstName());
         assertEquals(decodedName, registeredCustomer.getLastName());

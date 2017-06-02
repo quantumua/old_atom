@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import org.testng.annotations.Test;
 
 /**
@@ -12,7 +12,7 @@ public class MobileCRMOnboardingDemoWizardConditionsTest extends AbstractOnboard
     @Test(dataProvider = "GenericDataProvider")
     public void testWizard2(OnboardingWizardConditions conditions) throws Exception {
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(conditions.username(), CustomerBuilder.PASSWORD);
+        pages().loginPage().login(conditions.username(), CustomerRO.CustomerROBuilder.PASSWORD);
 
         verifyResultingSlidesShown(conditions);
     }

@@ -2,9 +2,13 @@ package com.betamedia.qe.af.core.fwdataaccess.repository.impl;
 
 import com.betamedia.qe.af.core.fwdataaccess.entities.FindBy;
 import com.betamedia.qe.af.core.fwdataaccess.entities.PageElementLocation;
+import com.betamedia.qe.af.core.fwdataaccess.repository.util.Index;
+import com.betamedia.qe.af.core.fwdataaccess.repository.util.RepositoryVersion;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
@@ -14,102 +18,56 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toMap;
 
 /**
- * Created by mbelyaev on 2/16/17.
+ * @author mbelyaev
+ * @since 2/16/17
  */
 @Repository
 public class WebElementRepository {
+    private static final Logger logger = LogManager.getLogger(WebElementRepository.class);
+
+    private static final String DEFAULT_WEB_OBJECTS_PATH = "/webobjects/webObjectRepository.csv";
+    private static final String INITIALIZATION_ERROR_MESSAGE = "Failed to initialize web element ID storage";
 
     private List<PageElementLocation> pageElements = null;
+    private String webObjectsPath = DEFAULT_WEB_OBJECTS_PATH;
 
     @PostConstruct
     public void populateRepository() throws IOException {
         HeaderColumnNameMappingStrategy<PageElementLocation> strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(PageElementLocation.class);
         CsvToBean<PageElementLocation> csvToBean = new CsvToBean<>();
-        try (InputStream resourceInputStream = new ClassPathResource("/webobjects/webObjectRepository.csv").getInputStream();) {
+        try (InputStream resourceInputStream = new ClassPathResource(webObjectsPath).getInputStream();) {
             pageElements = csvToBean.parse(strategy, new CSVReader(new InputStreamReader(resourceInputStream)));
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to initialize web elements IDs store");
+            logger.error(INITIALIZATION_ERROR_MESSAGE, e);
+            throw new RuntimeException(INITIALIZATION_ERROR_MESSAGE);
         }
     }
 
-    public Map<Index, FindBy> getVersionedWebElements(String build) {
-        return getPageElements().filter(el -> matchesAppVersion(el, build))
-                .collect(Collectors.toMap(Index::new, el -> new FindBy(el.getLocatorType(), el.getValue())));
-    }
-
-    private boolean matchesAppVersion(PageElementLocation el, String targetVersion) {
-        return versionCompare(el.getBuild(), targetVersion) <= 0;
-    }
-
-    public Stream<PageElementLocation> getPageElements() {
-        return pageElements.stream();
+    public void setWebObjectsPath(String webObjectsPath) {
+        this.webObjectsPath = webObjectsPath;
     }
 
     /**
-     * Compares two version strings.
-     * <p>
-     * Use this instead of String.compareTo() for a non-lexicographical
-     * comparison that works for version strings. e.g. "1.10".compareTo("1.6").
-     *
-     * @param str1 a string of ordinal numbers separated by decimal points.
-     * @param str2 a string of ordinal numbers separated by decimal points.
-     * @return The result is a negative integer if str1 is _numerically_ less than str2.
-     * The result is a positive integer if str1 is _numerically_ greater than str2.
-     * The result is zero if the strings are _numerically_ equal.
-     * @note It does not work if "1.10" is supposed to be equal to "1.10.0".
+     * {@link RepositoryVersion} matching strategy:
+     * <li>
+     * <ul>-If no implementation version is provided, use latest available</ul>
+     * <ul>-If no revision date provided, use latest available</ul>
+     * <ul>-Both fields have lexicographical order: in case there is no exact match for requested version, use the earliest available before it</ul>
+     * </li>
      */
-    private static int versionCompare(String str1, String str2) {
-        String[] vals1 = str1.split("\\.");
-        String[] vals2 = str2.split("\\.");
-        int i = 0;
-        // set index to first non-equal ordinal or length of shortest version string
-        while (i < vals1.length && i < vals2.length && vals1[i].equals(vals2[i])) {
-            i++;
-        }
-        // compare first non-equal ordinal number
-        if (i < vals1.length && i < vals2.length) {
-            int diff = Integer.valueOf(vals1[i]).compareTo(Integer.valueOf(vals2[i]));
-            return Integer.signum(diff);
-        }
-        // the strings are equal or one string is a substring of the other
-        // e.g. "1.2.3" = "1.2.3" or "1.2.3" < "1.2.3.4"
-        return Integer.signum(vals1.length - vals2.length);
+
+    public Map<Index, FindBy> getVersionedWebElements(RepositoryVersion targetVersion) {
+        return pageElements.stream()
+                .filter(p -> p.getRepositoryVersion().compareTo(targetVersion) <= 0)
+                .sorted(comparing(PageElementLocation::getRepositoryVersion))
+                .collect(toMap(PageElementLocation::getIndex, PageElementLocation::getFindBy, (findBy, findBy2) -> findBy2));
     }
 
-    public static class Index {
-        private String pageObjectName;
-        private String elementId;
-
-        Index(String pageObjectName, String elementId) {
-            this.pageObjectName = pageObjectName;
-            this.elementId = elementId;
-        }
-
-        Index(PageElementLocation pageElementLocation) {
-            this.pageObjectName = pageElementLocation.getPageObjectName();
-            this.elementId = pageElementLocation.getLocatorId();
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Index index = (Index) o;
-            return Objects.equals(pageObjectName, index.pageObjectName) &&
-                    Objects.equals(elementId, index.elementId);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(pageObjectName, elementId);
-        }
-    }
 
 }

@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountAdditionalDetailsBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
@@ -31,7 +31,7 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     }
 
     @Override
-    public void update(AccountAdditionalDetailsBuilder.AccountAdditionalDetails info) {
+    public void update(AccountAdditionalDetails info) {
         waitUntilDisplayed(birthDateDay);
         in(birthDateDay).selectByValue(info.birthDateDay);
         in(birthDateMonth).selectByValue(info.birthDateMonth);

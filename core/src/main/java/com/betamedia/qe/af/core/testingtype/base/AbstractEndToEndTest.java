@@ -2,7 +2,6 @@ package com.betamedia.qe.af.core.testingtype.base;
 
 import com.betamedia.qe.af.core.dsl.pages.factory.AbstractPageFactory;
 import com.betamedia.qe.af.core.dsl.templates.BackEndOperationsTemplate;
-import org.testng.annotations.AfterMethod;
 
 import java.util.Optional;
 
@@ -20,17 +19,16 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
 
     public abstract P getPageFactory();
 
-    @AfterMethod
-    public void tearDown() {
-        if (keepBrowser()) return;
+    @Override
+    protected void tearDown() {
         if (pages.get() != null) {
             pages.get().browser().closeBrowser();
-            pages.set(null);
+            pages.remove();
         }
     }
 
     @Override
-    public P pages() {
+    public final P pages() {
         if (pages.get() == null) {
             P pageFactory = getPageFactory();
             pageFactory.browser().maximizeWindow();
@@ -39,7 +37,7 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
         return pages.get();
     }
 
-    public T operations() {
+    public final T operations() {
         if (operationTemplate == null) {
             operationTemplate = getOperationTemplate();
         }
@@ -47,7 +45,7 @@ public abstract class AbstractEndToEndTest<T extends BackEndOperationsTemplate, 
     }
 
     @Override
-    public Optional<P> optPages() {
+    public final Optional<P> optPages() {
         return Optional.ofNullable(pages.get());
     }
 }

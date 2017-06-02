@@ -10,14 +10,14 @@ import com.betamedia.qe.af.core.testingtype.base.AbstractEndToEndTest;
  * @author Maksym Tsybulskyy
  *         Date: 3/22/17.
  */
-public class TPEndToEndTest extends AbstractEndToEndTest<TPTemplate, TPPageFactoryImpl> {
+public abstract class TPEndToEndTest extends AbstractEndToEndTest<TPTemplate, TPPageFactoryImpl> {
     @Override
-    public TPTemplate getOperationTemplate() {
+    public final TPTemplate getOperationTemplate() {
         return ThreadLocalBeansHolder.getOperationsTemplateThreadLocal();
     }
 
     @Override
-    public TPPageFactoryImpl getPageFactory() {
+    public final TPPageFactoryImpl getPageFactory() {
         return AppContextHolder.getBean(TPPageFactoryImpl.class);
     }
 }

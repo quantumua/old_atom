@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.web;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 import org.testng.Assert;
@@ -14,7 +14,7 @@ public class HandleBinaryBiddingMessages extends TPEndToEndTest {
     public void bidDuringZeroBalanceTest() {
         CRMCustomer customer = operations().customerOperations().register();
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         pages().topNavigationPage().binary();
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -34,7 +34,7 @@ public class HandleBinaryBiddingMessages extends TPEndToEndTest {
     public void bidMoreThanNoneZeroBalanceTest() {
         CRMCustomer customer = operations().customerOperations().register();
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         pages().topNavigationPage().binary();
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -53,7 +53,7 @@ public class HandleBinaryBiddingMessages extends TPEndToEndTest {
     public void checkAmountErrorMessagesTest() {
         CRMCustomer customer = operations().customerOperations().register();
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         pages().topNavigationPage().binary();
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();

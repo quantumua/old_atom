@@ -1,8 +1,8 @@
 package com.betamedia.qe.af;
 
 import com.betamedia.qe.af.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
-import com.betamedia.qe.af.core.holders.AppContextHolder;
 import com.betamedia.qe.af.core.fwtestrunner.storage.StorageProperties;
+import com.betamedia.qe.af.core.holders.AppContextHolder;
 import com.betamedia.qe.af.core.fwtestrunner.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

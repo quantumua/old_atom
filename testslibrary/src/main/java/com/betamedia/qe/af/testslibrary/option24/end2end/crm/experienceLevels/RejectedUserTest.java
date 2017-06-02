@@ -1,8 +1,8 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
 import org.testng.annotations.Test;
@@ -15,7 +15,7 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
     private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         return customer;
     }
 
@@ -69,8 +69,8 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
         );
     }
 
-    private TradingExperienceInfoBuilder.TradingExperienceInfo tradingExperienceInfoWith0Score() {
-        return new TradingExperienceInfoBuilder()
+    private TradingExperienceInfo tradingExperienceInfoWith0Score() {
+        return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())
                 .withBinaryExperience(Questions.BinaryExperience.NEVER.get())
                 .withForExExperience(Questions.ForExExperience.NEVER.get())
@@ -90,8 +90,8 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_35.get())
                 .build();
     }
-    private TradingExperienceInfoBuilder.TradingExperienceInfo tradingExperienceInfoWith10Score() {
-        return new TradingExperienceInfoBuilder()
+    private TradingExperienceInfo tradingExperienceInfoWith10Score() {
+        return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())
                 .withBinaryExperience(Questions.BinaryExperience.NEVER.get())
                 .withForExExperience(Questions.ForExExperience.NEVER.get())
@@ -112,8 +112,8 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
                 .build();
     }
 
-    private TradingExperienceInfoBuilder.TradingExperienceInfo tradingExperienceInfoWith15Score() {
-        return  new TradingExperienceInfoBuilder()
+    private TradingExperienceInfo tradingExperienceInfoWith15Score() {
+        return  TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())
                 .withBinaryExperience(Questions.BinaryExperience.NEVER.get())
                 .withForExExperience(Questions.ForExExperience.NEVER.get())

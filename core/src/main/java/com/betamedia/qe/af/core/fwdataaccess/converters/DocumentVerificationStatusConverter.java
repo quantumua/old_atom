@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.dataprovider.csv.converters;
+package com.betamedia.qe.af.core.fwdataaccess.converters;
 
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.opencsv.bean.AbstractBeanField;

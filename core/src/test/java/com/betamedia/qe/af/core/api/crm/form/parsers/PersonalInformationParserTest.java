@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.crm.form.parsers;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.qe.af.core.api.crm.form.entities.QuestionnaireData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -17,13 +17,13 @@ import static org.springframework.test.util.ReflectionTestUtils.setField;
 public class PersonalInformationParserTest {
     @Test
     public void testParse() throws Exception {
-        PersonalInformationBuilder.PersonalInformation expectedInfo = getExpectedInfo();
+        PersonalInformation expectedInfo = getExpectedInfo();
         QuestionnaireData data = createSourceData(expectedInfo);
         assertEquals(PersonalInformationParser.parse(data), expectedInfo);
     }
 
-    private PersonalInformationBuilder.PersonalInformation getExpectedInfo() {
-        return new PersonalInformationBuilder()
+    private PersonalInformation getExpectedInfo() {
+        return PersonalInformation.builder()
                 .withEmploymentStatus("sampleStatus")
                 .withIndustry("sampleIndustry")
                 .withIndustryOther("sampleIndustryOther")
@@ -48,13 +48,13 @@ public class PersonalInformationParserTest {
                 .build();
     }
 
-    private QuestionnaireData createSourceData(PersonalInformationBuilder.PersonalInformation source) {
+    private QuestionnaireData createSourceData(PersonalInformation source) {
         QuestionnaireData data = new QuestionnaireData();
         Arrays.stream(source.getClass().getFields()).forEach(f -> setField(data, f.getName(), getField(source, f.getName())));
         return data;
     }
 
-    private void assertEquals(PersonalInformationBuilder.PersonalInformation actual, PersonalInformationBuilder.PersonalInformation expected) {
+    private void assertEquals(PersonalInformation actual, PersonalInformation expected) {
         Arrays.stream(actual.getClass().getFields())
                 .map(Field::getName)
                 .forEach(fn -> Assert.assertEquals(getField(actual, fn), getField(expected, fn)));

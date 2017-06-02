@@ -2,30 +2,30 @@ package com.betamedia.qe.af.core.testingtype.base;
 
 
 import com.betamedia.qe.af.core.dsl.pages.factory.AbstractPageFactory;
-import org.testng.annotations.AfterMethod;
 
 import java.util.Optional;
 
 
 /**
- * Created by mbelyaev on 2/21/17.
+ * @author mbelyaev
+ * @since 2/21/17
  */
-public abstract class AbstractClientTest<T extends AbstractPageFactory> extends AbstractTest implements WebDriverTest<T>{
+public abstract class AbstractClientTest<T extends AbstractPageFactory> extends AbstractTest implements WebDriverTest<T> {
 
     private ThreadLocal<T> pages = new ThreadLocal<>();
 
     public abstract T getPageFactory();
 
-    @AfterMethod
-    public void tearDown() throws Exception {
+    @Override
+    protected void tearDown() {
         if (pages.get() != null) {
             pages.get().browser().closeBrowser();
-            pages.set(null);
+            pages.remove();
         }
     }
 
     @Override
-    public T pages() {
+    public final T pages() {
         if (pages.get() == null) {
             T pageFactory = getPageFactory();
             pageFactory.browser().maximizeWindow();
@@ -35,7 +35,7 @@ public abstract class AbstractClientTest<T extends AbstractPageFactory> extends 
     }
 
     @Override
-    public Optional<T> optPages() {
+    public final Optional<T> optPages() {
         return Optional.ofNullable(pages.get());
     }
 }

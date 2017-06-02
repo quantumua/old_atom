@@ -34,6 +34,7 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
     public static final String CRM_URL = "crm.url";
     public static final String BACKOFFICE_USERNAME = "bo.username";
     public static final String BACKOFFICE_PASSWORD = "bo.password";
+    public static final String BACKOFFICE_VERSION_URL = "bo.version.url";
 
     public static final String DRIVER_CLASS_NAME = "db.driverClassName";
     public static final String DATABASE_URL = "db.url";
@@ -65,6 +66,7 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
     private String crmUrl;
     private String backOfficeUsername;
     private String backOfficePassword;
+    private String backOfficeVersionUrl;
 
     private String driverClassName;
     private String databaseUrl;
@@ -93,6 +95,7 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
         crmUrl = getProperty(CRM_URL);
         backOfficeUsername = getProperty(BACKOFFICE_USERNAME);
         backOfficePassword = getProperty(BACKOFFICE_PASSWORD);
+        backOfficeVersionUrl = getOptionalProperty(BACKOFFICE_VERSION_URL);
 
         driverClassName = getProperty(DRIVER_CLASS_NAME);
         databaseUrl = getProperty(DATABASE_URL);
@@ -102,6 +105,10 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
 
     private String getProperty(String postfix) {
         return env.getRequiredProperty(getKeyPrefix() + DOT + postfix);
+    }
+
+    private String getOptionalProperty(String postfix){
+        return env.getProperty(getKeyPrefix() + DOT + postfix);
     }
 
     private String getKeyPrefix() {
@@ -196,6 +203,11 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
     @Override
     public String getBackOffPwd() {
         return backOfficePassword;
+    }
+
+    @Override
+    public String getBackOffVersionURL() {
+        return backOfficeVersionUrl;
     }
 
     @Override

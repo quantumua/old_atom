@@ -25,7 +25,8 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by mbelyaev on 4/10/17.
+ * @author mbelyaev
+ * @since 4/10/17
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ContextClassLoaderManagingExecutorImplTest {

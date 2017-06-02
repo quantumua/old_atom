@@ -4,7 +4,6 @@ import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;
 import com.betamedia.qe.af.core.api.tp.adapters.TPCRMHttpAdapter;
-import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.request.AccountRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccountCreate;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.PASSWORD;
+import static com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.PASSWORD;
 import static com.betamedia.qe.af.core.dsl.operations.impl.AbstractAccountOperations.DEFAULT_ACCOUNT_BALANCE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -160,10 +159,10 @@ public class AccountOperationsTest {
     public void testGetCRMWithAccountBuilder() {
         ArgumentCaptor<AccountRO> argumentCaptor = ArgumentCaptor.forClass(AccountRO.class);
         String newBrandDisplayId = "newBrandDisplayId";
-        AccountBuilder accountBuilder = new AccountBuilder();
-        accountBuilder.setBrandDisplayId(newBrandDisplayId);
+        AccountRO.AccountROBuilder accountROBuilder = AccountRO.builder();
+        accountROBuilder.setBrandDisplayId(newBrandDisplayId);
 
-        Account actualAccount = accountOperations.getCRM(accountBuilder);
+        Account actualAccount = accountOperations.getCRM(accountROBuilder);
 
         verify(crmHttpAdapter).create(argumentCaptor.capture());
         assertEquals(newBrandDisplayId, argumentCaptor.getValue().getBrandId());

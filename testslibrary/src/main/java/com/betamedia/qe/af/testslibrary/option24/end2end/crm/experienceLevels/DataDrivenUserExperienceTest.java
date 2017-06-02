@@ -3,7 +3,7 @@ package com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels;
 import com.betamedia.qe.af.core.api.crm.form.entities.QuestionnaireData;
 import com.betamedia.qe.af.core.api.crm.form.parsers.PersonalInformationParser;
 import com.betamedia.qe.af.core.api.crm.form.parsers.TradingExperienceInfoParser;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 import org.testng.annotations.Test;
 
@@ -14,7 +14,7 @@ public class DataDrivenUserExperienceTest extends TPEndToEndTest {
 
     @Test(dataProvider = "GenericDataProvider")
     public void dataDrivenInformationInputTest(QuestionnaireData data) {
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().crmNavigation().register();
         pages().register().register(customer);
         pages().crmNavigation().fnsTradingExperience();

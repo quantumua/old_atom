@@ -1,8 +1,8 @@
 package com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
@@ -39,11 +39,11 @@ public class MobileCRMMarketingParametersTest extends TPBackEndTest {
 
     private void testRegistrationAliases(boolean useLongAliases) {
         final String keyword = StringUtils.generateRandomId(10);
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        MarketingParametersBuilder marketingParametersBuilder = getExpectedMarketingParametersBuilder(useLongAliases);
-        marketingParametersBuilder.setKeyword(keyword);
 
-        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder, marketingParametersBuilder);
+        CRMCustomer registeredCustomer = operations().customerOperations().register(
+                CustomerRO.builder().build(),
+                getExpectedMarketingParametersBuilder(useLongAliases)
+                        .setKeyword(keyword).build());
 
         assertNotNull(registeredCustomer);
         verifyExpectedMarketingParameters(keyword);
@@ -52,13 +52,14 @@ public class MobileCRMMarketingParametersTest extends TPBackEndTest {
     @Test
     public void testRegistrationWithAfSiteIdRemoved() {
         final String keyword = StringUtils.generateRandomId(10);
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        MarketingParametersBuilder marketingParametersBuilder = getExpectedMarketingParametersBuilder(true);
-        marketingParametersBuilder.setAf_siteid("https://www.24option.com/");
-        marketingParametersBuilder.setSiteId(null);
-        marketingParametersBuilder.setKeyword(keyword);
 
-        CRMCustomer registeredCustomer = operations().customerOperations().register(customerBuilder, marketingParametersBuilder);
+        CRMCustomer registeredCustomer = operations().customerOperations().register(
+                CustomerRO.builder().build(),
+                getExpectedMarketingParametersBuilder(true)
+                        .setAf_siteid("https://www.24option.com/")
+                        .setSiteId(null)
+                        .setKeyword(keyword)
+                        .build());
         assertNotNull(registeredCustomer);
         TrackingInfoExtension infoExtension = operations().customerOperations().getCustomerTrackingInfoExtensionByCustomerId(registeredCustomer.getId());
         assertNotNull(infoExtension);
@@ -80,27 +81,26 @@ public class MobileCRMMarketingParametersTest extends TPBackEndTest {
 
     private void testDepositAliases(String tradingAccountId, boolean useLongAliases) {
         final String keyword = StringUtils.generateRandomId(10);
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
-        MarketingParametersBuilder marketingParametersBuilder = getExpectedMarketingParametersBuilder(useLongAliases);
-        marketingParametersBuilder.setKeyword(keyword);
 
-        CRMDeposit deposit = operations().customerOperations().deposit(depositBuilder, marketingParametersBuilder);
+        CRMDeposit deposit = operations().customerOperations().deposit(
+                MobileDepositRO.builder(tradingAccountId).build(),
+                getExpectedMarketingParametersBuilder(useLongAliases)
+                        .setKeyword(keyword).build());
 
         assertNotNull(deposit);
         verifyExpectedMarketingParameters(keyword);
     }
 
-    private MarketingParametersBuilder getExpectedMarketingParametersBuilder(boolean useLongAliases) {
-        MarketingParametersBuilder marketingParametersBuilder =  new MarketingParametersBuilder(useLongAliases);
-        marketingParametersBuilder.setReferrer(referrer);
-        marketingParametersBuilder.setSiteId(siteId);
-        marketingParametersBuilder.setOfrtc(ofrtc);
-        marketingParametersBuilder.setParam1(param1);
-        marketingParametersBuilder.setParam2(param2);
-        marketingParametersBuilder.setParam3(param3);
-        marketingParametersBuilder.setParam4(param4);
-        marketingParametersBuilder.setParam5(param5);
-        return marketingParametersBuilder;
+    private MarketingParametersRO.MarketingParametersBuilder getExpectedMarketingParametersBuilder(boolean useLongAliases) {
+        return MarketingParametersRO.builder(useLongAliases)
+                .setReferrer(referrer)
+                .setSiteId(siteId)
+                .setOfrtc(ofrtc)
+                .setParam1(param1)
+                .setParam2(param2)
+                .setParam3(param3)
+                .setParam4(param4)
+                .setParam5(param5);
     }
 
     private void verifyExpectedMarketingParameters(String keyword) {

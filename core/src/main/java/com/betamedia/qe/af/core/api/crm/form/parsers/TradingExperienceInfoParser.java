@@ -1,7 +1,6 @@
 package com.betamedia.qe.af.core.api.crm.form.parsers;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder.TradingExperienceInfo;
+import com.betamedia.qe.af.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.qe.af.core.api.crm.form.entities.QuestionnaireData;
 
 /**
@@ -9,7 +8,7 @@ import com.betamedia.qe.af.core.api.crm.form.entities.QuestionnaireData;
  */
 public class TradingExperienceInfoParser {
     public static TradingExperienceInfo parse(QuestionnaireData data) {
-        return new TradingExperienceInfoBuilder()
+        return TradingExperienceInfo.builder()
                 .withSharesExperience(data.getSharesExperience())
                 .withBinaryExperience(data.getBinaryExperience())
                 .withForExExperience(data.getForExExperience())

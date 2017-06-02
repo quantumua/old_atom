@@ -1,7 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
@@ -86,11 +85,10 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
 
     @Override
     public void register() {
-        CustomerRO customer = new CustomerBuilder()
-                .setFirstName(DEFAULT_CUSTOMER_NAME)
+        register(CustomerRO.builder().setFirstName(DEFAULT_CUSTOMER_NAME)
                 .setLastName(DEFAULT_CUSTOMER_NAME)
-                .createCustomerRO();
-        register(customer);
+                .build()
+        );
     }
 
     private void submitRegistration() {

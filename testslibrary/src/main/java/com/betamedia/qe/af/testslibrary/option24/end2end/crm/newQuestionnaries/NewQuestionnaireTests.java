@@ -1,10 +1,10 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries;
 
 import com.betamedia.common.enums.Country;
-import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.testingtype.tp.TPResourceAwareEndToEndTest;
+import com.betamedia.qe.af.core.api.crm.form.entities.PersonalInformation;
+import com.betamedia.qe.af.core.api.crm.form.entities.TradingExperienceInfo;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.testingtype.tp.TPCachedResourceEndToEndTest;
 import org.testng.annotations.Test;
 import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Questions.*;
 
@@ -12,7 +12,7 @@ import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionn
 /**
  * Created by vadyms on 5/22/17.
  */
-public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
+public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
 
     private final static String FREE_TEXT = "Free text";
     private final static String COUNTRY = Country.TOGO.getDbValue().toUpperCase();
@@ -21,12 +21,12 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
     @Test(description = "ID:9129")
     public void calculationOfScore86Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
 //        pages().crmNavigation().login();
 //        pages().crmLoginPage().login(customer.getEmail(),"123123");
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE.get())
                 .withIndustry(Industry.ACCOUNTING.get())
                 .withEmployerName(FREE_TEXT)
@@ -45,7 +45,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.FREQUENTLY.get())
                 .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -68,16 +68,16 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(86));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 86d);
     }
 
     @Test(description = "ID:9130")
     public void calculationOfScore49Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.UNEMPLOYED.get())
                 .withIndustry(Industry.FINANCE.get())
                 .withEmployerName(FREE_TEXT)
@@ -97,7 +97,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.REGULARLY.get())
                 .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -120,15 +120,15 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(49));    }
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 49d);    }
 
     @Test(description = "ID:9131")
     public void calculationOfScore48Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.STUDENT.get())
                 .withIndustry(Industry.FUNDS.get())
                 .withEmployerName(FREE_TEXT)
@@ -147,7 +147,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.OCCASIONALLY.get())
                 .withBinaryExperience(BinaryExperience.REGULARLY.get())
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -170,17 +170,17 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(48));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 48d);
     }
 
 
     @Test(description = "ID:9132")
     public void calculationOfScore32Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.RETIRED.get())
                 .withIndustry(Industry.ATTORNEYS.get())
                 .withEmployerName(FREE_TEXT)
@@ -200,7 +200,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.NEVER.get())
                 .withBinaryExperience(BinaryExperience.NEVER.get())
                 .withForExExperience(ForExExperience.NEVER.get())
@@ -220,16 +220,16 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(32));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 32d);
     }
 
     @Test(description = "ID:9133")
     public void calculationOfScore61Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SELF_EMPLOYED.get())
                 .withIndustry(Industry.COMPUTER.get())
                 .withEmployerName(FREE_TEXT)
@@ -250,7 +250,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.NEVER.get())
                 .withBinaryExperience(BinaryExperience.OCCASIONALLY.get())
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -273,16 +273,16 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(61));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 61d);
     }
 
     @Test(description = "ID:9134")
     public void calculationOfScore70Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE.get())
                 .withIndustry(Industry.OTHER.get())
                 .withEmployerName(FREE_TEXT)
@@ -303,7 +303,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.NEVER.get())
                 .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -326,16 +326,16 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(70));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 70d);
     }
 
     @Test(description = "ID:9135")
     public void calculationOfScore65Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.UNEMPLOYED.get())
                 .withIndustry(Industry.ATTORNEYS.get())
                 .withEmployerName(FREE_TEXT)
@@ -356,7 +356,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.FREQUENTLY.get())
                 .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -379,16 +379,16 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                 .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(65));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 65d);
     }
 
     @Test(description = "ID:9136")
     public void calculationOfScore68Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.RETIRED.get())
                 .withIndustry(Industry.FINANCE.get())
                 .withEmployerName(FREE_TEXT)
@@ -409,7 +409,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.FREQUENTLY.get())
                         .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -432,16 +432,16 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                         .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(68));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 68d);
     }
 
     @Test(description = "ID:9137")
     public void calculationOfScore66Test(){
         pages().crmNavigation().register();
-        CustomerBuilder.CustomerRO customer = new CustomerBuilder().createCustomerRO();
+        CustomerRO customer = CustomerRO.builder().build();
         pages().register().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.RETIRED.get())
                 .withIndustry(Industry.FINANCE.get())
                 .withEmployerName(FREE_TEXT)
@@ -462,7 +462,7 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                 .build()
         );
         pages().crmNavigation().fnsTradingExperience();
-        pages().fnsTradingExperience().submit(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.FREQUENTLY.get())
                         .withBinaryExperience(BinaryExperience.FREQUENTLY.get())
                         .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
@@ -485,6 +485,6 @@ public class NewQuestionnaireTests extends TPResourceAwareEndToEndTest{
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35.get())
                         .build()
         );
-        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(),Double.valueOf(66));
+        operations().onBoardingOperations().assertUsernameScore(customer.getEmail(), 66d);
     }
 }

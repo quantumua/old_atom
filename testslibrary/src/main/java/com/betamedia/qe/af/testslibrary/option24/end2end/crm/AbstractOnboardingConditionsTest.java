@@ -1,10 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountAdditionalDetailsBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.CreditCardDepositBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
-import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
+import com.betamedia.qe.af.core.api.crm.form.entities.*;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
 import com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
 
@@ -13,7 +9,7 @@ import com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Q
  */
 public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
-    protected void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
+    protected final void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
         if (!conditions.isShowWizard()) {
             return;
         }
@@ -24,9 +20,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
             pages().riskWarningPage().accept();
         }
         if (conditions.isShowAdditionalDetails()) {
-            pages().accountAdditionalDetails().update(new AccountAdditionalDetailsBuilder()
-                    .build()
-            );
+            pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         }
         if (conditions.isShowFnsPersonal()) {
             passPersonalQuestionnaire();
@@ -35,7 +29,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
             passTradingQuestionnaire();
         }
         if (conditions.isShowDeposit()) {
-            pages().creditCardDeposit().submit(new CreditCardDepositBuilder().build());
+            pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
         }
         if (conditions.isShowPoiPor()) {
             pages().onBoardingWizard().assertOnPOI();
@@ -46,7 +40,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
     }
 
     private void passPersonalQuestionnaire() {
-        pages().fnsPersonalInformation().submitOnWizard(new PersonalInformationBuilder()
+        pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
                 .withIndustry(Questions.Industry.ACCOUNTING.get())
                 .withEmployerName("testEmployer")
@@ -67,7 +61,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
     }
 
     private void passTradingQuestionnaire() {
-        pages().fnsTradingExperience().submitOnWizard(new TradingExperienceInfoBuilder()
+        pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.FREQUENTLY.get())
                 .withBinaryExperience(Questions.BinaryExperience.FREQUENTLY.get())
                 .withAverageYearlyBinaryVolume(Questions.AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())

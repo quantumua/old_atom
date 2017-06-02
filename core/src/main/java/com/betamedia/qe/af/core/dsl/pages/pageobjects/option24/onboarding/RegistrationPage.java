@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 
 /**
  * Created by mbelyaev on 3/21/17.
@@ -8,7 +8,7 @@ import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 public interface RegistrationPage {
 
 
-    void register(CustomerBuilder.CustomerRO customer);
+    void register(CustomerRO customer);
     void register();
     
   }

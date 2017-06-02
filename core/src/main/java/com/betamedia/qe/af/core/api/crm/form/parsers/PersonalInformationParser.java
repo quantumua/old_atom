@@ -1,7 +1,6 @@
 package com.betamedia.qe.af.core.api.crm.form.parsers;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder.PersonalInformation;
+import com.betamedia.qe.af.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.qe.af.core.api.crm.form.entities.QuestionnaireData;
 
 /**
@@ -9,7 +8,7 @@ import com.betamedia.qe.af.core.api.crm.form.entities.QuestionnaireData;
  */
 public class PersonalInformationParser {
     public static PersonalInformation parse(QuestionnaireData data) {
-        return new PersonalInformationBuilder()
+        return PersonalInformation.builder()
                 .withEmploymentStatus(data.getEmploymentStatus())
                 .withIndustry(data.getIndustry())
                 .withIndustryOther(data.getIndustryOther())

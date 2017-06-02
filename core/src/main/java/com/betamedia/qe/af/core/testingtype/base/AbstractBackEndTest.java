@@ -12,7 +12,7 @@ public abstract class AbstractBackEndTest<T extends BackEndOperationsTemplate> e
 
     public abstract T getOperationTemplate();
 
-    public T operations() {
+    public final T operations() {
         if (operationTemplate == null) {
             operationTemplate = getOperationTemplate();
         }

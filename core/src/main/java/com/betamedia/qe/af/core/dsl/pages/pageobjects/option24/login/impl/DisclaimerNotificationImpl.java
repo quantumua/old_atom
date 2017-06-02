@@ -31,7 +31,7 @@ public class DisclaimerNotificationImpl extends AbstractPageObject implements Di
             find(disclaimerCheckbox).click();
             find(disclaimerSubmitBtn).click();
         } catch (TimeoutException e) {
-            Reporter.log("Disclaimer notification not displayed in expected time");
+            Reporter.log("Disclaimer notification not displayed in expected time" + '\n');
         }
     }
 

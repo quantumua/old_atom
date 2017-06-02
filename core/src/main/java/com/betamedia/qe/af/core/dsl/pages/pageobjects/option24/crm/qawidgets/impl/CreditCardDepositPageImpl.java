@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.CreditCardDepositBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
@@ -43,7 +43,7 @@ public class CreditCardDepositPageImpl extends AbstractPageObject implements Cre
     }
 
     @Override
-    public void submit(CreditCardDepositBuilder.CreditCardDeposit info) {
+    public void submit(CreditCardDeposit info) {
         waitUntilDisplayed(depositAmount).sendKeys(info.depositAmount);
         find(creditCardNumber).sendKeys(info.creditCardNumber);
         find(cvv2).sendKeys(info.cvv2);

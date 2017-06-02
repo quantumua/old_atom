@@ -1,8 +1,8 @@
 package com.betamedia.qe.af.core.api.crm.form.entities;
 
-import com.betamedia.qe.af.core.dataprovider.csv.converters.AccountTypeConverter;
-import com.betamedia.qe.af.core.dataprovider.csv.converters.DocumentVerificationStatusConverter;
-import com.betamedia.qe.af.core.dataprovider.csv.converters.ExperienceLevelConverter;
+import com.betamedia.qe.af.core.fwdataaccess.converters.AccountTypeConverter;
+import com.betamedia.qe.af.core.fwdataaccess.converters.DocumentVerificationStatusConverter;
+import com.betamedia.qe.af.core.fwdataaccess.converters.ExperienceLevelConverter;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 

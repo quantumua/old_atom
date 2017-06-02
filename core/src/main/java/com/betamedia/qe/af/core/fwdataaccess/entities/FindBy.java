@@ -1,7 +1,8 @@
 package com.betamedia.qe.af.core.fwdataaccess.entities;
 
 /**
- * Created by mbelyaev on 3/29/17.
+ * @author mbelyaev
+ * @since 3/29/17
  */
 public class FindBy {
     public final String locatorType;

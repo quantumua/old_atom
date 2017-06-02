@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.HashSet;
 
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -12,7 +13,6 @@ import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
 import org.testng.Reporter;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.dsl.operations.TagOperations;
@@ -51,8 +51,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
-		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());		
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
@@ -62,7 +62,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		double newBalance = (minInvestmentAllowed + maxInvestmentAllowed) / 2;
 		operations().accountOperations().updateBalanceTP(accountId, newBalance);
 		double investment = operations().accountOperations().getTP(accountId).getBalance() + 1;
-		
+
         pages().binaryBidder()
                 .setAmount(String.valueOf(investment)  )
                 .bidHigh()
@@ -90,7 +90,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int maxInvestmentAllowed = 48000;		// TODO getMaxInvestment();
@@ -128,7 +128,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -161,7 +161,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -192,7 +192,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -221,7 +221,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -261,7 +261,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
                     .confirm();
             
             operations().accountGroupOperations().get().setExposureLimit(maxExposure);
-            
+
             pages().dialogBox().exists();
             pages().dialogBox().assertTitle("Error");
             pages().dialogBox().assertMessage("Your account doesn't have enough funds.");
@@ -272,7 +272,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
             
         }catch (Throwable e)  {
             logger.debug("Got error: " + e);
-            Reporter.log("Got error: " + e);
+            Reporter.log("Got error: " + e +'\n');
             operations().accountGroupOperations().get().setExposureLimit(maxExposure);
         }
 	}
@@ -292,7 +292,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		String Investment = "";
@@ -325,7 +325,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -356,7 +356,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -394,7 +394,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -426,7 +426,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -451,7 +451,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         pages().dialogBox().assertMessage("Your account doesn't have enough funds.");
         pages().dialogBox().close();
 	}
-	
+
 	@Test()
 	/* [TestLink] TP-3697:Multiple clicks on the buy
 	 *Select an asset --> Click a few times on the "Buy"
@@ -466,16 +466,16 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = cfdAccount.getId();
 		operations().accountOperations().depositCRM(accountId, 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
-        
+
         // Investing 200 more then the allowed minimum
         int min = 15; //TODO: getMinInvestment()
         double investment = min + 200;
-        
+
         operations().accountOperations().getTP().setBalance(investment);
         List<String> positionIds = pages().binaryPositions().get();
         Position previousPositionId = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size()));
@@ -494,15 +494,15 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         Position currentPositionId = operations().positionOperations().getByDisplayId(positionIds.get(positionIds.size()));
         Assert.assertEquals(previousPositionId.getPositionValue(), currentPositionId.getPositionValue());
 	}
-	
+
 	@Test()
 	/*[TestLink] TP-3698:Feed isnt received at time of opening
 	 * Select an asset --> Try to open a position when feed isn't
-	 * received at time of opening--> The position is rejected. 
+	 * received at time of opening--> The position is rejected.
 	 */
 	public void FeedIsntReceivedAtTimeOfOpeningTest(){
 		Asset asset = operations().assetOperations().get();
-		
+
 		Set<String> propertiesSet = new HashSet<String>();
        // AssetTestingManager.getInstance().updateEntity(asset, propertiesSet);
 		//operations().assetOperations().updateEntity();
@@ -514,14 +514,14 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
-        
+
 		operations().feedOperations().injectFeed(asset.getId(), 0.0d);
-		
+
         // Wait 5 minutes (Position cannot be opened after 5 minutes without
         // feed)
 		try{
@@ -530,20 +530,20 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
     	}catch (InterruptedException e) {
     		logger.error(e);
     		Thread.currentThread().interrupt();
-    	}        
+    	}
         // Check that position cannot be opened client side + error message
         int investment = 15; //TODO: getMinInvestment
         pages().binaryBidder()
         	.setAmount(String.valueOf(investment))
         	.bidHigh();
-        		
+
         pages().dialogBox().exists();
         pages().dialogBox().assertTitle("Error");
         pages().dialogBox().assertMessage("Position cannot be opened. Too old feed."); //TODO: Need to test correct error message's string for "bmMessage-tradingException-feedTooOld"
         pages().dialogBox().close();
-        
+
         Position actualPosition = operations().positionOperations().getByDisplayId(pages().binaryPositions().getLatest());
-        
+
         Assert.assertEquals(actualPosition.getStatus(), PositionStatus.REJECTED, "Position is in status rejected");
         Assert.assertEquals(actualPosition.getStatusReason(), "Feed is too old", "Position status reason as expected");
 	}

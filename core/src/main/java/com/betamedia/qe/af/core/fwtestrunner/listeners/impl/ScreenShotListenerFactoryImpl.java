@@ -1,16 +1,16 @@
 package com.betamedia.qe.af.core.fwtestrunner.listeners.impl;
 
 import com.betamedia.qe.af.core.fwtestrunner.listeners.ConfigurableListenerFactory;
-import com.betamedia.qe.af.core.fwtestrunner.runner.testng.TestNGRunnerImpl;
+import com.betamedia.qe.af.core.fwtestrunner.runner.AbstractTestNGRunner;
 import org.springframework.stereotype.Service;
 
 /**
  * {@link ConfigurableListenerFactory} implementation for {@link ScreenShotListener} that is managed by Spring and
- * injected into {@link TestNGRunnerImpl}
+ * injected into {@link AbstractTestNGRunner}
  *
  * @author mbelyaev
  * @since 5/29/17
- * @see TestNGRunnerImpl
+ * @see AbstractTestNGRunner
  */
 @Service
 public class ScreenShotListenerFactoryImpl implements ConfigurableListenerFactory<ScreenShotListener> {

@@ -1,12 +1,12 @@
 package com.betamedia.qe.af.core.fwtestrunner.listeners;
 
-import com.betamedia.qe.af.core.fwtestrunner.runner.testng.TestNGRunnerImpl;
+import com.betamedia.qe.af.core.fwtestrunner.runner.AbstractTestNGRunner;
 import org.testng.ITestNGListener;
 
 /**
  * Generic interface for {@link ITestNGListener} implementation factories to be injected to TestNG runtime
  *
- * @see TestNGRunnerImpl
+ * @see AbstractTestNGRunner
  * @author mbelyaev
  * @since 5/29/17
  */

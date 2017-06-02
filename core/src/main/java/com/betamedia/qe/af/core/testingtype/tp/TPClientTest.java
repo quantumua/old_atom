@@ -12,7 +12,7 @@ import com.betamedia.qe.af.core.testingtype.base.AbstractClientTest;
 public abstract class TPClientTest extends AbstractClientTest<TPPageFactoryImpl> {
 
     @Override
-    public TPPageFactoryImpl getPageFactory() {
+    public final TPPageFactoryImpl getPageFactory() {
         return AppContextHolder.getBean(TPPageFactoryImpl.class);
     }
 

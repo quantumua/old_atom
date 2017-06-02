@@ -1,8 +1,8 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.CreditCardDepositBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
 
@@ -25,7 +25,7 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
         }
 
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 
         verifyResultingSlidesShown(conditions);
     }
@@ -41,12 +41,13 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
 
     private void placePendingDeposit(CRMCustomer customer) {
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
 
-        CreditCardDepositBuilder builder = new CreditCardDepositBuilder();
         double depositLimit = operations().customerOperations().findMaximumDepositLimit(customer.getId());
-        builder.withDepositAmount(((Double)(depositLimit + 3000)).toString());
-        pages().creditCardDeposit().submit(builder.build());
+        pages().creditCardDeposit().submit(
+                CreditCardDeposit.builder()
+                        .withDepositAmount(((Double) (depositLimit + 3000)).toString())
+                        .build());
 
         pages().browser().deleteAllCookies();
         pages().topNavigationPage().goToHomePage();

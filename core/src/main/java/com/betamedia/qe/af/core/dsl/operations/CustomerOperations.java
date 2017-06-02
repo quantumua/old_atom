@@ -1,9 +1,9 @@
 package com.betamedia.qe.af.core.dsl.operations;
 
 import com.betamedia.qe.af.core.api.crm.form.entities.OnboardingWizardConditions;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
+import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
@@ -22,25 +22,25 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     CRMCustomer register();
 
-    CRMCustomer register(CustomerBuilder customerBuilder);
+    CRMCustomer register(CustomerRO customerRO);
 
-    CRMCustomer register(CustomerBuilder customerBuilder, MarketingParametersBuilder marketingParametersBuilder);
+    CRMCustomer register(CustomerRO customerRO, MarketingParametersRO marketingParametersRO);
 
-    List<CRMError>  registerWithErrors(CustomerBuilder customerBuilder);
+    List<CRMError>  registerWithErrors(CustomerRO customerRO);
 
     CRMCustomer login(String username, String password);
 
     void logout(String customerId);
 
-    CRMDeposit deposit(MobileDepositBuilder depositBuilder);
+    CRMDeposit deposit(MobileDepositRO deposit);
 
-    CRMDeposit deposit(MobileDepositBuilder depositBuilder, MarketingParametersBuilder marketingParametersBuilder);
+    CRMDeposit deposit(MobileDepositRO deposit, MarketingParametersRO marketingParametersRO);
 
-    List<CRMError> depositWithErrors(MobileDepositBuilder depositBuilder);
+    List<CRMError> depositWithErrors(MobileDepositRO deposit);
 
-    CRMDeposit depositByName(MobileDepositBuilder depositBuilder);
+    CRMDeposit depositByName(MobileDepositRO deposit);
 
-    List<CRMError>  depositByNameWithErrors(MobileDepositBuilder depositBuilder);
+    List<CRMError>  depositByNameWithErrors(MobileDepositRO depositRO);
 
     TrackingInfoExtension getCustomerTrackingInfoExtensionByCustomerId(String customerId);
 

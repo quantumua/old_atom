@@ -1,7 +1,6 @@
 package com.betamedia.qe.af.core.api.crm.form.parsers;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.PersonalInformationBuilder;
-import com.betamedia.qe.af.core.api.crm.form.builders.TradingExperienceInfoBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.qe.af.core.api.crm.form.entities.QuestionnaireData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,13 +17,13 @@ import static org.springframework.test.util.ReflectionTestUtils.setField;
 public class TradingExperienceInfoParserTest {
     @Test
     public void testParse() throws Exception {
-        TradingExperienceInfoBuilder.TradingExperienceInfo expectedInfo = getExpectedInfo();
+        TradingExperienceInfo expectedInfo = getExpectedInfo();
         QuestionnaireData data = createSourceData(expectedInfo);
         assertEquals(TradingExperienceInfoParser.parse(data), expectedInfo);
     }
 
-    private TradingExperienceInfoBuilder.TradingExperienceInfo getExpectedInfo() {
-        return new TradingExperienceInfoBuilder()
+    private TradingExperienceInfo getExpectedInfo() {
+        return TradingExperienceInfo.builder()
                 .withSharesExperience("sampleSharesExperience")
                 .withBinaryExperience("sampleBinaryExperience")
                 .withAverageYearlyBinaryVolume("sampleAverageYearlyBinaryVolume")
@@ -48,13 +47,13 @@ public class TradingExperienceInfoParserTest {
                 .build();
     }
 
-    private QuestionnaireData createSourceData(TradingExperienceInfoBuilder.TradingExperienceInfo source) {
+    private QuestionnaireData createSourceData(TradingExperienceInfo source) {
         QuestionnaireData data = new QuestionnaireData();
         Arrays.stream(source.getClass().getFields()).forEach(f -> setField(data, f.getName(), getField(source, f.getName())));
         return data;
     }
 
-    private void assertEquals(TradingExperienceInfoBuilder.TradingExperienceInfo actual, TradingExperienceInfoBuilder.TradingExperienceInfo expected) {
+    private void assertEquals(TradingExperienceInfo actual, TradingExperienceInfo expected) {
         Arrays.stream(actual.getClass().getFields())
                 .map(Field::getName)
                 .forEach(fn -> Assert.assertEquals(getField(actual, fn), getField(expected, fn)));

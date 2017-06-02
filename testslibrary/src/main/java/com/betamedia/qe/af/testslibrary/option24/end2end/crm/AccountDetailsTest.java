@@ -1,24 +1,25 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.crm;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.testingtype.tp.TPResourceAwareEndToEndTest;
+import com.betamedia.qe.af.core.api.crm.form.entities.AccountDetails;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.qe.af.core.testingtype.tp.TPCachedResourceEndToEndTest;
 import org.testng.annotations.Test;
 
 /**
- * Created by mbelyaev on 5/17/17.
+ * Created by vsnigur on 5/19/17.
  */
-public class AccountDetailsTest extends TPResourceAwareEndToEndTest {
+public class AccountDetailsTest extends TPCachedResourceEndToEndTest {
 
     @Test
     public void accountDetailsAddInformationTest() {
         pages().register().register();
         pages().crmNavigation().accountDetails();
 //        TODO use customerBuilder inside builder
-        pages().accountDetails().update(new AccountDetailsBuilder(new CustomerBuilder()
-                .setCity("city")
-                .setBirthOfDate("1990-1-1")
-                .createCustomerRO())
+        pages().accountDetails().update(AccountDetails
+                .builderFor(CustomerRO.builder()
+                        .setCity("city")
+                        .setBirthOfDate("1990-1-1")
+                        .build())
                 .setStreetNumber("streetNumber")
                 .build()
         );

@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.qe.af.core.api.crm.form.builders.AccountDetailsBuilder;
+import com.betamedia.qe.af.core.api.crm.form.entities.AccountDetails;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.dsl.pages.annotation.StoredId;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountDetailsPage;
@@ -40,7 +40,7 @@ public class AccountDetailsPageImpl extends AbstractPageObject implements Accoun
     }
 
     @Override
-    public void update(AccountDetailsBuilder.AccountDetails info) {
+    public void update(AccountDetails info) {
         waitUntilDisplayed(title);
         in(title).selectByVisibleText(info.title);
         find(street).sendKeys(info.street);

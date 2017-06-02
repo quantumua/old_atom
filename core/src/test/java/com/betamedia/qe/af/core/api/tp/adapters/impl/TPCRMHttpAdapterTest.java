@@ -1,7 +1,7 @@
 package com.betamedia.qe.af.core.api.tp.adapters.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.AbstractHttpAdapter;
-import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.AccountRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccountCreate;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
@@ -102,13 +102,14 @@ public class TPCRMHttpAdapterTest {
                 "&firstName=" + firstName + "&userPassword=" + backOfficePassword + "&userName=" + backOfficeUsername;
         when(restTemplate.exchange(eq(url), eq(HttpMethod.GET), eq(null), any(ParameterizedTypeReference.class))).thenReturn(responseEntity);
         when(responseEntity.getBody()).thenReturn(new TPCRMResponse<CRMAccountCreate>(new CRMAccountCreate(accountId, accountDisplayId, brandDisplayId), Collections.emptyList()));
-        AccountBuilder accountBuilder = new AccountBuilder();
-        accountBuilder.setBrandDisplayId(brandDisplayId);
-        accountBuilder.setCurrency(currency);
-        accountBuilder.setAccountType(accountType.getName());
-        accountBuilder.setFirstName(firstName);
 
-        TPCRMResponse<CRMAccountCreate> accountResponse = adapter.create(accountBuilder.createAccountRO());
+        TPCRMResponse<CRMAccountCreate> accountResponse = adapter.create(
+                AccountRO.builder()
+                        .setBrandDisplayId(brandDisplayId)
+                        .setCurrency(currency)
+                        .setAccountType(accountType.getName())
+                        .setFirstName(firstName)
+                        .build());
         assertNotNull(accountResponse);
 
         CRMAccountCreate account = accountResponse.getResult();

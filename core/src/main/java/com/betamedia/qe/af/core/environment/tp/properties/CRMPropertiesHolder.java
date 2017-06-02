@@ -15,4 +15,6 @@ public interface CRMPropertiesHolder<T extends EnvironmentDependent> {
     String getBackOffUsername();
 
     String getBackOffPwd();
+
+    String getBackOffVersionURL();
 }

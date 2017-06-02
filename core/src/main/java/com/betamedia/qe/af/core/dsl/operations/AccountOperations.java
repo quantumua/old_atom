@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.dsl.operations;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.AccountBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.AccountRO;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
 import com.betamedia.tp.api.model.Account;
 
@@ -34,7 +34,7 @@ public interface AccountOperations <T extends EnvironmentDependent> extends Envi
      * Create new account with custom params through TP CRM API
      * @return
      */
-    Account getCRM(AccountBuilder accountBuilder);
+    Account getCRM(AccountRO.AccountROBuilder accountROBuilder);
 
     /**
      * Deposit for account through TP CRM API

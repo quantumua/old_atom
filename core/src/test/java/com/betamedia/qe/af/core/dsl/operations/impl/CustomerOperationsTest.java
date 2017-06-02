@@ -1,9 +1,7 @@
 package com.betamedia.qe.af.core.dsl.operations.impl;
 
 import com.betamedia.qe.af.core.api.tp.adapters.MobileCRMHTTPAdaper;
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MarketingParametersBuilder;
-import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
@@ -103,12 +101,12 @@ public class CustomerOperationsTest {
 
     @Test
     public void testRegisterCustomerWithCustomerBuilder() {
-        ArgumentCaptor<CustomerBuilder.CustomerRO> argumentCaptor = ArgumentCaptor.forClass(CustomerBuilder.CustomerRO.class);
+        ArgumentCaptor<CustomerRO> argumentCaptor = ArgumentCaptor.forClass(CustomerRO.class);
         String newEmail = "newEmail";
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        customerBuilder.setEmail(newEmail);
-
-        CRMCustomer actualCustomer = customerOperations.register(customerBuilder);
+        CRMCustomer actualCustomer = customerOperations.register(
+                CustomerRO.builder()
+                        .setEmail(newEmail)
+                        .build());
 
         verify(mobileCRMHTTPAdaper).register(argumentCaptor.capture());
         assertEquals(newEmail, argumentCaptor.getValue().getEmail());
@@ -116,24 +114,24 @@ public class CustomerOperationsTest {
 
     }
 
-    @Test(expectedExceptions = NullPointerException.class)
-    public void testRegisterCustomerWithNullBuilder() {
-        customerOperations.register(null);
-    }
-
     @Test
     public void testRegisterCustomerWithMarketingParameters() {
-        when(mobileCRMHTTPAdaper.register(any(CustomerBuilder.CustomerRO.class), any(MarketingParametersRO.class))).thenReturn(expectedCustomerResponse);
+        when(mobileCRMHTTPAdaper.register(any(CustomerRO.class), any(MarketingParametersRO.class))).thenReturn(expectedCustomerResponse);
 
         ArgumentCaptor<MarketingParametersRO> argumentCaptor = ArgumentCaptor.forClass(MarketingParametersRO.class);
-        CustomerBuilder customerBuilder = new CustomerBuilder();
-        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
+        MarketingParametersRO.MarketingParametersBuilder marketingParametersBuilder = MarketingParametersRO.builder(true);
         marketingParametersBuilder.setSiteId(siteId);
         marketingParametersBuilder.setKeyword(keyword);
 
-        CRMCustomer actualCustomer = customerOperations.register(customerBuilder, marketingParametersBuilder);
+        CRMCustomer actualCustomer = customerOperations.register(
+                CustomerRO.builder().build(),
+                MarketingParametersRO.builder(true)
+                        .setSiteId(siteId)
+                        .setKeyword(keyword)
+                        .build()
+        );
 
-        verify(mobileCRMHTTPAdaper).register(any(CustomerBuilder.CustomerRO.class), argumentCaptor.capture());
+        verify(mobileCRMHTTPAdaper).register(any(CustomerRO.class), argumentCaptor.capture());
         assertEquals(siteId, argumentCaptor.getValue().getSiteId());
         assertEquals(keyword, argumentCaptor.getValue().getKeyword());
         assertThat(expectedCustomer, new ReflectionEquals(actualCustomer));
@@ -143,7 +141,7 @@ public class CustomerOperationsTest {
     public void testRegisterCustomerWithUnexpectedErrors() {
         CRMResponse<CRMRegisterResult> errorResponse = new CRMResponse<>(null, null,
                 Collections.singletonList(new CRMError("errorCode", "errorMessage")), null, null);
-        when(mobileCRMHTTPAdaper.register(any(CustomerBuilder.CustomerRO.class))).thenReturn(errorResponse);
+        when(mobileCRMHTTPAdaper.register(any(CustomerRO.class))).thenReturn(errorResponse);
 
         customerOperations.register();
     }
@@ -151,7 +149,7 @@ public class CustomerOperationsTest {
     @Test
     public void testRegisterCustomerWithExpectedErrors() {
         when(mobileCRMHTTPAdaper.register(any())).thenReturn(errorDepositResponse);
-        List<CRMError> actualErrors = customerOperations.registerWithErrors(new CustomerBuilder());
+        List<CRMError> actualErrors = customerOperations.registerWithErrors(CustomerRO.builder().build());
         assertTrue(actualErrors.size() == 1);
         assertThat(expectedError, new ReflectionEquals(actualErrors.get(0)));
     }
@@ -174,7 +172,7 @@ public class CustomerOperationsTest {
 
     @Test
     public void testDeposit() {
-        CRMDeposit actualDeposit = customerOperations.deposit(new MobileDepositBuilder(tradingAccountId));
+        CRMDeposit actualDeposit = customerOperations.deposit(MobileDepositRO.builder(tradingAccountId).build());
         assertThat(expectedDeposit, new ReflectionEquals(actualDeposit));
     }
 
@@ -183,11 +181,13 @@ public class CustomerOperationsTest {
         when(mobileCRMHTTPAdaper.deposit(any(MobileDepositRO.class), any(MarketingParametersRO.class))).thenReturn(expectedDepositResponse);
 
         ArgumentCaptor<MarketingParametersRO> argumentCaptor = ArgumentCaptor.forClass(MarketingParametersRO.class);
-        MarketingParametersBuilder marketingParametersBuilder = new MarketingParametersBuilder(true);
-        marketingParametersBuilder.setSiteId(siteId);
-        marketingParametersBuilder.setKeyword(keyword);
 
-        CRMDeposit actualDeposit = customerOperations.deposit(new MobileDepositBuilder(tradingAccountId), marketingParametersBuilder);
+        CRMDeposit actualDeposit = customerOperations.deposit(
+                MobileDepositRO.builder(tradingAccountId).build(),
+                MarketingParametersRO.builder(true)
+                        .setSiteId(siteId)
+                        .setKeyword(keyword)
+                        .build());
 
         verify(mobileCRMHTTPAdaper).deposit(any(MobileDepositRO.class), argumentCaptor.capture());
         assertEquals(siteId, argumentCaptor.getValue().getSiteId());
@@ -196,22 +196,22 @@ public class CustomerOperationsTest {
     }
 
     @Test(expectedExceptions = AssertionError.class)
-    public void testDepositWithUnexepectedErrors() {
+    public void testDepositWithUnexpectedErrors() {
         when(mobileCRMHTTPAdaper.deposit(any())).thenReturn(errorDepositResponse);
-        customerOperations.deposit(new MobileDepositBuilder(tradingAccountId));
+        customerOperations.deposit(MobileDepositRO.builder(tradingAccountId).build());
     }
 
     @Test
     public void testDepositWithExpectedErrors() {
         when(mobileCRMHTTPAdaper.deposit(any())).thenReturn(errorDepositResponse);
-        List<CRMError> actualErrors = customerOperations.depositWithErrors(new MobileDepositBuilder(tradingAccountId));
+        List<CRMError> actualErrors = customerOperations.depositWithErrors(MobileDepositRO.builder(tradingAccountId).build());
         assertTrue(actualErrors.size() == 1);
         assertThat(expectedError, new ReflectionEquals(actualErrors.get(0)));
     }
 
     @Test()
     public void testDepositByName() {
-        CRMDeposit actualDeposit = customerOperations.depositByName(new MobileDepositBuilder(tradingAccountId));
+        CRMDeposit actualDeposit = customerOperations.depositByName(MobileDepositRO.builder(tradingAccountId).build());
         assertThat(expectedDeposit, new ReflectionEquals(actualDeposit));
     }
 

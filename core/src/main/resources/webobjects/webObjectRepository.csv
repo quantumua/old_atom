@@ -1,194 +1,194 @@
-build,pageObjectName,locatorId,locatorType,value
-1603,LoginPageImpl,usernameField,ID,UserName
-1603,LoginPageImpl,passwordField,ID,Password
-1603,LoginPageImpl,submitButton,ID,FormSubmitBtn
-1603,DisclaimerNotificationImpl,disclaimerCheckbox,ID,checkboxDisclaimer
-1603,DisclaimerNotificationImpl,disclaimerSubmitBtn,ID,disclaimer_submit
-1603,TopNavigationPageImpl,loginBtn,ID,login_btn
-1603,TopNavigationPageImpl,myAccountBtn,ID,myaccount_btn
-1603,TopNavigationPageImpl,homePageLink,XPATH,//*[@id="header"]/div[2]/div[1]/a/img
-1603,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
-1603,BinaryBidderImpl,amountInput,ID,bmBidAmountInput
-1603,BinarySelectorImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame
-1603,BinarySelectorImpl,shortTermButton,CSS,.bmSelectItem.bmSelectShortTermGame
-1603,BinarySelectorImpl,doubleProfitButton,CSS,.bmSelectItem.bmSelectDoubleProfitGame
-1603,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
-1603,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
-1603,BinaryBidderImpl,lowButton,CSS,.bmButtonsWrapp.bmSelection2
-1603,BinaryBidderImpl,highButton,CSS,.bmButtonsWrapp.bmSelection1
-1603,BinaryBidderImpl,closePosition,CSS,.bmButtonWrapp.bmClosePositionDialog
-1603,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
-1603,PositionsImpl,position,CLASS_NAME,bmCellContent
-1603,TopNavigationPageImpl,binaryBtn,CLASS_NAME,product-binary
-1603,TopNavigationPageImpl,mainMenu,ID,mainMenu
-1603,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
-1603,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
-1603,TopNavigationPageImpl,cfdBtn,CLASS_NAME,product-cfd
-1603,AssetsImpl,assetContainer,CLASS_NAME,assets-list-container
-1603,AssetsImpl,assetName,CLASS_NAME,list-asset
-1603,AssetsImpl,pandaIframe,ID,swPandaIframe
-1603,LandingPageImpl,homepage,CLASS_NAME,homepage-balanced-template
-1603,ControlPanelImpl,accountCurrency,CLASS_NAME,swAccountCurrency
-1603,ControlPanelImpl,accountListMenu,ID,account_list_menu
-1603,AssetsImpl,assetTooltipIcon,CLASS_NAME,assetTooltip
-1603,AssetsImpl,assetTooltipContent,CLASS_NAME,tooltip-content
-1603,AssetsImpl,requiredMarginRow,CSS,div[data-bind='with: $root.investAmountModel.requiredMargin']
-1603,AssetsImpl,swapRow,CSS,div[data-bind='with: $root.investAmountModel.swaps']
-1603,AssetsImpl,underlyingAssetName,XPATH,.//div[./div='Underlying asset name']
-1603,AssetsImpl,assetNameTitle,CLASS_NAME,assetNameTitle
-1603,AssetsImpl,userDataCurrency,CSS,span[data-bind='text: $root.userData.currency']
-1603,AssetsImpl,firstRow,CSS,div:nth-of-type(1)
-1603,AssetsImpl,secondRow,CSS,div:nth-of-type(2)
-1603,AssetsImpl,toolTipName,CSS,span[data-bind='text: toolTipName']
-1603,AssetsImpl,selectedAssetCurrency,CSS,span[data-bind='text: $root.assetsListViewModel.selectedAsset().currency']
-1603,CfdBidderImpl,volumeInput,CLASS_NAME,investInsert
-1603,CfdBidderImpl,buyButton,CLASS_NAME,buyBTN
-1603,CfdBidderImpl,sellButton,CLASS_NAME,sellBTN
-1603,CfdBidderImpl,tradeButton,CLASS_NAME,buyTrade
-1603,MessageBoxImpl,messageBox,CLASS_NAME,messageBox
-1603,MessageBoxImpl,okButton,CLASS_NAME,ok-button
-1603,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
-1603,CfdPositionsImpl,assetName,CLASS_NAME,assetname
-1603,AssetsImpl,tooltipClose,CSS,.tooltip-close > .icon
-1603,ChartImpl,highChartsRoot,CLASS_NAME,highcharts-root
-1603,ChartImpl,candleSticks,CLASS_NAME,highcharts-candlestick-series
-1603,ChartImpl,candle,TAG,path
-1603,MessageBoxImpl,requoteTrade,CLASS_NAME,requote-trade
-1603,MessageBoxImpl,buttonsBlock,CLASS_NAME,buttons-block
-1603,MessageBoxImpl,firstButton,CSS,button:nth-of-type(1)
-1603,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
-1603,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
-1603,DialogBoxImpl,closeButton,XPATH,"//*[@id=""tradeManagerContainer""]/div/div[3]/div/div/div[3]"
-1603,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
-1603,BinaryBidderImpl,errorMinAmount,CSS,.bmMessage.bmError.bmMessageMinAmount
-1603,BinaryBidderImpl,errorMaxAmount,CSS,.bmMessage.bmError.bmMessageMaxAmount
-1603,BinaryBidderImpl,errorValidAmount,CSS,.bmMessage.bmError.bmMessageEnterValidAmount
-1603,CrmNavigationImpl,loginButton,NAME,btnLoginWidget
-1603,CrmNavigationImpl,fnsPersonalInformationButton,NAME,btnFnsPersonalInformationWidget
-1603,CrmNavigationImpl,fnsTradingExperienceButton,NAME,btnFnsTradingExperienceWidget
-1603,CrmNavigationImpl,accountDetailsButton,NAME,btnAccountDetailsWidget
-1603,CrmNavigationImpl,accountAdditionalDetailsButton,NAME,btnAccountAdditionalDetailsWidget
-1603,CrmNavigationImpl,creditCardDepositButton,NAME,btnCCDepositWidget
-1603,CrmNavigationImpl,registerButton,NAME,btnRegisterWidget
-1603,CrmNavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
-1603,FnsTradingExperienceImpl,sharesExperience,ID,FinancialProducts1Shares
-1603,FnsTradingExperienceImpl,binaryExperience,ID,FinancialProducts1Binary
-1603,FnsTradingExperienceImpl,averageYearlyBinaryVolume,ID,FinancialProducts1Volume
-1603,FnsTradingExperienceImpl,forExExperience,ID,FinancialProducts2Forex
-1603,FnsTradingExperienceImpl,averageYearlyForExVolume,ID,FinancialProducts2Volume
-1603,FnsTradingExperienceImpl,commonLeverage,ID,FinancialProducts2Leverage
-1603,FnsTradingExperienceImpl,financialWorkExperience,ID,SelectIfApplicable
-1603,FnsTradingExperienceImpl,cfdBinaryKnowledge,ID,KnowledgeCfdsBinaries
-1603,FnsTradingExperienceImpl,submit,NAME,swFinancialSuitabilityBtn
-1603,CrmLoginPageImpl,usernameField,ID,Username
-1603,CrmLoginPageImpl,passwordField,ID,Password
-1603,CrmLoginPageImpl,loginSubmit,NAME,swLoginBtn
-1603,FnsPersonalInformationImpl,employmentStatus,ID,EmploymentStatus
-1603,FnsPersonalInformationImpl,industry,ID,Industry
-1603,FnsPersonalInformationImpl,employerName,ID,QNameOfEmployer_A0
-1603,FnsPersonalInformationImpl,taxResidenceCountry,ID,CountryTaxResidence
-1603,FnsPersonalInformationImpl,hasTaxIdentificationNumber,ID,HaveTin
-1603,FnsPersonalInformationImpl,taxIdentificationNumber,ID,tinYes_alternate
-1603,FnsPersonalInformationImpl,socialSecurityNumber,ID,tinNo_alternate
-1603,FnsPersonalInformationImpl,educationLevel,ID,LevelOfEducation
-1603,FnsPersonalInformationImpl,educationField,ID,FieldOfStudy
-1603,FnsPersonalInformationImpl,isPoliticallyExposed,ID,PoliticallyExposed
-1603,FnsPersonalInformationImpl,politicalExposureComment,ID,politicallyExposedYes_alternate
-1603,FnsPersonalInformationImpl,sourceOfFunds,ID,SourceOfFunds
-1603,FnsPersonalInformationImpl,annualIncome,ID,TotalAnnualIncome
-1603,FnsPersonalInformationImpl,netWealth,ID,NetWealth
-1603,FnsPersonalInformationImpl,expectedDepositsPerYear,ID,ExpectedDeposits
-1603,FnsPersonalInformationImpl,purposeOfTrading,ID,PurposeOfTrading
-1603,FnsPersonalInformationImpl,submit,NAME,swFinancialSuitabilityBtn
-1603,FnsPersonalInformationImpl,industryOther,ID,industryOther_alternate
-1603,FnsPersonalInformationImpl,isUSReportable,ID,IsUSReportablePerson
-1603,FnsPersonalInformationImpl,educationFieldOther,ID,fieldOfStudyOther_alternate
-1603,FnsPersonalInformationImpl,sourceOfFundsOther,ID,sourceOfFundsOther_alternate
-1603,FnsPersonalInformationImpl,purposeOfTradingOther,ID,purposeOfTradingOther_alternate
-1603,FnsTradingExperienceImpl,mainFactorKnowledge,ID,KnowledgeMainFactor
-1603,FnsTradingExperienceImpl,howToCloseKnowledge,ID,KnowledgeIfYouOpen
-1603,FnsTradingExperienceImpl,cfdLeverageKnowledge,ID,KnowledgeLeverageCFD
-1603,FnsTradingExperienceImpl,stopLossKnowledge,ID,KnowledgeStoploss
-1603,FnsTradingExperienceImpl,requiredMarginKnowledge,ID,KnowledgeRequiredMargin
-1603,FnsTradingExperienceImpl,marginLevelDropKnowledge,ID,KnowledgeMarginLevelDrop
-1603,FnsTradingExperienceImpl,automaticStopKnowledge,ID,KnowledgeAutomaticStop
-1603,FnsTradingExperienceImpl,lossOn1to50Knowledge,ID,KnowledgePositionLoss1to50
-1603,FnsTradingExperienceImpl,lossOn1to200Knowledge,ID,KnowledgePositionLoss1to200
-1603,FnsTradingExperienceImpl,binaryInvestProfitKnowledge,ID,KnowledgeInvestBinaryProfit
-1603,FnsTradingExperienceImpl,binaryInvestLossKnowledge,ID,KnowledgeInvestBinaryLoss
-1603,FnsTradingExperienceImpl,binaryProbabilityKnowledge,ID,KnowledgeBinaryInTheMoney
-1603,AccountDetailsPageImpl,title,ID,Title
-1603,AccountDetailsPageImpl,street,ID,Street
-1603,AccountDetailsPageImpl,streetNumber,ID,StreetNumber
-1603,AccountDetailsPageImpl,city,ID,City
-1603,AccountDetailsPageImpl,countryPhonePrefix2,ID,PhoneExtention2
-1603,AccountDetailsPageImpl,phone2,ID,Telephone2
-1603,AccountDetailsPageImpl,birthdayDay,ID,BirthDateDay
-1603,AccountDetailsPageImpl,birthdayMonth,ID,BirthDateMonth
-1603,AccountDetailsPageImpl,birthdayYear,ID,BirthDateYear
-1603,AccountDetailsPageImpl,update,NAME,swUpdateCustomerBtn
-1603,AccountAdditionalDetailsPageImpl,birthDateDay,ID,BirthDateDay
-1603,AccountAdditionalDetailsPageImpl,birthDateMonth,ID,BirthDateMonth
-1603,AccountAdditionalDetailsPageImpl,birthDateYear,ID,BirthDateYear
-1603,AccountAdditionalDetailsPageImpl,countryOfBirth,ID,CountryOfBirthCode
-1603,AccountAdditionalDetailsPageImpl,nationality,ID,NationalityCode
-1603,AccountAdditionalDetailsPageImpl,update,NAME,swUpdateCustomerBtn
-1603,CreditCardDepositPageImpl,depositAmount,NAME,Amount
-1603,CreditCardDepositPageImpl,creditCardNumber,ID,CreditCardNumber
-1603,CreditCardDepositPageImpl,cvv2,NAME,Cvv2
-1603,CreditCardDepositPageImpl,expiryDateMonth,NAME,ExpiryDateMonth
-1603,CreditCardDepositPageImpl,expiryDateYear,NAME,ExpiryDateYear
-1603,CreditCardDepositPageImpl,cardHoldersFirstName,NAME,HolderFirstName
-1603,CreditCardDepositPageImpl,cardHoldersLastName,NAME,HolderLastName
-1603,CreditCardDepositPageImpl,billingAddress,NAME,BillingAddress
-1603,CreditCardDepositPageImpl,city,NAME,City
-1603,CreditCardDepositPageImpl,zipCode,NAME,Zip
-1603,CreditCardDepositPageImpl,country,ID,CountryCode
-1603,CreditCardDepositPageImpl,submit,NAME,swCCDepositBtn
-1603,RegisterPageImpl,title,NAME,Title
-1603,RegisterPageImpl,firstName,NAME,FirstName
-1603,RegisterPageImpl,lastName,NAME,LastName
-1603,RegisterPageImpl,email,NAME,Email
-1603,RegisterPageImpl,country,ID,CountryCode
-1603,RegisterPageImpl,telephonePrefix,NAME,PhoneExtention
-1603,RegisterPageImpl,telephoneNumber,NAME,Telephone
-1603,RegisterPageImpl,birthDateDay,NAME,BirthDateDay
-1603,RegisterPageImpl,birthDateMonth,NAME,BirthDateMonth
-1603,RegisterPageImpl,birthDateYear,NAME,BirthDateYear
-1603,RegisterPageImpl,accountBaseCurrency,NAME,Currency
-1603,RegisterPageImpl,password,NAME,Password
-1603,RegisterPageImpl,startTrading,NAME,swRegisterBtn
-1603,RegisterPageImpl,swProgressImg,ID,swProgressImg
-1603,RegisterPageImpl,resultPlaceHolder,ID,resultPlaceHolder
-1603,CrmLoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
-1603,FnsTradingExperienceImpl,resultPlaceholder,ID,resultPlaceHolder
-1603,FnsPersonalInformationImpl,resultPlaceholder,ID,resultPlaceHolder
-1603,RegistrationPageImpl,firstNameField,ID,FirstName
-1603,RegistrationPageImpl,lastNameField,ID,LastName
-1603,RegistrationPageImpl,emailField,ID,Email
-1603,RegistrationPageImpl,phoneNumberField,NAME,PhoneNumber.Number
-1603,RegistrationPageImpl,selectedFlagField,CLASS_NAME,selected-flag
-1603,RegistrationPageImpl,selectCountry,XPATH,.//ul[@class='country-list']//li[@data-country-code='de']
-1603,RegistrationPageImpl,passwordRegField,ID,Password
-1603,RegistrationPageImpl,reenterPasswordRegField,ID,ReEnterPassword
-1603,RegistrationPageImpl,accountAgreeField,ID,AccountAgreeLabel
-1603,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
-1603,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
-1603,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
-1603,WelcomePageImpl,startButton,XPATH,//*[@id="wizard-message"]/div[3]/button
-1603,RiskWarningImpl,iAmOver18CheckBox,ID,IsChecked
-1603,RiskWarningImpl,updateButton,XPATH,//*[@id="risk-warning-form-space"]/div/input
-1603,CrmLoginPageImpl,loginButton,NAME,btnLoginWidget
-1603,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
-1603,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
-1603,OnBoardingWizardImpl,button,CLASS_NAME,btn
-1603,StartTradeDialogImpl,startTradeDialog,CLASS_NAME,wizard-container
-1603,StartTradeDialogImpl,startTradeButton,CSS,#wizard-message>div.message-button>button
-1603,SetLeverageDialogImpl,setLeverageDialog,CSS,.swSetLeverageContent.swWidget.swGroupBox
-1603,SetLeverageDialogImpl,leverageComboBox,CSS,.dropdown-menu.inner
-1603,SetLeverageDialogImpl,okButton,CSS,.swFormControl.swAcceptButton
-1603,SetLeverageDialogImpl,cancelButton,CSS,.swFormControl.swCancelButton
-1603,SetLeverageDialogImpl,leveragesButton,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/button
-1603,SetLeverageDialogImpl,leveragesList,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/div/ul/li[*]/a/span[1]
-1603,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
-1603,RejectMessageOnLoginImpl,rejectCaption,CLASS_NAME,message-title
+implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,usernameField,ID,UserName
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,passwordField,ID,Password
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,submitButton,ID,FormSubmitBtn
+2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerCheckbox,ID,checkboxDisclaimer
+2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerSubmitBtn,ID,disclaimer_submit
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,loginBtn,ID,login_btn
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,myAccountBtn,ID,myaccount_btn
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,homePageLink,XPATH,//*[@id="header"]/div[2]/div[1]/a/img
+2.6.2,2017-05-29 15:24 +0000,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
+2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,amountInput,ID,bmBidAmountInput
+2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame
+2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,shortTermButton,CSS,.bmSelectItem.bmSelectShortTermGame
+2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,doubleProfitButton,CSS,.bmSelectItem.bmSelectDoubleProfitGame
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
+2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,lowButton,CSS,.bmButtonsWrapp.bmSelection2
+2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,highButton,CSS,.bmButtonsWrapp.bmSelection1
+2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,closePosition,CSS,.bmButtonWrapp.bmClosePositionDialog
+2.6.2,2017-05-29 15:24 +0000,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
+2.6.2,2017-05-29 15:24 +0000,PositionsImpl,position,CLASS_NAME,bmCellContent
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,binaryBtn,CLASS_NAME,product-binary
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,mainMenu,ID,mainMenu
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,cfdBtn,CLASS_NAME,product-cfd
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetContainer,CLASS_NAME,assets-list-container
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetName,CLASS_NAME,list-asset
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,pandaIframe,ID,swPandaIframe
+2.6.2,2017-05-29 15:24 +0000,LandingPageImpl,homepage,CLASS_NAME,homepage-balanced-template
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,accountCurrency,CLASS_NAME,swAccountCurrency
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,accountListMenu,ID,account_list_menu
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetTooltipIcon,CLASS_NAME,assetTooltip
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetTooltipContent,CLASS_NAME,tooltip-content
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,requiredMarginRow,CSS,div[data-bind='with: $root.investAmountModel.requiredMargin']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,swapRow,CSS,div[data-bind='with: $root.investAmountModel.swaps']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,underlyingAssetName,XPATH,.//div[./div='Underlying asset name']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetNameTitle,CLASS_NAME,assetNameTitle
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,userDataCurrency,CSS,span[data-bind='text: $root.userData.currency']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,firstRow,CSS,div:nth-of-type(1)
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,secondRow,CSS,div:nth-of-type(2)
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,toolTipName,CSS,span[data-bind='text: toolTipName']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,selectedAssetCurrency,CSS,span[data-bind='text: $root.assetsListViewModel.selectedAsset().currency']
+2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,volumeInput,CLASS_NAME,investInsert
+2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,buyButton,CLASS_NAME,buyBTN
+2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,sellButton,CLASS_NAME,sellBTN
+2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,tradeButton,CLASS_NAME,buyTrade
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,messageBox,CLASS_NAME,messageBox
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,okButton,CLASS_NAME,ok-button
+2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
+2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,assetName,CLASS_NAME,assetname
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,tooltipClose,CSS,.tooltip-close > .icon
+2.6.2,2017-05-29 15:24 +0000,ChartImpl,highChartsRoot,CLASS_NAME,highcharts-root
+2.6.2,2017-05-29 15:24 +0000,ChartImpl,candleSticks,CLASS_NAME,highcharts-candlestick-series
+2.6.2,2017-05-29 15:24 +0000,ChartImpl,candle,TAG,path
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,requoteTrade,CLASS_NAME,requote-trade
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,buttonsBlock,CLASS_NAME,buttons-block
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,firstButton,CSS,button:nth-of-type(1)
+2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
+2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
+2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,closeButton,XPATH,"//*[@id=""tradeManagerContainer""]/div/div[3]/div/div/div[3]"
+2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
+2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorMinAmount,CSS,.bmMessage.bmError.bmMessageMinAmount
+2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorMaxAmount,CSS,.bmMessage.bmError.bmMessageMaxAmount
+2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorValidAmount,CSS,.bmMessage.bmError.bmMessageEnterValidAmount
+2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,loginButton,NAME,btnLoginWidget
+2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,fnsPersonalInformationButton,NAME,btnFnsPersonalInformationWidget
+2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,fnsTradingExperienceButton,NAME,btnFnsTradingExperienceWidget
+2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,accountDetailsButton,NAME,btnAccountDetailsWidget
+2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,accountAdditionalDetailsButton,NAME,btnAccountAdditionalDetailsWidget
+2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,creditCardDepositButton,NAME,btnCCDepositWidget
+2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,registerButton,NAME,btnRegisterWidget
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,sharesExperience,ID,FinancialProducts1Shares
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,binaryExperience,ID,FinancialProducts1Binary
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,averageYearlyBinaryVolume,ID,FinancialProducts1Volume
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,forExExperience,ID,FinancialProducts2Forex
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,averageYearlyForExVolume,ID,FinancialProducts2Volume
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,commonLeverage,ID,FinancialProducts2Leverage
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,financialWorkExperience,ID,SelectIfApplicable
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,cfdBinaryKnowledge,ID,KnowledgeCfdsBinaries
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,submit,NAME,swFinancialSuitabilityBtn
+2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,usernameField,ID,Username
+2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,passwordField,ID,Password
+2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,loginSubmit,NAME,swLoginBtn
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employmentStatus,ID,EmploymentStatus
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,industry,ID,Industry
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employerName,ID,QNameOfEmployer_A0
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,taxResidenceCountry,ID,CountryTaxResidence
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,hasTaxIdentificationNumber,ID,HaveTin
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,taxIdentificationNumber,ID,tinYes_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,socialSecurityNumber,ID,tinNo_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,educationLevel,ID,LevelOfEducation
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,educationField,ID,FieldOfStudy
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,isPoliticallyExposed,ID,PoliticallyExposed
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,politicalExposureComment,ID,politicallyExposedYes_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,sourceOfFunds,ID,SourceOfFunds
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,annualIncome,ID,TotalAnnualIncome
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,netWealth,ID,NetWealth
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,expectedDepositsPerYear,ID,ExpectedDeposits
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,purposeOfTrading,ID,PurposeOfTrading
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,submit,NAME,swFinancialSuitabilityBtn
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,industryOther,ID,industryOther_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,isUSReportable,ID,IsUSReportablePerson
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,educationFieldOther,ID,fieldOfStudyOther_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,sourceOfFundsOther,ID,sourceOfFundsOther_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,purposeOfTradingOther,ID,purposeOfTradingOther_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,mainFactorKnowledge,ID,KnowledgeMainFactor
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,howToCloseKnowledge,ID,KnowledgeIfYouOpen
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,cfdLeverageKnowledge,ID,KnowledgeLeverageCFD
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,stopLossKnowledge,ID,KnowledgeStoploss
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,requiredMarginKnowledge,ID,KnowledgeRequiredMargin
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,marginLevelDropKnowledge,ID,KnowledgeMarginLevelDrop
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,automaticStopKnowledge,ID,KnowledgeAutomaticStop
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,lossOn1to50Knowledge,ID,KnowledgePositionLoss1to50
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,lossOn1to200Knowledge,ID,KnowledgePositionLoss1to200
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,binaryInvestProfitKnowledge,ID,KnowledgeInvestBinaryProfit
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,binaryInvestLossKnowledge,ID,KnowledgeInvestBinaryLoss
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,binaryProbabilityKnowledge,ID,KnowledgeBinaryInTheMoney
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,title,ID,Title
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,street,ID,Street
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,streetNumber,ID,StreetNumber
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,city,ID,City
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,countryPhonePrefix2,ID,PhoneExtention2
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,phone2,ID,Telephone2
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayDay,ID,BirthDateDay
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayMonth,ID,BirthDateMonth
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayYear,ID,BirthDateYear
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,update,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateDay,ID,BirthDateDay
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateMonth,ID,BirthDateMonth
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateYear,ID,BirthDateYear
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,countryOfBirth,ID,CountryOfBirthCode
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,nationality,ID,NationalityCode
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,update,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,depositAmount,NAME,Amount
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,creditCardNumber,ID,CreditCardNumber
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cvv2,NAME,Cvv2
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,expiryDateMonth,NAME,ExpiryDateMonth
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,expiryDateYear,NAME,ExpiryDateYear
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cardHoldersFirstName,NAME,HolderFirstName
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cardHoldersLastName,NAME,HolderLastName
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,billingAddress,NAME,BillingAddress
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,city,NAME,City
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,zipCode,NAME,Zip
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,country,ID,CountryCode
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,submit,NAME,swCCDepositBtn
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,title,NAME,Title
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,firstName,NAME,FirstName
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,lastName,NAME,LastName
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,email,NAME,Email
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,country,ID,CountryCode
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,telephonePrefix,NAME,PhoneExtention
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,telephoneNumber,NAME,Telephone
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,birthDateDay,NAME,BirthDateDay
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,birthDateMonth,NAME,BirthDateMonth
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,birthDateYear,NAME,BirthDateYear
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,accountBaseCurrency,NAME,Currency
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,password,NAME,Password
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,startTrading,NAME,swRegisterBtn
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,swProgressImg,ID,swProgressImg
+2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,resultPlaceHolder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,resultPlaceholder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,resultPlaceholder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,firstNameField,ID,FirstName
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,lastNameField,ID,LastName
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,emailField,ID,Email
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,phoneNumberField,NAME,PhoneNumber.Number
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,selectedFlagField,CLASS_NAME,selected-flag
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,selectCountry,XPATH,.//ul[@class='country-list']//li[@data-country-code='de']
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,passwordRegField,ID,Password
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,reenterPasswordRegField,ID,ReEnterPassword
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,accountAgreeField,ID,AccountAgreeLabel
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
+2.6.2,2017-05-29 15:24 +0000,WelcomePageImpl,startButton,XPATH,//*[@id="wizard-message"]/div[3]/button
+2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,iAmOver18CheckBox,ID,IsChecked
+2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,updateButton,XPATH,//*[@id="risk-warning-form-space"]/div/input
+2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,loginButton,NAME,btnLoginWidget
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
+2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
+2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeDialog,CLASS_NAME,wizard-container
+2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeButton,CSS,#wizard-message>div.message-button>button
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,setLeverageDialog,CSS,.swSetLeverageContent.swWidget.swGroupBox
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leverageComboBox,CSS,.dropdown-menu.inner
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,okButton,CSS,.swFormControl.swAcceptButton
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,cancelButton,CSS,.swFormControl.swCancelButton
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesButton,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/button
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesList,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/div/ul/li[*]/a/span[1]
+2.6.2,2017-05-29 15:24 +0000,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
+2.6.2,2017-05-29 15:24 +0000,RejectMessageOnLoginImpl,rejectCaption,CLASS_NAME,message-title

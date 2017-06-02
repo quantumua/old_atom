@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.MobileDepositBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
 import com.betamedia.qe.af.core.testingtype.tp.TPBackEndTest;
@@ -26,51 +26,53 @@ public class MobileCRMDepositTest extends TPBackEndTest {
     @Test
     @Parameters("tradingAccountId")
     public void testDeposit(String tradingAccountId) {
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
-        CRMDeposit deposit = operations().customerOperations().deposit(depositBuilder);
+        CRMDeposit deposit = operations().customerOperations().deposit(MobileDepositRO.builder(tradingAccountId).build());
         assertNotNull(deposit);
     }
 
     @Test
     @Parameters("tradingAccountId")
     public void testDepositWithoutAddressFields(String tradingAccountId) {
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
-        depositBuilder.setAddress(null);
-        depositBuilder.setCity(null);
-        depositBuilder.setCountryCode(null);
-
-        CRMDeposit deposit = operations().customerOperations().deposit(depositBuilder);
+        CRMDeposit deposit = operations().customerOperations().deposit(
+                MobileDepositRO.builder(tradingAccountId)
+                        .setAddress(null)
+                        .setCity(null)
+                        .setCountryCode(null)
+                        .build()
+        );
         assertNotNull(deposit);
     }
 
     @Test
     @Parameters("tradingAccountId")
     public void testDepositWithInvalidExpirationYear(String tradingAccountId) {
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
-        depositBuilder.setExpiryYear(2015);
-
-        List<CRMError> depositErrors = operations().customerOperations().depositWithErrors(depositBuilder);
+        List<CRMError> depositErrors = operations().customerOperations().depositWithErrors(
+                MobileDepositRO.builder(tradingAccountId)
+                        .setExpiryYear(2015)
+                        .build());
         verifyErrorCodeAndMessage(depositErrors, expiryErrorCode, expiryErrorMessage);
     }
 
     @Test
     @Parameters("tradingAccountId")
     public void testDepositWithInvalidExpirationMonth(String tradingAccountId) {
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
-        depositBuilder.setExpiryYear(2017);
-        depositBuilder.setExpiryMonth(1);
-
-        List<CRMError> depositErrors = operations().customerOperations().depositWithErrors(depositBuilder);
+        List<CRMError> depositErrors = operations().customerOperations().depositWithErrors(
+                MobileDepositRO.builder(tradingAccountId)
+                        .setExpiryYear(2017)
+                        .setExpiryMonth(1)
+                        .build()
+        );
         verifyErrorCodeAndMessage(depositErrors, expiryErrorCode, expiryErrorMessage);
     }
 
     @Test
     public void testDepositWithMissingAccountName() {
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(null);
-        depositBuilder.setTradingAccountName(null);
-        depositBuilder.setTradingAccountId(null);
-
-        List<CRMError> depositErrors = operations().customerOperations().depositByNameWithErrors(depositBuilder);
+        List<CRMError> depositErrors = operations().customerOperations().depositByNameWithErrors(
+                MobileDepositRO.builder(null)
+                        .setTradingAccountName(null)
+                        .setTradingAccountId(null)
+                        .build()
+        );
         verifyErrorCodeAndMessage(depositErrors, missingAccountErrorCode, missingAccountErrorMessage);
     }
 
@@ -81,9 +83,11 @@ public class MobileCRMDepositTest extends TPBackEndTest {
                 "q0zDXicgEJPSP33jnqAVugmL1RRXDwR0ajxpOP2zO8kLqBLvlMisEMV0DzremhEX8YYKcNX5qqGeYtGAub2tQpimQCGXo2SxJKzw" +
                 "WYrFisOJj0K0UtHBMW6k0lUUrlUSluLVUaA67muD301vOoAbo5evVV3itGx7OlS4uwS6mSBigVYMFmrc5hOE31VIjlN0l6BI4Dhj" +
                 "huyKbO94pGbX0W4nbzPZL";
-        MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
-        depositBuilder.setAddress(longAddress);
-        List<CRMError> depositErrors = operations().customerOperations().depositWithErrors(depositBuilder);
+        List<CRMError> depositErrors = operations().customerOperations().depositWithErrors(
+                MobileDepositRO.builder(tradingAccountId)
+                        .setAddress(longAddress)
+                        .build()
+        );
         verifyErrorCodeAndMessage(depositErrors, systemExceptionErrorCode, unknownErrorMessage);
     }
 

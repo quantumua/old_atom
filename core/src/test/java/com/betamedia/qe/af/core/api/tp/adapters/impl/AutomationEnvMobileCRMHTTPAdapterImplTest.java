@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.core.api.tp.adapters.impl;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMError;
@@ -36,7 +36,7 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
     private static final String EXPECTED_URL = "someUrl";
     private MobileDepositRO mobileDepositRO;
     private MarketingParametersRO marketingParametersRO;
-    private CustomerBuilder.CustomerRO customerRO;
+    private CustomerRO customerRO;
     private CRMResponse<CRMRegisterResult> crmResponseExpected;
 
     private static final String CUSTOMER_ID = "someCustomerID";
@@ -46,15 +46,15 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
 
     private static final String LANG = "lang";
     private static final String CURRENCY = "currency";
-    private static final String AMOUNT = "amount";
+    private static final Long   AMOUNT = 1000L;
     private static final String ADDRESS = "address";
     private static final String CITY = "city";
     private static final String COUNTRY_CODE = "countryCode";
-    private static final String ZIP = "zip";
-    private static final String CC_NUMBER = "ccNumber";
-    private static final String CVV2 = "cvv2";
-    private static final String EXP_MONTH = "expMonth";
-    private static final String EXP_YEAR = "expYear";
+    private static final Integer ZIP = 123456;
+    private static final Long   CC_NUMBER = 1111222233334444L;
+    private static final Integer CVV2 = 123;
+    private static final Integer EXP_MONTH = 1;
+    private static final Integer EXP_YEAR = 1;
     private static final String HOLDER_FIRST_NAME = "holderFirstName";
     private static final String HOLDER_LAST_NAME = "holderLastName";
     private static final String TRADING_ACCOUNT_ID = "tradingAccountId";
@@ -145,19 +145,48 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
     }
 
     private MobileDepositRO getMobileDepositRO() {
-        return new MobileDepositRO("lang", "currency", "amount", "address", "city", "countryCode", "zip", "ccNumber", "cvv2", "expMonth", "expYear", "holderFirstName", "holderLastName", "tradingAccountId", "tradingAccountName");
+        return MobileDepositRO.builder(TRADING_ACCOUNT_ID)
+                .setLanguage(LANG)
+                .setCurrency(CURRENCY)
+                .setAmount(AMOUNT)
+                .setAddress(ADDRESS)
+                .setCity(CITY)
+                .setCountryCode(COUNTRY_CODE)
+                .setZipCode(ZIP)
+                .setCreditCardNumber(CC_NUMBER)
+                .setCvv2(CVV2)
+                .setExpiryMonth(EXP_MONTH)
+                .setExpiryYear(EXP_YEAR)
+                .setHolderFirstName(HOLDER_FIRST_NAME)
+                .setHolderLastName(HOLDER_LAST_NAME)
+                .setTradingAccountName(TRADING_ACCOUNT_NAME)
+                .build();
     }
 
     private MarketingParametersRO getMarketingParametersRO() {
-        return new MarketingParametersRO("origin", "registrationIp", "channel", "referrer", "siteId", "af_siteid");
+        return MarketingParametersRO.builder(false)
+                .setOrigin(ORIGIN)
+                .setRegistrationIp(REGISTRATION_IP)
+                .setChannel(CHANNEL)
+                .setReferrer(REFERRER)
+                .setSiteId(SITE_ID)
+                .setAf_siteid(AF_SITE_ID)
+                .setParam1(null)
+                .setParam2(null)
+                .setParam3(null)
+                .setParam4(null)
+                .setParam5(null)
+                .setKeyword(null)
+                .setOfrtc(null)
+                .build();
     }
 
     private CRMResponse getCRMResponseExpected() {
         return new CRMResponse<>(new ArrayList<String>(), null, new ArrayList<CRMError>(), "methodValue", "actionValue");
     }
 
-    private CustomerBuilder.CustomerRO getCustomerRO() {
-        return new CustomerBuilder().createCustomerRO();
+    private CustomerRO getCustomerRO() {
+        return CustomerRO.builder().build();
     }
 
     private AutomationEnvMobileCRMHTTPAdapterImpl getAdapter() {

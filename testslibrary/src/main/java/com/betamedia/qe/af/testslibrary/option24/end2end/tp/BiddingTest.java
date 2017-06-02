@@ -1,6 +1,6 @@
 package com.betamedia.qe.af.testslibrary.option24.end2end.tp;
 
-import com.betamedia.qe.af.core.api.tp.entities.builders.CustomerBuilder;
+import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.dsl.operations.TagOperations;
@@ -27,7 +27,7 @@ public class BiddingTest extends TPEndToEndTest {
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
