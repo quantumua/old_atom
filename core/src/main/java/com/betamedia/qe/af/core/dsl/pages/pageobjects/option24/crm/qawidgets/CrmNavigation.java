@@ -17,4 +17,6 @@ public interface CrmNavigation {
     void creditCardDeposit();
 
     void register();
+
+    void setLeverage();
 }

@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite: sequential execution of tests" verbose="1">
+    <test name="Tryouts 1">
+        <classes>
+            <class name="com.betamedia.qe.af.testslibrary.option24.web.QuestionairesWizards.TPQuestionnairesWizardTests" >
+                <methods>
+                    <include name="personalInformationStep"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

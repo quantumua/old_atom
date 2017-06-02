@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by mbelyaev on 5/24/17.
  */
@@ -31,5 +33,4 @@ public class OnBoardingWizardImpl extends AbstractPageObject implements OnBoardi
     public void confirmMessage() {
         waitUntilDisplayed(wizardMessage, button).click();
     }
-
 }

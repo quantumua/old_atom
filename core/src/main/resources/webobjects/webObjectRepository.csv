@@ -70,6 +70,7 @@ build,pageObjectName,locatorId,locatorType,value
 1603,CrmNavigationImpl,accountAdditionalDetailsButton,NAME,btnAccountAdditionalDetailsWidget
 1603,CrmNavigationImpl,creditCardDepositButton,NAME,btnCCDepositWidget
 1603,CrmNavigationImpl,registerButton,NAME,btnRegisterWidget
+1603,CrmNavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
 1603,FnsTradingExperienceImpl,sharesExperience,ID,FinancialProducts1Shares
 1603,FnsTradingExperienceImpl,binaryExperience,ID,FinancialProducts1Binary
 1603,FnsTradingExperienceImpl,averageYearlyBinaryVolume,ID,FinancialProducts1Volume
@@ -181,3 +182,13 @@ build,pageObjectName,locatorId,locatorType,value
 1603,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
 1603,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
 1603,OnBoardingWizardImpl,button,CLASS_NAME,btn
+1603,StartTradeDialogImpl,startTradeDialog,CLASS_NAME,wizard-container
+1603,StartTradeDialogImpl,startTradeButton,CSS,#wizard-message>div.message-button>button
+1603,SetLeverageDialogImpl,setLeverageDialog,CSS,.swSetLeverageContent.swWidget.swGroupBox
+1603,SetLeverageDialogImpl,leverageComboBox,CSS,.dropdown-menu.inner
+1603,SetLeverageDialogImpl,okButton,CSS,.swFormControl.swAcceptButton
+1603,SetLeverageDialogImpl,cancelButton,CSS,.swFormControl.swCancelButton
+1603,SetLeverageDialogImpl,leveragesButton,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/button
+1603,SetLeverageDialogImpl,leveragesList,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/div/ul/li[*]/a/span[1]
+1603,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
+1603,RejectMessageImpl,rejectCaption,CLASS_NAME,message-title

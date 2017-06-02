@@ -23,6 +23,7 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.DialogBo
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.MessageBox;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.impl.DialogBoxImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.impl.MessageBoxImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.impl.RejectMessageOnLoginImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPageImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
@@ -30,9 +31,7 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNav
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl.OnBoardingWizardImpl;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl.RiskWarningImpl;
-import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomePageImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.impl.BinaryPositionsImpl;
@@ -180,5 +179,25 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     @Override
     public OnBoardingWizard onBoardingWizard(){
         return creator.getPage(OnBoardingWizardImpl.class);
+    }
+
+    @Override
+    public SetLeverageDialogImpl setLeverageDialog() {
+        return creator.getPage(SetLeverageDialogImpl.class);
+    }
+
+    @Override
+    public StartTradeDialogImpl startTradeDialog() {
+        return creator.getPage(StartTradeDialogImpl.class);
+    }
+
+    @Override
+    public SetLeveragePageImpl setLeveragePage() {
+        return creator.getPage(SetLeveragePageImpl.class);
+    }
+
+    @Override
+    public RejectMessageOnLoginImpl rejectMessage() {
+        return creator.getPage(RejectMessageOnLoginImpl.class);
     }
 }

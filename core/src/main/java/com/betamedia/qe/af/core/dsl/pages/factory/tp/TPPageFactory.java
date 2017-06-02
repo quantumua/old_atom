@@ -7,16 +7,20 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.bidder.CfdBidder;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.binaryselector.BinarySelector;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.*;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.SetLeveragePageImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.login.LoginPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.DialogBox;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.MessageBox;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.impl.RejectMessageOnLoginImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl.SetLeverageDialogImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.impl.StartTradeDialogImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
 
@@ -74,4 +78,12 @@ public interface TPPageFactory {
     RiskWarning riskWarningPage();
 
     OnBoardingWizard onBoardingWizard();
+
+    SetLeverageDialogImpl setLeverageDialog();
+
+    StartTradeDialogImpl startTradeDialog();
+
+    SetLeveragePageImpl setLeveragePage();
+
+    RejectMessageOnLoginImpl rejectMessage();
 }

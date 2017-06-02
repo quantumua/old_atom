@@ -20,12 +20,12 @@ public class MobileDepositBuilder {
     private String address = "301E45";
     private String city = "NYC";
     private String countryCode = "AR";
-    private Integer zipCode = 10017;
+    private Integer zipCode = 00000;
 
-    private Long creditCardNumber = 4444436501403986L;
-    private Integer cvv2 = 685;
-    private Integer expiryMonth = 12;
-    private Integer expiryYear = 2022;
+    private Long creditCardNumber = 4000020951595032L;
+    private Integer cvv2 = 123;
+    private Integer expiryMonth = 1;
+    private Integer expiryYear = 2020;
     private String holderFirstName = "Cosmo";
     private String holderLastName = "Kramer";
 

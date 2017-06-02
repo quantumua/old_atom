@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite: sequential execution of tests" verbose="1">
+    <test name="Regression leverages">
+        <classes>
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.CustomerLeverageWidgetsTest" >
+                <methods>
+                    <include name="checkRejectedCustomerHasDisabledSelectLeverageComboBox"/>
+                    <include name="checkThatNoExperienceCustomerHasDisabledLeverageComboBox"/>
+                    <include name="checkThatLowExperienceCustomerCanSelectLeverage"/>
+                    <include name="checkThatHighExperienceCustomerCanSelectLeverage"/>
+                    <include name="checkThatExpertCustomerCanSelectLeverage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

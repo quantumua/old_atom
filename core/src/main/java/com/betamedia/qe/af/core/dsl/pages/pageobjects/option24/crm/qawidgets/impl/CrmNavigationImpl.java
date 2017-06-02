@@ -24,6 +24,8 @@ public class CrmNavigationImpl extends AbstractPageObject implements CrmNavigati
     private By creditCardDepositButton;
     @StoredId
     private By registerButton;
+    @StoredId
+    private By setLeverageButton;
 
     public CrmNavigationImpl(WebDriver webDriver) {
         super(webDriver);
@@ -62,5 +64,10 @@ public class CrmNavigationImpl extends AbstractPageObject implements CrmNavigati
     @Override
     public void register() {
         click(registerButton);
+    }
+
+    @Override
+    public void setLeverage() {
+        click(setLeverageButton);
     }
 }

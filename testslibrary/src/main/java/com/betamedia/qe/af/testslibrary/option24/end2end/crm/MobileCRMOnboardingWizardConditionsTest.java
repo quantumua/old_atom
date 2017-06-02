@@ -18,7 +18,7 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
         if (conditions.hasPendingDeposit()) {
             customer = operations().customerOperations().registerWithWizardConditions(createConditionsToShowOnlyDepositPage());
             placePendingDeposit(customer);
-            operations().customerOperations().updateOnboardingConditionsInDatabase(customer.getId(), conditions);
+            operations().customerOperations().updateOnboardingConditionsInDB(customer.getId(), conditions);
         }
         else {
             customer = operations().customerOperations().registerWithWizardConditions(conditions);

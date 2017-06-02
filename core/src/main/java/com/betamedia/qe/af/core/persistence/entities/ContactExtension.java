@@ -117,6 +117,10 @@ public class ContactExtension {
         return experienceScore;
     }
 
+    public void setExperienceScore(Double experienceScore) {
+        this.experienceScore = experienceScore;
+    }
+
     public Integer getAccess() {
         return access;
     }

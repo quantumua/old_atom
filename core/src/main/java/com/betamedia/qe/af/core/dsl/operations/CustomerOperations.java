@@ -50,7 +50,9 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions);
 
-    ContactExtension updateOnboardingConditionsInDatabase(String contactId, OnboardingWizardConditions wizardConditions);
+    ContactExtension updateOnboardingConditionsInDB(String contactId, OnboardingWizardConditions wizardConditions);
+
+    ContactExtension updateExperienceScoreInDB(String contactId, int experienceScore);
 
     double findMaximumDepositLimit(String contactId);
 }

@@ -219,7 +219,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
         CRMCustomer registeredCustomer = register(new CustomerBuilder());
-        updateOnboardingConditionsInDatabase(registeredCustomer.getId(), wizardConditions);
+        updateOnboardingConditionsInDB(registeredCustomer.getId(), wizardConditions);
 
         String tradingAccountId = registeredCustomer.getBinaryAccount().getExternalId();
         MobileDepositBuilder depositBuilder = new MobileDepositBuilder(tradingAccountId);
@@ -231,7 +231,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     }
 
     @Override
-    public ContactExtension updateOnboardingConditionsInDatabase(String contactId, OnboardingWizardConditions wizardConditions) {
+    public ContactExtension updateOnboardingConditionsInDB(String contactId, OnboardingWizardConditions wizardConditions) {
         final Integer defaultBirthCountry = 100000207;
         final Integer defaultNationality = 100000207;
 
@@ -255,6 +255,15 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
             contactExtension.setNationality(defaultNationality);
         }
 
+        contactExtensionRepository.save(contactExtension);
+        return contactExtension;
+    }
+
+    public ContactExtension updateExperienceScoreInDB(String contactId, int experienceScore) {
+
+        ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
+        assertNotNull(contactExtension);
+        contactExtension.setExperienceScore((double) experienceScore);
         contactExtensionRepository.save(contactExtension);
         return contactExtension;
     }
