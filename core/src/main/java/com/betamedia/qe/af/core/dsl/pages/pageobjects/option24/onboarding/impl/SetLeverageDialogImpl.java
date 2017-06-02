@@ -43,12 +43,12 @@ public class SetLeverageDialogImpl extends AbstractPageObject implements SetLeve
 
     @Override
     public void okButton() {
-
+        waitUntilDisplayed(okButton).click();
     }
 
     @Override
     public void cancelButton() {
-
+        waitUntilDisplayed(cancelButton).click();
     }
 
     @Override

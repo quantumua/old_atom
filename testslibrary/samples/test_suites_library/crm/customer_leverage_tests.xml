@@ -9,6 +9,7 @@
                     <include name="checkThatLowExperienceCustomerCanSelectLeverage"/>
                     <include name="checkThatHighExperienceCustomerCanSelectLeverage"/>
                     <include name="checkThatExpertCustomerCanSelectLeverage"/>
+                    <include name="checkThatUnknownCustomerCanSelectLeverage"/>
                 </methods>
             </class>
         </classes>

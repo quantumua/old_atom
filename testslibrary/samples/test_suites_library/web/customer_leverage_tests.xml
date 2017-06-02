@@ -4,11 +4,16 @@
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.web.CustomerLeverageTest" >
                 <methods>
-                    <include name="checkCustomerLeverageForRejectedCustomer"/>
+                    <include name="checkNoCustomerLeverageForRejectedCustomer"/>
+                    <include name="checkIsNotAbbleToLoginForRejectedCustomer"/>
                     <include name="checkCustomerLeverageForNoExperienceCustomer"/>
+                    <!--<include name="checkIsAbbleToLoginForNoExperienceCustomer"/>-->
                     <include name="checkCustomerLeverageForLowExperienceCustomer"/>
+                    <include name="checkIsAbbleToLoginForLowExperienceCustomer"/>
                     <include name="checkCustomerLeverageForHighExperienceCustomer"/>
+                    <include name="checkIsAbbleToLoginForHighExperienceCustomer"/>
                     <include name="checkCustomerLeverageForExpertCustomer"/>
+                    <include name="checkIsAbbleToLoginLeverageForExpertCustomer"/>
                 </methods>
             </class>
         </classes>

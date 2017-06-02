@@ -70,6 +70,16 @@ public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTes
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(THIRD_AVERAGE),AVERAGE1TO200);
     }
 
+    @Test(description = "crm-9144")
+    public void checkThatUnknownCustomerCanSelectLeverage() {
+        CRMCustomer customer = operations().customerOperations().register();
+        pages().crmNavigation().login();
+        pages().crmLoginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        pages().crmNavigation().setLeverage();
+        Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),1);
+        Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
+    }
+
     private CRMCustomer createUser(OnboardingWizardConditions.ExperienceLevel experienceLevel, ExperienceScore experienceScore) {
         onboardingWizardConditions = onboardingWizardConditions(experienceLevel);
         CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions);
@@ -94,11 +104,14 @@ public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTes
     }
 
     private enum ExperienceScore {
+
+        UNKNOWN(0),
         REJECTED(5),
         NO_EXPERIENCE(25),
         LOW_EXPERIENCE(45),
         HIGH_EXPERIENCE(65),
         EXPERT(85);
+
 
         private int score;
 

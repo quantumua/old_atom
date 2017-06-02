@@ -8,6 +8,8 @@ import com.betamedia.qe.af.testslibrary.option24.end2end.crm.AbstractOnboardingC
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 /**
  * Created by vsnigur on 5/29/17.
  */
@@ -23,17 +25,34 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
     private final String AVERAGE1TO200 = "1:200";
 
     @Test(description = "crm-9043")
-    public void checkCustomerLeverageForRejectedCustomer() {
+    public void checkNoCustomerLeverageForRejectedCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.REJECTED, ExperienceScore.REJECTED).getUserName();
         pages().rejectMessage().isDisplayed();
-        pages().topNavigationPage().isLoggedOut();
     }
+
+    @Test(description = "crm-9020")
+    public void checkIsNotAbbleToLoginForRejectedCustomer() {
+        createUser(OnboardingWizardConditions.ExperienceLevel.REJECTED, ExperienceScore.REJECTED).getUserName();
+        assertTrue(pages().topNavigationPage().isLoggedOut());
+    }
+
 
     @Test(description = "crm-9044")
     public void checkCustomerLeverageForNoExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE).getUserName();
         pages().welcomePage().start();
     }
+
+    @Test(description = "crm-9021")
+    public void checkIsAbbleToLoginForNoExperienceCustomer() {
+        createUser(OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE).getUserName();
+        pages().welcomePage().start();
+        pages().riskWarningPage().accept();
+        updateCreditCard();
+        assertUserLogin();
+        assertTrue(pages().topNavigationPage().isLoggedIn());
+    }
+
 
     @Test(description = "crm-9045")
     public void checkCustomerLeverageForLowExperienceCustomer() {
@@ -47,6 +66,13 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
 
     }
 
+    @Test(description = "crm-9022")
+    public void checkIsAbbleToLoginForLowExperienceCustomer() {
+        createUser(OnboardingWizardConditions.ExperienceLevel.LOW_EXPERIENCE, ExperienceScore.LOW_EXPERIENCE).getUserName();
+        updateCreditCard();
+        assertUserLogin();
+    }
+
     @Test(description = "crm-9046")
     public void checkCustomerLeverageForHighExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE).getUserName();
@@ -57,7 +83,13 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(FIRST_AVERAGE),AVERAGE1TO50);
         Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(SECOND_AVERAGE),AVERAGE1TO100);
         Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(THIRD_AVERAGE),AVERAGE1TO200);
+    }
 
+    @Test(description = "crm-9024")
+    public void checkIsAbbleToLoginForHighExperienceCustomer() {
+        createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE).getUserName();
+        updateCreditCard();
+        assertUserLogin();
     }
 
     @Test(description = "crm-9047")
@@ -70,6 +102,19 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(FIRST_AVERAGE),AVERAGE1TO50);
         Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(SECOND_AVERAGE),AVERAGE1TO100);
         Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(THIRD_AVERAGE),AVERAGE1TO200);
+    }
+
+    @Test(description = "crm-9023")
+    public void checkIsAbbleToLoginLeverageForExpertCustomer() {
+        createUser(OnboardingWizardConditions.ExperienceLevel.EXPERT, ExperienceScore.EXPERT).getUserName();
+        updateCreditCard();
+        assertUserLogin();
+    }
+
+    private void assertUserLogin() {
+        pages().startTradeDialog().startTrade();
+        pages().setLeverageDialog().cancelButton();
+        assertTrue("User wan't login successfully",pages().topNavigationPage().isLoggedIn());
     }
 
     private CRMCustomer createUser(OnboardingWizardConditions.ExperienceLevel experienceLevel, ExperienceScore experienceScore) {

@@ -191,4 +191,4 @@ build,pageObjectName,locatorId,locatorType,value
 1603,SetLeverageDialogImpl,leveragesButton,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/button
 1603,SetLeverageDialogImpl,leveragesList,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/div/ul/li[*]/a/span[1]
 1603,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
-1603,RejectMessageImpl,rejectCaption,CLASS_NAME,message-title
+1603,RejectMessageOnLoginImpl,rejectCaption,CLASS_NAME,message-title
