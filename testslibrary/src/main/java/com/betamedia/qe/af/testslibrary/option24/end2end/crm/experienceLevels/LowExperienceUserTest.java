@@ -9,7 +9,7 @@ import static com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionn
 /**
  * Created by mbelyaev on 5/17/17.
  */
-public class WebsiteUserExperienceTest extends AbstractUserExperienceTest {
+public class LowExperienceUserTest extends AbstractUserExperienceTest {
 
     @Test(description = "ID:9029")
     public void checkCustomerWithScore31IsLowExperienceTest() {
