@@ -34,7 +34,7 @@
                     <include name = "checkExpertCustomerAccessActiveTest"/>
                 </methods>
             </class>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.ExperienceLevels.UnknownExperienceUserTest" >
+            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.UnknownExperienceUserTest" >
                 <methods>
                     <include name = "checkCustomerWithNoScoreIsUnknownExperienceTest"/>
                 </methods>
