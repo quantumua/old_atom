@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="CRM Widget high Experience Level User Validation Suite" verbose="1" parallel="methods" thread-count="4">
-    <test name="CRM Widget high Experience level User Validation">
+<suite name="CRM Widget High Experience Level User Validation Suite" verbose="1" parallel="methods" thread-count="4">
+    <test name="CRM Widget High Experience level User Validation">
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.HighExperienceUserTest">
             </class>
