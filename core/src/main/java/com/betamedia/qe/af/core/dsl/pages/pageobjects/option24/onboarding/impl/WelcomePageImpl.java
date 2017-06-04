@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 public class WelcomePageImpl extends AbstractPageObject implements WelcomePage {
 
     @StoredId
-    private By startButton;
+    private By startButton;    
 
     public WelcomePageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -23,4 +23,10 @@ public class WelcomePageImpl extends AbstractPageObject implements WelcomePage {
         waitUntilDisplayed(startButton);
         find(startButton).click();
     }
+    
+    @Override
+    public boolean isStartBtnDisplayed() {
+        return waitUntilDisplayed(startButton) != null;
+    }
+    
 }

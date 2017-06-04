@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite: parallel execution of tests" verbose="1" parallel="methods" thread-count="4">
-    <test name="Tryouts">
+<suite name="Suite: Login Tests - parallel execution of tests" verbose="1" parallel="methods" thread-count="4">
+    <test name="Login tests - parallel execution of tests">
         <classes>
             <class name="com.betamedia.qe.af.testslibrary.option24.web.LoginPageTest" >
                 <methods>

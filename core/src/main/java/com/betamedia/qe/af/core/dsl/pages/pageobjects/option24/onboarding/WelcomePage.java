@@ -5,4 +5,5 @@ package com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding;
  */
 public interface WelcomePage {
     void start();
+    boolean isStartBtnDisplayed();
 }
