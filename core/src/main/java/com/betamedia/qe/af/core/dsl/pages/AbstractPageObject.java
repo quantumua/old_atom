@@ -350,6 +350,11 @@ public abstract class AbstractPageObject {
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
     }
 
+    /**
+     * Waits until the page is fully loaded.
+     *
+     * @see JavascriptExecutor#executeScript(String, Object...)
+     */
     protected void waitUntilPageLoad() {
         getWait().until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));

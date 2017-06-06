@@ -67,6 +67,9 @@ public class BrowserOperationsImpl extends AbstractPageObject implements Browser
         return super.takeScreenShot();
     }
 
+    /**
+     * Waits until the page is fully loaded.
+     */
     @Override
     public void waitUntilPageLoad() {
         super.waitUntilPageLoad();
