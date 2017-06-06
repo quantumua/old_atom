@@ -2,7 +2,7 @@
 <suite name="Suite: sequential execution of tests" verbose="1">
     <test name="Regression leverages">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.CustomerLeverageWidgetsTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.CustomerLeverageWidgetsTest" >
                 <methods>
                     <include name="checkRejectedCustomerHasDisabledSelectLeverageComboBox"/>
                     <include name="checkThatNoExperienceCustomerHasDisabledLeverageComboBox"/>

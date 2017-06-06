@@ -2,7 +2,7 @@
 <suite name="CRM Widget Expert Experience Level User Validation Suite" verbose="1" parallel="methods" thread-count="4">
     <test name="CRM Widget Expert Experience Level User Validation">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.ExpertUserTest">
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.ExpertUserTest">
             </class>
         </classes>
     </test>

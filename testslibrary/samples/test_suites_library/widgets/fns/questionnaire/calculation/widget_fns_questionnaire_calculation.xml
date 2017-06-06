@@ -3,7 +3,7 @@
 <suite name="CRM Widget New Customer Experience Level Validation Suite" verbose="1" parallel="methods">
     <test name="CRM Widget New Customer Experience Level Validation">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.NewQuestionnaireTests">
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.NewQuestionnaireTests">
             </class>
         </classes>
     </test>

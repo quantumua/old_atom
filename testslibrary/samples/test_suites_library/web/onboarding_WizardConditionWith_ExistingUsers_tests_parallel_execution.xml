@@ -2,7 +2,7 @@
 <suite name="WebSite OnBoarding Wizard Condition with Existing Users Test Validation" verbose="1" parallel="methods" thread-count="5" data-provider-thread-count="4">
     <test name="WebSite OnBoarding Wizard Condition with Existing Users Test Validation">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.MobileCRMOnboardingDemoWizardConditionsTest">
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.MobileCRMOnboardingDemoWizardConditionsTest">
             </class>
         </classes>
     </test>

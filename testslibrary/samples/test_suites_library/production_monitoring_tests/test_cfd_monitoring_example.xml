@@ -2,7 +2,7 @@
 <suite name="Monitoring Suite" verbose="1" data-provider-thread-count="1">
     <test name="Monitoring Tryouts">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.web.monitoring.CfdMonitoringTest">
+            <class name="com.betamedia.atom.testslibrary.option24.web.monitoring.CfdMonitoringTest">
             </class>
         </classes>
     </test>

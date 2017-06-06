@@ -2,13 +2,13 @@
 <suite name="Web Smoke test" verbose="1">
     <test name="ShortTermCheckCasesThatPositionsCannotBeOpened">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.web.bmw.smoke.ShortTermCheckCasesThatPositionsCannotBeOpened">
+            <class name="com.betamedia.atom.testslibrary.option24.web.bmw.smoke.ShortTermCheckCasesThatPositionsCannotBeOpened">
             </class>
         </classes>
     </test>
     <test name="ShortTermPositionsOpeningClosing">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.web.bmw.smoke.ShortTermPositionsOpeningClosing" >
+            <class name="com.betamedia.atom.testslibrary.option24.web.bmw.smoke.ShortTermPositionsOpeningClosing" >
             </class>
         </classes>
     </test>

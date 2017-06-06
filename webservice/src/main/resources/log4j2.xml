@@ -23,7 +23,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="com.betamedia.qe.af" level="${LEVEL_AF}" additivity="false">
+        <Logger name="com.betamedia.atom" level="${LEVEL_AF}" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>

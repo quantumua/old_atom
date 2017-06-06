@@ -2,7 +2,7 @@
 <suite name="Suite: All levels experience of user tests" verbose="1" parallel="methods" thread-count="4">
     <test name="All levels experience of user tests">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.RejectedUserTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.RejectedUserTest" >
                 <methods>
                     <include name = "checkCustomerWithScore0IsRejectedTest"/>
                     <include name = "checkCustomerWithScore10IsRejectedTest"/>
@@ -10,7 +10,7 @@
                     <include name = "checkRejectedCustomerAccessNoLoginTest"/>
                 </methods>
             </class>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.NoExperienceUserTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.NoExperienceUserTest" >
                 <methods>
                     <include name = "checkCustomerWithScore16IsNoExperienceTest"/>
                     <include name = "checkCustomerWithScore25IsNoExperienceTest"/>
@@ -18,7 +18,7 @@
                     <include name = "checkNoExperienceCustomerAccessActiveTest"/>
                 </methods>
             </class>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.HighExperienceUserTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.HighExperienceUserTest" >
                 <methods>
                     <include name = "checkCustomerWithScore51IsHighExperienceTest"/>
                     <include name = "checkCustomerWithScore65IsHighExperienceTest"/>
@@ -26,7 +26,7 @@
                     <include name = "checkHighExperienceCustomerAccessActiveTest"/>
                 </methods>
             </class>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.ExpertUserTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.ExpertUserTest" >
                 <methods>
                     <include name = "checkCustomerWithScore71IsExpertTest"/>
                     <include name = "checkCustomerWithScore85IsExpertTest"/>
@@ -34,13 +34,13 @@
                     <include name = "checkExpertCustomerAccessActiveTest"/>
                 </methods>
             </class>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.UnknownExperienceUserTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.UnknownExperienceUserTest" >
                 <methods>
                     <include name = "checkCustomerWithNoScoreIsUnknownExperienceTest"/>
                 </methods>
             </class>
 
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.LowExperienceUserTest">
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.LowExperienceUserTest">
                 <methods>
                     <include name = "checkCustomerWithScore31IsLowExperienceTest"/>
                     <include name = "checkCustomerWithScore45IsLowExperienceTest"/>

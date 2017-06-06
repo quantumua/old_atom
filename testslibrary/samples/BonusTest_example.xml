@@ -2,7 +2,7 @@
 <suite name="Suite:BackEndTest" verbose="1" parallel="methods" thread-count="5">
     <test name="Add Bonus Test">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.BonusTest">
+            <class name="com.betamedia.atom.testslibrary.option24.backend.crm.BonusTest">
             </class>
         </classes>
     </test>

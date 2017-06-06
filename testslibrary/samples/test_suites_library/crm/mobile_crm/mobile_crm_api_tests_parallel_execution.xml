@@ -2,13 +2,13 @@
 <suite name="Mobile CRM test" verbose="1" parallel="methods" thread-count="5">
     <test name="registrationTest">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMRegistrationTest">
+            <class name="com.betamedia.atom.testslibrary.option24.backend.crm.mobile.MobileCRMRegistrationTest">
             </class>
         </classes>
     </test>
     <test name="loginTest">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMLoginTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.backend.crm.mobile.MobileCRMLoginTest" >
                 <methods>
                     <parameter name="username" value="dansha2609@test.ru"/>
                     <parameter name="password" value="123123"/>
@@ -19,7 +19,7 @@
     </test>
     <test name="depositTest">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMDepositTest">
+            <class name="com.betamedia.atom.testslibrary.option24.backend.crm.mobile.MobileCRMDepositTest">
                 <methods>
                     <parameter name="tradingAccountId" value="E8DE6CAC-A800-E611-A726-005056B73B53"/>
                 </methods>
@@ -28,7 +28,7 @@
     </test>
     <test name="marketingTest">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.backend.crm.mobile.MobileCRMMarketingParametersTest">
+            <class name="com.betamedia.atom.testslibrary.option24.backend.crm.mobile.MobileCRMMarketingParametersTest">
                 <methods>
                     <parameter name="tradingAccountId" value="E8DE6CAC-A800-E611-A726-005056B73B53"/>
                 </methods>

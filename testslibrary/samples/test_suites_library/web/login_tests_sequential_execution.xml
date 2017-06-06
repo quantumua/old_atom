@@ -2,7 +2,7 @@
 <suite name="Suite: sequential execution of tests" verbose="1">
     <test name="Tryouts 1">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.web.LoginPageTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.web.LoginPageTest" >
                 <methods>
                     <parameter name="username" value="maksym"/>
                     <parameter name="password" value="password"/>

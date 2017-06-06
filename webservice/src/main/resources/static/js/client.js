@@ -1,7 +1,7 @@
 angular.module('client', [])
     .controller('runner', function ($scope, $http, $timeout, $interval) {
         var self = this;
-        var refreshTimeout = 90000;
+        var refreshTimeout = 900000;
         var refreshDelay = 5000;
         self.messages = [];
         self.reports = [];
@@ -12,7 +12,7 @@ angular.module('client', [])
                 fd.append('suites[]', s);
             });
             fd.append('tempJar', tempJar);
-            $http.post('/af/upload/suite', fd, {
+            $http.post('/atom/upload/suite', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
@@ -50,7 +50,7 @@ angular.module('client', [])
         function pollForStatus(report, delay, timeout) {
             var interval = $interval(
                 function () {
-                    $http.post('/af/exists', report.path)
+                    $http.post('/atom/exists', report.path)
                         .then(function (r) {
                             if (r.data === true) {
                                 report.status = 'DONE';
@@ -70,7 +70,7 @@ angular.module('client', [])
         function uploadJar(jar, callback) {
             var fd = new FormData();
             fd.append('jar', jar);
-            $http.post('/af/upload/library', fd, {
+            $http.post('/atom/upload/library', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
@@ -99,7 +99,7 @@ angular.module('client', [])
         function uploadJar(expectedCfdAssets, callback) {
             var fd = new FormData();
             fd.append('expectedCfdAssets', expectedCfdAssets);
-            $http.post('/af/upload/expectedCfdAssets', fd, {
+            $http.post('/atom/upload/expectedCfdAssets', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
@@ -135,7 +135,7 @@ angular.module('client', [])
                 fd.append('suites[]', s);
             });
             fd.append('cronExpression', cron);
-            $http.post('/af/upload/suite/scheduled', fd, {
+            $http.post('/atom/upload/suite/scheduled', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
@@ -153,7 +153,7 @@ angular.module('client', [])
             suites.forEach(function (s) {
                 fd.append('suites[]', s);
             });
-            $http.post('/af/upload/suite/repeating', fd, {
+            $http.post('/atom/upload/suite/repeating', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
@@ -191,7 +191,7 @@ angular.module('client', [])
         };
         self.stop = function (name) {
             self.messages = [];
-            $http.delete('/af/scheduled/' + name + '/stop').then(function (response) {
+            $http.delete('/atom/scheduled/' + name + '/stop').then(function (response) {
                 self.messages.push('Stopped job successfully');
             }, function (response) {
                 self.messages.push(response.body);
@@ -200,7 +200,7 @@ angular.module('client', [])
         self.getScheduledTests = function () {
             self.messages = [];
             self.tests = [];
-            $http.get('/af/scheduled').then(function (response) {
+            $http.get('/atom/scheduled').then(function (response) {
                 Array.prototype.push.apply(self.tests, response.data);
             })
         }
@@ -210,7 +210,7 @@ angular.module('client', [])
         self.core = null;
         self.tests = null;
         function getCoreVersion() {
-            $http.get('/af/version/core')
+            $http.get('/atom/version/core')
                 .then(function (r) {
                     self.core = r.data['core.version'];
                 })
@@ -219,7 +219,7 @@ angular.module('client', [])
         function getTestsVersion() {
             $interval(
                 function () {
-                    $http.get('/af/version/testslibrary')
+                    $http.get('/atom/version/testslibrary')
                         .then(function (r) {
                             self.tests = r.data['testslibrary.version'];
                         })

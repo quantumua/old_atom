@@ -2,9 +2,9 @@
 <suite name="CRM Experience Validation Suite" verbose="1" parallel="methods" thread-count="4">
     <test name="CRM Experience Validation Tests">
         <classes>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.CrmUserExperienceTest">
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.CrmUserExperienceTest">
             </class>
-            <class name="com.betamedia.qe.af.testslibrary.option24.end2end.crm.experienceLevels.WebsiteUserExperienceTest">
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.LowExperienceUserTest">
             </class>
         </classes>
     </test>
