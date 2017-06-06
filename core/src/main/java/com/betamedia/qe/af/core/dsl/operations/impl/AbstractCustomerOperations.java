@@ -8,14 +8,8 @@ import com.betamedia.qe.af.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.qe.af.core.api.tp.entities.response.*;
 import com.betamedia.qe.af.core.dsl.operations.CustomerOperations;
 import com.betamedia.qe.af.core.environment.tp.EnvironmentDependent;
-import com.betamedia.qe.af.core.persistence.entities.ContactExtension;
-import com.betamedia.qe.af.core.persistence.entities.RiskLimits;
-import com.betamedia.qe.af.core.persistence.entities.TrackingInfo;
-import com.betamedia.qe.af.core.persistence.entities.TrackingInfoExtension;
-import com.betamedia.qe.af.core.persistence.repositories.AbstractContactExtensionRepository;
-import com.betamedia.qe.af.core.persistence.repositories.AbstractRiskLimitsRepository;
-import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoExtensionRepository;
-import com.betamedia.qe.af.core.persistence.repositories.AbstractTrackingInfoRepository;
+import com.betamedia.qe.af.core.persistence.entities.*;
+import com.betamedia.qe.af.core.persistence.repositories.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +43,9 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Autowired
     private AbstractRiskLimitsRepository<T> riskLimitsRepository;
+
+    @Autowired
+    private AbstractTradingAccountExtensionRepository<T> tradingAccountExtensionRepository;
 
     /**
      * Registers new CRM customer with default customer builder
@@ -216,25 +213,37 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         return trackingInfo;
     }
 
+    /**
+     * Performs a database query to find contact id. Then finds binary account in the database and gets its leverage.
+     */
+    @Override
+    public Integer getCustomerLeverageByUsername(String username) {
+        ContactExtension contactExtension = contactExtensionRepository.findByUsername(username);
+        assertNotNull(contactExtension);
+        List<TradingAccountExtension> tradingAccountExtensions = tradingAccountExtensionRepository.findByCustomerId(contactExtension.getContactId());
+
+        for (TradingAccountExtension tradingAccountExtension : tradingAccountExtensions) {
+            int leverage = tradingAccountExtension.getLeverage();
+            if (leverage > 0) return leverage;
+        }
+        return 0;
+    }
+
     @Override
     public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
-        CRMCustomer registeredCustomer = register();
-        updateOnboardingConditionsInDB(registeredCustomer.getId(), wizardConditions);
-
-        String tradingAccountId = registeredCustomer.getBinaryAccount().getExternalId();
-        if (wizardConditions.hasDeposit()) {
-            deposit(MobileDepositRO.builder(tradingAccountId).build());
-        }
-
+        CRMCustomer registeredCustomer = register(CustomerRO.builder().build());
+        updateCustomersOnboardingConditions(registeredCustomer, wizardConditions);
         return registeredCustomer;
     }
 
     @Override
-    public ContactExtension updateOnboardingConditionsInDB(String contactId, OnboardingWizardConditions wizardConditions) {
-        final Integer defaultBirthCountry = 100000207;
-        final Integer defaultNationality = 100000207;
+    public ContactExtension updateCustomersOnboardingConditions(CRMCustomer registeredCustomer, OnboardingWizardConditions wizardConditions) {
+        ContactExtension contactExtension = contactExtensionRepository.findOne(registeredCustomer.getId());
 
-        ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
+        if (wizardConditions.hasDeposit()) {
+            placeWizardDeposit(registeredCustomer.getBinaryAccount().getExternalId(), contactExtension);
+        }
+
         assertNotNull(contactExtension);
 
         contactExtension.setExperienceLevel(wizardConditions.getExperienceLevel().getLevel());
@@ -249,15 +258,29 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         contactExtension.setHasRegulationAnswers(wizardConditions.hasRegulationAnswers());
         contactExtension.setCustomerCompliant(wizardConditions.isCustomerCompliant());
 
-        if (wizardConditions.hasAdditionalDetails()) {
-            contactExtension.setCountryOfBirth(defaultBirthCountry);
-            contactExtension.setNationality(defaultNationality);
-        }
-
         contactExtensionRepository.save(contactExtension);
         return contactExtension;
     }
 
+    private void placeWizardDeposit(String tradingAccountId, ContactExtension contactExtension) {
+        final Integer defaultBirthCountry = 100000207;
+        final Integer defaultNationality = 100000207;
+
+        //workaround:
+        //it is not possible to place a deposit if additional details section is not filled
+        //and additional details have to be filled via UI
+        contactExtension.setCountryOfBirth(defaultBirthCountry);
+        contactExtension.setNationality(defaultNationality);
+        contactExtensionRepository.save(contactExtension);
+
+        deposit(MobileDepositRO.builder(tradingAccountId).build());
+
+        contactExtension.setCountryOfBirth(null);
+        contactExtension.setNationality(null);
+        contactExtensionRepository.save(contactExtension);
+    }
+
+    @Override
     public ContactExtension updateExperienceScoreInDB(String contactId, int experienceScore) {
 
         ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);

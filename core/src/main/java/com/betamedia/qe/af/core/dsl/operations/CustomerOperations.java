@@ -48,9 +48,11 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     TrackingInfo getCustomerTrackingInfo(String trackingInfoId);
 
+    Integer getCustomerLeverageByUsername(String username);
+
     CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions);
 
-    ContactExtension updateOnboardingConditionsInDB(String contactId, OnboardingWizardConditions wizardConditions);
+    ContactExtension updateCustomersOnboardingConditions(CRMCustomer customer, OnboardingWizardConditions wizardConditions);
 
     ContactExtension updateExperienceScoreInDB(String contactId, int experienceScore);
 

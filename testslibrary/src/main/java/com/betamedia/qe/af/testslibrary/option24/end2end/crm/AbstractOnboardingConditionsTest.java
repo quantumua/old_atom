@@ -9,10 +9,11 @@ import com.betamedia.qe.af.testslibrary.option24.end2end.crm.newQuestionnaries.Q
  */
 public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
-    protected final void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
+    protected void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
         if (!conditions.isShowWizard()) {
             return;
         }
+
         if (conditions.isShowWelcome()) {
             pages().welcomePage().start();
         }
@@ -31,6 +32,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
         if (conditions.isShowDeposit()) {
             pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
         }
+
         if (conditions.isShowPoiPor()) {
             pages().onBoardingWizard().assertOnPOI();
             return;
@@ -84,6 +86,10 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_25.get())
                 .build()
         );
+    }
+
+    protected boolean checkIfLeveragePopupWillBeShown(String username) {
+        return operations().customerOperations().getCustomerLeverageByUsername(username) == 0;
     }
 
     @Override

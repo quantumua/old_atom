@@ -5,10 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import org.testng.Reporter;
 
 import java.io.File;
@@ -351,6 +348,11 @@ public abstract class AbstractPageObject {
      */
     protected File takeScreenShot() {
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
+    }
+
+    protected void waitUntilPageLoad() {
+        getWait().until((ExpectedCondition<Boolean>) wd ->
+                ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 
     private Wait<WebDriver> getWait() {

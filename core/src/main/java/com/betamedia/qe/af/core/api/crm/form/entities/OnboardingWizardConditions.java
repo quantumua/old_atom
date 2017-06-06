@@ -242,7 +242,9 @@ public class OnboardingWizardConditions {
     @Override
     public String toString() {
         return "OnboardingWizardConditions{" +
-                "fnsPersonal=" + fnsPersonal +
+                "username=" + username +
+                ", testId='" + testId + '\'' +
+                ", fnsPersonal=" + fnsPersonal +
                 ", fnsTrading=" + fnsTrading +
                 ", hasAdditionalDetails=" + hasAdditionalDetails +
                 ", riskWarning=" + riskWarning +
@@ -263,7 +265,6 @@ public class OnboardingWizardConditions {
                 ", showFnsPersonal=" + showFnsPersonal +
                 ", showFnsTrading=" + showFnsTrading +
                 ", showPoiPor=" + showPoiPor +
-                ", testId='" + testId + '\'' +
                 ", hasRegulationAnswers=" + hasRegulationAnswers +
                 '}';
     }

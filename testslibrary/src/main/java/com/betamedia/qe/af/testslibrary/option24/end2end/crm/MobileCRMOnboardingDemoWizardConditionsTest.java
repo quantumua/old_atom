@@ -11,9 +11,18 @@ public class MobileCRMOnboardingDemoWizardConditionsTest extends AbstractOnboard
 
     @Test(dataProvider = "GenericDataProvider")
     public void testWizard2(OnboardingWizardConditions conditions) throws Exception {
+        //required to trigger notification popup
+        pages().browser().deleteAllCookies();
+
         pages().topNavigationPage().logIn();
         pages().loginPage().login(conditions.username(), CustomerRO.CustomerROBuilder.PASSWORD);
 
+
+        if (checkIfLeveragePopupWillBeShown(conditions.username())) {
+            pages().leveragePopup().setLeverage();
+        }
+
+        pages().disclaimerNotification().tryAccept();
         verifyResultingSlidesShown(conditions);
     }
 }

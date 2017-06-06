@@ -28,6 +28,7 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.Landin
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPageImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.LeveragePopup;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
@@ -199,5 +200,10 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     @Override
     public RejectMessageOnLoginImpl rejectMessage() {
         return creator.getPage(RejectMessageOnLoginImpl.class);
+    }
+
+    @Override
+    public LeveragePopup leveragePopup(){
+        return creator.getPage(LeveragePopupImpl.class);
     }
 }

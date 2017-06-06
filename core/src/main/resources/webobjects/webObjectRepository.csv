@@ -181,6 +181,9 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
+2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/button/span[1]
+2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/div/ul/li[1]/a/span[1]
+2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
 2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeDialog,CLASS_NAME,wizard-container
 2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeButton,CSS,#wizard-message>div.message-button>button

@@ -16,6 +16,7 @@ import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.MessageB
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.messages.impl.RejectMessageOnLoginImpl;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
+import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.LeveragePopup;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
 import com.betamedia.qe.af.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
@@ -78,6 +79,8 @@ public interface TPPageFactory {
     RiskWarning riskWarningPage();
 
     OnBoardingWizard onBoardingWizard();
+
+    LeveragePopup leveragePopup();
 
     SetLeverageDialogImpl setLeverageDialog();
 

@@ -17,4 +17,6 @@ public interface BrowserOperations {
     void refreshPage();
 
     File takeScreenShot();
+
+    void waitUntilPageLoad();
 }
