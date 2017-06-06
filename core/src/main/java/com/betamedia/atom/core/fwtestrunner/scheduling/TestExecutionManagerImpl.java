@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,7 +32,7 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
     private ConcurrentMap<String, TestExecution> executions = new ConcurrentHashMap<>();
 
     @Override
-    public void createRepeatingTest(String name, String mailAddress, Properties properties, List<String> suites) {
+    public void createRepeatingTest(String name, String mailAddress, Properties properties, MultipartFile[]  suites) {
         addTestExecution(
                 name,
                 new RepeatingTestExecution<>(
@@ -40,7 +41,7 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
     }
 
     @Override
-    public void createScheduledTest(String name, String mailAddress, Properties properties, List<String> suites, String cronExpression) {
+    public void createScheduledTest(String name, String mailAddress, Properties properties, MultipartFile[]  suites, String cronExpression) {
         addTestExecution(
                 name,
                 new ScheduledTestExecution<>(
@@ -73,11 +74,11 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
         execution.start();
     }
 
-    private Consumer<ExecutionListener<List<RunnerResult>>> getExecution(Properties properties, List<String> suites) {
+    private Consumer<ExecutionListener<List<RunnerResult>>> getExecution(Properties properties, MultipartFile[]  suites) {
         return executionListener -> handler.handle(properties, suites, null, executionListener);
     }
 
-    private Consumer<ExecutionListener<List<RunnerResult>>> getExecutionWithCallback(Properties properties, List<String> suites, Consumer<RunnerResult> callback) {
+    private Consumer<ExecutionListener<List<RunnerResult>>> getExecutionWithCallback(Properties properties, MultipartFile[]  suites, Consumer<RunnerResult> callback) {
         return executionListener -> handler.handle(properties, suites, null, result -> {
             result.forEach(callback);
             executionListener.onCompletion(result);

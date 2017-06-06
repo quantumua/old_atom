@@ -1,8 +1,8 @@
 angular.module('client', [])
     .controller('runner', function ($scope, $http, $timeout, $interval) {
         var self = this;
-        var refreshTimeout = 900000;
-        var refreshDelay = 5000;
+        var reportRefreshTimeout = 900000;
+        var reportRefreshDelay = 5000;
         self.messages = [];
         self.reports = [];
         function runTests(properties, suites, tempJar) {
@@ -17,16 +17,22 @@ angular.module('client', [])
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
                 self.messages.push('Upload successful');
-                var reports = response.data.map(function (p) {
-                    return {path: p, status: "N/A"}
-                });
+                var reports = response.data.map(reportMapper);
                 reports.forEach(function (r) {
-                    pollForStatus(r, refreshDelay, refreshTimeout);
+                    pollForStatus(r, reportRefreshDelay, reportRefreshTimeout);
                 });
                 Array.prototype.push.apply(self.reports, reports);
             }, function (response) {
                 self.messages.push(response.body);
             });
+        }
+
+        function reportMapper(report) {
+            report.suites = report.suites.map(function(suite){return suite.substr(suite.lastIndexOf('/')+1);});
+            report.date = [report.time.dayOfMonth, report.time.monthValue, report.time.year].join('/');
+            report.time = [report.time.hour, report.time.minute, report.time.second].join(':');
+            report.status = "N/A";
+            return report;
         }
 
         self.run = function () {
@@ -50,7 +56,7 @@ angular.module('client', [])
         function pollForStatus(report, delay, timeout) {
             var interval = $interval(
                 function () {
-                    $http.post('/atom/exists', report.path)
+                    $http.post('/atom/exists', report.reportFile)
                         .then(function (r) {
                             if (r.data === true) {
                                 report.status = 'DONE';
@@ -207,6 +213,7 @@ angular.module('client', [])
     })
     .controller('version', function ($http, $interval) {
         var self = this;
+        var versionRefreshDelay = 5000;
         self.core = null;
         self.tests = null;
         function getCoreVersion() {
@@ -223,7 +230,7 @@ angular.module('client', [])
                         .then(function (r) {
                             self.tests = r.data['testslibrary.version'];
                         })
-                }, 5000);
+                }, versionRefreshDelay);
         }
 
         getCoreVersion();

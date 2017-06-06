@@ -23,9 +23,6 @@ public class ScheduledTestController {
     private static final Logger logger = LogManager.getLogger(ScheduledTestController.class);
     @Autowired
     private TestExecutionManager testExecutionManager;
-    @Autowired
-    private StorageService storageService;
-
 
     @PostMapping("/upload/suite/scheduled")
     public void createScheduledTest(@RequestParam("name") String name,
@@ -34,7 +31,7 @@ public class ScheduledTestController {
                                     @RequestParam("suites[]") MultipartFile[] suites,
                                     @RequestParam("cronExpression") String cronExpression) throws IOException {
         logger.info("Scheduling test");
-        testExecutionManager.createScheduledTest(name, emailAddress, getProperties(properties), storageService.store(suites), cronExpression);
+        testExecutionManager.createScheduledTest(name, emailAddress, getProperties(properties), suites, cronExpression);
     }
 
     @PostMapping("/upload/suite/repeating")
@@ -43,7 +40,7 @@ public class ScheduledTestController {
                                     @RequestParam("properties") MultipartFile properties,
                                     @RequestParam("suites[]") MultipartFile[] suites) throws IOException {
         logger.info("Scheduling test");
-        testExecutionManager.createRepeatingTest(name, emailAddress, getProperties(properties), storageService.store(suites));
+        testExecutionManager.createRepeatingTest(name, emailAddress, getProperties(properties), suites);
     }
 
     @GetMapping("/scheduled")

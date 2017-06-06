@@ -4,6 +4,7 @@ import com.betamedia.atom.core.fwtestrunner.classloader.ContextClassLoaderManagi
 import com.betamedia.atom.core.fwtestrunner.runner.TestRunner;
 import com.betamedia.atom.core.fwtestrunner.scheduling.ExecutionListener;
 import com.betamedia.atom.core.fwtestrunner.scheduling.ObservableSupplier;
+import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import com.betamedia.atom.core.fwtestrunner.types.TestRunnerType;
 import com.betamedia.atom.core.holders.ConfigurationPropertyKey;
 import com.betamedia.atom.core.utils.PropertiesUtils;
@@ -12,7 +13,6 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -28,6 +28,8 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     private ContextClassLoaderManagingExecutor classLoaderExecutor;
     @Autowired
     private TaskExecutor asyncTaskExecutor;
+    @Autowired
+    private StorageService storageService;
 
     private Map<TestRunnerType, TestRunner> runners;
 
@@ -38,14 +40,20 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     }
 
     @Override
-    public List<String> handle(Properties properties, List<String> suites, MultipartFile tempJar, ExecutionListener<List<RunnerResult>> listener) {
-        List<ExecutionArguments> argsList = getExecutionArguments(properties, suites);
+    public List<ExecutionArguments> handle(Properties properties, MultipartFile[] suites, MultipartFile tempJar, ExecutionListener<List<RunnerResult>> listener) {
+        String tempDirectory = UUID.randomUUID().toString();
+        List<String> suitePaths = storageService.store(suites, tempDirectory);
+        List<ExecutionArguments> argsList = getExecutionArguments(properties, suitePaths);
+
         if (tempJar != null) {
-            execute(() -> classLoaderExecutor.run(getExecutions(argsList), tempJar), listener);
+            execute(() -> {
+                String tempJarPath = storageService.store(tempJar, tempDirectory);
+                return classLoaderExecutor.run(getExecutions(argsList), tempJarPath);
+            }, listener);
         } else {
             execute(() -> classLoaderExecutor.run(getExecutions(argsList)), listener);
         }
-        return argsList.stream().map(ExecutionArguments::getReportUrl).collect(Collectors.toList());
+        return argsList;
     }
 
     private List<ExecutionArguments> getExecutionArguments(Properties properties, List<String> suites) {
@@ -67,31 +75,11 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     private RunnerResult run(ExecutionArguments args) {
         return Optional.ofNullable(runners.get(getType(args.properties)))
                 .orElseThrow(() -> new RuntimeException("No corresponding runner"))
-                .run(args.properties, args.suites, args.reportPath);
+                .run(args.properties, args.suites, args.reportDirectory);
     }
 
     private TestRunnerType getType(Properties properties) {
         return TestRunnerType.parse((String) properties.get(ConfigurationPropertyKey.RUNNER_TYPE));
     }
 
-    private class ExecutionArguments {
-        public final Properties properties;
-        public final String reportPath;
-        public final List<String> suites;
-
-        ExecutionArguments(Properties properties, List<String> suites) {
-            this.properties = properties;
-            this.reportPath = getReportPath(properties);
-            this.suites = suites;
-        }
-
-        public String getReportUrl() {
-            return reportPath + "/index.html";
-        }
-
-        private String getReportPath(Properties props) {
-            LocalDateTime now = LocalDateTime.now();
-            return TEST_OUTPUT_DIRECTORY + (now.toString() + "." + Objects.hash(props, now, Thread.currentThread())).replaceAll("[^a-zA-Z0-9]", "_");
-        }
-    }
 }

@@ -179,8 +179,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
      * @param jar       The uploaded JAR binary
      */
     @Override
-    public <T> List<T> run(List<Supplier<T>> suppliers, MultipartFile jar) {
-        String jarPath = storageService.store(jar, "temp-" + UUID.randomUUID() + ".jar");
+    public <T> List<T> run(List<Supplier<T>> suppliers, String jarPath) {
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
         try {
             ClassLoader classLoader = classLoaderFactory.get(jarPath, parent);
@@ -191,7 +190,6 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
             throw new RuntimeException(e);
         } finally {
             Thread.currentThread().setContextClassLoader(parent);
-            storageService.delete(jarPath);
         }
     }
 

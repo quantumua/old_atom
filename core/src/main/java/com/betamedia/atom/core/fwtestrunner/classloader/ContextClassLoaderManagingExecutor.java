@@ -16,7 +16,7 @@ public interface ContextClassLoaderManagingExecutor {
 
     <T> List<T> run(List<Supplier<T>> suppliers);
 
-    <T> List<T> run(List<Supplier<T>> suppliers, MultipartFile jar);
+    <T> List<T> run(List<Supplier<T>> suppliers, String jarPath);
 
     String getJarVersion();
 

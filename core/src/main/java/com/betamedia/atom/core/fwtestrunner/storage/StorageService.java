@@ -16,11 +16,11 @@ public interface StorageService {
 
     String store(MultipartFile file);
 
-    String store(MultipartFile file, String filename);
+    String store(MultipartFile file, String subDirectory);
 
     List<String> store(MultipartFile[] files);
 
-    List<String> store(MultipartFile[] files, String postfix);
+    List<String> store(MultipartFile[] files, String subDirectory);
 
     void delete(String path);
 

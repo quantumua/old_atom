@@ -1,5 +1,7 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -10,9 +12,9 @@ import java.util.Set;
  */
 public interface TestExecutionManager {
 
-    void createRepeatingTest(String name, String mailAddress, Properties properties, List<String> suites);
+    void createRepeatingTest(String name, String mailAddress, Properties properties, MultipartFile[] suites);
 
-    void createScheduledTest(String name, String mailAddress, Properties properties, List<String> suites, String cronExpression);
+    void createScheduledTest(String name, String mailAddress, Properties properties, MultipartFile[] suites, String cronExpression);
 
     void stopTask(String name);
 

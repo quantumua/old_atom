@@ -14,14 +14,29 @@
         .highlight {
             color: limegreen !important;
         }
-         .form-control {
-            height:auto;
+
+        .form-control {
+            height: auto;
+        }
+
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
         }
     </style>
 </head>
 
 <body ng-app="client">
-<div id = "memu" style='margin-left: 20%;'>
+<div id="memu" style='margin-left: 20%;'>
     <a href="/atom/">Run tests</a> |
     <a href="/atom/schedule">Schedule test execution</a> |
     <a href="/atom/upload">Upload data</a>
@@ -54,21 +69,25 @@
             <input type="text" ng-model="cron" class="form-control" id="cron" name="cron"/>
         </div>
         <button type="submit" class="btn btn-primary">Schedule</button>
-        <table>
-            <tr ng-repeat="message in scheduler.messages">
-                <td><h3 ng-cloak>{{message}}</h3></td>
-            </tr>
-        </table>
+        <div ng-repeat="message in scheduler.messages">
+            <h4 ng-cloak>{{message}}</h4>
+        </div>
     </form>
     <hr/>
     <button type="button" ng-click="scheduler.getScheduledTests()" class="btn btn-primary btn-sm">Get scheduled tests
     </button>
     <table>
+        <tr>
+            <th>Name</th>
+            <th>Cron</th>
+            <th>Stop</th>
+        </tr>
         <tr ng-repeat="test in scheduler.tests">
             <td><span ng-cloak>{{test.name}}</span></td>
-            <td><span  style="padding:0 15px 0 15px;" ng-cloak>{{test.cronExpression}}</span></td>
+            <td><span style="padding:0 15px 0 15px;" ng-cloak>{{test.cronExpression}}</span></td>
             <td>
-                <button type="button" ng-click="scheduler.stop(test.name)" class="btn btn-danger btn-sm" ng-cloak>Stop</button>
+                <button type="button" ng-click="scheduler.stop(test.name)" class="btn btn-danger btn-sm" ng-cloak>Stop
+                </button>
             </td>
         </tr>
     </table>

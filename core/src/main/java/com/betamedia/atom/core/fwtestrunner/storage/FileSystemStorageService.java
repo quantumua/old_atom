@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.nio.file.Files.exists;
+
 /**
  * Created by mbelyaev on 2/28/17.
  */
@@ -32,20 +34,23 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public String store(MultipartFile file) {
-        return store(file, file.getOriginalFilename());
+        return store(file, "");
     }
 
     @Override
-    public String store(MultipartFile file, String filename) {
+    public String store(MultipartFile file, String subDirectory) {
         try {
             if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + filename);
+                throw new StorageException("Failed to store empty file " + subDirectory);
             }
-            Path internalPath = this.rootLocation.resolve(filename);
+            if (!resolve(Paths.get(subDirectory)).toFile().exists()){
+                Files.createDirectory(resolve(Paths.get(subDirectory)));
+            }
+            Path internalPath = resolve(Paths.get(subDirectory, file.getOriginalFilename()));
             Files.copy(file.getInputStream(), internalPath, StandardCopyOption.REPLACE_EXISTING);
             return internalPath.toString();
         } catch (IOException e) {
-            throw new StorageException("Failed to store file " + filename, e);
+            throw new StorageException("Failed to store file " + subDirectory, e);
         }
     }
 
@@ -57,9 +62,9 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public List<String> store(MultipartFile[] files, String postfix) {
+    public List<String> store(MultipartFile[] files, String subDirectory) {
         return Arrays.stream(files)
-                .map(file -> store(file, file.getOriginalFilename() + postfix))
+                .map(file -> store(file, subDirectory))
                 .collect(Collectors.toList());
     }
 
@@ -117,5 +122,9 @@ public class FileSystemStorageService implements StorageService {
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
+    }
+
+    private Path resolve(Path relativePath) {
+        return this.rootLocation.resolve(relativePath);
     }
 }

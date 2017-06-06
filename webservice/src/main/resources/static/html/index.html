@@ -14,14 +14,29 @@
         .highlight {
             color: limegreen !important;
         }
+
         .form-control {
-            height:auto;
+            height: auto;
+        }
+
+        table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
         }
     </style>
 </head>
 
 <body ng-app="client">
-<div id = "memu" style='margin-left: 20%;'>
+<div id="menu" style='margin-left: 20%;'>
     <a href="/atom/">Run tests</a> |
     <a href="/atom/schedule">Schedule test execution</a> |
     <a href="/atom/upload">Upload data</a>
@@ -30,40 +45,57 @@
 <div ng-controller="runner as runner" class="container">
     <form role="form" ng-submit="runner.run()">
         <div class="form-group">
-            <label for="properties">Properties:</label>
-            <input type="file" file-model="properties" class="form-control" id="properties" name="properties"/>
-        </div>
-        <div class="form-group">
             <label for="suites">Suites:</label>
             <input type="file" multiple file-model="suites" class="form-control" id="suites" name="suites"/>
+        </div>
+        <div class="form-group">
+            <label for="properties">Properties:</label>
+            <input type="file" file-model="properties" class="form-control" id="properties" name="properties"/>
         </div>
         <div class="form-group">
             <label for="tempJar">JAR override:</label>
             <input type="file" file-model="tempJar" class="form-control" id="tempJar" name="tempJar"/>
         </div>
         <button type="submit" class="btn btn-primary">Execute</button>
-        <table>
-            <tr ng-repeat="message in runner.messages">
-                <td><h3 ng-cloak>{{message}}</h3></td>
-            </tr>
-        </table>
+        <div ng-repeat="message in runner.messages">
+            <h4 ng-cloak>{{message}}</h4>
+        </div>
     </form>
     <hr/>
+    <h4>Reports</h4>
     <table>
+        <tr>
+            <th>Suites</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Report</th>
+            <th>Status</th>
+        </tr>
         <tr ng-repeat="report in runner.reports">
-            <td><span><a target="_blank" ng-href="/atom/{{report.path}}" ng-cloak>{{report.path}}</a></span></td>
-            <td><span style="padding:0 15px 0 15px;"
+            <td class="col-md-6">
+                <div ng-repeat="suite in report.suites" ng-cloak>
+                    {{suite}}
+                </div>
+            </td>
+            <td><span class="col-md-6" ng-cloak>{{report.date}}</span></td>
+            <td><span class="col-md-6" ng-cloak>{{report.time}}</span></td>
+            <td><span class="col-md-6"><a target="_blank" ng-href="/atom/{{report.reportFile}}" ng-cloak>link</a></span>
+            </td>
+            <td><span class="col-md-6" style="padding:0 15px 0 15px;"
                       ng-class="{highlight: report.status === 'DONE'}" ng-cloak>{{report.status}}</span></td>
         </tr>
     </table>
 </div>
 <div ng-controller="version as version" class="container">
+    <h4>Versions</h4>
     <table>
         <tr>
-            <td><span ng-cloak>Core: {{version.core}}</span></td>
+            <td><span>Core: </span></td>
+            <td><span ng-cloak>{{version.core}}</span></td>
         </tr>
         <tr>
-            <td><span ng-cloak>TestsLibrary: {{version.tests}}</span></td>
+            <td><span>TestsLibrary:</span></td>
+            <td><span ng-cloak>{{version.tests}}</span></td>
         </tr>
     </table>
 </div>
