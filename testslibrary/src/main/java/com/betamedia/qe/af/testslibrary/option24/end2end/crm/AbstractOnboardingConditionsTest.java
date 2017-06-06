@@ -17,6 +17,9 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
         if (conditions.isShowWelcome()) {
             pages().welcomePage().start();
         }
+        if (conditions.isShowWelcomeBack()) {
+            //TODO: Create page object for welcome back page, once it is deployed.
+        }
         if (conditions.isShowRiskWarning()) {
             pages().riskWarningPage().accept();
         }

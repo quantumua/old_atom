@@ -53,6 +53,8 @@ public class OnboardingWizardConditions {
     @CsvBindByName
     private boolean showPoiPor;
     @CsvBindByName
+    private boolean showWelcomeBack;
+    @CsvBindByName
     private String testId;
     @CsvBindByName
     private String username;
@@ -168,6 +170,10 @@ public class OnboardingWizardConditions {
     
     public String username() {
         return username;
+    }
+
+    public boolean isShowWelcomeBack() {
+        return showWelcomeBack;
     }
 
     public enum ExperienceLevel {
