@@ -1,37 +1,35 @@
 package com.betamedia.qe.af.testslibrary.option24.web.bmw.smoke;
 
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.HashSet;
-
 import com.betamedia.qe.af.core.api.tp.entities.request.CustomerRO;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.junit.Test;
-import org.openqa.selenium.WebDriverException;
-import org.testng.Assert;
-import org.testng.Reporter;
-
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.qe.af.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.qe.af.core.dsl.operations.TagOperations;
 import com.betamedia.qe.af.core.dsl.pages.AbstractPageObject;
 import com.betamedia.qe.af.core.testingtype.tp.TPEndToEndTest;
+
 import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.Asset;
-import com.betamedia.tp.api.model.DealApprovalConfiguration;
-import com.betamedia.tp.api.model.OptionConfiguration;
 import com.betamedia.tp.api.model.Position;
 import com.betamedia.tp.api.model.enums.OptionType;
 import com.betamedia.tp.api.model.enums.PositionStatus;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriverException;
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
 
 /**
  * @author leonid.a
  */
 
-public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTest  {
+public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTest {
 	private static final Logger logger = LogManager.getLogger(AbstractPageObject.class);
 	
 	/*
@@ -41,7 +39,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      * opened because there's not enough funds.
     */
 	@Test()
-	public void InvestedAmountAboveTABalancePlusOne() {
+	public void investedAmountAboveTABalancePlusOneTest() {
 		
 		Asset asset = operations().assetOperations().get();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -52,8 +50,10 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
 		pages().topNavigationPage().logIn();
 		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
-		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+//		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+		pages().startTradeDialog().startTrade();
         pages().disclaimerNotification().tryAccept();
+        
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 		
@@ -73,7 +73,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         pages().dialogBox().assertMessage("Your account doesn't have enough funds.");
         pages().dialogBox().close();
 	}
-	
+  
 	/*
 	 * [TestLink] TP-4502:Invested amount maximum+1
 	 * Select an asset --> Try to open a position with an invested amount that is equals to (maximum +1) -->
@@ -322,7 +322,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		operations().feedOperations().injectFeed(asset.getId(), 5.0d);
 		CRMCustomer customer = operations().customerOperations().register();
 		CRMAccount binaryAccount = customer.getBinaryAccount();
-		String accountId = binaryAccount.getId();
+		//String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
 		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
@@ -503,7 +503,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	public void FeedIsntReceivedAtTimeOfOpeningTest(){
 		Asset asset = operations().assetOperations().get();
 
-		Set<String> propertiesSet = new HashSet<String>();
+		//Set<String> propertiesSet = new HashSet<String>();
        // AssetTestingManager.getInstance().updateEntity(asset, propertiesSet);
 		//operations().assetOperations().updateEntity();
 		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
@@ -546,5 +546,5 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 
         Assert.assertEquals(actualPosition.getStatus(), PositionStatus.REJECTED, "Position is in status rejected");
         Assert.assertEquals(actualPosition.getStatusReason(), "Feed is too old", "Position status reason as expected");
-	}
+	}	
 }
