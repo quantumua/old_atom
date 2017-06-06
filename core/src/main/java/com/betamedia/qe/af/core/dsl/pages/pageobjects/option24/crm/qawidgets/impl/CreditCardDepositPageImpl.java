@@ -44,7 +44,9 @@ public class CreditCardDepositPageImpl extends AbstractPageObject implements Cre
 
     @Override
     public void submit(CreditCardDeposit info) {
-        waitUntilDisplayed(depositAmount).sendKeys(info.depositAmount);
+        click(depositAmount);
+        find(depositAmount).sendKeys(info.depositAmount);
+        click(creditCardNumber);
         find(creditCardNumber).sendKeys(info.creditCardNumber);
         find(cvv2).sendKeys(info.cvv2);
         in(expiryDateMonth).selectByValue(info.expiryDateMonth);

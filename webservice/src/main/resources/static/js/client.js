@@ -1,6 +1,8 @@
 angular.module('client', [])
     .controller('runner', function ($scope, $http, $timeout, $interval) {
         var self = this;
+        var refreshTimeout = 90000;
+        var refreshDelay = 5000;
         self.messages = [];
         self.reports = [];
         function runTests(properties, suites, tempJar) {
@@ -19,7 +21,7 @@ angular.module('client', [])
                     return {path: p, status: "N/A"}
                 });
                 reports.forEach(function (r) {
-                    pollForStatus(r, 5000, 600000);
+                    pollForStatus(r, refreshDelay, refreshTimeout);
                 });
                 Array.prototype.push.apply(self.reports, reports);
             }, function (response) {

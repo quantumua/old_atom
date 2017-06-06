@@ -175,7 +175,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
 2.6.2,2017-05-29 15:24 +0000,WelcomePageImpl,startButton,XPATH,//*[@id="wizard-message"]/div[3]/button
-2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,iAmOver18CheckBox,ID,IsChecked
+2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,iAmOver18Statement,CLASS_NAME,swRiskWarningAccountAgree
 2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,updateButton,XPATH,//*[@id="risk-warning-form-space"]/div/input
 2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,loginButton,NAME,btnLoginWidget
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
