@@ -52,10 +52,10 @@ public class ContextClassLoaderManagingExecutorImplTest {
         String mockPath = "mockPath";
         String alteredPath = "alteredPath";
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
-        when(storageService.store(mockFile)).thenReturn(mockPath);
-        when(storageService.store(eq(mockFile), anyString())).thenReturn(mockPath);
-        when(storageService.store(alteredFile)).thenReturn(alteredPath);
-        when(storageService.store(eq(alteredFile), anyString())).thenReturn(alteredPath);
+        when(storageService.storeToTemp(mockFile)).thenReturn(mockPath);
+        when(storageService.storeToTemp(eq(mockFile), anyString())).thenReturn(mockPath);
+        when(storageService.storeToTemp(alteredFile)).thenReturn(alteredPath);
+        when(storageService.storeToTemp(eq(alteredFile), anyString())).thenReturn(alteredPath);
         when(classLoaderFactory.get(mockPath, parent)).thenReturn(mockClassLoader);
         when(classLoaderFactory.get(alteredPath, parent)).thenReturn(alteredClassLoader);
         ExecutorService pool = Executors.newCachedThreadPool();

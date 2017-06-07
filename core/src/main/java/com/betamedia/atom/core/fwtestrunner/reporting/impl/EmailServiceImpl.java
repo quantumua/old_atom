@@ -10,9 +10,11 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
- * Created by mbelyaev on 4/25/17.
+ * @author mbelyaev
+ * @since 4/25/17
  */
 @Component
 public class EmailServiceImpl implements EmailService {
@@ -22,9 +24,9 @@ public class EmailServiceImpl implements EmailService {
     private HtmlEmailSenderMsg emailSender;
 
     @Override
-    public void sendLocalFile(String to, String subject, String pathToFile) {
+    public void sendLocalFile(String to, String subject, String contentPath, List<String> attachmentPaths) {
         try {
-            emailSender.sendHtmlEmail(to, subject, getContent(pathToFile), null);
+            emailSender.sendHtmlEmail(to, subject, getContent(contentPath), attachmentPaths.toArray(new String[attachmentPaths.size()]));
         } catch (MessagingException | IOException e) {
             logger.error("", e);
             return;

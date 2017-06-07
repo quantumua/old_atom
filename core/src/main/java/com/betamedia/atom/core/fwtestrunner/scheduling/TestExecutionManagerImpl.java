@@ -3,6 +3,7 @@ package com.betamedia.atom.core.fwtestrunner.scheduling;
 import com.betamedia.atom.core.fwtestrunner.RunnerResult;
 import com.betamedia.atom.core.fwtestrunner.TestRunnerHandler;
 import com.betamedia.atom.core.fwtestrunner.reporting.EmailService;
+import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
@@ -16,7 +17,8 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
- * Created by mbelyaev on 4/19/17.
+ * @author mbelyaev
+ * @since 4/19/17
  */
 @Component
 public class TestExecutionManagerImpl implements TestExecutionManager {
@@ -28,11 +30,13 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
     private TaskExecutor asyncTaskExecutor;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private StorageService storageService;
 
     private ConcurrentMap<String, TestExecution> executions = new ConcurrentHashMap<>();
 
     @Override
-    public void createRepeatingTest(String name, String mailAddress, Properties properties, MultipartFile[]  suites) {
+    public void createRepeatingTest(String name, String mailAddress, Properties properties, MultipartFile[] suites) {
         addTestExecution(
                 name,
                 new RepeatingTestExecution<>(
@@ -41,7 +45,7 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
     }
 
     @Override
-    public void createScheduledTest(String name, String mailAddress, Properties properties, MultipartFile[]  suites, String cronExpression) {
+    public void createScheduledTest(String name, String mailAddress, Properties properties, MultipartFile[] suites, String cronExpression) {
         addTestExecution(
                 name,
                 new ScheduledTestExecution<>(
@@ -74,12 +78,14 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
         execution.start();
     }
 
-    private Consumer<ExecutionListener<List<RunnerResult>>> getExecution(Properties properties, MultipartFile[]  suites) {
+    private Consumer<ExecutionListener<List<RunnerResult>>> getExecution(Properties properties, MultipartFile[] suites) {
         return executionListener -> handler.handle(properties, suites, null, executionListener);
     }
 
-    private Consumer<ExecutionListener<List<RunnerResult>>> getExecutionWithCallback(Properties properties, MultipartFile[]  suites, Consumer<RunnerResult> callback) {
-        return executionListener -> handler.handle(properties, suites, null, result -> {
+    private Consumer<ExecutionListener<List<RunnerResult>>> getExecutionWithCallback(Properties properties, MultipartFile[] suites, Consumer<RunnerResult> callback) {
+        String tempDirectory = UUID.randomUUID().toString();
+        List<String> suitePaths = storageService.storeToTemp(suites, tempDirectory);
+        return executionListener -> handler.handle(properties, suitePaths, null, result -> {
             result.forEach(callback);
             executionListener.onCompletion(result);
         });
@@ -88,7 +94,7 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
     private Consumer<RunnerResult> sender(String mailAddress) {
         return result -> {
             if (result.hasNotPassed() && mailAddress != null && !mailAddress.isEmpty()) {
-                emailService.sendLocalFile(mailAddress, "testReport", result.getPathToOutput());
+                emailService.sendLocalFile(mailAddress, "testReport", result.getOutputPath(), result.getAttachmentPaths());
             }
         };
     }

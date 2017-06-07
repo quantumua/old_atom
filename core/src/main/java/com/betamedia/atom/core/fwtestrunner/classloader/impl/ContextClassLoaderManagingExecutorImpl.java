@@ -78,7 +78,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
         try {
             if (jarLock.writeLock().tryLock()) {
                 try {
-                    setJarPath(storageService.store(jar));
+                    setJarPath(storageService.storeToTemp(jar));
                 } finally {
                     jarLock.writeLock().unlock();
                 }
@@ -93,7 +93,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
                         oldJarLock.writeLock().unlock();
                     }
                 });
-                setJarPath(storageService.store(jar, "testslibrary-" + UUID.randomUUID() + ".jar"));
+                setJarPath(storageService.storeToTemp(jar, "testslibrary-" + UUID.randomUUID()));
                 this.jarLock = new ReentrantReadWriteLock(true);
             }
             setJarVersion();

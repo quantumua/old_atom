@@ -42,14 +42,19 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     @Override
     public List<ExecutionArguments> handle(Properties properties, MultipartFile[] suites, MultipartFile tempJar, ExecutionListener<List<RunnerResult>> listener) {
         String tempDirectory = UUID.randomUUID().toString();
-        List<String> suitePaths = storageService.store(suites, tempDirectory);
-        List<ExecutionArguments> argsList = getExecutionArguments(properties, suitePaths);
-
+        List<String> suitePaths = storageService.storeToTemp(suites, tempDirectory);
+        String tempJarPath = null;
         if (tempJar != null) {
-            execute(() -> {
-                String tempJarPath = storageService.store(tempJar, tempDirectory);
-                return classLoaderExecutor.run(getExecutions(argsList), tempJarPath);
-            }, listener);
+            tempJarPath = storageService.storeToTemp(tempJar, tempDirectory);
+        }
+        return handle(properties, suitePaths, tempJarPath, listener);
+    }
+
+    @Override
+    public List<ExecutionArguments> handle(Properties properties, List<String> suitePaths, String tempJarPath, ExecutionListener<List<RunnerResult>> listener) {
+        List<ExecutionArguments> argsList = getExecutionArguments(properties, suitePaths);
+        if (tempJarPath != null) {
+            execute(() -> classLoaderExecutor.run(getExecutions(argsList), tempJarPath), listener);
         } else {
             execute(() -> classLoaderExecutor.run(getExecutions(argsList)), listener);
         }

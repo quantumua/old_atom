@@ -2,8 +2,9 @@ package com.betamedia.atom.core.fwtestrunner.listeners.impl;
 
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
 import com.betamedia.atom.core.dsl.pages.pageobjects.browser.BrowserOperations;
+import com.betamedia.atom.core.fwtestrunner.storage.StorageException;
+import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import com.betamedia.atom.core.testingtype.base.WebDriverTest;
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
@@ -12,28 +13,30 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * {@link ITestListener} implementation that invokes {@link BrowserOperations#takeScreenShot()} on test failure,
  * saves the file to report directory and inserts hyperlink to it in {@link Reporter#log(String)}
  *
- * @author  mbelyaev
+ * @author mbelyaev
  * @since 5/29/17
  */
 public class ScreenShotListener implements ITestListener {
     private static final Logger logger = LogManager.getLogger(ScreenShotListener.class);
+    public static final String SCREEN_SHOT_DIRECTORY = "screenshots";
     private static final String SCREEN_SHOT_MESSAGE = "Screenshot saved at: ";
     private static final String SCREEN_SHOT_FAILURE_MESSAGE = "Could not save screenshot to target directory";
 
     private final String outputDirectory;
+    private final StorageService storageService;
 
     /**
      * @param outputDirectory screen shot save directory (expected to be same as TestNG report directory)
      * @see ScreenShotListenerFactoryImpl
      */
-    public ScreenShotListener(String outputDirectory) {
+    public ScreenShotListener(String outputDirectory, StorageService storageService) {
         this.outputDirectory = outputDirectory;
+        this.storageService = storageService;
     }
 
     @Override
@@ -77,15 +80,14 @@ public class ScreenShotListener implements ITestListener {
     }
 
     private void takeScreenShot(AbstractPageFactory pageFactory) {
-        File screenShot = pageFactory.browser().takeScreenShot();
-        File destinationFile = new File(outputDirectory, +System.currentTimeMillis() + ".png");
         try {
-            FileUtils.copyFile(screenShot, destinationFile);
-        } catch (IOException e) {
+            File screenshot = pageFactory.browser().takeScreenShot();
+            storageService.store(screenshot, outputDirectory, SCREEN_SHOT_DIRECTORY);
+            Reporter.log(SCREEN_SHOT_MESSAGE + makeHyperlink(String.join("/", SCREEN_SHOT_DIRECTORY, screenshot.getName()) + '\n'));
+        } catch (StorageException e) {
             logger.error(SCREEN_SHOT_FAILURE_MESSAGE, e);
             Reporter.log(SCREEN_SHOT_FAILURE_MESSAGE + '\n');
         }
-        Reporter.log(SCREEN_SHOT_MESSAGE + makeHyperlink(destinationFile.getName()) + '\n');
     }
 
     private String makeHyperlink(String path) {

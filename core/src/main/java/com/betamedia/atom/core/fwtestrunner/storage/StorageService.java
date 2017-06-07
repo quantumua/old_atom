@@ -3,28 +3,34 @@ package com.betamedia.atom.core.fwtestrunner.storage;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * Created by mbelyaev on 2/28/17.
+ * @author mbelyaev
+ * @since 2/28/17
  */
 public interface StorageService {
 
     void init();
 
-    String store(MultipartFile file);
+    String storeToTemp(MultipartFile file);
 
-    String store(MultipartFile file, String subDirectory);
+    String storeToTemp(MultipartFile file, String pathString);
 
-    List<String> store(MultipartFile[] files);
+    String store(File file, String... pathString);
 
-    List<String> store(MultipartFile[] files, String subDirectory);
+    List<String> storeToTemp(MultipartFile[] files);
 
-    void delete(String path);
+    List<String> storeToTemp(MultipartFile[] files, String pathString);
+
+    void delete(String pathString);
 
     Stream<Path> loadAll();
+
+    Stream<Path> loadAll(String... pathString);
 
     Path load(String filename);
 
