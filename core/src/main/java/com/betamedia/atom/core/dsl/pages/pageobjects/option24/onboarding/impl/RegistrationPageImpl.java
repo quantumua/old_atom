@@ -34,10 +34,13 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
     private By passwordRegField;
     @StoredId
     private By reenterPasswordRegField;
-    @StoredId("submitButtonReg")
+    @StoredId
     private By submitButtonReg;
-    @StoredId("accountAgreeField")
+    @StoredId
     private By accountAgreeField;
+    @StoredId
+    private By selectedFlagField;
+
 
     public RegistrationPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -73,7 +76,12 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
 
 
    	    /*Account Agree */
-        find(accountAgreeField).click();
+        JScriptExecutor("document.getElementById('AccountAgree').checked = true;");
+        
+        /*Country Election*/
+        find(selectedFlagField).click();
+        find(selectCountry).click();
+        /* */
 
         logger.info("EMAIL  " + customer.getEmail());
         logger.info("Phone  " + customer.getPhone());

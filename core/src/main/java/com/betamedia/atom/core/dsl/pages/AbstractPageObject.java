@@ -386,4 +386,9 @@ public abstract class AbstractPageObject {
     private static WebElement elementIfVisible(WebElement element) {
         return element.isDisplayed() ? element : null;
     }
+    
+    protected void JScriptExecutor(String script) {
+        ((JavascriptExecutor) webDriver).executeScript(script);
+    }
+
 }
