@@ -17,7 +17,7 @@
         <tp.version>2.5.9</tp.version>
         <gs.version>10.2.1-14000-RELEASE</gs.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
-        <selenium.version>3.3.1</selenium.version>
+        <selenium.version>3.4.0</selenium.version>
         <guava.version>21.0</guava.version>
     </properties>
 
@@ -58,13 +58,16 @@
                     <artifactId>javassist</artifactId>
                 </exclusion>
             </exclusions>
-
         </dependency>
         <dependency>
             <groupId>com.betamedia.common</groupId>
             <artifactId>common</artifactId>
             <version>${tp.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
         </dependency>
         <!--logging-->
         <dependency>

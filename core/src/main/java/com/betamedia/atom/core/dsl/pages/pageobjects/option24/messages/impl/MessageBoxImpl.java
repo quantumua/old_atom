@@ -8,7 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
- * Created by mbelyaev on 4/28/17.
+ * @author mbelyaev
+ * @since 4/28/17
  */
 public class MessageBoxImpl extends AbstractPageObject implements MessageBox {
     @StoredId
@@ -28,10 +29,10 @@ public class MessageBoxImpl extends AbstractPageObject implements MessageBox {
 
     @Override
     public void ok() {
-        waitUntil(() -> tryFind(messageBox, okButton)
+        waitUntil(() -> maybe(() -> find(messageBox, okButton))
                 .orElseGet(() -> find(requoteTrade, buttonsBlock, firstButton))
                 .isDisplayed());
-        tryFind(requoteTrade, buttonsBlock, firstButton).ifPresent(WebElement::click);
+        maybe(() -> find(requoteTrade, buttonsBlock, firstButton)).ifPresent(WebElement::click);
         waitUntilDisplayed(messageBox, okButton);
         find(messageBox, okButton).click();
         waitUntil(() -> !exists(messageBox));
