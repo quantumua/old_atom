@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -37,7 +38,7 @@ public abstract class AbstractPageObject {
      * Wait until element is displayed ({@link WebElement#isDisplayed()})
      *
      * @param element locator for element
-     * @return <code>true</code> when element is displayed
+     * @return located {@link WebElement}
      */
     protected WebElement waitUntilDisplayed(By element) {
         return getWait().until(ExpectedConditions.visibilityOfElementLocated(element));
@@ -47,7 +48,7 @@ public abstract class AbstractPageObject {
      * Wait until element is displayed ({@link WebElement#isDisplayed()})
      *
      * @param elements locator chain for element
-     * @return <code>true</code> when element is displayed
+     * @return located {@link WebElement}
      */
     protected WebElement waitUntilDisplayed(By... elements) {
         return getWait().until(driver -> ignoringStale(() -> elementIfVisible(find(elements))));
@@ -61,6 +62,32 @@ public abstract class AbstractPageObject {
      */
     protected WebElement waitUntilExists(By element) {
         return getWait().until(ExpectedConditions.presenceOfElementLocated(element));
+    }
+
+    /**
+     * Wait until element exists on page (not necessarily visible)
+     *
+     * @param elements locator chain for element
+     * @return <code>true</code> when element is found
+     */
+    protected WebElement waitUntilExists(By... elements) {
+        return getWait().until(driver -> ignoringStale(() -> find(elements)));
+    }
+
+    /**
+     * A wrapper that handles {@link TimeoutException} and {@link NoSuchElementException} for {@link WebElement} retrieving methods.
+     *
+     * @param supplier supplier of the element
+     * @return {@link Optional<WebElement>} containing element or empty if nothing was located
+     */
+    protected Optional<WebElement> maybe(Supplier<WebElement> supplier) {
+        try {
+            return Optional.ofNullable(supplier.get());
+        } catch (TimeoutException | NoSuchElementException e) {
+            logger.debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
+            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
+            return Optional.empty();
+        }
     }
 
     /**
@@ -103,22 +130,6 @@ public abstract class AbstractPageObject {
      */
     protected WebElement find(By... by) {
         return find(Arrays.asList(by));
-    }
-
-    /**
-     * Tries to find the first {@link WebElement} using the by locator chain of {@link By}
-     *
-     * @param by element locator chain
-     * @return an {@code Optional} with a present element if found, otherwise an empty {@code Optional}
-     */
-    protected Optional<WebElement> tryFind(By... by) {
-        WebElement result = null;
-        try {
-            result = find(by);
-        } catch (NoSuchElementException e) {
-            logger.debug("", e);
-        }
-        return Optional.ofNullable(result);
     }
 
     /**
@@ -190,15 +201,14 @@ public abstract class AbstractPageObject {
      * This is for scenarios when target {@link WebElement} is expected to update often, raising {@link StaleElementReferenceException}.<br/>
      * The method will try to execute {@link Consumer} for {@link AbstractPageObject#MAX_WAIT_SEC} seconds
      *
+     * @param supplier element supplier function
      * @param consumer consumer to execute on located {@link WebElement}
-     * @param by       element locator chain
      */
-    protected void performOnUpdatingElement(Consumer<WebElement> consumer, By... by) {
-        List<By> bys = Arrays.asList(by);
+    protected void retryOnStale(Supplier<? extends WebElement> supplier, Consumer<? super WebElement> consumer) {
         long start = System.currentTimeMillis();
         do {
             try {
-                consumer.accept(find(bys));
+                consumer.accept(supplier.get());
             } catch (StaleElementReferenceException e) {
                 logger.debug(DOM_UPDATE_MESSAGE, e);
                 Reporter.log(DOM_UPDATE_MESSAGE + '\n');
@@ -211,16 +221,15 @@ public abstract class AbstractPageObject {
      * This is for scenarios when target {@link WebElement} is expected to update often, raising {@link StaleElementReferenceException}.<br/>
      * The method will try to execute {@link Function} for {@link AbstractPageObject#MAX_WAIT_SEC} seconds
      *
+     * @param supplier element supplier function
      * @param function function to evaluate on located {@link WebElement}
-     * @param by       element locator chain
      * @return the function result
      */
-    protected <T> T retrieveFromUpdatingElement(Function<WebElement, T> function, By... by) {
-        List<By> bys = Arrays.asList(by);
+    protected <T> T retryOnStale(Supplier<? extends WebElement> supplier, Function<? super WebElement, T> function) {
         long start = System.currentTimeMillis();
         do {
             try {
-                return function.apply(find(bys));
+                return function.apply(supplier.get());
             } catch (StaleElementReferenceException e) {
                 logger.debug(DOM_UPDATE_MESSAGE, e);
                 Reporter.log(DOM_UPDATE_MESSAGE + '\n');
@@ -271,8 +280,8 @@ public abstract class AbstractPageObject {
      * @return {@link Select} for the element
      */
 
-    protected Select in(By by) {
-        return in(waitUntilDisplayed(by));
+    protected Select inSelect(By by) {
+        return inSelect(waitUntilDisplayed(by));
     }
 
     /**
@@ -281,7 +290,7 @@ public abstract class AbstractPageObject {
      * @param element source <code>WebElement</code>
      * @return {@link Select} for the element
      */
-    protected static Select in(WebElement element) {
+    protected static Select inSelect(WebElement element) {
         return new Select(element);
     }
 
@@ -292,6 +301,10 @@ public abstract class AbstractPageObject {
      */
     protected void deleteAllCookies() {
         webDriver.manage().deleteAllCookies();
+        Set<Cookie> allCookies = webDriver.manage().getCookies();
+        if (!allCookies.isEmpty()) {
+            webDriver.manage().deleteAllCookies();
+        }
     }
 
     /**
@@ -343,8 +356,8 @@ public abstract class AbstractPageObject {
     /**
      * Take screen shot of page
      *
-     * @see TakesScreenshot#getScreenshotAs(OutputType)
      * @return {@link File} screen shot object
+     * @see TakesScreenshot#getScreenshotAs(OutputType)
      */
     protected File takeScreenShot() {
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);

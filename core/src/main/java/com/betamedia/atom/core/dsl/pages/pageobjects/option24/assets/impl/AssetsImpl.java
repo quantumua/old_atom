@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.impl;
 
-import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.Assets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +18,8 @@ import static javax.swing.text.html.HTML.Attribute.CLASS;
 import static javax.swing.text.html.HTML.Tag.TR;
 
 /**
- * Created by mbelyaev on 4/18/17.
+ * @author mbelyaev
+ * @since 4/18/17
  */
 public class AssetsImpl extends AbstractPageObject implements Assets {
     private static final Logger logger = LogManager.getLogger(AssetsImpl.class);
@@ -146,10 +147,16 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
     }
 
     private void validateSubRows(By row, By currencyType, String expectedCurrency) {
-        Assert.assertEquals(retrieveFromUpdatingElement(WebElement::getText,
-                assetTooltipContent, row, firstRow, currencyType), expectedCurrency);
-        Assert.assertEquals(retrieveFromUpdatingElement(WebElement::getText,
-                assetTooltipContent, row, secondRow, currencyType), expectedCurrency);
+        Assert.assertEquals(
+                retryOnStale(
+                        () -> find(assetTooltipContent, row, firstRow, currencyType),
+                        WebElement::getText),
+                expectedCurrency);
+        Assert.assertEquals(
+                retryOnStale(
+                        () -> find(assetTooltipContent, row, secondRow, currencyType),
+                        WebElement::getText),
+                expectedCurrency);
     }
 
 

@@ -55,16 +55,16 @@ public class RegisterPageImpl extends AbstractPageObject implements RegisterPage
     public void register(CustomerRO customer) {
         logger.info("Attempting to log in with customer " + customer);
         waitUntilDisplayed(title);
-        in(title).selectByValue(customer.getTitle());
+        inSelect(title).selectByValue(customer.getTitle());
         find(firstName).sendKeys(customer.getFirstName());
         find(lastName).sendKeys(customer.getLastName());
         find(email).sendKeys(customer.getEmail());
-        in(country).selectByValue(customer.getCountryCode());
+        inSelect(country).selectByValue(customer.getCountryCode());
         find(telephoneNumber).sendKeys(customer.getPhone());
-        in(birthDateDay).selectByValue(customer.getBirthdayDayOfMonth());
-        in(birthDateMonth).selectByValue(customer.getBirthdayMonth());
-        in(birthDateYear).selectByValue(customer.getBirthdayYear());
-        in(accountBaseCurrency).selectByValue(customer.getCurrency());
+        inSelect(birthDateDay).selectByValue(customer.getBirthdayDayOfMonth());
+        inSelect(birthDateMonth).selectByValue(customer.getBirthdayMonth());
+        inSelect(birthDateYear).selectByValue(customer.getBirthdayYear());
+        inSelect(accountBaseCurrency).selectByValue(customer.getCurrency());
         find(password).sendKeys(customer.getPassword());
         find(startTrading).click();
         waitUntilDisplayed(resultPlaceHolder);

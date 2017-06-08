@@ -42,14 +42,14 @@ public class AccountDetailsPageImpl extends AbstractPageObject implements Accoun
     @Override
     public void update(AccountDetails info) {
         waitUntilDisplayed(title);
-        in(title).selectByVisibleText(info.title);
+        inSelect(title).selectByVisibleText(info.title);
         find(street).sendKeys(info.street);
         find(streetNumber).sendKeys(info.streetNumber);
         find(city).sendKeys(info.city);
         find(phone2).sendKeys(info.phone2);
-        in(birthdayDay).selectByValue(info.birthdayDay);
-        in(birthdayMonth).selectByValue(info.birthdayMonth);
-        in(birthdayYear).selectByValue(info.birthdayYear);
+        inSelect(birthdayDay).selectByValue(info.birthdayDay);
+        inSelect(birthdayMonth).selectByValue(info.birthdayMonth);
+        inSelect(birthdayYear).selectByValue(info.birthdayYear);
         find(update).click();
     }
 }

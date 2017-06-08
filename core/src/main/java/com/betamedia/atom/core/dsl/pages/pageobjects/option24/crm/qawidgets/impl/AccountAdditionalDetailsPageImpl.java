@@ -33,11 +33,11 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     @Override
     public void update(AccountAdditionalDetails info) {
         waitUntilDisplayed(birthDateDay);
-        in(birthDateDay).selectByValue(info.birthDateDay);
-        in(birthDateMonth).selectByValue(info.birthDateMonth);
-        in(birthDateYear).selectByValue(info.birthDateYear);
-        in(countryOfBirth).selectByValue(info.countryOfBirth);
-        in(nationality).selectByValue(info.nationality);
+        inSelect(birthDateDay).selectByValue(info.birthDateDay);
+        inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
+        inSelect(birthDateYear).selectByValue(info.birthDateYear);
+        inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
+        inSelect(nationality).selectByValue(info.nationality);
         find(update).click();
     }
 }

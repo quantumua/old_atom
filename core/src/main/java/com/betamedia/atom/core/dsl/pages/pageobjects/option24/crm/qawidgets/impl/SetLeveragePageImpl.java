@@ -24,7 +24,7 @@ public class SetLeveragePageImpl extends AbstractPageObject implements SetLevera
 
     @Override
     public List<String> getLeveragesList() {
-        return in(waitUntilDisplayed(setLeverageComboBox)).getOptions()
+        return inSelect(waitUntilDisplayed(setLeverageComboBox)).getOptions()
                 .stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());

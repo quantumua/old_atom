@@ -66,26 +66,26 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
 
     @Override
     public void submit(PersonalInformation info) {
-        in(employmentStatus).selectByValue(info.employmentStatus);
-        in(industry).selectByValue(info.industry);
+        inSelect(employmentStatus).selectByValue(info.employmentStatus);
+        inSelect(industry).selectByValue(info.industry);
         if(notNull(info.industryOther)) find(industryOther).sendKeys(info.industryOther);
         if(notNull(info.employerName)) find(employerName).sendKeys(info.employerName);
-        in(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
-        if(notNull(info.isUSReportable)) in(isUSReportable).selectByValue(info.isUSReportable);
-        in(hasTaxIdentificationNumber).selectByValue(info.hasTaxIdentificationNumber);
+        inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
+        if(notNull(info.isUSReportable)) inSelect(isUSReportable).selectByValue(info.isUSReportable);
+        inSelect(hasTaxIdentificationNumber).selectByValue(info.hasTaxIdentificationNumber);
         if(notNull(info.taxIdentificationNumber)) find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
         if(notNull(info.socialSecurityNumber)) find(socialSecurityNumber).sendKeys(info.socialSecurityNumber);
-        in(educationLevel).selectByValue(info.educationLevel);
-        in(educationField).selectByValue(info.educationField);
+        inSelect(educationLevel).selectByValue(info.educationLevel);
+        inSelect(educationField).selectByValue(info.educationField);
         if(notNull(info.educationFieldOther)) find(educationFieldOther).sendKeys(info.educationFieldOther);
-        in(isPoliticallyExposed).selectByValue(info.isPoliticallyExposed);
+        inSelect(isPoliticallyExposed).selectByValue(info.isPoliticallyExposed);
         if(notNull(info.politicalExposureComment)) find(politicalExposureComment).sendKeys(info.politicalExposureComment);
-        in(sourceOfFunds).selectByValue(info.sourceOfFunds);
+        inSelect(sourceOfFunds).selectByValue(info.sourceOfFunds);
         if(notNull(info.sourceOfFundsOther)) find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
-        in(annualIncome).selectByValue(info.annualIncome);
-        in(netWealth).selectByValue(info.netWealth);
-        in(expectedDepositsPerYear).selectByValue(info.expectedDepositsPerYear);
-        in(purposeOfTrading).selectByValue(info.purposeOfTrading);
+        inSelect(annualIncome).selectByValue(info.annualIncome);
+        inSelect(netWealth).selectByValue(info.netWealth);
+        inSelect(expectedDepositsPerYear).selectByValue(info.expectedDepositsPerYear);
+        inSelect(purposeOfTrading).selectByValue(info.purposeOfTrading);
         if(notNull(info.purposeOfTradingOther)) find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
         click(submit);
         waitUntilDisplayed(resultPlaceholder);
@@ -100,7 +100,7 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         find(employerName).sendKeys(info.employerName);
 
         waitUntilDisplayed(taxResidenceCountry);
-        in(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
+        inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
 
         submitOnWizard(info.isUSReportable);
         submitOnWizard(info.hasTaxIdentificationNumber);

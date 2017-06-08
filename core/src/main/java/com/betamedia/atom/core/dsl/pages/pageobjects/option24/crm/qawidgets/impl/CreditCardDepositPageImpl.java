@@ -49,8 +49,8 @@ public class CreditCardDepositPageImpl extends AbstractPageObject implements Cre
         click(creditCardNumber);
         find(creditCardNumber).sendKeys(info.creditCardNumber);
         find(cvv2).sendKeys(info.cvv2);
-        in(expiryDateMonth).selectByValue(info.expiryDateMonth);
-        in(expiryDateYear).selectByValue(info.expiryDateYear);
+        inSelect(expiryDateMonth).selectByValue(info.expiryDateMonth);
+        inSelect(expiryDateYear).selectByValue(info.expiryDateYear);
         find(cardHoldersFirstName).sendKeys(info.cardHoldersFirstName);
         find(cardHoldersLastName).sendKeys(info.cardHoldersLastName);
         find(billingAddress).sendKeys(info.billingAddress);

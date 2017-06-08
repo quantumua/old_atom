@@ -8,7 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Created by mbelyaev on 5/17/17.
+ * @author mbelyaev
+ * @since 5/17/17
  */
 public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsTradingExperience {
     @StoredId
@@ -63,26 +64,26 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     //TODO extract method for send-keys-if-not-null scenario
     @Override
     public void submit(TradingExperienceInfo info) {
-        in(sharesExperience).selectByValue(info.sharesExperience);
-        in(binaryExperience).selectByValue(info.binaryExperience);
-        if(notNull(info.averageYearlyBinaryVolume)) in(averageYearlyBinaryVolume).selectByValue(info.averageYearlyBinaryVolume);
-        in(forExExperience).selectByValue(info.forExExperience);
-        if(notNull(info.averageYearlyForExVolume)) in(averageYearlyForExVolume).selectByValue(info.averageYearlyForExVolume);
-        if(notNull(info.commonLeverage)) in(commonLeverage).selectByValue(info.commonLeverage);
-        in(financialWorkExperience).selectByValue(info.financialWorkExperience);
-        in(cfdBinaryKnowledge).selectByValue(info.cfdBinaryKnowledge);
-        in(mainFactorKnowledge).selectByValue(info.mainFactorKnowledge);
-        in(howToCloseKnowledge).selectByValue(info.howToCloseKnowledge);
-        in(cfdLeverageKnowledge).selectByValue(info.cfdLeverageKnowledge);
-        in(stopLossKnowledge).selectByValue(info.stopLossKnowledge);
-        in(requiredMarginKnowledge).selectByValue(info.requiredMarginKnowledge);
-        in(marginLevelDropKnowledge).selectByValue(info.marginLevelDropKnowledge);
-        in(automaticStopKnowledge).selectByValue(info.automaticStopKnowledge);
-        in(lossOn1to50Knowledge).selectByValue(info.lossOn1to50Knowledge);
-        in(lossOn1to200Knowledge).selectByValue(info.lossOn1to200Knowledge);
-        in(binaryInvestProfitKnowledge).selectByValue(info.binaryInvestProfitKnowledge);
-        in(binaryInvestLossKnowledge).selectByValue(info.binaryInvestLossKnowledge);
-        in(binaryProbabilityKnowledge).selectByValue(info.binaryProbabilityKnowledge);
+        inSelect(sharesExperience).selectByValue(info.sharesExperience);
+        inSelect(binaryExperience).selectByValue(info.binaryExperience);
+        if(notNull(info.averageYearlyBinaryVolume)) inSelect(averageYearlyBinaryVolume).selectByValue(info.averageYearlyBinaryVolume);
+        inSelect(forExExperience).selectByValue(info.forExExperience);
+        if(notNull(info.averageYearlyForExVolume)) inSelect(averageYearlyForExVolume).selectByValue(info.averageYearlyForExVolume);
+        if(notNull(info.commonLeverage)) inSelect(commonLeverage).selectByValue(info.commonLeverage);
+        inSelect(financialWorkExperience).selectByValue(info.financialWorkExperience);
+        inSelect(cfdBinaryKnowledge).selectByValue(info.cfdBinaryKnowledge);
+        inSelect(mainFactorKnowledge).selectByValue(info.mainFactorKnowledge);
+        inSelect(howToCloseKnowledge).selectByValue(info.howToCloseKnowledge);
+        inSelect(cfdLeverageKnowledge).selectByValue(info.cfdLeverageKnowledge);
+        inSelect(stopLossKnowledge).selectByValue(info.stopLossKnowledge);
+        inSelect(requiredMarginKnowledge).selectByValue(info.requiredMarginKnowledge);
+        inSelect(marginLevelDropKnowledge).selectByValue(info.marginLevelDropKnowledge);
+        inSelect(automaticStopKnowledge).selectByValue(info.automaticStopKnowledge);
+        inSelect(lossOn1to50Knowledge).selectByValue(info.lossOn1to50Knowledge);
+        inSelect(lossOn1to200Knowledge).selectByValue(info.lossOn1to200Knowledge);
+        inSelect(binaryInvestProfitKnowledge).selectByValue(info.binaryInvestProfitKnowledge);
+        inSelect(binaryInvestLossKnowledge).selectByValue(info.binaryInvestLossKnowledge);
+        inSelect(binaryProbabilityKnowledge).selectByValue(info.binaryProbabilityKnowledge);
         click(submit);
         waitUntilDisplayed(resultPlaceholder);
     }
