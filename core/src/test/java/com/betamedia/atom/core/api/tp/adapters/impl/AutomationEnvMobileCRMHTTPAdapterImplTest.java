@@ -1,12 +1,13 @@
 package com.betamedia.atom.core.api.tp.adapters.impl;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
+import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
+import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMError;
 import com.betamedia.atom.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.atom.core.api.tp.entities.response.CRMResponse;
 import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -186,7 +187,7 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
     }
 
     private CustomerRO getCustomerRO() {
-        return CustomerRO.builder().build();
+        return CustomerRO.builder(WidgetsNamingStrategy.get()).build();
     }
 
     private AutomationEnvMobileCRMHTTPAdapterImpl getAdapter() {

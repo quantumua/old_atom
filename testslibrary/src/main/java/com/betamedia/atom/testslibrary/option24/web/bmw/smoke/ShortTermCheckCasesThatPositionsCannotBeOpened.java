@@ -49,7 +49,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 //		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		pages().startTradeDialog().startTrade();
         pages().disclaimerNotification().tryAccept();
@@ -90,7 +90,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int maxInvestmentAllowed = 48000;		// TODO getMaxInvestment();
@@ -128,7 +128,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -161,7 +161,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -192,7 +192,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -221,7 +221,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -292,7 +292,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		String Investment = "";
@@ -325,7 +325,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		//String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -356,7 +356,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -394,7 +394,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -426,7 +426,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -466,7 +466,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = cfdAccount.getId();
 		operations().accountOperations().depositCRM(accountId, 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -514,7 +514,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();

@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
  */
 public class CreditCardDepositTest extends TPCachedResourceEndToEndTest {
     private static final String USERNAME = StringUtils.generateRandomId(10).replaceAll("[^A-Za-z]", "");
-    private final static String PASSWORD = CustomerRO.CustomerROBuilder.PASSWORD;
+    private final static String PASSWORD = CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD;
 
     @Test
     public void creditCardDepositSubmitInformationTest() {
 
-        pages().register().register();
+        pages().registerPage().register();
         pages().crmNavigation().creditCardDeposit();
         pages().creditCardDeposit().submit(
 //                TODO Add to builder autogeneration of unique fields, set default values for required fields in builder

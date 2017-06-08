@@ -1,9 +1,10 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl;
 
-import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -85,10 +86,7 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
 
     @Override
     public void register() {
-        register(CustomerRO.builder().setFirstName(DEFAULT_CUSTOMER_NAME)
-                .setLastName(DEFAULT_CUSTOMER_NAME)
-                .build()
-        );
+        register(CustomerRO.builder(WebSiteNamingStrategy.get()).build());
     }
 
     private void submitRegistration() {

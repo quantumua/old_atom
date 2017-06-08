@@ -71,6 +71,6 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
         pages().topNavigationPage().goToHomePage();
 
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(username, CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().loginPage().login(username, CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
     }
 }

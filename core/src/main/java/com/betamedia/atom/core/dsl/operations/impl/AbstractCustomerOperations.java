@@ -2,6 +2,7 @@ package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.adapters.MobileCRMHTTPAdaper;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
@@ -52,7 +53,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public CRMCustomer register() {
-        return register(CustomerRO.builder().build());
+        return register(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
     }
 
     /**
@@ -231,7 +232,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Override
     public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
-        CRMCustomer registeredCustomer = register(CustomerRO.builder().build());
+        CRMCustomer registeredCustomer = register(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         updateCustomersOnboardingConditions(registeredCustomer, wizardConditions);
         return registeredCustomer;
     }

@@ -15,7 +15,7 @@ public class MobileCRMOnboardingDemoWizardConditionsTest extends AbstractOnboard
         pages().browser().deleteAllCookies();
 
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(conditions.username(), CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().loginPage().login(conditions.username(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 
 
         if (checkIfLeveragePopupWillBeShown(conditions.username())) {

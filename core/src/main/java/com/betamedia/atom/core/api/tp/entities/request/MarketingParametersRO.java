@@ -7,6 +7,7 @@ import com.betamedia.atom.core.api.tp.adapters.impl.AbstractMobileCRMHTTPAdapter
  *
  * Created by Oleksandr Losiev on 4/25/17.
  */
+//TODO duplication of CustomerRO fields! We needn't this class. Need to refactor to use CustomerRO instead.
 public class MarketingParametersRO {
 
     private String origin;

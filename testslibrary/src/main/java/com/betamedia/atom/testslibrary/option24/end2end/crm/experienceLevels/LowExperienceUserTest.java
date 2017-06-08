@@ -1,6 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels;
 
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
 import org.testng.annotations.Test;
@@ -13,8 +14,8 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9029")
     public void checkCustomerWithScore31IsLowExperienceTest() {
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
@@ -46,8 +47,8 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9071")
     public void checkCustomerWithScore45IsLowExperienceTest() {
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
@@ -79,8 +80,8 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9032")
     public void checkCustomerWithScore50IsLowExperienceTest() {
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()

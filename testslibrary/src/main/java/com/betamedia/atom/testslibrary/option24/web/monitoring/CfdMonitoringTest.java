@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.is;
  */
 public class CfdMonitoringTest extends TPCachedResourceEndToEndTest {
     private static final String USERNAME = "QENirShuTest@Test.ru";
-    private static final String PASSWORD = CustomerRO.CustomerROBuilder.PASSWORD;
+    private static final String PASSWORD = CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD;
     private static final String DATA_DRIVEN_MONITORING_TEST_GROUP = "data_driven_monitoring_test_group";
     private String expectedCurrency;
 

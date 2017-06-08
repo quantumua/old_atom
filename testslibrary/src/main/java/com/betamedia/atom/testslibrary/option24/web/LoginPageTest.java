@@ -55,7 +55,7 @@ public class LoginPageTest extends TPEndToEndTest {
     public void registerAndLoginTest() {
         CRMCustomer customer = operations().customerOperations().register();
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         Assert.assertTrue(pages().welcomePage().isStartBtnDisplayed());
     }
 

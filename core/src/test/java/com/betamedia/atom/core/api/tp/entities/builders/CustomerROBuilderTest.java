@@ -1,8 +1,20 @@
 package com.betamedia.atom.core.api.tp.entities.builders;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+import org.assertj.core.util.Strings;
 import org.testng.annotations.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.AbstractUserNamingStrategy.DEFAULT_USER_FIRST_NAME;
+import static com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.AbstractUserNamingStrategy.DEFAULT_USER_LAST_NAME;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.testng.Assert.*;
 
 /**
@@ -44,8 +56,6 @@ public class CustomerROBuilderTest {
     private static final String UTC_OFFSET = "utcOffset";
     private static final String ZIP = "zip";
 
-    private static final String DEFAULT_FIRST_NAME = "Automation";
-    private static final String DEFAULT_LAST_NAME = "Automation";
     private static final String DEFAULT_CURENCY = "EUR";
     private static final String DEFAULT_COUNTRY_CODE = "JM";
     private static final String DEFAULT_PASSWORD = "123123";
@@ -54,36 +64,46 @@ public class CustomerROBuilderTest {
     private static final String DEFAULT_TITLE = "Mr";
     private static final String DEFAULT_BIRTH_OF_DATE = "1982-02-03";
     private static final String CUSTOM_PHONE = "12465555555";
+    public static final String CRM_EMAIL_NAMING_TEMPLATE = "^crm_(.+)@24options\\.atom$";
+    public static final String WEBSITENAMING_TEMPLATE = "^Web(.+)@24options\\.atom$";
+    public static final String WIDGET_NAMING_TEMPLATE = "^widget(.+)@24options\\.atom$";
 
     @Test
     public void testCreateDefaultCustomerRO() {
-        CustomerRO customerRO = CustomerRO.builder().build();
-        assertTrue(customerRO.getEmail().contains(customerRO.getUserName()));
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        assertThat(customerRO.getUserName(), is(nullValue()));
+        checkMailMatching(CRM_EMAIL_NAMING_TEMPLATE, customerRO.getEmail());
     }
 
     @Test
     public void shouldGenerateEmailByFirstNameIfNotSet() {
         String customUserName = "customUserName";
-        CustomerRO customerRO = CustomerRO.builder().setUserName(customUserName).build();
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).setUserName(customUserName).build();
         assertTrue(customUserName.equals(customerRO.getUserName()));
-        assertTrue(customerRO.getEmail().contains(customerRO.getUserName()));
+        checkMailMatching(CRM_EMAIL_NAMING_TEMPLATE, customerRO.getEmail());
+    }
+
+
+    private void checkMailMatching(String regex, String mail) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(mail);
+        assertTrue(matcher.find());
+        assertFalse(Strings.isNullOrEmpty(matcher.group(1)));
     }
 
     @Test
     public void shouldUseSetEmail() {
         String customUserName = "customUserName";
         String email = "dontMatchFirstName@email.com";
-        CustomerRO customerRO = CustomerRO.builder().setUserName(customUserName).setEmail(email).build();
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).setUserName(customUserName).setEmail(email).build();
         assertFalse(customerRO.getEmail().contains(customerRO.getUserName()));
     }
 
     @Test
     public void testDefaultCustomerRO() {
-        CustomerRO actualCustomerRO = CustomerRO.builder().build();
+        CustomerRO actualCustomerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         checkDefault(actualCustomerRO, getDefaultCustomerRO());
-        assertEquals(actualCustomerRO.getEmail(), actualCustomerRO.getUserName() + DEFAULT_EMAIL);
-        assertTrue(actualCustomerRO.getUserName().contains(CustomerRO.CustomerROBuilder.TP_AUTOMATION_PREFIX));
-        assertTrue(actualCustomerRO.getUserName().length() > CustomerRO.CustomerROBuilder.TP_AUTOMATION_PREFIX.length());
+        checkMailMatching(CRM_EMAIL_NAMING_TEMPLATE, actualCustomerRO.getEmail());
     }
 
     @Test
@@ -95,22 +115,22 @@ public class CustomerROBuilderTest {
     }
 
     private CustomerRO getDefaultCustomerRO() {
-        CustomerRO customerRO = CustomerRO.builder().build();
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         customerRO.setCountryCode(DEFAULT_COUNTRY_CODE);
         customerRO.setCurrency(DEFAULT_CURENCY);
         customerRO.setPassword(DEFAULT_PASSWORD);
         customerRO.setPhone(CUSTOM_PHONE);
         customerRO.setEmail(DEFAULT_EMAIL);
         customerRO.setUserName(DEFAULT_USER_NAME);
-        customerRO.setFirstName(DEFAULT_FIRST_NAME);
-        customerRO.setLastName(DEFAULT_LAST_NAME);
+        customerRO.setFirstName(DEFAULT_USER_FIRST_NAME);
+        customerRO.setLastName(DEFAULT_USER_LAST_NAME);
         customerRO.setTitle(DEFAULT_TITLE);
         customerRO.setBirthOfDate(DEFAULT_BIRTH_OF_DATE);
         return customerRO;
     }
 
     private CustomerRO.CustomerROBuilder getCustomCustomerBuilder() {
-        return CustomerRO.builder()
+        return CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                 .setBirthOfDate(BIRTH_OF_DATE)
                 .setCampaign(CAMPAIGN)
                 .setChannel(CHANNEL)
@@ -190,7 +210,7 @@ public class CustomerROBuilderTest {
     }
 
     private CustomerRO getCustomCustomerRO() {
-        CustomerRO customerRO = CustomerRO.builder().build();
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         customerRO.setBirthOfDate(BIRTH_OF_DATE);
         customerRO.setCampaign(CAMPAIGN);
         customerRO.setChannel(CHANNEL);
@@ -224,5 +244,29 @@ public class CustomerROBuilderTest {
         customerRO.setUtcOffset(UTC_OFFSET);
         customerRO.setZip(ZIP);
         return customerRO;
+    }
+
+    @Test
+    public void testCRMMobileApiCreatedCustomerNamingStrategies() {
+        CustomerRO crmMobileApiCreatedCustomer = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        checkStrategy(DEFAULT_USER_FIRST_NAME, DEFAULT_USER_LAST_NAME, CRM_EMAIL_NAMING_TEMPLATE, crmMobileApiCreatedCustomer);
+    }
+
+    @Test
+    public void testWebSiteCreatedCustomerNamingStrategies() {
+        CustomerRO webSiteCreatedCustomer = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
+        checkStrategy(DEFAULT_USER_FIRST_NAME, DEFAULT_USER_LAST_NAME, WEBSITENAMING_TEMPLATE, webSiteCreatedCustomer);
+    }
+
+    @Test
+    public void testCRMWidgetsCreatedCustomerNamingStrategies() {
+        CustomerRO widgetsCreatedCustomer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        checkStrategy(DEFAULT_USER_FIRST_NAME, DEFAULT_USER_LAST_NAME, WIDGET_NAMING_TEMPLATE, widgetsCreatedCustomer);
+    }
+
+    private void checkStrategy(String firstName, String lastName, String emailRegex, CustomerRO customerRO) {
+        assertThat(customerRO.getFirstName(), is(firstName));
+        assertThat(customerRO.getLastName(), is(lastName));
+        checkMailMatching(emailRegex, customerRO.getEmail());
     }
 }	

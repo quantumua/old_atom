@@ -136,7 +136,7 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions);
         operations().customerOperations().updateExperienceScoreInDB(crmCustomer.getId(), experienceScore.get());
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().loginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         return crmCustomer;
     }
 

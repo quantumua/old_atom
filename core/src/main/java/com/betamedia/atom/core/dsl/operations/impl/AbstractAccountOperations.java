@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.Set;
 
-import static com.betamedia.atom.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.PASSWORD;
+import static com.betamedia.atom.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -84,7 +84,7 @@ public abstract class AbstractAccountOperations<T extends EnvironmentDependent> 
         account.setDescription(
                 "This account was created by automatic test.");
         account.setLevel(AccountLevel.REGULAR);
-        account.setPassword(PASSWORD);
+        account.setPassword(DEFAULT_PASSWORD);
         account.setStatus(AccountStatus.ACTIVE);
         account = tpConnector.create(account);
         assertNotNull(account);

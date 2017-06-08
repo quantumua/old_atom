@@ -2,7 +2,7 @@ package com.betamedia.atom.core.api.tp.entities.request;
 
 import java.util.Objects;
 
-import static com.betamedia.atom.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.CHARS_IN_ID;
+import static com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.AbstractUserNamingStrategy.CHARS_IN_ID;
 import static com.betamedia.atom.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.TP_AUTOMATION_PREFIX;
 import static com.betamedia.atom.core.utils.StringUtils.generateRandomId;
 

@@ -41,7 +41,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
         pages().topNavigationPage().logIn();
-        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.DEFAULT_PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -73,7 +73,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(accountId, 100d);
         pages().topNavigationPage().logIn();
-        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.DEFAULT_PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().topNavigationPage().binary();
         pages().binarySelector().highLow();
@@ -133,7 +133,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
         pages().topNavigationPage().logIn();
-        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.DEFAULT_PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -162,7 +162,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
         pages().topNavigationPage().logIn();
-       // pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+       // pages().loginPage().login(customer.getUserName(), CustomerBuilder.DEFAULT_PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -192,7 +192,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
         pages().topNavigationPage().logIn();
-        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.DEFAULT_PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -224,7 +224,7 @@ public class ShortTermPositionsOpeningClosing extends TPEndToEndTest {
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
         pages().topNavigationPage().logIn();
-        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.DEFAULT_PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 
         pages().disclaimerNotification().tryAccept();

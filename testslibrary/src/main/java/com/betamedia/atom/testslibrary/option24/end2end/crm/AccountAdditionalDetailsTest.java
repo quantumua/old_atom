@@ -11,7 +11,7 @@ public class AccountAdditionalDetailsTest extends TPCachedResourceEndToEndTest {
 
     @Test
     public void accountAdditionalDetailsAddInformationTest(){
-        pages().register().register();
+        pages().registerPage().register();
         pages().crmNavigation().accountAdditionalDetails();
         pages().accountAdditionalDetails().update(
                 (AccountAdditionalDetails.builder()

@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.betamedia.atom.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.PASSWORD;
+import static com.betamedia.atom.core.api.tp.entities.request.CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -191,7 +191,7 @@ public class AccountOperationsTest {
         account.setDateCreated(System.currentTimeMillis());
         account.setDescription("This account was created by automatic test.");
         account.setLevel(AccountLevel.REGULAR);
-        account.setPassword(PASSWORD);
+        account.setPassword(DEFAULT_PASSWORD);
         account.setStatus(AccountStatus.ACTIVE);
         account.setBalance(AbstractAccountOperations.DEFAULT_ACCOUNT_BALANCE);
         account.setId(accountId);
