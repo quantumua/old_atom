@@ -64,7 +64,7 @@ public class CfdMonitoringTest extends TPCachedResourceEndToEndTest {
      * For each entry in list of expected CFD assets, find it on product page, validate symbols and currency and try to open a trade <br/>
      * Product page is expected to not contain every expected CFD asset.
      */
-    @Test(dataProvider = "CachedDataProvider", groups = DATA_DRIVEN_MONITORING_TEST_GROUP)
+    @Test(dataProvider = CACHED_DATA_PROVIDER, groups = DATA_DRIVEN_MONITORING_TEST_GROUP)
     public void assetValidationTest(ExpectedCfdAsset asset) {
         if (!pages().assets().tryValidateAsset(asset.getListBidderName(), asset.getSymbol(), asset.getTooltipName(), expectedCurrency)) {
             return;

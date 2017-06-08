@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  */
 public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingConditionsTest {
 
-    @Test(dataProvider = "GenericDataProvider")
+    @Test(dataProvider = GENERIC_PARALLEL_DATA_PROVIDER)
     public void testWizard(OnboardingWizardConditions conditions) throws Exception {
         CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
         if (conditions.hasAdditionalDetails()) {

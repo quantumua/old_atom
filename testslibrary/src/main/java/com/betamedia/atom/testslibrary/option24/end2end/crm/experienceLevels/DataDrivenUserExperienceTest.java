@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  */
 public class DataDrivenUserExperienceTest extends TPEndToEndTest {
 
-    @Test(dataProvider = "GenericDataProvider")
+    @Test(dataProvider = GENERIC_PARALLEL_DATA_PROVIDER)
     public void dataDrivenInformationInputTest(QuestionnaireData data) {
         CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
         pages().crmNavigation().register();

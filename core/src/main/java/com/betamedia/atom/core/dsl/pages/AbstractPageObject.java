@@ -1,15 +1,16 @@
 package com.betamedia.atom.core.dsl.pages;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -37,41 +38,33 @@ public abstract class AbstractPageObject {
     /**
      * Wait until element is displayed ({@link WebElement#isDisplayed()})
      *
-     * @param element locator for element
+     * @param first element locator
+     * @param rest  element locator chain
      * @return located {@link WebElement}
      */
-    protected WebElement waitUntilDisplayed(By element) {
-        return getWait().until(ExpectedConditions.visibilityOfElementLocated(element));
-    }
-
-    /**
-     * Wait until element is displayed ({@link WebElement#isDisplayed()})
-     *
-     * @param elements locator chain for element
-     * @return located {@link WebElement}
-     */
-    protected WebElement waitUntilDisplayed(By... elements) {
-        return getWait().until(driver -> ignoringStale(() -> elementIfVisible(find(elements))));
+    protected WebElement waitUntilDisplayed(By first, By... rest) {
+        return getWait().until(driver -> ignoringStale(() -> elementIfVisible(find(first, rest))));
     }
 
     /**
      * Wait until element exists on page (not necessarily visible)
      *
-     * @param element locator for element
+     * @param first element locator
+     * @param rest  element locator chain
      * @return <code>true</code> when element is found
      */
-    protected WebElement waitUntilExists(By element) {
-        return getWait().until(ExpectedConditions.presenceOfElementLocated(element));
+    protected WebElement waitUntilExists(By first, By... rest) {
+        return getWait().until(driver -> ignoringStale(() -> find(first, rest)));
     }
 
     /**
-     * Wait until element exists on page (not necessarily visible)
+     * Wait until arbitrary condition is not null or false
      *
-     * @param elements locator chain for element
-     * @return <code>true</code> when element is found
+     * @param isValid condition to evaluate
+     * @return return value of condition
      */
-    protected WebElement waitUntilExists(By... elements) {
-        return getWait().until(driver -> ignoringStale(() -> find(elements)));
+    protected <T> T waitUntil(Supplier<T> isValid) {
+        return getWait().until(d -> ignoringStale(isValid));
     }
 
     /**
@@ -91,27 +84,6 @@ public abstract class AbstractPageObject {
     }
 
     /**
-     * Wait until arbitrary condition is not null or false
-     *
-     * @param isValid condition to evaluate
-     * @return return value of condition
-     */
-    protected <T> T waitUntil(Supplier<T> isValid) {
-        return getWait().until(d -> ignoringStale(isValid));
-    }
-
-    /**
-     * Find the first {@link WebElement} using the by locator {@link By}
-     *
-     * @param by element locator
-     * @return The first matching element on the current page
-     * @throws NoSuchElementException If no matching elements are found
-     */
-    protected WebElement find(By by) {
-        return webDriver.findElement(by);
-    }
-
-    /**
      * Find the list of elements using the by locator {@link By}
      *
      * @param by element locator
@@ -124,12 +96,17 @@ public abstract class AbstractPageObject {
     /**
      * Find the first {@link WebElement} using the by locator chain of {@link By}
      *
-     * @param by element locator chain
+     * @param first element locator
+     * @param rest  element locator chain
      * @return The first matching element on the current page
      * @throws NoSuchElementException If no matching elements are found
      */
-    protected WebElement find(By... by) {
-        return find(Arrays.asList(by));
+    protected WebElement find(By first, By... rest) {
+        WebElement element = webDriver.findElement(first);
+        for (By b : rest) {
+            element = element.findElement(b);
+        }
+        return element;
     }
 
     /**
@@ -139,25 +116,6 @@ public abstract class AbstractPageObject {
      */
     protected Actions makeActions() {
         return new Actions(webDriver);
-    }
-
-
-    /**
-     * Evaluate {@link Supplier} value for given iFrame located with a {@link By}
-     *
-     * @param supplier function to evaluate
-     * @param iFrame   {@link By} locator for an iFrame
-     * @return return value of supplier
-     * @throws NoSuchFrameException           If the given element is neither an IFRAME nor a FRAME element.
-     * @throws StaleElementReferenceException If the WebElement has gone stale.
-     */
-    protected <T> T inIFrame(Supplier<T> supplier, By iFrame) {
-        try {
-            switchToFrame(iFrame);
-            return supplier.get();
-        } finally {
-            leaveFrame();
-        }
     }
 
     /**
@@ -171,7 +129,9 @@ public abstract class AbstractPageObject {
      */
     protected <T> T inIFrame(Supplier<T> supplier, By... iFrames) {
         try {
-            Arrays.stream(iFrames).forEach(this::switchToFrame);
+            for (By iFrame : iFrames) {
+                switchToFrame(iFrame);
+            }
             return supplier.get();
         } finally {
             leaveFrame();
@@ -241,12 +201,13 @@ public abstract class AbstractPageObject {
     /**
      * Check if {@link WebElement} located with {@link By} chain exists on page
      *
-     * @param by element locator chain
+     * @param first element locator chain
+     * @param rest  element locator chain
      * @return <code>true</code> if element was found on page, <code>false</code> otherwise
      */
-    protected boolean exists(By... by) {
+    protected boolean exists(By first, By... rest) {
         try {
-            find(by);
+            find(first, rest);
             return true;
         } catch (NoSuchElementException e) {
             logger.debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
@@ -258,30 +219,23 @@ public abstract class AbstractPageObject {
     /**
      * Wait until element is displayed and perform {@link WebElement#click()} on it
      *
-     * @param by element locator
+     * @param first element locator
+     * @param rest  element locator chain
      */
-    protected void click(By by) {
-        waitUntilDisplayed(by).click();
-    }
-
-    /**
-     * Wait until element is displayed and perform {@link WebElement#click()} on it
-     *
-     * @param by element locator chain
-     */
-    protected void click(By... by) {
-        waitUntilDisplayed(by).click();
+    protected void click(By first, By... rest) {
+        waitUntilDisplayed(first, rest).click();
     }
 
     /**
      * Retrieves a <code>select</code> element at the locator and wraps it in {@link Select}
      *
-     * @param by element locator
+     * @param first element locator
+     * @param rest  element locator chain
      * @return {@link Select} for the element
      */
 
-    protected Select inSelect(By by) {
-        return inSelect(waitUntilDisplayed(by));
+    protected Select inSelect(By first, By... rest) {
+        return inSelect(waitUntilDisplayed(first, rest));
     }
 
     /**
@@ -375,17 +329,6 @@ public abstract class AbstractPageObject {
 
     private Wait<WebDriver> getWait() {
         return new WebDriverWait(webDriver, MAX_WAIT_SEC);
-    }
-
-    private WebElement find(List<By> bys) {
-        return find(find(bys.get(0)), bys.subList(1, bys.size()));
-    }
-
-    private WebElement find(WebElement webElement, List<By> bys) {
-        if (bys.isEmpty()) {
-            return webElement;
-        }
-        return find(webElement.findElement(bys.get(0)), bys.subList(1, bys.size()));
     }
 
     private static <T> T ignoringStale(Supplier<T> supplier) {

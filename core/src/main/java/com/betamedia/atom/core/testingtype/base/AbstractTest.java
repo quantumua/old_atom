@@ -19,6 +19,8 @@ import java.util.List;
  * @since 5/23/17
  */
 public abstract class AbstractTest {
+    protected static final String GENERIC_DATA_PROVIDER = "GenericDataProvider";
+    protected static final String GENERIC_PARALLEL_DATA_PROVIDER = "GenericParallelDataProvider";
     private static final String DATA_PROVIDER_ERROR = "Failed to load data";
 
     /**
@@ -27,7 +29,7 @@ public abstract class AbstractTest {
      * and to only tear it down after a set of tests has concluded. <br/>
      * To achieve that, override {@link AbstractTest#doResetState()} to return <code>false</code>
      *
-     * @see AbstractTest#runTearDownForInvocation()
+     * @see AbstractTest#tearDown()
      */
     @AfterMethod
     public final void runTearDownForInvocation() {
@@ -39,7 +41,8 @@ public abstract class AbstractTest {
      * tests with invocation count > 1. <br/>
      * Calls {@link AbstractTest#tearDown()} that you want to override in implementing classes
      *
-     * @see AbstractTest#runTearDownForInvocation()
+     * @implNote Data providers with parallel = true will disregard lastTimeOnly and invoke this for every method execution
+     * @see AbstractTest#tearDown()
      * @see AfterMethod#lastTimeOnly()
      */
     @AfterMethod(lastTimeOnly = true)
@@ -58,7 +61,7 @@ public abstract class AbstractTest {
     /**
      * Override this method in implementing classes to provide test fixture tear down behavior
      *
-     * @implNote Will be invoked twice on for last test invocation, implement accordingly
+     * @implNote Can be invoked multiple times, implement accordingly
      * @see AbstractClientTest#tearDown()
      */
     protected void tearDown() {
@@ -68,8 +71,22 @@ public abstract class AbstractTest {
      * Generic data provider that attempts to read the CSV resource on classpath provided by {@link AbstractTest#getDataSourcePath()}
      * as entities provided by {@link AbstractTest#getDataSourceEntity()};
      */
-    @DataProvider(name = "GenericDataProvider", parallel = true)
+    @DataProvider(name = GENERIC_DATA_PROVIDER)
     public final Iterator<Object[]> genericDataProvider() {
+        return getData(getDataSourceEntity(), getDataSourcePath())
+                .stream()
+                .map(d -> new Object[]{d})
+                .iterator();
+    }
+
+    /**
+     * Generic data provider that attempts to read the CSV resource on classpath provided by {@link AbstractTest#getDataSourcePath()}
+     * as entities provided by {@link AbstractTest#getDataSourceEntity()};
+     *
+     * @implNote TestNG will invoke {@link #runTearDown()} after every execution
+     */
+    @DataProvider(name = GENERIC_PARALLEL_DATA_PROVIDER, parallel = true)
+    public final Iterator<Object[]> genericParallelDataProvider() {
         return getData(getDataSourceEntity(), getDataSourcePath())
                 .stream()
                 .map(d -> new Object[]{d})
@@ -101,26 +118,4 @@ public abstract class AbstractTest {
             throw new RuntimeException(DATA_PROVIDER_ERROR, e);
         }
     }
-
-    //TODO: Should be removed shortly. Generic data provider should be used instead.
-    /*@DataProvider(name = "demoWizardConditions")
-    public static Object[][] conditions() {
-        List<OnboardingWizardConditions> wizardConditionsList = new ArrayList<>();
-        HeaderColumnNameMappingStrategy<OnboardingWizardConditions> strategy = new HeaderColumnNameMappingStrategy<>();
-        strategy.setType(OnboardingWizardConditions.class);
-        CsvToBean<OnboardingWizardConditions> csvToBean = new CsvToBean<>();
-
-        try (InputStream resourceInputStream = new ClassPathResource("/data/demoWizardTestCases.csv").getInputStream();) {
-            wizardConditionsList = csvToBean.parse(strategy, new CSVReader(new InputStreamReader(resourceInputStream)));
-        } catch (Exception e) {
-            fail("Failed to initialize wizard condition tests");
-        }
-
-        Object[][] result = new Object[wizardConditionsList.size()][1];
-        for (int i = 0; i < wizardConditionsList.size(); i++) {
-            result[i][0] = wizardConditionsList.get(i);
-        }
-        return result;
-
-    }*/
 }

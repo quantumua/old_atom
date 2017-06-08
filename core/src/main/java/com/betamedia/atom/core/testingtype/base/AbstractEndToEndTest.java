@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.testingtype.base;
 
-import com.betamedia.atom.core.dsl.templates.BackEndOperationsTemplate;
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
+import com.betamedia.atom.core.dsl.templates.BackEndOperationsTemplate;
 
 import java.util.Optional;
 
