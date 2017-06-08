@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -300,6 +301,10 @@ public abstract class AbstractPageObject {
      */
     protected void deleteAllCookies() {
         webDriver.manage().deleteAllCookies();
+        Set<Cookie> allCookies = webDriver.manage().getCookies();
+        if (!allCookies.isEmpty()) {
+            webDriver.manage().deleteAllCookies();
+        }
     }
 
     /**

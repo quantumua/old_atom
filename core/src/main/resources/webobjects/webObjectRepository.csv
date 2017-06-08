@@ -181,6 +181,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,closeButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/button/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/div/ul/li[1]/a/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
@@ -195,3 +196,8 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesList,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/div/ul/li[*]/a/span[1]
 2.6.2,2017-05-29 15:24 +0000,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
 2.6.2,2017-05-29 15:24 +0000,RejectMessageOnLoginImpl,rejectCaption,CLASS_NAME,message-title
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogImpl,CSS,.content.mobile-single
+2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmCloseMessage,ID,close_dialog
+2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmImSure,ID,dialog_btn_leave
+2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmNo,ID,dialog_btn_stay
+2.6.2,2017-05-29 15:24 +0000,WelcomeBackMessageImpl,continueQuestionnaire,XPATH,//*[text()='Continue Questionnaire']

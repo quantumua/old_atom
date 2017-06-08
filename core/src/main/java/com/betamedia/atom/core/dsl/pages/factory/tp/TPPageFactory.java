@@ -19,8 +19,7 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.Leverag
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.SetLeverageDialogImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.StartTradeDialogImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.MessageBox;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
@@ -89,4 +88,10 @@ public interface TPPageFactory {
     SetLeveragePageImpl setLeveragePage();
 
     RejectMessageOnLoginImpl rejectMessage();
+
+    WelcomeBackMessageImpl welcomeBackMessage();
+
+    ConfirmCloseMessageImpl confirmCloseMessage();
+
+    UploadDocumentDialogImpl uploadDocumentDialog();
 }

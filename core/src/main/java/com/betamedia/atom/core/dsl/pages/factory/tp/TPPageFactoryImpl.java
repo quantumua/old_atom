@@ -203,7 +203,24 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
+    public WelcomeBackMessageImpl welcomeBackMessage() {
+        return creator.getPage(WelcomeBackMessageImpl.class);
+    }
+
+    @Override
+    public ConfirmCloseMessageImpl confirmCloseMessage() {
+        return creator.getPage(ConfirmCloseMessageImpl.class);
+    }
+
+    @Override
+    public UploadDocumentDialogImpl uploadDocumentDialog() {
+        return creator.getPage(UploadDocumentDialogImpl.class);
+    }
+
+    @Override
     public LeveragePopup leveragePopup(){
         return creator.getPage(LeveragePopupImpl.class);
     }
+
+
 }

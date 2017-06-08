@@ -3,6 +3,7 @@ package com.betamedia.atom.testslibrary.option24.end2end.crm;
 import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
+import org.testng.Reporter;
 
 /**
  * Created by Oleksandr Losiev on 5/29/17.
@@ -11,32 +12,56 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
     protected void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
         if (!conditions.isShowWizard()) {
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowWizard should happens.");
             return;
         }
 
         if (conditions.isShowWelcome()) {
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowWelcome should happens.");
             pages().welcomePage().start();
         }
+
         if (conditions.isShowWelcomeBack()) {
-            //TODO: Create page object for welcome back page, once it is deployed.
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowWelcomeBack should happens.");
+            pages().welcomeBackMessage().continueQuestionnaire();
         }
+
         if (conditions.isShowRiskWarning()) {
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowRiskWarning should happens.");
             pages().riskWarningPage().accept();
         }
+
         if (conditions.isShowAdditionalDetails()) {
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowAdditionalDetails should happens.");
             pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         }
+
         if (conditions.isShowFnsPersonal()) {
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowFnsPersonal should happens.");
             passPersonalQuestionnaire();
         }
+
         if (conditions.isShowFnsTrading()) {
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowFnsTrading should happens.");
             passTradingQuestionnaire();
         }
+
         if (conditions.isShowDeposit()) {
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowDeposit should happens.");
             pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
         }
 
         if (conditions.isShowPoiPor()) {
+            pages().browser().takeScreenShot();
+            Reporter.log("INFO: ShowPoiPor should happens.");
             pages().onBoardingWizard().assertOnPOI();
             return;
         }
