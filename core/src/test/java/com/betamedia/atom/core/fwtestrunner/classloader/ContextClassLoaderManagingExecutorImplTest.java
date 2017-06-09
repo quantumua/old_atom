@@ -112,7 +112,7 @@ public class ContextClassLoaderManagingExecutorImplTest {
                     }));
                 }
         ).forEach(pool::execute);
-        pool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        pool.awaitTermination(1, TimeUnit.MINUTES);
         verify(storageService).delete(mockPath);
     }
 
