@@ -1,9 +1,9 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
-import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountDetailsPage;
 import com.betamedia.atom.core.api.crm.form.entities.AccountDetails;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountDetailsPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -41,8 +41,11 @@ public class AccountDetailsPageImpl extends AbstractPageObject implements Accoun
 
     @Override
     public void update(AccountDetails info) {
-        waitUntilDisplayed(title);
-        inSelect(title).selectByVisibleText(info.title);
+        retryOnStale(
+                () -> waitUntilDisplayed(title),
+                t -> {
+                    inSelect(t).selectByVisibleText(info.title);
+                });
         find(street).sendKeys(info.street);
         find(streetNumber).sendKeys(info.streetNumber);
         find(city).sendKeys(info.city);

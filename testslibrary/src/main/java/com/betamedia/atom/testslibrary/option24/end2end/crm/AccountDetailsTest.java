@@ -13,12 +13,13 @@ public class AccountDetailsTest extends TPCachedResourceEndToEndTest {
 
     @Test
     public void accountDetailsAddInformationTest() {
+        pages().crmNavigation().register();
         pages().registerPage().register();
         pages().crmNavigation().accountDetails();
         pages().accountDetails().update(AccountDetails
                 .builderFor(CustomerRO.builder(WidgetsNamingStrategy.get())
                         .setCity("city")
-                        .setBirthOfDate("1990-1-1")
+                        .setBirthOfDate("1990-01-01")
                         .build())
                 .setStreetNumber("streetNumber")
                 .build()
