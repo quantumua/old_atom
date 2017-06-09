@@ -18,4 +18,6 @@ public interface TopNavigationPage {
     void signUp();
 
     void goToHomePage();
+    
+    boolean isSubmitBtn();
 }

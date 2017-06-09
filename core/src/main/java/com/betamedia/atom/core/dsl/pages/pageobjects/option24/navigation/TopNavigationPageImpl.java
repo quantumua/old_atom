@@ -17,6 +17,8 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By loginBtn;
     @StoredId("myAccountBtn")
     private By myAccountBtn;
+    @StoredId("submitButton")
+    private By submitButton;
     @StoredId
     private By binaryBtn;
     @StoredId
@@ -72,4 +74,8 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
         find(homePageLink).click();
     }
 
+	@Override
+	public boolean isSubmitBtn() {
+		return waitUntilDisplayed(submitButton) != null;
+	}
 }
