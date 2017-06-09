@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class RiskWarningImpl extends AbstractPageObject implements RiskWarning {
     private static final int X_OFFSET = 0;
-    private static final int Y_OFFSET = 5;
+    private static final int Y_OFFSET = 10;
 
     @StoredId
     private By iAmOver18Statement;

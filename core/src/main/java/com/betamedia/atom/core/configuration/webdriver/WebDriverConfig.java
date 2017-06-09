@@ -40,21 +40,6 @@ public class WebDriverConfig {
                 .build();
     }
 
-    /**
-     * Need to avoid unnecessarily restarting the GeckoDriver server with each instance (see {@link ChromeDriver})
-     *
-     * @param geckoDriverPath path to geckodriver executable
-     * @return
-     */
-    @Bean(initMethod = "start", destroyMethod = "stop")
-    @Lazy
-    public GeckoDriverService geckoDriverService(@Value("${gecko.driver.path}") String geckoDriverPath) {
-        return new GeckoDriverService.Builder()
-                .usingDriverExecutable(new File(geckoDriverPath))
-                .usingAnyFreePort()
-                .build();
-    }
-
     @Bean
     public ParametrizedWebDriverFactoryProvider remoteDriverProvider() {
         return new ParametrizedWebDriverFactoryProvider() {
@@ -101,7 +86,8 @@ public class WebDriverConfig {
     }
 
     @Bean
-    public ParametrizedWebDriverFactoryProvider firefoxDriverProvider(@Lazy GeckoDriverService driverService) {
+    public ParametrizedWebDriverFactoryProvider firefoxDriverProvider(@Value("${gecko.driver.path}") String geckoDriverPath) {
+        System.setProperty("webdriver.gecko.driver", geckoDriverPath);
         return new ParametrizedWebDriverFactoryProvider() {
             @Override
             public String getType() {
@@ -110,7 +96,7 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> (WebDriver) new RemoteWebDriver(driverService.getUrl(), dc);
+                return (dc, url) -> (WebDriver) new FirefoxDriver(new FirefoxOptions().addCapabilities(dc));
             }
         };
     }
