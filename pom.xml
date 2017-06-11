@@ -42,6 +42,10 @@
             <name>Internal Releases</name>
             <url>http://uconn:8081/nexus/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>

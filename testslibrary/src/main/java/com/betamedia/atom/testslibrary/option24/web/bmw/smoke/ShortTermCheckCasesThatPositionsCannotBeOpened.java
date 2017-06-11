@@ -24,6 +24,7 @@ import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+import org.w3c.dom.DOMConfiguration;
 
 /**
  * @author leonid.a
@@ -595,7 +596,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         
         int delay = 30 * 1000;
         // Change delay
-        List<DealApprovalConfiguration> dealApprovalConfigurations = accountGroup.getDealApprovalConfigurations();
+        List<DOMConfiguration> dealApprovalConfigurations = accountGroup.getDealApprovalConfigurations();
         for (DealApprovalConfiguration dealApprovalConfiguration : dealApprovalConfigurations) {
             // Setting delay to by 30 seconds
             dealApprovalConfiguration.setDelay(delay);
