@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.testlink.annotations;
+package com.betamedia.atom.core.testlink.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

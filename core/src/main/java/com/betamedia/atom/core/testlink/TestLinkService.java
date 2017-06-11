@@ -1,7 +1,8 @@
-package com.betamedia.qe.af.core.testlink;
+package com.betamedia.atom.core.testlink;
 
-import com.betamedia.qe.af.core.persistence.entities.TestLinkTestCase;
-import com.betamedia.qe.af.core.persistence.repositories.impl.testlink.TestLinkTestCaseRepository;
+import com.betamedia.atom.core.persistence.entities.TestLinkTestCase;
+import com.betamedia.atom.core.persistence.repositories.impl.testlink.TestLinkTestCaseRepository;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

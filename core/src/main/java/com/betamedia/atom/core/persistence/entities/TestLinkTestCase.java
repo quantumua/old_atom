@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.persistence.entities;
+package com.betamedia.atom.core.persistence.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

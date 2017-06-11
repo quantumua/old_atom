@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.testlink;
+package com.betamedia.atom.core.testlink;
 
 public enum TestCaseResultStatus {
 

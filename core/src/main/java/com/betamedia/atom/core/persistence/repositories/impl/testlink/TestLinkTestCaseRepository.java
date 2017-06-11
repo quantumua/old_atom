@@ -1,8 +1,9 @@
-package com.betamedia.qe.af.core.persistence.repositories.impl.testlink;
+package com.betamedia.atom.core.persistence.repositories.impl.testlink;
 
-import com.betamedia.qe.af.core.persistence.entities.TestLinkTestCase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+
+import com.betamedia.atom.core.persistence.entities.TestLinkTestCase;
 
 import java.util.List;
 

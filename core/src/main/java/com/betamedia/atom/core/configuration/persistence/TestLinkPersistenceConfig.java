@@ -1,4 +1,4 @@
-package com.betamedia.qe.af.core.configuration.persistence.impl;
+package com.betamedia.atom.core.configuration.persistence;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

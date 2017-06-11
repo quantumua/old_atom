@@ -1,7 +1,10 @@
-package com.betamedia.qe.af.core.testlink;
+package com.betamedia.atom.core.testlink;
 
-import com.betamedia.qe.af.core.persistence.entities.TestLinkTestCase;
-import com.betamedia.qe.af.core.persistence.repositories.impl.testlink.TestLinkTestCaseRepository;
+import com.betamedia.atom.core.persistence.entities.TestLinkTestCase;
+import com.betamedia.atom.core.persistence.repositories.impl.testlink.TestLinkTestCaseRepository;
+import com.betamedia.atom.core.testlink.TestCaseResultStatus;
+import com.betamedia.atom.core.testlink.TestLinkService;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;

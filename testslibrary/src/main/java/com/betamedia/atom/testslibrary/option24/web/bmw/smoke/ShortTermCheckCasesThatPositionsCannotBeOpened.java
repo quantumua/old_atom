@@ -9,6 +9,8 @@ import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 
 import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.Asset;
+import com.betamedia.tp.api.model.DealApprovalConfiguration;
+import com.betamedia.tp.api.model.OptionConfiguration;
 import com.betamedia.tp.api.model.Position;
 import com.betamedia.tp.api.model.enums.OptionType;
 import com.betamedia.tp.api.model.enums.PositionStatus;
@@ -596,7 +598,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         
         int delay = 30 * 1000;
         // Change delay
-        List<DOMConfiguration> dealApprovalConfigurations = accountGroup.getDealApprovalConfigurations();
+        List<DealApprovalConfiguration> dealApprovalConfigurations = accountGroup.getDealApprovalConfigurations();
         for (DealApprovalConfiguration dealApprovalConfiguration : dealApprovalConfigurations) {
             // Setting delay to by 30 seconds
             dealApprovalConfiguration.setDelay(delay);
