@@ -163,7 +163,7 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public RegisterPage register() {
+    public RegisterPage registerPage() {
         return creator.getPage(RegisterPageImpl.class);
     }
 

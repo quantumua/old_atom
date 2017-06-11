@@ -9,13 +9,13 @@ import org.testng.annotations.Test;
  */
 public class MobileCRMOnboardingDemoWizardConditionsTest extends AbstractOnboardingConditionsTest {
 
-    @Test(dataProvider = "GenericDataProvider")
+    @Test(dataProvider = GENERIC_PARALLEL_DATA_PROVIDER)
     public void testWizard2(OnboardingWizardConditions conditions) throws Exception {
         //required to trigger notification popup
         pages().browser().deleteAllCookies();
 
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(conditions.username(), CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().loginPage().login(conditions.username(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 
 
         if (checkIfLeveragePopupWillBeShown(conditions.username())) {

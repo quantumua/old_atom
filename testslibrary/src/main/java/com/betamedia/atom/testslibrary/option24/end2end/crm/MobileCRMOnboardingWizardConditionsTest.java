@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  */
 public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingConditionsTest {
 
-    @Test(dataProvider = "GenericDataProvider")
+    @Test(dataProvider = GENERIC_PARALLEL_DATA_PROVIDER)
     public void testWizard(OnboardingWizardConditions conditions) throws Exception {
         CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
         if (conditions.hasAdditionalDetails()) {
@@ -71,6 +71,6 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
         pages().topNavigationPage().goToHomePage();
 
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(username, CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().loginPage().login(username, CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
     }
 }

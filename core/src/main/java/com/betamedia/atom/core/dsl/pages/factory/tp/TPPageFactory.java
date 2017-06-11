@@ -71,7 +71,7 @@ public interface TPPageFactory {
 
     CreditCardDepositPage creditCardDeposit();
 
-    RegisterPage register();
+    RegisterPage registerPage();
 
     WelcomePage welcomePage();
 

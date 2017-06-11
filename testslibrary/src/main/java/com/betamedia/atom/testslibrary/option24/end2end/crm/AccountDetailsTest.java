@@ -1,6 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountDetails;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.testingtype.tp.TPCachedResourceEndToEndTest;
 import org.testng.annotations.Test;
@@ -12,13 +13,13 @@ public class AccountDetailsTest extends TPCachedResourceEndToEndTest {
 
     @Test
     public void accountDetailsAddInformationTest() {
-        pages().register().register();
+        pages().crmNavigation().register();
+        pages().registerPage().register();
         pages().crmNavigation().accountDetails();
-//        TODO use customerBuilder inside builder
         pages().accountDetails().update(AccountDetails
-                .builderFor(CustomerRO.builder()
+                .builderFor(CustomerRO.builder(WidgetsNamingStrategy.get())
                         .setCity("city")
-                        .setBirthOfDate("1990-1-1")
+                        .setBirthOfDate("1990-01-01")
                         .build())
                 .setStreetNumber("streetNumber")
                 .build()

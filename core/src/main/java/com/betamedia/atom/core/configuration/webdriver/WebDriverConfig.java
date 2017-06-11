@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -27,7 +28,7 @@ public class WebDriverConfig {
     /**
      * Need to avoid unnecessarily restarting the ChromeDriver server with each instance (see {@link ChromeDriver})
      *
-     * @param chromeDriverPath
+     * @param chromeDriverPath path to chromedriver executable
      * @return
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
@@ -40,7 +41,7 @@ public class WebDriverConfig {
     }
 
     @Bean
-    public ParametrizedWebDriverFactoryProvider remoteDriverSupplier() {
+    public ParametrizedWebDriverFactoryProvider remoteDriverProvider() {
         return new ParametrizedWebDriverFactoryProvider() {
             @Override
             public String getType() {
@@ -55,7 +56,7 @@ public class WebDriverConfig {
     }
 
     @Bean
-    public ParametrizedWebDriverFactoryProvider chromeDriverSupplier(@Lazy ChromeDriverService driverService) {
+    public ParametrizedWebDriverFactoryProvider chromeDriverProvider(@Lazy ChromeDriverService driverService) {
         return new ParametrizedWebDriverFactoryProvider() {
             @Override
             public String getType() {
@@ -70,7 +71,23 @@ public class WebDriverConfig {
     }
 
     @Bean
-    public ParametrizedWebDriverFactoryProvider firefoxDriverSupplier() {
+    public ParametrizedWebDriverFactoryProvider firefoxLegacyDriverProvider() {
+        return new ParametrizedWebDriverFactoryProvider() {
+            @Override
+            public String getType() {
+                return "firefox-legacy";
+            }
+
+            @Override
+            public ParametrizedWebDriverFactory get() {
+                return (dc, url) -> (WebDriver) new FirefoxDriver(new FirefoxOptions().setLegacy(true).addCapabilities(dc));
+            }
+        };
+    }
+
+    @Bean
+    public ParametrizedWebDriverFactoryProvider firefoxDriverProvider(@Value("${gecko.driver.path}") String geckoDriverPath) {
+        System.setProperty("webdriver.gecko.driver", geckoDriverPath);
         return new ParametrizedWebDriverFactoryProvider() {
             @Override
             public String getType() {
@@ -79,13 +96,13 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> (WebDriver) new FirefoxDriver(new FirefoxOptions().setLegacy(true).addDesiredCapabilities(dc));
+                return (dc, url) -> (WebDriver) new FirefoxDriver(new FirefoxOptions().addCapabilities(dc));
             }
         };
     }
 
     @Bean
-    public ParametrizedWebDriverFactoryProvider ieDriverSupplier() {
+    public ParametrizedWebDriverFactoryProvider ieDriverProvider() {
         return new ParametrizedWebDriverFactoryProvider() {
             @Override
             public String getType() {

@@ -1,5 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
@@ -72,6 +73,6 @@ public class RegisterPageImpl extends AbstractPageObject implements RegisterPage
 
     @Override
     public void register() {
-        register(CustomerRO.builder().build());
+        register(CustomerRO.builder(WidgetsNamingStrategy.get()).build());
     }
 }

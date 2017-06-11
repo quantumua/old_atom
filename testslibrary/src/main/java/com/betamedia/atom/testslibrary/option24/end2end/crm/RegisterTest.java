@@ -12,6 +12,6 @@ public class RegisterTest extends TPCachedResourceEndToEndTest {
     public void registerNewAccountTest() {
 
         pages().crmNavigation().register();
-               pages().register().register();
+               pages().registerPage().register();
     }
 }

@@ -1,5 +1,6 @@
 package com.betamedia.atom.testslibrary.option24.backend.crm.mobile;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
@@ -49,7 +50,7 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
     public void testRegistrationCurrencies(String registrationCurrency, String expectedCurrency) {
 
         CRMCustomer registeredCustomer = operations().customerOperations().register(
-                CustomerRO.builder()
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                         .setCurrency(registrationCurrency)
                         .build());
 
@@ -65,7 +66,7 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
         final String expectedErrorMessage = "Currency is not supported";
 
         List<CRMError> registrationErrors = operations().customerOperations().registerWithErrors(
-                CustomerRO.builder()
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                         .setCurrency(registrationCurrency)
                         .build()
         );
@@ -81,7 +82,7 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
         final String targetForex = "forex";
 
         CRMCustomer registeredCustomer = operations().customerOperations().register(
-                CustomerRO.builder()
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                         .setTarget(targetForex)
                         .build()
         );
@@ -93,7 +94,7 @@ public class MobileCRMRegistrationTest extends TPBackEndTest {
         final String decodedName = "Ù\u0081Ù\u0087Ø¯Ø§Ù\u0084Ø¨Ø±Ø§Ù\u0083";
 
         CRMCustomer registeredCustomer = operations().customerOperations().register(
-                CustomerRO.builder()
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                         .setFirstName(decodedName)
                         .setLastName(decodedName)
                         .build()

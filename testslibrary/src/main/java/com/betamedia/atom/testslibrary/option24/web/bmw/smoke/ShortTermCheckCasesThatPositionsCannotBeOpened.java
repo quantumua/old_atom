@@ -49,7 +49,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 //		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		pages().startTradeDialog().startTrade();
         pages().disclaimerNotification().tryAccept();
@@ -90,7 +90,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int maxInvestmentAllowed = 48000;		// TODO getMaxInvestment();
@@ -128,7 +128,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -161,7 +161,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -192,7 +192,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -221,7 +221,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -292,7 +292,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 		
 		String Investment = "";
@@ -325,7 +325,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		//String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -356,7 +356,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -394,7 +394,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -426,7 +426,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -466,7 +466,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		String accountId = cfdAccount.getId();
 		operations().accountOperations().depositCRM(accountId, 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -514,7 +514,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().topNavigationPage().logIn();
-		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+		pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
 		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
@@ -547,4 +547,141 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         Assert.assertEquals(actualPosition.getStatus(), PositionStatus.REJECTED, "Position is in status rejected");
         Assert.assertEquals(actualPosition.getStatusReason(), "Feed is too old", "Position status reason as expected");
 	}	
+	
+    /*
+	 * TP-3699:Logged out status
+	 * Select an asset when being logged out --> Try to open a position --> You are redirected to the login page
+	 */
+	@Test
+	public void LoggedOutStatus() {
+    	Asset asset = operations().assetOperations().get();
+        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
+        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
+    	pages().topNavigationPage();
+		
+		try{
+			long timeToWait = 3000;
+			TimeUnit.MILLISECONDS.sleep(timeToWait);
+    	}catch (InterruptedException e) {
+    		logger.error(e);
+    		Thread.currentThread().interrupt();
+    	}  
+		String investment = "15"; //TODO getMinInvestment()
+		pages().binaryBidder()
+        	.setAmount(investment)
+        	.bidLow()
+        	.confirm();
+		
+		Assert.assertTrue(pages().topNavigationPage().isSubmitBtn());
+	}
+
+	/*
+	 * TP-3700:Approval Configuration Delay for openning > time left for Hi Low option to close
+	 */
+	@Test
+	public void optionClosesEarlierThenDelay() {
+		AccountGroup accountGroup = new AccountGroup();
+		Asset asset = operations().assetOperations().get();
+		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
+		CRMCustomer customer = operations().customerOperations().register();
+		CRMAccount binaryAccount = customer.getBinaryAccount();
+		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
+		pages().topNavigationPage().logIn();
+		//pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        pages().disclaimerNotification().tryAccept();
+        pages().binarySelector().highLow();
+        pages().assets().asset(asset.getId(), asset.getAssetName());
+        
+        int delay = 30 * 1000;
+        // Change delay
+        List<DealApprovalConfiguration> dealApprovalConfigurations = accountGroup.getDealApprovalConfigurations();
+        for (DealApprovalConfiguration dealApprovalConfiguration : dealApprovalConfigurations) {
+            // Setting delay to by 30 seconds
+            dealApprovalConfiguration.setDelay(delay);
+        }
+        accountGroup.setMarketDealApprovalConfigurations(dealApprovalConfigurations);
+        
+        operations().optionTemplateOperations().getOptionTemplates(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
+        OptionConfiguration configuration = new OptionConfiguration(); //TODO: How to use for new framework
+        configuration.setNoMoreTrades(0);
+        
+        operations().feedOperations().injectFeed(asset.getId(),1.5d);
+        Double Investment  = 15.0; //TODO: getMinInvestment()
+        operations().accountOperations().getTP().setBalance(Investment);
+          
+     // Wait until time left for option will be smaller then delay
+        long getCloseTime = 20000; // TODO:	testCaseOption.getCloseTime() 
+        long timeToWait = getCloseTime -delay - System.currentTimeMillis()+2000;
+        try{
+			TimeUnit.MILLISECONDS.sleep(timeToWait);
+    	}catch (InterruptedException e) {
+    		logger.error(e);
+    		Thread.currentThread().interrupt();
+    	}  
+
+		pages().binaryBidder()
+    		.setAmount(String.valueOf(Investment))
+    		.bidLow()
+    		.confirm();
+
+		Position position = operations().positionOperations().getByDisplayId(pages().binaryPositions().getLatest());
+	    Assert.assertEquals(position.getStatus(), PositionStatus.REJECTED);
+	}
+
+	/*
+	 *TP-8463:Approval Configuration Delay for opening > time left for no more trades in short term option 
+	 */
+	@Test
+	public void optionGetsToNoMoreTradesEarlierThenDelay(){
+		AccountGroup accountGroup = new AccountGroup();
+		Asset asset = operations().assetOperations().get();
+		operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
+		CRMCustomer customer = operations().customerOperations().register();
+		CRMAccount binaryAccount = customer.getBinaryAccount();
+		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
+		pages().topNavigationPage().logIn();
+		//pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
+		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        pages().disclaimerNotification().tryAccept();
+        pages().binarySelector().highLow();
+        pages().assets().asset(asset.getId(), asset.getAssetName());
+        
+        int delay = 30 * 1000;
+        // Change delay
+        List<DealApprovalConfiguration> dealApprovalConfigurations = accountGroup.getDealApprovalConfigurations();
+        for (DealApprovalConfiguration dealApprovalConfiguration : dealApprovalConfigurations) {
+            // Setting delay to by 30 seconds
+            dealApprovalConfiguration.setDelay(delay);
+        }
+        accountGroup.setMarketDealApprovalConfigurations(dealApprovalConfigurations);
+        
+        operations().optionTemplateOperations().getOptionTemplates(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
+        OptionConfiguration configuration = new OptionConfiguration(); //TODO: How to use for new framework
+        int notMoreTrades = 5;
+        configuration.setNoMoreTrades(notMoreTrades);
+        
+        operations().feedOperations().injectFeed(asset.getId(),1.5d);
+        Double Investment  = 15.0; //TODO: getMinInvestment()
+        operations().accountOperations().getTP().setBalance(Investment);//	testCaseOption.getCloseTime() - delay - System.currentTimeMillis() + 2000;
+
+     // Wait until time left for option will be smaller then delay
+        long getCloseTime = 20000; // TODO:	testCaseOption.getCloseTime() 
+        long timeToWait = getCloseTime -delay - System.currentTimeMillis()- notMoreTrades +1000;
+        try{
+			TimeUnit.MILLISECONDS.sleep(timeToWait);
+    	}catch (InterruptedException e) {
+    		logger.error(e);
+    		Thread.currentThread().interrupt();
+    	}  
+        
+		pages().binaryBidder()
+    		.setAmount(String.valueOf(Investment))
+    		.bidLow()
+    		.confirm();
+
+		Position position = operations().positionOperations().getByDisplayId(pages().binaryPositions().getLatest());
+	    Assert.assertEquals(position.getStatus(), PositionStatus.REJECTED);		
+	}	
+	
 }

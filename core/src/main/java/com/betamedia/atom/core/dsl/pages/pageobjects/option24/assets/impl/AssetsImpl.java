@@ -130,6 +130,7 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
                 listName,
                 "Bidding widget asset title mismatch");
         makeActions().moveToElement(find(assetTooltipIcon)).perform();
+        //FIXME WebDriverException when executed on Firefox v52 via geckodriver
         waitUntilDisplayed(assetTooltipContent);
         Assert.assertEquals(find(assetTooltipContent, underlyingAssetName, toolTipName).getText(),
                 symbol,

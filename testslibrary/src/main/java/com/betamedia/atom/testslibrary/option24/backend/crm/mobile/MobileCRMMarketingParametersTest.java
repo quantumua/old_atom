@@ -1,5 +1,6 @@
 package com.betamedia.atom.testslibrary.option24.backend.crm.mobile;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
@@ -41,7 +42,7 @@ public class MobileCRMMarketingParametersTest extends TPBackEndTest {
         final String keyword = StringUtils.generateRandomId(10);
 
         CRMCustomer registeredCustomer = operations().customerOperations().register(
-                CustomerRO.builder().build(),
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build(),
                 getExpectedMarketingParametersBuilder(useLongAliases)
                         .setKeyword(keyword).build());
 
@@ -54,7 +55,7 @@ public class MobileCRMMarketingParametersTest extends TPBackEndTest {
         final String keyword = StringUtils.generateRandomId(10);
 
         CRMCustomer registeredCustomer = operations().customerOperations().register(
-                CustomerRO.builder().build(),
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build(),
                 getExpectedMarketingParametersBuilder(true)
                         .setAf_siteid("https://www.24option.com/")
                         .setSiteId(null)
@@ -91,6 +92,7 @@ public class MobileCRMMarketingParametersTest extends TPBackEndTest {
         verifyExpectedMarketingParameters(keyword);
     }
 
+    //TODO: these are fields of CustomerRO! Need to refactor
     private MarketingParametersRO.MarketingParametersBuilder getExpectedMarketingParametersBuilder(boolean useLongAliases) {
         return MarketingParametersRO.builder(useLongAliases)
                 .setReferrer(referrer)

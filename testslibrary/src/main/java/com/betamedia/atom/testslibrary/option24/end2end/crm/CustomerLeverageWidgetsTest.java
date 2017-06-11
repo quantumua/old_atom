@@ -74,7 +74,7 @@ public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTes
     public void checkThatUnknownCustomerCanSelectLeverage() {
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         pages().crmNavigation().setLeverage();
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),1);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
@@ -85,7 +85,7 @@ public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTes
         CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions);
         operations().customerOperations().updateExperienceScoreInDB(crmCustomer.getId(), experienceScore.get());
         pages().crmNavigation().login();
-        pages().crmLoginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().crmLoginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         pages().crmNavigation().creditCardDeposit();
         pages().creditCardDeposit().submit(
                 CreditCardDeposit.builder()

@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.api.tp.entities.request;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.UserNamingStrategy;
 import com.betamedia.atom.core.utils.StringUtils;
-import com.google.common.base.Strings;
 import org.testng.Reporter;
 
 import java.time.LocalDate;
@@ -12,6 +12,7 @@ import java.util.Optional;
  */
 public class CustomerRO {
 
+    //when the userName is not set CRMMobileApi create the new user with email as userName
     private String userName;
     private String password;
     private String firstName;
@@ -401,22 +402,19 @@ public class CustomerRO {
                 '}';
     }
 
-    public static CustomerROBuilder builder() {
-        return new CustomerROBuilder();
+    public static CustomerROBuilder builder(UserNamingStrategy namingStrategy) {
+        return new CustomerROBuilder(namingStrategy);
     }
 
     public static class CustomerROBuilder {
 
-        public static final int CHARS_IN_ID = 6;
         public static final int CHARS_IN_PHONE_NUMBER = 11;
         public static final String TP_AUTOMATION_PREFIX = "tp_automation_";
-        public static final String PASSWORD = "123123";
-        public static final String EMAIL_TEMPLATE = "{userName}@automation.ru";
-        public static final String DYNAMIC_EMAIL_PART_REGEX = "\\{userName\\}";
+        public static final String DEFAULT_PASSWORD = "123123";
         //should be unique
         private String userName;
-        private String password = PASSWORD;
-        private String firstName = "Automation";
+        private String password = DEFAULT_PASSWORD;
+        private String firstName;
         private String email;
         private String phone;
         private String currency = "EUR";
@@ -425,7 +423,7 @@ public class CustomerRO {
         //    every registration opens 2 Trading Accounts (Binary & FX), which the primary is FX/CFD by default.
         //    set target as "binary" to have Binary as a primary TA
         private String target;
-        private String lastName = "Automation";
+        private String lastName;
         private String utcOffset;
         private String oftc;
         private String birthOfDate = "1982-02-03";
@@ -450,7 +448,10 @@ public class CustomerRO {
         private String p4;
         private String p5;
 
-        private CustomerROBuilder() {
+        private UserNamingStrategy userNamingStrategy;
+
+        private CustomerROBuilder(UserNamingStrategy userNamingStrategy) {
+            this.userNamingStrategy = userNamingStrategy;
         }
 
         public CustomerROBuilder setUserName(String userName) {
@@ -614,34 +615,21 @@ public class CustomerRO {
         }
 
         public CustomerRO build() {
-            formDefaultUniqueFields();
+            firstName = userNamingStrategy.getFirstName(firstName);
+            lastName = userNamingStrategy.getLastName(lastName);
+            email = userNamingStrategy.getEmail(email);
+            phone = formPhoneNumber(phone);
             CustomerRO customerRO = new CustomerRO(userName, password, firstName, email, phone, currency, countryCode, lastName, utcOffset, oftc, birthOfDate, city, userAgent, lang, phoneTwo, registrationIp, stateCode, street, street2, title, zip, channel, campaign, kw, landingpage, siteid, p1, p2, p3, p4, p5, target);
             addUserDetailsToReport(customerRO);
             return customerRO;
         }
 
-        private void formDefaultUniqueFields() {
-            if (Strings.isNullOrEmpty(userName)) {
-                userName = TP_AUTOMATION_PREFIX + StringUtils.generateRandomId(CHARS_IN_ID);
-            }
-            email = formMail(userName);
-            phone = formPhoneNumber();
-        }
-
-        private String formMail(String userName) {
-            if (!Strings.isNullOrEmpty(email)) {
-                return email;
-            }
-            return EMAIL_TEMPLATE.replaceAll(DYNAMIC_EMAIL_PART_REGEX, userName);
-        }
-
-        private String formPhoneNumber() {
+        private String formPhoneNumber(String phone) {
             return Optional.ofNullable(phone).orElse(StringUtils.generateNumbersSequence(CHARS_IN_PHONE_NUMBER));
         }
 
         private void addUserDetailsToReport(CustomerRO customerRO) {
             Reporter.log("Customer details:" + customerRO.toString() + '\n');
         }
-
     }
 }

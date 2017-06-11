@@ -1,10 +1,11 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries;
 
-import com.betamedia.common.enums.Country;
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.testingtype.tp.TPCachedResourceEndToEndTest;
+import com.betamedia.common.enums.Country;
 import org.testng.annotations.Test;
 
 
@@ -20,8 +21,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9129")
     public void calculationOfScore86Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
 //        pages().crmNavigation().login();
 //        pages().crmLoginPage().login(customer.getEmail(),"123123");
         pages().crmNavigation().fnsPersonalInformation();
@@ -73,8 +74,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9130")
     public void calculationOfScore49Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.UNEMPLOYED.get())
@@ -124,8 +125,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9131")
     public void calculationOfScore48Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.STUDENT.get())
@@ -176,8 +177,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9132")
     public void calculationOfScore32Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.RETIRED.get())
@@ -225,8 +226,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9133")
     public void calculationOfScore61Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.SELF_EMPLOYED.get())
@@ -278,8 +279,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9134")
     public void calculationOfScore70Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
@@ -331,8 +332,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9135")
     public void calculationOfScore65Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.UNEMPLOYED.get())
@@ -384,8 +385,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9136")
     public void calculationOfScore68Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.RETIRED.get())
@@ -437,8 +438,8 @@ public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
     @Test(description = "ID:9137")
     public void calculationOfScore66Test(){
         pages().crmNavigation().register();
-        CustomerRO customer = CustomerRO.builder().build();
-        pages().register().register(customer);
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.RETIRED.get())

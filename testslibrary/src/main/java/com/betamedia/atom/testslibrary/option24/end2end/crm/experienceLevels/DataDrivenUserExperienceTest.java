@@ -3,6 +3,7 @@ package com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels;
 import com.betamedia.atom.core.api.crm.form.entities.QuestionnaireData;
 import com.betamedia.atom.core.api.crm.form.parsers.PersonalInformationParser;
 import com.betamedia.atom.core.api.crm.form.parsers.TradingExperienceInfoParser;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 import org.testng.annotations.Test;
@@ -12,11 +13,11 @@ import org.testng.annotations.Test;
  */
 public class DataDrivenUserExperienceTest extends TPEndToEndTest {
 
-    @Test(dataProvider = "GenericDataProvider")
+    @Test(dataProvider = GENERIC_PARALLEL_DATA_PROVIDER)
     public void dataDrivenInformationInputTest(QuestionnaireData data) {
-        CustomerRO customer = CustomerRO.builder().build();
+        CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
         pages().crmNavigation().register();
-        pages().register().register(customer);
+        pages().registerPage().register(customer);
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(TradingExperienceInfoParser.parse(data));
         pages().crmNavigation().fnsPersonalInformation();

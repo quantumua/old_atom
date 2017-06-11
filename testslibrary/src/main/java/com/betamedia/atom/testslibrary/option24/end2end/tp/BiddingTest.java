@@ -27,7 +27,7 @@ public class BiddingTest extends TPEndToEndTest {
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.PASSWORD);
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
