@@ -227,16 +227,12 @@ public abstract class AbstractPageObject {
 
     /**
      * Ccroll web page to the element to get visibility of it
-     * @param locator
+     *
+     * @param element WebElement
      */
-    protected void scrollIntoView(By locator) {
-        try {
-            executeScript("arguments[0].scrollIntoView()", find(locator));
-        } catch (NoSuchElementException e) {
-            logger.debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
-            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
-            return;
-        }
+    protected WebElement scrollIntoView(WebElement element) {
+        executeScript("arguments[0].scrollIntoView()", element);
+        return element;
     }
 
     /**

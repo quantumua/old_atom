@@ -12,6 +12,11 @@ import org.testng.annotations.Test;
  */
 public class HighExperienceUserTest extends AbstractUserExperienceTest {
 
+    /**
+     * - Build user for the test;
+     * - Login with created user;
+     * @return - CRMCustomer
+     */
     private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
@@ -19,6 +24,13 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
         return customer;
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has high experience level;
+     */
     @Test(description = "ID:9033")
     public void checkCustomerWithScore51IsHighExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -31,6 +43,13 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameHighExperience(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has high experience level;
+     */
     @Test(description = "ID:9072")
     public void checkCustomerWithScore65IsHighExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -43,6 +62,13 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameHighExperience(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has high experience level;
+     */
     @Test(description = "ID:9034")
     public void checkCustomerWithScore70IsHighExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -55,6 +81,12 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameHighExperience(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check that user has no trade access type in the DB;
+     */
     @Test(description = "ID:9024")
     public void checkHighExperienceCustomerAccessActiveTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -69,6 +101,10 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
         );
     }
 
+    /**
+     * Build trading experience info with 51 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith51Score() {
         return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.FREQUENTLY.get())
@@ -92,6 +128,11 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_35.get())
                 .build();
     }
+
+    /**
+     * Build trading experience info with 65 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith65Score() {
         return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.FREQUENTLY.get())
@@ -116,6 +157,10 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
                 .build();
     }
 
+    /**
+     * Build trading experience info with 70 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith70Score() {
         return  TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.FREQUENTLY.get())

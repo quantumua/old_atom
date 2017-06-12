@@ -12,6 +12,11 @@ import org.testng.annotations.Test;
  */
 public class ExpertUserTest extends AbstractUserExperienceTest {
 
+    /**
+     * - Build user for the test;
+     * - Login with created user;
+     * @return - CRMCustomer
+     */
     private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
@@ -19,6 +24,13 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
         return customer;
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has expert experience level;
+     */
     @Test(description = "ID:9035")
     public void checkCustomerWithScore71IsExpertTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -31,6 +43,13 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameExpert(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has expert experience level;
+     */
     @Test(description = "ID:9073")
     public void checkCustomerWithScore85IsExpertTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -43,6 +62,13 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameExpert(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has expert experience level;
+     */
     @Test(description = "ID:9036")
     public void checkCustomerWithScore100IsExpertTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -55,6 +81,12 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameExpert(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check that user has no trade access type in the DB;
+     */
     @Test(description = "ID:9023")
     public void checkExpertCustomerAccessActiveTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -69,6 +101,10 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
         );
     }
 
+    /**
+     * Build trading experience info with 71 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith71Score() {
         return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.FREQUENTLY.get())
@@ -93,6 +129,11 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_25.get())
                 .build();
     }
+
+    /**
+     * Build trading experience info with 85 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith85Score() {
         return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.FREQUENTLY.get())
@@ -118,6 +159,10 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
                 .build();
     }
 
+    /**
+     * Build trading experience info with 100 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith100Score() {
         return  TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.FREQUENTLY.get())

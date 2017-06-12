@@ -61,7 +61,6 @@ public class CreditCardDepositPageImpl extends AbstractPageObject implements Cre
         if (info.country != null) {
             find(country).sendKeys(info.country);
         }
-        scrollIntoView(submit);
-        find(submit).click();
+        scrollIntoView(find(submit)).click();
     }
 }

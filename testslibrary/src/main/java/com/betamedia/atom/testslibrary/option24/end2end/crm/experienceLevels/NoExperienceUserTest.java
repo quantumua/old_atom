@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
 public class NoExperienceUserTest extends AbstractUserExperienceTest {
 
     /**
-     * 1. Build user for the test;
-     * 2. Login with created user;
-     * @return
+     * - Build user for the test;
+     * - Login with created user;
+     * @return - CRMCustomer
      */
     private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
@@ -25,11 +25,11 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
     }
 
     /**
-     * 1. Crete user via mobile API;
-     * 2. Update as needed answers in the trading experience crm widgets page;
-     * 3. Update personal score in the personal information crm widgets page;
-     * 4. Check experience score in the DB;
-     * 5. Check that user has no experience level;
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has no experience level;
      */
     @Test(description = "ID:9027")
     public void checkCustomerWithScore16IsNoExperienceTest() {
@@ -44,11 +44,11 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
     }
 
     /**
-     * 1. Crete user via mobile API;
-     * 2. Update as needed answers in the trading experience crm widgets page;
-     * 3. Update personal score in the personal information crm widgets page;
-     * 4. Check experience score in the DB;
-     * 5. Check that user has no experience level;
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has no experience level;
      */
     @Test(description = "ID:9070")
     public void checkCustomerWithScore25IsNoExperienceTest() {
@@ -63,11 +63,11 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
     }
 
     /**
-     * 1. Crete user via mobile API;
-     * 2. Update as needed answers in the trading experience crm widgets page;
-     * 3. Update personal score in the personal information crm widgets page;
-     * 4. Check experience score in the DB;
-     * 5. Check that user has no experience level;
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user has no experience level;
      */
     @Test(description = "ID:9028")
     public void checkCustomerWithScore30IsNoExperienceTest() {
@@ -82,11 +82,10 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
     }
 
     /**
-     * 1. Crete user via mobile API;
-     * 2. Update as needed answers in the trading experience crm widgets page;
-     * 3. Update personal score in the personal information crm widgets page;
-     * 4. Check experience score in the DB;
-     * 5. Check that user has no experience level;
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check that user has no trade access type in the DB;
      */
     @Test(description = "ID:9021")
     public void checkNoExperienceCustomerAccessActiveTest() {

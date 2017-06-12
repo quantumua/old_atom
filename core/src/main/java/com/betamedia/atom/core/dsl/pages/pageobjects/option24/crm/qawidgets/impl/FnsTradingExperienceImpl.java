@@ -84,8 +84,7 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         inSelect(binaryInvestProfitKnowledge).selectByValue(info.binaryInvestProfitKnowledge);
         inSelect(binaryInvestLossKnowledge).selectByValue(info.binaryInvestLossKnowledge);
         inSelect(binaryProbabilityKnowledge).selectByValue(info.binaryProbabilityKnowledge);
-        scrollIntoView(submit);
-        click(submit);
+        scrollIntoView(find(submit)).click();
         waitUntil(() -> waitUntilDisplayed(resultPlaceholder).getText().contains("\"HasTradingExperienceAnswers\":true"));
     }
 

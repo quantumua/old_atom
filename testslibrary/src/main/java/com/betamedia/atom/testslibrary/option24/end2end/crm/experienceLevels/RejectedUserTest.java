@@ -12,6 +12,11 @@ import org.testng.annotations.Test;
  */
 public class RejectedUserTest extends AbstractUserExperienceTest {
 
+    /**
+     * - Build user for the test;
+     * - Login with created user;
+     * @return - CRMCustomer object
+     */
     private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
@@ -19,6 +24,13 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
         return customer;
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user is rejected;
+     */
     @Test(description = "ID:9025")
     public void checkCustomerWithScore0IsRejectedTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -31,6 +43,13 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameRejected(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user is rejected;
+     */
     @Test(description = "ID:9069")
     public void checkCustomerWithScore10IsRejectedTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -43,6 +62,13 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameRejected(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check experience score in the DB;
+     * - Check that user is rejected;
+     */
     @Test(description = "ID:9026")
     public void checkCustomerWithScore15IsRejectedTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -55,6 +81,12 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameRejected(customer.getUserName());
     }
 
+    /**
+     * - Create user via mobile API;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check that user access type is no login;
+     */
     @Test(description = "ID:9019")
     public void checkRejectedCustomerAccessNoLoginTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -69,6 +101,10 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
         );
     }
 
+    /**
+     * Build trading experience info with 0 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith0Score() {
         return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())
@@ -90,6 +126,11 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_35.get())
                 .build();
     }
+
+    /**
+     * Build trading experience info with 10 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith10Score() {
         return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())
@@ -112,6 +153,10 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
                 .build();
     }
 
+    /**
+     * Build trading experience info with 15 score
+     * @return - TradingExperienceInfo instance
+     */
     private TradingExperienceInfo tradingExperienceInfoWith15Score() {
         return  TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())

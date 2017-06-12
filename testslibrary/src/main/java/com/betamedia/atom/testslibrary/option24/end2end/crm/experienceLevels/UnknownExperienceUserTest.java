@@ -10,13 +10,10 @@ import org.testng.annotations.Test;
  */
 public class UnknownExperienceUserTest extends AbstractUserExperienceTest {
 
-    private CRMCustomer crmRegisterAndLogIn(){
-        CRMCustomer customer = operations().customerOperations().register();
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        return customer;
-    }
-
+    /**
+     * - Register default user via mobile API and login in the crm widgets
+     * - Assert that user created has no trade access type
+     */
     @Test(description = "ID:9143")
     public void checkCustomerWithNoScoreIsUnknownExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -25,4 +22,16 @@ public class UnknownExperienceUserTest extends AbstractUserExperienceTest {
                 OnboardingWizardConditions.AccessType.NOTRADE
         );
     }
+
+    /**
+     * Register simple user using mobile API with default password
+     * @return - return created user
+     */
+    private CRMCustomer crmRegisterAndLogIn(){
+        CRMCustomer customer = operations().customerOperations().register();
+        pages().crmNavigation().login();
+        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+        return customer;
+    }
+
 }

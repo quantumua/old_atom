@@ -11,6 +11,12 @@ import org.testng.annotations.Test;
  */
 public class LowExperienceUserTest extends AbstractUserExperienceTest {
 
+    /**
+     * - Create user via crm widget;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check that user has low experience level;
+     */
     @Test(description = "ID:9029")
     public void checkCustomerWithScore31IsLowExperienceTest() {
         pages().crmNavigation().register();
@@ -44,6 +50,12 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameLowExperience(customer.getEmail());
     }
 
+    /**
+     * - Create user via crm widget;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check that user has low experience level;
+     */
     @Test(description = "ID:9071")
     public void checkCustomerWithScore45IsLowExperienceTest() {
         pages().crmNavigation().register();
@@ -77,6 +89,12 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameLowExperience(customer.getEmail());
     }
 
+    /**
+     * - Create user via crm widget;
+     * - Update as needed answers in the trading experience crm widgets page;
+     * - Update personal score in the personal information crm widgets page;
+     * - Check that user has low experience level;
+     */
     @Test(description = "ID:9032")
     public void checkCustomerWithScore50IsLowExperienceTest() {
         pages().crmNavigation().register();
