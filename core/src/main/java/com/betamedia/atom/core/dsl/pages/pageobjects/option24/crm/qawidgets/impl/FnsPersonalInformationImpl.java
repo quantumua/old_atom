@@ -87,6 +87,7 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         inSelect(expectedDepositsPerYear).selectByValue(info.expectedDepositsPerYear);
         inSelect(purposeOfTrading).selectByValue(info.purposeOfTrading);
         if(notNull(info.purposeOfTradingOther)) find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
+        scrollIntoView(submit);
         click(submit);
         waitUntilDisplayed(resultPlaceholder);
     }

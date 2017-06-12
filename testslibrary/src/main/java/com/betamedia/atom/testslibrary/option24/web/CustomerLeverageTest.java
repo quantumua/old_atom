@@ -25,25 +25,52 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
     private final String AVERAGE1TO100 = "1:100";
     private final String AVERAGE1TO200 = "1:200";
 
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify reject message
+     */
     @Test(description = "crm-9043")
     public void checkNoCustomerLeverageForRejectedCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.REJECTED, ExperienceScore.REJECTED).getUserName();
         pages().rejectMessage().isDisplayed();
     }
 
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged out
+     */
     @Test(description = "crm-9020")
     public void checkIsNotAbbleToLoginForRejectedCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.REJECTED, ExperienceScore.REJECTED).getUserName();
         assertTrue(pages().topNavigationPage().isLoggedOut());
     }
 
-
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and welcome message appears
+     */
     @Test(description = "crm-9044")
     public void checkCustomerLeverageForNoExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE).getUserName();
         pages().welcomePage().start();
     }
 
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and welcome message appears
+     */
     @Test(description = "crm-9021")
     public void checkIsAbbleToLoginForNoExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE).getUserName();
@@ -55,7 +82,14 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         assertTrue(pages().topNavigationPage().isLoggedIn());
     }
 
-
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and start trade message appears
+     * 5. Verify 1:50 and 1:100 select leverage options are available
+     */
     @Test(description = "crm-9045")
     public void checkCustomerLeverageForLowExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.LOW_EXPERIENCE, ExperienceScore.LOW_EXPERIENCE).getUserName();
@@ -70,6 +104,13 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
 
     }
 
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in
+     */
     @Test(description = "crm-9022")
     public void checkIsAbbleToLoginForLowExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.LOW_EXPERIENCE, ExperienceScore.LOW_EXPERIENCE).getUserName();
@@ -79,6 +120,14 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         assertUserLogin();
     }
 
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and start trade message appears
+     * 5. Verify 1:50, 1:100, 1:200 select leverage options are available
+     */
     @Test(description = "crm-9046")
     public void checkCustomerLeverageForHighExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE).getUserName();
@@ -93,6 +142,13 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(THIRD_AVERAGE), AVERAGE1TO200);
     }
 
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in
+     */
     @Test(description = "crm-9024")
     public void checkIsAbbleToLoginForHighExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE).getUserName();
@@ -102,6 +158,14 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         assertUserLogin();
     }
 
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and start trade message appears
+     * 5. Verify 1:50, 1:100, 1:200 select leverage options are available
+     */
     @Test(description = "crm-9047")
     public void checkCustomerLeverageForExpertCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.EXPERT, ExperienceScore.EXPERT).getUserName();
@@ -116,6 +180,13 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(THIRD_AVERAGE), AVERAGE1TO200);
     }
 
+    /**
+     * Tests main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level and score in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in
+     */
     @Test(description = "crm-9023")
     public void checkIsAbbleToLoginLeverageForExpertCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.EXPERT, ExperienceScore.EXPERT).getUserName();
@@ -125,12 +196,21 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         assertUserLogin();
     }
 
+    /**
+     * Assert that current user was logged in successfully
+     */
     private void assertUserLogin() {
         pages().startTradeDialog().startTrade();
         pages().setLeverageDialog().cancelButton();
         assertTrue("User wan't login successfully", pages().topNavigationPage().isLoggedIn());
     }
 
+    /**
+     * Create user via mobile API using parameters to update in DB
+     * @param experienceLevel - experience level for the user
+     * @param experienceScore - experience score to add for the user into DB
+     * @return - created CRMCustomer object
+     */
     private CRMCustomer createUser(OnboardingWizardConditions.ExperienceLevel experienceLevel, ExperienceScore experienceScore) {
         onboardingWizardConditions = onboardingWizardConditions(experienceLevel);
         CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions);
@@ -140,6 +220,9 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         return crmCustomer;
     }
 
+    /**
+     * Method to update credit card for current logged in user
+     */
     private void updateCreditCard() {
         pages().creditCardDeposit().submit(
                 CreditCardDeposit.builder()
@@ -147,6 +230,11 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
                         .build());
     }
 
+    /**
+     * Build onboarding wizard condition
+     * @param experienceLevel - experience level to set into builder
+     * @return
+     */
     private OnboardingWizardConditions onboardingWizardConditions(OnboardingWizardConditions.ExperienceLevel experienceLevel) {
         return new OnboardingWizardConditions(true, true, true, true,
                 experienceLevel, false,
@@ -157,6 +245,9 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
 
     }
 
+    /**
+     * enums for experience scores in the current test class
+     */
     private enum ExperienceScore {
         REJECTED(5),
         NO_EXPERIENCE(25),

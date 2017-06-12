@@ -12,6 +12,11 @@ import org.testng.annotations.Test;
  */
 public class NoExperienceUserTest extends AbstractUserExperienceTest {
 
+    /**
+     * 1. Build user for the test;
+     * 2. Login with created user;
+     * @return
+     */
     private CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
@@ -19,6 +24,13 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
         return customer;
     }
 
+    /**
+     * 1. Crete user via mobile API;
+     * 2. Update as needed answers in the trading experience crm widgets page;
+     * 3. Update personal score in the personal information crm widgets page;
+     * 4. Check experience score in the DB;
+     * 5. Check that user has no experience level;
+     */
     @Test(description = "ID:9027")
     public void checkCustomerWithScore16IsNoExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -31,6 +43,13 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameNoExperience(customer.getUserName());
     }
 
+    /**
+     * 1. Crete user via mobile API;
+     * 2. Update as needed answers in the trading experience crm widgets page;
+     * 3. Update personal score in the personal information crm widgets page;
+     * 4. Check experience score in the DB;
+     * 5. Check that user has no experience level;
+     */
     @Test(description = "ID:9070")
     public void checkCustomerWithScore25IsNoExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -43,6 +62,13 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameNoExperience(customer.getUserName());
     }
 
+    /**
+     * 1. Crete user via mobile API;
+     * 2. Update as needed answers in the trading experience crm widgets page;
+     * 3. Update personal score in the personal information crm widgets page;
+     * 4. Check experience score in the DB;
+     * 5. Check that user has no experience level;
+     */
     @Test(description = "ID:9028")
     public void checkCustomerWithScore30IsNoExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -55,6 +81,13 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
         operations().onBoardingOperations().assertUsernameNoExperience(customer.getUserName());
     }
 
+    /**
+     * 1. Crete user via mobile API;
+     * 2. Update as needed answers in the trading experience crm widgets page;
+     * 3. Update personal score in the personal information crm widgets page;
+     * 4. Check experience score in the DB;
+     * 5. Check that user has no experience level;
+     */
     @Test(description = "ID:9021")
     public void checkNoExperienceCustomerAccessActiveTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
@@ -69,6 +102,10 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
         );
     }
 
+    /**
+     * Build user experience with score
+     * @return Trading experience built object
+     */
     private TradingExperienceInfo tradingExperienceInfoWith16Score() {
         return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())
@@ -90,6 +127,11 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_35.get())
                 .build();
     }
+
+    /**
+     * Build user experience with score
+     * @return Trading experience built object
+     */
     private TradingExperienceInfo tradingExperienceInfoWith25Score() {
         return TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())
@@ -113,6 +155,10 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
                 .build();
     }
 
+    /**
+     * Build user experience with score
+     * @return Trading experience built object
+     */
     private TradingExperienceInfo tradingExperienceInfoWith30Score() {
         return  TradingExperienceInfo.builder()
                 .withSharesExperience(Questions.SharesExperience.NEVER.get())

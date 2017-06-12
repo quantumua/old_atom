@@ -5,6 +5,7 @@ import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -60,7 +61,7 @@ public class CreditCardDepositPageImpl extends AbstractPageObject implements Cre
         if (info.country != null) {
             find(country).sendKeys(info.country);
         }
-
+        scrollIntoView(submit);
         find(submit).click();
     }
 }

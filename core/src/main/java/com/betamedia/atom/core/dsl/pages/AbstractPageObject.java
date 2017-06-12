@@ -226,6 +226,20 @@ public abstract class AbstractPageObject {
     }
 
     /**
+     * Ccroll web page to the element to get visibility of it
+     * @param locator
+     */
+    protected void scrollIntoView(By locator) {
+        try {
+            executeScript("arguments[0].scrollIntoView()", find(locator));
+        } catch (NoSuchElementException e) {
+            logger.debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
+            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
+            return;
+        }
+    }
+
+    /**
      * Retrieves a <code>select</code> element at the locator and wraps it in {@link Select}
      *
      * @param first element locator

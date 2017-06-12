@@ -20,6 +20,10 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
             fillAdditionalDetails(customer);
             operations().customerOperations().updateCustomersOnboardingConditions(customer, conditions);
             pages().browser().waitUntilPageLoad();
+        } else {
+            operations().customerOperations().updateCustomersOnboardingConditions(customer, createConditionsToShowWelcomeAndAdditionalDetailsPages());
+            operations().customerOperations().updateCustomersOnboardingConditions(customer, conditions);
+            pages().browser().waitUntilPageLoad();
         }
         if (conditions.hasPendingDeposit()) {
             operations().customerOperations().updateCustomersOnboardingConditions(customer, createConditionsToShowOnlyDepositPage());
@@ -62,15 +66,19 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
 
     private void fillAdditionalDetails(CRMCustomer customer) {
         goToHomepageAndLogin(customer.getUserName());
-        pages().welcomePage().start();
+        pages().browser().waitUntilPageLoad();
+        pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
     }
 
     private void goToHomepageAndLogin(String username) {
         pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        pages().browser().waitUntilPageLoad();
         pages().topNavigationPage().goToHomePage();
-
+        pages().browser().waitUntilPageLoad();
         pages().topNavigationPage().logIn();
         pages().loginPage().login(username, CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+        pages().browser().waitUntilPageLoad();
     }
 }
