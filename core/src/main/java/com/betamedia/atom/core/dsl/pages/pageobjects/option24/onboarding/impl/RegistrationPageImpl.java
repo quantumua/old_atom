@@ -77,8 +77,9 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
 
 
    	    /*Account Agree */
-        JScriptExecutor("document.getElementById('AccountAgree').checked = true;");
-        
+   	    //TODO create StoredId for the field
+   	    executeScript("arguments[0].checked = true", find(By.id("AccountAgree")));
+
         /*Country Election*/
         find(selectedFlagField).click();
         find(selectCountry).click();
