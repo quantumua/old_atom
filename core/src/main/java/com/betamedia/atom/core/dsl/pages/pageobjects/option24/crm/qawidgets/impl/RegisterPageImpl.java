@@ -68,7 +68,7 @@ public class RegisterPageImpl extends AbstractPageObject implements RegisterPage
         inSelect(accountBaseCurrency).selectByValue(customer.getCurrency());
         find(password).sendKeys(customer.getPassword());
         find(startTrading).click();
-        waitUntilDisplayed(resultPlaceHolder);
+        waitUntil(() -> waitUntilDisplayed(resultPlaceHolder).getText().contains("CustomerId"));
     }
 
     @Override

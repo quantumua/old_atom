@@ -89,7 +89,7 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         if(notNull(info.purposeOfTradingOther)) find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
         scrollIntoView(submit);
         click(submit);
-        waitUntilDisplayed(resultPlaceholder);
+        waitUntil(() -> waitUntilDisplayed(resultPlaceholder).getText().contains("\"HasPersonalInformationAnswers\":true"));
     }
 
     @Override
