@@ -1,14 +1,10 @@
 package com.betamedia.atom.core.testlink;
 
-
+import com.betamedia.atom.core.holders.AppContextHolder;
+import com.betamedia.atom.core.testlink.annotations.TestLinkDisplayId;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
-import com.betamedia.atom.core.holders.AppContextHolder;
-import com.betamedia.atom.core.testlink.annotations.TestLinkDisplayId;
-
-
 
 /**
  * Listener for TestLink integration.

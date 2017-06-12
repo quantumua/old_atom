@@ -9,8 +9,6 @@ import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 
 import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.Asset;
-import com.betamedia.tp.api.model.DealApprovalConfiguration;
-import com.betamedia.tp.api.model.OptionConfiguration;
 import com.betamedia.tp.api.model.Position;
 import com.betamedia.tp.api.model.enums.OptionType;
 import com.betamedia.tp.api.model.enums.PositionStatus;
@@ -26,7 +24,6 @@ import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-import org.w3c.dom.DOMConfiguration;
 
 /**
  * @author leonid.a
