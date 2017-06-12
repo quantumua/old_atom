@@ -569,7 +569,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
                 .setAmount(investment)
                 .bidLow()
                 .confirm();
-
+//FIXME TopNavigationPageImpl::isSubmitBtn is broken
         Assert.assertTrue(pages().topNavigationPage().isSubmitBtn());
     }
 
