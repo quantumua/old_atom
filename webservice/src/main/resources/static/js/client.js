@@ -28,11 +28,25 @@ angular.module('client', [])
         }
 
         function reportMapper(report) {
-            report.suites = report.suites.map(function(suite){return suite.substr(suite.lastIndexOf('/')+1);});
-            report.date = [report.time.dayOfMonth, report.time.monthValue, report.time.year].join('/');
-            report.time = [report.time.hour, report.time.minute, report.time.second].join(':');
+            report.suites = report.suites.map(function (suite) {
+                return suite.substr(suite.lastIndexOf('/') + 1);
+            });
+            report.date = [
+                withLeadingZero(report.time.dayOfMonth),
+                withLeadingZero(report.time.monthValue),
+                report.time.year
+            ].join('/');
+            report.time = [
+                withLeadingZero(report.time.hour),
+                withLeadingZero(report.time.minute),
+                withLeadingZero(report.time.second)
+            ].join(':');
             report.status = "N/A";
             return report;
+        }
+
+        function withLeadingZero(input) {
+            return ("0" + input).slice(-2);
         }
 
         self.run = function () {
