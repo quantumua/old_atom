@@ -11,5 +11,7 @@ public interface SetLeverageDialog {
     void cancelButton();
     void assertCustomerLeverage();
     List<String> getLeveragesList();
+    List<String> getLeveragesPickOptions();
     void expandList();
+    void closeLeverageDialog();
 }

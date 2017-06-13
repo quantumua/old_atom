@@ -16,6 +16,10 @@ import static org.junit.Assert.assertTrue;
  * Created by vsnigur on 5/29/17.
  */
 public class SetLeverageDialogImpl extends AbstractPageObject implements SetLeverageDialog {
+
+    @StoredId
+    private By setLeverageDialog;
+
     @StoredId
     private By leverageComboBox;
 
@@ -30,6 +34,12 @@ public class SetLeverageDialogImpl extends AbstractPageObject implements SetLeve
 
     @StoredId
     private By leveragesList;
+
+    @StoredId
+    private By leveragesPickOption;
+
+    @StoredId
+    private By closeLeverageDialog;
 
     public SetLeverageDialogImpl(WebDriver webDriver) {
         super(webDriver);
@@ -65,7 +75,22 @@ public class SetLeverageDialogImpl extends AbstractPageObject implements SetLeve
     }
 
     @Override
+    public List<String> getLeveragesPickOptions() {
+        List<String> leverageOptions = new ArrayList<String>();
+        waitUntilDisplayed(leveragesPickOption);
+        for(WebElement webElement:findElements(leveragesPickOption)) {
+            leverageOptions.add(webElement.getText());
+        }
+        return leverageOptions;
+    }
+
+    @Override
     public void expandList() {
         waitUntilDisplayed(leveragesButton).click();
+    }
+
+    @Override
+    public void closeLeverageDialog() {
+        waitUntilExists(closeLeverageDialog).click();
     }
 }

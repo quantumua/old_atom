@@ -97,10 +97,9 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         pages().startTradeDialog().startTrade();
-        pages().setLeverageDialog().expandList();
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().size(), 2);
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(SECOND_AVERAGE), AVERAGE1TO100);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().size(), 2);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().get(FIRST_AVERAGE), AVERAGE1TO50);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().get(SECOND_AVERAGE), AVERAGE1TO100);
 
     }
 
@@ -135,11 +134,10 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         pages().startTradeDialog().startTrade();
-        pages().setLeverageDialog().expandList();
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().size(), 3);
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(SECOND_AVERAGE), AVERAGE1TO100);
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(THIRD_AVERAGE), AVERAGE1TO200);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().size(), 3);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().get(FIRST_AVERAGE), AVERAGE1TO50);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().get(SECOND_AVERAGE), AVERAGE1TO100);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().get(THIRD_AVERAGE), AVERAGE1TO200);
     }
 
     /**
@@ -173,11 +171,10 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         pages().startTradeDialog().startTrade();
-        pages().setLeverageDialog().expandList();
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().size(), 3);
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(SECOND_AVERAGE), AVERAGE1TO100);
-        Assert.assertEquals(pages().setLeverageDialog().getLeveragesList().get(THIRD_AVERAGE), AVERAGE1TO200);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().size(), 3);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().get(FIRST_AVERAGE), AVERAGE1TO50);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().get(SECOND_AVERAGE), AVERAGE1TO100);
+        Assert.assertEquals(pages().setLeverageDialog().getLeveragesPickOptions().get(THIRD_AVERAGE), AVERAGE1TO200);
     }
 
     /**
@@ -201,7 +198,7 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
      */
     private void assertUserLogin() {
         pages().startTradeDialog().startTrade();
-        pages().setLeverageDialog().cancelButton();
+        pages().setLeverageDialog().closeLeverageDialog();
         assertTrue("User wan't login successfully", pages().topNavigationPage().isLoggedIn());
     }
 
