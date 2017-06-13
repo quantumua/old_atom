@@ -201,3 +201,4 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmImSure,ID,dialog_btn_leave
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmNo,ID,dialog_btn_stay
 2.6.2,2017-05-29 15:24 +0000,WelcomeBackMessageImpl,continueQuestionnaire,XPATH,//*[text()='Continue Questionnaire']
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,accountAgreeCheckbox,ID,AccountAgree

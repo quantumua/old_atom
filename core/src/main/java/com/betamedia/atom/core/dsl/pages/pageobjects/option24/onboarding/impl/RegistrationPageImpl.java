@@ -41,6 +41,8 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
     private By accountAgreeField;
     @StoredId
     private By selectedFlagField;
+    @StoredId
+    private By accountAgreeCheckbox;
 
 
     public RegistrationPageImpl(WebDriver webDriver) {
@@ -77,8 +79,7 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
 
 
    	    /*Account Agree */
-   	    //TODO create StoredId for the field
-   	    executeScript("arguments[0].checked = true", find(By.id("AccountAgree")));
+   	    executeScript("arguments[0].click()", find(accountAgreeCheckbox));
 
         /*Country Election*/
         find(selectedFlagField).click();
