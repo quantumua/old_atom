@@ -4,6 +4,7 @@ import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.adapters.MobileCRMHTTPAdaper;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.atom.core.api.tp.entities.request.CustomerRO.CustomerROBuilder;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.*;
@@ -233,6 +234,13 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
         CRMCustomer registeredCustomer = register(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
+        updateCustomersOnboardingConditions(registeredCustomer, wizardConditions);
+        return registeredCustomer;
+    }
+
+    @Override
+    public CRMCustomer registerWithWizardConditions(CustomerROBuilder customerBuilder, OnboardingWizardConditions wizardConditions) {
+        CRMCustomer registeredCustomer = register(customerBuilder.setUserNamingStrategy(CRMMobileAPINamingStrategy.get()).build());
         updateCustomersOnboardingConditions(registeredCustomer, wizardConditions);
         return registeredCustomer;
     }

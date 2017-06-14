@@ -21,10 +21,5 @@ public interface WEBPageFactory {
     
     WelcomePage welcomepage();
     
-    AccountAdditionalDetailsPage accountAdditionalDetailsPage();     
-    
-    
-    
-
-
+    AccountAdditionalDetailsPage accountAdditionalDetailsPage();
 }

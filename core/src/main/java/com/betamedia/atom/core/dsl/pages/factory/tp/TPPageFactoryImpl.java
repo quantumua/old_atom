@@ -1,14 +1,9 @@
 package com.betamedia.atom.core.dsl.pages.factory.tp;
 
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.BinaryBidder;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.DisclaimerNotificationImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.LeveragePopup;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.Assets;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.impl.AssetsImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.BinaryBidder;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.CfdBidder;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.impl.BinaryBidderImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.impl.CfdBidderImpl;
@@ -16,9 +11,12 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.binaryselector.Bin
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.binaryselector.impl.BinarySelectorImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.impl.ControlPanelImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.DisclaimerNotificationImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginErrorNotificationImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.DialogBox;
@@ -30,9 +28,8 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.Landing
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.LandingPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.impl.BinaryPositionsImpl;
@@ -178,7 +175,7 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public OnBoardingWizard onBoardingWizard(){
+    public OnBoardingWizard onBoardingWizard() {
         return creator.getPage(OnBoardingWizardImpl.class);
     }
 
@@ -218,9 +215,12 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public LeveragePopup leveragePopup(){
+    public LeveragePopup leveragePopup() {
         return creator.getPage(LeveragePopupImpl.class);
     }
 
-
+    @Override
+    public SignatureRiskWarning signatureRiskWarning() {
+        return creator.getPage(SignatureRiskWarningImpl.class);
+    }
 }
