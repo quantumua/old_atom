@@ -1,8 +1,8 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
-import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
+import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.PositionOperations;
-import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
+import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
 import com.betamedia.tp.api.model.Position;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,14 +22,14 @@ public abstract class AbstractPositionOperations<T extends EnvironmentDependent>
     private static final Logger logger = LogManager.getLogger(AbstractPositionOperations.class);
 
     @Autowired
-    private com.betamedia.atom.core.connectors.tp.FWTPConnector<AutomationEnvironment> FWTPConnector;
+    private FWTPConnector<T> tpConnector;
 
     /**
      * Returns position by given id.
      */
     @Override
     public Position get(String id) {
-        Position position = FWTPConnector.readById(Position.class, id);
+        Position position = tpConnector.readById(Position.class, id);
         assertNotNull(position, "Position id=" + id + " is not available in GS");
         return position;
     }
@@ -39,19 +39,19 @@ public abstract class AbstractPositionOperations<T extends EnvironmentDependent>
      */
     @Override
     public Position getByDisplayId(String displayId) {
-        Position position = FWTPConnector.readByDisplayId(Position.class, displayId);
+        Position position = tpConnector.readByDisplayId(Position.class, displayId);
         assertNotNull(position, "Position displayId=" + displayId + " is not available in GS");
         return position;
     }
-    
+
     /**
      * Waits until trade is expired against to given position
      */
     @Override
-	public Position getExpired(Position position) {
-    	// see https://devredmine/issues/65323
-    	// TODO: Move implementation of waiting trade expirity from legacy framework: com.scipio.tptesting.util.Suspension.waitTradeToExpire
-		return position;
-    	
+    public Position getExpired(Position position) {
+        // see https://devredmine/issues/65323
+        // TODO: Move implementation of waiting trade expirity from legacy framework: com.scipio.tptesting.util.Suspension.waitTradeToExpire
+        return position;
+
     }
 }
