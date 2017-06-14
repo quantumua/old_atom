@@ -5,8 +5,10 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.Welcome
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.AccountAdditionalDetailsPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsPersonalInformationImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsTradingExperienceImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RegistrationPageImpl;
@@ -54,6 +56,10 @@ public class WEBPageFactoryImpl extends AbstractPageFactory implements WEBPageFa
 	        return creator.getPage(FnsPersonalInformationImpl.class);
 	  }
 	 
+	 @Override
+	    public FnsTradingExperience fnsTradingExperience() {
+	        return creator.getPage(FnsTradingExperienceImpl.class);
+	  }
 	 	    
 }
 
