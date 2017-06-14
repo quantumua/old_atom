@@ -2,8 +2,10 @@ package com.betamedia.atom.testslibrary.option24.web;
 
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
+import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.AccountAdditionalDetailsTest;
+import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
 
 import org.testng.annotations.Test;
 
@@ -15,7 +17,7 @@ import org.testng.annotations.Test;
 public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	
 
-	 @Test
+//	 @Test
 	    public void  onboardingWizardRegistration() {
 	     	pages().topNavigationPage().signUp();
 	        pages().registrationPage().register();
@@ -47,6 +49,32 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	               .withNationality("DE")
 	               .build());
       
+	       
+	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
+	                .withIndustry(Questions.Industry.FINANCE.get())
+	                .withEmployerName("fgsfds")
+	                .withTaxResidenceCountry("DE")
+	                .withUSReportabilityStatus(Questions.HasTaxIdentificationNumber.NO.get())
+	                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.NO.get())
+	                .withTaxIdentificationNumber("123456789")
+	                .withEducationLevel(Questions.EducationLevel.POST_GRADUATE.get())
+	                .withEducationField(Questions.EducationField.ACCOUNTING.get())
+	                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.NO.get())
+	                .withSourceOfFunds(Questions.SourceOfFunds.EMPLOYMENT.get())
+	                .withAnnualIncome(Questions.AnnualIncome.INCOME_OVER_100K.get())
+	                .withNetWealth(Questions.NetWealth.NET_WEALTH_OVER_300K.get())
+	                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
+	                .withPurposeOfTrading(Questions.PurposeOfTrading.ADDITIONAL_INCOME.get())
+	                .build());
+	       
+	      
+//	       try {
+//	            Thread.sleep(10000);
+//	        } catch (InterruptedException e) {
+//	            // TODO Auto-generated catch block
+//	            e.printStackTrace();
+//	        }
 	        
 	    }
 	    

@@ -102,11 +102,12 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         waitUntilDisplayed(taxResidenceCountry);
         inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
 
-        submitOnWizard(info.isUSReportable);
-        submitOnWizard(info.hasTaxIdentificationNumber);
+//        submitOnWizard(info.hasTaxIdentificationNumber);
+//        submitOnWizard(info.hasTaxIdentificationNumber);
 
-        waitUntilDisplayed(taxIdentificationNumber);
-        find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
+//        waitUntilDisplayed(taxIdentificationNumber);
+//        find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
+        submitOnWizardAndWriteValue(info.hasTaxIdentificationNumber, info.taxIdentificationNumber);
 
         WebElement submitButton = find(By.xpath("//*[@id=\"fns-pi-form-space\"]/div/div[2]/div/div[3]/input"));
         executeScript("arguments[0].scrollIntoView(true)", submitButton);
@@ -120,11 +121,18 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         submitOnWizard(info.netWealth);
         submitOnWizard(info.expectedDepositsPerYear);
         submitOnWizard(info.purposeOfTrading);
+        waitUntilExists(By.id("FinancialProducts1Shares"));
     }
 
     @Override
     public void submitOnWizard(String dataValue) {
         waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
+    }
+    
+    public void submitOnWizardAndWriteValue(String dataValue, String numberTaxId) {
+        waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
+        waitUntilDisplayed(By.id(dataValue+"_alternate"));
+        find(By.id(dataValue+"_alternate")).sendKeys(numberTaxId);
     }
 
     private static boolean notNull(Object o) {
