@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
+import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvBrandOperationsImpl;
 import com.betamedia.common.search.Page;
 import com.betamedia.atom.core.environment.tp.properties.EntityPropertiesHolder;
 import com.betamedia.tp.api.model.Brand;

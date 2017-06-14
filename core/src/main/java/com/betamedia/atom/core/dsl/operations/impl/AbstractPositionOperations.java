@@ -14,7 +14,8 @@ import static org.testng.Assert.assertNotNull;
  * This class is designed to facilitate the execution of common operations related to position operations.
  * It can be used as a "building block" when writing integration tests.
  * <p>
- * Created by mbelyaev on 3/27/17.
+ * @author mbelyaev
+ * @since 3/27/17
  *
  * @see Position
  */

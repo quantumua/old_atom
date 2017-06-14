@@ -4,6 +4,7 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMAccountCreate;
 import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.AccountGroupOperations;
+import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvAccountOperationsImpl;
 import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
 import com.betamedia.common.utils.CollectionUtils;

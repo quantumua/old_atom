@@ -4,6 +4,7 @@ import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.connectors.tp.feedgateway.FWFeedGatewayConnector;
 import com.betamedia.atom.core.dsl.operations.TradingCalendarOperations;
 import com.betamedia.atom.core.dsl.operations.VolatilityUnitOperations;
+import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvAssetOperationsImpl;
 import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.RelatedEntityHolder;
 import com.betamedia.tp.api.model.enums.AssetStatus;

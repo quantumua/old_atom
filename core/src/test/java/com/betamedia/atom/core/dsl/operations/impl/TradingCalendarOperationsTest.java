@@ -2,6 +2,7 @@ package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.TimezoneOperations;
+import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvTradingCalendarOperationsImpl;
 import com.betamedia.tp.api.model.scheduling.Timezone;
 import com.betamedia.tp.api.model.scheduling.TradingCalendar;
 import org.mockito.InjectMocks;

@@ -5,6 +5,7 @@ import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.atom.core.dsl.operations.BrandOperations;
+import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvBonusOperationsImpl;
 import com.betamedia.tp.api.model.Bonus;
 import com.betamedia.tp.api.model.Brand;
 import com.betamedia.tp.api.model.enums.BonusType;
