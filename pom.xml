@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <tp.version>2.5.9</tp.version>
+        <tp.version>2.6.2</tp.version>
         <gs.version>10.2.1-14000-RELEASE</gs.version>
         <hibernate.version>4.3.11.Final</hibernate.version>
         <selenium.version>3.4.0</selenium.version>
