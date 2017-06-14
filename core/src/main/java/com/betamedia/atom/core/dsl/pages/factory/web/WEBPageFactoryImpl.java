@@ -1,10 +1,14 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.AccountAdditionalDetailsPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RegistrationPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomePageImpl;
 import com.betamedia.atom.core.dsl.pages.type.ProductType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -34,4 +38,12 @@ public class WEBPageFactoryImpl extends AbstractPageFactory implements WEBPageFa
     public ProductType getType() {
         return ProductType.WEB;
     }
+	@Override
+	public WelcomePage welcomepage() {
+		return creator.getPage(WelcomePageImpl.class);
+	}
+	@Override
+	public AccountAdditionalDetailsPage accountAdditionalDetailsPage() {
+		return creator.getPage(AccountAdditionalDetailsPageImpl.class);
+	}
 }
