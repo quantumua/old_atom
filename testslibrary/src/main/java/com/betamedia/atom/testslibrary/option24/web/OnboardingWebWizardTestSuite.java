@@ -1,7 +1,9 @@
 package com.betamedia.atom.testslibrary.option24.web;
 
 
+import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
+import com.betamedia.atom.testslibrary.option24.end2end.crm.AccountAdditionalDetailsTest;
 
 import org.testng.annotations.Test;
 
@@ -11,6 +13,7 @@ import org.testng.annotations.Test;
  */
 
 public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
+	
 
 	 @Test
 	    public void  onboardingWizardRegistration() {
@@ -18,14 +21,32 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	        pages().registrationPage().register();
 	        pages().welcomepage().isStartBtnDisplayed();
 	        pages().welcomepage().start();
+	        pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
+	                .withBirthDateDay("1")
+	                .withBirthDateMonth("2")
+	                .withBirthDateYear("1990")
+	                .withCountryOfBirth("DE")
+	                .withNationality("DE")
+	                .build());
+	       
 	        
 	        
 	    }
 	    
-//	    @Test
+   @Test
 	    public void  onboardingWizardFNSpersonalRejectRisk() {
-	     	pages().topNavigationPage().signUp();
-	        pages().registrationPage().register();
+		   pages().topNavigationPage().signUp();
+	       pages().registrationPage().register();
+	       pages().welcomepage().isStartBtnDisplayed();
+	       pages().welcomepage().start();
+	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
+	               .withBirthDateDay("1")
+	               .withBirthDateMonth("2")
+	               .withBirthDateYear("1990")
+	               .withCountryOfBirth("DE")
+	               .withNationality("DE")
+	               .build());
+      
 	        
 	    }
 	    

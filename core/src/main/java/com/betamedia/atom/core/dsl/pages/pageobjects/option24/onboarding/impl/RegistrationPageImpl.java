@@ -100,20 +100,16 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
     }
 
     private void submitRegistration() {
-        try {
-            Thread.sleep(3000);
+    	
+    	try {
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         waitUntilDisplayed(submitButtonReg);
         find(registrationWidget, submitButtonReg).click();
-        try {
-            Thread.sleep(100000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+       
 
     }
 
