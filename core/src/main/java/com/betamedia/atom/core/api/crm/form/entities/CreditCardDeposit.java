@@ -36,7 +36,7 @@ public class CreditCardDeposit {
     }
 
     public static class CreditCardDepositBuilder {
-        private static final String DEFAULT_CREDIT_CARD_VISA = "4176661000001015";
+        private static final String DEFAULT_CREDIT_CARD_VISA = "4000020951595032";
 
         private String depositAmount = "100";
         private String creditCardNumber = DEFAULT_CREDIT_CARD_VISA;
