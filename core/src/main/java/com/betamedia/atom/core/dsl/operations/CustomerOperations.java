@@ -52,6 +52,8 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions);
 
+    CRMCustomer registerWithWizardConditions(CustomerRO.CustomerROBuilder customerBuilder, OnboardingWizardConditions wizardConditions);
+
     ContactExtension updateCustomersOnboardingConditions(CRMCustomer customer, OnboardingWizardConditions wizardConditions);
 
     ContactExtension updateExperienceScoreInDB(String contactId, int experienceScore);

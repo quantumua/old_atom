@@ -454,6 +454,11 @@ public class CustomerRO {
             this.userNamingStrategy = userNamingStrategy;
         }
 
+        public CustomerROBuilder setUserNamingStrategy(UserNamingStrategy userNamingStrategy) {
+            this.userNamingStrategy = userNamingStrategy;
+            return this;
+        }
+
         public CustomerROBuilder setUserName(String userName) {
             this.userName = userName;
             return this;

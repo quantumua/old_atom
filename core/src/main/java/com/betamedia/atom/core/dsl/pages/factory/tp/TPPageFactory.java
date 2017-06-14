@@ -12,16 +12,13 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.DisclaimerNo
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.DialogBox;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.MessageBox;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.impl.RejectMessageOnLoginImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.LeveragePopup;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.MessageBox;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
 
 /**
@@ -94,4 +91,6 @@ public interface TPPageFactory {
     ConfirmCloseMessageImpl confirmCloseMessage();
 
     UploadDocumentDialogImpl uploadDocumentDialog();
+
+    SignatureRiskWarning signatureRiskWarning();
 }
