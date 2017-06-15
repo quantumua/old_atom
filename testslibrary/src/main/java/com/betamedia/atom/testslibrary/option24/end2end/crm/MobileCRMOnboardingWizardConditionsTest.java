@@ -76,7 +76,7 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
         pages().browser().refreshPage();
         pages().browser().waitUntilPageLoad();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
