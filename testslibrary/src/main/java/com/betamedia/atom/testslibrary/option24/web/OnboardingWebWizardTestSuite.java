@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	
 
-//	 @Test
+ @Test
 	    public void  onboardingWizardRegistration() {
 	     	pages().topNavigationPage().signUp();
 	        pages().registrationPage().register();
@@ -36,7 +36,7 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	        
 	    }
 	    
-//   @Test
+   @Test
 	    public void  onboardingWizardFNSpersonalRejectRisk() {
 		   pages().topNavigationPage().signUp();
 	       pages().registrationPage().register();
@@ -73,7 +73,7 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 
 	    }
 	    
-	    @Test
+//	    @Test
 	    public void  onboardingWizardFNStradingRejectRisk() {
 	    	  pages().topNavigationPage().signUp();
 		       pages().registrationPage().register();
