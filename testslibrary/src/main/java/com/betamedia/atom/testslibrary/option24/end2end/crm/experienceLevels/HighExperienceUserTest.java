@@ -1,7 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels;
 
-import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
+import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;

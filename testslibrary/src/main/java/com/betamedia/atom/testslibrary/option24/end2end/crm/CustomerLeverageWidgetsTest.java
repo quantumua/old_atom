@@ -1,13 +1,12 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * Created by vsnigur on 5/29/17.

@@ -1,8 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw;
-import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
-import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 
+import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
+import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

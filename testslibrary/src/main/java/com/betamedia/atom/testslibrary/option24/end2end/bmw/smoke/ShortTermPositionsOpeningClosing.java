@@ -1,6 +1,5 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw.smoke;
 
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.dsl.operations.TagOperations;
@@ -11,16 +10,15 @@ import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.Position;
 import com.betamedia.tp.api.model.enums.OptionType;
 import com.betamedia.tp.api.model.enums.PositionStatus;
-
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.openqa.selenium.WebElement;
+import static org.testng.Assert.assertEquals;
 
 /**
  * @author leonid.a

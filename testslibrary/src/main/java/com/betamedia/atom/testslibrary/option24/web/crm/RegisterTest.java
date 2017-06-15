@@ -1,8 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.crm;
 
-import org.testng.annotations.Test;
-
 import com.betamedia.atom.core.testingtype.tp.TPClientTest;
+import org.testng.annotations.Test;
 
 /**
  * Created by vsnigur on 5/19/17.

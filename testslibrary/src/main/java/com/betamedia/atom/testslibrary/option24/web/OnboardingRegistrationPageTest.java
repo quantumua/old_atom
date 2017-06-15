@@ -2,7 +2,6 @@ package com.betamedia.atom.testslibrary.option24.web;
 
 
 import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
-
 import org.testng.annotations.Test;
 
 /**

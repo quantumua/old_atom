@@ -1,11 +1,8 @@
 package com.betamedia.atom.testslibrary.option24.web.crm;
 
-import org.testng.annotations.Test;
-
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.testingtype.tp.TPClientTest;
-import com.betamedia.atom.core.utils.StringUtils;
+import org.testng.annotations.Test;
 
 /**
  * Created by vsnigur on 5/19/17.

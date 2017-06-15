@@ -1,7 +1,5 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
-import org.testng.Assert;
-
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
@@ -12,6 +10,7 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.dsl.operations.TagOperations;
 import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.enums.OptionType;
+import org.testng.Assert;
 
 /**
  * @author  leonid.a

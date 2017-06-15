@@ -1,13 +1,12 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries;
 
-import org.testng.annotations.Test;
-
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 import com.betamedia.common.enums.Country;
+import org.testng.annotations.Test;
 
 
 /**

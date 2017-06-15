@@ -1,20 +1,19 @@
 package com.betamedia.atom.testslibrary.option24.web.monitoring;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.is;
+import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.atom.core.fwdataaccess.entities.ExpectedCfdAsset;
+import com.betamedia.atom.core.testingtype.tp.TPClientTest;
+import org.testng.Assert;
+import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.testng.Assert;
-import org.testng.annotations.BeforeGroups;
-import org.testng.annotations.Test;
-
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.fwdataaccess.entities.ExpectedCfdAsset;
-import com.betamedia.atom.core.testingtype.tp.TPClientTest;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 
 /**
  * @author mbelyaev

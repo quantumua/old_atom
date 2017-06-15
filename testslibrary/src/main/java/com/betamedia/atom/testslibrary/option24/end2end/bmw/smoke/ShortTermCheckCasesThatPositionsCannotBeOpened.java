@@ -1,10 +1,13 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw.smoke;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;
+import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
+import com.betamedia.atom.core.dsl.operations.TagOperations;
+import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
+import com.betamedia.tp.api.model.*;
+import com.betamedia.tp.api.model.enums.OptionType;
+import com.betamedia.tp.api.model.enums.PositionStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriverException;
@@ -12,13 +15,10 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
-import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;
-import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.core.dsl.operations.TagOperations;
-import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
-import com.betamedia.tp.api.model.*;
-import com.betamedia.tp.api.model.enums.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author leonid.a
