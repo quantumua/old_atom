@@ -14,7 +14,7 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
 
     @Test(dataProvider = GENERIC_PARALLEL_DATA_PROVIDER)
     public void testWizard(OnboardingWizardConditions conditions) throws Exception {
-        CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
+       CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
         if (conditions.hasAdditionalDetails()) {
             operations().customerOperations().updateCustomersOnboardingConditions(customer, createConditionsToShowWelcomeAndAdditionalDetailsPages());
             fillAdditionalDetails(customer);
@@ -75,7 +75,11 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
         pages().browser().deleteAllCookies();
         pages().browser().refreshPage();
         pages().browser().waitUntilPageLoad();
-        pages().topNavigationPage().goToHomePage();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         pages().topNavigationPage().logIn();
         pages().loginPage().login(username, CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         pages().topNavigationPage().isLoggedIn();
