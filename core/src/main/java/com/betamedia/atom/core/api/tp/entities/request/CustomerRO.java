@@ -411,14 +411,19 @@ public class CustomerRO {
         public static final int CHARS_IN_PHONE_NUMBER = 11;
         public static final String TP_AUTOMATION_PREFIX = "tp_automation_";
         public static final String DEFAULT_PASSWORD = "123123";
+        public static final String DEFAULT_COUNTRY = "JM";
+        public static final String DEFAULT_CURRENCY = "EUR";
+        public static final String DEFAULT_BIRTHOFDATE = "1982-02-03";
+        public static final String DEFAULT_TITLE = "Mr";
+        
         //should be unique
         private String userName;
         private String password = DEFAULT_PASSWORD;
         private String firstName;
         private String email;
         private String phone;
-        private String currency = "EUR";
-        private String countryCode = "JM";
+        private String currency = DEFAULT_CURRENCY; 
+        private String countryCode = DEFAULT_COUNTRY;
 
         //    every registration opens 2 Trading Accounts (Binary & FX), which the primary is FX/CFD by default.
         //    set target as "binary" to have Binary as a primary TA
@@ -426,7 +431,7 @@ public class CustomerRO {
         private String lastName;
         private String utcOffset;
         private String oftc;
-        private String birthOfDate = "1982-02-03";
+        private String birthOfDate = DEFAULT_BIRTHOFDATE;
         private String city;
         private String userAgent;
         private String lang;
@@ -435,7 +440,7 @@ public class CustomerRO {
         private String stateCode;
         private String street;
         private String street2;
-        private String title = "Mr";
+        private String title = DEFAULT_TITLE;
         private String zip;
         private String channel;
         private String campaign;

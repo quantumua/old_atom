@@ -1,10 +1,11 @@
-package com.betamedia.atom.testslibrary.option24.end2end.crm;
+package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
+
 import org.testng.annotations.Test;
 
 /**
@@ -14,7 +15,7 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
 
     @Test(dataProvider = GENERIC_PARALLEL_DATA_PROVIDER)
     public void testWizard(OnboardingWizardConditions conditions) throws Exception {
-       CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
+        CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
         if (conditions.hasAdditionalDetails()) {
             operations().customerOperations().updateCustomersOnboardingConditions(customer, createConditionsToShowWelcomeAndAdditionalDetailsPages());
             fillAdditionalDetails(customer);

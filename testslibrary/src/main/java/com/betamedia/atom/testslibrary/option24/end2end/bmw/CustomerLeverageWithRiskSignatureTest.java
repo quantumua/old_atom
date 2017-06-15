@@ -1,14 +1,8 @@
-package com.betamedia.atom.testslibrary.option24.web;
+package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
-import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
-import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.testslibrary.option24.end2end.crm.AbstractOnboardingConditionsTest;
-import com.betamedia.atom.testslibrary.option24.web.CustomerLeverageTest.ExperienceScore;
+
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -20,7 +14,7 @@ import static org.testng.AssertJUnit.assertTrue;
  * Updated by Nir Shukrun on 6/6/17.
  * Updated by Nir Shukrun on 6/13/17 - new Signature Risk Warning for Spain.
  */
-public class CustomerLeverageWithRiskSignatureTest extends AbstractOnboardingConditionsTest {
+public class CustomerLeverageWithRiskSignatureTest extends AbstractOnboardingUserExperienceTest {
 
     private static final int FIRST_AVERAGE = 0;
     private static final int SECOND_AVERAGE = 1;
@@ -226,50 +220,5 @@ public class CustomerLeverageWithRiskSignatureTest extends AbstractOnboardingCon
         pages().startTradeDialog().startTrade();
         pages().setLeverageDialog().closeLeverageDialog();
         assertTrue("User wan't login successfully", pages().topNavigationPage().isLoggedIn());
-    }
-
-    /**
-     * Create user via mobile API using parameters to update in DB
-     *
-     * @param experienceLevel - experience level for the user
-     * @param experienceScore - experience score to add for the user into DB
-     * @return - created CRMCustomer object
-     */
-    private CRMCustomer createUser(String countryCode, ExperienceLevel experienceLevel, ExperienceScore experienceScore) {
-        CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(
-                CustomerRO.builder(CRMMobileAPINamingStrategy.get())
-                        .setCountryCode(countryCode),
-                onboardingWizardConditions(experienceLevel)
-        );
-        operations().customerOperations().updateExperienceScoreInDB(crmCustomer.getId(), experienceScore.get());
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        return crmCustomer;
-    }
-
-    /**
-     * Method to update credit card for current logged in user
-     */
-    private void updateCreditCard() {
-        pages().creditCardDeposit().submit(
-                CreditCardDeposit.builder()
-                        .withDepositAmount("100")
-                        .build());
-    }
-
-    /**
-     * Build onboarding wizard condition
-     *
-     * @param experienceLevel - experience level to set into builder
-     * @return OnboardingWizardConditions
-     */
-    private OnboardingWizardConditions onboardingWizardConditions(ExperienceLevel experienceLevel) {
-        return new OnboardingWizardConditions(true, true, true, true,
-                experienceLevel, false,
-                OnboardingWizardConditions.AccountType.REAL,
-                OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED,
-                OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED, true,
-                false, OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED);
-
     }
 }

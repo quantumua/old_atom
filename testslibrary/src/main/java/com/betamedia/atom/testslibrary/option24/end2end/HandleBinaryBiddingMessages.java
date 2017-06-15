@@ -1,4 +1,4 @@
-package com.betamedia.atom.testslibrary.option24.web;
+package com.betamedia.atom.testslibrary.option24.end2end;
 
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;

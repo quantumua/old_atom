@@ -1,18 +1,19 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm;
 
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 
 /**
  * Created by vsnigur on 5/29/17.
  */
-public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTest {
+public class CustomerLeverageWidgetsTest extends TPEndToEndTest {
 
-    private OnboardingWizardConditions onboardingWizardConditions;
     private final int FIRST_AVERAGE = 0;
     private final int SECOND_AVERAGE = 1;
     private final int THIRD_AVERAGE = 2;
@@ -81,8 +82,7 @@ public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTes
     }
 
     private CRMCustomer createUser(OnboardingWizardConditions.ExperienceLevel experienceLevel, ExperienceScore experienceScore) {
-        onboardingWizardConditions = onboardingWizardConditions(experienceLevel);
-        CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions);
+        CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions(experienceLevel));
         operations().customerOperations().updateExperienceScoreInDB(crmCustomer.getId(), experienceScore.get());
         pages().crmNavigation().login();
         pages().crmLoginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
@@ -105,21 +105,16 @@ public class CustomerLeverageWidgetsTest extends AbstractOnboardingConditionsTes
     }
 
     private enum ExperienceScore {
-
         UNKNOWN(0),
         REJECTED(5),
         NO_EXPERIENCE(25),
         LOW_EXPERIENCE(45),
         HIGH_EXPERIENCE(65),
         EXPERT(85);
-
-
         private int score;
-
         ExperienceScore(int score) {
             this.score = score;
         }
-
         public int get() {
             return score;
         }

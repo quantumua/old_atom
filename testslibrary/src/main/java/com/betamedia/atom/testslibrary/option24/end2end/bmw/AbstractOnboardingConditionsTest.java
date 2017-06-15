@@ -1,4 +1,4 @@
-package com.betamedia.atom.testslibrary.option24.end2end.crm;
+package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;

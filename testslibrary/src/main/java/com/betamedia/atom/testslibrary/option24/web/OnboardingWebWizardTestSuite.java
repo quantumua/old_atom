@@ -5,8 +5,8 @@ import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
-import com.betamedia.atom.testslibrary.option24.end2end.crm.AccountAdditionalDetailsTest;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
+import com.betamedia.atom.testslibrary.option24.web.crm.AccountAdditionalDetailsTest;
 
 import org.testng.annotations.Test;
 

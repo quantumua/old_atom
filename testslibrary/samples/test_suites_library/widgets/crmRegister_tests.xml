@@ -2,7 +2,7 @@
 <suite name="Suite: sequential execution of tests" verbose="1">
     <test name="Test scenario for register accounts in the CRM">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.RegisterTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.web.crm.RegisterTest" >
             </class>
         </classes>
     </test>

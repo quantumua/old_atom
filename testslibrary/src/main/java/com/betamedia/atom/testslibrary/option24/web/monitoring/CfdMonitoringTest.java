@@ -1,25 +1,26 @@
 package com.betamedia.atom.testslibrary.option24.web.monitoring;
 
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.fwdataaccess.entities.ExpectedCfdAsset;
-import com.betamedia.atom.core.testingtype.tp.TPCachedResourceEndToEndTest;
-import org.testng.Assert;
-import org.testng.annotations.BeforeGroups;
-import org.testng.annotations.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.is;
+import org.testng.Assert;
+import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.Test;
+
+import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.atom.core.fwdataaccess.entities.ExpectedCfdAsset;
+import com.betamedia.atom.core.testingtype.tp.TPClientTest;
 
 /**
  * @author mbelyaev
  * @since 4/18/17
  */
-public class CfdMonitoringTest extends TPCachedResourceEndToEndTest {
+public class CfdMonitoringTest extends TPClientTest {
     private static final String USERNAME = "QENirShuTest@Test.ru";
     private static final String PASSWORD = CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD;
     private static final String DATA_DRIVEN_MONITORING_TEST_GROUP = "data_driven_monitoring_test_group";

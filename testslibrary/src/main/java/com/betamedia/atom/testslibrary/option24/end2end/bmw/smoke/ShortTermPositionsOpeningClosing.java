@@ -1,4 +1,4 @@
-package com.betamedia.atom.testslibrary.option24.web.bmw.smoke;
+package com.betamedia.atom.testslibrary.option24.end2end.bmw.smoke;
 
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;

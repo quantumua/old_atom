@@ -2,11 +2,11 @@
 <suite name="Suite: sequential execution of tests" verbose="1">
     <test name="Test scenarios for register and update user information in the CRM widgets">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.AccountAdditionalDetailsTest" />
-            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.RegisterTest" />
-            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.AccountDetailsTest" />
-            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.CreditCardDepositTest" />
-            <class name="com.betamedia.atom.testslibrary.option24.end2end.crm.RegisterTest" />
+            <class name="com.betamedia.atom.testslibrary.option24.web.crm.AccountAdditionalDetailsTest" />
+            <class name="com.betamedia.atom.testslibrary.option24.web.crm.RegisterTest" />
+            <class name="com.betamedia.atom.testslibrary.option24.web.crm.AccountDetailsTest" />
+            <class name="com.betamedia.atom.testslibrary.option24.web.crm.CreditCardDepositTest" />
+            <class name="com.betamedia.atom.testslibrary.option24.web.crm.RegisterTest" />
         </classes>
     </test>
 </suite>

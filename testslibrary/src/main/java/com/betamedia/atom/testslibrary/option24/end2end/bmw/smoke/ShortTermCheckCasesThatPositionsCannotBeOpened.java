@@ -1,14 +1,10 @@
-package com.betamedia.atom.testslibrary.option24.web.bmw.smoke;
+package com.betamedia.atom.testslibrary.option24.end2end.bmw.smoke;
 
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;
-import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.core.dsl.operations.TagOperations;
-import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
-import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
-import com.betamedia.tp.api.model.*;
-import com.betamedia.tp.api.model.enums.OptionType;
-import com.betamedia.tp.api.model.enums.PositionStatus;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriverException;
@@ -16,16 +12,19 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
+import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;
+import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
+import com.betamedia.atom.core.dsl.operations.TagOperations;
+import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
+import com.betamedia.tp.api.model.*;
+import com.betamedia.tp.api.model.enums.*;
 
 /**
  * @author leonid.a
  */
 
-public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTest {
+public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardingUserExperienceTest {
     private static final Logger logger = LogManager.getLogger(AbstractPageObject.class);
 
     /*
@@ -37,18 +36,12 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
     @Test()
     public void investedAmountAboveTABalancePlusOneTest() {
 
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade();
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 100d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-//		Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().startTradeDialog().startTrade();
-        pages().disclaimerNotification().tryAccept();
 
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
@@ -78,21 +71,19 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void InvestedAmountMaximumPlusOne() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
-        CRMCustomer customer = operations().customerOperations().register();
-        CRMAccount binaryAccount = customer.getBinaryAccount();
-        String accountId = binaryAccount.getId();
+        Asset asset = assetIsReadyToTrade();
+        CRMCustomer customer = createHighExperiencedUser();
+
+		CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 
         int maxInvestmentAllowed = 48000;        // TODO getMaxInvestment();
         double aboveMaxInvestment = maxInvestmentAllowed + 1;
 
         // Making sure that I have enough money
+        String accountId = binaryAccount.getId();
         Double accountBalance = operations().accountOperations().getTP(accountId).getBalance();
         if (accountBalance < aboveMaxInvestment) {
             operations().accountOperations().updateBalanceTP(accountId, (double) aboveMaxInvestment + 200);
@@ -116,15 +107,13 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void InsertValidCharactersInAnInvalidForm() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade();
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 
         int minInvestmentAllowed = 10;        // TODO getMinInvestment();
@@ -149,16 +138,14 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void InvestNegativeAmount() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
-        CRMCustomer customer = operations().customerOperations().register();
+
+        Asset asset = assetIsReadyToTrade();
+        CRMCustomer customer = createHighExperiencedUser();
+
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 
         int minInvestmentAllowed = 10;        // TODO getMinInvestment();
         operations().accountOperations().updateBalanceTP(accountId, (double) minInvestmentAllowed);
@@ -181,16 +168,13 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void InvestZeroAmount() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 5.0d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade(); // 5.0d
+        CRMCustomer customer = createHighExperiencedUser();
+
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 
         int minInvestmentAllowed = 10;        // TODO getMinInvestment();
         operations().accountOperations().updateBalanceTP(accountId, (double) minInvestmentAllowed);
@@ -214,13 +198,11 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
     */
     @Test()
     public void aboveMaxExposureLimit() {
-        CRMCustomer customer = operations().customerOperations().register();
+        CRMCustomer customer = createHighExperiencedUser();
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
 
@@ -282,16 +264,12 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void BuyingWithoutInvestedAmount() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 5.0d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade(); // 5.0d
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
 
         String Investment = "";
         int minInvestmentAllowed = 10;        // TODO getMinInvestment();
@@ -315,16 +293,12 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void InvalidIinvestedAmount() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 5.0d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade(); // 5.0d
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
-        //String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
@@ -346,16 +320,12 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void InvestedAmountAboveMmaximum() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 5.0d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade(); // 5.0d
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
@@ -384,16 +354,13 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void InvestedAmountBelowMinimum() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 5.0d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade(); // 5.0d
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
@@ -417,15 +384,12 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test()
     public void InvestedAmountAboveTABalance() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 5.0d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade(); // 5.0d
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
@@ -456,16 +420,12 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	 * Only 1 position was opened.
 	 */
     public void MultipleClicksOnTheBuyTest() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 5.0d);
-        CRMCustomer customer = operations().customerOperations().register();
+        Asset asset = assetIsReadyToTrade(); // 5.0d
+        CRMCustomer customer = createHighExperiencedUser();
         CRMAccount cfdAccount = customer.getFXCFDAccount();
         String accountId = cfdAccount.getId();
         operations().accountOperations().depositCRM(accountId, 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
@@ -508,12 +468,11 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         if (asset.getFeedTimeout() < 500) {
             operations().assetOperations().setTimeout(asset, 500, 501);
         }
-        CRMCustomer customer = operations().customerOperations().register();
+
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
@@ -552,9 +511,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
 	 */
     @Test
     public void LoggedOutStatus() {
-        Asset asset = operations().assetOperations().get();
-        operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        operations().feedOperations().injectFeed(asset.getId(), 1.5d);
+        assetIsReadyToTrade();
+
         pages().topNavigationPage();
 
         try {
@@ -578,21 +536,21 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
      */
     @Test
     public void optionClosesEarlierThenDelay() {
-        AccountGroup accountGroup = new AccountGroup();
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        CRMCustomer customer = operations().customerOperations().register();
+
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());
 
         int delay = 30 * 1000;
         // Change delay
+        AccountGroup accountGroup = new AccountGroup();
         List<DealApprovalConfiguration> dealApprovalConfigurations = accountGroup.getDealApprovalConfigurations();
         for (DealApprovalConfiguration dealApprovalConfiguration : dealApprovalConfigurations) {
             // Setting delay to by 30 seconds
@@ -635,12 +593,12 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends TPEndToEndTe
         AccountGroup accountGroup = new AccountGroup();
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-        CRMCustomer customer = operations().customerOperations().register();
+
+        CRMCustomer customer = createHighExperiencedUser();
+
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
-        pages().topNavigationPage().logIn();
-        //pages().loginPage().login(customer.getUserName(), CustomerBuilder.PASSWORD);
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
         pages().assets().asset(asset.getId(), asset.getAssetName());

@@ -1,13 +1,14 @@
-package com.betamedia.atom.testslibrary.option24.end2end.crm;
+package com.betamedia.atom.testslibrary.option24.web.crm;
+
+import org.testng.annotations.Test;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.testingtype.tp.TPCachedResourceEndToEndTest;
-import org.testng.annotations.Test;
+import com.betamedia.atom.core.testingtype.tp.TPClientTest;
 
 /**
  * Created by vsnigur on 5/19/17.
  */
-public class AccountAdditionalDetailsTest extends TPCachedResourceEndToEndTest {
+public class AccountAdditionalDetailsTest extends TPClientTest {
 
     @Test
     public void accountAdditionalDetailsAddInformationTest(){

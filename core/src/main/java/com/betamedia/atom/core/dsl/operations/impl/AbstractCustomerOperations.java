@@ -233,9 +233,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Override
     public CRMCustomer registerWithWizardConditions(OnboardingWizardConditions wizardConditions) {
-        CRMCustomer registeredCustomer = register(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
-        updateCustomersOnboardingConditions(registeredCustomer, wizardConditions);
-        return registeredCustomer;
+        return registerWithWizardConditions(CustomerRO.builder(CRMMobileAPINamingStrategy.get()), wizardConditions);
     }
 
     @Override

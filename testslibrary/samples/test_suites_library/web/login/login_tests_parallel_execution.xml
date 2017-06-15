@@ -2,7 +2,7 @@
 <suite name="Suite: Login Tests - parallel execution of tests" verbose="1" parallel="methods" thread-count="4">
     <test name="Login tests - parallel execution of tests">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.web.LoginPageTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.LoginPageTest" >
                 <methods>
                     <parameter name="username" value="maksym"/>
                     <parameter name="password" value="password"/>

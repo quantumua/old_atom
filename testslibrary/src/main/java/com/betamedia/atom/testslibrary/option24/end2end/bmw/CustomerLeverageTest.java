@@ -1,10 +1,8 @@
-package com.betamedia.atom.testslibrary.option24.web;
+package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.testslibrary.option24.end2end.crm.AbstractOnboardingConditionsTest;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,9 +12,8 @@ import static org.testng.AssertJUnit.assertTrue;
  * Created by vsnigur on 5/29/17.
  * Updated by Nir Shukrun on 6/6/17.
  */
-public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
+public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
 
-    private OnboardingWizardConditions onboardingWizardConditions;
     private final int FIRST_AVERAGE = 0;
     private final int SECOND_AVERAGE = 1;
     private final int THIRD_AVERAGE = 2;
@@ -200,67 +197,5 @@ public class CustomerLeverageTest extends AbstractOnboardingConditionsTest {
         pages().startTradeDialog().startTrade();
         pages().setLeverageDialog().closeLeverageDialog();
         assertTrue("User wan't login successfully", pages().topNavigationPage().isLoggedIn());
-    }
-
-    /**
-     * Create user via mobile API using parameters to update in DB
-     * @param experienceLevel - experience level for the user
-     * @param experienceScore - experience score to add for the user into DB
-     * @return - created CRMCustomer object
-     */
-    private CRMCustomer createUser(OnboardingWizardConditions.ExperienceLevel experienceLevel, ExperienceScore experienceScore) {
-        onboardingWizardConditions = onboardingWizardConditions(experienceLevel);
-        CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions);
-        operations().customerOperations().updateExperienceScoreInDB(crmCustomer.getId(), experienceScore.get());
-        pages().topNavigationPage().logIn();
-        pages().loginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        return crmCustomer;
-    }
-
-    /**
-     * Method to update credit card for current logged in user
-     */
-    private void updateCreditCard() {
-        pages().creditCardDeposit().submit(
-                CreditCardDeposit.builder()
-                        .withDepositAmount("100")
-                        .build());
-    }
-
-    /**
-     * Build onboarding wizard condition
-     * @param experienceLevel - experience level to set into builder
-     * @return
-     */
-    private OnboardingWizardConditions onboardingWizardConditions(OnboardingWizardConditions.ExperienceLevel experienceLevel) {
-        return new OnboardingWizardConditions(true, true, true, true,
-                experienceLevel, false,
-                OnboardingWizardConditions.AccountType.REAL,
-                OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED,
-                OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED, true,
-                false, OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED);
-
-    }
-
-    /**
-     * enums for experience scores in the current test class
-     * TODO extract enum if it's meant to be used for multiple classes
-     */
-    public enum ExperienceScore {
-        REJECTED(5),
-        NO_EXPERIENCE(25),
-        LOW_EXPERIENCE(45),
-        HIGH_EXPERIENCE(65),
-        EXPERT(85);
-
-        private int score;
-
-        ExperienceScore(int score) {
-            this.score = score;
-        }
-
-        public int get() {
-            return score;
-        }
     }
 }

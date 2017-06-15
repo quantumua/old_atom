@@ -1,5 +1,7 @@
 package com.betamedia.atom.core.testingtype.base;
 
+import com.betamedia.atom.core.fwdataaccess.repository.EntityRepository;
+import com.betamedia.atom.core.holders.AppContextHolder;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -21,7 +23,11 @@ import java.util.List;
 public abstract class AbstractTest {
     protected static final String GENERIC_DATA_PROVIDER = "GenericDataProvider";
     protected static final String GENERIC_PARALLEL_DATA_PROVIDER = "GenericParallelDataProvider";
+    protected static final String CACHED_DATA_PROVIDER = "CachedDataProvider";
+    protected static final String CACHED_PARALLEL_DATA_PROVIDER = "CachedParallelDataProvider";
     private static final String DATA_PROVIDER_ERROR = "Failed to load data";
+    
+    private EntityRepository entityRepository = null;
 
     /**
      * Test fixture teardown procedure that is invoked by TestNG after each test method invocation. <br/>
@@ -94,6 +100,36 @@ public abstract class AbstractTest {
     }
 
     /**
+     * Generic data provider that attempts to get resources from {@link EntityRepository}
+     * as entities provided by {@link AbstractTest#getDataSourceEntity()};
+     */
+    @DataProvider(name = CACHED_DATA_PROVIDER)
+    public final Iterator<Object[]> cachedDataProvider() {
+        return getResources(getDataSourceEntity())
+                .stream()
+                .map(a -> new Object[]{a})
+                .iterator();
+    }
+
+    /**
+     * Generic data provider that attempts to get resources from {@link EntityRepository}
+     * as entities provided by {@link AbstractTest#getDataSourceEntity()};
+     *
+     * @implNote TestNG will invoke {@link #runTearDown()} after every execution
+     */
+    @DataProvider(name = CACHED_PARALLEL_DATA_PROVIDER, parallel = true)
+    public final Iterator<Object[]> cachedParallelDataProvider() {
+        return getResources(getDataSourceEntity())
+                .stream()
+                .map(a -> new Object[]{a})
+                .iterator();
+    }
+    
+    protected final <T> List<T> getResources(Class<T> entity) {
+        return getEntityRepository().get(entity);
+    }
+
+    /**
      * Override this method in implementing test class to pass the required entity to GenericDataProvider
      */
     protected Class getDataSourceEntity() {
@@ -117,5 +153,12 @@ public abstract class AbstractTest {
             Reporter.log(DATA_PROVIDER_ERROR + '\n');
             throw new RuntimeException(DATA_PROVIDER_ERROR, e);
         }
+    }
+
+    private EntityRepository getEntityRepository() {
+        if (entityRepository == null) {
+            entityRepository = AppContextHolder.getBean(EntityRepository.class);
+        }
+        return entityRepository;
     }
 }

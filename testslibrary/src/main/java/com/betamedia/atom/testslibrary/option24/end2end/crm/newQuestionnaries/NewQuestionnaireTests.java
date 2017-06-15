@@ -1,18 +1,19 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries;
 
+import org.testng.annotations.Test;
+
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.testingtype.tp.TPCachedResourceEndToEndTest;
+import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 import com.betamedia.common.enums.Country;
-import org.testng.annotations.Test;
 
 
 /**
  * Created by vadyms on 5/22/17.
  */
-public class NewQuestionnaireTests extends TPCachedResourceEndToEndTest {
+public class NewQuestionnaireTests extends TPEndToEndTest {
 
     private final static String FREE_TEXT = "Free text";
     private final static String COUNTRY = Country.TOGO.getDbValue().toUpperCase();

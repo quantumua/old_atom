@@ -2,7 +2,7 @@
 <suite name="Suite: sequential execution of tests" verbose="1" parallel="methods" thread-count="5">
     <test name="Regression leverage">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.web.CustomerLeverageTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.CustomerLeverageTest" >
                 <methods>
                     <include name="checkNoCustomerLeverageForRejectedCustomer"/>
                     <include name="checkIsNotAbbleToLoginForRejectedCustomer"/>
