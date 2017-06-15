@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
+import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvTimezoneOperationsImpl;
 import com.betamedia.tp.api.model.scheduling.Timezone;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

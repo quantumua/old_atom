@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.feedgateway.FWFeedGatewayConnector;
+import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvFeedOperationsImpl;
 import com.betamedia.common.utils.UUIDUtils;
 import com.betamedia.tp.api.feed.TickData;
 import com.betamedia.tp.api.model.enums.FeedResolution;

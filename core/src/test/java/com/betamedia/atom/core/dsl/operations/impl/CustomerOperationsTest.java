@@ -6,6 +6,7 @@ import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.*;
+import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvCustomerOperationsImpl;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.atom.core.persistence.entities.TrackingInfo;
 import com.betamedia.atom.core.persistence.entities.TrackingInfoExtension;

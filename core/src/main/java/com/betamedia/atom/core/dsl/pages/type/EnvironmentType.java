@@ -8,7 +8,8 @@ public enum EnvironmentType {
 
     QA("qa"),
     PROD("prod"),
-    AUTOMATION("automation");
+    AUTOMATION("automation"),
+    NEW_AUTOMATION("newAutomation");
 
     private String value;
 
