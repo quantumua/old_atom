@@ -40,9 +40,9 @@ public class CreditCardDeposit {
 
         private String depositAmount = "100";
         private String creditCardNumber = DEFAULT_CREDIT_CARD_VISA;
-        private String cvv2 = "123";
-        private String expiryDateMonth = "1";
-        private String expiryDateYear = "2020";
+        private String cvv2 = "281";
+        private String expiryDateMonth = "12";
+        private String expiryDateYear = "2017";
         private String cardHoldersFirstName = "Automation";
         private String cardHoldersLastName = "Automation";
         private String billingAddress = "Test Address";

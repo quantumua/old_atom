@@ -1,12 +1,16 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
-import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.AccountAdditionalDetailsPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
+import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.AccountAdditionalDetailsPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsPersonalInformationImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsTradingExperienceImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RegistrationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomePageImpl;
 import com.betamedia.atom.core.dsl.pages.type.ProductType;
@@ -24,29 +28,38 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 @Component
 @Scope(SCOPE_PROTOTYPE)
 public class WEBPageFactoryImpl extends AbstractPageFactory implements WEBPageFactory {
-
-    @Override
-    public ProductType getType() {
-        return ProductType.WEB;
-    }
-
-    @Override
-    public RegistrationPage registrationPage() {
-        return creator.getPage(RegistrationPageImpl.class);
-    }
-
+   
+	@Override
+	public RegistrationPage registrationPage() {
+		return creator.getPage(RegistrationPageImpl.class);
+	}
     @Override
     public TopNavigationPage topNavigationPage() {
         return creator.getPage(TopNavigationPageImpl.class);
     }
-
+  
     @Override
-    public WelcomePage welcomepage() {
-        return creator.getPage(WelcomePageImpl.class);
+    public ProductType getType() {
+        return ProductType.WEB;
     }
-
-    @Override
-    public AccountAdditionalDetailsPage accountAdditionalDetailsPage() {
-        return creator.getPage(AccountAdditionalDetailsPageImpl.class);
-    }
+	@Override
+	public WelcomePage welcomepage() {
+		return creator.getPage(WelcomePageImpl.class);
+	}
+	@Override
+	public AccountAdditionalDetailsPage accountAdditionalDetailsPage() {
+		return creator.getPage(AccountAdditionalDetailsPageImpl.class);
+	}
+	
+	 @Override
+	    public FnsPersonalInformation fnsPersonalInformation() {
+	        return creator.getPage(FnsPersonalInformationImpl.class);
+	  }
+	 
+	 @Override
+	    public FnsTradingExperience fnsTradingExperience() {
+	        return creator.getPage(FnsTradingExperienceImpl.class);
+	  }
+	 	    
 }
+
