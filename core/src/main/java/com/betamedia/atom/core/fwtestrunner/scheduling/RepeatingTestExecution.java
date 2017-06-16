@@ -1,8 +1,10 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
+import com.betamedia.atom.core.fwtestrunner.TestTask;
 import org.springframework.core.task.TaskExecutor;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
@@ -11,7 +13,7 @@ import java.util.function.Consumer;
 /**
  * Created by mbelyaev on 4/19/17.
  */
-public class RepeatingTestExecution<T> implements TestExecution, ExecutionListener<T> {
+public class RepeatingTestExecution<T> implements ContinuousTask, ExecutionListener<T> {
 
     private final AtomicBoolean isActive = new AtomicBoolean(true);
     private final Consumer<ExecutionListener<T>> consumer;
@@ -43,5 +45,6 @@ public class RepeatingTestExecution<T> implements TestExecution, ExecutionListen
     public Map<String, String> getInfo() {
         return Collections.emptyMap();
     }
+
 
 }

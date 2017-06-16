@@ -1,4 +1,4 @@
-package com.betamedia.atom.core.fwtestrunner.listeners.impl;
+package com.betamedia.atom.core.fwtestrunner.listeners.testng.impl;
 
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
 import com.betamedia.atom.core.dsl.pages.pageobjects.browser.BrowserOperations;

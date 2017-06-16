@@ -3,6 +3,7 @@ package com.betamedia.atom.core.fwtestrunner.classloader.impl;
 import com.betamedia.atom.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.atom.core.fwtestrunner.classloader.URLClassLoaderFactory;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
+import com.betamedia.atom.core.utils.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,6 +122,13 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
         }
     }
 
+    @Override
+    public <T> List<T> run(List<Supplier<T>> suppliers, String jarPath) {
+        if (jarPath == null || jarPath.isEmpty())
+            return runWithGlobalJar(suppliers);
+        return runWithProvidedJar(suppliers, jarPath);
+    }
+
     /**
      * <p>
      * This method executes Runnable objects, providing custom context classloader for them.
@@ -140,8 +148,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
      *
      * @param suppliers List of Supplier objects to execute
      */
-    @Override
-    public <T> List<T> run(List<Supplier<T>> suppliers) {
+    private <T> List<T> runWithGlobalJar(List<Supplier<T>> suppliers){
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
         ClassLoader classLoader;
         pathLock.readLock().lock();
@@ -167,7 +174,6 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
         }
     }
 
-
     /**
      * <p>
      * This method executes Runnable objects, providing temporary context classloader made using uploaded JAR file.
@@ -176,10 +182,9 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
      * </p>
      *
      * @param suppliers List of Supplier objects to execute
-     * @param jar       The uploaded JAR binary
+     * @param jarPath   Path to the uploaded JAR binary
      */
-    @Override
-    public <T> List<T> run(List<Supplier<T>> suppliers, String jarPath) {
+    private <T> List<T> runWithProvidedJar(List<Supplier<T>> suppliers, String jarPath){
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
         try {
             ClassLoader classLoader = classLoaderFactory.get(jarPath, parent);

@@ -1,4 +1,4 @@
-package com.betamedia.atom.core.fwtestrunner.listeners;
+package com.betamedia.atom.core.fwtestrunner.listeners.testng;
 
 import com.betamedia.atom.core.fwtestrunner.runner.AbstractTestNGRunner;
 import org.testng.ITestNGListener;

@@ -1,5 +1,6 @@
 package com.betamedia.atom.core.fwtestrunner;
 
+import com.betamedia.atom.core.fwtestrunner.listeners.TestTaskCompletionListener;
 import com.betamedia.atom.core.fwtestrunner.scheduling.ExecutionListener;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +14,10 @@ import java.util.Properties;
 public interface TestRunnerHandler {
 
     String TEST_OUTPUT_DIRECTORY = "test-output/";
+
+    List<TestTask> handleTask(Properties properties, MultipartFile[] suites, MultipartFile tempJar, List<TestTaskCompletionListener> listeners);
+
+    List<TestTask> handleTask(Properties properties, List<String> suitePaths, String tempJarPath, List<TestTaskCompletionListener> listeners);
 
     List<ExecutionArguments> handle(Properties properties, MultipartFile[] suites, MultipartFile tempJar, ExecutionListener<List<RunnerResult>> listener);
 

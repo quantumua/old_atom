@@ -14,8 +14,6 @@ public interface ContextClassLoaderManagingExecutor {
 
     void setJarPath(String jarPath);
 
-    <T> List<T> run(List<Supplier<T>> suppliers);
-
     <T> List<T> run(List<Supplier<T>> suppliers, String jarPath);
 
     String getJarVersion();

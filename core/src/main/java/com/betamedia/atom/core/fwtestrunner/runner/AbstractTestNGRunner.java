@@ -1,8 +1,9 @@
 package com.betamedia.atom.core.fwtestrunner.runner;
 
 import com.betamedia.atom.core.fwtestrunner.RunnerResult;
-import com.betamedia.atom.core.fwtestrunner.listeners.ConfigurableListenerFactory;
-import com.betamedia.atom.core.fwtestrunner.listeners.impl.ScreenShotListener;
+import com.betamedia.atom.core.fwtestrunner.TestTask;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.ConfigurableListenerFactory;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotListener;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageException;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import com.betamedia.atom.core.fwtestrunner.types.TestRunnerType;
@@ -50,6 +51,34 @@ public abstract class AbstractTestNGRunner implements TestRunner {
                 testng.getOutputDirectory() + "/emailable-report.html",
                 getScreenshots(testng.getOutputDirectory())
         );
+    }
+
+    @Override
+    public TestTask run(TestTask task) {
+        initializeEnvironment(task.properties);
+        TestNG testng = new TestNG();
+        testng.setOutputDirectory(task.reportDirectory);
+        listenerFactories.stream()
+                .map(f -> f.get(task.reportDirectory))
+                .forEach(testng::addListener);
+        testng.setTestSuites(task.suites);
+        TestTask startedTask = task.update().withStatus(TestTask.Status.STARTED).build();
+        try {
+            testng.run();
+        } catch (RuntimeException e) {
+            logger.error("TestNG exception!", e);
+            return startedTask.update()
+                    .withStatus(TestTask.Status.ABORTED)
+                    .hasFailed(true)
+                    .build();
+        }
+        return startedTask.update()
+                .withStatus(TestTask.Status.COMPLETED)
+                .hasFailed(testng.hasFailure() || testng.hasSkip())
+                .withAttachmentURLs(getScreenshots(task.reportDirectory))
+                .withReportURL(task.reportDirectory +"/index.html")
+                .withEmailReportURL(task.reportDirectory + "/emailable-report.html")
+                .build();
     }
 
     /**

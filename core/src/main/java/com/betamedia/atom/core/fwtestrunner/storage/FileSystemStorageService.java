@@ -1,5 +1,7 @@
 package com.betamedia.atom.core.fwtestrunner.storage;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -27,6 +29,7 @@ import java.util.stream.Stream;
  */
 @Service
 public class FileSystemStorageService implements StorageService {
+    private static final Logger logger = LogManager.getLogger(FileSystemStorageService.class);
 
     private final Path rootLocation;
 
@@ -43,8 +46,9 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public String storeToTemp(MultipartFile file, String pathString) {
         try {
-            if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + pathString);
+            if (file == null || file.isEmpty()) {
+                logger.debug("Trying to store empty file " + pathString);
+                return null;
             }
             if (!resolve(Paths.get(pathString)).toFile().exists()) {
                 Files.createDirectory(resolve(Paths.get(pathString)));

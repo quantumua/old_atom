@@ -2,6 +2,8 @@ package com.betamedia.atom.core.fwtestrunner.scheduling;
 
 import com.betamedia.atom.core.fwtestrunner.RunnerResult;
 import com.betamedia.atom.core.fwtestrunner.TestRunnerHandler;
+import com.betamedia.atom.core.fwtestrunner.TestTask;
+import com.betamedia.atom.core.fwtestrunner.listeners.TestTaskCompletionListener;
 import com.betamedia.atom.core.fwtestrunner.reporting.EmailService;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -21,7 +24,7 @@ import java.util.stream.Collectors;
  * @since 4/19/17
  */
 @Component
-public class TestExecutionManagerImpl implements TestExecutionManager {
+public class ContinuousTaskManagerImpl implements ScheduledTaskManager {
     @Autowired
     private TestRunnerHandler handler;
     @Autowired
@@ -32,37 +35,68 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
     private EmailService emailService;
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private List<TestTaskCompletionListener> listeners;
 
-    private ConcurrentMap<String, TestExecution> executions = new ConcurrentHashMap<>();
+    private ConcurrentMap<String, ContinuousTask> continuousTasks = new ConcurrentHashMap<>();
 
     @Override
-    public void createRepeatingTest(String name, String mailAddress, Properties properties, MultipartFile[] suites) {
+    public void createScheduledTask(String name, String emailAddress, Properties properties, MultipartFile[] suites, String cronExpression) {
         addTestExecution(
                 name,
-                new RepeatingTestExecution<>(
-                        getExecutionWithCallback(properties, suites, sender(mailAddress)),
+                new ScheduledTask(
+                        getTaskExecution(properties, suites, listeners),
+                        cronExpression,
+                        taskScheduler));
+    }
+
+    @Override
+    public void createRepeatingTask(String name, String emailAddress, Properties properties, MultipartFile[] suites) {
+        addTestExecution(
+                name,
+                new RepeatingTask(
+                        getTaskExecution(properties, suites, listeners),
                         asyncTaskExecutor));
     }
 
     @Override
-    public void createScheduledTest(String name, String mailAddress, Properties properties, MultipartFile[] suites, String cronExpression) {
+    public List<TestTask> getTasks() {
+        return null;
+    }
+
+    @Override
+    public void stopTask(UUID uuid) {
+
+    }
+
+    @Override
+    public void createRepeatingTest(String name, String emailAddress, Properties properties, MultipartFile[] suites) {
+        addTestExecution(
+                name,
+                new RepeatingTestExecution<>(
+                        getExecutionWithCallback(properties, suites, sender(emailAddress)),
+                        asyncTaskExecutor));
+    }
+
+    @Override
+    public void createScheduledTest(String name, String emailAddress, Properties properties, MultipartFile[] suites, String cronExpression) {
         addTestExecution(
                 name,
                 new ScheduledTestExecution<>(
-                        getExecutionWithCallback(properties, suites, sender(mailAddress)),
+                        getExecutionWithCallback(properties, suites, sender(emailAddress)),
                         cronExpression,
                         taskScheduler));
     }
 
     @Override
     public void stopTask(String name) {
-        Optional.ofNullable(executions.remove(name))
-                .ifPresent(TestExecution::stop);
+        Optional.ofNullable(continuousTasks.remove(name))
+                .ifPresent(ContinuousTask::stop);
     }
 
     @Override
     public Set<Map<String, String>> getInfo() {
-        return executions.entrySet()
+        return continuousTasks.entrySet()
                 .stream()
                 .map(e -> {
                     Map<String, String> info = new HashMap<>(e.getValue().getInfo());
@@ -72,9 +106,9 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
                 .collect(Collectors.toSet());
     }
 
-    private void addTestExecution(String name, TestExecution execution) {
-        Optional.ofNullable(executions.put(name, execution))
-                .ifPresent(TestExecution::stop);
+    private void addTestExecution(String name, ContinuousTask execution) {
+        Optional.ofNullable(continuousTasks.put(name, execution))
+                .ifPresent(ContinuousTask::stop);
         execution.start();
     }
 
@@ -89,6 +123,13 @@ public class TestExecutionManagerImpl implements TestExecutionManager {
             result.forEach(callback);
             executionListener.onCompletion(result);
         });
+    }
+
+    private Supplier<List<TestTask>> getTaskExecution(Properties properties, MultipartFile[] suites, List<TestTaskCompletionListener> listeners) {
+        String tempDirectory = UUID.randomUUID().toString();
+        List<String> suitePaths = storageService.storeToTemp(suites, tempDirectory);
+//TODO          invoking TEHandler will create new set of tasks, TestTask covers singular execution
+        return () -> handler.handleTask(properties, suitePaths, null, listeners);
     }
 
     private Consumer<RunnerResult> sender(String mailAddress) {

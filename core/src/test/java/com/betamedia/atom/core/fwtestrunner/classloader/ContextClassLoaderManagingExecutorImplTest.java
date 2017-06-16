@@ -80,7 +80,7 @@ public class ContextClassLoaderManagingExecutorImplTest {
                         }
                         mockExecution(mockClassLoader, "MOCK 1");
                         return null;
-                    }));
+                    }), null);
                 },
                 () -> {
                     try {
@@ -97,7 +97,7 @@ public class ContextClassLoaderManagingExecutorImplTest {
                     executionHandler.run(Collections.singletonList(() -> {
                         mockExecution(alteredClassLoader, "ALT 1");
                         return null;
-                    }));
+                    }), null);
                 },
                 () -> {
                     try {
@@ -109,7 +109,7 @@ public class ContextClassLoaderManagingExecutorImplTest {
                     executionHandler.run(Collections.singletonList(() -> {
                         mockExecution(alteredClassLoader, "ALT 2");
                         return null;
-                    }));
+                    }), null);
                 }
         ).forEach(pool::execute);
         pool.awaitTermination(1, TimeUnit.MINUTES);
