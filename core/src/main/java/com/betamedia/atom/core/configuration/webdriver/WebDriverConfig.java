@@ -29,7 +29,7 @@ public class WebDriverConfig {
      * Need to avoid unnecessarily restarting the ChromeDriver server with each instance (see {@link ChromeDriver})
      *
      * @param chromeDriverPath path to chromedriver executable
-     * @return
+     * @return ChromeDriverService instance
      */
     @Bean(initMethod = "start", destroyMethod = "stop")
     @Lazy

@@ -1,6 +1,5 @@
 package com.betamedia.atom.core.fwtestrunner.runner;
 
-import com.betamedia.atom.core.fwtestrunner.RunnerResult;
 import com.betamedia.atom.core.fwtestrunner.TestTask;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.ConfigurableListenerFactory;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotListener;
@@ -38,22 +37,6 @@ public abstract class AbstractTestNGRunner implements TestRunner {
     }
 
     @Override
-    public final RunnerResult run(Properties properties, List<String> suites, String outputDirectory) {
-        initializeEnvironment(properties);
-        TestNG testng = new TestNG();
-        testng.setOutputDirectory(outputDirectory);
-        listenerFactories.stream()
-                .map(f -> f.get(outputDirectory))
-                .forEach(testng::addListener);
-        testng.setTestSuites(suites);
-        testng.run();
-        return new RunnerResult(testng.hasFailure() || testng.hasSkip(),
-                testng.getOutputDirectory() + "/emailable-report.html",
-                getScreenshots(testng.getOutputDirectory())
-        );
-    }
-
-    @Override
     public TestTask run(TestTask task) {
         initializeEnvironment(task.properties);
         TestNG testng = new TestNG();
@@ -76,7 +59,7 @@ public abstract class AbstractTestNGRunner implements TestRunner {
                 .withStatus(TestTask.Status.COMPLETED)
                 .hasFailed(testng.hasFailure() || testng.hasSkip())
                 .withAttachmentURLs(getScreenshots(task.reportDirectory))
-                .withReportURL(task.reportDirectory +"/index.html")
+                .withReportURL(task.reportDirectory + "/index.html")
                 .withEmailReportURL(task.reportDirectory + "/emailable-report.html")
                 .build();
     }

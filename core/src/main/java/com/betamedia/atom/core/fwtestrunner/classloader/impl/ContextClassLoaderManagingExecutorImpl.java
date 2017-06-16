@@ -3,7 +3,6 @@ package com.betamedia.atom.core.fwtestrunner.classloader.impl;
 import com.betamedia.atom.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.atom.core.fwtestrunner.classloader.URLClassLoaderFactory;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
-import com.betamedia.atom.core.utils.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +23,6 @@ import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.stream.Collectors;
-
-/**
- * Created by mbelyaev on 4/10/17.
- */
 
 /**
  * <h1>ContextClassLoaderManagingExecutorImpl</h1>
@@ -148,7 +143,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
      *
      * @param suppliers List of Supplier objects to execute
      */
-    private <T> List<T> runWithGlobalJar(List<Supplier<T>> suppliers){
+    private <T> List<T> runWithGlobalJar(List<Supplier<T>> suppliers) {
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
         ClassLoader classLoader;
         pathLock.readLock().lock();
@@ -159,7 +154,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
                 try {
                     classLoader = classLoaderFactory.get(jarPath, parent);
                 } catch (MalformedURLException e) {
-                    logger.error("", e);
+                    logger.error("Failed to retrieve classloader!", e);
                     throw new RuntimeException(e);
                 } finally {
                     pathLock.readLock().unlock();
@@ -184,14 +179,14 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
      * @param suppliers List of Supplier objects to execute
      * @param jarPath   Path to the uploaded JAR binary
      */
-    private <T> List<T> runWithProvidedJar(List<Supplier<T>> suppliers, String jarPath){
+    private <T> List<T> runWithProvidedJar(List<Supplier<T>> suppliers, String jarPath) {
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
         try {
             ClassLoader classLoader = classLoaderFactory.get(jarPath, parent);
             Thread.currentThread().setContextClassLoader(classLoader);
             return executeInPool(suppliers);
         } catch (MalformedURLException e) {
-            logger.error("", e);
+            logger.error("Failed to retrieve classloader!", e);
             throw new RuntimeException(e);
         } finally {
             Thread.currentThread().setContextClassLoader(parent);

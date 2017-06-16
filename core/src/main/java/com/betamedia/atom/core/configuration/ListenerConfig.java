@@ -11,13 +11,16 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class ListenerConfig {
+    private static final String EMAIL_TO = "email.to";
+    private static final String EMAIL_SUBJECT = "email.subject";
+
     @Bean
     public TestTaskCompletionListener emailOnFailedTestListener(EmailService emailService) {
         return task -> {
-            if (task.hasFailed && task.properties.getProperty("email.to") != null && !task.properties.getProperty("email.to").isEmpty()) {
+            if (task.hasFailed && task.properties.getProperty(EMAIL_TO) != null && !task.properties.getProperty(EMAIL_TO).isEmpty()) {
                 emailService.sendLocalFile(
-                        task.properties.getProperty("email.to"),
-                        task.properties.getProperty("email.subject"),
+                        task.properties.getProperty(EMAIL_TO),
+                        task.properties.getProperty(EMAIL_SUBJECT),
                         task.emailReportURL,
                         task.attachmentURLs);
             }
