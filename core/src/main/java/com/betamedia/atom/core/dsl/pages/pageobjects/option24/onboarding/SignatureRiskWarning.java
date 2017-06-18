@@ -5,4 +5,5 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding;
  */
 public interface SignatureRiskWarning {
 	void RiskSignatureText(String riskSignatureText);
+	void waitforRiskSingnature();
 }

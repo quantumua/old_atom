@@ -148,7 +148,7 @@ public class PersonalInformation {
 
         public PersonalInformationBuilder withPoliticalExposureComment(String politicalExposureComment) {
             this.politicalExposureComment = politicalExposureComment;
-            return this;
+           return this;
         }
 
         public PersonalInformationBuilder withSourceOfFunds(String sourceOfFunds) {

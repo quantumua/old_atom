@@ -29,5 +29,9 @@ public class SignatureRiskWarningImpl extends AbstractPageObject implements Sign
         find(RiskSignatureTextbox).sendKeys(riskSignatureText);
         find(RiskSignatureSubmitbtn).click();
     }
-	        
+	 
+    @Override
+    public void waitforRiskSingnature() {
+    	waitUntilDisplayed(RiskSignatureSubmitbtn);    	
+    }
 }

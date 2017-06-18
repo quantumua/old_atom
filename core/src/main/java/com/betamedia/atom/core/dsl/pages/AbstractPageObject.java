@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
@@ -351,4 +353,9 @@ public abstract class AbstractPageObject {
     private static WebElement elementIfVisible(WebElement element) {
         return element.isDisplayed() ? element : null;
     }
+
+	public void register(CustomerRO customer, String countryCode) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -32,5 +32,9 @@ public class RiskWarningImpl extends AbstractPageObject implements RiskWarning {
         makeActions().moveToElement(find(iAmOver18Statement),X_OFFSET, Y_OFFSET).click().perform();
         find(updateButton).click();
     }
-
+    
+    @Override
+    public void waitforRisWarning() {
+    	waitUntilDisplayed(updateButton);    	
+    }
 }

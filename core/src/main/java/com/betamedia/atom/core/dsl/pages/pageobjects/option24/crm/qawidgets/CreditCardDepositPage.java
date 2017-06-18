@@ -5,5 +5,6 @@ import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 public interface CreditCardDepositPage {
 
     void submit(CreditCardDeposit info);
+    void waitforCreditCardDepositPage();
 
 }

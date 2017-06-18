@@ -8,7 +8,9 @@ import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 public interface RegistrationPage {
 
 
-    void register(CustomerRO customer);
-    void register();
+//    void register(CustomerRO customer);
+//    void register(CustomerRO customerRO, String string);
+
+	void register(String countrycode);
     
   }

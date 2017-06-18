@@ -13,54 +13,59 @@ import org.openqa.selenium.WebDriver;
  */
 public class CreditCardDepositPageImpl extends AbstractPageObject implements CreditCardDepositPage {
 
-    @StoredId
-    private By depositAmount;
-    @StoredId
-    private By creditCardNumber;
-    @StoredId
-    private By cvv2;
-    @StoredId
-    private By expiryDateMonth;
-    @StoredId
-    private By expiryDateYear;
-    @StoredId
-    private By cardHoldersFirstName;
-    @StoredId
-    private By cardHoldersLastName;
-    @StoredId
-    private By billingAddress;
-    @StoredId
-    private By city;
-    @StoredId
-    private By zipCode;
-    @StoredId
-    private By country;
-    @StoredId
-    private By submit;
+	@StoredId
+	private By depositAmount;
+	@StoredId
+	private By creditCardNumber;
+	@StoredId
+	private By cvv2;
+	@StoredId
+	private By expiryDateMonth;
+	@StoredId
+	private By expiryDateYear;
+	@StoredId
+	private By cardHoldersFirstName;
+	@StoredId
+	private By cardHoldersLastName;
+	@StoredId
+	private By billingAddress;
+	@StoredId
+	private By city;
+	@StoredId
+	private By zipCode;
+	@StoredId
+	private By country;
+	@StoredId
+	private By submit;
 
+	public CreditCardDepositPageImpl(WebDriver webDriver) {
+		super(webDriver);
+	}
 
-    public CreditCardDepositPageImpl(WebDriver webDriver) {
-        super(webDriver);
-    }
+	@Override
+	public void submit(CreditCardDeposit info) {
+		click(depositAmount);
+		find(depositAmount).sendKeys(info.depositAmount);
+		click(creditCardNumber);
+		find(creditCardNumber).sendKeys(info.creditCardNumber);
+		find(cvv2).sendKeys(info.cvv2);
+		inSelect(expiryDateMonth).selectByValue(info.expiryDateMonth);
+		inSelect(expiryDateYear).selectByValue(info.expiryDateYear);
+		find(cardHoldersFirstName).sendKeys(info.cardHoldersFirstName);
+		find(cardHoldersLastName).sendKeys(info.cardHoldersLastName);
+		find(billingAddress).sendKeys(info.billingAddress);
+		find(city).sendKeys(info.city);
+		find(zipCode).sendKeys(info.zipCode);
 
-    @Override
-    public void submit(CreditCardDeposit info) {
-        click(depositAmount);
-        find(depositAmount).sendKeys(info.depositAmount);
-        click(creditCardNumber);
-        find(creditCardNumber).sendKeys(info.creditCardNumber);
-        find(cvv2).sendKeys(info.cvv2);
-        inSelect(expiryDateMonth).selectByValue(info.expiryDateMonth);
-        inSelect(expiryDateYear).selectByValue(info.expiryDateYear);
-        find(cardHoldersFirstName).sendKeys(info.cardHoldersFirstName);
-        find(cardHoldersLastName).sendKeys(info.cardHoldersLastName);
-        find(billingAddress).sendKeys(info.billingAddress);
-        find(city).sendKeys(info.city);
-        find(zipCode).sendKeys(info.zipCode);
+		if (info.country != null) {
+			find(country).sendKeys(info.country);
+		}
+		scrollIntoView(find(submit)).click();
+	}
 
-        if (info.country != null) {
-            find(country).sendKeys(info.country);
-        }
-        scrollIntoView(find(submit)).click();
-    }
+	@Override
+	public void waitforCreditCardDepositPage() {
+		waitUntilDisplayed(depositAmount);
+
+	}
 }

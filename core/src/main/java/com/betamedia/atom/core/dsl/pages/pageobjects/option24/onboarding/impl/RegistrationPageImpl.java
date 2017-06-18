@@ -51,7 +51,7 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
 
     @Override
 //    TODO Please see RegisterPageImpl and change in similar manner
-    public void register(CustomerRO customer) {
+    public void register(CustomerRO customer, String countryCode) {
 
 		/* firstName */
         waitUntilDisplayed(registrationWidget);
@@ -83,7 +83,8 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
 
         /*Country Election*/
         find(selectedFlagField).click();
-        find(selectCountry).click();
+//        find(selectCountry).click();
+        submitCountry(countryCode);
         /* */
 
         logger.info("EMAIL  " + customer.getEmail());
@@ -95,10 +96,13 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
     }
 
     @Override
-    public void register() {
-        register(CustomerRO.builder(WebSiteNamingStrategy.get()).build());
+    public void register(String countrycode) {
+        register(CustomerRO.builder(WebSiteNamingStrategy.get()).build(), countrycode);
     }
 
+    public void submitCountry(String dataValue) {
+        find(By.xpath("//ul[@class='country-list']//li[@data-country-code='"+dataValue+"']")).click();
+    }
     private void submitRegistration() {
     	
     	try {

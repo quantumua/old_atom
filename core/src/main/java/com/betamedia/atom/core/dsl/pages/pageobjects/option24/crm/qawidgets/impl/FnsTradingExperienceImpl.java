@@ -92,10 +92,10 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     public void submitOnWizard(TradingExperienceInfo info) {
         submitOnWizard(info.sharesExperience);
         submitOnWizard(info.binaryExperience);
-        submitOnWizard(info.averageYearlyBinaryVolume);
+        if(notNull(info.averageYearlyBinaryVolume))submitOnWizard(info.averageYearlyBinaryVolume);
         submitOnWizard(info.forExExperience);
-        submitOnWizard(info.averageYearlyForExVolume);
-        submitOnWizard(info.commonLeverage);
+        if(notNull(info.averageYearlyForExVolume))submitOnWizard(info.averageYearlyForExVolume);
+        if(notNull(info.commonLeverage))submitOnWizard(info.commonLeverage);
         submitOnWizard(info.financialWorkExperience);
         submitOnWizard(info.cfdBinaryKnowledge);
         submitOnWizard(info.mainFactorKnowledge);

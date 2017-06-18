@@ -3,9 +3,13 @@ package com.betamedia.atom.core.dsl.pages.factory.web;
 
 
 
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.SignatureRiskWarning;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
@@ -29,6 +33,12 @@ public interface WEBPageFactory {
     
     FnsTradingExperience fnsTradingExperience();
     
+    RiskWarning riskwarning();
+    
+    CreditCardDepositPage creditCardDepositPage();
+    
+    OnBoardingWizard onBoardingWizard();
 
+	SignatureRiskWarning signatureRiskWarning();
 
 }
