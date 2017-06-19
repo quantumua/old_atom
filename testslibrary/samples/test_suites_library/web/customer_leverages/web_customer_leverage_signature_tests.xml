@@ -6,7 +6,14 @@
                 <methods>
                     <!-- sample test for Spanish (cc: ES) customer -->
                     <parameter name="countryCode" value="ES"/>
+                    <parameter name="availableProducts" value="BINARY,CFD,FOREX"/>
+                    <parameter name="notAvailableProducts" value=""/>
                     <include name="checkIsAbleToLoginForNoExperienceCustomer"/>
+                    <include name="checkBinaryProductForNoExperienceCustomer"/>
+                    <include name="checkNoBinaryProductForNoExperienceCustomer"/>
+                    <include name="checkCfdProductForNoExperienceCustomer"/>
+                    <include name="checkAvailableProductsForNoExperienceCustomer"/>
+                    <include name="checkNotAvailableProductsForNoExperienceCustomer"/>
                 </methods>
             </class>
         </classes>

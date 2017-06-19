@@ -3,8 +3,14 @@ package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.util.Strings;
 
+import java.util.Arrays;
+
+import static com.betamedia.atom.core.utils.StringUtils.COMMA;
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -187,6 +193,52 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         assertUserLogin();
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and products are available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode", "availableProducts"})
+    public void checkAvailableProductsForNoExperienceCustomer(String countryCode, String availableProducts) {
+        if (Strings.isNullOrEmpty(availableProducts)) {
+            return;
+        }
+        createUser(countryCode, OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().riskWarningPage().accept();
+        updateCreditCard();
+        assertUserLogin();
+        Arrays.stream(availableProducts.split(COMMA))
+                .forEach(product -> assertTrue(pages().topNavigationPage().getProducts().contains(product)));
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and products are not available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode", "notAvailableProducts"})
+    public void checkNotAvailableProductsForNoExperienceCustomer(String countryCode, String notAvailableProducts) {
+        if (Strings.isNullOrEmpty(notAvailableProducts)) {
+            return;
+        }
+        createUser(countryCode, OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().riskWarningPage().accept();
+        updateCreditCard();
+        assertUserLogin();
+        Arrays.stream(notAvailableProducts.split(COMMA))
+                .forEach(product -> assertFalse(pages().topNavigationPage().getProducts().contains(product)));
     }
 
     /**

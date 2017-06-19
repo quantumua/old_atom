@@ -12,6 +12,7 @@ import org.testng.Reporter;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -267,9 +268,7 @@ public abstract class AbstractPageObject {
     protected void deleteAllCookies() {
         webDriver.manage().deleteAllCookies();
         Set<Cookie> allCookies = webDriver.manage().getCookies();
-        if (!allCookies.isEmpty()) {
-            webDriver.manage().deleteAllCookies();
-        }
+        allCookies.forEach(logger::error);
     }
 
     /**

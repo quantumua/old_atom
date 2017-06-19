@@ -5,7 +5,12 @@ import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.util.Strings;
 
+import java.util.Arrays;
+
+import static com.betamedia.atom.core.utils.StringUtils.COMMA;
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -210,6 +215,166 @@ public class CustomerLeverageWithRiskSignatureTest extends AbstractOnboardingUse
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_EXPERIENCED);
         updateCreditCard();
         assertUserLogin();
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and products are available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode", "availableProducts"})
+    public void checkAvailableProductsForNoExperienceCustomer(String countryCode, String availableProducts) {
+        if (Strings.isNullOrEmpty(availableProducts)) {
+            return;
+        }
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        Arrays.stream(availableProducts.split(COMMA))
+                .forEach(product -> assertTrue(pages().topNavigationPage().getProducts().contains(product)));
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and products are not available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode", "notAvailableProducts" })
+    public void checkNotAvailableProductsForNoExperienceCustomer(String countryCode, String notAvailableProducts) {
+        if (Strings.isNullOrEmpty(notAvailableProducts)) {
+            return;
+        }
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        Arrays.stream(notAvailableProducts.split(COMMA))
+                .forEach(product -> assertFalse(pages().topNavigationPage().getProducts().contains(product)));
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and binary product is available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode"})
+    public void checkBinaryProductForNoExperienceCustomer(String countryCode) {
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        pages().topNavigationPage().binary();
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and no binary product is available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode"})
+    public void checkNoBinaryProductForNoExperienceCustomer(String countryCode) {
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        assertFalse(pages().topNavigationPage().getProducts().contains("BINARY"));
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and cfd product is available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode"})
+    public void checkCfdProductForNoExperienceCustomer(String countryCode) {
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        pages().topNavigationPage().cfd();
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and no cfd product is available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode"})
+    public void checkNoCfdProductForNoExperienceCustomer(String countryCode) {
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        assertFalse(pages().topNavigationPage().getProducts().contains("CFD"));
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and forex product is available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode"})
+    public void checkForexProductForNoExperienceCustomer(String countryCode) {
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        assertTrue(pages().topNavigationPage().getProducts().contains("FOREX"));
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and no forex product is available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode"})
+    public void checkNoForexProductForNoExperienceCustomer(String countryCode) {
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomePage().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        assertFalse(pages().topNavigationPage().getProducts().contains("FOREX"));
     }
 
     /**

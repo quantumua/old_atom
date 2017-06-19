@@ -4,6 +4,13 @@ import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.gigaspaces.internal.query.predicate.SpacePredicates.in;
 
 /**
  * @author Maksym Tsybulskyy
@@ -28,8 +35,9 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By signUpBtn;
     @StoredId
     private By homePageLink;
-    
-    
+    @StoredId
+    private By productButtons;
+
     public TopNavigationPageImpl(WebDriver webDriver) {
         super(webDriver);
     }
@@ -81,4 +89,9 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 //		return waitUntilDisplayed(submitButton) != null;
         return false;
 	}
+
+    @Override
+    public List<String> getProducts() {
+        return findElements(productButtons).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
 }

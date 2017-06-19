@@ -24,6 +24,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,cfdBtn,CLASS_NAME,product-cfd
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,productButtons,CLASS_NAME,rootMenu
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetContainer,CLASS_NAME,assets-list-container
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetName,CLASS_NAME,list-asset
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,pandaIframe,ID,swPandaIframe

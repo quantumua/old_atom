@@ -18,4 +18,71 @@
             </class>
         </classes>
     </test>
+    <test name = "check products for DE users">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.CustomerLeverageTest" >
+                <methods>
+                    <parameter name="countryCode" value="DE"/>
+                    <parameter name="availableProducts" value="CFD,FOREX"/>
+                    <parameter name="notAvailableProducts" value="BINARY"/>
+                    <include name="checkAvailableProductsForNoExperienceCustomer"/>
+                    <include name="checkNotAvailableProductsForNoExperienceCustomer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name = "check products for IT users">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.CustomerLeverageTest" >
+                <methods>
+                    <parameter name="countryCode" value="IT"/>
+                    <parameter name="availableProducts" value="CFD,FOREX"/>
+                    <parameter name="notAvailableProducts" value="BINARY"/>
+                    <include name="checkAvailableProductsForNoExperienceCustomer"/>
+                    <include name="checkNotAvailableProductsForNoExperienceCustomer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name = "check products for NL users">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.CustomerLeverageTest" >
+                <methods>
+                    <parameter name="countryCode" value="NL"/>
+                    <parameter name="availableProducts" value="CFD,FOREX"/>
+                    <parameter name="notAvailableProducts" value="BINARY"/>
+                    <include name="checkAvailableProductsForNoExperienceCustomer"/>
+                    <include name="checkNotAvailableProductsForNoExperienceCustomer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name = "check products for NG users">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.CustomerLeverageTest" >
+                <methods>
+                    <parameter name="countryCode" value="NG"/>
+                    <parameter name="availableProducts" value="BINARY,CFD,FOREX"/>
+                    <parameter name="notAvailableProducts" value=""/>
+                    <include name="checkAvailableProductsForNoExperienceCustomer"/>
+                    <include name="checkNotAvailableProductsForNoExperienceCustomer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name = "check products for users">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.CustomerLeverageTest" >
+                <methods>
+                    <parameter name="countryCode" value="ES"/>
+                    <parameter name="availableProducts" value="BINARY,CFD,FOREX"/>
+                    <parameter name="notAvailableProducts" value=""/>
+                    <include name="checkAvailableProductsForNoExperienceCustomer"/>
+                    <include name="checkNotAvailableProductsForNoExperienceCustomer"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
