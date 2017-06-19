@@ -5,9 +5,9 @@ import com.betamedia.atom.core.fwservices.webdriver.ParametrizedWebDriverFactory
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -18,6 +18,8 @@ import org.springframework.context.annotation.Lazy;
 
 import java.io.File;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author mbelyaev
@@ -65,7 +67,23 @@ public class WebDriverConfig {
 
             @Override
             public ParametrizedWebDriverFactory get() {
-                return (dc, url) -> (WebDriver) new RemoteWebDriver(driverService.getUrl(), dc);
+                return (dc, url) -> {
+                    dc.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
+                    return (WebDriver) new RemoteWebDriver(driverService.getUrl(), dc);
+                };
+            }
+
+            private ChromeOptions getChromeOptions() {
+                ChromeOptions options = new ChromeOptions();
+                disableSavingPassword(options);
+                return options;
+            }
+
+            private void disableSavingPassword(ChromeOptions options) {
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("credentials_enable_service", false);
+                prefs.put("profile.password_manager_enabled", false);
+                options.setExperimentalOption("prefs", prefs);
             }
         };
     }
