@@ -69,7 +69,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * Result: There will be a pop up as designed.
      */
     @Test()
-    public void InvestedAmountMaximumPlusOne() {
+    public void investedAmountMaximumPlusOne() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
 
@@ -105,7 +105,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * Result: There will an error message "Please enter a valid amount." in the input with a red border
      */
     @Test()
-    public void InsertValidCharactersInAnInvalidForm() {
+    public void insertValidCharactersInAnInvalidForm() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
 
@@ -136,7 +136,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * Result: There will an error message "Please enter a valid amount." in the input with a red border
      */
     @Test()
-    public void InvestNegativeAmount() {
+    public void investNegativeAmount() {
 
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
@@ -166,7 +166,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * Result: There will an error message in the input with a red border
      */
     @Test()
-    public void InvestZeroAmount() {
+    public void investZeroAmount() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
@@ -262,7 +262,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * Result: There will an error message in the input with a red border
      */
     @Test()
-    public void BuyingWithoutInvestedAmount() {
+    public void buyingWithoutInvestedAmount() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
@@ -291,7 +291,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * Result: There will an error message in the input with a red border
      */
     @Test()
-    public void InvalidIinvestedAmount() {
+    public void invalidIinvestedAmount() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
@@ -318,7 +318,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * There's a message the position cannot be opened because the invested amount is above the maximum (maximumAllowed+999).
      */
     @Test()
-    public void InvestedAmountAboveMmaximum() {
+    public void investedAmountAboveMaximum() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
@@ -352,7 +352,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * There's a message the position cannot be opened because the invested amount is below the minimum.
      */
     @Test()
-    public void InvestedAmountBelowMinimum() {
+    public void investedAmountBelowMinimum() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
@@ -382,7 +382,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      * There's a message the position cannot be opened because there's not enough funds.
      */
     @Test()
-    public void InvestedAmountAboveTABalance() {
+    public void investedAmountAboveTABalance() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
@@ -418,7 +418,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      *Select an asset --> Click a few times on the "Buy"
 	 * Only 1 position was opened.
 	 */
-    public void MultipleClicksOnTheBuyTest() {
+    public void multipleClicksOnTheBuyTest() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
         CRMAccount cfdAccount = customer.getFXCFDAccount();
@@ -457,7 +457,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
 	 * Select an asset --> Try to open a position when feed isn't
 	 * received at time of opening--> The position is rejected.
 	 */
-    public void FeedIsntReceivedAtTimeOfOpeningTest() {
+    public void feedIsntReceivedAtTimeOfOpeningTest() {
         Asset asset = operations().assetOperations().get();
 
         //Set<String> propertiesSet = new HashSet<String>();
@@ -509,7 +509,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
 	 * Select an asset when being logged out --> Try to open a position --> You are redirected to the login page
 	 */
     @Test
-    public void LoggedOutStatus() {
+    public void loggedOutStatus() {
         assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         pages().topNavigationPage();
 

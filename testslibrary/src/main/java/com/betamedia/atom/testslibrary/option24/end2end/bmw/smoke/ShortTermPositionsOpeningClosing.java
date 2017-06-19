@@ -59,7 +59,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
      */
 	@Test() 
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMaximumAllowed() {
-        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
+        assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -115,7 +115,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
     */
 	@Test 
 //TODO    fully duplicates the code of the first test
-    public void OpenAPositionThatExpiresIn60SecondsBasicFunctionality() {
+    public void openAPositionThatExpiresIn60SecondsBasicFunctionality() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
         
@@ -140,7 +140,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
     * In this test we will check that when we are opening a Short Term position, the basic functionality is valid.
     */
 	@Test 
-    public void OpenAPositionThatEexpiresIn2MinutesBasicFunctionality() {
+    public void openAPositionThatEexpiresIn2MinutesBasicFunctionality() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
         
@@ -166,7 +166,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
     * In this test we will check that when we are opening a Short Term position, the basic functionality is valid.
     */
 	@Test 
-	public void OpenAPositionThatEexpiresIn5MinutesBasicFunctionality(){
+	public void openAPositionThatEexpiresIn5MinutesBasicFunctionality(){
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
         
@@ -194,7 +194,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
      * successfully on win and lose Winning - Green. Loosing - Red.
      */
     @Test(description = "TP-3686:Position Indication - check that the color of the cursor changes successfully on win and lose")
-    public void PositionIndicationCheckThatTheColorOfTheCursorChangesSuccessfullyOnWinAndLose() {
+    public void positionIndicationCheckThatTheColorOfTheCursorChangesSuccessfullyOnWinAndLose() {
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
         TickData tickData = operations().feedOperations().injectFeed(asset.getId(), 1.5d);

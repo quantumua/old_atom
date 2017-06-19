@@ -9,6 +9,10 @@ import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUs
 import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.enums.OptionType;
 
+/**
+ * @author leonid.a
+ */
+
 public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardingUserExperienceTest{
 	/*
 	 * [TestLink] TP-4335:Invest negative amount (-X)
@@ -16,7 +20,7 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
      * Result: There will an error message "Please enter a valid amount." in the input with a red border
 	 */
 	@Test(description = "TP-4335")
-	public void InvestNegativeAmountTest()	{
+	public void investNegativeAmountTest()	{
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
         
@@ -44,7 +48,7 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
 	 * Result: There will an error message in the input with a red border
 	 */
 	@Test(description = "TP-4320") 
-	public void InvestZeroAmountTest()	{
+	public void investZeroAmountTest()	{
 		Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 5.0d);
 	    CRMCustomer customer = createHighExperiencedUser();
 	    
@@ -72,7 +76,7 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
      * Result: There will an error message in the input with a red border
      */
 	@Test(description = "TP-3642")
-	public void BuyingWithoutInvestedAmountTest()	{
+	public void buyingWithoutInvestedAmountTest()	{
 		Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
 	    CRMCustomer customer = createHighExperiencedUser();
 
@@ -100,7 +104,7 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
 	 * Result: There will an error message in the input with a red border
 	 */
 	@Test(description = "TP-3656") 
-	public void InvalidIinvestedAmountTest()	{
+	public void invalidIinvestedAmountTest()	{
 		Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 5.0d);
 	    CRMCustomer customer = createHighExperiencedUser();
 

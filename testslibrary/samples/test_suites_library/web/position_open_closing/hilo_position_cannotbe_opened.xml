@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Web Smoke test" verbose="1">
+    <test name="Hilo - Check cases that positions cannot be opened">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.smoke.HiloCheckCasesThatPositionsCannotBeOpened">
+                <methods>
+                    <include name="investNegativeAmountTest"/>
+                    <include name="investZeroAmountTest"/>
+                    <include name="buyingWithoutInvestedAmountTest"/>
+                    <include name="invalidIinvestedAmountTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
