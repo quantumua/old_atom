@@ -100,10 +100,10 @@ public class AbstractOnboardingUserExperienceTest extends AbstractOnboardingCond
      * 3. Inject Feed for asset with price 1.5d
      */
     
-    protected Asset assetIsReadyToTrade() {
+    protected Asset assetIsReadyToTrade(OptionType optionType, TagOperations.TagName tagName, double price) {
     Asset asset = operations().assetOperations().get();
-    operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
-    operations().feedOperations().injectFeed(asset.getId(), 1.5d);
+    operations().optionTemplateOperations().create(asset.getId(), optionType, tagName);
+    operations().feedOperations().injectFeed(asset.getId(), price);
     return asset;
     }
     

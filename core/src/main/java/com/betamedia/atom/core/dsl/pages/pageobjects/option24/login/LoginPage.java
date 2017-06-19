@@ -6,4 +6,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.login;
  */
 public interface LoginPage  {
     void login(String username, String password);
+    
+    boolean isSubmitBtnExists();
 }

@@ -35,8 +35,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     */
     @Test()
     public void investedAmountAboveTABalancePlusOneTest() {
-
-        Asset asset = assetIsReadyToTrade();
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -71,7 +70,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      */
     @Test()
     public void InvestedAmountMaximumPlusOne() {
-        Asset asset = assetIsReadyToTrade();
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
 
 		CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -107,7 +106,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      */
     @Test()
     public void InsertValidCharactersInAnInvalidForm() {
-        Asset asset = assetIsReadyToTrade();
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -139,7 +138,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void InvestNegativeAmount() {
 
-        Asset asset = assetIsReadyToTrade();
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         CRMCustomer customer = createHighExperiencedUser();
 
 
@@ -168,7 +167,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      */
     @Test()
     public void InvestZeroAmount() {
-        Asset asset = assetIsReadyToTrade(); // 5.0d
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
 
@@ -264,7 +263,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      */
     @Test()
     public void BuyingWithoutInvestedAmount() {
-        Asset asset = assetIsReadyToTrade(); // 5.0d
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -293,7 +292,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      */
     @Test()
     public void InvalidIinvestedAmount() {
-        Asset asset = assetIsReadyToTrade(); // 5.0d
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -320,7 +319,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      */
     @Test()
     public void InvestedAmountAboveMmaximum() {
-        Asset asset = assetIsReadyToTrade(); // 5.0d
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -354,7 +353,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      */
     @Test()
     public void InvestedAmountBelowMinimum() {
-        Asset asset = assetIsReadyToTrade(); // 5.0d
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -384,7 +383,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
      */
     @Test()
     public void InvestedAmountAboveTABalance() {
-        Asset asset = assetIsReadyToTrade(); // 5.0d
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -420,7 +419,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
 	 * Only 1 position was opened.
 	 */
     public void MultipleClicksOnTheBuyTest() {
-        Asset asset = assetIsReadyToTrade(); // 5.0d
+        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
         CRMCustomer customer = createHighExperiencedUser();
         CRMAccount cfdAccount = customer.getFXCFDAccount();
         String accountId = cfdAccount.getId();
@@ -511,8 +510,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
 	 */
     @Test
     public void LoggedOutStatus() {
-        assetIsReadyToTrade();
-
+        assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         pages().topNavigationPage();
 
         try {
@@ -527,8 +525,8 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
                 .setAmount(investment)
                 .bidLow()
                 .confirm();
-//FIXME TopNavigationPageImpl::isSubmitBtn is broken
-        Assert.assertTrue(pages().topNavigationPage().isSubmitBtn());
+
+        Assert.assertTrue(pages().loginPage().isSubmitBtnExists());
     }
 
     /*

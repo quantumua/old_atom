@@ -31,4 +31,8 @@ public class LoginPageImpl extends AbstractPageObject implements LoginPage {
         find(submitButton).click();
     }
 
+	@Override
+	public boolean isSubmitBtnExists() {
+		return waitUntilDisplayed(submitButton) != null;
+	}
 }

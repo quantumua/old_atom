@@ -21,7 +21,5 @@ public interface TopNavigationPage {
 
     void goToHomePage();
     
-    boolean isSubmitBtn();
-
     List<String> getProducts();
 }

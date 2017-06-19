@@ -24,9 +24,6 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By loginBtn;
     @StoredId("myAccountBtn")
     private By myAccountBtn;
-//FIXME no corresponding entry in repository; is there really a submit button in nav header?
-//    @StoredId("submitButton")
-//    private By submitButton;
     @StoredId
     private By binaryBtn;
     @StoredId
@@ -82,13 +79,6 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
         find(homePageLink).click();
         waitUntilPageLoad();
     }
-
-	@Override
-	public boolean isSubmitBtn() {
-//FIXME see submitButton above; consider different name for method
-//		return waitUntilDisplayed(submitButton) != null;
-        return false;
-	}
 
     @Override
     public List<String> getProducts() {
