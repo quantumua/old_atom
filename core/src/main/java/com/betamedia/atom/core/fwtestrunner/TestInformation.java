@@ -42,7 +42,7 @@ public class TestInformation {
         this.handler = handler;
     }
 
-    public static TestInformationBuilder builder(TestInformationHandlerImpl handler) {
+    public static TestInformationBuilder builder(TestInformationHandler handler) {
         return new TestInformationBuilder(handler);
     }
 
@@ -161,7 +161,7 @@ public class TestInformation {
             return TestRunnerHandler.TEST_OUTPUT_DIRECTORY + (time.toString() + "." + Objects.hash(props, time, Thread.currentThread())).replaceAll("[^a-zA-Z0-9]", "_");
         }
 
-        private TestInformation store(TestInformation testInformation){
+        private TestInformation store(TestInformation testInformation) {
             handler.put(testInformation);
             return testInformation;
         }
