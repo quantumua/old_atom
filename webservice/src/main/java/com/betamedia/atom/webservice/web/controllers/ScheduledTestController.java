@@ -1,7 +1,7 @@
 package com.betamedia.atom.webservice.web.controllers;
 
-import com.betamedia.atom.core.fwtestrunner.TestTask;
-import com.betamedia.atom.core.fwtestrunner.scheduling.ContinuousTaskManagerImpl;
+import com.betamedia.atom.core.fwtestrunner.TestInformation;
+import com.betamedia.atom.core.fwtestrunner.scheduling.ContinuousTestManagerImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import static com.betamedia.atom.core.utils.PropertiesUtils.getProperties;
 
@@ -23,26 +24,25 @@ import static com.betamedia.atom.core.utils.PropertiesUtils.getProperties;
 public class ScheduledTestController {
     private static final Logger logger = LogManager.getLogger(ScheduledTestController.class);
     @Autowired
-    private ContinuousTaskManagerImpl continuousTaskManager;
+    private ContinuousTestManagerImpl continuousTaskManager;
 
     @PostMapping("/upload/task/scheduled")
-    public void createScheduledTask(@RequestParam("name") String name,
-                                    @RequestParam("emailAddress") String emailAddress,
-                                    @RequestParam("properties") MultipartFile properties,
-                                    @RequestParam("suites[]") MultipartFile[] suites,
-                                    @RequestParam("cronExpression") Optional<String> cronExpression) throws IOException {
+    public TestInformation createScheduledTask(@RequestParam("name") String name,
+                                               @RequestParam("properties") MultipartFile properties,
+                                               @RequestParam("suites[]") MultipartFile[] suites,
+                                               @RequestParam("cronExpression") Optional<String> cronExpression) throws IOException {
         logger.info("Scheduling test");
-        continuousTaskManager.createTask(name, emailAddress, getProperties(properties), suites, cronExpression);
+        return continuousTaskManager.createTest(name, getProperties(properties), suites, cronExpression);
     }
 
     @GetMapping("/scheduled")
-    public Set<TestTask> getScheduledTests() {
+    public Set<TestInformation> getScheduledTests() {
         return continuousTaskManager.getInfo();
     }
 
-    @DeleteMapping("/scheduled/{name}/stop")
-    public void stopScheduledTest(@PathVariable String name) {
-        continuousTaskManager.stopTask(name);
+    @DeleteMapping("/scheduled/{id}/stop")
+    public void stopScheduledTest(@PathVariable UUID uuid) {
+        continuousTaskManager.stopTest(uuid);
     }
 
 

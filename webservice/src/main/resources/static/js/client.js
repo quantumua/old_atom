@@ -4,7 +4,7 @@ angular.module('client', [])
         var reportRefreshTimeout = 900000;
         var reportRefreshDelay = 5000;
         self.messages = [];
-        self.reports = [];
+        self.tasks = [];
         function runTests(properties, suites, tempJar) {
             var fd = new FormData();
             fd.append('properties', properties);
@@ -12,37 +12,36 @@ angular.module('client', [])
                 fd.append('suites[]', s);
             });
             fd.append('tempJar', tempJar);
-            $http.post('/atom/upload/suite', fd, {
+            $http.post('/atom/upload/task', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
                 self.messages.push('Upload successful');
-                var reports = response.data.map(reportMapper);
-                reports.forEach(function (r) {
-                    pollForStatus(r, reportRefreshDelay, reportRefreshTimeout);
+                var tasks = response.data.map(taskFormatter);
+                tasks.forEach(function (task) {
+                    pollForStatus(task, reportRefreshDelay, reportRefreshTimeout);
                 });
-                Array.prototype.push.apply(self.reports, reports);
+                Array.prototype.push.apply(self.tasks, tasks);
             }, function (response) {
                 self.messages.push(response.body);
             });
         }
 
-        function reportMapper(report) {
-            report.suites = report.suites.map(function (suite) {
+        function taskFormatter(task) {
+            task.suites = task.suites.map(function (suite) {
                 return suite.substr(suite.lastIndexOf('/') + 1);
             });
-            report.date = [
-                withLeadingZero(report.time.dayOfMonth),
-                withLeadingZero(report.time.monthValue),
-                report.time.year
+            task.date = [
+                withLeadingZero(task.time.dayOfMonth),
+                withLeadingZero(task.time.monthValue),
+                task.time.year
             ].join('/');
-            report.time = [
-                withLeadingZero(report.time.hour),
-                withLeadingZero(report.time.minute),
-                withLeadingZero(report.time.second)
+            task.time = [
+                withLeadingZero(task.time.hour),
+                withLeadingZero(task.time.minute),
+                withLeadingZero(task.time.second)
             ].join(':');
-            report.status = "N/A";
-            return report;
+            return task;
         }
 
         function withLeadingZero(input) {
@@ -67,13 +66,13 @@ angular.module('client', [])
             runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0]);
         };
 
-        function pollForStatus(report, delay, timeout) {
+        function pollForStatus(task, delay, timeout) {
             var interval = $interval(
                 function () {
-                    $http.post('/atom/exists', report.reportFile)
+                    $http.post('/atom/status', task.id)
                         .then(function (r) {
-                            if (r.data === true) {
-                                report.status = 'DONE';
+                            task = taskFormatter(r.body);
+                            if (task.status !== 'RUNNING') {
                                 $interval.cancel(interval);
                             }
                         })
@@ -82,7 +81,6 @@ angular.module('client', [])
                 $interval.cancel(interval);
             }, timeout);
         }
-
     })
     .controller('jarUploader', function ($scope, $http) {
         var self = this;
@@ -146,16 +144,15 @@ angular.module('client', [])
         var self = this;
         self.messages = [];
         self.tests = [];
-        function scheduleCronTests(name, emailAddress, properties, suites, cron) {
+        function scheduleTests(name, emailAddress, properties, suites, cron) {
             var fd = new FormData();
             fd.append('name', name);
-            fd.append('emailAddress', emailAddress);
             fd.append('properties', properties);
-            suites.forEach(function (s) {
-                fd.append('suites[]', s);
+            suites.forEach(function (suite) {
+                fd.append('suites[]', suite);
             });
             fd.append('cronExpression', cron);
-            $http.post('/atom/upload/suite/scheduled', fd, {
+            $http.post('/atom/upload/task/scheduled', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
@@ -165,23 +162,6 @@ angular.module('client', [])
             });
         }
 
-        function scheduleRepeatingTests(name, emailAddress, properties, suites) {
-            var fd = new FormData();
-            fd.append('name', name);
-            fd.append('emailAddress', emailAddress);
-            fd.append('properties', properties);
-            suites.forEach(function (s) {
-                fd.append('suites[]', s);
-            });
-            $http.post('/atom/upload/suite/repeating', fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            }).then(function (response) {
-                self.messages.push('Scheduled job successfully');
-            }, function (response) {
-                self.messages.push(response.body);
-            });
-        }
 
         self.schedule = function () {
             self.messages = [];
@@ -203,12 +183,9 @@ angular.module('client', [])
                 badInput = true;
             }
             if (badInput) return;
-            if ($scope.isRepeating) {
-                scheduleRepeatingTests($scope.name, $scope.emailAddress, $scope.properties[0], Array.from($scope.suites));
-            } else {
-                scheduleCronTests($scope.name, $scope.emailAddress, $scope.properties[0], Array.from($scope.suites), $scope.cron)
-            }
+            scheduleTests($scope.name, $scope.emailAddress, $scope.properties[0], Array.from($scope.suites), $scope.cron)
         };
+
         self.stop = function (name) {
             self.messages = [];
             $http.delete('/atom/scheduled/' + name + '/stop').then(function (response) {

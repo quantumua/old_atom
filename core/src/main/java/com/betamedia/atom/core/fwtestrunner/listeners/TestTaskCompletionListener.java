@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.fwtestrunner.listeners;
 
-import com.betamedia.atom.core.fwtestrunner.TestTask;
+import com.betamedia.atom.core.fwtestrunner.TestInformation;
 
 import java.util.function.Consumer;
 
@@ -9,5 +9,5 @@ import java.util.function.Consumer;
  * @since 6/16/17
  */
 @FunctionalInterface
-public interface TestTaskCompletionListener extends Consumer<TestTask> {
+public interface TestTaskCompletionListener extends Consumer<TestInformation> {
 }

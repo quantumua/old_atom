@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.fwtestrunner.runner;
 
-import com.betamedia.atom.core.fwtestrunner.TestTask;
+import com.betamedia.atom.core.fwtestrunner.TestInformation;
 import com.betamedia.atom.core.fwtestrunner.types.TestRunnerType;
 
 /**
@@ -11,5 +11,5 @@ public interface TestRunner {
 
     TestRunnerType getType();
 
-    TestTask run(TestTask task);
+    TestInformation run(TestInformation task);
 }

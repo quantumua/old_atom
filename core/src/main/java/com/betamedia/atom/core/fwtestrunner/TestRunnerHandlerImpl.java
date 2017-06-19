@@ -29,6 +29,8 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     private TaskExecutor asyncTaskExecutor;
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private TestInformationHandler testInformationHandler;
 
     private Map<TestRunnerType, TestRunner> runners;
 
@@ -39,45 +41,46 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     }
 
     @Override
-    public List<TestTask> handleTask(Properties properties, MultipartFile[] suites, Optional<MultipartFile> tempJar, List<TestTaskCompletionListener> listeners) {
+    public List<TestInformation> handleTest(Properties properties, MultipartFile[] suites, Optional<MultipartFile> tempJar, List<TestTaskCompletionListener> listeners) {
         String tempDirectory = UUID.randomUUID().toString();
         Function<MultipartFile, String> store = file -> storageService.storeToTemp(file, tempDirectory);
         List<String> suitePaths = Arrays.stream(suites).map(store).collect(Collectors.toList());
         Optional<String> tempJarPath = tempJar.map(store);
-        return handleTask(properties, suitePaths, tempJarPath, listeners);
+        return handleTest(properties, suitePaths, tempJarPath, listeners);
     }
 
     @Override
-    public List<TestTask> handleTask(Properties properties, List<String> suitePaths, Optional<String> tempJarPath, List<TestTaskCompletionListener> listeners) {
-        List<TestTask> tasks = getTasks(properties, suitePaths);
-        async(() -> classLoaderExecutor.run(getTaskExecutions(tasks), tempJarPath), listeners);
+    public List<TestInformation> handleTest(Properties properties, List<String> suitePaths, Optional<String> tempJarPath, List<TestTaskCompletionListener> listeners) {
+        List<TestInformation> tasks = getTests(properties, suitePaths);
+        async(() -> classLoaderExecutor.run(getTestExecutions(tasks), tempJarPath), listeners);
         return tasks;
     }
 
-    private List<TestTask> getTasks(Properties properties, List<String> suites) {
+    private List<TestInformation> getTests(Properties properties, List<String> suites) {
         return PropertiesUtils.permute(properties).stream()
-                .map(p -> TestTask.builder()
-                        .withStatus(TestTask.Status.CREATED)
+                .map(p -> testInformationHandler.builder()
+                        .withStatus(TestInformation.Status.CREATED)
                         .withProperties(properties)
                         .withSuites(suites)
                         .build())
+                .peek(testInformationHandler::put)
                 .collect(Collectors.toList());
     }
 
-    private void async(Supplier<List<TestTask>> supplier, List<TestTaskCompletionListener> listeners) {
+    private void async(Supplier<List<TestInformation>> supplier, List<TestTaskCompletionListener> listeners) {
         asyncTaskExecutor.execute(() -> {
-            List<TestTask> results = supplier.get();
+            List<TestInformation> results = supplier.get();
             listeners.forEach(results::forEach);
         });
     }
 
-    private List<Supplier<TestTask>> getTaskExecutions(List<TestTask> tasks) {
+    private List<Supplier<TestInformation>> getTestExecutions(List<TestInformation> tasks) {
         return tasks.stream()
-                .map(task -> (Supplier<TestTask>) () -> run(task))
+                .map(task -> (Supplier<TestInformation>) () -> run(task))
                 .collect(Collectors.toList());
     }
 
-    private TestTask run(TestTask task) {
+    private TestInformation run(TestInformation task) {
         return Optional.ofNullable(runners.get(getType(task.properties)))
                 .orElseThrow(() -> new RuntimeException("No corresponding runner"))
                 .run(task);

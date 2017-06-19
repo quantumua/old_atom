@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.configuration;
 
-import com.betamedia.atom.core.fwtestrunner.TestTask;
+import com.betamedia.atom.core.fwtestrunner.TestInformation;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -15,17 +15,16 @@ import java.util.concurrent.TimeUnit;
  * @since 6/16/17
  */
 @Configuration
-public class TestTaskCacheConfig {
+public class TestInformationCacheConfig {
     @Bean
-    public LoadingCache<UUID, TestTask> taskCache() {
+    public LoadingCache<UUID, TestInformation> testInformationCache() {
         return CacheBuilder.newBuilder()
                 .concurrencyLevel(4)
                 .maximumSize(1000)
                 .expireAfterWrite(300, TimeUnit.SECONDS)
-                .build(new CacheLoader<UUID, TestTask>() {
+                .build(new CacheLoader<UUID, TestInformation>() {
                     @Override
-                    public TestTask load(UUID key) {
-                        //consider what to do for new key lookup
+                    public TestInformation load(UUID key) {
                         return null;
                     }
                 });

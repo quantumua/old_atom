@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
-import com.betamedia.atom.core.fwtestrunner.TestTask;
+import com.betamedia.atom.core.fwtestrunner.TestInformation;
+import com.betamedia.atom.core.fwtestrunner.TestInformationHandler;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 
@@ -12,14 +13,12 @@ import java.util.function.Supplier;
  * @author mbelyaev
  * @since 6/16/17
  */
-public class ScheduledTask extends ContinuousTask {
-    private final String cronExpression;
+public class ScheduledTest extends ContinuousTest {
     private final TaskScheduler scheduler;
     private volatile ScheduledFuture scheduledFuture;
 
-    public ScheduledTask(Supplier<List<TestTask>> taskExecution, String cronExpression, TaskScheduler scheduler) {
-        super(taskExecution);
-        this.cronExpression = cronExpression;
+    public ScheduledTest(TestInformation taskEntry, Supplier<List<TestInformation>> taskExecution, TaskScheduler scheduler) {
+        super(taskEntry, taskExecution);
         this.scheduler = scheduler;
     }
 
@@ -35,7 +34,7 @@ public class ScheduledTask extends ContinuousTask {
                 return;
             }
             reportCompletion();
-        }, new CronTrigger(cronExpression));
+        }, new CronTrigger(testInformation.cronExpression));
     }
 
     @Override

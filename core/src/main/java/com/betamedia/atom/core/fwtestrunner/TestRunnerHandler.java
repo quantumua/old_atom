@@ -15,8 +15,8 @@ public interface TestRunnerHandler {
 
     String TEST_OUTPUT_DIRECTORY = "test-output/";
 
-    List<TestTask> handleTask(Properties properties, MultipartFile[] suites, Optional<MultipartFile> tempJar, List<TestTaskCompletionListener> listeners);
+    List<TestInformation> handleTest(Properties properties, MultipartFile[] suites, Optional<MultipartFile> tempJar, List<TestTaskCompletionListener> listeners);
 
-    List<TestTask> handleTask(Properties properties, List<String> suitePaths, Optional<String> tempJarPath, List<TestTaskCompletionListener> listeners);
+    List<TestInformation> handleTest(Properties properties, List<String> suitePaths, Optional<String> tempJarPath, List<TestTaskCompletionListener> listeners);
 
 }

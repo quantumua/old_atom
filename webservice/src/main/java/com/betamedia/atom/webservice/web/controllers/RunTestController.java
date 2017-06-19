@@ -1,8 +1,8 @@
 package com.betamedia.atom.webservice.web.controllers;
 
 import com.betamedia.atom.core.fwtestrunner.TestRunnerHandler;
-import com.betamedia.atom.core.fwtestrunner.TestTask;
-import com.betamedia.atom.core.fwtestrunner.TestTaskHandler;
+import com.betamedia.atom.core.fwtestrunner.TestInformation;
+import com.betamedia.atom.core.fwtestrunner.TestInformationHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,19 +29,19 @@ public class RunTestController {
     @Autowired
     private TestRunnerHandler testRunnerHandler;
     @Autowired
-    private TestTaskHandler testTaskHandler;
+    private TestInformationHandler testInformationHandler;
 
     @PostMapping("/upload/task")
-    public List<TestTask> runTask(@RequestParam("properties") MultipartFile properties,
-                                  @RequestParam("suites[]") MultipartFile[] suites,
-                                  @RequestParam("tempJar") Optional<MultipartFile> tempJar) throws IOException {
+    public List<TestInformation> runTask(@RequestParam("properties") MultipartFile properties,
+                                         @RequestParam("suites[]") MultipartFile[] suites,
+                                         @RequestParam("tempJar") Optional<MultipartFile> tempJar) throws IOException {
         logger.info("Starting tests");
-        return testRunnerHandler.handleTask(getProperties(properties), suites, tempJar, Collections.emptyList());
+        return testRunnerHandler.handleTest(getProperties(properties), suites, tempJar, Collections.emptyList());
     }
 
     @PostMapping(value = "/status/{taskId}")
-    public TestTask getTaskStatus(@PathVariable UUID taskId) {
-        return testTaskHandler.get(taskId);
+    public TestInformation getTaskStatus(@PathVariable UUID taskId) {
+        return testInformationHandler.get(taskId);
     }
 
 }
