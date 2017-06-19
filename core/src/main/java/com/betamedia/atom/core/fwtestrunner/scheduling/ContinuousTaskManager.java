@@ -1,8 +1,10 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
+import com.betamedia.atom.core.fwtestrunner.TestTask;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.Set;
 
@@ -11,11 +13,9 @@ import java.util.Set;
  * @since 4/20/17
  */
 public interface ContinuousTaskManager {
-    void createScheduledTask(String name, String emailAddress, Properties properties, MultipartFile[] suites, String cronExpression);
-
-    void createRepeatingTask(String name, String emailAddress, Properties properties, MultipartFile[] suites);
+    void createTask(String name, String emailAddress, Properties properties, MultipartFile[] suites, Optional<String> cronExpression);
 
     void stopTask(String name);
 
-    Set<Map<String, String>> getInfo();
+    Set<TestTask> getInfo();
 }

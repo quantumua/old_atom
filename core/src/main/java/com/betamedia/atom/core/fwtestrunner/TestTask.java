@@ -3,10 +3,7 @@ package com.betamedia.atom.core.fwtestrunner;
 import com.betamedia.atom.core.holders.AppContextHolder;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author mbelyaev
@@ -14,6 +11,8 @@ import java.util.UUID;
  */
 public class TestTask {
     public final UUID uuid;
+    public final Boolean isContinuous;
+    public final List<UUID> childTaskIds;
     public final Status status;
     public final Boolean hasFailed;
     public final LocalDateTime time;
@@ -24,8 +23,10 @@ public class TestTask {
     public final List<String> attachmentURLs;
     public final String emailReportURL;
 
-    private TestTask(UUID uuid, Status status, Boolean hasFailed, LocalDateTime time, Properties properties, List<String> suites, String reportDirectory, String reportURL, List<String> attachmentURLs, String emailReportURL) {
+    private TestTask(UUID uuid, Boolean isContinuous, List<UUID> childTaskIds, Status status, Boolean hasFailed, LocalDateTime time, Properties properties, List<String> suites, String reportDirectory, String reportURL, List<String> attachmentURLs, String emailReportURL) {
         this.uuid = uuid;
+        this.isContinuous = isContinuous;
+        this.childTaskIds = childTaskIds;
         this.status = status;
         this.hasFailed = hasFailed;
         this.time = time;
@@ -47,9 +48,11 @@ public class TestTask {
 
     public static class TaskStatusBuilder {
         private UUID uuid;
-        private LocalDateTime time;
+        private Boolean isContinuous;
+        private List<UUID> childTaskIds;
         private Status status;
         private Boolean hasFailed;
+        private LocalDateTime time;
         private Properties properties;
         private List<String> suites;
         private String reportDirectory;
@@ -64,6 +67,8 @@ public class TestTask {
 
         private TaskStatusBuilder(TestTask source) {
             this.uuid = source.uuid;
+            this.isContinuous = source.isContinuous;
+            this.childTaskIds = source.childTaskIds;
             this.status = source.status;
             this.hasFailed = source.hasFailed;
             this.time = source.time;
@@ -73,6 +78,16 @@ public class TestTask {
             this.reportURL = source.reportURL;
             this.attachmentURLs = source.attachmentURLs;
             this.emailReportURL = source.emailReportURL;
+        }
+
+        public TaskStatusBuilder isContinuous(boolean isContinuous) {
+            this.isContinuous = isContinuous;
+            return this;
+        }
+
+        public TaskStatusBuilder withChildTasks(List<UUID> childTaskIds) {
+            this.childTaskIds = childTaskIds;
+            return this;
         }
 
         public TaskStatusBuilder withStatus(Status status) {
@@ -117,8 +132,9 @@ public class TestTask {
         }
 
         public TestTask build() {
+            if (isContinuous && childTaskIds == null) this.childTaskIds = new ArrayList<>();
             if (this.reportDirectory == null) this.reportDirectory = getReportDirectory(properties, time);
-            return store(new TestTask(uuid, status, hasFailed, time, properties, suites, reportDirectory, reportURL, attachmentURLs, emailReportURL));
+            return store(new TestTask(uuid, isContinuous, childTaskIds, status, hasFailed, time, properties, suites, reportDirectory, reportURL, attachmentURLs, emailReportURL));
         }
 
         private static TestTask store(TestTask task) {

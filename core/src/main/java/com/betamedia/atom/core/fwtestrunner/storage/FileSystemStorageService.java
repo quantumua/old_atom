@@ -79,20 +79,6 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public List<String> storeToTemp(MultipartFile[] files) {
-        return Arrays.stream(files)
-                .map(this::storeToTemp)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<String> storeToTemp(MultipartFile[] files, String pathString) {
-        return Arrays.stream(files)
-                .map(file -> storeToTemp(file, pathString))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public void delete(String pathString) {
         try {
             Files.delete(Paths.get(pathString));
@@ -102,45 +88,12 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public Stream<Path> loadAll() {
-        try {
-            return Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation))
-                    .map(this.rootLocation::relativize);
-        } catch (IOException e) {
-            throw new StorageException("Failed to read stored files", e);
-        }
-
-    }
-
-    @Override
     public Stream<Path> loadAll(String... pathString) {
         try {
             return Files.walk(Paths.get("", pathString), 1)
                     .filter(path -> !path.equals(Paths.get("", pathString)));
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
-        }
-    }
-
-    @Override
-    public Path load(String filename) {
-        return rootLocation.resolve(filename);
-    }
-
-    @Override
-    public Resource loadAsResource(String filename) {
-        try {
-            Path file = load(filename);
-            Resource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new StorageFileNotFoundException("Could not read file: " + filename);
-
-            }
-        } catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file: " + filename, e);
         }
     }
 

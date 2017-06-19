@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.betamedia.atom.core.utils.PropertiesUtils.getProperties;
@@ -33,7 +34,7 @@ public class RunTestController {
     @PostMapping("/upload/task")
     public List<TestTask> runTask(@RequestParam("properties") MultipartFile properties,
                                   @RequestParam("suites[]") MultipartFile[] suites,
-                                  @RequestParam(value = "tempJar", required = false) MultipartFile tempJar) throws IOException {
+                                  @RequestParam("tempJar") Optional<MultipartFile> tempJar) throws IOException {
         logger.info("Starting tests");
         return testRunnerHandler.handleTask(getProperties(properties), suites, tempJar, Collections.emptyList());
     }

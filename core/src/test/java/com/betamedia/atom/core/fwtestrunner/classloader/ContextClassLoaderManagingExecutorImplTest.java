@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -80,7 +81,7 @@ public class ContextClassLoaderManagingExecutorImplTest {
                         }
                         mockExecution(mockClassLoader, "MOCK 1");
                         return null;
-                    }), null);
+                    }), Optional.empty());
                 },
                 () -> {
                     try {
@@ -97,7 +98,7 @@ public class ContextClassLoaderManagingExecutorImplTest {
                     executionHandler.run(Collections.singletonList(() -> {
                         mockExecution(alteredClassLoader, "ALT 1");
                         return null;
-                    }), null);
+                    }), Optional.empty());
                 },
                 () -> {
                     try {
@@ -109,7 +110,7 @@ public class ContextClassLoaderManagingExecutorImplTest {
                     executionHandler.run(Collections.singletonList(() -> {
                         mockExecution(alteredClassLoader, "ALT 2");
                         return null;
-                    }), null);
+                    }), Optional.empty());
                 }
         ).forEach(pool::execute);
         pool.awaitTermination(1, TimeUnit.MINUTES);

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -38,15 +39,16 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
     }
 
     @Override
-    public List<TestTask> handleTask(Properties properties, MultipartFile[] suites, MultipartFile tempJar, List<TestTaskCompletionListener> listeners) {
+    public List<TestTask> handleTask(Properties properties, MultipartFile[] suites, Optional<MultipartFile> tempJar, List<TestTaskCompletionListener> listeners) {
         String tempDirectory = UUID.randomUUID().toString();
-        List<String> suitePaths = storageService.storeToTemp(suites, tempDirectory);
-        String tempJarPath = storageService.storeToTemp(tempJar, tempDirectory);
+        Function<MultipartFile, String> store = file -> storageService.storeToTemp(file, tempDirectory);
+        List<String> suitePaths = Arrays.stream(suites).map(store).collect(Collectors.toList());
+        Optional<String> tempJarPath = tempJar.map(store);
         return handleTask(properties, suitePaths, tempJarPath, listeners);
     }
 
     @Override
-    public List<TestTask> handleTask(Properties properties, List<String> suitePaths, String tempJarPath, List<TestTaskCompletionListener> listeners) {
+    public List<TestTask> handleTask(Properties properties, List<String> suitePaths, Optional<String> tempJarPath, List<TestTaskCompletionListener> listeners) {
         List<TestTask> tasks = getTasks(properties, suitePaths);
         async(() -> classLoaderExecutor.run(getTaskExecutions(tasks), tempJarPath), listeners);
         return tasks;

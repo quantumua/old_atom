@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -36,22 +37,16 @@ public class ContinuousTaskManagerImpl implements ContinuousTaskManager {
     private ConcurrentMap<String, ContinuousTask> continuousTasks = new ConcurrentHashMap<>();
 
     @Override
-    public void createScheduledTask(String name, String emailAddress, Properties properties, MultipartFile[] suites, String cronExpression) {
-        addTestExecution(
-                name,
-                new ScheduledTask(
-                        getTaskExecution(properties, suites, listeners),
-                        cronExpression,
-                        taskScheduler));
-    }
-
-    @Override
-    public void createRepeatingTask(String name, String emailAddress, Properties properties, MultipartFile[] suites) {
-        addTestExecution(
-                name,
-                new RepeatingTask(
-                        getTaskExecution(properties, suites, listeners),
-                        asyncTaskExecutor));
+    public void createTask(String name, String emailAddress, Properties properties, MultipartFile[] suites, Optional<String> cronExpression) {
+        String tempDirectory = UUID.randomUUID().toString();
+        Function<MultipartFile, String> store = file -> storageService.storeToTemp(file, tempDirectory);
+        List<String> suitePaths = Arrays.stream(suites).map(store).collect(Collectors.toList());
+        Supplier<List<TestTask>> runnable = () -> handler.handleTask(properties, suitePaths, Optional.empty(), listeners);
+        ContinuousTask task = getTask(runnable, cronExpression);
+        Optional.ofNullable(
+                continuousTasks.put(name, task))
+                .ifPresent(ContinuousTask::stop);
+        task.start();
     }
 
     @Override
@@ -61,28 +56,18 @@ public class ContinuousTaskManagerImpl implements ContinuousTaskManager {
     }
 
     @Override
-    public Set<Map<String, String>> getInfo() {
+    public Set<TestTask> getInfo() {
         return continuousTasks.entrySet()
                 .stream()
-                .map(e -> {
-                    Map<String, String> info = new HashMap<>(e.getValue().getInfo());
-                    info.put("name", e.getKey());
-                    return info;
-                })
+                .map(e -> e.getValue().getTask())
                 .collect(Collectors.toSet());
     }
 
-    private void addTestExecution(String name, ContinuousTask execution) {
-        Optional.ofNullable(continuousTasks.put(name, execution))
-                .ifPresent(ContinuousTask::stop);
-        execution.start();
+    private ContinuousTask getTask(Supplier<List<TestTask>> runnable, Optional<String> cronExpression) {
+        return cronExpression
+                .map((Function<String, ContinuousTask>) expr -> new ScheduledTask(runnable, expr, taskScheduler))
+                .orElseGet(() -> new RepeatingTask(runnable, asyncTaskExecutor));
     }
 
-    private Supplier<List<TestTask>> getTaskExecution(Properties properties, MultipartFile[] suites, List<TestTaskCompletionListener> listeners) {
-        String tempDirectory = UUID.randomUUID().toString();
-        List<String> suitePaths = storageService.storeToTemp(suites, tempDirectory);
-//TODO          invoking TRHandler will create new set of tasks, TestTask covers singular execution
-        return () -> handler.handleTask(properties, suitePaths, null, listeners);
-    }
 
 }
