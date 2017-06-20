@@ -75,8 +75,7 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
         pages().crmNavigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith100Score());
         pages().crmNavigation().fnsPersonalInformation();
-        pages().fnsPersonalInformation().submit(personalInfoScore10());
-
+        pages().fnsPersonalInformation().submit(personalInfoScoreMax());
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(100));
         operations().onBoardingOperations().assertUsernameExpert(customer.getUserName());
     }
@@ -169,9 +168,9 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
                 .withBinaryExperience(Questions.BinaryExperience.FREQUENTLY.get())
                 .withAverageYearlyBinaryVolume(Questions.AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
                 .withForExExperience(Questions.ForExExperience.FREQUENTLY.get())
-                .withAverageYearlyForExVolume(Questions.AverageYearlyForExVolume.VOLUME_50K_150K.get())
-                .withCommonLeverage(Questions.CommonLeverageForExVolume.LEVERAGE_1TO50_1TO200.get())
-                .withFinancialWorkExperience(Questions.FinancialWorkExperience.WORKED.get())
+                .withAverageYearlyForExVolume(Questions.AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
+                .withCommonLeverage(Questions.CommonLeverageForExVolume.LEVERAGE_ABOVE_1TO500.get())
+                .withFinancialWorkExperience(Questions.FinancialWorkExperience.BOTH.get())
                 .withCfdBinaryKnowledge(Questions.CfdBinaryKnowledge.SPECULATIVE.get())
                 .withMainFactorKnowledge(Questions.MainFactorKnowledge.INTEREST_RATES.get())
                 .withHowToCloseKnowledge(Questions.HowToCloseKnowledge.ONLY_PLATFORM.get())

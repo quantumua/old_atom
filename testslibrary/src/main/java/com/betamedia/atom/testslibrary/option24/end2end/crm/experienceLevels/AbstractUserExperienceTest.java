@@ -28,6 +28,26 @@ public abstract class AbstractUserExperienceTest extends TPEndToEndTest {
                 .build();
     }
 
+    protected PersonalInformation personalInfoScoreMax() {
+        return PersonalInformation.builder()
+                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
+                .withIndustry(Questions.Industry.ACCOUNTING.get())
+                .withEmployerName("erter")
+                .withTaxResidenceCountry("JP")
+                .withUSReportabilityStatus(Questions.IsUSReportable.YES.get())
+                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.NO.get())
+                .withSocialSecurityNumber("123456789")
+                .withEducationLevel(Questions.EducationLevel.POST_GRADUATE.get())
+                .withEducationField(Questions.EducationField.ACCOUNTING.get())
+                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.NO.get())
+                .withSourceOfFunds(Questions.SourceOfFunds.EMPLOYMENT.get())
+                .withAnnualIncome(Questions.AnnualIncome.INCOME_OVER_100K.get())
+                .withNetWealth(Questions.NetWealth.NET_WEALTH_OVER_300K.get())
+                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
+                .withPurposeOfTrading(Questions.PurposeOfTrading.SPECULATIVE.get())
+                .build();
+    }
+
     protected PersonalInformation personalInfoScore0() {
         return PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
