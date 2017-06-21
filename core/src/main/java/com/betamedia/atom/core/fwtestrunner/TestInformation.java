@@ -11,6 +11,7 @@ public class TestInformation {
     public final UUID id;
     public final Boolean isContinuous;
     public final String name;
+    public final String emailAddress;
     public final String cronExpression;
     public final List<UUID> childTaskIds;
     public final Status status;
@@ -23,10 +24,11 @@ public class TestInformation {
     public final List<String> attachmentURLs;
     public final String emailReportURL;
 
-    private TestInformation(UUID id, Boolean isContinuous, String name, String cronExpression, List<UUID> childTaskIds, Status status, Boolean hasFailed, LocalDateTime time, Properties properties, List<String> suites, String reportDirectory, String reportURL, List<String> attachmentURLs, String emailReportURL) {
+    private TestInformation(UUID id, Boolean isContinuous, String name, String emailAddress, String cronExpression, List<UUID> childTaskIds, Status status, Boolean hasFailed, LocalDateTime time, Properties properties, List<String> suites, String reportDirectory, String reportURL, List<String> attachmentURLs, String emailReportURL) {
         this.id = id;
         this.isContinuous = isContinuous;
         this.name = name;
+        this.emailAddress = emailAddress;
         this.cronExpression = cronExpression;
         this.childTaskIds = childTaskIds;
         this.status = status;
@@ -52,6 +54,7 @@ public class TestInformation {
         private UUID id;
         private Boolean isContinuous = false;
         private String name;
+        private String emailAddress;
         private String cronExpression;
         private List<UUID> childTaskIds;
         private Status status;
@@ -72,6 +75,7 @@ public class TestInformation {
         private TestInformationBuilder(TestInformation source) {
             this.id = source.id;
             this.name = source.name;
+            this.emailAddress = source.emailAddress;
             this.isContinuous = source.isContinuous;
             this.cronExpression = source.cronExpression;
             this.childTaskIds = source.childTaskIds;
@@ -88,6 +92,11 @@ public class TestInformation {
 
         public TestInformationBuilder withName(String name) {
             this.name = name;
+            return this;
+        }
+
+        public TestInformationBuilder withEmailAddress(String emailAddress) {
+            this.emailAddress = emailAddress;
             return this;
         }
 
@@ -150,13 +159,12 @@ public class TestInformation {
         public TestInformation build() {
             if (isContinuous && childTaskIds == null) this.childTaskIds = new ArrayList<>();
             if (this.reportDirectory == null) this.reportDirectory = getReportDirectory(properties, time);
-            return new TestInformation(id, isContinuous, name, cronExpression, childTaskIds, status, hasFailed, time, properties, suites, reportDirectory, reportURL, attachmentURLs, emailReportURL);
+            return new TestInformation(id, isContinuous, name, emailAddress, cronExpression, childTaskIds, status, hasFailed, time, properties, suites, reportDirectory, reportURL, attachmentURLs, emailReportURL);
         }
 
         private static String getReportDirectory(Properties props, LocalDateTime time) {
             return TestRunnerHandler.TEST_OUTPUT_DIRECTORY + (time.toString() + "." + Objects.hash(props, time, Thread.currentThread())).replaceAll("[^a-zA-Z0-9]", "_");
         }
-
     }
 
     public enum Status {

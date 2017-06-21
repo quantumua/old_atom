@@ -79,7 +79,11 @@
             </td>
             <td><span class="col-md-6" ng-cloak>{{test.data.date}}</span></td>
             <td><span class="col-md-6" ng-cloak>{{test.data.time}}</span></td>
-            <td><span class="col-md-6"><a target="_blank" ng-href="/atom/{{test.data.reportURL}}" ng-cloak>link</a></span>
+            <td><span class="col-md-6">
+                <a target="_blank" ng-href="/atom/{{test.data.reportURL}}" ng-style="{'visibility': test.data.status === 'COMPLETED' ? 'visible':'hidden'}">
+                    link
+                </a>
+            </span>
             </td>
             <td><span class="col-md-6" style="padding:0 15px 0 15px;"
                       ng-class="{highlight: test.data.status === 'COMPLETED'}" ng-cloak>{{test.data.status}}</span></td>

@@ -1,9 +1,9 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
-import com.betamedia.atom.core.fwtestrunner.listeners.TestCompletionListener;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -12,5 +12,5 @@ import java.util.function.Function;
  */
 @FunctionalInterface
 public interface ContinuousTestFactory {
-    ContinuousTest get(TestInformation testInformation, Function<TestCompletionListener, List<TestInformation>> testExecution);
+    ContinuousTest get(TestInformation testInformation, Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution);
 }

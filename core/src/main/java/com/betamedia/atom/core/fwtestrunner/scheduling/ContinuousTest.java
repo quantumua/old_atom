@@ -1,7 +1,6 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
-import com.betamedia.atom.core.fwtestrunner.listeners.TestCompletionListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,11 +18,11 @@ import java.util.stream.Stream;
 public abstract class ContinuousTest {
     private static final Logger logger = LogManager.getLogger(ContinuousTest.class);
     protected final AtomicBoolean isEnabled = new AtomicBoolean(true);
-    protected final Function<TestCompletionListener, List<TestInformation>> testExecution;
+    protected final Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution;
     protected TestInformation testInformation;
     protected Consumer<TestInformation> onTestSubmitCompletion;
 
-    protected ContinuousTest(TestInformation testInformation, Function<TestCompletionListener, List<TestInformation>> testExecution, Consumer<TestInformation> onTestSubmitCompletion) {
+    protected ContinuousTest(TestInformation testInformation, Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution, Consumer<TestInformation> onTestSubmitCompletion) {
         this.testExecution = testExecution;
         this.testInformation = testInformation;
         this.onTestSubmitCompletion = onTestSubmitCompletion;
@@ -36,8 +35,9 @@ public abstract class ContinuousTest {
     protected void runExecution() {
         if (!isEnabled.get()) {
             logger.error("Attempted to start a disabled continuous test!", this);
-            return;}
-        if (testInformation.status.equals(TestInformation.Status.CREATED)){
+            return;
+        }
+        if (testInformation.status.equals(TestInformation.Status.CREATED)) {
             logger.info("Starting continuous test for the first time.", this);
             testInformation = testInformation.update().withStatus(TestInformation.Status.RUNNING).build();
         }

@@ -29,10 +29,11 @@ public class ScheduledTestController {
     @PostMapping("/upload/test/scheduled")
     public TestInformation createScheduledTest(@RequestParam("name") String name,
                                                @RequestParam("properties") MultipartFile properties,
+                                               @RequestParam("emailAddress") String emailAddress,
                                                @RequestParam("suites[]") MultipartFile[] suites,
                                                @RequestParam("cronExpression") Optional<String> cronExpression) throws IOException {
         logger.info("Scheduling test");
-        return continuousTestManager.createTest(name, getProperties(properties), suites, cronExpression);
+        return continuousTestManager.createTest(name, emailAddress, getProperties(properties), suites, cronExpression);
     }
 
     @GetMapping("/scheduled")

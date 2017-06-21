@@ -30,19 +30,17 @@ angular.module('client', [])
         }
 
         function testFormatter(test) {
-            if(!!test.suites){
+            if (!!test.suites) {
                 test.suites = test.suites.map(function (suite) {
                     return suite.substr(suite.lastIndexOf('/') + 1);
                 });
             }
-            if(!!test.date){
+            if (!!test.time) {
                 test.date = [
                     withLeadingZero(test.time.dayOfMonth),
                     withLeadingZero(test.time.monthValue),
                     test.time.year
                 ].join('/');
-            }
-            if(!!test.time){
                 test.time = [
                     withLeadingZero(test.time.hour),
                     withLeadingZero(test.time.minute),
@@ -153,9 +151,10 @@ angular.module('client', [])
         var self = this;
         self.messages = [];
         self.tests = [];
-        function scheduleTests(name, properties, suites, cron) {
+        function scheduleTests(name, emailAddress, properties, suites, cron) {
             var fd = new FormData();
             fd.append('name', name);
+            fd.append('emailAddress', emailAddress);
             fd.append('properties', properties);
             suites.forEach(function (suite) {
                 fd.append('suites[]', suite);
@@ -194,7 +193,7 @@ angular.module('client', [])
                 badInput = true;
             }
             if (badInput) return;
-            scheduleTests($scope.name, $scope.properties[0], Array.from($scope.suites), $scope.cron)
+            scheduleTests($scope.name, $scope.emailAddress, $scope.properties[0], Array.from($scope.suites), $scope.cron)
         };
 
         self.stop = function (id) {
@@ -213,19 +212,17 @@ angular.module('client', [])
             })
         };
         function testFormatter(test) {
-            if(!!test.suites){
+            if (!!test.suites) {
                 test.suites = test.suites.map(function (suite) {
                     return suite.substr(suite.lastIndexOf('/') + 1);
                 });
             }
-            if(!!test.date){
+            if (!!test.time) {
                 test.date = [
                     withLeadingZero(test.time.dayOfMonth),
                     withLeadingZero(test.time.monthValue),
                     test.time.year
                 ].join('/');
-            }
-            if(!!test.time){
                 test.time = [
                     withLeadingZero(test.time.hour),
                     withLeadingZero(test.time.minute),

@@ -1,7 +1,6 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
-import com.betamedia.atom.core.fwtestrunner.listeners.TestCompletionListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.TaskScheduler;
@@ -23,7 +22,7 @@ public class ScheduledTest extends ContinuousTest {
     private final TaskScheduler scheduler;
     private volatile ScheduledFuture scheduledFuture;
 
-    public ScheduledTest(TestInformation testInformation, Function<TestCompletionListener, List<TestInformation>> testExecution, Consumer<TestInformation> onTestSubmitCompletion, TaskScheduler scheduler) {
+    public ScheduledTest(TestInformation testInformation, Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution, Consumer<TestInformation> onTestSubmitCompletion, TaskScheduler scheduler) {
         super(testInformation, testExecution, onTestSubmitCompletion);
         this.scheduler = scheduler;
     }
@@ -36,7 +35,7 @@ public class ScheduledTest extends ContinuousTest {
         }
         scheduledFuture = scheduler.schedule(() -> {
             logger.info("Checking if execution is allowed.", this);
-            if (allowedToStart.compareAndSet(true, false)){
+            if (allowedToStart.compareAndSet(true, false)) {
                 logger.info("Running test execution.", this);
                 runExecution();
             }

@@ -11,7 +11,7 @@ import java.util.*;
  */
 public interface ContinuousTestManager {
 
-    TestInformation createTest(String name, Properties properties, MultipartFile[] suites, Optional<String> cronExpression);
+    TestInformation createTest(String name, String emailAddress, Properties properties, MultipartFile[] suites, Optional<String> cronExpression);
 
     void stopTest(UUID name);
 

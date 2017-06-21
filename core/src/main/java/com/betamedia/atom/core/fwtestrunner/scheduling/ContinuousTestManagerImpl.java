@@ -2,7 +2,7 @@ package com.betamedia.atom.core.fwtestrunner.scheduling;
 
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
 import com.betamedia.atom.core.fwtestrunner.TestRunnerHandler;
-import com.betamedia.atom.core.fwtestrunner.listeners.TestCompletionListener;
+import com.betamedia.atom.core.fwtestrunner.reporting.EmailService;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class ContinuousTestManagerImpl implements ContinuousTestManager {
     @Autowired
     private StorageService storageService;
     @Autowired
-    private List<TestCompletionListener> listeners;
+    private EmailService emailService;
     @Autowired
     private ContinuousTestFactory scheduledTaskFactory;
     @Autowired
@@ -34,18 +35,23 @@ public class ContinuousTestManagerImpl implements ContinuousTestManager {
     private ConcurrentMap<UUID, ContinuousTest> continuousTasks = new ConcurrentHashMap<>();
 
     @Override
-    public TestInformation createTest(String name, Properties properties, MultipartFile[] suites, Optional<String> cronExpression) {
+    public TestInformation createTest(String name, String emailAddress, Properties properties, MultipartFile[] suites, Optional<String> cronExpression) {
         String tempDirectory = UUID.randomUUID().toString();
         Function<MultipartFile, String> store = file -> storageService.storeToTemp(file, tempDirectory);
         List<String> suitePaths = Arrays.stream(suites).map(store).collect(Collectors.toList());
-        Function<TestCompletionListener, List<TestInformation>> testExecution = getTestExecution(properties, suitePaths);
+        Consumer<List<TestInformation>> emailListener = tests ->
+                tests.stream()
+                        .filter(t -> t.hasFailed)
+                        .forEach(t -> emailService.sendLocalFile(emailAddress, name, t.emailReportURL, t.attachmentURLs));
+        Function<Consumer<List<TestInformation>>, List<TestInformation>> emailingExecution = getTestExecution(properties, suitePaths, emailListener);
         TestInformation testInformation = TestInformation.builder()
                 .isContinuous(true)
                 .withName(name)
+                .withEmailAddress(emailAddress)
                 .withCronExpression(cronExpression.orElse(""))
                 .withStatus(TestInformation.Status.CREATED)
                 .build();
-        ContinuousTest test = cronExpression.isPresent() ? scheduledTaskFactory.get(testInformation, testExecution) : repeatingTaskFactory.get(testInformation, testExecution);
+        ContinuousTest test = cronExpression.isPresent() ? scheduledTaskFactory.get(testInformation, emailingExecution) : repeatingTaskFactory.get(testInformation, emailingExecution);
         Optional.ofNullable(
                 continuousTasks.put(testInformation.id, test))
                 .ifPresent(ContinuousTest::stop);
@@ -67,12 +73,10 @@ public class ContinuousTestManagerImpl implements ContinuousTestManager {
                 .collect(Collectors.toSet());
     }
 
-    private Function<TestCompletionListener, List<TestInformation>> getTestExecution(Properties properties, List<String> suitePaths) {
-        return schedulingListener ->{
-            ArrayList<TestCompletionListener> listenersWithScheduler = new ArrayList<>(listeners);
-            listenersWithScheduler.add(schedulingListener);
-            return handler.handleTest(properties, suitePaths, Optional.empty(), listenersWithScheduler);
-        };
+    private Function<Consumer<List<TestInformation>>, List<TestInformation>> getTestExecution(Properties properties, List<String> suitePaths, Consumer<List<TestInformation>> listener) {
+        return injectedListener ->
+                handler.handleTest(properties, suitePaths, Optional.empty(), listener.andThen(injectedListener));
+
     }
 
 }
