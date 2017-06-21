@@ -1,7 +1,5 @@
 package com.betamedia.atom.core.fwtestrunner;
 
-import com.betamedia.atom.core.fwtestrunner.TestInformation.TestInformationBuilder;
-
 import java.util.UUID;
 
 /**
@@ -13,5 +11,4 @@ public interface TestInformationHandler {
 
     void put(TestInformation testInformation);
 
-    TestInformationBuilder builder();
 }

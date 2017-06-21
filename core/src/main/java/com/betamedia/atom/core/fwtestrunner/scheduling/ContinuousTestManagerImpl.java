@@ -1,9 +1,8 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
-import com.betamedia.atom.core.fwtestrunner.TestRunnerHandler;
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
-import com.betamedia.atom.core.fwtestrunner.TestInformationHandler;
-import com.betamedia.atom.core.fwtestrunner.listeners.TestTaskCompletionListener;
+import com.betamedia.atom.core.fwtestrunner.TestRunnerHandler;
+import com.betamedia.atom.core.fwtestrunner.listeners.TestCompletionListener;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -25,11 +23,9 @@ public class ContinuousTestManagerImpl implements ContinuousTestManager {
     @Autowired
     private TestRunnerHandler handler;
     @Autowired
-    private TestInformationHandler testInformationHandler;
-    @Autowired
     private StorageService storageService;
     @Autowired
-    private List<TestTaskCompletionListener> listeners;
+    private List<TestCompletionListener> listeners;
     @Autowired
     private ContinuousTestFactory scheduledTaskFactory;
     @Autowired
@@ -42,18 +38,18 @@ public class ContinuousTestManagerImpl implements ContinuousTestManager {
         String tempDirectory = UUID.randomUUID().toString();
         Function<MultipartFile, String> store = file -> storageService.storeToTemp(file, tempDirectory);
         List<String> suitePaths = Arrays.stream(suites).map(store).collect(Collectors.toList());
-        Supplier<List<TestInformation>> testExecution = () -> handler.handleTest(properties, suitePaths, Optional.empty(), listeners);
-        TestInformation testInformation = testInformationHandler.builder()
+        Function<TestCompletionListener, List<TestInformation>> testExecution = getTestExecution(properties, suitePaths);
+        TestInformation testInformation = TestInformation.builder()
                 .isContinuous(true)
                 .withName(name)
                 .withCronExpression(cronExpression.orElse(""))
                 .withStatus(TestInformation.Status.CREATED)
                 .build();
-        ContinuousTest task = cronExpression.isPresent() ? scheduledTaskFactory.get(testInformation, testExecution) : repeatingTaskFactory.get(testInformation, testExecution);
+        ContinuousTest test = cronExpression.isPresent() ? scheduledTaskFactory.get(testInformation, testExecution) : repeatingTaskFactory.get(testInformation, testExecution);
         Optional.ofNullable(
-                continuousTasks.put(testInformation.id, task))
+                continuousTasks.put(testInformation.id, test))
                 .ifPresent(ContinuousTest::stop);
-        task.start();
+        test.start();
         return testInformation;
     }
 
@@ -69,6 +65,14 @@ public class ContinuousTestManagerImpl implements ContinuousTestManager {
                 .stream()
                 .map(e -> e.getValue().getTestInformation())
                 .collect(Collectors.toSet());
+    }
+
+    private Function<TestCompletionListener, List<TestInformation>> getTestExecution(Properties properties, List<String> suitePaths) {
+        return schedulingListener ->{
+            ArrayList<TestCompletionListener> listenersWithScheduler = new ArrayList<>(listeners);
+            listenersWithScheduler.add(schedulingListener);
+            return handler.handleTest(properties, suitePaths, Optional.empty(), listenersWithScheduler);
+        };
     }
 
 }

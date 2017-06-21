@@ -1,11 +1,14 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
-import com.betamedia.atom.core.fwtestrunner.TestInformationHandler;
+import com.betamedia.atom.core.fwtestrunner.listeners.TestCompletionListener;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.core.task.TaskExecutor;
 
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 
 /**
@@ -13,30 +16,37 @@ import java.util.function.Supplier;
  * @since 6/16/17
  */
 public class RepeatingTest extends ContinuousTest {
+    private static final Logger logger = LogManager.getLogger(RepeatingTest.class);
     private final TaskExecutor executor;
 
-    public RepeatingTest(TestInformation taskEntry, Supplier<List<TestInformation>> taskExecution, TaskExecutor executor) {
-        super(taskEntry, taskExecution);
+    public RepeatingTest(TestInformation testInformation, Function<TestCompletionListener, List<TestInformation>> testExecution, Consumer<TestInformation> onTestSubmitCompletion, TaskExecutor executor) {
+        super(testInformation, testExecution, onTestSubmitCompletion);
         this.executor = executor;
     }
 
     @Override
     public void start() {
-        if (testInformation.status.equals(TestInformation.Status.CREATED))
-            testInformation = testInformation.update().withStatus(TestInformation.Status.RUNNING).build();
-        executor.execute(() -> {
-            runExecution();
-            if (isEnabled.get()) {
-                start();
-                return;
-            }
-            reportCompletion();
-        });
+        executor.execute(this::runExecution);
     }
 
     @Override
     public void stop() {
+        logger.info("Setting test termination flag.", this);
         isEnabled.set(false);
+    }
+
+    @Override
+    protected void onIterationCompletion(List<TestInformation> iterationResults) {
+        logger.info("Finished executing test iteration.", this);
+        if (isEnabled.get()) {
+            logger.info("Restarting continuous test.", this);
+            start();
+            logger.info("Continuous test restarted.", this);
+            return;
+        }
+        logger.info("The test will no longer be restarted.", this);
+        testInformation = testInformation.update().withStatus(TestInformation.Status.COMPLETED).build();
+        onTestSubmitCompletion.accept(this.testInformation);
     }
 
 }

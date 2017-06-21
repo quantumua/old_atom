@@ -4,7 +4,7 @@ angular.module('client', [])
         var reportRefreshTimeout = 900000;
         var reportRefreshDelay = 5000;
         self.messages = [];
-        self.tasks = [];
+        self.tests = [];
         function runTests(properties, suites, tempJar) {
             var fd = new FormData();
             fd.append('properties', properties);
@@ -12,36 +12,44 @@ angular.module('client', [])
                 fd.append('suites[]', s);
             });
             fd.append('tempJar', tempJar);
-            $http.post('/atom/upload/task', fd, {
+            $http.post('/atom/upload/test', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
                 self.messages.push('Upload successful');
-                var tasks = response.data.map(taskFormatter);
-                tasks.forEach(function (task) {
-                    pollForStatus(task, reportRefreshDelay, reportRefreshTimeout);
+                var tests = response.data.map(testFormatter).map(function (test) {
+                    return {'data': test}
                 });
-                Array.prototype.push.apply(self.tasks, tasks);
+                tests.forEach(function (test) {
+                    pollForStatus(test, reportRefreshDelay, reportRefreshTimeout);
+                });
+                Array.prototype.push.apply(self.tests, tests);
             }, function (response) {
                 self.messages.push(response.body);
             });
         }
 
-        function taskFormatter(task) {
-            task.suites = task.suites.map(function (suite) {
-                return suite.substr(suite.lastIndexOf('/') + 1);
-            });
-            task.date = [
-                withLeadingZero(task.time.dayOfMonth),
-                withLeadingZero(task.time.monthValue),
-                task.time.year
-            ].join('/');
-            task.time = [
-                withLeadingZero(task.time.hour),
-                withLeadingZero(task.time.minute),
-                withLeadingZero(task.time.second)
-            ].join(':');
-            return task;
+        function testFormatter(test) {
+            if(!!test.suites){
+                test.suites = test.suites.map(function (suite) {
+                    return suite.substr(suite.lastIndexOf('/') + 1);
+                });
+            }
+            if(!!test.date){
+                test.date = [
+                    withLeadingZero(test.time.dayOfMonth),
+                    withLeadingZero(test.time.monthValue),
+                    test.time.year
+                ].join('/');
+            }
+            if(!!test.time){
+                test.time = [
+                    withLeadingZero(test.time.hour),
+                    withLeadingZero(test.time.minute),
+                    withLeadingZero(test.time.second)
+                ].join(':');
+            }
+            return test;
         }
 
         function withLeadingZero(input) {
@@ -66,15 +74,16 @@ angular.module('client', [])
             runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0]);
         };
 
-        function pollForStatus(task, delay, timeout) {
+        function pollForStatus(test, delay, timeout) {
             var interval = $interval(
                 function () {
-                    $http.post('/atom/status', task.id)
+                    $http.get('/atom/status/' + test.data.id)
                         .then(function (r) {
-                            task = taskFormatter(r.body);
-                            if (task.status !== 'RUNNING') {
-                                $interval.cancel(interval);
+                            if (r.data === '') {
+                                return;
                             }
+                            test.data = testFormatter(r.data);
+                            $interval.cancel(interval);
                         })
                 }, delay);
             $timeout(function () {
@@ -144,15 +153,17 @@ angular.module('client', [])
         var self = this;
         self.messages = [];
         self.tests = [];
-        function scheduleTests(name, emailAddress, properties, suites, cron) {
+        function scheduleTests(name, properties, suites, cron) {
             var fd = new FormData();
             fd.append('name', name);
             fd.append('properties', properties);
             suites.forEach(function (suite) {
                 fd.append('suites[]', suite);
             });
-            fd.append('cronExpression', cron);
-            $http.post('/atom/upload/task/scheduled', fd, {
+            if (!angular.isUndefined($scope.cron)) {
+                fd.append('cronExpression', cron);
+            }
+            $http.post('/atom/upload/test/scheduled', fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
@@ -183,12 +194,12 @@ angular.module('client', [])
                 badInput = true;
             }
             if (badInput) return;
-            scheduleTests($scope.name, $scope.emailAddress, $scope.properties[0], Array.from($scope.suites), $scope.cron)
+            scheduleTests($scope.name, $scope.properties[0], Array.from($scope.suites), $scope.cron)
         };
 
-        self.stop = function (name) {
+        self.stop = function (id) {
             self.messages = [];
-            $http.delete('/atom/scheduled/' + name + '/stop').then(function (response) {
+            $http.delete('/atom/scheduled/' + id + '/stop').then(function (response) {
                 self.messages.push('Stopped job successfully');
             }, function (response) {
                 self.messages.push(response.body);
@@ -198,9 +209,36 @@ angular.module('client', [])
             self.messages = [];
             self.tests = [];
             $http.get('/atom/scheduled').then(function (response) {
-                Array.prototype.push.apply(self.tests, response.data);
+                Array.prototype.push.apply(self.tests, response.data.map(testFormatter));
             })
+        };
+        function testFormatter(test) {
+            if(!!test.suites){
+                test.suites = test.suites.map(function (suite) {
+                    return suite.substr(suite.lastIndexOf('/') + 1);
+                });
+            }
+            if(!!test.date){
+                test.date = [
+                    withLeadingZero(test.time.dayOfMonth),
+                    withLeadingZero(test.time.monthValue),
+                    test.time.year
+                ].join('/');
+            }
+            if(!!test.time){
+                test.time = [
+                    withLeadingZero(test.time.hour),
+                    withLeadingZero(test.time.minute),
+                    withLeadingZero(test.time.second)
+                ].join(':');
+            }
+            return test;
         }
+
+        function withLeadingZero(input) {
+            return ("0" + input).slice(-2);
+        }
+
     })
     .controller('version', function ($http, $interval) {
         var self = this;

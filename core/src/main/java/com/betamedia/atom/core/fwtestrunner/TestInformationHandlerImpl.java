@@ -1,6 +1,5 @@
 package com.betamedia.atom.core.fwtestrunner;
 
-import com.betamedia.atom.core.fwtestrunner.TestInformation.TestInformationBuilder;
 import com.google.common.cache.LoadingCache;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +21,7 @@ public class TestInformationHandlerImpl implements TestInformationHandler {
 
     @Override
     public TestInformation get(UUID testId) {
-        return testInformationCache.getUnchecked(testId);
+        return testInformationCache.getIfPresent(testId);
     }
 
     @Override
@@ -30,8 +29,4 @@ public class TestInformationHandlerImpl implements TestInformationHandler {
         testInformationCache.put(task.id, task);
     }
 
-    @Override
-    public TestInformationBuilder builder() {
-        return TestInformation.builder(this);
-    }
 }

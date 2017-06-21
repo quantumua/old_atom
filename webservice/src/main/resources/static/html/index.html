@@ -71,18 +71,18 @@
             <th>Report</th>
             <th>Status</th>
         </tr>
-        <tr ng-repeat="task in runner.tasks">
+        <tr ng-repeat="test in runner.tests">
             <td class="col-md-6">
-                <div ng-repeat="suite in task.suites" ng-cloak>
+                <div ng-repeat="suite in test.data.suites" ng-cloak>
                     {{suite}}
                 </div>
             </td>
-            <td><span class="col-md-6" ng-cloak>{{report.date}}</span></td>
-            <td><span class="col-md-6" ng-cloak>{{report.time}}</span></td>
-            <td><span class="col-md-6"><a target="_blank" ng-href="/atom/{{task.reportURL}}" ng-cloak>link</a></span>
+            <td><span class="col-md-6" ng-cloak>{{test.data.date}}</span></td>
+            <td><span class="col-md-6" ng-cloak>{{test.data.time}}</span></td>
+            <td><span class="col-md-6"><a target="_blank" ng-href="/atom/{{test.data.reportURL}}" ng-cloak>link</a></span>
             </td>
             <td><span class="col-md-6" style="padding:0 15px 0 15px;"
-                      ng-class="{highlight: task.status === 'COMPLETED'}" ng-cloak>{{task.status}}</span></td>
+                      ng-class="{highlight: test.data.status === 'COMPLETED'}" ng-cloak>{{test.data.status}}</span></td>
         </tr>
     </table>
 </div>

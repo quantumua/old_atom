@@ -31,7 +31,7 @@ public class RunTestController {
     @Autowired
     private TestInformationHandler testInformationHandler;
 
-    @PostMapping("/upload/task")
+    @PostMapping("/upload/test")
     public List<TestInformation> runTask(@RequestParam("properties") MultipartFile properties,
                                          @RequestParam("suites[]") MultipartFile[] suites,
                                          @RequestParam("tempJar") Optional<MultipartFile> tempJar) throws IOException {
@@ -39,9 +39,9 @@ public class RunTestController {
         return testRunnerHandler.handleTest(getProperties(properties), suites, tempJar, Collections.emptyList());
     }
 
-    @PostMapping(value = "/status/{taskId}")
-    public TestInformation getTaskStatus(@PathVariable UUID taskId) {
-        return testInformationHandler.get(taskId);
+    @GetMapping(value = "/status/{testId}")
+    public TestInformation getTaskStatus(@PathVariable UUID testId) {
+        return testInformationHandler.get(testId);
     }
 
 }

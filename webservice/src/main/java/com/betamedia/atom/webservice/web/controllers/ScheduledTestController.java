@@ -24,25 +24,25 @@ import static com.betamedia.atom.core.utils.PropertiesUtils.getProperties;
 public class ScheduledTestController {
     private static final Logger logger = LogManager.getLogger(ScheduledTestController.class);
     @Autowired
-    private ContinuousTestManagerImpl continuousTaskManager;
+    private ContinuousTestManagerImpl continuousTestManager;
 
-    @PostMapping("/upload/task/scheduled")
-    public TestInformation createScheduledTask(@RequestParam("name") String name,
+    @PostMapping("/upload/test/scheduled")
+    public TestInformation createScheduledTest(@RequestParam("name") String name,
                                                @RequestParam("properties") MultipartFile properties,
                                                @RequestParam("suites[]") MultipartFile[] suites,
                                                @RequestParam("cronExpression") Optional<String> cronExpression) throws IOException {
         logger.info("Scheduling test");
-        return continuousTaskManager.createTest(name, getProperties(properties), suites, cronExpression);
+        return continuousTestManager.createTest(name, getProperties(properties), suites, cronExpression);
     }
 
     @GetMapping("/scheduled")
     public Set<TestInformation> getScheduledTests() {
-        return continuousTaskManager.getInfo();
+        return continuousTestManager.getInfo();
     }
 
-    @DeleteMapping("/scheduled/{id}/stop")
-    public void stopScheduledTest(@PathVariable UUID uuid) {
-        continuousTaskManager.stopTest(uuid);
+    @DeleteMapping("/scheduled/{testId}/stop")
+    public void stopScheduledTest(@PathVariable UUID testId) {
+        continuousTestManager.stopTest(testId);
     }
 
 
