@@ -26,14 +26,14 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
             pages().welcomeBackMessage().continueQuestionnaire();
         }
 
-        if (conditions.isShowRiskWarning()) {
-            Reporter.log("INFO: ShowRiskWarning should happens.");
-            pages().riskWarningPage().accept();
-        }
-
         if (conditions.isShowAdditionalDetails()) {
             Reporter.log("INFO: ShowAdditionalDetails should happens.");
             pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        }
+
+        if (conditions.isShowRiskWarning()) {
+            Reporter.log("INFO: ShowRiskWarning should happens.");
+            pages().riskWarningPage().accept();
         }
 
         if (conditions.isShowFnsPersonal()) {
