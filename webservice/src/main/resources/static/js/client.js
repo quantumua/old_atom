@@ -72,21 +72,31 @@ angular.module('client', [])
             runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0]);
         };
 
-        function pollForStatus(test, delay, timeout) {
+        function pollForStatus(test, delay, timeoutDuration) {
             var interval = $interval(
-                function () {
-                    $http.get('/atom/status/' + test.data.id)
-                        .then(function (r) {
-                            if (r.data === '') {
-                                return;
-                            }
-                            test.data = testFormatter(r.data);
-                            $interval.cancel(interval);
-                        })
-                }, delay);
-            $timeout(function () {
-                $interval.cancel(interval);
-            }, timeout);
+                function (timeoutPromise) {
+                    return function () {
+                        $http.get('/atom/status/' + test.data.id)
+                            .then(function (r) {
+                                if (r.data === '') {
+                                    return;
+                                }
+                                test.data = testFormatter(r.data);
+                                $timeout.cancel(timeoutPromise);
+                                $interval.cancel(interval);
+                            })
+                    }
+                }($timeout(function () {
+                        $interval.cancel(interval);
+                        test.data.status = 'TIMED OUT';
+                    },
+                    timeoutDuration)),
+                delay);
+        }
+
+        self.pollForStatus = function (test) {
+            test.data.status = 'UPDATING';
+            pollForStatus(test, reportRefreshDelay, reportRefreshTimeout);
         }
     })
     .controller('jarUploader', function ($scope, $http) {

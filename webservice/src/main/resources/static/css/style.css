@@ -1,0 +1,19 @@
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+.highlight {
+    color: limegreen !important;
+}
+
+.form-control {
+    height: auto;
+}
+
+div div.row:nth-child(odd) {
+    background-color: #f1f1f1;
+}
+
+div div.row:nth-child(even) {
+    background-color: #ffffff;
+}

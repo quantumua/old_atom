@@ -3,40 +3,13 @@
 <head>
     <title>ATOM</title>
     <link href="css/angular-bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <script src="js/angular-bootstrap.js" type="text/javascript"></script>
     <script src="js/client.js"></script>
-
-    <style type="text/css">
-        [ng\:cloak], [ng-cloak], .ng-cloak {
-            display: none !important;
-        }
-
-        .highlight {
-            color: limegreen !important;
-        }
-
-        .form-control {
-            height: auto;
-        }
-
-        table, th, td {
-            border: 1px solid grey;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-
-        table tr:nth-child(odd) {
-            background-color: #f1f1f1;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #ffffff;
-        }
-    </style>
 </head>
 
 <body ng-app="client">
-<div id="memu" style='margin-left: 20%;'>
+<div id="menu" style='margin-left: 20%;'>
     <a href="/atom/">Run tests</a> |
     <a href="/atom/schedule">Schedule test execution</a> |
     <a href="/atom/upload">Upload data</a>
@@ -76,21 +49,21 @@
     <hr/>
     <button type="button" ng-click="scheduler.getScheduledTests()" class="btn btn-primary btn-sm">Get scheduled tests
     </button>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Cron</th>
-            <th>Stop</th>
-        </tr>
-        <tr ng-repeat="test in scheduler.tests">
-            <td><span ng-cloak>{{test.name}}</span></td>
-            <td><span style="padding:0 15px 0 15px;" ng-cloak>{{test.cronExpression}}</span></td>
-            <td>
-                <button type="button" ng-click="scheduler.stop(test.id)" class="btn btn-danger btn-sm" ng-cloak>Stop
+    <div>
+        <div class="row">
+            <div class="col-md-4">Name</div>
+            <div class="col-md-2">Cron</div>
+            <div class="col-md-1">Stop</div>
+        </div>
+        <div class="row" ng-repeat="test in scheduler.tests">
+            <div class="col-md-4">{{test.name}}</div>
+            <div class="col-md-2">{{test.cronExpression}}</div>
+            <div class="col-md-1">
+                <button type="button" ng-click="scheduler.stop(test.id)" class="btn btn-danger btn-xs">Stop
                 </button>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <hr width="60%"/>
