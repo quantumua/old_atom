@@ -124,25 +124,3 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
         pages().binaryBidder().assertValidAmountMessage("Please enter a valid amount.");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

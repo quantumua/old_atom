@@ -2,6 +2,7 @@ package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
+
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -26,7 +27,15 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     private final String AVERAGE1TO50 = "1:50";
     private final String AVERAGE1TO100 = "1:100";
     private final String AVERAGE1TO200 = "1:200";
-
+    
+    /**
+     * Assert that current user was logged in successfully
+     */
+    public void assertUserLogin() {
+        pages().startTradeDialog().startTrade();
+        pages().setLeverageDialog().closeLeverageDialog();
+        assertTrue("User wan't login successfully", pages().topNavigationPage().isLoggedIn());
+    }
     /**
      * Tests main actions
      * 1. Create user via mobile api
@@ -239,14 +248,5 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
         assertUserLogin();
         Arrays.stream(notAvailableProducts.split(COMMA))
                 .forEach(product -> assertFalse(pages().topNavigationPage().getProducts().contains(product)));
-    }
-
-    /**
-     * Assert that current user was logged in successfully
-     */
-    private void assertUserLogin() {
-        pages().startTradeDialog().startTrade();
-        pages().setLeverageDialog().closeLeverageDialog();
-        assertTrue("User wan't login successfully", pages().topNavigationPage().isLoggedIn());
     }
 }

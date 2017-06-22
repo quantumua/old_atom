@@ -1,24 +1,25 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
-import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
+import static com.betamedia.atom.core.utils.StringUtils.COMMA;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
+
+import java.util.Arrays;
+
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.util.Strings;
 
-import java.util.Arrays;
-
-import static com.betamedia.atom.core.utils.StringUtils.COMMA;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
+import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
+import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
 
 /**
  * Created by vsnigur on 5/29/17.
  * Updated by Nir Shukrun on 6/6/17.
  * Updated by Nir Shukrun on 6/13/17 - new Signature Risk Warning for Spain.
  */
-public class CustomerLeverageWithRiskSignatureTest extends AbstractOnboardingUserExperienceTest {
+public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest {
 
     private static final int FIRST_AVERAGE = 0;
     private static final int SECOND_AVERAGE = 1;
@@ -377,12 +378,4 @@ public class CustomerLeverageWithRiskSignatureTest extends AbstractOnboardingUse
         assertFalse(pages().topNavigationPage().getProducts().contains("FOREX"));
     }
 
-    /**
-     * Assert that current user was logged in successfully
-     */
-    private void assertUserLogin() {
-        pages().startTradeDialog().startTrade();
-        pages().setLeverageDialog().closeLeverageDialog();
-        assertTrue("User wan't login successfully", pages().topNavigationPage().isLoggedIn());
-    }
 }
