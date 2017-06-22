@@ -1,8 +1,8 @@
 package com.betamedia.atom.webservice.web.controllers;
 
-import com.betamedia.atom.core.fwtestrunner.ExecutionArguments;
+import com.betamedia.atom.core.fwtestrunner.TestInformation;
+import com.betamedia.atom.core.fwtestrunner.TestInformationHandler;
 import com.betamedia.atom.core.fwtestrunner.TestRunnerHandler;
-import com.betamedia.atom.core.fwtestrunner.scheduling.ExecutionListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static com.betamedia.atom.core.utils.PropertiesUtils.getProperties;
 
@@ -26,18 +27,20 @@ public class RunTestController {
 
     @Autowired
     private TestRunnerHandler testRunnerHandler;
+    @Autowired
+    private TestInformationHandler testInformationHandler;
 
-    @PostMapping("/upload/suite")
-    public List<ExecutionArguments> handleFileUpload(@RequestParam("properties") MultipartFile properties,
-                                                     @RequestParam("suites[]") MultipartFile[] suites,
-                                                     @RequestParam(value = "tempJar", required = false) MultipartFile tempJar) throws IOException {
+    @PostMapping("/upload/test")
+    public List<TestInformation> runTask(@RequestParam("properties") MultipartFile properties,
+                                         @RequestParam("suites[]") MultipartFile[] suites,
+                                         @RequestParam("tempJar") Optional<MultipartFile> tempJar) throws IOException {
         logger.info("Starting tests");
-        return testRunnerHandler.handle(getProperties(properties), suites, tempJar, ExecutionListener.nullListener());
+        return testRunnerHandler.handleTest(getProperties(properties), suites, tempJar, tests -> {});
     }
 
-    @PostMapping(value = "/exists")
-    public Boolean getReportStatus(@RequestBody String path) {
-        return Paths.get(path).toFile().exists();
+    @GetMapping(value = "/status/{testId}")
+    public TestInformation getTaskStatus(@PathVariable UUID testId) {
+        return testInformationHandler.get(testId);
     }
 
 }

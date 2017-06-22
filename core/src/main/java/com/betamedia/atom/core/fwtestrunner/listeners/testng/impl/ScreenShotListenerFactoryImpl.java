@@ -1,6 +1,6 @@
-package com.betamedia.atom.core.fwtestrunner.listeners.impl;
+package com.betamedia.atom.core.fwtestrunner.listeners.testng.impl;
 
-import com.betamedia.atom.core.fwtestrunner.listeners.ConfigurableListenerFactory;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.ConfigurableListenerFactory;
 import com.betamedia.atom.core.fwtestrunner.runner.AbstractTestNGRunner;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -9,7 +9,8 @@ import java.net.URLClassLoader;
 import java.nio.file.Paths;
 
 /**
- * Created by mbelyaev on 4/10/17.
+ * @author mbelyaev
+ * @since 4/10/17
  */
 @Service
 public class URLClassLoaderFactoryImpl implements URLClassLoaderFactory {

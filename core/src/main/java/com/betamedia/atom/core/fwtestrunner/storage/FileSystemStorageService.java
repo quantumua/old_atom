@@ -1,5 +1,7 @@
 package com.betamedia.atom.core.fwtestrunner.storage;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -27,6 +29,7 @@ import java.util.stream.Stream;
  */
 @Service
 public class FileSystemStorageService implements StorageService {
+    private static final Logger logger = LogManager.getLogger(FileSystemStorageService.class);
 
     private final Path rootLocation;
 
@@ -43,8 +46,9 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public String storeToTemp(MultipartFile file, String pathString) {
         try {
-            if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + pathString);
+            if (file == null || file.isEmpty()) {
+                logger.debug("Trying to store empty file " + pathString);
+                return null;
             }
             if (!resolve(Paths.get(pathString)).toFile().exists()) {
                 Files.createDirectory(resolve(Paths.get(pathString)));
@@ -75,20 +79,6 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public List<String> storeToTemp(MultipartFile[] files) {
-        return Arrays.stream(files)
-                .map(this::storeToTemp)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<String> storeToTemp(MultipartFile[] files, String pathString) {
-        return Arrays.stream(files)
-                .map(file -> storeToTemp(file, pathString))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public void delete(String pathString) {
         try {
             Files.delete(Paths.get(pathString));
@@ -98,45 +88,12 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public Stream<Path> loadAll() {
-        try {
-            return Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation))
-                    .map(this.rootLocation::relativize);
-        } catch (IOException e) {
-            throw new StorageException("Failed to read stored files", e);
-        }
-
-    }
-
-    @Override
     public Stream<Path> loadAll(String... pathString) {
         try {
             return Files.walk(Paths.get("", pathString), 1)
                     .filter(path -> !path.equals(Paths.get("", pathString)));
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
-        }
-    }
-
-    @Override
-    public Path load(String filename) {
-        return rootLocation.resolve(filename);
-    }
-
-    @Override
-    public Resource loadAsResource(String filename) {
-        try {
-            Path file = load(filename);
-            Resource resource = new UrlResource(file.toUri());
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            } else {
-                throw new StorageFileNotFoundException("Could not read file: " + filename);
-
-            }
-        } catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file: " + filename, e);
         }
     }
 

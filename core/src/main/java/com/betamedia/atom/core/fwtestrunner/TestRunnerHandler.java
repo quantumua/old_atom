@@ -1,10 +1,11 @@
 package com.betamedia.atom.core.fwtestrunner;
 
-import com.betamedia.atom.core.fwtestrunner.scheduling.ExecutionListener;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.function.Consumer;
 
 /**
  * @author Maksym Tsybulskyy
@@ -14,7 +15,8 @@ public interface TestRunnerHandler {
 
     String TEST_OUTPUT_DIRECTORY = "test-output/";
 
-    List<ExecutionArguments> handle(Properties properties, MultipartFile[] suites, MultipartFile tempJar, ExecutionListener<List<RunnerResult>> listener);
+    List<TestInformation> handleTest(Properties properties, MultipartFile[] suites, Optional<MultipartFile> tempJar, Consumer<List<TestInformation>> listener);
 
-    List<ExecutionArguments> handle(Properties properties, List<String> suitePaths, String tempJarPath, ExecutionListener<List<RunnerResult>> listener);
+    List<TestInformation> handleTest(Properties properties, List<String> suitePaths, Optional<String> tempJarPath, Consumer<List<TestInformation>> listener);
+
 }

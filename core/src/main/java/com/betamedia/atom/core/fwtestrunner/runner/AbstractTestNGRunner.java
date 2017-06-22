@@ -1,8 +1,8 @@
 package com.betamedia.atom.core.fwtestrunner.runner;
 
-import com.betamedia.atom.core.fwtestrunner.RunnerResult;
-import com.betamedia.atom.core.fwtestrunner.listeners.ConfigurableListenerFactory;
-import com.betamedia.atom.core.fwtestrunner.listeners.impl.ScreenShotListener;
+import com.betamedia.atom.core.fwtestrunner.TestInformation;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.ConfigurableListenerFactory;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotListener;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageException;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import com.betamedia.atom.core.fwtestrunner.types.TestRunnerType;
@@ -37,19 +37,31 @@ public abstract class AbstractTestNGRunner implements TestRunner {
     }
 
     @Override
-    public final RunnerResult run(Properties properties, List<String> suites, String outputDirectory) {
-        initializeEnvironment(properties);
+    public TestInformation run(TestInformation task) {
+        initializeEnvironment(task.properties);
         TestNG testng = new TestNG();
-        testng.setOutputDirectory(outputDirectory);
+        testng.setOutputDirectory(task.reportDirectory);
         listenerFactories.stream()
-                .map(f -> f.get(outputDirectory))
+                .map(f -> f.get(task.reportDirectory))
                 .forEach(testng::addListener);
-        testng.setTestSuites(suites);
-        testng.run();
-        return new RunnerResult(testng.hasFailure() || testng.hasSkip(),
-                testng.getOutputDirectory() + "/emailable-report.html",
-                getScreenshots(testng.getOutputDirectory())
-        );
+        testng.setTestSuites(task.suites);
+        TestInformation startedTask = task.update().withStatus(TestInformation.Status.RUNNING).build();
+        try {
+            testng.run();
+        } catch (RuntimeException e) {
+            logger.error("TestNG exception!", e);
+            return startedTask.update()
+                    .withStatus(TestInformation.Status.ABORTED)
+                    .hasFailed(true)
+                    .build();
+        }
+        return startedTask.update()
+                .withStatus(TestInformation.Status.COMPLETED)
+                .hasFailed(testng.hasFailure() || testng.hasSkip())
+                .withAttachmentURLs(getScreenshots(task.reportDirectory))
+                .withReportURL(task.reportDirectory + "/index.html")
+                .withEmailReportURL(task.reportDirectory + "/emailable-report.html")
+                .build();
     }
 
     /**
