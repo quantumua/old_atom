@@ -36,23 +36,23 @@
     </form>
     <hr/>
     <h4>Reports</h4>
-    <div>
+    <div style="word-wrap: break-word;">
         <div class="row">
-            <div class="col-md-4">Suites</div>
+            <div class="col-md-5">Suites</div>
             <div class="col-md-2">Date</div>
-            <div class="col-md-2">Time</div>
+            <div class="col-md-1">Time</div>
             <div class="col-md-1">Report</div>
             <div class="col-md-2">Status</div>
             <div class="col-md-1">Refresh</div>
         </div>
         <div ng-repeat="test in runner.tests" class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div ng-repeat="suite in test.data.suites" ng-cloak>
                     {{suite}}
                 </div>
             </div>
             <div class="col-md-2">{{test.data.date}}</div>
-            <div class="col-md-2">{{test.data.time}}</div>
+            <div class="col-md-1">{{test.data.time}}</div>
             <div class="col-md-1">
                 <a target="_blank" ng-href="/atom/{{test.data.reportURL}}" ng-style="{'visibility': test.data.status === 'COMPLETED' ? 'visible':'hidden'}">
                     link
