@@ -56,9 +56,7 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
 
     private void placePendingDeposit(CRMCustomer customer) {
         goToHomepageAndLogin(customer.getUserName());
-        if (pages().welcomeBackMessage().exists()) {
-            pages().welcomeBackMessage().continueQuestionnaire();
-        }
+        pages().welcomeBackMessage().continueQuestionnaire();
         double depositLimit = operations().customerOperations().findMaximumDepositLimit(customer.getId());
         pages().creditCardDeposit().submit(
                 CreditCardDeposit.builder()
