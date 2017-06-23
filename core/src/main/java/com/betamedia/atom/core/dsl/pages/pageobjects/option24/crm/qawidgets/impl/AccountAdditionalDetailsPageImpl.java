@@ -40,4 +40,13 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
         inSelect(nationality).selectByValue(info.nationality);
         find(update).click();
     }
+
+    @Override
+    public boolean exists() {
+        try {
+            return waitUntilDisplayed(birthDateDay).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

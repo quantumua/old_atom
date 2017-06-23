@@ -5,5 +5,6 @@ import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 public interface AccountAdditionalDetailsPage {
 
     void update(AccountAdditionalDetails info);
+    boolean exists();
 
 }

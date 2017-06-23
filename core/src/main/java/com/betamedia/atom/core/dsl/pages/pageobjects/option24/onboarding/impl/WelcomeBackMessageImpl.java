@@ -24,6 +24,10 @@ public class WelcomeBackMessageImpl extends AbstractPageObject implements Welcom
 
     @Override
     public Boolean exists() {
-        return exists(continueQuestionnaire);
+        try {
+            return waitUntilExists(continueQuestionnaire).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

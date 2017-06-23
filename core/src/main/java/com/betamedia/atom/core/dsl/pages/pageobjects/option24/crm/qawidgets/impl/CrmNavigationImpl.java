@@ -33,7 +33,7 @@ public class CrmNavigationImpl extends AbstractPageObject implements CrmNavigati
 
     @Override
     public void login() {
-        click(loginButton);
+        waitUntilDisplayed(loginButton).click();
     }
 
     @Override

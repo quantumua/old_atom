@@ -56,7 +56,12 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
 
     private void placePendingDeposit(CRMCustomer customer) {
         goToHomepageAndLogin(customer.getUserName());
-        pages().welcomeBackMessage().continueQuestionnaire();
+        if (pages().welcomeBackMessage().exists()) {
+            pages().welcomeBackMessage().continueQuestionnaire();
+        }
+        if (pages().accountAdditionalDetails().exists()) {
+            pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        }
         double depositLimit = operations().customerOperations().findMaximumDepositLimit(customer.getId());
         pages().creditCardDeposit().submit(
                 CreditCardDeposit.builder()
@@ -83,5 +88,6 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
         pages().topNavigationPage().logIn();
         pages().loginPage().login(username, CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         pages().welcomeBackMessage().exists();
+        pages().browser().waitUntilPageLoad();
     }
 }

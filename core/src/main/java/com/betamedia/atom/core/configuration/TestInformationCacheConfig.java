@@ -20,8 +20,8 @@ public class TestInformationCacheConfig {
     public LoadingCache<UUID, TestInformation> testInformationCache() {
         return CacheBuilder.newBuilder()
                 .concurrencyLevel(4)
-                .maximumSize(1000)
-                .expireAfterWrite(300, TimeUnit.SECONDS)
+                .maximumSize(10000)
+                .expireAfterWrite(1, TimeUnit.HOURS)
                 .build(new CacheLoader<UUID, TestInformation>() {
                     @Override
                     public TestInformation load(UUID key) {

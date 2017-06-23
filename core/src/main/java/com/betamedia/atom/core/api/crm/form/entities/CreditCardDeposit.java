@@ -38,7 +38,7 @@ public class CreditCardDeposit {
     public static class CreditCardDepositBuilder {
         private static final String DEFAULT_CREDIT_CARD_VISA = "4000020951595032";
 
-        private String depositAmount = "100";
+        private String depositAmount = "50";
         private String creditCardNumber = DEFAULT_CREDIT_CARD_VISA;
         private String cvv2 = "281";
         private String expiryDateMonth = "12";
