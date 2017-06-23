@@ -66,7 +66,7 @@ public class TestRunnerHandlerImpl implements TestRunnerHandler {
         return PropertiesUtils.permute(properties).stream()
                 .map(p -> TestInformation.builder()
                         .withStatus(TestInformation.Status.CREATED)
-                        .withProperties(properties)
+                        .withProperties(p)
                         .withSuites(suites)
                         .build())
                 .collect(Collectors.toList());
