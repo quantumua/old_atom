@@ -1,12 +1,19 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw.smoke;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.dsl.operations.TagOperations;
+import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import com.betamedia.tp.api.model.Asset;
+import com.betamedia.tp.api.model.OptionConfiguration;
 import com.betamedia.tp.api.model.enums.OptionType;
 
 /**
@@ -14,30 +21,29 @@ import com.betamedia.tp.api.model.enums.OptionType;
  */
 
 public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardingUserExperienceTest{
-	/*
+    /*
 	 * [TestLink] TP-4335:Invest negative amount (-X)
 	 * Select an asset --> Try to open a position with a negative invested amount ( example: -500 )
      * Result: There will an error message "Please enter a valid amount." in the input with a red border
 	 */
 	@Test(description = "TP-4335")
 	public void investNegativeAmountTest()	{
-        Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        //Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 1.5d);
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
         
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 		pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
-        pages().assets().asset(asset.getId(), asset.getAssetName());
+        //pages().assets().asset(asset.getId(), asset.getAssetName());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
 		operations().accountOperations().updateBalanceTP(accountId, (double) minInvestmentAllowed);
 
         pages().binaryBidder()
                 .setAmount(String.valueOf(-1))
-                .bidHigh()
-                .confirm();
+                .bidHigh();
         
         pages().binaryBidder().assertValidAmountMessage("Please enter a valid amount.");
 	}
@@ -49,25 +55,24 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
 	 */
 	@Test(description = "TP-4320") 
 	public void investZeroAmountTest()	{
-		Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 5.0d);
-	    CRMCustomer customer = createHighExperiencedUser();
+		//Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 5.0d);
+	    CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 	    
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
-        pages().assets().asset(asset.getId(), asset.getAssetName());
+        //pages().assets().asset(asset.getId(), asset.getAssetName());
 		
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
 		operations().accountOperations().updateBalanceTP(accountId, (double) minInvestmentAllowed);
 
         pages().binaryBidder()
                 .setAmount(String.valueOf(0))
-                .bidLow()
-                .confirm();
+                .bidLow();
         
-        pages().binaryBidder().assertMinAmountMessage("Min. amount\n€\n10  ");
+        pages().binaryBidder().assertMinAmountMessage("Min. amount\n€\n22  ");
 	}
 	
 	/*
@@ -77,15 +82,15 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
      */
 	@Test(description = "TP-3642")
 	public void buyingWithoutInvestedAmountTest()	{
-		Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
-	    CRMCustomer customer = createHighExperiencedUser();
+		//Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
+	    CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		String accountId = binaryAccount.getId();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
-        pages().assets().asset(asset.getId(), asset.getAssetName());
+        //pages().assets().asset(asset.getId(), asset.getAssetName());
 		
 		String Investment = "";
 		int minInvestmentAllowed = 10;		// TODO getMinInvestment();
@@ -93,8 +98,7 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
 		
         pages().binaryBidder()
                 .setAmount(Investment)
-                .bidHigh()
-                .confirm();
+                .bidHigh();
         
         pages().binaryBidder().assertValidAmountMessage("Please enter a valid amount.");
 	}
@@ -105,22 +109,37 @@ public class HiloCheckCasesThatPositionsCannotBeOpened extends AbstractOnboardin
 	 */
 	@Test(description = "TP-3656") 
 	public void invalidIinvestedAmountTest()	{
-		Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 5.0d);
-	    CRMCustomer customer = createHighExperiencedUser();
+		//Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 5.0d);
+	    CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
 		CRMAccount binaryAccount = customer.getBinaryAccount();
 		operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
         pages().disclaimerNotification().tryAccept();
         pages().binarySelector().highLow();
-        pages().assets().asset(asset.getId(), asset.getAssetName());
+        //pages().assets().asset(asset.getId(), asset.getAssetName());
 
 		String Investment = "!@#$%^&*)(";
 
         pages().binaryBidder()
                 .setAmount(Investment)
-                .bidHigh()
-                .confirm();
+                .bidHigh();
         
         pages().binaryBidder().assertValidAmountMessage("Please enter a valid amount.");
 	}
+	
+	 /*[TestLink] TP-3598:Logged out status
+     * Select an asset when being logged out --> Try to open a position --> You are redirected to the login page
+     */
+    @Test(description = "TP-3598") 
+    public void loggedOutStatus() {
+        //assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.NO_CATEGORY, 1.5d);
+        pages().topNavigationPage().binary();
+        
+        String investment = "15"; //TODO getMinInvestment()
+        pages().binaryBidder()
+            .setAmount(investment)
+            .bidLow();
+        
+        Assert.assertTrue(pages().loginPage().isSubmitBtnExists());
+    }
 }

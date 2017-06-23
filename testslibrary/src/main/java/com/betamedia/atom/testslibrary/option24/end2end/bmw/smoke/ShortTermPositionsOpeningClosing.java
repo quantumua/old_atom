@@ -33,7 +33,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
 	@Test()	
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMinimumAllowed() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -60,7 +60,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
 	@Test() 
     public void openAPositionThatExpiresIn60SecondsWithInvestedAmountMaximumAllowed() {
         assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
@@ -117,7 +117,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
 //TODO    fully duplicates the code of the first test
     public void openAPositionThatExpiresIn60SecondsBasicFunctionality() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
         
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -142,7 +142,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
 	@Test 
     public void openAPositionThatEexpiresIn2MinutesBasicFunctionality() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
         
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -168,7 +168,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
 	@Test 
 	public void openAPositionThatEexpiresIn5MinutesBasicFunctionality(){
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
         
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -198,7 +198,7 @@ public class ShortTermPositionsOpeningClosing extends AbstractOnboardingUserExpe
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
         TickData tickData = operations().feedOperations().injectFeed(asset.getId(), 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
 

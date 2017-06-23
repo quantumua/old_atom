@@ -8,6 +8,7 @@
                     <include name="investZeroAmountTest"/>
                     <include name="buyingWithoutInvestedAmountTest"/>
                     <include name="invalidIinvestedAmountTest"/>
+                    <include name="loggedOutStatus"/>
                 </methods>
             </class>
         </classes>

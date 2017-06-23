@@ -36,7 +36,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void investedAmountAboveTABalancePlusOneTest() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
@@ -71,7 +71,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void investedAmountMaximumPlusOne() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
 		CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -107,7 +107,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void insertValidCharactersInAnInvalidForm() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
@@ -139,7 +139,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     public void investNegativeAmount() {
 
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -168,7 +168,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void investZeroAmount() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
@@ -197,7 +197,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     */
     @Test()
     public void aboveMaxExposureLimit() {
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -264,7 +264,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void buyingWithoutInvestedAmount() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
@@ -293,7 +293,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void invalidIinvestedAmount() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -320,7 +320,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void investedAmountAboveMaximum() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
@@ -354,7 +354,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void investedAmountBelowMinimum() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         String accountId = binaryAccount.getId();
@@ -384,7 +384,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
     @Test()
     public void investedAmountAboveTABalance() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -420,7 +420,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
 	 */
     public void multipleClicksOnTheBuyTest() {
         Asset asset = assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 5.0d);
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
         CRMAccount cfdAccount = customer.getFXCFDAccount();
         String accountId = cfdAccount.getId();
         operations().accountOperations().depositCRM(accountId, 1000d);
@@ -468,7 +468,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
             operations().assetOperations().setTimeout(asset, 500, 501);
         }
 
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -513,18 +513,10 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
         assetIsReadyToTrade(OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT, 1.5d);
         pages().topNavigationPage();
 
-        try {
-            long timeToWait = 3000;
-            TimeUnit.MILLISECONDS.sleep(timeToWait);
-        } catch (InterruptedException e) {
-            logger.error(e);
-            Thread.currentThread().interrupt();
-        }
         String investment = "15"; //TODO getMinInvestment()
         pages().binaryBidder()
                 .setAmount(investment)
-                .bidLow()
-                .confirm();
+                .bidLow();
 
         Assert.assertTrue(pages().loginPage().isSubmitBtnExists());
     }
@@ -537,7 +529,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
 
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);
@@ -592,7 +584,7 @@ public class ShortTermCheckCasesThatPositionsCannotBeOpened extends AbstractOnbo
         Asset asset = operations().assetOperations().get();
         operations().optionTemplateOperations().create(asset.getId(), OptionType.HILO, TagOperations.TagName.SHORT_TERM_60_SEC_GAME_H3_TEXT);
 
-        CRMCustomer customer = createHighExperiencedUser();
+        CRMCustomer customer = createHighExperiencedUserAndStartBinary();
 
         CRMAccount binaryAccount = customer.getBinaryAccount();
         operations().accountOperations().depositCRM(binaryAccount.getId(), 1000d);

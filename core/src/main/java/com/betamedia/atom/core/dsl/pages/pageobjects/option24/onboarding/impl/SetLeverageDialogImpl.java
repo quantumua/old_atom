@@ -46,7 +46,10 @@ public class SetLeverageDialogImpl extends AbstractPageObject implements SetLeve
     }
 
     @Override
-    public void selectLeverage() {
+    public void selectLeverage(String leveregeValue) {
+        if (leveregeValue.isEmpty()) {
+            leveregeValue = "100"; }
+        find(By.xpath("//*[@id='scipioPopupHandler']//span/ul/li[@data-value='" + leveregeValue + "']")).click();
 
     }
 

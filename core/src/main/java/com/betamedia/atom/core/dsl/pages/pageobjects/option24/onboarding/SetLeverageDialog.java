@@ -6,7 +6,7 @@ import java.util.List;
  * Created by vsnigur on 5/29/17.
  */
 public interface SetLeverageDialog {
-    void selectLeverage();
+    void selectLeverage(String LeveregeValue);
     void okButton();
     void cancelButton();
     void assertCustomerLeverage();

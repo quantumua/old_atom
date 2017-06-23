@@ -83,12 +83,14 @@ public class AbstractOnboardingUserExperienceTest extends AbstractOnboardingCond
      * ExperienceScore = HIGH_EXPERIENCE
      */
 
-    protected CRMCustomer createHighExperiencedUser() {
+    protected CRMCustomer createHighExperiencedUserAndStartBinary() {
         CRMCustomer crmCustomer = createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE);
         pages().welcomePage().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         pages().startTradeDialog().startTrade();
+        pages().setLeverageDialog().selectLeverage("100");
+        pages().topNavigationPage().binary();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         return crmCustomer;
     }
@@ -101,9 +103,10 @@ public class AbstractOnboardingUserExperienceTest extends AbstractOnboardingCond
      */
     
     protected Asset assetIsReadyToTrade(OptionType optionType, TagOperations.TagName tagName, double price) {
-    Asset asset = operations().assetOperations().get();
-    operations().optionTemplateOperations().create(asset.getId(), optionType, tagName);
-    operations().feedOperations().injectFeed(asset.getId(), price);
+     // TODO: Review Assets creation logic. It currently does not creates any Asset for selection
+     Asset asset = operations().assetOperations().get();
+     operations().optionTemplateOperations().create(asset.getId(), optionType, tagName);
+     operations().feedOperations().injectFeed(asset.getId(), price);
     return asset;
     }
     
