@@ -175,7 +175,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
-2.6.2,2017-05-29 15:24 +0000,WelcomePageImpl,startButton,XPATH,//*[@id="wizard-message"]/div[3]/button
+2.6.2,2017-05-29 15:24 +0000,WelcomePageImpl,startButton,ID,welcome-btn
 2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,iAmOver18Statement,CLASS_NAME,swRiskWarningAccountAgree
 2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,updateButton,XPATH,//*[@id="risk-warning-form-space"]/div/input
 2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,loginButton,NAME,btnLoginWidget
@@ -203,7 +203,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmCloseMessage,ID,close_dialog
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmImSure,ID,dialog_btn_leave
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmNo,ID,dialog_btn_stay
-2.6.2,2017-05-29 15:24 +0000,WelcomeBackMessageImpl,continueQuestionnaire,XPATH,//*[text()='Continue Questionnaire']
+2.6.2,2017-05-29 15:24 +0000,WelcomeBackMessageImpl,continueQuestionnaire,ID,welcomeback-btn
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,accountAgreeCheckbox,ID,AccountAgree
 2.6.2,2017-05-29 15:24 +0000,SignatureRiskWarningImpl,RiskSignatureTextbox,XPATH,//*[@id="txtareaRiskSignatureText"]
 2.6.2,2017-05-29 15:24 +0000,SignatureRiskWarningImpl,RiskSignatureSubmitbtn,XPATH,//*[@id="signature-risk-warning"]/div/div[4]/div[2]/input
