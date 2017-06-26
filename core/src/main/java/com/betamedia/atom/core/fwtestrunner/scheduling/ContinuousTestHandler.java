@@ -9,11 +9,13 @@ import java.util.*;
  * @author mbelyaev
  * @since 4/20/17
  */
-public interface ContinuousTestManager {
+public interface ContinuousTestHandler {
 
-    TestInformation createTest(String name, String emailAddress, Properties properties, MultipartFile[] suites, Optional<String> cronExpression);
+    List<TestInformation> handleTest(String name, Properties properties, MultipartFile[] suites, Optional<String> cronExpression, String emailAddress);
 
-    void stopTest(UUID name);
+    void stop(UUID id);
+
+    boolean abort(UUID id);
 
     Set<TestInformation> getInfo();
 }

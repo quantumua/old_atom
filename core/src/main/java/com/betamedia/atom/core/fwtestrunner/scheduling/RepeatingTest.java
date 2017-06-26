@@ -3,11 +3,10 @@ package com.betamedia.atom.core.fwtestrunner.scheduling;
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.core.task.TaskExecutor;
+import org.springframework.util.concurrent.ListenableFuture;
 
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 
 /**
@@ -16,16 +15,16 @@ import java.util.function.Function;
  */
 public class RepeatingTest extends ContinuousTest {
     private static final Logger logger = LogManager.getLogger(RepeatingTest.class);
-    private final TaskExecutor executor;
+    private Optional<ListenableFuture<TestInformation>> future = Optional.empty();
 
-    public RepeatingTest(TestInformation testInformation, Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution, Consumer<TestInformation> onTestSubmitCompletion, TaskExecutor executor) {
-        super(testInformation, testExecution, onTestSubmitCompletion);
-        this.executor = executor;
+    public RepeatingTest(Supplier<ListenableFuture<TestInformation>> testExecution) {
+        super(testExecution);
     }
 
     @Override
     public void start() {
-        executor.execute(this::runExecution);
+        future = runExecution();
+        future.ifPresent(f -> f.addCallback(t -> this.onSuccess(), ex -> this.onSuccess()));
     }
 
     @Override
@@ -35,7 +34,14 @@ public class RepeatingTest extends ContinuousTest {
     }
 
     @Override
-    protected void onIterationCompletion(List<TestInformation> iterationResults) {
+    public boolean abort() {
+        logger.info("Setting test termination flag.", this);
+        isEnabled.set(false);
+        logger.info("Forcefully interrupting test.", this);
+        return future.map(f -> f.cancel(true)).orElse(false);
+    }
+
+    private void onSuccess() {
         logger.info("Finished executing test iteration.", this);
         if (isEnabled.get()) {
             logger.info("Restarting continuous test.", this);
@@ -44,8 +50,6 @@ public class RepeatingTest extends ContinuousTest {
             return;
         }
         logger.info("The test will no longer be restarted.", this);
-        testInformation = testInformation.update().withStatus(TestInformation.Status.COMPLETED).build();
-        onTestSubmitCompletion.accept(this.testInformation);
     }
 
 }

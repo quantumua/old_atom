@@ -15,7 +15,12 @@ import java.nio.file.Paths;
 @Service
 public class URLClassLoaderFactoryImpl implements URLClassLoaderFactory {
     @Override
-    public ClassLoader get(String jarPath, ClassLoader parent) throws MalformedURLException {
-        return new URLClassLoader(new URL[]{Paths.get(jarPath).toUri().toURL()}, parent);
+    public ClassLoader get(URL url, ClassLoader parent) {
+        return new URLClassLoader(new URL[]{url}, parent);
+    }
+
+    @Override
+    public URL getURL(String jarPath) throws MalformedURLException {
+        return Paths.get(jarPath).toUri().toURL();
     }
 }

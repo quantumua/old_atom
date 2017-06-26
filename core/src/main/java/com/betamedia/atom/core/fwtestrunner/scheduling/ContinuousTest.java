@@ -3,13 +3,11 @@ package com.betamedia.atom.core.fwtestrunner.scheduling;
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.util.concurrent.ListenableFuture;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.function.Supplier;
 
 /**
  * @author mbelyaev
@@ -18,44 +16,24 @@ import java.util.stream.Stream;
 public abstract class ContinuousTest {
     private static final Logger logger = LogManager.getLogger(ContinuousTest.class);
     protected final AtomicBoolean isEnabled = new AtomicBoolean(true);
-    protected final Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution;
-    protected TestInformation testInformation;
-    protected Consumer<TestInformation> onTestSubmitCompletion;
+    protected final Supplier<ListenableFuture<TestInformation>> testExecution;
 
-    protected ContinuousTest(TestInformation testInformation, Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution, Consumer<TestInformation> onTestSubmitCompletion) {
+    protected ContinuousTest(Supplier<ListenableFuture<TestInformation>> testExecution) {
         this.testExecution = testExecution;
-        this.testInformation = testInformation;
-        this.onTestSubmitCompletion = onTestSubmitCompletion;
     }
 
-    public TestInformation getTestInformation() {
-        return testInformation;
-    }
-
-    protected void runExecution() {
+    protected Optional<ListenableFuture<TestInformation>> runExecution() {
         if (!isEnabled.get()) {
-            logger.error("Attempted to start a disabled continuous test!", this);
-            return;
+            logger.error("Attempting to start a disabled continuous test!", this);
+            return Optional.empty();
         }
-        if (testInformation.status.equals(TestInformation.Status.CREATED)) {
-            logger.info("Starting continuous test for the first time.", this);
-            testInformation = testInformation.update().withStatus(TestInformation.Status.RUNNING).build();
-        }
-        testInformation = testInformation.update()
-                .withChildTasks(
-                        Stream.concat(
-                                testInformation.childTaskIds.stream(),
-                                testExecution.apply(this::onIterationCompletion)
-                                        .stream()
-                                        .map(t -> t.id))
-                                .collect(Collectors.toList())).build();
-        onTestSubmitCompletion.accept(testInformation);
+        return Optional.of(testExecution.get());
     }
 
     abstract void start();
 
     abstract void stop();
 
-    abstract void onIterationCompletion(List<TestInformation> iterationResults);
+    abstract boolean abort();
 
 }

@@ -1,10 +1,10 @@
 package com.betamedia.atom.core.fwtestrunner.scheduling;
 
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
+import org.springframework.util.concurrent.ListenableFuture;
 
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * @author mbelyaev
@@ -12,5 +12,5 @@ import java.util.function.Function;
  */
 @FunctionalInterface
 public interface ContinuousTestFactory {
-    ContinuousTest get(TestInformation testInformation, Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution);
+    ContinuousTest get(Supplier<ListenableFuture<TestInformation>> testExecution, Optional<String> cronExpression);
 }

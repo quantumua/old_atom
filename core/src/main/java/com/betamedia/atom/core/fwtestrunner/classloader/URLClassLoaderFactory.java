@@ -1,10 +1,14 @@
 package com.betamedia.atom.core.fwtestrunner.classloader;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
- * Created by mbelyaev on 4/10/17.
+ * @author mbelyaev
+ * @since 4/10/17
  */
 public interface URLClassLoaderFactory {
-    ClassLoader get(String jarPath, ClassLoader parent) throws MalformedURLException;
+    ClassLoader get(URL url, ClassLoader parent);
+
+    URL getURL(String jarPath) throws MalformedURLException;
 }

@@ -51,15 +51,39 @@
     </button>
     <div>
         <div class="row">
-            <div class="col-md-4">Name</div>
-            <div class="col-md-2">Cron</div>
+            <div class="col-md-2">Name</div>
+            <div class="col-md-2">Suites</div>
+            <div class="col-md-2">Date</div>
+            <div class="col-md-1">Time</div>
+            <div class="col-md-1">Report</div>
+            <div class="col-md-1">Status</div>
+            <div class="col-md-1">Cron</div>
             <div class="col-md-1">Stop</div>
+            <div class="col-md-1">Abort</div>
         </div>
         <div class="row" ng-repeat="test in scheduler.tests">
-            <div class="col-md-4">{{test.name}}</div>
-            <div class="col-md-2">{{test.cronExpression}}</div>
+            <div class="col-md-2">{{test.name}}</div>
+            <div class="col-md-2">
+                <div ng-repeat="suite in test.suites" ng-cloak>
+                    {{suite}}
+                </div>
+            </div>
+            <div class="col-md-2">{{test.date}}</div>
+            <div class="col-md-1">{{test.time}}</div>
             <div class="col-md-1">
-                <button type="button" ng-click="scheduler.stop(test.id)" class="btn btn-danger btn-xs">Stop
+                <a target="_blank" ng-href="/atom/{{test.reportURL}}"
+                   ng-style="{'visibility': !!test.reportURL  ? 'visible':'hidden'}">
+                    link
+                </a>
+            </div>
+            <div class="col-md-1" ng-class="{highlight: test.status === 'COMPLETED'}">{{test.status}}</div>
+            <div class="col-md-1">{{test.cronExpression}}</div>
+            <div class="col-md-1">
+                <button type="button" ng-click="scheduler.stop(test)" class="btn btn-info btn-xs">Stop
+                </button>
+            </div>
+            <div class="col-md-1">
+                <button type="button" ng-click="scheduler.abort(test)" class="btn btn-danger btn-xs">Abort
                 </button>
             </div>
         </div>

@@ -9,7 +9,7 @@ public interface RegistrationPage {
 
 
 //    void register(CustomerRO customer);
-//    void register(CustomerRO customerRO, String string);
+    void register(CustomerRO customerRO, String countryCode);
 
 	void register(String countrycode);
     

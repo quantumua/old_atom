@@ -7,11 +7,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URL;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
@@ -23,7 +22,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 /**
  * @author mbelyaev
@@ -35,8 +34,6 @@ public class ContextClassLoaderManagingExecutorImplTest {
     private ContextClassLoaderManagingExecutorImpl executionHandler;
     @Mock
     private StorageService storageService;
-    @Mock
-    private TaskExecutor mockExecutor;
     @Mock
     private URLClassLoaderFactory classLoaderFactory;
     @Mock
@@ -52,36 +49,35 @@ public class ContextClassLoaderManagingExecutorImplTest {
     public void concurrentExecutionTest() throws Exception {
         String mockPath = "mockPath";
         String alteredPath = "alteredPath";
+        URL mockURL = new URL("http://mock.org");
+        URL alteredURL = new URL("http://alt.org");
         ClassLoader parent = Thread.currentThread().getContextClassLoader();
         when(storageService.storeToTemp(mockFile)).thenReturn(mockPath);
         when(storageService.storeToTemp(eq(mockFile), anyString())).thenReturn(mockPath);
         when(storageService.storeToTemp(alteredFile)).thenReturn(alteredPath);
         when(storageService.storeToTemp(eq(alteredFile), anyString())).thenReturn(alteredPath);
-        when(classLoaderFactory.get(mockPath, parent)).thenReturn(mockClassLoader);
-        when(classLoaderFactory.get(alteredPath, parent)).thenReturn(alteredClassLoader);
+        when(classLoaderFactory.getURL(mockPath)).thenReturn(mockURL);
+        when(classLoaderFactory.getURL(alteredPath)).thenReturn(alteredURL);
+        when(classLoaderFactory.get(mockURL, parent)).thenReturn(mockClassLoader);
+        when(classLoaderFactory.get(alteredURL, parent)).thenReturn(alteredClassLoader);
         ExecutorService pool = Executors.newCachedThreadPool();
-        doAnswer(invocation -> {
-            pool.submit(invocation.getArgumentAt(0, Runnable.class));
-            pool.shutdown();
-            return null;
-        }).when(mockExecutor).execute(any());
         Semaphore startedFirstExecutionWithFirstJar = new Semaphore(0);
         Semaphore completedWritingSecondJar = new Semaphore(0);
         Semaphore allowThirdExecutionForSecondJar = new Semaphore(0);
         Arrays.asList(
                 (Runnable) () -> {
                     executionHandler.store(mockFile);
-
-                    executionHandler.run(Collections.singletonList(() -> {
-                        startedFirstExecutionWithFirstJar.release();
-                        try {
-                            completedWritingSecondJar.acquire();
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        mockExecution(mockClassLoader, "MOCK 1");
-                        return null;
-                    }), Optional.empty());
+                    executionHandler.run(() -> {
+                                startedFirstExecutionWithFirstJar.release();
+                                try {
+                                    completedWritingSecondJar.acquire();
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
+                                }
+                                mockExecution(mockClassLoader, "MOCK 1");
+                                return null;
+                            },
+                            Optional.empty());
                 },
                 () -> {
                     try {
@@ -89,16 +85,14 @@ public class ContextClassLoaderManagingExecutorImplTest {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-
                     executionHandler.store(alteredFile);
-
                     completedWritingSecondJar.release();
                     allowThirdExecutionForSecondJar.release();
-
-                    executionHandler.run(Collections.singletonList(() -> {
-                        mockExecution(alteredClassLoader, "ALT 1");
-                        return null;
-                    }), Optional.empty());
+                    executionHandler.run(() -> {
+                                mockExecution(alteredClassLoader, "ALT 1");
+                                return null;
+                            },
+                            Optional.empty());
                 },
                 () -> {
                     try {
@@ -106,15 +100,15 @@ public class ContextClassLoaderManagingExecutorImplTest {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-
-                    executionHandler.run(Collections.singletonList(() -> {
-                        mockExecution(alteredClassLoader, "ALT 2");
-                        return null;
-                    }), Optional.empty());
+                    executionHandler.run(() -> {
+                                mockExecution(alteredClassLoader, "ALT 2");
+                                return null;
+                            },
+                            Optional.empty());
                 }
         ).forEach(pool::execute);
+        pool.shutdown();
         pool.awaitTermination(1, TimeUnit.MINUTES);
-        verify(storageService).delete(mockPath);
     }
 
     private void mockExecution(ClassLoader expectedClassLoader, String id) {

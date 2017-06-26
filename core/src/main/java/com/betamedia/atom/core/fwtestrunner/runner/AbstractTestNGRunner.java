@@ -45,13 +45,17 @@ public abstract class AbstractTestNGRunner implements TestRunner {
                 .map(f -> f.get(task.reportDirectory))
                 .forEach(testng::addListener);
         testng.setTestSuites(task.suites);
-        TestInformation startedTask = task.update().withStatus(TestInformation.Status.RUNNING).build();
+        TestInformation startedTask = task.update()
+                .withStatus(TestInformation.Status.RUNNING)
+                .withReportURL(task.reportDirectory + "/index.html")
+                .withEmailReportURL(task.reportDirectory + "/emailable-report.html")
+                .build();
         try {
             testng.run();
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             logger.error("TestNG exception!", e);
             return startedTask.update()
-                    .withStatus(TestInformation.Status.ABORTED)
+                    .withStatus(TestInformation.Status.FAILED)
                     .hasFailed(true)
                     .build();
         }
@@ -59,8 +63,6 @@ public abstract class AbstractTestNGRunner implements TestRunner {
                 .withStatus(TestInformation.Status.COMPLETED)
                 .hasFailed(testng.hasFailure() || testng.hasSkip())
                 .withAttachmentURLs(getScreenshots(task.reportDirectory))
-                .withReportURL(task.reportDirectory + "/index.html")
-                .withEmailReportURL(task.reportDirectory + "/emailable-report.html")
                 .build();
     }
 
