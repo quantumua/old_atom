@@ -18,7 +18,7 @@
         <wro4j.version>1.8.0</wro4j.version>
         <angularjs.version>1.6.2</angularjs.version>
         <bootstrap.version>3.3.7-1</bootstrap.version>
-        <jquery.version>3.1.1-1</jquery.version>
+        <angularui.version>2.2.0</angularui.version>
     </properties>
 
     <dependencies>
@@ -107,13 +107,13 @@
                 <dependencies>
                     <dependency>
                         <groupId>org.webjars</groupId>
-                        <artifactId>jquery</artifactId>
-                        <version>${jquery.version}</version>
+                        <artifactId>angularjs</artifactId>
+                        <version>${angularjs.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.webjars</groupId>
-                        <artifactId>angularjs</artifactId>
-                        <version>${angularjs.version}</version>
+                        <artifactId>angular-ui-bootstrap</artifactId>
+                        <version>${angularui.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>org.webjars</groupId>

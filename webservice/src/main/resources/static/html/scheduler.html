@@ -16,30 +16,43 @@
 </div>
 <hr width="60%"/>
 <div ng-controller="scheduler as scheduler" class="container">
-    <form role="form" ng-submit="scheduler.schedule()">
+    <form role="form" class="form-horizontal" ng-submit="scheduler.schedule()">
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" ng-model="name" class="form-control" id="name" name="name"/>
+            <label for="name" class="control-label col-sm-2">Name:</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="name" class="form-control" id="name" name="name"/>
+            </div>
         </div>
         <div class="form-group">
-            <label for="emailAddress">Email:</label>
-            <input type="text" ng-model="emailAddress" class="form-control" id="emailAddress" name="emailAddress"/>
+            <label for="emailAddress" class="control-label col-sm-2">Email:</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="emailAddress" class="form-control" id="emailAddress" name="emailAddress"/>
+            </div>
         </div>
         <div class="form-group">
-            <label for="schSuites">Suites:</label>
-            <input type="file" multiple file-model="suites" class="form-control" id="schSuites" name="suites"/>
+            <label for="schSuites" class="control-label col-sm-2">Suites:</label>
+            <div class="col-sm-10">
+                <input type="file" multiple file-model="suites" class="form-control" id="schSuites" name="suites"/>
+            </div>
         </div>
         <div class="form-group">
-            <label for="schProperties">Properties:</label>
-            <input type="file" file-model="properties" class="form-control" id="schProperties" name="properties"/>
+            <label for="schProperties" class="control-label col-sm-2">Properties:</label>
+            <div class="col-sm-10">
+                <input type="file" file-model="properties" class="form-control" id="schProperties" name="properties"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="isRepeating">Is repeating:</label>
-            <input type="checkbox" ng-model="isRepeating" class="form-control" id="isRepeating" name="isRepeating"/>
+        <div class="form-group inline">
+            <div class="checkbox col-sm-offset-2">
+                <label><input type="checkbox" ng-model="isRepeating"
+                              id="isRepeating" name="isRepeating"
+                              ng-click="scheduler.cronEnabled = !scheduler.cronEnabled"
+                              ng-checked="true">Is repeating</label></div>
         </div>
-        <div class="form-group">
-            <label for="cron">Cron expression:</label>
-            <input type="text" ng-model="cron" class="form-control" id="cron" name="cron"/>
+        <div class="form-group inline" uib-collapse="!scheduler.cronEnabled">
+            <label for="cron" class="control-label col-sm-2">Cron expression:</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="cron" class="form-control" id="cron" name="cron"/>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Schedule</button>
         <div ng-repeat="message in scheduler.messages">

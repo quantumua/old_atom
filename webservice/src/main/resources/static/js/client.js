@@ -1,10 +1,11 @@
-angular.module('client', [])
+angular.module('client', ['ui.bootstrap'])
     .controller('runner', function ($scope, $http, $timeout, $interval) {
         var self = this;
         var reportRefreshTimeout = 900000;
         var reportRefreshDelay = 5000;
         self.messages = [];
         self.tests = [];
+        self.isCollapsed = true;
         self.run = function () {
             self.messages = [];
             var badInput = false;
@@ -171,6 +172,7 @@ angular.module('client', [])
         var self = this;
         self.messages = [];
         self.tests = [];
+        self.cronEnabled = false;
         function scheduleTests(name, emailAddress, properties, suites, cron) {
             var fd = new FormData();
             fd.append('name', name);
