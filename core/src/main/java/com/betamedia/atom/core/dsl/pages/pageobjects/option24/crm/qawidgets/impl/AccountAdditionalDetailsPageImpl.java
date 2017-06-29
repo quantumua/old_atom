@@ -4,6 +4,8 @@ import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -48,5 +50,10 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    @Override
+    public void assertUpdateBtnIsDisabled(){
+    	Assert.assertFalse(waitUntilDisplayed(update).isEnabled());
     }
 }

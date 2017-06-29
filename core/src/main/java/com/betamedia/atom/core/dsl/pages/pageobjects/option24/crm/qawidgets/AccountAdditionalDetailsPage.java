@@ -6,5 +6,6 @@ public interface AccountAdditionalDetailsPage {
 
     void update(AccountAdditionalDetails info);
     boolean exists();
+    void assertUpdateBtnIsDisabled();
 
 }
