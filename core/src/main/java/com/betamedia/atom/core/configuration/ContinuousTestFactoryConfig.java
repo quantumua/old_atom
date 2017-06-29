@@ -1,12 +1,11 @@
 package com.betamedia.atom.core.configuration;
 
-import com.betamedia.atom.core.fwtestrunner.TestInformationHandler;
+import com.betamedia.atom.core.fwtestrunner.scheduling.ContinuousTest;
 import com.betamedia.atom.core.fwtestrunner.scheduling.ContinuousTestFactory;
 import com.betamedia.atom.core.fwtestrunner.scheduling.RepeatingTest;
 import com.betamedia.atom.core.fwtestrunner.scheduling.ScheduledTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.TaskScheduler;
 
 /**
@@ -16,12 +15,10 @@ import org.springframework.scheduling.TaskScheduler;
 @Configuration
 public class ContinuousTestFactoryConfig {
     @Bean
-    public ContinuousTestFactory repeatingTaskFactory(TaskExecutor asyncTaskExecutor, TestInformationHandler handler) {
-        return (testTask, testExecution) -> new RepeatingTest(testTask, testExecution, handler::put, asyncTaskExecutor);
+    public ContinuousTestFactory continuousTestFactory(TaskScheduler taskScheduler) {
+        return (testExecution, cronExpression) -> cronExpression
+                .map(c -> (ContinuousTest) new ScheduledTest(testExecution, c, taskScheduler))
+                .orElseGet(() -> new RepeatingTest(testExecution));
     }
 
-    @Bean
-    public ContinuousTestFactory scheduledTaskFactory(TaskScheduler taskScheduler, TestInformationHandler handler) {
-        return (testTask, testExecution) -> new ScheduledTest(testTask, testExecution, handler::put, taskScheduler);
-    }
 }

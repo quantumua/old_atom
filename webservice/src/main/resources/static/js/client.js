@@ -1,10 +1,44 @@
-angular.module('client', [])
+angular.module('client', ['ui.bootstrap'])
     .controller('runner', function ($scope, $http, $timeout, $interval) {
         var self = this;
         var reportRefreshTimeout = 900000;
         var reportRefreshDelay = 5000;
         self.messages = [];
         self.tests = [];
+        self.isCollapsed = true;
+        self.run = function () {
+            self.messages = [];
+            var badInput = false;
+            if (angular.isUndefined($scope.properties) || !$scope.properties.length) {
+                self.messages.push('No property file selected!');
+                badInput = true;
+            }
+            if (angular.isUndefined($scope.suites) || !$scope.suites.length) {
+                self.messages.push('No suite XML files selected!');
+                badInput = true;
+            }
+            if (angular.isUndefined($scope.tempJar) || !$scope.tempJar.length) {
+                $scope.tempJar = [null];
+            }
+            if (badInput) return;
+            runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0]);
+        };
+
+        self.pollForStatus = function (test) {
+            test.data.status = 'UPDATING';
+            pollForStatus(test, reportRefreshDelay, reportRefreshTimeout);
+        };
+
+        self.abort = function (test) {
+            self.messages = [];
+            $http.delete('/atom/tests/' + test.data.id)
+                .then(function (r) {
+                    self.messages.push("Abort command sent");
+                }, function () {
+                    self.messages.push("Failed to abort test");
+                })
+        };
+
         function runTests(properties, suites, tempJar) {
             var fd = new FormData();
             fd.append('properties', properties);
@@ -17,7 +51,7 @@ angular.module('client', [])
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
                 self.messages.push('Upload successful');
-                var tests = response.data.map(testFormatter).map(function (test) {
+                var tests = response.data.filter(x => x).map(testFormatter).map(function (test) {
                     return {'data': test}
                 });
                 tests.forEach(function (test) {
@@ -54,24 +88,6 @@ angular.module('client', [])
             return ("0" + input).slice(-2);
         }
 
-        self.run = function () {
-            self.messages = [];
-            var badInput = false;
-            if (angular.isUndefined($scope.properties) || !$scope.properties.length) {
-                self.messages.push('No property file selected!');
-                badInput = true;
-            }
-            if (angular.isUndefined($scope.suites) || !$scope.suites.length) {
-                self.messages.push('No suite XML files selected!');
-                badInput = true;
-            }
-            if (angular.isUndefined($scope.tempJar) || !$scope.tempJar.length) {
-                $scope.tempJar = [null];
-            }
-            if (badInput) return;
-            runTests($scope.properties[0], Array.from($scope.suites), $scope.tempJar[0]);
-        };
-
         function pollForStatus(test, delay, timeoutDuration) {
             var interval = $interval(
                 function (timeoutPromise) {
@@ -93,16 +109,11 @@ angular.module('client', [])
                     timeoutDuration)),
                 delay);
         }
-
-        self.pollForStatus = function (test) {
-            test.data.status = 'UPDATING';
-            pollForStatus(test, reportRefreshDelay, reportRefreshTimeout);
-        }
     })
     .controller('jarUploader', function ($scope, $http) {
         var self = this;
         self.message = '';
-        function uploadJar(jar, callback) {
+        function uploadJar(jar) {
             var fd = new FormData();
             fd.append('jar', jar);
             $http.post('/atom/upload/library', fd, {
@@ -110,10 +121,8 @@ angular.module('client', [])
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
                 self.message = 'Upload successful';
-                callback && callback();
             }, function (response) {
                 self.message = response.body;
-                callback && callback();
             });
         }
 
@@ -131,7 +140,7 @@ angular.module('client', [])
     .controller('fileUploader', function ($scope, $http) {
         var self = this;
         self.message = '';
-        function uploadJar(expectedCfdAssets, callback) {
+        function uploadJar(expectedCfdAssets) {
             var fd = new FormData();
             fd.append('expectedCfdAssets', expectedCfdAssets);
             $http.post('/atom/upload/expectedCfdAssets', fd, {
@@ -139,10 +148,8 @@ angular.module('client', [])
                 headers: {'Content-Type': undefined}
             }).then(function (response) {
                 self.message = 'Upload successful';
-                callback && callback();
             }, function (response) {
                 self.message = response.body;
-                callback && callback();
             });
         }
 
@@ -161,6 +168,7 @@ angular.module('client', [])
         var self = this;
         self.messages = [];
         self.tests = [];
+        self.cronEnabled = false;
         function scheduleTests(name, emailAddress, properties, suites, cron) {
             var fd = new FormData();
             fd.append('name', name);
@@ -206,19 +214,27 @@ angular.module('client', [])
             scheduleTests($scope.name, $scope.emailAddress, $scope.properties[0], Array.from($scope.suites), $scope.cron)
         };
 
-        self.stop = function (id) {
+        self.stop = function (test) {
             self.messages = [];
-            $http.delete('/atom/scheduled/' + id + '/stop').then(function (response) {
+            $http.delete('/atom/scheduled/' + test.id + '/stop').then(function (response) {
                 self.messages.push('Stopped job successfully');
             }, function (response) {
                 self.messages.push(response.body);
             });
         };
+        self.abort = function (test) {
+            self.messages = [];
+            $http.delete('/atom/scheduled/' + test.id + '/abort').then(function (r) {
+                self.messages.push("Abort command sent");
+            }, function () {
+                self.messages.push("Failed to abort test");
+            })
+        };
         self.getScheduledTests = function () {
             self.messages = [];
             self.tests = [];
             $http.get('/atom/scheduled').then(function (response) {
-                Array.prototype.push.apply(self.tests, response.data.map(testFormatter));
+                Array.prototype.push.apply(self.tests, response.data.filter(x => x).map(testFormatter));
             })
         };
         function testFormatter(test) {

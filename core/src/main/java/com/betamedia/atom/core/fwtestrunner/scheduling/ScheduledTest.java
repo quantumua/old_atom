@@ -5,41 +5,42 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
+import org.springframework.util.concurrent.ListenableFuture;
 
-import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * @author mbelyaev
  * @since 6/16/17
  */
 public class ScheduledTest extends ContinuousTest {
-    private static final Logger logger = LogManager.getLogger(RepeatingTest.class);
+    private static final Logger logger = LogManager.getLogger(ScheduledTest.class);
     private final AtomicBoolean allowedToStart = new AtomicBoolean(true);
     private final TaskScheduler scheduler;
+    private final String cronExpression;
     private volatile ScheduledFuture scheduledFuture;
 
-    public ScheduledTest(TestInformation testInformation, Function<Consumer<List<TestInformation>>, List<TestInformation>> testExecution, Consumer<TestInformation> onTestSubmitCompletion, TaskScheduler scheduler) {
-        super(testInformation, testExecution, onTestSubmitCompletion);
+    public ScheduledTest(Supplier<ListenableFuture<TestInformation>> testExecution, String cronExpression, TaskScheduler scheduler) {
+        super(testExecution);
         this.scheduler = scheduler;
+        this.cronExpression = cronExpression;
     }
 
     @Override
     public void start() {
         if (scheduledFuture != null) {
-            logger.error("Attempted to start an already started continuous test!", this);
+            logger.error("Attempted to start an already running scheduled test!", this);
             return;
         }
         scheduledFuture = scheduler.schedule(() -> {
             logger.info("Checking if execution is allowed.", this);
             if (allowedToStart.compareAndSet(true, false)) {
                 logger.info("Running test execution.", this);
-                runExecution();
+                runExecution().ifPresent(f -> f.addCallback(t -> this.onSuccess(), ex -> this.onSuccess()));
             }
-        }, new CronTrigger(testInformation.cronExpression));
+        }, new CronTrigger(cronExpression));
     }
 
     @Override
@@ -47,11 +48,26 @@ public class ScheduledTest extends ContinuousTest {
         logger.info("Setting test termination flag.", this);
         isEnabled.set(false);
         logger.info("Gracefully terminating scheduler for the test.", this);
+        if (scheduledFuture == null) {
+            logger.error("Attempted to cancel an already stopped scheduled test!", this);
+            return;
+        }
         scheduledFuture.cancel(false);
     }
 
     @Override
-    protected void onIterationCompletion(List<TestInformation> iterationResults) {
+    public boolean abort() {
+        logger.info("Setting test termination flag.", this);
+        isEnabled.set(false);
+        logger.info("Interrupting scheduler for the test.", this);
+        if (scheduledFuture == null) {
+            logger.error("Attempted to cancel a scheduled test that wasn't started!", this);
+            return false;
+        }
+        return scheduledFuture.cancel(true);
+    }
+
+    private void onSuccess() {
         logger.info("Finished executing test iteration.", this);
         if (isEnabled.get()) {
             logger.info("Allowing next test iteration to start.", this);
@@ -59,7 +75,5 @@ public class ScheduledTest extends ContinuousTest {
             return;
         }
         logger.info("The test will no longer be restarted.", this);
-        testInformation = testInformation.update().withStatus(TestInformation.Status.COMPLETED).build();
-        onTestSubmitCompletion.accept(this.testInformation);
     }
 }

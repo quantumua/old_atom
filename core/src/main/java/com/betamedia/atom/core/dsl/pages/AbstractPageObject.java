@@ -353,8 +353,4 @@ public abstract class AbstractPageObject {
         return element.isDisplayed() ? element : null;
     }
 
-	public void register(CustomerRO customer, String countryCode) {
-		// TODO Auto-generated method stub
-		
-	}
 }

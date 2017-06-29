@@ -1,8 +1,8 @@
 package com.betamedia.atom.webservice.web.controllers;
 
+import com.betamedia.atom.core.fwtestrunner.TestHandler;
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
 import com.betamedia.atom.core.fwtestrunner.TestInformationHandler;
-import com.betamedia.atom.core.fwtestrunner.TestRunnerHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class RunTestController {
     private static final Logger logger = LogManager.getLogger(RunTestController.class);
 
     @Autowired
-    private TestRunnerHandler testRunnerHandler;
+    private TestHandler testHandler;
     @Autowired
     private TestInformationHandler testInformationHandler;
 
@@ -35,12 +35,17 @@ public class RunTestController {
                                          @RequestParam("suites[]") MultipartFile[] suites,
                                          @RequestParam("tempJar") Optional<MultipartFile> tempJar) throws IOException {
         logger.info("Starting tests");
-        return testRunnerHandler.handleTest(getProperties(properties), suites, tempJar, tests -> {});
+        return testHandler.handleTest(getProperties(properties), suites, tempJar);
     }
 
     @GetMapping(value = "/status/{testId}")
     public TestInformation getTaskStatus(@PathVariable UUID testId) {
         return testInformationHandler.get(testId);
+    }
+
+    @DeleteMapping(value = "/tests/{testId}")
+    public boolean abort(@PathVariable UUID testId) {
+        return testHandler.abort(testId);
     }
 
 }
