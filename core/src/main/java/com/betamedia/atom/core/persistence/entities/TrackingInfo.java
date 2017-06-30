@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by Oleksandr Losiev on 4/27/17.
  */
 @Entity
-@Table(name = "bt_trackinginfobase")
+@Table(name = "bt_trackinginfoBase")
 public class TrackingInfo {
 
     public TrackingInfo() {
@@ -21,10 +21,10 @@ public class TrackingInfo {
     }
 
     @Id
-    @Column(name = "bt_trackinginfoid")
+    @Column(name = "bt_trackinginfoId")
     private String id;
 
-    @Column(name = "createdon")
+    @Column(name = "CreatedOn")
     private Date createdOn;
 
     public String getId() {

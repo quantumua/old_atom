@@ -1,18 +1,26 @@
 package com.betamedia.atom.core.holders;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author Maksym Tsybulskyy
  *         Date: 2/24/17.
  */
+@Component
 public class AppContextHolder {
 
     private static ConfigurableApplicationContext context;
 
+    @Autowired
+    private ConfigurableApplicationContext applicationContext;
 
-    public static void setContext(ConfigurableApplicationContext context) {
-        AppContextHolder.context = context;
+    @PostConstruct
+    public void init(){
+        context = applicationContext;
     }
 
     public static <T> T getBean(Class<T> clazz) {
