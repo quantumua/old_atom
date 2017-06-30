@@ -6,6 +6,12 @@ public interface AccountAdditionalDetailsPage {
 
     void update(AccountAdditionalDetails info);
     boolean exists();
-    void assertUpdateBtnIsDisabled();
+    boolean isUpdateBtnEnabled();
+    void SelectBirthDateDay(AccountAdditionalDetails info);
+    void SelectBirthDateMonth(AccountAdditionalDetails info);
+    void SelectBirthDateYear(AccountAdditionalDetails info);
+    void SelectCountryOfBirth(AccountAdditionalDetails info);
+    void SelectNationality(AccountAdditionalDetails info);
+    void SelectAllData(AccountAdditionalDetails info);
 
 }

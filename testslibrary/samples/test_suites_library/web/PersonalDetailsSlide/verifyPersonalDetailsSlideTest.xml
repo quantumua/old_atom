@@ -1,12 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite: parallel execution of tests" verbose="1">
+<suite name="Suite: verify Personal Details Slide" verbose="1">
     <test name="Tryouts">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.web.ctw.verifyPersonalDetailsSlideTest">
+            <class name="com.betamedia.atom.testslibrary.option24.web.ctw.VerifyPersonalDetailsSlideTest">
                 <methods>
-                    <include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" />
-                    <include name="verifySubmitBbttnIisMandatoryForMovingFwd" />
                     <parameter name="countrycode" value="de"/>
+                    <include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" />
+                    <include name="verifySubmitBbttnIisMandatoryForMovingFwd" /> 
+                    <include name="verifyAll3FieldsAreMandatory" />
+                    <include name="verifySubmitBttnEnablesWhenAll3FieldsAreFilled" />
+                    <include name="clickOnSubmitMovesYouToFNSFirstSlide" />
                 </methods>
             </class>
         </classes>

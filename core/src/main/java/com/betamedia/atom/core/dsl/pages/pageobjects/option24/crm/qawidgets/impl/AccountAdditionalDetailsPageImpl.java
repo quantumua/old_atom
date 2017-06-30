@@ -1,5 +1,8 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
@@ -40,6 +43,7 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
         inSelect(birthDateYear).selectByValue(info.birthDateYear);
         inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
         inSelect(nationality).selectByValue(info.nationality);
+        find(update).click();
         scrollIntoView(find(update)).click();
     }
 
@@ -55,7 +59,49 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     }
     
     @Override
-    public void assertUpdateBtnIsDisabled(){
-    	Assert.assertFalse(waitUntilDisplayed(update).isEnabled());
+    public boolean isUpdateBtnEnabled(){
+        return waitUntilDisplayed(birthDateDay) != null;
     }
+    
+    @Override
+    public void SelectBirthDateDay(AccountAdditionalDetails info) {
+        waitUntilDisplayed(birthDateDay);
+        inSelect(birthDateDay).selectByValue(info.birthDateDay);
+    }
+
+    @Override
+    public void SelectBirthDateMonth(AccountAdditionalDetails info) {
+        waitUntilDisplayed(birthDateMonth);
+        inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
+    }
+    
+    @Override
+    public void SelectBirthDateYear(AccountAdditionalDetails info) {
+        waitUntilDisplayed(birthDateYear);
+        inSelect(birthDateYear).selectByValue(info.birthDateYear);
+    }
+    
+    public void SelectCountryOfBirth(AccountAdditionalDetails info) {
+        waitUntilDisplayed(countryOfBirth);
+        inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
+    }    
+    
+    @Override
+    public void SelectNationality(AccountAdditionalDetails info) {
+        waitUntilDisplayed(nationality);
+        inSelect(nationality).selectByValue(info.nationality);
+    }
+    
+    @Override
+    public void SelectAllData(AccountAdditionalDetails info) {
+        waitUntilDisplayed(birthDateDay);
+        inSelect(birthDateDay).selectByValue(info.birthDateDay);
+        inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
+        inSelect(birthDateYear).selectByValue(info.birthDateYear);
+        inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
+        inSelect(nationality).selectByValue(info.nationality);
+    }
+    
+
+    
 }
