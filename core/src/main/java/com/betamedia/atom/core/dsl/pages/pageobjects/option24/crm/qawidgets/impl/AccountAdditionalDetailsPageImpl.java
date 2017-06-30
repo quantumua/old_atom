@@ -43,7 +43,6 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
         inSelect(birthDateYear).selectByValue(info.birthDateYear);
         inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
         inSelect(nationality).selectByValue(info.nationality);
-        find(update).click();
         scrollIntoView(find(update)).click();
     }
 
