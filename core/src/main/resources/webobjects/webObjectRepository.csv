@@ -207,3 +207,9 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,accountAgreeCheckbox,ID,AccountAgree
 2.6.2,2017-05-29 15:24 +0000,SignatureRiskWarningImpl,RiskSignatureTextbox,XPATH,//*[@id="txtareaRiskSignatureText"]
 2.6.2,2017-05-29 15:24 +0000,SignatureRiskWarningImpl,RiskSignatureSubmitbtn,XPATH,//*[@id="signature-risk-warning"]/div/div[4]/div[2]/input
+2.6.2,2017-05-29 15:24 +0000,ConfirmTrueAnswers,confirmTrueAnswers,CSS,wizard-container
+2.6.2,2017-05-29 15:24 +0000,ConfirmTrueAnswers,upButton,CSS,backward.icon-Up4.disabled
+2.6.2,2017-05-29 15:24 +0000,ConfirmTrueAnswers,downButton,CSS,forward.icon-Down4.disabled
+2.6.2,2017-05-29 15:24 +0000,ConfirmTrueAnswers,message,CSS,message-content
+2.6.2,2017-05-29 15:24 +0000,ConfirmTrueAnswers,nextButton,XPATH,//*[@id="wizard-message"]/div[3]/button
+

@@ -46,7 +46,9 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     @Override
     public boolean exists() {
         try {
-            return waitUntilDisplayed(birthDateDay).isDisplayed();
+            return waitUntil(() -> maybe(() -> find(birthDateDay))
+                    .orElseGet(() -> find(birthDateDay))
+                    .isDisplayed());
         } catch (Exception e) {
             return false;
         }

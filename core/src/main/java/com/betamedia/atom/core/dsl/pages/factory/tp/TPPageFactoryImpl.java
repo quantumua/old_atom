@@ -223,4 +223,7 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     public SignatureRiskWarning signatureRiskWarning() {
         return creator.getPage(SignatureRiskWarningImpl.class);
     }
+
+    @Override
+    public ConfirmTrueAnswers confirmTrueAnswers() { return creator.getPage(ConfirmTrueAnswersImpl.class); }
 }

@@ -5,6 +5,7 @@ import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.StartTradeDialog;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Reporter;
 
 /**
  * Created by vsnigur on 5/30/17.
@@ -23,5 +24,16 @@ public class StartTradeDialogImpl extends AbstractPageObject implements StartTra
     @Override
     public void startTrade() {
         waitUntilDisplayed(startTradeButton).click();
+    }
+
+    public void wizardExists() {
+        try {
+            waitUntilDisplayed(startTradeDialog);
+            find(startTradeDialog).isDisplayed();
+            Reporter.log("Wizard appears.");
+        } catch (Exception e) {
+            Reporter.log("Wizard did not appear.");
+
+        }
     }
 }

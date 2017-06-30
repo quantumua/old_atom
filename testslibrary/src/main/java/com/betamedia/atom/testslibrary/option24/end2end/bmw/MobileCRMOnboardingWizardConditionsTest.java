@@ -12,24 +12,21 @@ import org.testng.annotations.Test;
  */
 public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingConditionsTest {
 
-    @Test(dataProvider = GENERIC_PARALLEL_DATA_PROVIDER)
+    @Test(dataProvider = GENERIC_DATA_PROVIDER)
     public void testWizard(OnboardingWizardConditions conditions) throws Exception {
         CRMCustomer customer = operations().customerOperations().registerWithWizardConditions(conditions);
         if (conditions.hasAdditionalDetails()) {
             operations().customerOperations().updateCustomersOnboardingConditions(customer, createConditionsToShowWelcomeAndAdditionalDetailsPages());
             fillAdditionalDetails(customer);
             operations().customerOperations().updateCustomersOnboardingConditions(customer, conditions);
-            pages().browser().waitUntilPageLoad();
         } else {
             operations().customerOperations().updateCustomersOnboardingConditions(customer, createConditionsToShowWelcomeAndAdditionalDetailsPages());
             operations().customerOperations().updateCustomersOnboardingConditions(customer, conditions);
-            pages().browser().waitUntilPageLoad();
         }
         if (conditions.hasPendingDeposit()) {
             operations().customerOperations().updateCustomersOnboardingConditions(customer, createConditionsToShowOnlyDepositPage());
             placePendingDeposit(customer);
             operations().customerOperations().updateCustomersOnboardingConditions(customer, conditions);
-            pages().browser().waitUntilPageLoad();
         }
 
         goToHomepageAndLogin(customer.getUserName());
@@ -71,7 +68,6 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
 
     private void fillAdditionalDetails(CRMCustomer customer) {
         goToHomepageAndLogin(customer.getUserName());
-        pages().browser().waitUntilPageLoad();
         pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
     }
@@ -79,15 +75,11 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
     private void goToHomepageAndLogin(String username) {
         pages().browser().deleteAllCookies();
         pages().browser().refreshPage();
-        pages().browser().waitUntilPageLoad();
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         pages().topNavigationPage().logIn();
+        if (!pages().loginPage().isSubmitBtnExists()) {
+            pages().topNavigationPage().logIn();
+        }
         pages().loginPage().login(username, CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        pages().welcomeBackMessage().exists();
-        pages().browser().waitUntilPageLoad();
+        pages().startTradeDialog().wizardExists();
     }
 }

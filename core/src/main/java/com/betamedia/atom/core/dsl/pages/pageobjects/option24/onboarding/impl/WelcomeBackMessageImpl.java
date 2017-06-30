@@ -5,6 +5,7 @@ import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomeBackMessage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created by vsnigur on 6/8/17.
@@ -22,12 +23,19 @@ public class WelcomeBackMessageImpl extends AbstractPageObject implements Welcom
         waitUntilExists(continueQuestionnaire).click();
     }
 
+    public void continueQuestionnaireMayBe() {
+        maybe(() -> find(continueQuestionnaire)).ifPresent(WebElement::click);
+    }
+
     @Override
     public Boolean exists() {
         try {
-            return waitUntilExists(continueQuestionnaire).isDisplayed();
+            return waitUntil(() -> maybe(() -> find(continueQuestionnaire))
+                    .orElseGet(() -> find(continueQuestionnaire))
+                    .isDisplayed());
         } catch (Exception e) {
             return false;
         }
     }
+
 }
