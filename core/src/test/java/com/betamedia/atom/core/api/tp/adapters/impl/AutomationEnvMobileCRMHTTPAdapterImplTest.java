@@ -7,6 +7,9 @@ import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMError;
 import com.betamedia.atom.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.atom.core.api.tp.entities.response.CRMResponse;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.mockito.InjectMocks;
@@ -32,6 +35,7 @@ import static org.mockito.Mockito.when;
  * Created by vsnigur on 5/5/17.
  */
 public class AutomationEnvMobileCRMHTTPAdapterImplTest {
+    private static class AutomationEnvMobileCRMHTTPAdapterImpl extends AbstractMobileCRMHTTPAdapter<QAEnvironment> implements QAEnvironment {}
 
     private static final String SERVER_URL = "http://some.server.com";
     private static final String EXPECTED_URL = "someUrl";
@@ -47,12 +51,12 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
 
     private static final String LANG = "lang";
     private static final String CURRENCY = "currency";
-    private static final Long   AMOUNT = 1000L;
+    private static final Long AMOUNT = 1000L;
     private static final String ADDRESS = "address";
     private static final String CITY = "city";
     private static final String COUNTRY_CODE = "countryCode";
     private static final Integer ZIP = 123456;
-    private static final Long   CC_NUMBER = 1111222233334444L;
+    private static final Long CC_NUMBER = 1111222233334444L;
     private static final Integer CVV2 = 123;
     private static final Integer EXP_MONTH = 1;
     private static final Integer EXP_YEAR = 1;
@@ -92,9 +96,9 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
 
     @Test
     public void getBaseUrl() throws Exception {
-        AutomationEnvMobileCRMHTTPAdapterImpl automationEnvMobileCRMHTTPAdapterImpl = getAdapter();
+        AbstractMobileCRMHTTPAdapter<AutomationEnvironment> automationEnvMobileCRMHTTPAdapterImpl = getAdapter();
         ReflectionTestUtils.setField(automationEnvMobileCRMHTTPAdapterImpl,
-                AutomationEnvMobileCRMHTTPAdapterImpl.class,
+                AbstractMobileCRMHTTPAdapter.class,
                 "crmPropertiesHolder",
                 getCRMPropertiesHolder(),
                 CRMPropertiesHolder.class);
@@ -190,8 +194,13 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
         return CustomerRO.builder(WidgetsNamingStrategy.get()).build();
     }
 
-    private AutomationEnvMobileCRMHTTPAdapterImpl getAdapter() {
-        return new AutomationEnvMobileCRMHTTPAdapterImpl();
+    private AbstractMobileCRMHTTPAdapter<AutomationEnvironment> getAdapter() {
+        return new AbstractMobileCRMHTTPAdapter<AutomationEnvironment>() {
+            @Override
+            public EnvironmentType getEnvironment() {
+                return EnvironmentType.AUTOMATION;
+            }
+        };
     }
 
     private CRMPropertiesHolder getCRMPropertiesHolder() {

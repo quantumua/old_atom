@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
-import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvAccountGroupOperationsImpl;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.atom.core.environment.tp.properties.EntityPropertiesHolder;
 import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.DealApprovalConfiguration;
@@ -22,6 +22,7 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 4/18/17.
  */
 public class AccountGroupOperationsTest {
+    private static class QAEnvAccountGroupOperationsImpl extends AbstractAccountGroupOperations<QAEnvironment> implements QAEnvironment {}
 
     @InjectMocks
     private QAEnvAccountGroupOperationsImpl accountGroupOperations;
@@ -87,19 +88,19 @@ public class AccountGroupOperationsTest {
 
     @Test
     public void testOpeningDelay() {
-        int actualDelay = accountGroupOperations.getOpeningDelay((double)firstDealAmount + 1);
+        int actualDelay = accountGroupOperations.getOpeningDelay((double) firstDealAmount + 1);
         assertEquals(firstDealDelay, actualDelay);
     }
 
     @Test
     public void testNegativeOpeningDelay() {
-        int actualDelay = accountGroupOperations.getOpeningDelay((double)secondDealAmount + 1);
+        int actualDelay = accountGroupOperations.getOpeningDelay((double) secondDealAmount + 1);
         assertEquals(secondDealDelay, actualDelay);
     }
 
     @Test
     public void testDealWithThresholdAmount() {
-        int actualDelay = accountGroupOperations.getOpeningDelay((double)marketDealAmount);
+        int actualDelay = accountGroupOperations.getOpeningDelay((double) marketDealAmount);
         assertEquals(marketDealDelay, actualDelay);
     }
 

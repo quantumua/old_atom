@@ -93,4 +93,6 @@ public interface TPPageFactory {
     UploadDocumentDialogImpl uploadDocumentDialog();
 
     SignatureRiskWarning signatureRiskWarning();
+
+    ConfirmTrueAnswers confirmTrueAnswers();
 }

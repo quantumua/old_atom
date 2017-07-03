@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.api.tp.adapters.impl;
 
 import com.betamedia.atom.core.api.tp.adapters.AbstractHttpAdapter;
-import com.betamedia.atom.core.api.tp.adapters.MobileCRMHTTPAdaper;
+import com.betamedia.atom.core.api.tp.adapters.MobileCRMHTTPAdapter;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
@@ -26,7 +26,7 @@ import java.util.Map;
  * @see CRMRegisterResult
  */
 
-public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependent> extends AbstractHttpAdapter implements MobileCRMHTTPAdaper<T> {
+public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependent> extends AbstractHttpAdapter implements MobileCRMHTTPAdapter<T> {
 
     private static final Logger logger = LogManager.getLogger(AbstractMobileCRMHTTPAdapter.class);
     public static final String REGISTER_CUSTOMER_URL = "/customer/registration";

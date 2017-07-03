@@ -64,6 +64,12 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         super(webDriver);
     }
 
+    
+    @Override
+    public boolean exists() {
+        return waitUntilDisplayed(employmentStatus) != null;
+    }
+    
     @Override
     public void submit(PersonalInformation info) {
         inSelect(employmentStatus).selectByValue(info.employmentStatus);

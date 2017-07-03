@@ -30,7 +30,8 @@
             </div>
         </div>
         <div class="form-group">
-            <button type="button" class="btn btn-default btn-sm col-sm-1" ng-click="runner.isCollapsed = !runner.isCollapsed">JAR
+            <button type="button" class="btn btn-default btn-sm col-sm-1"
+                    ng-click="runner.isCollapsed = !runner.isCollapsed">JAR
             </button>
             <div uib-collapse="runner.isCollapsed">
                 <label for="tempJar" class="control-label  col-sm-2">JAR override:</label>
@@ -39,7 +40,9 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Execute</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-sm col-sm-1">Execute</button>
+        </div>
         <div ng-repeat="message in runner.messages">
             <h4 ng-cloak>{{message}}</h4>
         </div>

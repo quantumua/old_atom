@@ -2,7 +2,7 @@ package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.*;
-import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvOptionTemplateOperationsImpl;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.common.search.Page;
 import com.betamedia.common.search.Paging;
 import com.betamedia.common.search.Sorting;
@@ -35,6 +35,7 @@ import static org.mockito.Mockito.*;
  * Created by Oleksandr Losiev on 4/20/17.
  */
 public class OptionTemplateOperationsTest {
+    private static class QAEnvOptionTemplateOperationsImpl extends AbstractOptionTemplateOperations<QAEnvironment> implements QAEnvironment {}
 
     @InjectMocks
     private QAEnvOptionTemplateOperationsImpl optionTemplateOperations;
@@ -157,7 +158,7 @@ public class OptionTemplateOperationsTest {
     }
 
     @Test
-    public void testHiloOptionConfigurationCreation(){
+    public void testHiloOptionConfigurationCreation() {
         when(tagOperations.get(any(TagOperations.TagName.class))).thenReturn(Collections.singletonList(expectedTag));
         when(schedulerOperations.create(eq(timezoneId), any(TagOperations.TagName.class))).thenReturn(mockScheduler);
         when(schedulerOperations.get(eq(timezoneId), any(TagOperations.TagName.class))).thenReturn(Collections.singletonList(mockScheduler));
@@ -169,7 +170,7 @@ public class OptionTemplateOperationsTest {
         checkShortTermHiloDuration(TagOperations.TagName.SHORT_TERM_5_MIN_GAME_H3_TEXT, 300);
     }
 
-    private void checkShortTermHiloDuration(TagOperations.TagName tagName, Integer expectedValue){
+    private void checkShortTermHiloDuration(TagOperations.TagName tagName, Integer expectedValue) {
         optionTemplateOperations.create(assetId, OptionType.HILO, tagName);
         verify(tpConnector, atLeastOnce()).create(optionTemplateArgumentCaptor.capture());
         assertThat(optionTemplateArgumentCaptor.getValue().getOptionConfiguration().getShortTermDuration(), is(expectedValue));

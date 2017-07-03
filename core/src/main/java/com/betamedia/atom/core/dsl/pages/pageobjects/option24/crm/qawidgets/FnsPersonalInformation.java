@@ -11,4 +11,6 @@ public interface FnsPersonalInformation {
     void submitOnWizard(PersonalInformation info);
 
     void submitOnWizard(String dataValue);
+
+    boolean exists();
 }

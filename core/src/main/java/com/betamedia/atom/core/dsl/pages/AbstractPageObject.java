@@ -9,10 +9,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-
 import java.io.File;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -229,7 +226,7 @@ public abstract class AbstractPageObject {
     }
 
     /**
-     * Ccroll web page to the element to get visibility of it
+     * Scroll web page to the element to get visibility of it
      *
      * @param element WebElement
      */

@@ -57,8 +57,13 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
             pages().onBoardingWizard().assertOnPOI();
             return;
         }
+        try {
+            pages().onBoardingWizard().confirmMessage();
+            Reporter.log("Confirm message appeared.");
+        } catch (Exception e) {
+            Reporter.log("Confirm message did not appear.");
+        }
 
-        pages().onBoardingWizard().confirmMessage();
     }
 
     private void passPersonalQuestionnaire() {

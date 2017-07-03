@@ -29,7 +29,6 @@ public class EmailServiceImpl implements EmailService {
             emailSender.sendHtmlEmail(to, subject, getContent(contentPath), attachmentPaths.toArray(new String[attachmentPaths.size()]));
         } catch (MessagingException | IOException e) {
             logger.error("", e);
-            return;
         }
     }
 

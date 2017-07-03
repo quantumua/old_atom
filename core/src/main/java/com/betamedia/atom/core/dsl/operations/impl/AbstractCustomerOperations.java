@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
-import com.betamedia.atom.core.api.tp.adapters.MobileCRMHTTPAdaper;
+import com.betamedia.atom.core.api.tp.adapters.MobileCRMHTTPAdapter;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO.CustomerROBuilder;
@@ -23,6 +23,7 @@ import static org.testng.Assert.*;
 /**
  * This class is designed to facilitate the execution of common operations related to customer operations.
  * It can be used as a "building block" when writing integration tests.
+ *
  * @author Maksym Tsybulskyy
  *         Date: 3/31/17.
  * @see CRMCustomer
@@ -32,7 +33,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     private static final Logger logger = LogManager.getLogger(AbstractCustomerOperations.class);
 
     @Autowired
-    private MobileCRMHTTPAdaper<T> mobileCRMHTTPAdaper;
+    private MobileCRMHTTPAdapter<T> mobileCRMHTTPAdapter;
 
     @Autowired
     private AbstractTrackingInfoRepository<T> trackingInfoRepository;
@@ -62,7 +63,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public CRMCustomer register(CustomerRO customerRO) {
-        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerRO);
+        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdapter.register(customerRO);
         return verifyAndReturnCRMCustomer(register);
     }
 
@@ -71,7 +72,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public CRMCustomer register(CustomerRO customerRO, MarketingParametersRO marketingParametersRO) {
-        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerRO,
+        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdapter.register(customerRO,
                 marketingParametersRO);
         return verifyAndReturnCRMCustomer(register);
     }
@@ -81,7 +82,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public List<CRMError> registerWithErrors(CustomerRO customerRO) {
-        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdaper.register(customerRO);
+        CRMResponse<CRMRegisterResult> register = mobileCRMHTTPAdapter.register(customerRO);
         List<CRMError> registerErrors = register.getErrors();
         assertFalse(registerErrors.isEmpty(), "Registration errors were expected, but there were none.");
         return registerErrors;
@@ -101,7 +102,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public CRMCustomer login(String username, String password) {
-        CRMResponse<CRMRegisterResult> loginResponse = mobileCRMHTTPAdaper.login(username, password);
+        CRMResponse<CRMRegisterResult> loginResponse = mobileCRMHTTPAdapter.login(username, password);
         CRMRegisterResult loggedInCustomer = loginResponse.getResult();
         List<CRMError> loginErrors = loginResponse.getErrors();
 
@@ -115,7 +116,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public void logout(String customerId) {
-        CRMResponse logoutResponse = mobileCRMHTTPAdaper.logout(customerId);
+        CRMResponse logoutResponse = mobileCRMHTTPAdapter.logout(customerId);
         List<CRMError> logoutErrors = logoutResponse == null ? null : logoutResponse.getErrors();
         assertNull(logoutResponse, "There were errors during customer logout:" + logoutErrors);
     }
@@ -125,7 +126,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public CRMDeposit deposit(MobileDepositRO deposit) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(deposit);
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdapter.deposit(deposit);
         return verifyAndReturnDepositResult(depositResponse);
     }
 
@@ -134,7 +135,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public CRMDeposit deposit(MobileDepositRO deposit, MarketingParametersRO marketingParametersRO) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(deposit, marketingParametersRO);
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdapter.deposit(deposit, marketingParametersRO);
         return verifyAndReturnDepositResult(depositResponse);
     }
 
@@ -152,7 +153,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public List<CRMError> depositWithErrors(MobileDepositRO deposit) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.deposit(deposit);
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdapter.deposit(deposit);
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
         return depositErrors;
@@ -163,7 +164,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public CRMDeposit depositByName(MobileDepositRO deposit) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(deposit);
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdapter.depositByName(deposit);
         CRMDeposit depositResult = depositResponse.getResult();
         List<CRMError> depositErrors = depositResponse.getErrors();
 
@@ -177,7 +178,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
      */
     @Override
     public List<CRMError> depositByNameWithErrors(MobileDepositRO deposit) {
-        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdaper.depositByName(deposit);
+        CRMResponse<MobileCRMDeposit> depositResponse = mobileCRMHTTPAdapter.depositByName(deposit);
         List<CRMError> depositErrors = depositResponse.getErrors();
         assertFalse(depositErrors.isEmpty(), "Deposit errors were expected, but there were none.");
         return depositErrors;

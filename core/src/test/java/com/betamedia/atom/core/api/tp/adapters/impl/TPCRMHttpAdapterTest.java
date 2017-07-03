@@ -1,12 +1,13 @@
 package com.betamedia.atom.core.api.tp.adapters.impl;
 
 import com.betamedia.atom.core.api.tp.adapters.AbstractHttpAdapter;
-import com.betamedia.atom.core.api.tp.entities.response.CRMAccountCreate;
-import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
-import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
 import com.betamedia.atom.core.api.tp.entities.request.AccountRO;
+import com.betamedia.atom.core.api.tp.entities.response.CRMAccountCreate;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.atom.core.api.tp.entities.response.CRMDeposit;
+import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
+import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
 import com.betamedia.tp.api.model.enums.AccountType;
 import com.betamedia.tp.api.model.enums.BonusType;
 import org.mockito.InjectMocks;
@@ -33,9 +34,10 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 5/10/17.
  */
 public class TPCRMHttpAdapterTest {
+    private static class QAEnvTPCRMHttpAdapterImpl extends AbstractTPCRMHttpAdapter<QAEnvironment> implements QAEnvironment {}
 
     @InjectMocks
-    QAEnvTPCRMHttpAdapterImpl adapter;
+    private QAEnvTPCRMHttpAdapterImpl adapter;
 
     @Mock
     private CRMPropertiesHolder crmPropertiesHolder;

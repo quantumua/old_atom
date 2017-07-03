@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
-import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvTimezoneOperationsImpl;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.tp.api.model.scheduling.Timezone;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,6 +19,7 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 5/5/17.
  */
 public class TimezoneOperationsTest {
+    private static class QAEnvTimezoneOperationsImpl extends AbstractTimezoneOperations<QAEnvironment> implements QAEnvironment {}
 
     @InjectMocks
     private QAEnvTimezoneOperationsImpl timezoneOperations;
