@@ -75,6 +75,11 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
     private void goToHomepageAndLogin(String username) {
         pages().browser().deleteAllCookies();
         pages().browser().refreshPage();
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         pages().topNavigationPage().logIn();
         if (!pages().loginPage().isSubmitBtnExists()) {
             pages().topNavigationPage().logIn();
