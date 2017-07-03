@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
-import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvVolatilityUnitOperationsImpl;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.common.search.Page;
 import com.betamedia.tp.api.model.volatility.VolatilityUnit;
 import org.mockito.InjectMocks;
@@ -26,6 +26,7 @@ import static org.mockito.Mockito.*;
  * Created by Oleksandr Losiev on 5/5/17.
  */
 public class VolatilityUnitOperationsTest {
+    private static class QAEnvVolatilityUnitOperationsImpl extends AbstractVolatilityUnitOperations<QAEnvironment> implements QAEnvironment {}
 
     @InjectMocks
     private QAEnvVolatilityUnitOperationsImpl volatilityUnitOperations;

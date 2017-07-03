@@ -9,6 +9,6 @@ import java.util.List;
 /**
  * Created by Oleksandr Losiev on 4/27/17.
  */
-public interface AbstractTradingAccountExtensionRepository<T extends EnvironmentDependent> extends JpaRepository<TradingAccountExtension, String>, EnvironmentDependent {
+public interface AbstractTradingAccountExtensionRepository<T extends EnvironmentDependent> extends JpaRepository<TradingAccountExtension, String> {
     List<TradingAccountExtension> findByCustomerId(String customerId);
 }

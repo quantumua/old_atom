@@ -1,9 +1,9 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
-import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvBrandOperationsImpl;
-import com.betamedia.common.search.Page;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.atom.core.environment.tp.properties.EntityPropertiesHolder;
+import com.betamedia.common.search.Page;
 import com.betamedia.tp.api.model.Brand;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 4/19/17.
  */
 public class BrandOperationsTest {
+    private static class QAEnvBrandOperationsImpl extends AbstractBrandOperations<QAEnvironment> implements QAEnvironment {}
 
     @InjectMocks
     private QAEnvBrandOperationsImpl brandOperations;

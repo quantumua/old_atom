@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by Oleksandr Losiev on 4/27/17.
  */
-public interface AbstractContactExtensionRepository<T extends EnvironmentDependent> extends JpaRepository<ContactExtension, String>, EnvironmentDependent {
+public interface AbstractContactExtensionRepository<T extends EnvironmentDependent> extends JpaRepository<ContactExtension, String> {
     ContactExtension findByUsername(String username);
 }

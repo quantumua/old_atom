@@ -4,7 +4,7 @@ import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.connectors.tp.feedgateway.FWFeedGatewayConnector;
 import com.betamedia.atom.core.dsl.operations.TradingCalendarOperations;
 import com.betamedia.atom.core.dsl.operations.VolatilityUnitOperations;
-import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvAssetOperationsImpl;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.tp.api.model.Asset;
 import com.betamedia.tp.api.model.RelatedEntityHolder;
 import com.betamedia.tp.api.model.enums.AssetStatus;
@@ -27,6 +27,7 @@ import static org.mockito.Mockito.*;
  * Created by Oleksandr Losiev on 4/19/17.
  */
 public class AssetOperationsTest {
+    private static class QAEnvAssetOperationsImpl extends AbstractAssetOperations<QAEnvironment> implements QAEnvironment {}
 
     @InjectMocks
     private QAEnvAssetOperationsImpl assetOperations;

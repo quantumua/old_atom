@@ -2,7 +2,7 @@ package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.AccountGroupOperations;
-import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvOrderOperationsImpl;
+import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.tp.api.model.enums.OrderStatus;
 import com.betamedia.tp.api.model.order.Order;
 import org.mockito.InjectMocks;
@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 4/20/17.
  */
 public class OrderOperationsTest {
+    private static class QAEnvOrderOperationsImpl extends AbstractOrderOperations<QAEnvironment> implements QAEnvironment {}
 
     @InjectMocks
     private QAEnvOrderOperationsImpl orderOperations;

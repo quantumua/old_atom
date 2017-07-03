@@ -36,9 +36,9 @@ public abstract class AbstractEnvPropertiesHolder<T extends EnvironmentDependent
     public static final String BACKOFFICE_PASSWORD = "bo.password";
     public static final String BACKOFFICE_VERSION_URL = "bo.version.url";
 
-    public static final String DRIVER_CLASS_NAME = "db.driverClassName";
+    public static final String DRIVER_CLASS_NAME = "db.driver-class-name";
     public static final String DATABASE_URL = "db.url";
-    public static final String DATABASE_USERNAME = "db.user";
+    public static final String DATABASE_USERNAME = "db.username";
     public static final String DATABASE_PASSWORD = "db.password";
 
     @Autowired

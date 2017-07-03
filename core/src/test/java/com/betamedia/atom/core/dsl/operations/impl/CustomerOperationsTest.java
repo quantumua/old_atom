@@ -1,12 +1,11 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
-import com.betamedia.atom.core.api.tp.adapters.MobileCRMHTTPAdaper;
+import com.betamedia.atom.core.api.tp.adapters.impl.AbstractMobileCRMHTTPAdapter;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.*;
-import com.betamedia.atom.core.dsl.operations.impl.qa.QAEnvCustomerOperationsImpl;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.atom.core.persistence.entities.TrackingInfo;
 import com.betamedia.atom.core.persistence.entities.TrackingInfoExtension;
@@ -33,6 +32,7 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 4/20/17.
  */
 public class CustomerOperationsTest {
+    private static class QAEnvCustomerOperationsImpl extends AbstractCustomerOperations<QAEnvironment> implements QAEnvironment {}
 
     private final String customerId = "1243";
     private final String displayId = "535";
@@ -48,8 +48,9 @@ public class CustomerOperationsTest {
     private final String trackingId = "testTrackingId";
 
     private CRMResponse<CRMRegisterResult> expectedCustomerResponse;
-    private CRMResponse<CRMDeposit> expectedDepositResponse;
-    private CRMResponse<CRMDeposit> errorDepositResponse;
+    private CRMResponse<CRMRegisterResult> errorRegisterResult;
+    private CRMResponse<MobileCRMDeposit> expectedDepositResponse;
+    private CRMResponse<MobileCRMDeposit> errorDepositResponse;
     private CRMCustomer expectedCustomer;
     private CRMDeposit expectedDeposit;
     private CRMError expectedError;
@@ -60,7 +61,7 @@ public class CustomerOperationsTest {
     private QAEnvCustomerOperationsImpl customerOperations;
 
     @Mock
-    private MobileCRMHTTPAdaper mobileCRMHTTPAdaper;
+    private AbstractMobileCRMHTTPAdapter<QAEnvironment> mobileCRMHTTPAdaper;
 
     @Mock
     private AbstractTrackingInfoRepository<QAEnvironment> trackingInfoRepository;
@@ -75,6 +76,7 @@ public class CustomerOperationsTest {
         expectedDeposit = getExpectedDeposit();
         expectedDepositResponse = getExpectedDepositResponse();
         errorDepositResponse = getErrorDepositResponse();
+        errorRegisterResult = getErrorRegisterResult();
         expectedTrackingInfo = getExpectedTrackingInfo();
         expectedTrackingInfoExtension = getExpectedTrackingInfoExtension();
         expectedError = getExpectedError();
@@ -150,7 +152,7 @@ public class CustomerOperationsTest {
 
     @Test
     public void testRegisterCustomerWithExpectedErrors() {
-        when(mobileCRMHTTPAdaper.register(any())).thenReturn(errorDepositResponse);
+        when(mobileCRMHTTPAdaper.register(any())).thenReturn(errorRegisterResult);
         List<CRMError> actualErrors = customerOperations.registerWithErrors(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         assertTrue(actualErrors.size() == 1);
         assertThat(expectedError, new ReflectionEquals(actualErrors.get(0)));
@@ -240,11 +242,16 @@ public class CustomerOperationsTest {
                 new CRMRegisterResult(getExpectedCustomer()), Collections.emptyList(), "", "");
     }
 
-    private CRMResponse<CRMDeposit> getExpectedDepositResponse() {
+    private CRMResponse<MobileCRMDeposit> getExpectedDepositResponse() {
         return new CRMResponse<>(Collections.emptyList(), getExpectedDeposit(), Collections.emptyList(), "", "");
     }
 
-    private CRMResponse<CRMDeposit> getErrorDepositResponse() {
+    private CRMResponse<MobileCRMDeposit> getErrorDepositResponse() {
+        return new CRMResponse<>(null, null,
+                Collections.singletonList(getExpectedError()), null, null);
+    }
+
+    private CRMResponse<CRMRegisterResult> getErrorRegisterResult() {
         return new CRMResponse<>(null, null,
                 Collections.singletonList(getExpectedError()), null, null);
     }
@@ -263,8 +270,8 @@ public class CustomerOperationsTest {
         return crmCustomer;
     }
 
-    private CRMDeposit getExpectedDeposit() {
-        return new CRMDeposit(transactionId);
+    private MobileCRMDeposit getExpectedDeposit() {
+        return new MobileCRMDeposit(transactionId);
     }
 
     private TrackingInfo getExpectedTrackingInfo() {
