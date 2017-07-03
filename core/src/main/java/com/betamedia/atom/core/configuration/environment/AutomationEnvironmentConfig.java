@@ -11,7 +11,7 @@ import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
 import com.betamedia.atom.core.environment.tp.properties.AbstractEnvPropertiesHolder;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
-import com.betamedia.atom.core.persistence.repositories.impl.newautomation.NewAutomationEnvContactExtensionRepository;
+import com.betamedia.atom.core.persistence.repositories.impl.automation.AutomationEnvContactExtensionRepository;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -32,7 +32,7 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(
         basePackageClasses = {
                 ContactExtension.class,
-                NewAutomationEnvContactExtensionRepository.class
+                AutomationEnvContactExtensionRepository.class
         },
         entityManagerFactoryRef = "automationEntityManagerFactory"
 )
@@ -300,7 +300,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
                 .dataSource(automationDataSource())
                 .packages(
                         ContactExtension.class,
-                        NewAutomationEnvContactExtensionRepository.class)
+                        AutomationEnvContactExtensionRepository.class)
                 .persistenceUnit("automationPersistenceUnit")
                 .build();
     }
