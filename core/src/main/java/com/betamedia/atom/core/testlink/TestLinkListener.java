@@ -24,20 +24,20 @@ public class TestLinkListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        testLinkService.updateTestCase(
+        testLinkService.updateTestCase(iTestResult.getParameters(),
                 getTestDisplayId(iTestResult), ExecutionStatus.PASSED);
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        testLinkService.updateTestCase(
+        testLinkService.updateTestCase(iTestResult.getParameters(),
                 getTestDisplayId(iTestResult), ExecutionStatus.FAILED);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        testLinkService.updateTestCase(
-                getTestDisplayId(iTestResult), ExecutionStatus.BLOCKED);
+        testLinkService.updateTestCase(iTestResult.getParameters(),
+                getTestDisplayId(iTestResult), ExecutionStatus.NOT_RUN);
     }
 
     @Override

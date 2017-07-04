@@ -12,19 +12,22 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Service to provide TestLink integration.
  * It is used to update test result status in conjunction with {@link TestLinkListener}.
- *
+ * <p>
  * Created by Oleksandr Losiev on 5/16/17.
  */
-
 @Service
 @PropertySource("classpath:testlink.properties")
 public class TestLinkService {
 
+    private static final Logger log = LogManager.getLogger(TestLinkService.class);
     @Value("${testlink.testPlanId}")
     private int testPlanId;
     @Value("${testlink.buildId}")
@@ -33,34 +36,31 @@ public class TestLinkService {
     private String url;
     @Value("${testlink.key}")
     private String devKey;
-
     private TestLinkAPI api;
-    private static final Logger log = LogManager.getLogger(TestLinkService.class);
 
     @PostConstruct
-    public void init() {
-        try {
-            api = new TestLinkAPI(new URL(url), devKey);
-        } catch (MalformedURLException e) {
-            log.error("Cant init TestLink api due to exception ", e);
-        }
+    public void init() throws MalformedURLException {
+        api = new TestLinkAPI(new URL(url), devKey);
     }
 
-    void updateTestCase(String testCaseDisplayId, ExecutionStatus executionStatus) {
+    void updateTestCase(Object[] testParams, String testCaseDisplayId, ExecutionStatus executionStatus) {
 
-        if (!testCaseDisplayId.isEmpty()) {
+        if (testCaseDisplayId.isEmpty()) {
             log.info("Test case display id was not provided for this test.");
             return;
         }
 
         TestCase testCase = api.getTestCaseByExternalId(testCaseDisplayId, null);
-        if ( testCase == null ) {
-            log.error("Cant find TestLink testCase by externalId=" + testCaseDisplayId);
-            return;
-        }
+
+        String notes = Stream.of(testParams)
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
 
         api.reportTCResult(testCase.getId(), null,
-                testPlanId, executionStatus, buildId, null, null, null, null, null, null, null, null);
+                testPlanId, executionStatus, buildId, null,
+                notes, null, null, null,
+                null, null, null
+        );
         log.info("Test Case results update status : " + executionStatus);
     }
 }
