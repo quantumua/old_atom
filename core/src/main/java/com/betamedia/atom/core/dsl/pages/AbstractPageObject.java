@@ -270,9 +270,6 @@ public abstract class AbstractPageObject {
     protected void deleteAllCookies() {
         webDriver.manage().deleteAllCookies();
         Set<Cookie> allCookies = webDriver.manage().getCookies();
-        if (!allCookies.isEmpty()) {
-            webDriver.manage().deleteAllCookies();
-        }
         allCookies.forEach(logger::error);
     }
 

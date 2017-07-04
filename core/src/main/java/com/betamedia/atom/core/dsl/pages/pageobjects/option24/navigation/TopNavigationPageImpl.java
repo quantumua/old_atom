@@ -37,8 +37,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public void signUp() {
-    	waitUntilDisplayed(signUpBtn);
-         find(mainMenu, signUpBtn).click();
+    	waitUntilDisplayed(signUpBtn).click();
     }
     
     @Override
@@ -53,10 +52,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public void logIn() {
-        waitUntil(() -> maybe(() -> find(loginBtn))
-                .orElseGet(() -> find(loginBtn))
-                .isDisplayed());
-        waitUntilExists(loginBtn).click();
+        waitUntilDisplayed(loginBtn).click();
     }
 
     @Override
@@ -68,14 +64,12 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public void cfd() {
-        waitUntilDisplayed(mainMenu);
-        find(mainMenu, cfdBtn).click();
+        waitUntilDisplayed(mainMenu,cfdBtn).click();
     }
 
     @Override
     public void goToHomePage() {
-        waitUntilDisplayed(homePageLink);
-        find(homePageLink).click();
+        waitUntilDisplayed(homePageLink).click();
         waitUntilPageLoad();
     }
 
