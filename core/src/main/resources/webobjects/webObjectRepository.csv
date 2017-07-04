@@ -188,7 +188,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
 2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeDialog,CLASS_NAME,wizard-container
-2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeButton,CSS,#wizard-message>div.message-button>button
+2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeButton,ID,thankyou-btn
 2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,setLeverageDialog,CSS,.swSetLeverageContent.swWidget.swGroupBox
 2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leverageComboBox,CSS,.dropdown-menu.inner
 2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,okButton,CSS,.swFormControl.swAcceptButton
