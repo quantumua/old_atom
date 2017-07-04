@@ -34,7 +34,7 @@ public class RiskWarningImpl extends AbstractPageObject implements RiskWarning {
     }
     
     @Override
-    public void waitforRisWarning() {
+    public void waitForRiskWarning() {
     	waitUntilDisplayed(updateButton);    	
     }
 }

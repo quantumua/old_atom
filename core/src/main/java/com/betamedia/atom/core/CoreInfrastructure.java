@@ -1,6 +1,7 @@
 package com.betamedia.atom.core;
 
-import com.betamedia.atom.core.fwtestrunner.storage.StorageProperties;
+import com.betamedia.atom.core.configuration.properties.StorageProperties;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
-@PropertySource("classpath:core.properties")
+@PropertySource("classpath:config/core.properties")
 public class CoreInfrastructure {
 
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite: sequential execution of tests" verbose="1" parallel="methods" thread-count="5">
+    <test name="Create New Customer tests web">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers" >
+                <methods>
+                    <include name="verifySignUpButtonRedirectToOnboardingOpenAccount"/>
+                    <include name="applyForAnAccountElementsVerification"/>
+                    <!--<include name="applyForAnAccountFirstNameFieldValidations"/>-->
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

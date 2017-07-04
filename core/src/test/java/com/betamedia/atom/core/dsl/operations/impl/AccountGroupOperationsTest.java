@@ -1,8 +1,8 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
+import com.betamedia.atom.core.configuration.properties.EntityProperties;
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
-import com.betamedia.atom.core.environment.tp.properties.EntityPropertiesHolder;
 import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.DealApprovalConfiguration;
 import org.mockito.InjectMocks;
@@ -31,7 +31,7 @@ public class AccountGroupOperationsTest {
     private FWTPConnector tpConnector;
 
     @Mock
-    private EntityPropertiesHolder entityPropertiesHolder;
+    private EntityProperties<QAEnvironment> entityProperties;
 
     private final String accountGroupName = "testAccountGroup";
     private final String accountGroupDescription = "testAccountGroupDescription";
@@ -62,7 +62,7 @@ public class AccountGroupOperationsTest {
 
         when(tpConnector.readById(AccountGroup.class, accountGroupId)).thenReturn(accountGroup);
         when(tpConnector.readById(AccountGroup.class, defaultAccountGroupId)).thenReturn(accountGroup);
-        when(entityPropertiesHolder.getDefaultAccountGroupId()).thenReturn(accountGroupId);
+        when(entityProperties.getAccountGroupId()).thenReturn(accountGroupId);
 
         accountGroupOperations.init();
     }

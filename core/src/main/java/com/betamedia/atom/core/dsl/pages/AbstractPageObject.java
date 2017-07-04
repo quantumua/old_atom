@@ -29,7 +29,7 @@ public abstract class AbstractPageObject {
     private static final String EXPECTED_LOOKUP_FAILURE_MESSAGE = "Could not find element";
     private static final int MAX_WAIT_SEC = 60;
 
-    private static WebDriver webDriver;
+    private WebDriver webDriver;
 
     protected AbstractPageObject(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -55,6 +55,10 @@ public abstract class AbstractPageObject {
      */
     protected WebElement waitUntilExists(By first, By... rest) {
         return getWait().until(driver -> ignoringStale(() -> find(first, rest)));
+    }
+
+    protected WebElement waitUntilClickable(By first, By... rest) {
+        return getWait().until(ExpectedConditions.elementToBeClickable(find(first, rest)));
     }
 
     /**
@@ -294,6 +298,7 @@ public abstract class AbstractPageObject {
      * @see WebDriver#quit()
      */
     protected void closeBrowser() {
+        webDriver.close();
         webDriver.quit();
     }
 
@@ -335,7 +340,7 @@ public abstract class AbstractPageObject {
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 
-    protected static Wait<WebDriver> getWait() {
+    protected Wait<WebDriver> getWait() {
         return new WebDriverWait(webDriver, MAX_WAIT_SEC);
     }
 
@@ -350,22 +355,4 @@ public abstract class AbstractPageObject {
     private static WebElement elementIfVisible(WebElement element) {
         return element.isDisplayed() ? element : null;
     }
-    
-    protected static WebElement waitUntilToBeClickable (By first, By... rest){
-    	 WebElement element = webDriver.findElement(first);
-         for (By b : rest) {
-             element = element.findElement(b);
-         }
-		return getWait().until(ExpectedConditions.elementToBeClickable(element));
-		
-    	
-    }
-
-//    protected WebElement find(By first, By... rest) {
-//        WebElement element = webDriver.findElement(first);
-//        for (By b : rest) {
-//            element = element.findElement(b);
-//        }
-//        return element;
-//    }
 }

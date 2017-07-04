@@ -1,9 +1,10 @@
-package com.betamedia.atom.core.fwtestrunner.storage;
+package com.betamedia.atom.core.configuration.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Created by mbelyaev on 2/28/17.
+ * @author mbelyaev
+ * @since 2/28/17
  */
 @ConfigurationProperties("storage")
 public class StorageProperties {

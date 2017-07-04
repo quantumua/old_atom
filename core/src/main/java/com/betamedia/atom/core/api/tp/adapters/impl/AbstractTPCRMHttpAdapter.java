@@ -4,11 +4,11 @@ import com.betamedia.atom.core.api.tp.adapters.AbstractHttpAdapter;
 import com.betamedia.atom.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.atom.core.api.tp.entities.request.AccountRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAccountCreate;
-import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
-import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.atom.core.api.tp.entities.response.CRMDeposit;
+import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
+import com.betamedia.atom.core.configuration.properties.CRMProperties;
+import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
 import com.betamedia.tp.api.model.enums.BonusType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,19 +43,19 @@ public abstract class AbstractTPCRMHttpAdapter<T extends EnvironmentDependent> e
     private static final String PARAM_PASSWORD = "userPassword";
 
     @Autowired
-    private CRMPropertiesHolder<T> crmPropertiesHolder;
+    private CRMProperties<T> crmProperties;
 
     @Override
     protected Map<String, String> getRequiredParams() {
         return Collections.unmodifiableMap(Stream.of(
-                new AbstractMap.SimpleEntry<>(PARAM_USERNAME, crmPropertiesHolder.getBackOffUsername()),
-                new AbstractMap.SimpleEntry<>(PARAM_PASSWORD, crmPropertiesHolder.getBackOffPwd()))
+                new AbstractMap.SimpleEntry<>(PARAM_USERNAME, crmProperties.getBackOfficeUsername()),
+                new AbstractMap.SimpleEntry<>(PARAM_PASSWORD, crmProperties.getBackOfficePassword()))
                 .collect(Collectors.toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue)));
     }
 
     @Override
     protected String getBaseUrl() {
-        return crmPropertiesHolder.getCRMUrl();
+        return crmProperties.getCrmUrl();
     }
 
     @Override

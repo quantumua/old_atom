@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * @author Lilian Medina
@@ -91,7 +90,7 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
         logger.info("Phone  " + customer.getPhone());
         logger.info("passwod  " + customer.getPassword());
 
-        waitUntilToBeClickable(submitButtonReg).click();
+        waitUntilClickable(submitButtonReg).click();
 
     }
 

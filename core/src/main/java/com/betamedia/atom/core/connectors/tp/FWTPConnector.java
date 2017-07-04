@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.connectors.tp;
 
+import com.betamedia.atom.core.configuration.properties.SpaceProperties;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.environment.tp.properties.SpacePropertiesHolder;
 import com.betamedia.tp.api.connector.ClientSessionIdHandler;
 import com.betamedia.tp.api.connector.ClientTPConnector;
 import com.betamedia.tp.api.model.TPSession;
@@ -18,7 +18,7 @@ import javax.annotation.PreDestroy;
 public abstract class FWTPConnector<T extends EnvironmentDependent> extends ClientTPConnector implements EnvironmentDependent {
 
     @Autowired
-    private SpacePropertiesHolder<T> spacePropertiesHolder;
+    private SpaceProperties<T> spaceProperties;
 
 
     private ClientSessionIdHandler clientSessionIdHandler;
@@ -44,11 +44,11 @@ public abstract class FWTPConnector<T extends EnvironmentDependent> extends Clie
     }
 
     private void initProperties() {
-        this.spaceGroups = spacePropertiesHolder.getSpaceGroups();
-        this.spaceLocators = spacePropertiesHolder.getSpaceLocators();
-        this.spaceUsername = spacePropertiesHolder.getSpaceUsername();
-        this.spacePassword = spacePropertiesHolder.getSpacePassword();
-        this.spaceUrl = spacePropertiesHolder.getSpaceURL();
+        this.spaceGroups = spaceProperties.getGroups();
+        this.spaceLocators = spaceProperties.getLocators();
+        this.spaceUsername = spaceProperties.getSpaceUsername();
+        this.spacePassword = spaceProperties.getSpacePassword();
+        this.spaceUrl = spaceProperties.getSpaceUrl();
     }
 
     @Override
@@ -63,7 +63,7 @@ public abstract class FWTPConnector<T extends EnvironmentDependent> extends Clie
     @Override
     protected void postConnect() {
         userService = serviceProxy(IUserService.class);
-        TPSession session = userService.login(spacePropertiesHolder.getUsername(), spacePropertiesHolder.getPwd());
+        TPSession session = userService.login(spaceProperties.getUsername(), spaceProperties.getPassword());
         clientSessionIdHandler = new ClientSessionIdHandler();
         this.getMetaArgumentsHandler().setSessionId(session.getId());
     }

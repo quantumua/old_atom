@@ -1,8 +1,8 @@
 package com.betamedia.atom.core.fwdataaccess.repository.util.version;
 
-import com.betamedia.atom.core.fwdataaccess.converters.LocalDateTimeConverter;
+import com.betamedia.atom.core.configuration.properties.CRMProperties;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
+import com.betamedia.atom.core.fwdataaccess.converters.LocalDateTimeConverter;
 import com.betamedia.atom.core.fwdataaccess.repository.util.RepositoryVersion;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter;
 public abstract class AbstractApplicationVersionService<T extends EnvironmentDependent> implements ApplicationVersionService {
     private static final Logger logger = LogManager.getLogger(AbstractApplicationVersionService.class);
     @Autowired
-    private CRMPropertiesHolder<T> crmPropertiesHolder;
+    private CRMProperties<T> crmProperties;
     @Autowired
     private RestTemplateBuilder builder;
     @Autowired
@@ -39,7 +39,7 @@ public abstract class AbstractApplicationVersionService<T extends EnvironmentDep
 
     @Override
     public RepositoryVersion getVersion() {
-        return getVersion(crmPropertiesHolder.getBackOffVersionURL());
+        return getVersion(crmProperties.getBackOfficeVersionUrl());
     }
 
 

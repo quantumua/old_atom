@@ -57,13 +57,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
             pages().onBoardingWizard().assertOnPOI();
             return;
         }
-        try {
-            pages().onBoardingWizard().confirmMessage();
-            Reporter.log("Confirm message appeared.");
-        } catch (Exception e) {
-            Reporter.log("Confirm message did not appear.");
-        }
-
+        pages().startTradeDialog().startTrade();
     }
 
     private void passPersonalQuestionnaire() {
@@ -111,6 +105,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_25.get())
                 .build()
         );
+        pages().confirmAnswers().next();
     }
 
     protected boolean checkIfLeveragePopupWillBeShown(String username) {
@@ -124,6 +119,6 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
     @Override
     protected String getDataSourcePath() {
-        return "/data/demoWizardTestCases.csv";
+        return "/data/wizardTestCases.csv";
     }
 }

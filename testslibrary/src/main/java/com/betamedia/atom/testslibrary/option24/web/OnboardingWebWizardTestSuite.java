@@ -9,7 +9,6 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSite
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
-
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -234,8 +233,7 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	                 .withBinaryInvestLossKnowledge(Questions.BinaryInvestLossKnowledge.LOSS_75.get())
 	                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_35.get())
 	                 .build());
-//	         FIXME not implemented
-         pages().riskwarning().waitforRisWarning();
+         pages().riskwarning().waitForRiskWarning();
 	    }
 	    
 	    

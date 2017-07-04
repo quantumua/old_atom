@@ -7,10 +7,10 @@ import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMError;
 import com.betamedia.atom.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.atom.core.api.tp.entities.response.CRMResponse;
+import com.betamedia.atom.core.configuration.properties.CRMProperties;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
-import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -79,7 +79,7 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
     private ResponseEntity<CRMResponse<CRMRegisterResult>> responseEntity;
 
     @Mock
-    private CRMPropertiesHolder crmPropertiesHolder;
+    private CRMProperties<QAEnvironment> crmProperties;
 
     @InjectMocks
     private AutomationEnvMobileCRMHTTPAdapterImpl automationEnvMobileCRMHTTPAdapterImpl;
@@ -99,9 +99,9 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
         AbstractMobileCRMHTTPAdapter<AutomationEnvironment> automationEnvMobileCRMHTTPAdapterImpl = getAdapter();
         ReflectionTestUtils.setField(automationEnvMobileCRMHTTPAdapterImpl,
                 AbstractMobileCRMHTTPAdapter.class,
-                "crmPropertiesHolder",
+                "crmProperties",
                 getCRMPropertiesHolder(),
-                CRMPropertiesHolder.class);
+                CRMProperties.class);
 
         Assert.assertEquals(automationEnvMobileCRMHTTPAdapterImpl.getBaseUrl(), EXPECTED_URL);
     }
@@ -203,15 +203,15 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
         };
     }
 
-    private CRMPropertiesHolder getCRMPropertiesHolder() {
-        CRMPropertiesHolder crmPropertiesHolder = Mockito.mock(CRMPropertiesHolder.class);
-        when(crmPropertiesHolder.getMobileCRMUrl()).thenReturn(EXPECTED_URL);
-        return crmPropertiesHolder;
+    private CRMProperties getCRMPropertiesHolder() {
+        CRMProperties crmProperties = Mockito.mock(CRMProperties.class);
+        when(crmProperties.getMobileCrmUrl()).thenReturn(EXPECTED_URL);
+        return crmProperties;
     }
 
     private void intitializeMocks() {
         automationEnvMobileCRMHTTPAdapterImpl.init();
-        when(crmPropertiesHolder.getMobileCRMUrl()).thenReturn(SERVER_URL);
+        when(crmProperties.getMobileCrmUrl()).thenReturn(SERVER_URL);
         when(responseEntity.getBody()).thenReturn(crmResponseExpected);
         String arguments = "";
         when(restTemplate.exchange(

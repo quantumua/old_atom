@@ -8,17 +8,15 @@ import com.betamedia.atom.core.dsl.operations.impl.*;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
-import com.betamedia.atom.core.environment.tp.properties.AbstractEnvPropertiesHolder;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.persistence.repositories.impl.qa.QAEnvContactExtensionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
@@ -29,24 +27,8 @@ import javax.sql.DataSource;
  * @since 6/29/17
  */
 @Configuration
-@PropertySource("/env/qa-env.properties")
-@EnableJpaRepositories(
-        basePackageClasses = {
-                ContactExtension.class,
-                QAEnvContactExtensionRepository.class
-        },
-        entityManagerFactoryRef = "qaEntityManagerFactory"
-)
+@Profile("qa")
 public class QAEnvironmentConfig implements QAEnvironment {
-    @Bean
-    public AbstractEnvPropertiesHolder<QAEnvironment> qaPropertiesHolder() {
-        return new AbstractEnvPropertiesHolder<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
 
     @Bean
     public AbstractApplicationVersionService<QAEnvironment> qaVersionService() {
@@ -280,31 +262,4 @@ public class QAEnvironmentConfig implements QAEnvironment {
         };
     }
 
-    @Bean
-    @Primary
-    @ConfigurationProperties("qa.db")
-    public DataSource qaDataSource() {
-        return qaDataSourceProperties().initializeDataSourceBuilder().build();
-    }
-
-    @Bean
-    @Primary
-    @ConfigurationProperties("qa.db")
-    public DataSourceProperties qaDataSourceProperties() {
-        return new DataSourceProperties();
-    }
-
-    @Bean
-    @Primary
-    public LocalContainerEntityManagerFactoryBean qaEntityManagerFactory(
-            EntityManagerFactoryBuilder builder) {
-        return builder
-                .dataSource(qaDataSource())
-                .packages(
-                        ContactExtension.class,
-                        QAEnvContactExtensionRepository.class
-                )
-                .persistenceUnit("qaPersistenceUnit")
-                .build();
-    }
 }

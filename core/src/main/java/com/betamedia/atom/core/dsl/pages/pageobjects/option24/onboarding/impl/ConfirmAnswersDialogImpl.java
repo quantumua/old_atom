@@ -2,14 +2,14 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl;
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.ConfirmTrueAnswers;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.ConfirmAnswersDialog;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
  * Created by vsnigur on 6/27/17.
  */
-public class ConfirmTrueAnswersImpl extends AbstractPageObject implements ConfirmTrueAnswers {
+public class ConfirmAnswersDialogImpl extends AbstractPageObject implements ConfirmAnswersDialog {
 
     @StoredId
     private By confirmTrueAnswers;
@@ -22,7 +22,7 @@ public class ConfirmTrueAnswersImpl extends AbstractPageObject implements Confir
     @StoredId
     private By nextButton;
 
-    protected ConfirmTrueAnswersImpl(WebDriver webDriver) {
+    protected ConfirmAnswersDialogImpl(WebDriver webDriver) {
         super(webDriver);
     }
 

@@ -7,6 +7,7 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsP
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import static java.util.Objects.nonNull;
 
 /**
  * Created by vadimsn on 5/18/17.
@@ -74,25 +75,25 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     public void submit(PersonalInformation info) {
         inSelect(employmentStatus).selectByValue(info.employmentStatus);
         inSelect(industry).selectByValue(info.industry);
-        if(notNull(info.industryOther)) find(industryOther).sendKeys(info.industryOther);
-        if(notNull(info.employerName)) find(employerName).sendKeys(info.employerName);
+        if(nonNull(info.industryOther)) find(industryOther).sendKeys(info.industryOther);
+        if(nonNull(info.employerName)) find(employerName).sendKeys(info.employerName);
         inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
-        if(notNull(info.isUSReportable)) inSelect(isUSReportable).selectByValue(info.isUSReportable);
+        if(nonNull(info.isUSReportable)) inSelect(isUSReportable).selectByValue(info.isUSReportable);
         inSelect(hasTaxIdentificationNumber).selectByValue(info.hasTaxIdentificationNumber);
-        if(notNull(info.taxIdentificationNumber)) find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
-        if(notNull(info.socialSecurityNumber)) find(socialSecurityNumber).sendKeys(info.socialSecurityNumber);
+        if(nonNull(info.taxIdentificationNumber)) find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
+        if(nonNull(info.socialSecurityNumber)) find(socialSecurityNumber).sendKeys(info.socialSecurityNumber);
         inSelect(educationLevel).selectByValue(info.educationLevel);
         inSelect(educationField).selectByValue(info.educationField);
-        if(notNull(info.educationFieldOther)) find(educationFieldOther).sendKeys(info.educationFieldOther);
+        if(nonNull(info.educationFieldOther)) find(educationFieldOther).sendKeys(info.educationFieldOther);
         inSelect(isPoliticallyExposed).selectByValue(info.isPoliticallyExposed);
-        if(notNull(info.politicalExposureComment)) find(politicalExposureComment).sendKeys(info.politicalExposureComment);
+        if(nonNull(info.politicalExposureComment)) find(politicalExposureComment).sendKeys(info.politicalExposureComment);
         inSelect(sourceOfFunds).selectByValue(info.sourceOfFunds);
-        if(notNull(info.sourceOfFundsOther)) find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
+        if(nonNull(info.sourceOfFundsOther)) find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
         inSelect(annualIncome).selectByValue(info.annualIncome);
         inSelect(netWealth).selectByValue(info.netWealth);
         inSelect(expectedDepositsPerYear).selectByValue(info.expectedDepositsPerYear);
         inSelect(purposeOfTrading).selectByValue(info.purposeOfTrading);
-        if(notNull(info.purposeOfTradingOther)) find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
+        if(nonNull(info.purposeOfTradingOther)) find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
         scrollIntoView(find(submit)).click();
         waitUntil(() -> waitUntilDisplayed(resultPlaceholder).getText().contains("\"HasPersonalInformationAnswers\":true"));
     }
@@ -141,7 +142,4 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         find(By.id(dataValue+"_alternate")).sendKeys(numberTaxId);
     }
 
-    private static boolean notNull(Object o) {
-        return o != null;
-    }
 }

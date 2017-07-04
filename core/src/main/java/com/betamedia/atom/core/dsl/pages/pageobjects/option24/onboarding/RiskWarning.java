@@ -5,5 +5,5 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding;
  */
 public interface RiskWarning {
     void accept();
-    void waitforRisWarning();
+    void waitForRiskWarning();
 }
