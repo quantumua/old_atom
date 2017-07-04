@@ -6,16 +6,11 @@ import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,8 +50,7 @@ public class TestLinkService {
                 testLinkProperties.getTestPlanId(), executionStatus,
                 testLinkProperties.getBuildId(), null,
                 notes, null, null, null,
-                null, null, null
-        );
+                null, null, null);
         log.info("Updated test case result in TestLink with status: " + executionStatus);
     }
 }
