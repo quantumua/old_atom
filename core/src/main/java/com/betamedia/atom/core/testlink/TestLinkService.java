@@ -46,7 +46,7 @@ public class TestLinkService {
     void updateTestCase(Object[] testParams, String testCaseDisplayId, ExecutionStatus executionStatus) {
 
         if (testCaseDisplayId.isEmpty()) {
-            log.info("Test case display id was not provided for this test.");
+            log.debug("Test case display id was not provided for this test.");
             return;
         }
 
@@ -61,7 +61,7 @@ public class TestLinkService {
                 notes, null, null, null,
                 null, null, null
         );
-        log.info("Test Case results update status : " + executionStatus);
+        log.info("Updated test case result in TestLink with status: " + executionStatus);
     }
 }
 
