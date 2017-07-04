@@ -12,7 +12,8 @@ import org.testng.annotations.Test;
  * @author Maksym Tsybulskyy
  *         Date: 2/15/17.
  */
-
+//remark to run directly from IDE
+//@Listeners(ExternalExecutionListener.class)
 public class LoginPageTest extends TPEndToEndTest {
 
     @Test

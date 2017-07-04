@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
  * @author Maksym Tsybulskyy
  *         Date: 6/26/17.
  */
-@SpringBootApplication(scanBasePackages = {"com.betamedia.atom.core"})
+@SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 @PropertySource("classpath:core.properties")
 public class CoreInfrastructure {

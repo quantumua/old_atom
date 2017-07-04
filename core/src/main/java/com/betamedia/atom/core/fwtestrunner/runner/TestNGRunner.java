@@ -9,12 +9,12 @@ import com.betamedia.atom.core.fwtestrunner.types.TestRunnerType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.testng.TestNG;
 
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
-import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,8 +23,9 @@ import java.util.stream.Stream;
  * @author Maksym Tsybulskyy
  *         Date: 2/24/17.
  */
-public abstract class AbstractTestNGRunner implements TestRunner {
-    private static final Logger logger = LogManager.getLogger(AbstractTestNGRunner.class);
+@Component
+public class TestNGRunner implements TestRunner {
+    private static final Logger logger = LogManager.getLogger(TestNGRunner.class);
 
     @Autowired
     private Collection<ConfigurableListenerFactory> listenerFactories;
@@ -38,7 +39,6 @@ public abstract class AbstractTestNGRunner implements TestRunner {
 
     @Override
     public TestInformation run(TestInformation task) {
-        initializeEnvironment(task.properties);
         TestNG testng = new TestNG();
         testng.setOutputDirectory(task.reportDirectory);
         listenerFactories.stream()
@@ -65,11 +65,6 @@ public abstract class AbstractTestNGRunner implements TestRunner {
                 .withAttachmentURLs(getScreenshots(task.reportDirectory))
                 .build();
     }
-
-    /**
-     * Override to implement environment bootstrapping
-     */
-    public abstract void initializeEnvironment(Properties properties);
 
     private List<String> getScreenshots(String outputDirectory) {
         return getScreenshotStream(outputDirectory)
