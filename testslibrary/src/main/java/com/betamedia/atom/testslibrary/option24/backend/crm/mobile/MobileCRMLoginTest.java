@@ -24,12 +24,12 @@ public class MobileCRMLoginTest extends TPBackEndTest {
         final String expectedPlatform = "scipio";
         final String expectedProduct = "binary";
 
-      CRMCustomer loggedInCustomer = operations().customerOperations().login(username, password);
+        CRMCustomer loggedInCustomer = operations().customerOperations().login(username, password);
         assertEquals(username, loggedInCustomer.getUserName());
 
         assertFalse(Arrays.stream(loggedInCustomer.getAccounts())
                 .filter(account -> account.getPlatform().equals(expectedPlatform) &&
-                            account.getProduct().equals(expectedProduct))
+                        account.getProduct().equals(expectedProduct))
                 .collect(Collectors.toList())
                 .isEmpty()
         );
