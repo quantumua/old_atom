@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,7 +29,7 @@ public abstract class AbstractPageObject {
     private static final String EXPECTED_LOOKUP_FAILURE_MESSAGE = "Could not find element";
     private static final int MAX_WAIT_SEC = 60;
 
-    private WebDriver webDriver;
+    private static WebDriver webDriver;
 
     protected AbstractPageObject(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -334,7 +335,7 @@ public abstract class AbstractPageObject {
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 
-    private Wait<WebDriver> getWait() {
+    protected static Wait<WebDriver> getWait() {
         return new WebDriverWait(webDriver, MAX_WAIT_SEC);
     }
 
@@ -349,5 +350,22 @@ public abstract class AbstractPageObject {
     private static WebElement elementIfVisible(WebElement element) {
         return element.isDisplayed() ? element : null;
     }
+    
+    protected static WebElement waitUntilToBeClickable (By first, By... rest){
+    	 WebElement element = webDriver.findElement(first);
+         for (By b : rest) {
+             element = element.findElement(b);
+         }
+		return getWait().until(ExpectedConditions.elementToBeClickable(element));
+		
+    	
+    }
 
+//    protected WebElement find(By first, By... rest) {
+//        WebElement element = webDriver.findElement(first);
+//        for (By b : rest) {
+//            element = element.findElement(b);
+//        }
+//        return element;
+//    }
 }

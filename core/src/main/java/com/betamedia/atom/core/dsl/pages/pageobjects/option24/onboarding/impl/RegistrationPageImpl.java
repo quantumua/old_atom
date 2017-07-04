@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * @author Lilian Medina
@@ -83,7 +84,6 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
 
         /*Country Election*/
         find(selectedFlagField).click();
-//        find(selectCountry).click();
         submitCountry(countryCode);
         /* */
 
@@ -91,7 +91,7 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
         logger.info("Phone  " + customer.getPhone());
         logger.info("passwod  " + customer.getPassword());
 
-        submitRegistration();
+        waitUntilToBeClickable(submitButtonReg).click();
 
     }
 
@@ -103,19 +103,5 @@ public class RegistrationPageImpl extends AbstractPageObject implements Registra
     public void submitCountry(String dataValue) {
         find(By.xpath("//ul[@class='country-list']//li[@data-country-code='"+dataValue+"']")).click();
     }
-    private void submitRegistration() {
-    	
-    	try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        waitUntilDisplayed(submitButtonReg);
-        find(registrationWidget, submitButtonReg).click();
-       
-
-    }
-
-
+   
 }
