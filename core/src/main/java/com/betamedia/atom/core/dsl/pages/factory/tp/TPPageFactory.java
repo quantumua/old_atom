@@ -94,5 +94,7 @@ public interface TPPageFactory {
 
     SignatureRiskWarning signatureRiskWarning();
 
-    ConfirmTrueAnswers confirmTrueAnswers();
+    ConfirmAnswersDialog confirmAnswers();
+
+    RegistrationDialog registrationDialog();
 }

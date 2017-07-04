@@ -111,6 +111,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
                 .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_25.get())
                 .build()
         );
+        pages().confirmAnswers().next();
     }
 
     protected boolean checkIfLeveragePopupWillBeShown(String username) {

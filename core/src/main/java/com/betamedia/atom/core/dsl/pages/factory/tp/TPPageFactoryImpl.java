@@ -225,5 +225,8 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public ConfirmTrueAnswers confirmTrueAnswers() { return creator.getPage(ConfirmTrueAnswersImpl.class); }
+    public ConfirmAnswersDialog confirmAnswers() { return creator.getPage(ConfirmAnswersDialogImpl.class); }
+
+    @Override
+    public RegistrationDialog registrationDialog() {return creator.getPage(RegistrationDialogImpl.class); }
 }

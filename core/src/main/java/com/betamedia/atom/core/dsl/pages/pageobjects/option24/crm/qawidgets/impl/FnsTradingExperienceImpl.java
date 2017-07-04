@@ -6,6 +6,7 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsT
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import static java.util.Objects.nonNull;
 
 /**
  * @author mbelyaev
@@ -61,15 +62,14 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         super(webDriver);
     }
 
-    //TODO extract method for send-keys-if-not-null scenario
     @Override
     public void submit(TradingExperienceInfo info) {
         inSelect(sharesExperience).selectByValue(info.sharesExperience);
         inSelect(binaryExperience).selectByValue(info.binaryExperience);
-        if(notNull(info.averageYearlyBinaryVolume)) inSelect(averageYearlyBinaryVolume).selectByValue(info.averageYearlyBinaryVolume);
+        if(nonNull(info.averageYearlyBinaryVolume)) inSelect(averageYearlyBinaryVolume).selectByValue(info.averageYearlyBinaryVolume);
         inSelect(forExExperience).selectByValue(info.forExExperience);
-        if(notNull(info.averageYearlyForExVolume)) inSelect(averageYearlyForExVolume).selectByValue(info.averageYearlyForExVolume);
-        if(notNull(info.commonLeverage)) inSelect(commonLeverage).selectByValue(info.commonLeverage);
+        if(nonNull(info.averageYearlyForExVolume)) inSelect(averageYearlyForExVolume).selectByValue(info.averageYearlyForExVolume);
+        if(nonNull(info.commonLeverage)) inSelect(commonLeverage).selectByValue(info.commonLeverage);
         inSelect(financialWorkExperience).selectByValue(info.financialWorkExperience);
         inSelect(cfdBinaryKnowledge).selectByValue(info.cfdBinaryKnowledge);
         inSelect(mainFactorKnowledge).selectByValue(info.mainFactorKnowledge);
@@ -92,10 +92,10 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     public void submitOnWizard(TradingExperienceInfo info) {
         submitOnWizard(info.sharesExperience);
         submitOnWizard(info.binaryExperience);
-        if(notNull(info.averageYearlyBinaryVolume))submitOnWizard(info.averageYearlyBinaryVolume);
+        if(nonNull(info.averageYearlyBinaryVolume))submitOnWizard(info.averageYearlyBinaryVolume);
         submitOnWizard(info.forExExperience);
-        if(notNull(info.averageYearlyForExVolume))submitOnWizard(info.averageYearlyForExVolume);
-        if(notNull(info.commonLeverage))submitOnWizard(info.commonLeverage);
+        if(nonNull(info.averageYearlyForExVolume))submitOnWizard(info.averageYearlyForExVolume);
+        if(nonNull(info.commonLeverage))submitOnWizard(info.commonLeverage);
         submitOnWizard(info.financialWorkExperience);
         submitOnWizard(info.cfdBinaryKnowledge);
         submitOnWizard(info.mainFactorKnowledge);
@@ -110,7 +110,6 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         submitOnWizard(info.binaryInvestProfitKnowledge);
         submitOnWizard(info.binaryInvestLossKnowledge);
         submitOnWizard(info.binaryProbabilityKnowledge);
-        waitUntilDisplayed(By.xpath("//*[@id=\"wizard-message\"]/div[3]/button")).click();
     }
 
     @Override
@@ -118,8 +117,4 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
     }
 
-
-    private static boolean notNull(Object o) {
-        return o != null;
-    }
 }
