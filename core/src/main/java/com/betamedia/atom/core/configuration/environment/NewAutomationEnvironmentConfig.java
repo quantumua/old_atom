@@ -8,16 +8,16 @@ import com.betamedia.atom.core.dsl.operations.impl.*;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
 import com.betamedia.atom.core.environment.tp.NewAutomationEnvironment;
-import com.betamedia.atom.core.environment.tp.properties.AbstractEnvPropertiesHolder;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.persistence.repositories.impl.newautomation.NewAutomationEnvTrackingInfoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
@@ -28,23 +28,8 @@ import javax.sql.DataSource;
  * @since 6/29/17
  */
 @Configuration
-@PropertySource("/env/newAutomation-env.properties")
-@EnableJpaRepositories(
-        basePackageClasses = {
-                ContactExtension.class,
-                NewAutomationEnvTrackingInfoRepository.class
-        },
-        entityManagerFactoryRef = "newAutomationEntityManagerFactory"
-)
+@Profile("newAutomation")
 public class NewAutomationEnvironmentConfig implements NewAutomationEnvironment {
-    @Bean
-    public AbstractEnvPropertiesHolder<NewAutomationEnvironment> newAutomationPropertiesHolder() {
-        return new AbstractEnvPropertiesHolder<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
 
     @Bean
     public AbstractApplicationVersionService<NewAutomationEnvironment> newAutomationVersionService() {
@@ -83,6 +68,7 @@ public class NewAutomationEnvironmentConfig implements NewAutomationEnvironment 
     }
 
     @Bean
+    @ConfigurationProperties("feed")
     public FWFeedGatewayConnector<NewAutomationEnvironment> newAutomationFeedGWConnector() {
         return new FWFeedGatewayConnector<NewAutomationEnvironment>() {
             public EnvironmentType getEnvironment() {
@@ -253,27 +239,4 @@ public class NewAutomationEnvironmentConfig implements NewAutomationEnvironment 
         };
     }
 
-    @Bean
-    @ConfigurationProperties("newAutomation.db")
-    public DataSource newAutomationDataSource() {
-        return newAutomationDataSourceProperties().initializeDataSourceBuilder().build();
-    }
-
-    @Bean
-    @ConfigurationProperties("newAutomation.db")
-    public DataSourceProperties newAutomationDataSourceProperties() {
-        return new DataSourceProperties();
-    }
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean newAutomationEntityManagerFactory(
-            EntityManagerFactoryBuilder builder) {
-        return builder
-                .dataSource(newAutomationDataSource())
-                .packages(
-                        ContactExtension.class,
-                        NewAutomationEnvTrackingInfoRepository.class)
-                .persistenceUnit("newAutomationPersistenceUnit")
-                .build();
-    }
 }

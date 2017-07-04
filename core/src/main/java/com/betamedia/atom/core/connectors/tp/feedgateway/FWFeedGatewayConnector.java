@@ -1,12 +1,8 @@
 package com.betamedia.atom.core.connectors.tp.feedgateway;
 
-/**
- * @author Maksym Tsybulskyy
- * Date: 4/21/17.
- */
 
+import com.betamedia.atom.core.configuration.properties.FeedGatewayProperties;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.environment.tp.properties.FeedGatewayPropertiesHolder;
 import com.betamedia.tp.api.connector.FeedGatewayConnector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,12 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+/**
+ * @author Maksym Tsybulskyy
+ *         Date: 4/21/17.
+ */
 public abstract class FWFeedGatewayConnector<T extends EnvironmentDependent> extends FeedGatewayConnector implements EnvironmentDependent {
 
     private static final Logger logger = LogManager.getLogger(FWFeedGatewayConnector.class);
 
     @Autowired
-    private FeedGatewayPropertiesHolder<T> feedGatewayPropertiesHolder;
+    private FeedGatewayProperties<T> feedGatewayProperties;
 
     @PostConstruct
     public void init() {
@@ -42,10 +42,10 @@ public abstract class FWFeedGatewayConnector<T extends EnvironmentDependent> ext
     }
 
     private void initProperties() {
-        this.spaceGroups = feedGatewayPropertiesHolder.getGWSpaceGroups();
-        this.spaceLocators = feedGatewayPropertiesHolder.getGWSpaceLocators();
-        this.spaceUsername = feedGatewayPropertiesHolder.getGWSpaceUsername();
-        this.spacePassword = feedGatewayPropertiesHolder.getGWSpacePassword();
-        this.spaceUrl = feedGatewayPropertiesHolder.getGWSpaceURL();
+        this.spaceGroups = feedGatewayProperties.getGroups();
+        this.spaceLocators = feedGatewayProperties.getLocators();
+        this.spaceUsername = feedGatewayProperties.getSpaceUsername();
+        this.spacePassword = feedGatewayProperties.getSpacePassword();
+        this.spaceUrl = feedGatewayProperties.getSpaceUrl();
     }
 }

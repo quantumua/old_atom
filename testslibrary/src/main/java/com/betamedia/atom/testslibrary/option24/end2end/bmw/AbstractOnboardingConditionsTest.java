@@ -125,6 +125,6 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
     @Override
     protected String getDataSourcePath() {
-        return "/data/demoWizardTestCases.csv";
+        return "/data/wizardTestCases.csv";
     }
 }

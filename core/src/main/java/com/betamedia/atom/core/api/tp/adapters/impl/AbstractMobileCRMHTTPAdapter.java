@@ -8,8 +8,8 @@ import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.atom.core.api.tp.entities.response.CRMResponse;
 import com.betamedia.atom.core.api.tp.entities.response.MobileCRMDeposit;
+import com.betamedia.atom.core.configuration.properties.CRMProperties;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +36,11 @@ public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependen
     public static final String DEPOSIT_BY_NAME_URL = "/finance/depositByName";
 
     @Autowired
-    private CRMPropertiesHolder<T> crmPropertiesHolder;
+    private CRMProperties<T> crmProperties;
 
     @Override
     protected String getBaseUrl() {
-        return crmPropertiesHolder.getMobileCRMUrl();
+        return crmProperties.getMobileCrmUrl();
     }
 
     /**

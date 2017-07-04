@@ -1,9 +1,9 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
+import com.betamedia.atom.core.configuration.properties.EntityProperties;
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.AccountGroupOperations;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.environment.tp.properties.EntityPropertiesHolder;
 import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.DealApprovalConfiguration;
 import org.apache.commons.lang.NotImplementedException;
@@ -27,7 +27,7 @@ public abstract class AbstractAccountGroupOperations<T extends EnvironmentDepend
     private static final Logger logger = LogManager.getLogger(AbstractAccountGroupOperations.class);
 
     @Autowired
-    private EntityPropertiesHolder<T> entityPropertiesHolder;
+    private EntityProperties<T> entityProperties;
 
     @Autowired
     private FWTPConnector<T> tpConnector;
@@ -36,7 +36,7 @@ public abstract class AbstractAccountGroupOperations<T extends EnvironmentDepend
 
     @PostConstruct
     public void init() {
-        accountGroup = get(entityPropertiesHolder.getDefaultAccountGroupId());
+        accountGroup = get(entityProperties.getAccountGroupId());
     }
 
     /**

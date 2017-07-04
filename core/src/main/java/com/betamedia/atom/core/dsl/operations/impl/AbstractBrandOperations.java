@@ -1,10 +1,10 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
+import com.betamedia.atom.core.configuration.properties.EntityProperties;
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
-import com.betamedia.common.search.criteria.SearchCriteria;
 import com.betamedia.atom.core.dsl.operations.BrandOperations;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.environment.tp.properties.EntityPropertiesHolder;
+import com.betamedia.common.search.criteria.SearchCriteria;
 import com.betamedia.tp.api.model.Brand;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,11 +31,11 @@ public abstract class AbstractBrandOperations<T extends EnvironmentDependent> im
     private FWTPConnector<T> tpConnector;
 
     @Autowired
-    private EntityPropertiesHolder<T> entityPropertiesHolder;
+    private EntityProperties<T> entityProperties;
 
     @PostConstruct
     public void init() {
-        brand = get(entityPropertiesHolder.getBrandId());
+        brand = get(entityProperties.getBrandId());
     }
 
     /**

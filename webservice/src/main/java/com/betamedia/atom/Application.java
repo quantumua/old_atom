@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-@SpringBootApplication(scanBasePackages = {"com.betamedia.atom.webservice"})
+@SpringBootApplication
 @Import(CoreInfrastructure.class)
 public class Application {
 

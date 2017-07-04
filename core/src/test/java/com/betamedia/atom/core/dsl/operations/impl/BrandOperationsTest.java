@@ -1,8 +1,8 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
+import com.betamedia.atom.core.configuration.properties.EntityProperties;
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
-import com.betamedia.atom.core.environment.tp.properties.EntityPropertiesHolder;
 import com.betamedia.common.search.Page;
 import com.betamedia.tp.api.model.Brand;
 import org.mockito.InjectMocks;
@@ -38,7 +38,7 @@ public class BrandOperationsTest {
     private Page<Brand> brandPage;
 
     @Mock
-    private EntityPropertiesHolder entityPropertiesHolder;
+    private EntityProperties<QAEnvironment> entityProperties;
 
     private String brandId = "testBrandId";
     private String brandName = "testBrandName";
@@ -47,7 +47,7 @@ public class BrandOperationsTest {
     @BeforeMethod
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        when(entityPropertiesHolder.getBrandId()).thenReturn(brandId);
+        when(entityProperties.getBrandId()).thenReturn(brandId);
         when(tpConnector.readById(Brand.class, brandId)).thenReturn(getExpectedBrand());
         doReturn(brandPage).when(tpConnector).readMultiple(any(), any(), any());
 

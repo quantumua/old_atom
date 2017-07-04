@@ -6,8 +6,8 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMAccountCreate;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.atom.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
+import com.betamedia.atom.core.configuration.properties.CRMProperties;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
-import com.betamedia.atom.core.environment.tp.properties.CRMPropertiesHolder;
 import com.betamedia.tp.api.model.enums.AccountType;
 import com.betamedia.tp.api.model.enums.BonusType;
 import org.mockito.InjectMocks;
@@ -40,7 +40,7 @@ public class TPCRMHttpAdapterTest {
     private QAEnvTPCRMHttpAdapterImpl adapter;
 
     @Mock
-    private CRMPropertiesHolder crmPropertiesHolder;
+    private CRMProperties crmProperties;
 
     @Mock
     private RestTemplate restTemplate;
@@ -75,9 +75,9 @@ public class TPCRMHttpAdapterTest {
     @BeforeMethod
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        when(crmPropertiesHolder.getBackOffPwd()).thenReturn(backOfficePassword);
-        when(crmPropertiesHolder.getBackOffUsername()).thenReturn(backOfficeUsername);
-        when(crmPropertiesHolder.getCRMUrl()).thenReturn(baseUrl);
+        when(crmProperties.getBackOfficePassword()).thenReturn(backOfficePassword);
+        when(crmProperties.getBackOfficeUsername()).thenReturn(backOfficeUsername);
+        when(crmProperties.getCrmUrl()).thenReturn(baseUrl);
         ReflectionTestUtils.setField(adapter, AbstractHttpAdapter.class, "restTemplate", restTemplate, RestTemplate.class);
         adapter.init();
     }
