@@ -5,6 +5,7 @@ import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,23 +26,16 @@ import java.util.stream.Stream;
  * Created by Oleksandr Losiev on 5/16/17.
  */
 @Service
-@PropertySource("classpath:testlink.properties")
 public class TestLinkService {
 
     private static final Logger log = LogManager.getLogger(TestLinkService.class);
-    @Value("${testlink.testPlanId}")
-    private int testPlanId;
-    @Value("${testlink.buildId}")
-    private int buildId;
-    @Value("${testlink.url}")
-    private String url;
-    @Value("${testlink.key}")
-    private String devKey;
+    @Autowired
+    private TestLinkProperties testLinkProperties;
     private TestLinkAPI api;
 
     @PostConstruct
     public void init() throws MalformedURLException {
-        api = new TestLinkAPI(new URL(url), devKey);
+        api = new TestLinkAPI(new URL(testLinkProperties.getUrl()), testLinkProperties.getKey());
     }
 
     void updateTestCase(Object[] testParams, String testCaseDisplayId, ExecutionStatus executionStatus) {
@@ -57,7 +52,8 @@ public class TestLinkService {
                 .collect(Collectors.joining(", "));
 
         api.reportTCResult(testCase.getId(), null,
-                testPlanId, executionStatus, buildId, null,
+                testLinkProperties.getTestPlanId(), executionStatus,
+                testLinkProperties.getBuildId(), null,
                 notes, null, null, null,
                 null, null, null
         );
