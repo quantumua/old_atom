@@ -77,7 +77,7 @@ public class TPCRMHttpAdapterTest {
         MockitoAnnotations.initMocks(this);
         when(crmProperties.getBackOfficePassword()).thenReturn(backOfficePassword);
         when(crmProperties.getBackOfficeUsername()).thenReturn(backOfficeUsername);
-        when(crmProperties.getCrmUrl()).thenReturn(baseUrl);
+        when(crmProperties.getUrl()).thenReturn(baseUrl);
         ReflectionTestUtils.setField(adapter, AbstractHttpAdapter.class, "restTemplate", restTemplate, RestTemplate.class);
         adapter.init();
     }

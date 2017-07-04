@@ -7,26 +7,26 @@ import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
  *         Date: 4/21/17.
  */
 public class CRMProperties<T extends EnvironmentDependent> {
-    private String mobileCrmUrl;
-    private String crmUrl;
+    private String mobileUrl;
+    private String url;
     private String backOfficeUsername;
     private String backOfficePassword;
     private String backOfficeVersionUrl;
 
-    public String getMobileCrmUrl() {
-        return mobileCrmUrl;
+    public String getMobileUrl() {
+        return mobileUrl;
     }
 
-    public void setMobileCrmUrl(String mobileCrmUrl) {
-        this.mobileCrmUrl = mobileCrmUrl;
+    public void setMobileUrl(String mobileUrl) {
+        this.mobileUrl = mobileUrl;
     }
 
-    public String getCrmUrl() {
-        return crmUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setCrmUrl(String crmUrl) {
-        this.crmUrl = crmUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getBackOfficeUsername() {

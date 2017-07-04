@@ -40,7 +40,7 @@ public abstract class AbstractMobileCRMHTTPAdapter<T extends EnvironmentDependen
 
     @Override
     protected String getBaseUrl() {
-        return crmProperties.getMobileCrmUrl();
+        return crmProperties.getMobileUrl();
     }
 
     /**

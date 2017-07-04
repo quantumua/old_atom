@@ -55,7 +55,7 @@ public abstract class AbstractTPCRMHttpAdapter<T extends EnvironmentDependent> e
 
     @Override
     protected String getBaseUrl() {
-        return crmProperties.getCrmUrl();
+        return crmProperties.getUrl();
     }
 
     @Override

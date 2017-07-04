@@ -205,13 +205,13 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
 
     private CRMProperties getCRMPropertiesHolder() {
         CRMProperties crmProperties = Mockito.mock(CRMProperties.class);
-        when(crmProperties.getMobileCrmUrl()).thenReturn(EXPECTED_URL);
+        when(crmProperties.getMobileUrl()).thenReturn(EXPECTED_URL);
         return crmProperties;
     }
 
     private void intitializeMocks() {
         automationEnvMobileCRMHTTPAdapterImpl.init();
-        when(crmProperties.getMobileCrmUrl()).thenReturn(SERVER_URL);
+        when(crmProperties.getMobileUrl()).thenReturn(SERVER_URL);
         when(responseEntity.getBody()).thenReturn(crmResponseExpected);
         String arguments = "";
         when(restTemplate.exchange(
