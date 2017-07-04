@@ -1,5 +1,6 @@
 package com.betamedia.atom.core.testlink;
 
+import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 import com.betamedia.atom.core.holders.AppContextHolder;
 import com.betamedia.atom.core.testlink.annotations.TestLinkDisplayId;
 import org.testng.ITestContext;
@@ -19,47 +20,42 @@ public class TestLinkListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
         testLinkService.updateTestCase(
-                getTestDisplayId(iTestResult), TestCaseResultStatus.PASSED);
+                getTestDisplayId(iTestResult), ExecutionStatus.PASSED);
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         testLinkService.updateTestCase(
-                getTestDisplayId(iTestResult), TestCaseResultStatus.FAILED);
+                getTestDisplayId(iTestResult), ExecutionStatus.FAILED);
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
         testLinkService.updateTestCase(
-                getTestDisplayId(iTestResult), TestCaseResultStatus.BLOCKED);
+                getTestDisplayId(iTestResult), ExecutionStatus.BLOCKED);
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-
     }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-
     }
 
-    private Optional<String> getTestDisplayId(ITestResult iTestResult) {
-        return Optional.of(Optional.ofNullable(iTestResult.getMethod().getConstructorOrMethod()
+    private String getTestDisplayId(ITestResult iTestResult) {
+        return Optional.ofNullable(iTestResult.getMethod().getConstructorOrMethod()
                 .getMethod().getAnnotation(TestLinkDisplayId.class))
                 .map(TestLinkDisplayId::value)
-                .orElse(""))
-        ;
+                .orElse("");
     }
 }

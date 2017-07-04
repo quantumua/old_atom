@@ -3,6 +3,7 @@ package com.betamedia.atom.testslibrary.option24.backend.crm.mobile;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAccount;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.testingtype.tp.TPBackEndTest;
+import com.betamedia.atom.core.testlink.annotations.TestLinkDisplayId;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -14,8 +15,19 @@ import static org.junit.Assert.assertTrue;
  */
 public class MobileCRMLoginTest extends TPBackEndTest {
 
+    @Override
+    protected Class getDataSourceEntity() {
+        return UsernamePwdData.class;
+    }
+
+    @Override
+    protected String getDataSourcePath() {
+        return "/data/usernamepwd.csv";
+    }
+
     @Test
     @Parameters({"username", "password"})
+    @TestLinkDisplayId("CTW-11804")
     public void testLogin(String username, String password) {
         final String expectedPlatform = "scipio";
         final String expectedProduct = "binary";
@@ -34,6 +46,7 @@ public class MobileCRMLoginTest extends TPBackEndTest {
 
     @Test
     @Parameters("customerId")
+    @TestLinkDisplayId("CTW-11803")
     public void testLogout(String customerId) {
         operations().customerOperations().logout(customerId);
     }

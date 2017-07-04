@@ -1,17 +1,17 @@
 package com.betamedia.atom.core.testlink;
 
-import com.betamedia.atom.core.testlink.persistence.entities.TestLinkTestCase;
-import com.betamedia.atom.core.testlink.persistence.repositories.TestCaseVersionsRepository;
+import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
+import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
+import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import testlink.api.java.client.TestLinkAPIClient;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Optional;
 
 /**
@@ -34,54 +34,34 @@ public class TestLinkService {
     @Value("${testlink.key}")
     private String devKey;
 
-    private TestLinkAPIClient api;
+    private TestLinkAPI api;
     private static final Logger log = LogManager.getLogger(TestLinkService.class);
-    private static final Long automationExecutionType = 2l;
-
-    @Autowired
-    public TestCaseVersionsRepository testCaseRepository;
 
     @PostConstruct
     public void init() {
-        api = new TestLinkAPIClient(devKey, url);
+        try {
+            api = new TestLinkAPI(new URL(url), devKey);
+        } catch (MalformedURLException e) {
+            log.error("Cant init TestLink api due to exception ", e);
+        }
     }
 
-    void updateTestCase(Optional<String> testCaseDisplayId, TestCaseResultStatus testCaseResultStatus) {
-        if (!testCaseDisplayId.isPresent()) {
+    void updateTestCase(String testCaseDisplayId, ExecutionStatus executionStatus) {
+
+        if (!testCaseDisplayId.isEmpty()) {
             log.info("Test case display id was not provided for this test.");
             return;
         }
 
-        int testCaseId;
-        try {
-            testCaseId = getTestCaseIdByNumericalDisplayId(splitDisplayId(testCaseDisplayId));
-        } catch (IllegalArgumentException e) {
-            log.warn("Test case id was not found for a given display id: " + testCaseDisplayId);
+        TestCase testCase = api.getTestCaseByExternalId(testCaseDisplayId, null);
+        if ( testCase == null ) {
+            log.error("Cant find TestLink testCase by externalId=" + testCaseDisplayId);
             return;
         }
-/*
-        try {
-            String testResultStatus = testCaseResultStatus.getStatus();
-            TestLinkAPIResults testLinkAPIResults = api.reportTestCaseResult(testPlanId, testCaseId, buildId, "", testResultStatus);
-            log.info("Test Case results update status : " + testLinkAPIResults);
-        } catch (TestLinkAPIException e) {
-            log.error("An exception has occurred while updating the test case: ", e);
-        }
-*/
-    }
 
-    private long splitDisplayId(Optional<String> testCaseDisplayId) {
-        String[] splitId = testCaseDisplayId.get().split("-");
-        return Long.valueOf(splitId[splitId.length-1]);
+        api.reportTCResult(testCase.getId(), null,
+                testPlanId, executionStatus, buildId, null, null, null, null, null, null, null, null);
+        log.info("Test Case results update status : " + executionStatus);
     }
-
-    private int getTestCaseIdByNumericalDisplayId(Long displayId) throws IllegalArgumentException {
-        List<TestLinkTestCase> testCases = testCaseRepository.findByExternalIdAndExecutionType(displayId, automationExecutionType);
-        if (testCases.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-        return testCases.get(0).getId();
-    }
-
 }
 
