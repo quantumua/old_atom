@@ -59,7 +59,7 @@ public class TestLinkListener implements ITestListener {
         try {
             getTestCaseResult(testRes, status).ifPresent(testLinkService::updateTestCase);
         } catch(Exception e) {
-            log.error("Cant update test with result=" + testRes + " due to exception ", e);
+            log.error("Cant update test with result=" + testRes + " due to exception " + e.getMessage());
         }
     }
 
@@ -69,8 +69,8 @@ public class TestLinkListener implements ITestListener {
         Optional<Integer> plan = getIntParameterFromTestXml(xmlTest, "testlink.planId");
         Optional<String> displayId = getTestDisplayId(testResult);
         if(!build.isPresent() || !plan.isPresent() || !displayId.isPresent()) {
-            log.error("Cant update testCase in TestLink because one of parameters " +
-                    "not provided testlink.buildId=" + build + " testlink.planId=" + plan+
+            log.error("Cant update testCase in TestLink because some of mandatory parameters " +
+                    "are missing testlink.buildId=" + build + " testlink.planId=" + plan+
                     " displayId=" + displayId + " testResult=" + testResult);
             return Optional.empty();
         }
