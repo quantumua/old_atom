@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
  * Created by sergeyg on 04.07.17.
  */
 @Component
-@PropertySource("classpath:testlink.properties")
 @ConfigurationProperties(prefix = "testlink")
 public class TestLinkProperties {
     private String url;
