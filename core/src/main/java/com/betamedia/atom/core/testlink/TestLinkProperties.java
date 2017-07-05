@@ -15,8 +15,6 @@ import javax.annotation.PostConstruct;
 public class TestLinkProperties {
     private String url;
     private String key;
-    private int testPlanId;
-    private int buildId;
 
     public String getUrl() {
         return url;
@@ -32,21 +30,5 @@ public class TestLinkProperties {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public int getTestPlanId() {
-        return testPlanId;
-    }
-
-    public void setTestPlanId(int testPlanId) {
-        this.testPlanId = testPlanId;
-    }
-
-    public int getBuildId() {
-        return buildId;
-    }
-
-    public void setBuildId(int buildId) {
-        this.buildId = buildId;
     }
 }
