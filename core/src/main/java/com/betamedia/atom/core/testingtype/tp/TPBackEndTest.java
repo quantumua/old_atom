@@ -10,7 +10,6 @@ import org.testng.annotations.Listeners;
  * @author Maksym Tsybulskyy
  *         Date: 3/22/17.
  */
-@Listeners(TestLinkListener.class)
 public abstract class TPBackEndTest extends AbstractBackEndTest<TPTemplate> {
 
     @Override

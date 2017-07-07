@@ -69,18 +69,16 @@ public class TestLinkListener implements ITestListener {
         Optional<Integer> plan = getIntParameterFromTestXml(xmlTest, "testlink.planId");
         Optional<String> displayId = getTestDisplayId(testResult);
         if(!build.isPresent() || !plan.isPresent() || !displayId.isPresent()) {
-            log.error("Cant update testCase in TestLink because some of mandatory parameters " +
+            log.warn("Cant update testCase in TestLink because some of mandatory parameters " +
                     "are missing testlink.buildId=" + build + " testlink.planId=" + plan+
                     " displayId=" + displayId + " testResult=" + testResult);
             return Optional.empty();
         }
-        return Optional.of(TestCaseResult.builder()
-                .setExecutionStatus(status)
-                .setParameters(formatTestParameters(testResult.getParameters()))
-                .setBuildId(build.get())
-                .setDisplayId(displayId.get())
-                .setTestPlanId(plan.get())
-                .build());
+        return Optional.of(
+                new TestCaseResult(build.get(), plan.get(),
+                        formatTestParameters(testResult.getParameters()), status,
+                        displayId.get()));
+
     }
 
     private Optional<Integer> getIntParameterFromTestXml(XmlTest xml, String paramName) {
