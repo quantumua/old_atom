@@ -7,6 +7,7 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.atom.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.atom.core.configuration.properties.CRMProperties;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.tp.api.model.enums.AccountType;
 import com.betamedia.tp.api.model.enums.BonusType;
@@ -34,7 +35,12 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 5/10/17.
  */
 public class TPCRMHttpAdapterTest {
-    private static class QAEnvTPCRMHttpAdapterImpl extends AbstractTPCRMHttpAdapter<QAEnvironment> implements QAEnvironment {}
+    private static class QAEnvTPCRMHttpAdapterImpl extends AbstractTPCRMHttpAdapter<QAEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.QA;
+        }
+    }
 
     @InjectMocks
     private QAEnvTPCRMHttpAdapterImpl adapter;

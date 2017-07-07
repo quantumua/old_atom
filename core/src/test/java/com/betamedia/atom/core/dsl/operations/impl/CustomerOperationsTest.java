@@ -6,6 +6,7 @@ import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.*;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.atom.core.persistence.entities.TrackingInfo;
 import com.betamedia.atom.core.persistence.entities.TrackingInfoExtension;
@@ -32,7 +33,12 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 4/20/17.
  */
 public class CustomerOperationsTest {
-    private static class QAEnvCustomerOperationsImpl extends AbstractCustomerOperations<QAEnvironment> implements QAEnvironment {}
+    private static class QAEnvCustomerOperationsImpl extends AbstractCustomerOperations<QAEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.QA;
+        }
+    }
 
     private final String customerId = "1243";
     private final String displayId = "535";

@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.tp.api.model.Position;
 import org.mockito.InjectMocks;
@@ -18,7 +19,12 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 4/20/17.
  */
 public class PositionOperationsTest {
-    private static class QAEnvPositionOperationsImpl extends AbstractPositionOperations<QAEnvironment> implements QAEnvironment {}
+    private static class QAEnvPositionOperationsImpl extends AbstractPositionOperations<QAEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.QA;
+        }
+    }
 
     @InjectMocks
     private QAEnvPositionOperationsImpl positionOperations;

@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.feedgateway.FWFeedGatewayConnector;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.common.utils.UUIDUtils;
 import com.betamedia.tp.api.feed.TickData;
@@ -22,7 +23,12 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 4/20/17.
  */
 public class FeedOperationsTest {
-    private static class QAEnvFeedOperationsImpl extends AbstractFeedOperations<QAEnvironment> implements QAEnvironment {}
+    private static class QAEnvFeedOperationsImpl extends AbstractFeedOperations<QAEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.QA;
+        }
+    }
 
     @InjectMocks
     private QAEnvFeedOperationsImpl feedOperations;

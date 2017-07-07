@@ -8,6 +8,7 @@ import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.AccountGroupOperations;
 import com.betamedia.atom.core.dsl.operations.BrandOperations;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
@@ -42,7 +43,12 @@ import static org.mockito.Mockito.*;
  * Created by Oleksandr Losiev on 4/18/17.
  */
 public class AccountOperationsTest {
-    private static class QAEnvAccountOperationsImpl extends AbstractAccountOperations<QAEnvironment> implements QAEnvironment {}
+    private static class QAEnvAccountOperationsImpl extends AbstractAccountOperations<QAEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.QA;
+        }
+    }
 
     @InjectMocks
     private QAEnvAccountOperationsImpl accountOperations;

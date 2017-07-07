@@ -2,6 +2,7 @@ package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.*;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.common.search.Page;
 import com.betamedia.common.search.Paging;
@@ -35,7 +36,12 @@ import static org.mockito.Mockito.*;
  * Created by Oleksandr Losiev on 4/20/17.
  */
 public class OptionTemplateOperationsTest {
-    private static class QAEnvOptionTemplateOperationsImpl extends AbstractOptionTemplateOperations<QAEnvironment> implements QAEnvironment {}
+    private static class QAEnvOptionTemplateOperationsImpl extends AbstractOptionTemplateOperations<QAEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.QA;
+        }
+    }
 
     @InjectMocks
     private QAEnvOptionTemplateOperationsImpl optionTemplateOperations;

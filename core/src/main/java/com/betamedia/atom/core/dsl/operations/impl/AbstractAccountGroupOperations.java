@@ -11,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -32,18 +31,16 @@ public abstract class AbstractAccountGroupOperations<T extends EnvironmentDepend
     @Autowired
     private FWTPConnector<T> tpConnector;
 
-    private AccountGroup accountGroup;
-
-    @PostConstruct
-    public void init() {
-        accountGroup = get(entityProperties.getAccountGroupId());
-    }
+    private AccountGroup accountGroup = null;
 
     /**
      * This method is used to get account group by default id.
      */
     @Override
     public AccountGroup get() {
+        if (accountGroup == null) {
+            accountGroup = get(entityProperties.getAccountGroupId());
+        }
         return accountGroup;
     }
 

@@ -2,6 +2,7 @@ package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
 import com.betamedia.atom.core.dsl.operations.TagOperations;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.common.search.Page;
 import com.betamedia.common.search.Paging;
@@ -31,7 +32,12 @@ import static org.testng.Assert.assertEquals;
  * Created by Oleksandr Losiev on 4/20/17.
  */
 public class TagOperationsTest {
-    private static class QAEnvTagOperationsImpl extends AbstractTagOperations<QAEnvironment> implements QAEnvironment {}
+    private static class QAEnvTagOperationsImpl extends AbstractTagOperations<QAEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.QA;
+        }
+    }
 
     @InjectMocks
     private QAEnvTagOperationsImpl tagOperations;
