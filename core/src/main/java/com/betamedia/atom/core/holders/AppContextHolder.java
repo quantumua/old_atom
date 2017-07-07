@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 /**
+ * Exposes application context through static method for use by non-managed components.
+ *
  * @author Maksym Tsybulskyy
  *         Date: 2/24/17.
  */

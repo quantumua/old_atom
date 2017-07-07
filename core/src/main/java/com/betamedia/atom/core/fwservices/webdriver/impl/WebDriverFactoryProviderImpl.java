@@ -16,7 +16,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Created by mbelyaev on 3/31/17.
+ * Provides configured {@link WebDriverFactory} instances for requested web driver parameters.
+ *
+ * @author mbelyaev
+ * @since 3/31/17
  */
 @Component
 public class WebDriverFactoryProviderImpl implements WebDriverFactoryProvider {

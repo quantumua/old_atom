@@ -20,6 +20,10 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
+ * Executes the test run asynchronously, backed by Spring's {@link AsyncListenableTaskExecutor} implementation.
+ * Selects the proper test runner and environment initializer according to test properties, generates output report path
+ * and decorates execution with {@link ContextClassLoaderManagingExecutor}.
+ *
  * @author mbelyaev
  * @since 6/26/17
  */
