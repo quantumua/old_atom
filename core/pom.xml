@@ -97,9 +97,9 @@
         </dependency>
         <!-- Test Link API -->
         <dependency>
-            <groupId>com.github.shabana-parveen</groupId>
-            <artifactId>testlink-api-java-client</artifactId>
-            <version>5b52a17</version>
+            <groupId>br.eti.kinoshita</groupId>
+            <artifactId>testlink-java-api</artifactId>
+            <version>1.9.16-1</version>
         </dependency>
 
         <dependency>
