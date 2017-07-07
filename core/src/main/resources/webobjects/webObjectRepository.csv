@@ -84,6 +84,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,passwordField,ID,Password
 2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,loginSubmit,NAME,swLoginBtn
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employmentStatus,ID,EmploymentStatus
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employmentStatusSalariedEmployee,XPATH,//*[@id='divQEmploymentStatus']/div/ul/li[@data-value='employmentStatusSalariedEmployee']
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,industry,ID,Industry
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employerName,ID,QNameOfEmployer_A0
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,taxResidenceCountry,ID,CountryTaxResidence
@@ -184,6 +185,8 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,closeButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/button/span[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDayDropDown,XPATH,//*[@id='BirthDateDay']/option
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDayDropDownSelectItem,XPATH,//*[@id='BirthDateDay']/option[4]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id="scipioPopupHandler"]/div/div[3]/span/div/div/ul/li[1]/a/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget

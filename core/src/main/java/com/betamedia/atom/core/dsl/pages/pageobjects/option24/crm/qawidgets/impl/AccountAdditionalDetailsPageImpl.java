@@ -1,17 +1,16 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
-
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 /**
  * Created by vsnigur on 5/18/17.
  */
@@ -19,6 +18,10 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
 
     @StoredId
     private By birthDateDay;
+    @StoredId
+    private By birthDayDropDown;
+    @StoredId
+    private By birthDayDropDownSelectItem;
     @StoredId
     private By birthDateMonth;
     @StoredId
@@ -59,7 +62,44 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     
     @Override
     public boolean isUpdateBtnEnabled(){
-        return waitUntilDisplayed(birthDateDay) != null;
+    	if (waitUntilDisplayed(update).isEnabled())
+    		return true;
+    	return false;
+    }
+    
+    @Override
+    public void clickDropDownButton(){
+    	waitUntilDisplayed(birthDateDay).click();
+    }
+
+    @Override
+    public List<String> getBirthDayDataList() {
+        List<String> BirthDayDataOptions = new ArrayList<String>();
+        for(WebElement webElement:findElements(birthDayDropDown)) {
+        	BirthDayDataOptions.add(webElement.getText());
+        }
+        selectBirthDayData();
+        return BirthDayDataOptions;
+    }
+    
+    @Override
+    public void selectBirthDayData() {
+    	waitUntilDisplayed(birthDayDropDownSelectItem).click();
+    }
+    
+    public String getBirthDaySelectedItem(){
+    	return waitUntilDisplayed(birthDateDay).getAttribute("value");
+    }
+
+    public String getColorOfElement(){
+    	String borderColor = waitUntilDisplayed(birthDateDay).getCssValue("border");
+        return borderColor;	
+    }
+    
+    @Override
+    public String getElementsBackground() {
+    	String backgroundImage = waitUntilDisplayed(birthDateDay).getCssValue("background-image");
+    	return backgroundImage ;
     }
     
     @Override
@@ -72,12 +112,6 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     public void SelectBirthDateMonth(AccountAdditionalDetails info) {
         waitUntilDisplayed(birthDateMonth);
         inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
-    }
-    
-    @Override
-    public void SelectBirthDateYear(AccountAdditionalDetails info) {
-        waitUntilDisplayed(birthDateYear);
-        inSelect(birthDateYear).selectByValue(info.birthDateYear);
     }
     
     public void SelectCountryOfBirth(AccountAdditionalDetails info) {
@@ -100,7 +134,5 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
         inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
         inSelect(nationality).selectByValue(info.nationality);
     }
-    
-
     
 }
