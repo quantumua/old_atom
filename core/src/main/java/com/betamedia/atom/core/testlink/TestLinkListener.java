@@ -3,14 +3,19 @@ package com.betamedia.atom.core.testlink;
 import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 import com.betamedia.atom.core.holders.AppContextHolder;
 import com.betamedia.atom.core.testlink.annotations.TestLinkDisplayId;
+import com.betamedia.common.utils.NumberUtils;
+import com.beust.jcommander.Strings;
+import com.google.common.primitives.Ints;
+import com.mysql.cj.core.util.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.ITest;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.xml.XmlTest;
 
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -86,7 +91,11 @@ public class TestLinkListener implements ITestListener {
     }
 
     private Optional<String> getTestDisplayId(ITestResult iTestResult) {
-        return Optional.ofNullable(iTestResult.getMethod().getConstructorOrMethod()
+        List params = Arrays.asList(iTestResult.getParameters());
+        Optional display = params.stream().filter(a->a instanceof TestLinkDisplayIdHolder).findFirst();
+        return display.isPresent() ?
+                Optional.of(((TestLinkDisplayIdHolder)display.get()).getDisplayId())
+                :Optional.ofNullable(iTestResult.getMethod().getConstructorOrMethod()
                 .getMethod().getAnnotation(TestLinkDisplayId.class))
                 .map(TestLinkDisplayId::value);
     }

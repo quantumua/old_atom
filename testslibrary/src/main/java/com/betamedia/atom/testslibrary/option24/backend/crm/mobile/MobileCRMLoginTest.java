@@ -11,21 +11,30 @@ import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by Oleksandr Losiev on 4/21/17.
  */
 public class MobileCRMLoginTest extends TPBackEndTest {
 
-    @Test
-    @Parameters({"username", "password"})
-    @TestLinkDisplayId("CTW-11804")
-    public void testLogin(String username, String password) {
+    @Override
+    protected Class getDataSourceEntity() {
+        return UserNamePwdData.class;
+    }
+
+    @Override
+    protected String getDataSourcePath() {
+        return "/data/logindata.csv";
+    }
+
+    @Test(dataProvider = GENERIC_DATA_PROVIDER)
+    public void testLogin(UserNamePwdData cred) {
         final String expectedPlatform = "scipio";
         final String expectedProduct = "binary";
 
-        CRMCustomer loggedInCustomer = operations().customerOperations().login(username, password);
-        assertEquals(username, loggedInCustomer.getUserName());
+        CRMCustomer loggedInCustomer = operations().customerOperations().login(cred.getUserName(), cred.getUserPwd());
+        assertEquals(cred.getUserName(), loggedInCustomer.getUserName());
 
         assertFalse(Arrays.stream(loggedInCustomer.getAccounts())
                 .filter(account -> account.getPlatform().equals(expectedPlatform) &&

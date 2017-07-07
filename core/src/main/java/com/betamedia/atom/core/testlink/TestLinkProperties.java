@@ -1,10 +1,7 @@
 package com.betamedia.atom.core.testlink;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 /**
  * Created by sergeyg on 04.07.17.
