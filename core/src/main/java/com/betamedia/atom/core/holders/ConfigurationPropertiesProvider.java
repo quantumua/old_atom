@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 import java.util.Properties;
 
 /**
+ * Creates test execution {@link Properties} out of environment properties of the application. Used for running tests
+ * through maven surefire.
+ *
  * @author Maksym Tsybulskyy
  *         Date: 2/28/17.
  */

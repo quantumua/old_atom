@@ -10,6 +10,8 @@ import java.util.function.Supplier;
 
 
 /**
+ * Test that restarts itself on completion by applying self-invoking callback to test result.
+ *
  * @author mbelyaev
  * @since 6/16/17
  */

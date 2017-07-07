@@ -10,6 +10,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
 /**
+ * Base class for self-managing continuous tests. Test execution is contained in {@link Supplier} of {@link ListenableFuture}
+ * result of {@link org.springframework.core.task.AsyncListenableTaskExecutor} invocation. Expected to apply callbacks
+ * to {@link ListenableFuture} to manage own lifecycle.<br/>
+ * <code>isEnabled</code> flag is checked before each test iteration and
+ * is used to shut down test execution.
+ *
  * @author mbelyaev
  * @since 4/19/17
  */

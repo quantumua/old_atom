@@ -19,6 +19,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
+ * Manages execution of scheduled and repeating tests. Stores input files and parses input parameters just like
+ * {@link com.betamedia.atom.core.fwtestrunner.TestHandlerImpl}, but encapsulates test execution data in {@link ContinuousTest}
+ * objects that manage their own lifecycle through execution callbacks. Stores active {@link ContinuousTest}s and allows
+ * their management - getting information and stopping or aborting execution.
+ *
  * @author mbelyaev
  * @since 4/19/17
  */

@@ -64,8 +64,8 @@ public abstract class AbstractAccountGroupOperations<T extends EnvironmentDepend
      * @return opening delay
      */
     public Integer getOpeningDelay(Double amount) {
-        return Stream.of(accountGroup.getMarketDealApprovalConfigurations(),
-                accountGroup.getDealApprovalConfigurations())
+        return Stream.of(get().getMarketDealApprovalConfigurations(),
+                get().getDealApprovalConfigurations())
                 .flatMap(List::stream)
                 .filter(d -> d.getAmount() <= amount)
                 .max(Comparator.comparing(DealApprovalConfiguration::getAmount))

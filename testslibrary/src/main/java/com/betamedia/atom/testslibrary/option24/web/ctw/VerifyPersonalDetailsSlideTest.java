@@ -32,12 +32,12 @@ public class VerifyPersonalDetailsSlideTest extends WEBEndToEndTest{
 	 */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5625")
-    public void  verifySubmitButtyonIsMandatoryForMovingFwd(String countrycode) {
+    public void  verifySubmitButtonIsMandatoryForMovingFwd(String countrycode) {
      	pages().topNavigationPage().signUp();
         pages().registrationPage().register(countrycode);
         pages().welcomepage().isStartBtnDisplayed();
         pages().welcomepage().start();
-    	Assert.assertTrue(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
+    	Assert.assertFalse(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
     }
     
     /*
@@ -76,7 +76,59 @@ public class VerifyPersonalDetailsSlideTest extends WEBEndToEndTest{
     }
     
     /*
-     * CTW-5666:Click on submit moves you to FNS first slide
+     * [testlink] CTW-5647:Verify date of birth drop down functionality
+     * 
+     */
+    @Parameters({"countrycode"}) 
+    @Test(description = "CTW-5647")
+    public void VerifyDateOofBirthDropDownFunctionality(String countrycode){
+        pages().topNavigationPage().signUp();
+        pages().registrationPage().register(countrycode);
+        pages().welcomepage().isStartBtnDisplayed();
+        pages().welcomepage().start();
+        pages().accountAdditionalDetailsPage().clickDropDownButton();
+        Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDayDataList().size(),32);
+        Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDaySelectedItem(), "3");
+    }
+ 
+    /*
+     * [testlink] CTW-5660:Verify selection changes drop down color
+     * 
+     */
+    @Parameters({"countrycode"}) 
+    @Test(description = "CTW-5660")
+    public void verifySelectionChangesDropDownColor(String countrycode){
+        pages().topNavigationPage().signUp();
+        pages().registrationPage().register(countrycode);
+        pages().welcomepage().isStartBtnDisplayed();
+        pages().welcomepage().start();
+        String colorOfBorderBeforeClick = pages().accountAdditionalDetailsPage().getColorOfElement();
+        pages().accountAdditionalDetailsPage().clickDropDownButton();
+        pages().accountAdditionalDetailsPage().selectBirthDayData();
+        String colorOfBorderAfterClick = pages().accountAdditionalDetailsPage().getColorOfElement();
+        Assert.assertNotEquals(colorOfBorderAfterClick, colorOfBorderBeforeClick);
+    }
+
+    /*
+     * [testlink] CTW-5663:Verify opening drop downs changes arrow direction
+     * 
+     */
+    @Parameters({"countrycode"}) 
+    @Test(description = "CTW-5663")
+    public void verifyOpeningDropDownsChangesArrowDdirection(String countrycode) {
+        pages().topNavigationPage().signUp();
+        pages().registrationPage().register(countrycode);
+        pages().welcomepage().isStartBtnDisplayed();
+        pages().welcomepage().start();
+        String backgroundButtonBeforeClick = pages().accountAdditionalDetailsPage().getElementsBackground();
+        pages().accountAdditionalDetailsPage().clickDropDownButton();
+        pages().accountAdditionalDetailsPage().selectBirthDayData();
+        String backgroundButtonAfterClick = pages().accountAdditionalDetailsPage().getElementsBackground();
+        Assert.assertNotEquals(backgroundButtonAfterClick, backgroundButtonBeforeClick);
+    }
+
+    /*
+     * [testlink] CTW-5666:Click on submit moves you to FNS first slide
      * 
      */
     @Parameters({"countrycode"}) 
@@ -87,6 +139,6 @@ public class VerifyPersonalDetailsSlideTest extends WEBEndToEndTest{
         pages().welcomepage().isStartBtnDisplayed();
         pages().welcomepage().start();
         pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder().build());
-        pages().fnsPersonalInformation().exists();
+        Assert.assertTrue(pages().fnsPersonalInformation().exists());
     }  
 }

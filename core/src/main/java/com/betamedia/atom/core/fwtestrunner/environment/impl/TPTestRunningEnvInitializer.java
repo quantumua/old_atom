@@ -24,6 +24,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 /**
+ * Configures and exposes environment-specific components through {@link ThreadLocalBeansHolder} for later use outside of
+ * managed application context.
+ *
  * @author mbelyaev
  * @since 5/31/17
  */

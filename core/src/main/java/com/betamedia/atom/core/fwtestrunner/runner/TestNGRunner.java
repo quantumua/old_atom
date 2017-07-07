@@ -20,6 +20,8 @@ import java.util.stream.Stream;
 
 
 /**
+ * Configures and launches {@link TestNG} instance according to provided parameters and reports the execution status.
+ *
  * @author Maksym Tsybulskyy
  *         Date: 2/24/17.
  */

@@ -7,6 +7,8 @@ import java.util.Properties;
 import java.util.UUID;
 
 /**
+ * Entity to encapsulate necessary test execution information and metadata.
+ *
  * @author mbelyaev
  * @since 6/16/17
  */

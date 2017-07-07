@@ -1,5 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets;
 
+import java.util.List;
+
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 
 public interface AccountAdditionalDetailsPage {
@@ -9,9 +11,13 @@ public interface AccountAdditionalDetailsPage {
     boolean isUpdateBtnEnabled();
     void SelectBirthDateDay(AccountAdditionalDetails info);
     void SelectBirthDateMonth(AccountAdditionalDetails info);
-    void SelectBirthDateYear(AccountAdditionalDetails info);
     void SelectCountryOfBirth(AccountAdditionalDetails info);
     void SelectNationality(AccountAdditionalDetails info);
     void SelectAllData(AccountAdditionalDetails info);
-
+	void clickDropDownButton();
+	List<String> getBirthDayDataList();
+	String getBirthDaySelectedItem();
+	String getColorOfElement();
+	void selectBirthDayData();
+	String getElementsBackground();
 }

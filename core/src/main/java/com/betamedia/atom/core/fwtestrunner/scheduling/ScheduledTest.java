@@ -12,6 +12,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
 /**
+ * Test that registers self-starting callback with {@link TaskScheduler} based on cron expression.
+ * Stores resulting {@link ScheduledFuture} to prevent launching the same test multiple times.
+ * Also manages the execution state in <code>allowedToStart</code> to prevent running new test executions on schedule
+ * while the previous one has not been completed yet.
+ *
  * @author mbelyaev
  * @since 6/16/17
  */
