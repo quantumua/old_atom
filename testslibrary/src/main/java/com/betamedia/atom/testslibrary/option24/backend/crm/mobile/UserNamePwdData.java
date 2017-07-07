@@ -36,10 +36,6 @@ public class UserNamePwdData implements TestLinkDisplayIdHolder{
 
     @Override
     public String toString() {
-        return "UserNamePwdData{" +
-                "userName='" + userName + '\'' +
-                ", userPwd='" + userPwd + '\'' +
-                ", testLinkDisplayId='" + testLinkDisplayId + '\'' +
-                '}';
+        return "userName=" + userName + ", userPwd=" + userPwd;
     }
 }
