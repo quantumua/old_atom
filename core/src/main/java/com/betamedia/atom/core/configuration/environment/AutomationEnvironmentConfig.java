@@ -1,42 +1,35 @@
 package com.betamedia.atom.core.configuration.environment;
 
-import com.betamedia.atom.core.api.tp.adapters.impl.AbstractMobileCRMHTTPAdapter;
-import com.betamedia.atom.core.api.tp.adapters.impl.AbstractTPCRMHttpAdapter;
-import com.betamedia.atom.core.connectors.tp.FWTPConnector;
-import com.betamedia.atom.core.connectors.tp.feedgateway.FWFeedGatewayConnector;
 import com.betamedia.atom.core.dsl.operations.impl.*;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
 import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
-import com.betamedia.atom.core.persistence.entities.ContactExtension;
-import com.betamedia.atom.core.persistence.repositories.impl.automation.AutomationEnvContactExtensionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-
-import javax.sql.DataSource;
 
 /**
+ * Automation Environment-specific bean configuration class.
+ * Please take care to prefix bean names with <code>automation</code> for post-processing purposes.
+ *
  * @author mbelyaev
+ * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 6/29/17
  */
 @Configuration
 @Profile("automation")
-public class AutomationEnvironmentConfig implements AutomationEnvironment {
+public class AutomationEnvironmentConfig {
+
+    public static EnvironmentType getEnvironment() {
+        return EnvironmentType.AUTOMATION;
+    }
 
     @Bean
     public AbstractApplicationVersionService<AutomationEnvironment> automationVersionService() {
         return new AbstractApplicationVersionService<AutomationEnvironment>() {
-
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -46,48 +39,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractTPTemplate<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractTPCRMHttpAdapter<AutomationEnvironment> automationTPCRMHttpAdapter() {
-        return new AbstractTPCRMHttpAdapter<AutomationEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractMobileCRMHTTPAdapter<AutomationEnvironment> automationMobileCRMHttpAdapter() {
-        return new AbstractMobileCRMHTTPAdapter<AutomationEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    @ConfigurationProperties("feed")
-    public FWFeedGatewayConnector<AutomationEnvironment> automationFeedGWConnector() {
-        return new FWFeedGatewayConnector<AutomationEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public FWTPConnector<AutomationEnvironment> automationFWTPConnector() {
-        return new FWTPConnector<AutomationEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -97,7 +49,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractAccountGroupOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -107,7 +59,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractAccountOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -117,7 +69,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractAssetOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -127,7 +79,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractBonusOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -137,29 +89,27 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractBrandOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
-
 
     @Bean
     public AbstractFeedOperations<AutomationEnvironment> automationFeedOperations() {
         return new AbstractFeedOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
-
 
     @Bean
     public AbstractOptionOperations<AutomationEnvironment> automationOptionOperations() {
         return new AbstractOptionOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -169,7 +119,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractOptionTemplateOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -179,7 +129,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractOrderOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -189,7 +139,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractPositionOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -199,7 +149,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractSchedulerOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -209,7 +159,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractTagOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -219,7 +169,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractTimezoneOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -229,7 +179,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractTradingCalendarOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -239,7 +189,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractVolatilityUnitOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -249,7 +199,7 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractCustomerOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -259,9 +209,8 @@ public class AutomationEnvironmentConfig implements AutomationEnvironment {
         return new AbstractOnBoardingOperations<AutomationEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return AutomationEnvironmentConfig.this.getEnvironment();
+                return AutomationEnvironmentConfig.getEnvironment();
             }
         };
     }
-
 }

@@ -1,41 +1,36 @@
 package com.betamedia.atom.core.configuration.environment;
 
-import com.betamedia.atom.core.api.tp.adapters.impl.AbstractMobileCRMHTTPAdapter;
-import com.betamedia.atom.core.api.tp.adapters.impl.AbstractTPCRMHttpAdapter;
-import com.betamedia.atom.core.connectors.tp.FWTPConnector;
-import com.betamedia.atom.core.connectors.tp.feedgateway.FWFeedGatewayConnector;
 import com.betamedia.atom.core.dsl.operations.impl.*;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
-import com.betamedia.atom.core.persistence.entities.ContactExtension;
-import com.betamedia.atom.core.persistence.repositories.impl.qa.QAEnvContactExtensionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-
-import javax.sql.DataSource;
 
 /**
+ * QA Environment-specific bean configuration class.
+ * Please take care to prefix bean names with <code>qa</code> for post-processing purposes.
+ *
  * @author mbelyaev
+ * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 6/29/17
  */
 @Configuration
 @Profile("qa")
-public class QAEnvironmentConfig implements QAEnvironment {
+public class QAEnvironmentConfig {
+
+    public static EnvironmentType getEnvironment() {
+        return EnvironmentType.QA;
+    }
 
     @Bean
     public AbstractApplicationVersionService<QAEnvironment> qaVersionService() {
         return new AbstractApplicationVersionService<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -45,47 +40,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractTPTemplate<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractTPCRMHttpAdapter<QAEnvironment> qaTPCRMHttpAdapter() {
-        return new AbstractTPCRMHttpAdapter<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractMobileCRMHTTPAdapter<QAEnvironment> qaMobileCRMHttpAdapter() {
-        return new AbstractMobileCRMHTTPAdapter<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public FWFeedGatewayConnector<QAEnvironment> qaFeedGWConnector() {
-        return new FWFeedGatewayConnector<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public FWTPConnector<QAEnvironment> qaFWTPConnector() {
-        return new FWTPConnector<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -95,7 +50,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractAccountGroupOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -105,7 +60,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractAccountOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -115,7 +70,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractAssetOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -125,7 +80,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractBonusOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -135,29 +90,27 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractBrandOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
-
 
     @Bean
     public AbstractFeedOperations<QAEnvironment> qaFeedOperations() {
         return new AbstractFeedOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
-
 
     @Bean
     public AbstractOptionOperations<QAEnvironment> qaOptionOperations() {
         return new AbstractOptionOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -167,7 +120,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractOptionTemplateOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -177,7 +130,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractOrderOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -187,7 +140,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractPositionOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -197,7 +150,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractSchedulerOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -207,7 +160,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractTagOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -217,7 +170,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractTimezoneOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -227,7 +180,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractTradingCalendarOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -237,7 +190,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractVolatilityUnitOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -247,7 +200,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractCustomerOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }
@@ -257,7 +210,7 @@ public class QAEnvironmentConfig implements QAEnvironment {
         return new AbstractOnBoardingOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.this.getEnvironment();
+                return QAEnvironmentConfig.getEnvironment();
             }
         };
     }

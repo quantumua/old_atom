@@ -11,7 +11,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
+ * New Automation Environment-specific properties configuration class.
+ * Please take care to prefix bean names with <code>newAutomation</code> for post-processing purposes.
+ *
  * @author mbelyaev
+ * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 7/4/17
  */
 @Configuration
@@ -19,7 +23,7 @@ import org.springframework.context.annotation.PropertySource;
 @ConditionalOnBean(NewAutomationEnvironmentConfig.class)
 public class NewAutomationPropertiesConfig {
     private static final String NEW_AUTOMATION_TP_PREFIX = "newAutomation.tp";
-    
+
     @Bean
     @ConfigurationProperties(NEW_AUTOMATION_TP_PREFIX)
     public EnvironmentProperties<NewAutomationEnvironment> newAutomationEnvironmentProperties() {

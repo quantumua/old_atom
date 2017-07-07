@@ -10,7 +10,6 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMResponse;
 import com.betamedia.atom.core.configuration.properties.CRMProperties;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
-import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -35,7 +34,8 @@ import static org.mockito.Mockito.when;
  * Created by vsnigur on 5/5/17.
  */
 public class AutomationEnvMobileCRMHTTPAdapterImplTest {
-    private static class AutomationEnvMobileCRMHTTPAdapterImpl extends AbstractMobileCRMHTTPAdapter<QAEnvironment> implements QAEnvironment {}
+    @Mock
+    private CRMProperties<AutomationEnvironment> crmProperties;
 
     private static final String SERVER_URL = "http://some.server.com";
     private static final String EXPECTED_URL = "someUrl";
@@ -78,8 +78,12 @@ public class AutomationEnvMobileCRMHTTPAdapterImplTest {
     @Mock
     private ResponseEntity<CRMResponse<CRMRegisterResult>> responseEntity;
 
-    @Mock
-    private CRMProperties<QAEnvironment> crmProperties;
+    private static class AutomationEnvMobileCRMHTTPAdapterImpl extends AbstractMobileCRMHTTPAdapter<AutomationEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.AUTOMATION;
+        }
+    }
 
     @InjectMocks
     private AutomationEnvMobileCRMHTTPAdapterImpl automationEnvMobileCRMHTTPAdapterImpl;

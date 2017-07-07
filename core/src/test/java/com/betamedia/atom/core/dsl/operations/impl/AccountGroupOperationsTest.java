@@ -2,6 +2,7 @@ package com.betamedia.atom.core.dsl.operations.impl;
 
 import com.betamedia.atom.core.configuration.properties.EntityProperties;
 import com.betamedia.atom.core.connectors.tp.FWTPConnector;
+import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.tp.api.model.AccountGroup;
 import com.betamedia.tp.api.model.DealApprovalConfiguration;
@@ -22,7 +23,15 @@ import static org.mockito.Mockito.when;
  * Created by Oleksandr Losiev on 4/18/17.
  */
 public class AccountGroupOperationsTest {
-    private static class QAEnvAccountGroupOperationsImpl extends AbstractAccountGroupOperations<QAEnvironment> implements QAEnvironment {}
+    @BeforeMethod
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+
+        when(tpConnector.readById(AccountGroup.class, accountGroupId)).thenReturn(accountGroup);
+        when(tpConnector.readById(AccountGroup.class, defaultAccountGroupId)).thenReturn(accountGroup);
+        when(entityProperties.getAccountGroupId()).thenReturn(accountGroupId);
+        accountGroupOperations.get();
+    }
 
     @InjectMocks
     private QAEnvAccountGroupOperationsImpl accountGroupOperations;
@@ -56,15 +65,11 @@ public class AccountGroupOperationsTest {
         setDealApprovalConfigurations(accountGroup);
     }
 
-    @BeforeMethod
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-
-        when(tpConnector.readById(AccountGroup.class, accountGroupId)).thenReturn(accountGroup);
-        when(tpConnector.readById(AccountGroup.class, defaultAccountGroupId)).thenReturn(accountGroup);
-        when(entityProperties.getAccountGroupId()).thenReturn(accountGroupId);
-
-        accountGroupOperations.init();
+    private static class QAEnvAccountGroupOperationsImpl extends AbstractAccountGroupOperations<QAEnvironment> {
+        @Override
+        public EnvironmentType getEnvironment() {
+            return EnvironmentType.QA;
+        }
     }
 
     @Test

@@ -17,6 +17,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
+ * This service sets up test execution(s) according to passed parameters. Exposes entry points to handle uploaded
+ * {@link MultipartFile}s of test suites and library jar, as well as a handler that takes the paths to stored local
+ * files directly.<br/>
+ * Uploaded files are stored in auto-generated directory and will not persist between deployments.<br/>
+ * Handles test {@link Properties} with multiple values per key by generating a set of {@link Properties} with possible
+ * combinations and executing each one as separate test run.<br/>
+ * Tasks are then sent to {@link AsyncTestExecutorImpl} to run asynchronously and resulting {@link ListenableFuture}s
+ * are orchestrated with callbacks and stored by task ID to provide task cancellation facilities.
+ *
  * @author Maksym Tsybulskyy
  *         Date: 2/24/17.
  */
