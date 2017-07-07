@@ -70,7 +70,7 @@ public class TestLinkListener implements ITestListener {
         Optional<String> displayId = getTestDisplayId(testResult);
         if(!build.isPresent() || !plan.isPresent() || !displayId.isPresent()) {
             log.warn("Cant update testCase in TestLink because some of mandatory parameters " +
-                    "are missing testlink.buildId=" + build + " testlink.planId=" + plan+
+                    "are missing testlinkBuildId=" + build + " testlinkPlanId=" + plan+
                     " displayId=" + displayId + " testResult=" + testResult);
             return Optional.empty();
         }
