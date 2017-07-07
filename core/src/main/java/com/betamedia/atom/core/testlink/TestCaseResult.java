@@ -41,4 +41,15 @@ public class TestCaseResult {
     public String getDisplayId() {
         return displayId;
     }
+
+    @Override
+    public String toString() {
+        return "TestCaseResult{" +
+                "buildId=" + buildId +
+                ", planId=" + planId +
+                ", parameters='" + parameters + '\'' +
+                ", status=" + status +
+                ", displayId='" + displayId + '\'' +
+                '}';
+    }
 }
