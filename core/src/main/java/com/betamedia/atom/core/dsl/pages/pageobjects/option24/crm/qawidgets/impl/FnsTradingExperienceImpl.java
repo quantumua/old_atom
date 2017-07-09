@@ -57,6 +57,8 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     private By submit;
     @StoredId
     private By resultPlaceholder;
+    @StoredId
+    private By buttonWizardDeclaration;
 
     public FnsTradingExperienceImpl(WebDriver webDriver) {
         super(webDriver);
@@ -107,9 +109,10 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         submitOnWizard(info.automaticStopKnowledge);
         submitOnWizard(info.lossOn1to50Knowledge);
         submitOnWizard(info.lossOn1to200Knowledge);
-        submitOnWizard(info.binaryInvestProfitKnowledge);
-        submitOnWizard(info.binaryInvestLossKnowledge);
-        submitOnWizard(info.binaryProbabilityKnowledge);
+//        submitOnWizard(info.binaryInvestProfitKnowledge);
+//        submitOnWizard(info.binaryInvestLossKnowledge);
+//        submitOnWizard(info.binaryProbabilityKnowledge);
+        waitUntilDisplayed(buttonWizardDeclaration).click();
     }
 
     @Override
