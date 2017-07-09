@@ -2,6 +2,7 @@ package com.betamedia.atom.core.fwtestrunner.runner;
 
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.ConfigurableListenerFactory;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.ListenerFactory;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotListener;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageException;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
@@ -30,7 +31,9 @@ public class TestNGRunner implements TestRunner {
     private static final Logger logger = LogManager.getLogger(TestNGRunner.class);
 
     @Autowired
-    private Collection<ConfigurableListenerFactory> listenerFactories;
+    private Collection<ListenerFactory> listenerFactories;
+    @Autowired
+    private Collection<ConfigurableListenerFactory> configurableListenerFactories;
     @Autowired
     private StorageService storageService;
 
@@ -44,6 +47,9 @@ public class TestNGRunner implements TestRunner {
         TestNG testng = new TestNG();
         testng.setOutputDirectory(task.reportDirectory);
         listenerFactories.stream()
+                .map(f->f.get())
+                .forEach(testng::addListener);
+        configurableListenerFactories.stream()
                 .map(f -> f.get(task.reportDirectory))
                 .forEach(testng::addListener);
         testng.setTestSuites(task.suites);

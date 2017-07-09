@@ -3,6 +3,7 @@ package com.betamedia.atom.core.testlink;
 import br.eti.kinoshita.testlinkjavaapi.TestLinkAPI;
 import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 import br.eti.kinoshita.testlinkjavaapi.model.TestCase;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class TestLinkService {
         api = new TestLinkAPI(new URL(testLinkProperties.getUrl()), testLinkProperties.getKey());
     }
 
-    void updateTestCase(TestCaseResult tcRes) {
+    public void updateTestCase(TestCaseResult tcRes) {
         ExecutionStatus executionStatus = tcRes.getStatus();
         TestCase testCase = api.getTestCaseByExternalId(tcRes.getDisplayId(), null);
         api.reportTCResult(testCase.getId(), null,

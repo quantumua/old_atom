@@ -75,7 +75,8 @@
                                 <property>
                                     <name>listener</name>
                                     <value>
-                                        com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ExternalExecutionListener
+                                        com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ExternalExecutionListener,
+                                        com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener
                                     </value>
                                 </property>
                             </properties>

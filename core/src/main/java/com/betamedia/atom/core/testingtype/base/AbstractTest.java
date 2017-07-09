@@ -2,7 +2,7 @@ package com.betamedia.atom.core.testingtype.base;
 
 import com.betamedia.atom.core.fwdataaccess.repository.EntityRepository;
 import com.betamedia.atom.core.holders.AppContextHolder;
-import com.betamedia.atom.core.testlink.TestLinkListener;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -22,7 +22,6 @@ import java.util.List;
  * @author mbelyaev
  * @since 5/23/17
  */
-@Listeners(TestLinkListener.class)
 public abstract class AbstractTest {
     protected static final String GENERIC_DATA_PROVIDER = "GenericDataProvider";
     protected static final String GENERIC_PARALLEL_DATA_PROVIDER = "GenericParallelDataProvider";

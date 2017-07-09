@@ -5,8 +5,6 @@ import com.betamedia.atom.core.dsl.templates.tp.TPTemplate;
 import com.betamedia.atom.core.holders.AppContextHolder;
 import com.betamedia.atom.core.holders.ThreadLocalBeansHolder;
 import com.betamedia.atom.core.testingtype.base.AbstractEndToEndTest;
-import com.betamedia.atom.core.testlink.TestLinkListener;
-import org.testng.annotations.Listeners;
 
 /**
  * @author Maksym Tsybulskyy

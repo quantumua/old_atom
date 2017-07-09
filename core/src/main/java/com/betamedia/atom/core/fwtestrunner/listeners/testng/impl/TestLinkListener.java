@@ -1,15 +1,13 @@
-package com.betamedia.atom.core.testlink;
+package com.betamedia.atom.core.fwtestrunner.listeners.testng.impl;
 
 import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 import com.betamedia.atom.core.holders.AppContextHolder;
+import com.betamedia.atom.core.testlink.TestCaseResult;
+import com.betamedia.atom.core.testlink.TestLinkDisplayIdHolder;
+import com.betamedia.atom.core.testlink.TestLinkService;
 import com.betamedia.atom.core.testlink.annotations.TestLinkDisplayId;
-import com.betamedia.common.utils.NumberUtils;
-import com.beust.jcommander.Strings;
-import com.google.common.primitives.Ints;
-import com.mysql.cj.core.util.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.ITest;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -27,7 +25,7 @@ import java.util.stream.Stream;
 public class TestLinkListener implements ITestListener {
 
     private static final Logger log = LogManager.getLogger(TestLinkListener.class);
-    private TestLinkService testLinkService = AppContextHolder.getBean(TestLinkService.class);
+    private TestLinkService testLinkService;
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -62,8 +60,8 @@ public class TestLinkListener implements ITestListener {
 
     private void updateTestCaseWithStatus(ITestResult testRes, ExecutionStatus status) {
         try {
-            getTestCaseResult(testRes, status).ifPresent(testLinkService::updateTestCase);
-        } catch(Exception e) {
+            getTestCaseResult(testRes, status).ifPresent(getTestLinkService()::updateTestCase);
+        } catch (Exception e) {
             log.error("Cant update test with result=" + testRes + " due to exception " + e.getMessage());
         }
     }
@@ -73,9 +71,9 @@ public class TestLinkListener implements ITestListener {
         Optional<Integer> build = getIntParameterFromTestXml(xmlTest, "testlinkBuildId");
         Optional<Integer> plan = getIntParameterFromTestXml(xmlTest, "testlinkPlanId");
         Optional<String> displayId = getTestDisplayId(testResult);
-        if(!build.isPresent() || !plan.isPresent() || !displayId.isPresent()) {
+        if (!build.isPresent() || !plan.isPresent() || !displayId.isPresent()) {
             log.warn("Cant update testCase in TestLink because some of mandatory parameters " +
-                    "are missing testlinkBuildId=" + build + " testlinkPlanId=" + plan+
+                    "are missing testlinkBuildId=" + build + " testlinkPlanId=" + plan +
                     " displayId=" + displayId + " testResult=" + testResult);
             return Optional.empty();
         }
@@ -92,10 +90,10 @@ public class TestLinkListener implements ITestListener {
 
     private Optional<String> getTestDisplayId(ITestResult iTestResult) {
         List params = Arrays.asList(iTestResult.getParameters());
-        Optional display = params.stream().filter(a->a instanceof TestLinkDisplayIdHolder).findFirst();
+        Optional display = params.stream().filter(a -> a instanceof TestLinkDisplayIdHolder).findFirst();
         return display.isPresent() ?
-                Optional.of(((TestLinkDisplayIdHolder)display.get()).getDisplayId())
-                :Optional.ofNullable(iTestResult.getMethod().getConstructorOrMethod()
+                Optional.of(((TestLinkDisplayIdHolder) display.get()).getDisplayId())
+                : Optional.ofNullable(iTestResult.getMethod().getConstructorOrMethod()
                 .getMethod().getAnnotation(TestLinkDisplayId.class))
                 .map(TestLinkDisplayId::value);
     }
@@ -104,5 +102,12 @@ public class TestLinkListener implements ITestListener {
         return Stream.of(params)
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));
+    }
+
+    private TestLinkService getTestLinkService() {
+        if (testLinkService == null) {
+            testLinkService = AppContextHolder.getBean(TestLinkService.class);
+        }
+        return testLinkService;
     }
 }
