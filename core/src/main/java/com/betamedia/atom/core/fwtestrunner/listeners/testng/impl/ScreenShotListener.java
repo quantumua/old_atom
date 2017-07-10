@@ -1,7 +1,9 @@
 package com.betamedia.atom.core.fwtestrunner.listeners.testng.impl;
 
+import com.betamedia.atom.core.configuration.properties.StorageProperties;
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
 import com.betamedia.atom.core.dsl.pages.pageobjects.browser.BrowserOperations;
+import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageException;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
 import com.betamedia.atom.core.testingtype.base.WebDriverTest;
@@ -13,6 +15,7 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 
 import java.io.File;
+import java.util.function.Function;
 
 /**
  * {@link ITestListener} implementation that invokes {@link BrowserOperations#takeScreenShot()} on test failure,
@@ -29,14 +32,22 @@ public class ScreenShotListener implements ITestListener {
 
     private final String outputDirectory;
     private final StorageService storageService;
+    private final Function<String, String> screenshotURLStrategy;
+
+    public ScreenShotListener() {
+        this.outputDirectory = "";
+        this.storageService = new FileSystemStorageService(new StorageProperties());
+        this.screenshotURLStrategy = ScreenShotListener::getSurefireURL;
+    }
 
     /**
      * @param outputDirectory screen shot save directory (expected to be same as TestNG report directory)
      * @see ScreenShotListenerFactoryImpl
      */
-    public ScreenShotListener(String outputDirectory, StorageService storageService) {
+    public ScreenShotListener(String outputDirectory, StorageService storageService, Function<String, String> strategy) {
         this.outputDirectory = outputDirectory;
         this.storageService = storageService;
+        this.screenshotURLStrategy = strategy;
     }
 
     @Override
@@ -83,14 +94,18 @@ public class ScreenShotListener implements ITestListener {
         try {
             File screenshot = pageFactory.browser().takeScreenShot();
             storageService.store(screenshot, outputDirectory, SCREEN_SHOT_DIRECTORY);
-            Reporter.log(SCREEN_SHOT_MESSAGE + makeHyperlink(String.join("/", SCREEN_SHOT_DIRECTORY, screenshot.getName()) + '\n'));
+            Reporter.log(SCREEN_SHOT_MESSAGE + screenshotURLStrategy.apply(String.join("/", SCREEN_SHOT_DIRECTORY, screenshot.getName()) + '\n'));
         } catch (StorageException e) {
             logger.error(SCREEN_SHOT_FAILURE_MESSAGE, e);
             Reporter.log(SCREEN_SHOT_FAILURE_MESSAGE + '\n');
         }
     }
 
-    private String makeHyperlink(String path) {
+    public static String getWebServiceURL(String path) {
         return "<a href=\"" + path + "\">" + path + "</a>";
+    }
+
+    public static String getSurefireURL(String path) {
+        return "<a href=\"..\\..\\" + path + "\">" + path + "</a>";
     }
 }
