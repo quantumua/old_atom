@@ -1,8 +1,8 @@
 package com.betamedia.atom.core.fwtestrunner.runner;
 
 import com.betamedia.atom.core.fwtestrunner.TestInformation;
-import com.betamedia.atom.core.fwtestrunner.listeners.testng.ConfigurableListenerFactory;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.ListenerFactory;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.ScreenShotListenerFactory;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotListener;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageException;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
@@ -33,7 +33,7 @@ public class TestNGRunner implements TestRunner {
     @Autowired
     private Collection<ListenerFactory> listenerFactories;
     @Autowired
-    private Collection<ConfigurableListenerFactory> configurableListenerFactories;
+    private ScreenShotListenerFactory screenShotListenerFactory;
     @Autowired
     private StorageService storageService;
 
@@ -46,12 +46,7 @@ public class TestNGRunner implements TestRunner {
     public TestInformation run(TestInformation task) {
         TestNG testng = new TestNG();
         testng.setOutputDirectory(task.reportDirectory);
-        listenerFactories.stream()
-                .map(f->f.get())
-                .forEach(testng::addListener);
-        configurableListenerFactories.stream()
-                .map(f -> f.get(task.reportDirectory))
-                .forEach(testng::addListener);
+        configureListeners(task, testng);
         testng.setTestSuites(task.suites);
         TestInformation startedTask = task.update()
                 .withStatus(TestInformation.Status.RUNNING)
@@ -72,6 +67,13 @@ public class TestNGRunner implements TestRunner {
                 .hasFailed(testng.hasFailure() || testng.hasSkip())
                 .withAttachmentURLs(getScreenshots(task.reportDirectory))
                 .build();
+    }
+
+    private void configureListeners(TestInformation task, TestNG testng) {
+        listenerFactories.stream()
+                .map(ListenerFactory::get)
+                .forEach(testng::addListener);
+        testng.addListener(screenShotListenerFactory.get(task.reportDirectory));
     }
 
     private List<String> getScreenshots(String outputDirectory) {

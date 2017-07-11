@@ -48,7 +48,7 @@ public class FileSystemStorageService implements StorageService {
             if (!resolve(Paths.get(pathString)).toFile().exists()) {
                 Files.createDirectory(resolve(Paths.get(pathString)));
             }
-            Path internalPath = resolve(Paths.get(pathString, file.getOriginalFilename()));
+            Path internalPath = resolve(Paths.get(pathString, file.getOriginalFilename().replaceAll("[^.a-zA-Z0-9]", "_")));
             Files.copy(file.getInputStream(), internalPath, StandardCopyOption.REPLACE_EXISTING);
             return internalPath.toString();
         } catch (IOException e) {

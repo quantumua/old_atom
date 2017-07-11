@@ -115,7 +115,7 @@ public class VerifyPersonalDetailsSlideTest extends WEBEndToEndTest{
      */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5663")
-    public void verifyOpeningDropDownsChangesArrowDdirection(String countrycode) {
+    public void verifyOpeningDropDownsChangesArrowDirection(String countrycode) {
         pages().topNavigationPage().signUp();
         pages().registrationPage().register(countrycode);
         pages().welcomepage().isStartBtnDisplayed();

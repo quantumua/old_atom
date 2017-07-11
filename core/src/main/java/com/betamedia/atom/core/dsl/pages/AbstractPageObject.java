@@ -298,7 +298,6 @@ public abstract class AbstractPageObject {
      * @see WebDriver#quit()
      */
     protected void closeBrowser() {
-        webDriver.close();
         webDriver.quit();
     }
 

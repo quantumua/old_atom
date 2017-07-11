@@ -5,14 +5,15 @@
             <class name="com.betamedia.atom.testslibrary.option24.web.ctw.VerifyPersonalDetailsSlideTest">
                 <methods>
                     <parameter name="countrycode" value="de"/>
-					<include name="clickOnSubmitMovesYouToFNSFirstSlide" /><!-- 
+                    <include name="verifyOpeningDropDownsChangesArrowDdirection" />
 					<include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" />
                     <include name="verifySubmitButtonIsMandatoryForMovingFwd" /> 
                     <include name="verifyAll3FieldsAreMandatory" />                    
                     <include name="verifySubmitButtonEnableWhenAllFieldsAreFilled" />
-                    
+					<include name="clickOnSubmitMovesYouToFNSFirstSlide" />                    
                     <include name="verifySelectionChangesDropDownColor" /> 
-                    <include name="VerifyDateOofBirthDropDownFunctionality" /> -->
+                    <include name="verifyOpeningDropDownsChangesArrowDirection" />
+                    <include name="VerifyDateOofBirthDropDownFunctionality" />
                 </methods>
             </class>
         </classes>
