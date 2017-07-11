@@ -79,6 +79,62 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	       
 	       pages().creditCardDepositPage().waitforCreditCardDepositPage();
 	    }
-	  
+	    @Parameters({"countrycode"}) 
+        @Test(description = "CTW-9074")
+	    public void  scoringTest2(String countrycode) {
+		   pages().topNavigationPage().signUp();
+	       pages().registrationPage().register(countrycode);
+	       pages().welcomepage().isStartBtnDisplayed();
+	       pages().welcomepage().start();
+	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
+	               .withBirthDateDay("1")
+	               .withBirthDateMonth("2")
+	               .withBirthDateYear("1990")
+	               .withCountryOfBirth("DE")
+	               .withNationality("DE")
+	               .build());
+      
+	       
+	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	                .withEmploymentStatus(Questions.EmploymentStatus.UNEMPLOYED.get())
+	                .withIndustry(Questions.Industry.FINANCE.get())
+	                .withEmployerName("fgsfds")
+	                .withTaxResidenceCountry("DE")
+	                .withUSReportabilityStatus(Questions.HasTaxIdentificationNumber.YES.get())
+	                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.NO.get())
+	                .withTaxIdentificationNumber("123456789")
+	                .withEducationLevel(Questions.EducationLevel.BACHELOR.get())
+	                .withEducationField(Questions.EducationField.LAW.get())
+	                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.YES.get())
+	                .withPoliticalExposureComment("President")
+	                .withSourceOfFunds(Questions.SourceOfFunds.SAVINGS.get())
+	                .withAnnualIncome(Questions.AnnualIncome.INCOME_50K_100K.get())
+	                .withNetWealth(Questions.NetWealth.NET_WEALTH_150K_300K.get())
+	                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_25K_50K.get())
+	                .withPurposeOfTrading(Questions.PurposeOfTrading.ADDITIONAL_INCOME.get())
+	                .build());
+	       
+	       pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	                 .withSharesExperience(Questions.SharesExperience.REGULARLY.get())
+	                 .withBinaryExperience(Questions.BinaryExperience.FREQUENTLY.get())
+	                 .withAverageYearlyBinaryVolume(Questions.AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
+	                 .withForExExperience(Questions.ForExExperience.REGULARLY.get())
+	                 .withAverageYearlyForExVolume(Questions.AverageYearlyForExVolume.VOLUME_150K_500K.get())
+	                 .withCommonLeverage(Questions.CommonLeverageForExVolume.LEVERAGE_1TO200_1TO500.get())
+	                 .withFinancialWorkExperience(Questions.FinancialWorkExperience.SEMINARS.get())
+	                 .withCfdBinaryKnowledge(Questions.CfdBinaryKnowledge.NON_RISKY.get())
+	                 .withMainFactorKnowledge(Questions.MainFactorKnowledge.ANNOUNCEMENT.get())
+	                 .withHowToCloseKnowledge(Questions.HowToCloseKnowledge.LONDON_STOCK.get())
+	                 .withCfdLeverageKnowledge(Questions.CfdLeverageKnowledge.PROVIDES.get())
+	                 .withStopLossKnowledge(Questions.StopLossKnowledge.BUY.get())
+	                 .withRequiredMarginKnowledge(Questions.RequiredMarginKnowledge.MARGIN_10K.get())
+	                 .withMarginLevelDropKnowledge(Questions.MarginLevelDropKnowledge.WARNING_CALL.get())
+	                 .withAutomaticStopKnowledge(Questions.AutomaticStopKnowledge.EARNINGS.get())
+	                 .withLossOn1to50Knowledge(Questions.LossOn1to50Knowledge.A2_450.get())
+	                 .withLossOn1to200Knowledge(Questions.LossOn1to200Knowledge.A2_1200.get())
+	                 .build());
+	       
+	       pages().creditCardDepositPage().waitforCreditCardDepositPage();
+	    }
 	    
 }

@@ -64,6 +64,8 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     private By submit;
     @StoredId
     private By resultPlaceholder;
+    @StoredId
+    private By politicalExposureBttn;
 
     public FnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);
@@ -126,6 +128,9 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         submitOnWizard(info.educationLevel);
         submitOnWizard(info.educationField);
         submitOnWizard(info.isPoliticallyExposed);
+        if(nonNull(info.politicalExposureComment)) find(By.id(info.isPoliticallyExposed +"_alternate")).sendKeys(info.politicalExposureComment);
+        if(nonNull(info.politicalExposureComment)) executeScript("arguments[0].click()",find(politicalExposureBttn));
+
         submitOnWizard(info.sourceOfFunds);
         submitOnWizard(info.annualIncome);
         submitOnWizard(info.netWealth);

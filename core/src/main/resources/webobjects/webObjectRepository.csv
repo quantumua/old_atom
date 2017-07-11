@@ -105,6 +105,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,isUSReportable,ID,IsUSReportablePerson
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,educationFieldOther,ID,fieldOfStudyOther_alternate
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,sourceOfFundsOther,ID,sourceOfFundsOther_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,politicalExposureBttn,XPATH,//*[@id='divQPoliticallyExposed']//*[@class='alternate-submit']
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,purposeOfTradingOther,ID,purposeOfTradingOther_alternate
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,mainFactorKnowledge,ID,KnowledgeMainFactor
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,howToCloseKnowledge,ID,KnowledgeIfYouOpen

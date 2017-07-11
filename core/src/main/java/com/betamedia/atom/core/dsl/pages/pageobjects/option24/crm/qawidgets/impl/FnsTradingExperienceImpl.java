@@ -119,5 +119,7 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
     public void submitOnWizard(String dataValue) {
         waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
     }
+    
+    
 
 }
