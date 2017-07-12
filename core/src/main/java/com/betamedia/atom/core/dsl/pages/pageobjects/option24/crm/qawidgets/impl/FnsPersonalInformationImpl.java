@@ -66,7 +66,9 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     private By resultPlaceholder;
     @StoredId
     private By politicalExposureBttn;
-
+    @StoredId
+    private By purposeOfTradingBttn; 
+    
     public FnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);
     }
@@ -128,14 +130,21 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         submitOnWizard(info.educationLevel);
         submitOnWizard(info.educationField);
         submitOnWizard(info.isPoliticallyExposed);
-        if(nonNull(info.politicalExposureComment)) find(By.id(info.isPoliticallyExposed +"_alternate")).sendKeys(info.politicalExposureComment);
-        if(nonNull(info.politicalExposureComment)) executeScript("arguments[0].click()",find(politicalExposureBttn));
+        if(nonNull(info.politicalExposureComment)){ 
+        	find(politicalExposureComment).sendKeys(info.politicalExposureComment);
+        	executeScript("arguments[0].click()",find(politicalExposureBttn));
+        }
+        
 
         submitOnWizard(info.sourceOfFunds);
         submitOnWizard(info.annualIncome);
         submitOnWizard(info.netWealth);
         submitOnWizard(info.expectedDepositsPerYear);
         submitOnWizard(info.purposeOfTrading);
+        if(nonNull(info.purposeOfTradingOther)) {
+        	find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
+        	executeScript("arguments[0].click()",find(purposeOfTradingBttn));
+        }
         waitUntilExists(By.id("FinancialProducts1Shares"));
     }
 
