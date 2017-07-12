@@ -95,5 +95,6 @@
         <module>webservice</module>
         <module>core</module>
         <module>testslibrary</module>
+        <module>app</module>
     </modules>
 </project>

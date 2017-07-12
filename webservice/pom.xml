@@ -24,7 +24,7 @@
     <dependencies>
         <dependency>
             <groupId>com.betamedia.atom</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>app</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

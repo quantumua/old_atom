@@ -6,7 +6,7 @@ import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.betamedia.atom.core.fwtestrunner.TestHandler.TEST_OUTPUT_DIRECTORY;
+import static com.betamedia.atom.app.handler.TestHandler.TEST_OUTPUT_DIRECTORY;
 
 /**
  * Created by mbelyaev on 4/20/17.

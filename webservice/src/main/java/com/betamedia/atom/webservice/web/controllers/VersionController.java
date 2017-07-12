@@ -1,6 +1,6 @@
 package com.betamedia.atom.webservice.web.controllers;
 
-import com.betamedia.atom.core.fwtestrunner.classloader.ContextClassLoaderManagingExecutor;
+import com.betamedia.atom.app.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.atom.webservice.holders.DependenciesInfoHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

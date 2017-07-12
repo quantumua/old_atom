@@ -1,8 +1,8 @@
 package com.betamedia.atom.webservice.web.controllers;
 
-import com.betamedia.atom.core.fwtestrunner.TestHandler;
-import com.betamedia.atom.core.fwtestrunner.TestInformation;
-import com.betamedia.atom.core.fwtestrunner.TestInformationHandler;
+import com.betamedia.atom.app.handler.TestHandler;
+import com.betamedia.atom.app.entity.TestInformation;
+import com.betamedia.atom.app.handler.TestInformationHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

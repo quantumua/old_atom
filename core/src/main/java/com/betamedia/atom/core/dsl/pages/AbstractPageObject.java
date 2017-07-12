@@ -339,7 +339,7 @@ public abstract class AbstractPageObject {
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 
-    protected Wait<WebDriver> getWait() {
+    private Wait<WebDriver> getWait() {
         return new WebDriverWait(webDriver, MAX_WAIT_SEC);
     }
 

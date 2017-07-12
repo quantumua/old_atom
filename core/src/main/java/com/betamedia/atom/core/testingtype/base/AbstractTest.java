@@ -2,7 +2,6 @@ package com.betamedia.atom.core.testingtype.base;
 
 import com.betamedia.atom.core.fwdataaccess.repository.EntityRepository;
 import com.betamedia.atom.core.holders.AppContextHolder;
-import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -10,7 +9,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
 
 import java.io.IOException;
 import java.io.InputStream;

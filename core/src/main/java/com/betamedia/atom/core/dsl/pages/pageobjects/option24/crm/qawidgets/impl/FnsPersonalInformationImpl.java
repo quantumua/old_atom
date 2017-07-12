@@ -77,12 +77,12 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     public boolean exists() {
     	return waitUntilDisplayed(employmentStatusSalariedEmployee).isDisplayed();
     }
-    
+
     @Override
     public void submit(PersonalInformation info) {
         inSelect(employmentStatus).selectByValue(info.employmentStatus);
         inSelect(industry).selectByValue(info.industry);
-        if(nonNull(info.industryOther)) find(industryOther).sendKeys(info.industryOther);
+        if(nonNull(info.industryOther)) {find(industryOther).sendKeys(info.industryOther);}
         if(nonNull(info.employerName)) find(employerName).sendKeys(info.employerName);
         inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
         if(nonNull(info.isUSReportable)) inSelect(isUSReportable).selectByValue(info.isUSReportable);
@@ -152,7 +152,7 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     public void submitOnWizard(String dataValue) {
         waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
     }
-    
+
     public void submitOnWizardAndWriteValue(String dataValue, String numberTaxId) {
         waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
         waitUntilDisplayed(By.id(dataValue+"_alternate"));

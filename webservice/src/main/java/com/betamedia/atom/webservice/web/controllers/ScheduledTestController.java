@@ -1,7 +1,7 @@
 package com.betamedia.atom.webservice.web.controllers;
 
-import com.betamedia.atom.core.fwtestrunner.TestInformation;
-import com.betamedia.atom.core.fwtestrunner.scheduling.ContinuousTestHandlerImpl;
+import com.betamedia.atom.app.entity.TestInformation;
+import com.betamedia.atom.app.scheduling.impl.ContinuousTestHandlerImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
