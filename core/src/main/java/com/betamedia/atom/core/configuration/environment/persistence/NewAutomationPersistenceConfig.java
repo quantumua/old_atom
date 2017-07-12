@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.configuration.environment.persistence;
 
 import com.betamedia.atom.core.configuration.environment.NewAutomationEnvironmentConfig;
+import com.betamedia.atom.core.persistence.entities.ContactBase;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.persistence.repositories.impl.newautomation.NewAutomationEnvTrackingInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJpaRepositories(
         basePackageClasses = {
+                ContactBase.class,
                 ContactExtension.class,
                 NewAutomationEnvTrackingInfoRepository.class
         },
@@ -46,6 +48,7 @@ public class NewAutomationPersistenceConfig {
         return builder
                 .dataSource(newAutomationDataSource())
                 .packages(
+                        ContactBase.class,
                         ContactExtension.class,
                         NewAutomationEnvTrackingInfoRepository.class)
                 .persistenceUnit("newAutomationPersistenceUnit")

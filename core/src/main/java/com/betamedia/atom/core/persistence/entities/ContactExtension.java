@@ -100,10 +100,17 @@ public class ContactExtension {
         this.poiOcrStatus = poiOcrStatus;
     }
 
+    public Integer getCountryOfBirth() {
+        return countryOfBirth;
+    }
+
+    public Integer getNationality() {
+        return nationality;
+    }
+    
     public String getContactId() {
         return contactId;
     }
-
 
     public String getRiskLimitsId() {
         return riskLimitsId;

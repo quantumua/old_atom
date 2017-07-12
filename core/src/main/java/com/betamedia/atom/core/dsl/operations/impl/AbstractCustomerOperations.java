@@ -42,6 +42,9 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     private AbstractTrackingInfoExtensionRepository<T> trackingInfoExtensionRepository;
 
     @Autowired
+    private AbstractContactBaseRepository<T> contactBaseRepository;
+
+    @Autowired
     private AbstractContactExtensionRepository<T> contactExtensionRepository;
 
     @Autowired
@@ -308,4 +311,23 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
         return riskLimits.getVerifySettleFrom();
     }
+
+    @Override
+    public Integer findNationality(String contactId) {
+        ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
+        return contactExtension.getNationality();
+    }
+    
+    @Override
+    public Integer findCountryOfBirth(String contactId) {
+        ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
+        return  contactExtension.getCountryOfBirth();
+    }
+    
+    @Override
+    public String findBirthDate(String contactId) {
+        ContactBase contactBase = contactBaseRepository.findOne(contactId);
+        return  contactBase.getBirthdate().toString();
+    }
+    
 }

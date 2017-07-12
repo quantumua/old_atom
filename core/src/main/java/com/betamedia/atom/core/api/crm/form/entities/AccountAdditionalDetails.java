@@ -30,7 +30,19 @@ public class AccountAdditionalDetails {
         private String nationality = "TG";
 
         private AccountAdditionalDetailsBuilder(){}
+        
+        public String getDefaultBirthDate () {
+        	return birthDateMonth + "/" + birthDateDay + "/" + birthDateYear;
+        }
+        
+        public String getDegaultNationality () {
+        	return nationality;
+        }
 
+        public String getDegaultCountryOfBirth () {
+        	return countryOfBirth;
+        }
+        
         public AccountAdditionalDetailsBuilder withBirthDateDay(String birthDateDay) {
             this.birthDateDay = birthDateDay;
             return this;

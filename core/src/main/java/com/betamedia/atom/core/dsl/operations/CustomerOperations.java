@@ -59,4 +59,10 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
     ContactExtension updateExperienceScoreInDB(String contactId, int experienceScore);
 
     double findMaximumDepositLimit(String contactId);
+
+    Integer findNationality(String contactId);
+
+    Integer findCountryOfBirth(String contactId);
+
+    String findBirthDate(String contactId);
 }

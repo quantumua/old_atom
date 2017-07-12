@@ -5,15 +5,20 @@
             <class name="com.betamedia.atom.testslibrary.option24.web.ctw.VerifyPersonalDetailsSlideTest">
                 <methods>
                     <parameter name="countrycode" value="de"/>
-                    <include name="verifyOpeningDropDownsChangesArrowDdirection" />
-					<include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" />
+                    <include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" />
                     <include name="verifySubmitButtonIsMandatoryForMovingFwd" /> 
                     <include name="verifyAll3FieldsAreMandatory" />                    
                     <include name="verifySubmitButtonEnableWhenAllFieldsAreFilled" />
-					<include name="clickOnSubmitMovesYouToFNSFirstSlide" />                    
+                    <include name="clickOnSubmitMovesYouToFNSFirstSlide" />                    
                     <include name="verifySelectionChangesDropDownColor" /> 
                     <include name="verifyOpeningDropDownsChangesArrowDirection" />
                     <include name="VerifyDateOofBirthDropDownFunctionality" />
+                </methods>
+            </class>
+            <class name="com.betamedia.atom.testslibrary.option24.web.ctw.VerifyReflectionInCRM">
+                <methods>
+                    <parameter name="countrycode" value="de"/>
+                    <include name="verifyThe3FieldsUpdateInTheCRM" />
                 </methods>
             </class>
         </classes>
