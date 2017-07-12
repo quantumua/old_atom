@@ -35,4 +35,14 @@ public interface OnBoardingOperations<T extends EnvironmentDependent> extends En
     void assertUsernameScore(String username, Double expectedScore);
 
     void assertUsernameLoginType(String username, AccessType accessType);
+
+    void assertTrafficSource(String userName, String expectedTrafficSource);
+
+    void assertMarketingDataValue(String userName, String expectedMarketingDataValue);
+
+    void assertContactBaseBirthDate(String userName, String expectedBirthDate);
+
+    void assertUsersHaveConnection(String firstUser, String secondUser, String expectedConnectionRoleName);
+
+
 }

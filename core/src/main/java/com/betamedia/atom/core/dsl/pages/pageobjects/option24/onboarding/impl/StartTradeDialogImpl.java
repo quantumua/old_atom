@@ -26,14 +26,13 @@ public class StartTradeDialogImpl extends AbstractPageObject implements StartTra
         waitUntilDisplayed(startTradeButton).click();
     }
 
-    public void wizardExists() {
+    @Override
+    public boolean exists() {
         try {
             waitUntilDisplayed(startTradeDialog);
-            find(startTradeDialog).isDisplayed();
-            Reporter.log("Wizard appears.");
+            return find(startTradeDialog).isDisplayed();
         } catch (Exception e) {
-            Reporter.log("Wizard did not appear.");
-
+            return false;
         }
     }
 }

@@ -12,7 +12,7 @@ import static com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionna
  */
 public class CrmUserExperienceTest extends AbstractUserExperienceTest {
 
-    private CRMCustomer crmRegisterAndLogIn(){
+    protected CRMCustomer crmRegisterAndLogIn(){
         CRMCustomer customer = operations().customerOperations().register();
         pages().crmNavigation().login();
         pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);

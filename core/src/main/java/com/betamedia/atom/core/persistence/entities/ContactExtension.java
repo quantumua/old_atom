@@ -47,6 +47,8 @@ public class ContactExtension {
     private Integer experienceLevel;
     @Column(name = "bt_ExperienceScore")
     private Double experienceScore;
+    @Column(name = "bt_trafficsource")
+    private int trafficSource;
 
     public void setFnsPersonal(boolean fnsPersonal) {
         this.fnsPersonal = fnsPersonal;
@@ -130,5 +132,13 @@ public class ContactExtension {
 
     public Integer getAccess() {
         return access;
+    }
+
+    public int getTrafficSource() {
+        return trafficSource;
+    }
+
+    public void setContactId(String contactId) {
+        this.contactId = contactId;
     }
 }

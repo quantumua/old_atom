@@ -229,4 +229,7 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
 
     @Override
     public RegistrationDialog registrationDialog() {return creator.getPage(RegistrationDialogImpl.class); }
+
+    @Override
+    public RedirectDialog redirectDialog() { return creator.getPage(RedirectDialogImpl.class); }
 }

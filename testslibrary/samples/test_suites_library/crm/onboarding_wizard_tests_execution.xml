@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Mobile CRM test" verbose="1" parallel="methods" thread-count="1" data-provider-thread-count="1">
+    <test name="wizardTest">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.MobileCRMOnboardingWizardConditionsTest">
+            </class>
+        </classes>
+    </test>
+</suite>

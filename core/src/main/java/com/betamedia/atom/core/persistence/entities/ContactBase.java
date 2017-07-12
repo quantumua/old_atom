@@ -20,6 +20,8 @@ public class ContactBase {
     @Id
     @Column(name = "ContactId")
     private String contactId;
+    @Column(name = "EMailAddress1")
+    private String emailAddress1;
 	@Column(name = "BirthDate", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date birthdate;
@@ -28,5 +30,12 @@ public class ContactBase {
        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
        return format.format(birthdate);
      }
+    public String getEmailAddress1() {
+        return emailAddress1;
+    }
+
+    public void setEmailAddress1(String emailAddress1) {
+        this.emailAddress1 = emailAddress1;
+    }
  
 }

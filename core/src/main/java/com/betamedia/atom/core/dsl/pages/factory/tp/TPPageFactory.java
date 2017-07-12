@@ -97,4 +97,6 @@ public interface TPPageFactory {
     ConfirmAnswersDialog confirmAnswers();
 
     RegistrationDialog registrationDialog();
+
+    RedirectDialog redirectDialog();
 }

@@ -1,12 +1,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite: sequential execution of tests" verbose="1" parallel="methods" thread-count="5">
+<suite name="Suite: sequential execution of tests" verbose="1" parallel="methods" thread-count="1">
     <test name="Create New Customer tests web">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers" >
                 <methods>
                     <include name="verifySignUpButtonRedirectToOnboardingOpenAccount"/>
                     <include name="applyForAnAccountElementsVerification"/>
-                    <!--<include name="applyForAnAccountFirstNameFieldValidations"/>-->
+                    <include name="applyForAnAccountFirstNameFieldValidations"/>
+                    <include name="applyForAnAccountLastNameFieldValidations"/>
+                    <include name="emailFieldValidations"/>
+                    <include name="prefixFieldValidations"/>
+                    <include name="phoneFieldValidations"/>
+                    <include name="countryDropdownFieldSearchEngine"/>
+                    <include name="countryDropdownValidations"/>
+                    <include name="currencyDropdownFieldValidation"/>
+                    <include name="passwordFieldsValidation"/>  <!-- failed in the 5 chars password -->
+                    <include name="agreementCheckboxValidation"/>
+                    <include name="submitButtonValidation"/>
+                    <include name="validateConnectionInDBForDifferentCustomersButSameCreditCard"/>
                 </methods>
             </class>
         </classes>
