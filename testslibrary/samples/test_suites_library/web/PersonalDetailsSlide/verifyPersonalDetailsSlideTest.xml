@@ -2,7 +2,7 @@
 <suite name="Suite: verify Personal Details Slide" verbose="1">
     <test name="Tryouts">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.web.ctw.VerifyPersonalDetailsSlideTest">
+            <class name="com.betamedia.atom.testslibrary.option24.web.ctw.PersonalDetailsSlideTest">
                 <methods>
                     <parameter name="countrycode" value="de"/>
                     <include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" />
@@ -15,10 +15,17 @@
                     <include name="VerifyDateOofBirthDropDownFunctionality" />
                 </methods>
             </class>
-            <class name="com.betamedia.atom.testslibrary.option24.web.ctw.VerifyReflectionInCRM">
+            <class name="com.betamedia.atom.testslibrary.option24.web.ctw.ReflectionInCRMTest">
                 <methods>
                     <parameter name="countrycode" value="de"/>
                     <include name="verifyThe3FieldsUpdateInTheCRM" />
+                </methods>
+            </class>
+            <class name="com.betamedia.atom.testslibrary.option24.web.ctw.PersonalDetailsSlideLocalisationTest">
+                <methods>
+                    <parameter name="countrycode" value="de"/>
+                    <include name="verifyTtheSlideIsTranslatedToAllLanguages" />
+                    <include name="verifyTheSlideTurnsRTLOnAR" />
                 </methods>
             </class>
         </classes>

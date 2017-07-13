@@ -11,7 +11,7 @@ import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
  * @author leonid.a
  */
 
-public class VerifyPersonalDetailsSlideTest extends WEBEndToEndTest{
+public class PersonalDetailsSlideTest extends WEBEndToEndTest{
 	/*
 	 *[testlink]  CTW-5624:Verify slide appear after registration and welcome slide
 	 * 

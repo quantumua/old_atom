@@ -11,7 +11,7 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 
 
-public class VerifyReflectionInCRM extends AbstractOnboardingUserExperienceTest{
+public class ReflectionInCRMTest extends AbstractOnboardingUserExperienceTest{
 	
     /*
      * Reflection in CRM
