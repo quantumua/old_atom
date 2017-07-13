@@ -68,6 +68,12 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     private By politicalExposureBttn;
     @StoredId
     private By purposeOfTradingBttn; 
+    @StoredId
+    private By educationFieldBttn;
+    @StoredId
+    private By sourceOfFundsBttn;
+    @StoredId
+    private By industryOtherBttn;
     
     public FnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);
@@ -109,6 +115,10 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     public void submitOnWizard(PersonalInformation info) {
         submitOnWizard(info.employmentStatus);
         submitOnWizard(info.industry);
+        if(nonNull(info.industryOther)){ 
+        	find(industryOther).sendKeys(info.industryOther);
+        	executeScript("arguments[0].click()",find(industryOtherBttn));
+        }
 
         waitUntilDisplayed(employerName);
         find(employerName).sendKeys(info.employerName);
@@ -129,6 +139,10 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
 
         submitOnWizard(info.educationLevel);
         submitOnWizard(info.educationField);
+        if(nonNull(info.educationFieldOther)){ 
+        	find(educationFieldOther).sendKeys(info.educationFieldOther);
+        	executeScript("arguments[0].click()",find(educationFieldBttn));
+        }
         submitOnWizard(info.isPoliticallyExposed);
         if(nonNull(info.politicalExposureComment)){ 
         	find(politicalExposureComment).sendKeys(info.politicalExposureComment);
@@ -137,6 +151,10 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         
 
         submitOnWizard(info.sourceOfFunds);
+        if(nonNull(info.sourceOfFundsOther)){ 
+        	find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
+        	executeScript("arguments[0].click()",find(sourceOfFundsBttn));
+        }
         submitOnWizard(info.annualIncome);
         submitOnWizard(info.netWealth);
         submitOnWizard(info.expectedDepositsPerYear);
