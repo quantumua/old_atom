@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "ContactBase")
 public class ContactBase {
+    
+    private final String BIRTH_DATE_FORMAT = "MM/dd/yyyy";
 
     @Id
     @Column(name = "ContactId")
@@ -28,7 +30,7 @@ public class ContactBase {
 	private Date birthdate;
 	
      public String getBirthdate() {  
-       SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+       SimpleDateFormat format = new SimpleDateFormat(BIRTH_DATE_FORMAT);
        return format.format(birthdate);
      }
     public String getEmailAddress1() {

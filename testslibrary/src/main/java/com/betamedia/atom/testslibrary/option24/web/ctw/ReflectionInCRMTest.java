@@ -15,10 +15,10 @@ import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUs
  * @since 07/12/2017
  */
 
-public class ReflectionInCRMTest extends AbstractOnboardingUserExperienceTest{
+public class ReflectionInCRMTest extends AbstractOnboardingUserExperienceTest {
 	
     /*
-     * Reflection in CRM
+     * Reflection in CRM verification
      * [testlink] CTW-5679:Verify the 3 fields update in the CRM
      */
     @Parameters({"countrycode"}) 
