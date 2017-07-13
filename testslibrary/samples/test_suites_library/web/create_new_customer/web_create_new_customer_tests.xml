@@ -8,7 +8,7 @@
                     <include name="applyForAnAccountElementsVerification"/>
                     <include name="applyForAnAccountFirstNameFieldValidations"/>
                     <include name="applyForAnAccountLastNameFieldValidations"/>
-                    <include name="emailFieldValidations"/>
+                    <include name="emailFieldValidations"/> <!-- fails as email field is not green even if it is valid -->
                     <include name="prefixFieldValidations"/>
                     <include name="phoneFieldValidations"/>
                     <include name="countryDropdownFieldSearchEngine"/>
@@ -20,10 +20,10 @@
                     <include name="validateConnectionInDBForDifferentCustomersButSameCreditCard"/>
                     <include name="validateConnectionInDBForDifferentCustomersButSamePhone"/>
                     <include name="validateNoConnectionsInDBForDifferentCustomersWithSameFirstAndLastNames"/>
-                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameEmail"/>
+                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameEmail"/> <!-- Test fails as impossible create user with the same email -->
                     <include name="validateNoConnectionsInDBForDifferentCustomersWithSameMachineID"/>
                     <include name="validateBulkEmailHasNoneZeroForNewCreatedCustomer"/>
-                    <include name="validatePhoneCallsForNewCreatedCustomer"/>
+                    <include name="validatePhoneCallsForNewCreatedCustomer"/> <!-- Fails as during user creation ContactBase.DoNotPhone = 0 value -->
                     <include name="validateCustomerCreationSourceId"/>
                 </methods>
             </class>

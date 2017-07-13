@@ -327,7 +327,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public String findBirthDate(String contactId) {
         ContactBase contactBase = contactBaseRepository.findOne(contactId);
-        return  contactBase.getBirthdate().toString();
+        return  contactBase.getBirthDate().toString();
     }
     
 }

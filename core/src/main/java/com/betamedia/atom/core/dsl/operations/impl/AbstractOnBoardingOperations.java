@@ -125,7 +125,7 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
 
     @Override
     public void assertContactBaseBirthDate(String email, String expectedBirthDate) {
-        assertEquals(expectedBirthDate,contactBaseRepository.findByEmailAddress1(email).getBirthdate());
+        assertEquals(expectedBirthDate,contactBaseRepository.findByEmailAddress1(email).getBirthDate());
     }
 
     @Override

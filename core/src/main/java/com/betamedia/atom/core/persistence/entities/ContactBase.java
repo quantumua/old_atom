@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 @Table(name = "ContactBase")
 public class ContactBase {
     
-    private final String BIRTH_DATE_FORMAT = "MM/dd/yyyy";
+    private static final String BIRTH_DATE_FORMAT = "MM/dd/yyyy";
 
     @Id
     @Column(name = "ContactId")
@@ -29,13 +29,13 @@ public class ContactBase {
     private String emailAddress1;
 	@Column(name = "BirthDate", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date birthdate;
+	private Date birthDate;
     @Column(name = "DoNotPhone")
     private String doNotPhone;
 
-     public String getBirthdate() {  
+     public String getBirthDate() {
        SimpleDateFormat format = new SimpleDateFormat(BIRTH_DATE_FORMAT);
-       return format.format(birthdate);
+       return format.format(birthDate);
      }
     public String getEmailAddress1() {
         return emailAddress1;

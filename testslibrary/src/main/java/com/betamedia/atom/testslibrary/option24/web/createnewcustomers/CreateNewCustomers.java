@@ -113,6 +113,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().setCountryPrefix(JORDAN_COUNTRY);
         pages().redirectDialog().startTrade();
+        pages().registrationDialog().exists();
         assertEquals(JORDAN_PHONE_PREFIX, pages().registrationDialog().getCountryPrefix());
         pages().registrationDialog().setCountryPrefix(ISRAEL_COUNTRY);
         pages().registrationDialog().register(customerRO);
@@ -138,6 +139,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().setCountryPrefix(JORDAN_COUNTRY);
         pages().redirectDialog().startTrade();
+        pages().registrationDialog().exists();
         assertEquals("Country was not available in the search result.",
                 IRELAND_COUNTRY, pages().registrationDialog().countrySearch("I", IRELAND_COUNTRY));
     }
@@ -276,10 +278,11 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         createCustomer(customerROFirst);
         pages().browser().deleteAllCookies();
         pages().browser().refreshPage();
-        createCustomer(customerROSecond);
-        operations().onBoardingOperations().assertUsersHaveNotConnection(
-                customerROFirst.getEmail(),
-                customerROSecond.getEmail());
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().register(customerROSecond);
+        assertEquals(NO_ERROR_MESSAGE,
+                "Customer with the same user name is already registered",
+                pages().registrationDialog().getErrorMessageNotification());
     }
 
     @Test(description = "CTW-17746:Same Machine ID -negative")
