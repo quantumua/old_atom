@@ -11,7 +11,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * Created by Leonid.a on 4/27/17.
+ * @author Leonid Artemiev
+ * @since 7/11/17
  */
 @Entity
 @Table(name = "ContactBase")

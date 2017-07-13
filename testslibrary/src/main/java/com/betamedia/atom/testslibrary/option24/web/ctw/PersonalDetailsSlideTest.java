@@ -14,24 +14,22 @@ import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
 public class PersonalDetailsSlideTest extends WEBEndToEndTest{
 	/*
 	 *[testlink]  CTW-5624:Verify slide appear after registration and welcome slide
-	 * 
 	 */
-    @Parameters({"countrycode"}) 
-    @Test(description = "CTW-5624")
+    @Parameters({"countrycode"})
+    @Test(description = "CTW-5624:Verify slide appear after registration and welcome slide")
 	  public void  verifySlideAppearAfterRegistrationAndWelcomeSlide(String countrycode) {
 	     	pages().topNavigationPage().signUp();
 	        pages().registrationPage().register(countrycode);
 	        pages().welcomepage().isStartBtnDisplayed();
 	        pages().welcomepage().start();
-	        pages().accountAdditionalDetailsPage().exists();
+	        Assert.assertTrue("Additional details page is available right after Welcome page", pages().accountAdditionalDetailsPage().exists());
     }
     
 	/*
 	 *[testlink]   CTW-5625:Verify "Submit" bttn is mandatory for moving fwd
-	 * 
 	 */
     @Parameters({"countrycode"}) 
-    @Test(description = "CTW-5625")
+    @Test(description = "CTW-5625:Verify Submit bttn is mandatory for moving fwd")
     public void  verifySubmitButtonIsMandatoryForMovingFwd(String countrycode) {
      	pages().topNavigationPage().signUp();
         pages().registrationPage().register(countrycode);

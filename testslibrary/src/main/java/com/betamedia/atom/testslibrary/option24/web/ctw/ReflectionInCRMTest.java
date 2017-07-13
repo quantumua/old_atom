@@ -10,6 +10,10 @@ import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 
+/**
+ * @author Leonid Artemiev
+ * @since 07/12/2017
+ */
 
 public class ReflectionInCRMTest extends AbstractOnboardingUserExperienceTest{
 	
