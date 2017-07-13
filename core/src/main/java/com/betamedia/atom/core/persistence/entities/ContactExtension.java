@@ -49,6 +49,8 @@ public class ContactExtension {
     private Double experienceScore;
     @Column(name = "bt_trafficsource")
     private int trafficSource;
+    @Column(name = "bt_acceptbulkemail")
+    private int acceptbulkemail;
 
     public void setFnsPersonal(boolean fnsPersonal) {
         this.fnsPersonal = fnsPersonal;
@@ -140,5 +142,13 @@ public class ContactExtension {
 
     public void setContactId(String contactId) {
         this.contactId = contactId;
+    }
+
+    public int getAcceptbulkemail() {
+        return acceptbulkemail;
+    }
+
+    public void setAcceptbulkemail(int acceptbulkemail) {
+        this.acceptbulkemail = acceptbulkemail;
     }
 }

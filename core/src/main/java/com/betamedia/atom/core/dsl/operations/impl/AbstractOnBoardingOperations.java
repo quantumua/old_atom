@@ -1,5 +1,6 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
+import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
 import com.betamedia.atom.core.persistence.entities.ConnectionBase;
 import com.betamedia.atom.core.persistence.repositories.AbstractConnectionBaseRepository;
@@ -8,20 +9,24 @@ import com.betamedia.atom.core.persistence.repositories.AbstractContactBaseRepos
 import com.betamedia.atom.core.persistence.repositories.AbstractContactExtensionRepository;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
 import com.betamedia.atom.core.dsl.operations.OnBoardingOperations;
+import org.hamcrest.core.IsNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.AccessType;
 import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.*;
 import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Created by mbelyaev on 5/19/17.
  */
 public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependent> implements OnBoardingOperations<T> {
+
     @Autowired
     private AbstractContactExtensionRepository<T> contactExtensionRepository;
 
@@ -114,13 +119,8 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
     }
 
     @Override
-    public void assertTrafficSource(String userName, String expectedTrafficSource) {
-        assertEquals(expectedTrafficSource, contactExtensionRepository.findByUsername(userName).getTrafficSource());
-    }
-
-    @Override
-    public void assertMarketingDataValue(String userName, String expectedMarketingDataValue) {
-        //TODO
+    public void assertTrafficSource(String userLoginName, int expectedTrafficSourceId) {
+        assertEquals(expectedTrafficSourceId, contactExtensionRepository.findByUsername(userLoginName).getTrafficSource());
     }
 
     @Override
@@ -144,4 +144,28 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
         assertEquals(expectedConnectionRoleName,actualConnectionName, actualConnectionName);
     }
 
+    @Override
+    public void assertUsersHaveNotConnection(String firstUser, String secondUser) {
+        assertTrue("Users have connections in the database.",
+                connectionBaseRepository.findByRecord1Id(
+                        contactExtensionRepository.findByUsername(firstUser).getContactId()).isEmpty()
+        );
+        assertTrue("Users have connections in the database.",
+                connectionBaseRepository.findByRecord1Id(
+                        contactExtensionRepository.findByUsername(secondUser).getContactId()).isEmpty()
+        );
+
+    }
+
+    @Override
+    public void assertBulkEmailHasNotValue(String userLoginName, int notExpectedValue) {
+        assertTrue(contactExtensionRepository.findByUsername(userLoginName)
+                .getAcceptbulkemail()!=notExpectedValue);
+    }
+
+    @Override
+    public void assertDoNotPhoneHasNotValue(String userLoginName, String notExpectedDoNotPhoneValue) {
+        assertFalse(contactBaseRepository.findByEmailAddress1(userLoginName)
+                .getDoNotPhone().equalsIgnoreCase(notExpectedDoNotPhoneValue));
+    }
 }

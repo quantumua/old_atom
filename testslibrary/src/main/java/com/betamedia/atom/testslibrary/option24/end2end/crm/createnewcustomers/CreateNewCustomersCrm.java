@@ -17,12 +17,13 @@ import static org.testng.AssertJUnit.*;
  */
 public class CreateNewCustomersCrm extends CrmUserExperienceTest {
 
+    private static int WIDGET_SOURCE_ID = 206440002;
+
     @Test(description = "CTW-2544: Web widget")
-    public void checkTrafficSourceAndMarketingDataValuesInDB() {
+    public void checkTrafficSourceAndMarketingDataValuesInDataBase() {
         pages().crmNavigation().register();
         CRMCustomer customer = crmRegisterAndLogIn();
-        operations().onBoardingOperations().assertTrafficSource(customer.getId(), "206440004");
-        operations().onBoardingOperations().assertMarketingDataValue(customer.getId(), "Web");
+        operations().onBoardingOperations().assertTrafficSource(customer.getEmail(), WIDGET_SOURCE_ID);
     }
 }
 

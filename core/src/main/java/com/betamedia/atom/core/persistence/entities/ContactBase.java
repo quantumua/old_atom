@@ -23,12 +23,16 @@ public class ContactBase {
     @Id
     @Column(name = "ContactId")
     private String contactId;
+    @Column(name = "DoNotBulkEMail")
+    private String doNotBulkEMail;
     @Column(name = "EMailAddress1")
     private String emailAddress1;
 	@Column(name = "BirthDate", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date birthdate;
-	
+    @Column(name = "DoNotPhone")
+    private String doNotPhone;
+
      public String getBirthdate() {  
        SimpleDateFormat format = new SimpleDateFormat(BIRTH_DATE_FORMAT);
        return format.format(birthdate);
@@ -40,5 +44,20 @@ public class ContactBase {
     public void setEmailAddress1(String emailAddress1) {
         this.emailAddress1 = emailAddress1;
     }
- 
+
+    public String getDoNotBulkEMail() {
+        return doNotBulkEMail;
+    }
+
+    public void setDoNotBulkEMail(String doNotBulkEMail) {
+        this.doNotBulkEMail = doNotBulkEMail;
+    }
+
+    public String getDoNotPhone() {
+        return doNotPhone;
+    }
+
+    public void setDoNotPhone(String doNotPhone) {
+        this.doNotPhone = doNotPhone;
+    }
 }

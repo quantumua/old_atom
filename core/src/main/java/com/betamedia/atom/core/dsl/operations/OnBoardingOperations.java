@@ -36,13 +36,16 @@ public interface OnBoardingOperations<T extends EnvironmentDependent> extends En
 
     void assertUsernameLoginType(String username, AccessType accessType);
 
-    void assertTrafficSource(String userName, String expectedTrafficSource);
-
-    void assertMarketingDataValue(String userName, String expectedMarketingDataValue);
+    void assertTrafficSource(String userLoginName, int expectedTrafficSourceId);
 
     void assertContactBaseBirthDate(String userName, String expectedBirthDate);
 
-    void assertUsersHaveConnection(String firstUser, String secondUser, String expectedConnectionRoleName);
+    void assertUsersHaveConnection(String userLoginName, String secondUser, String expectedConnectionRoleName);
 
+    void assertUsersHaveNotConnection(String userLoginName, String secondUser);
+
+    void assertBulkEmailHasNotValue(String userLoginName, int notExpectedBulkValue);
+
+    void assertDoNotPhoneHasNotValue(String userLoginName, String notExpectedDoNotPhoneValue);
 
 }

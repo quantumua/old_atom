@@ -18,6 +18,13 @@
                     <include name="agreementCheckboxValidation"/>
                     <include name="submitButtonValidation"/>
                     <include name="validateConnectionInDBForDifferentCustomersButSameCreditCard"/>
+                    <include name="validateConnectionInDBForDifferentCustomersButSamePhone"/>
+                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameFirstAndLastNames"/>
+                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameEmail"/>
+                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameMachineID"/>
+                    <include name="validateBulkEmailHasNoneZeroForNewCreatedCustomer"/>
+                    <include name="validatePhoneCallsForNewCreatedCustomer"/>
+                    <include name="validateCustomerCreationSourceId"/>
                 </methods>
             </class>
         </classes>

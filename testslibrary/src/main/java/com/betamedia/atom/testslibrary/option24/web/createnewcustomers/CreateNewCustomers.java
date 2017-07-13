@@ -2,23 +2,11 @@ package com.betamedia.atom.testslibrary.option24.web.createnewcustomers;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
-import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.UserNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.core.persistence.entities.ContactBase;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
-import com.sun.javafx.scene.control.skin.TableColumnHeader;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-
-import java.util.List;
-
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -49,11 +37,8 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     private static final String PHONE_NO_DIGITS = "phone~!@#$";
     private static final String INCORRECT_PASSWORD = "!@#$%";
     private static final String NO_ERROR_MESSAGE = "Error message did not appear.";
-
-    @BeforeMethod
-    public void before() {
-
-    }
+    private static final int ZERO_VALUE = 0;
+    private static final int WEB_SOURCE_ID = 206440004;
 
     @Test(description = "CTW-5079:verify sign up button gives you the open account pop up")
     public void verifySignUpButtonRedirectToOnboardingOpenAccount() {
@@ -75,9 +60,9 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5375:first name field validations")
     public void applyForAnAccountFirstNameFieldValidations() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        CustomerRO customerRO = CustomerRO.builder(
+                CRMMobileAPINamingStrategy.get()).setFirstName(MAX_PLUS_ONE_CHARS).build();
         pages().topNavigationPage().signUp();
-        customerRO.setFirstName(MAX_PLUS_ONE_CHARS);
         pages().registrationDialog().fillRegisterForm(customerRO);
         assertEquals(MAX_CHARS, pages().registrationDialog().getFirstName());
         customerRO.setFirstName(SYMBOLS_AND_DIGITS);
@@ -90,9 +75,9 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5208:last name field validations")
     public void applyForAnAccountLastNameFieldValidations() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
+                .setLastName(MAX_PLUS_ONE_CHARS).build();
         pages().topNavigationPage().signUp();
-        customerRO.setLastName(MAX_PLUS_ONE_CHARS);
         pages().registrationDialog().fillRegisterForm(customerRO);
         assertEquals(MAX_CHARS, pages().registrationDialog().getLastName());
         customerRO.setLastName(SYMBOLS_AND_DIGITS);
@@ -105,12 +90,12 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5209:email field validations")
     public void emailFieldValidations() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        customerRO.setPassword(""); // set empty password to have fail on submit
-        customerRO.setEmail(INCORRECT_EMAIL);
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
+                .setPassword("").setEmail(INCORRECT_EMAIL).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRO);
-        assertEquals("Enter a valid email address.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals("Enter a valid email address.",
+                pages().registrationDialog().getErrorMessageNotification());
         customerRO.setEmail(INCORRECT_CHARS_IN_EMAIL);
         pages().registrationDialog().fillRegisterForm(customerRO);
         assertEquals("", pages().registrationDialog().getEmail());
@@ -138,9 +123,9 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5211:phone number field validations")
     public void phoneFieldValidations() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
+                .setPhone(PHONE_NO_DIGITS).build();
         pages().topNavigationPage().signUp();
-        customerRO.setPhone(PHONE_NO_DIGITS);
         pages().registrationDialog().register(customerRO);
         assertEquals("", pages().registrationDialog().getPhoneNumber());
         customerRO.setPhone(PHONE_FIVE_DIGITS);
@@ -150,7 +135,6 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5260:country dropdown field search engine")
     public void countryDropdownFieldSearchEngine() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().setCountryPrefix(JORDAN_COUNTRY);
         pages().redirectDialog().startTrade();
@@ -160,11 +144,11 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5261:country dropdown validations")
     public void countryDropdownValidations() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().countrySearch("", ISRAEL_COUNTRY);
         pages().redirectDialog().startTrade();
-        pages().registrationDialog().fillRegisterForm(customerRO);
+        pages().registrationDialog().fillRegisterForm(
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         pages().registrationDialog().submitRegisterForm();
         assertEquals(NO_ERROR_MESSAGE,
                 "Registration Is Not Available In Your Country",
@@ -173,23 +157,22 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5262:currency dropdown field validation")
     public void currencyDropdownFieldValidation() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().fillRegisterForm(customerRO);
+        pages().registrationDialog().fillRegisterForm(
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         assertFalse("Currencies are not available",
                 pages().registrationDialog().availableCurrencies().isEmpty());
     }
 
     @Test(description = "CTW-5264:password fields validations")
     public void passwordFieldsValidation() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
+                .setPassword("").build();
         pages().topNavigationPage().signUp();
-        customerRO.setPassword("");
         pages().registrationDialog().register(customerRO);
         assertEquals(NO_ERROR_MESSAGE,
                 "Incorrect password.",
                 pages().registrationDialog().getErrorMessageNotification());
-
         customerRO.setPassword(INCORRECT_PASSWORD);
         pages().registrationDialog().register(customerRO);
         assertEquals(NO_ERROR_MESSAGE,
@@ -219,9 +202,9 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5265:checkbox validation")
     public void agreementCheckboxValidation() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().fillRegisterForm(customerRO);
+        pages().registrationDialog().fillRegisterForm(
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
         assertEquals("You must read and agree to the above terms!",
@@ -230,9 +213,9 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
     @Test(description = "CTW-5359:submit button")
     public void submitButtonValidation() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerRO);
+        pages().registrationDialog().register(
+                CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         assertFalse(pages().registrationDialog().submitIsEnabled());
         assertTrue(pages().startTradeDialog().exists());
     }
@@ -243,21 +226,102 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().browser().deleteAllCookies();
         pages().browser().refreshPage();
         CustomerRO customerROSecond = registerCustomer();
-        waitForCalculation(4000);
         operations().onBoardingOperations().assertUsersHaveConnection(
                 customerROFirst.getEmail(),
                 customerROSecond.getEmail(),
                 "Same Credit Card");
-
     }
 
-    private void waitForCalculation(int milliseconds) {
-        try {
-            Thread.sleep(milliseconds); // wait until db will be calculated
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    @Test(description = "CTW-17744:Same Phone number1")
+    public void validateConnectionInDBForDifferentCustomersButSamePhone() {
+        CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
+                .setPhone(customerROFirst.getPhone()).build();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().register(customerROFirst);
+        pages().welcomePage().isStartBtnDisplayed();
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().register(customerROSecond);
+        pages().welcomePage().isStartBtnDisplayed();
+        operations().onBoardingOperations().assertUsersHaveConnection(
+                customerROFirst.getEmail(),
+                customerROSecond.getEmail(),
+                "Same Phone");
     }
+
+    @Test(description = "CTW-17745:Same First and last name")
+    public void validateNoConnectionsInDBForDifferentCustomersWithSameFirstAndLastNames() {
+        CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
+                .setFirstName(customerROFirst.getFirstName())
+                .setLastName(customerROFirst.getLastName())
+                .build();
+        createCustomer(customerROFirst);
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        createCustomer(customerROSecond);
+        operations().onBoardingOperations().assertUsersHaveNotConnection(
+                customerROFirst.getEmail(),
+                customerROSecond.getEmail());
+    }
+
+    @Test(description = "CTW-17743:Same Email")
+    public void validateNoConnectionsInDBForDifferentCustomersWithSameEmail() {
+        CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
+                .setEmail(customerROFirst.getEmail())
+                .build();
+        createCustomer(customerROFirst);
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        createCustomer(customerROSecond);
+        operations().onBoardingOperations().assertUsersHaveNotConnection(
+                customerROFirst.getEmail(),
+                customerROSecond.getEmail());
+    }
+
+    @Test(description = "CTW-17746:Same Machine ID -negative")
+    public void validateNoConnectionsInDBForDifferentCustomersWithSameMachineID() {
+        CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        createCustomer(customerROFirst);
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        createCustomer(customerROSecond);
+        operations().onBoardingOperations().assertUsersHaveNotConnection(
+                customerROFirst.getEmail(),
+                customerROSecond.getEmail());
+    }
+
+    @Test(description = "CTW-7884:Bulk emails indicator Allow=No by default")
+    public void validateBulkEmailHasNoneZeroForNewCreatedCustomer() {
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        createCustomer(customerRO);
+        operations().onBoardingOperations().assertBulkEmailHasNotValue(customerRO.getEmail(), ZERO_VALUE);
+    }
+
+    @Test(description = "CTW-9009:Phone calls indicator = Allow by default")
+    public void validatePhoneCallsForNewCreatedCustomer() {
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        createCustomer(customerRO);
+        operations().onBoardingOperations().assertDoNotPhoneHasNotValue(customerRO.getEmail(), String.valueOf(ZERO_VALUE));
+    }
+
+    @Test(description = "CTW-2544: Web page")
+    public void validateCustomerCreationSourceId() {
+        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        createCustomer(customerRO);
+        operations().onBoardingOperations().assertTrafficSource(customerRO.getEmail(), WEB_SOURCE_ID);
+    }
+
+    private void createCustomer(CustomerRO customerRO) {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().register(customerRO);
+        pages().welcomePage().isStartBtnDisplayed();
+    }
+
     private void passQuestionnaire() {
         pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
                 .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
@@ -311,6 +375,11 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         passQuestionnaire();
         pages().riskWarningPage().accept();
         pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        try {
+            pages().uploadDocumentDialog().exists();
+        } catch (Exception e) {
+            Reporter.log("Upload documents dialog did not appear");
+        }
         return customerRO;
     }
 
@@ -335,81 +404,6 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
         return customerRO;
     }
-
-    @Test(description = "CTW-17744:Same Phone number1")
-    public void validateConnectionInDBForDifferentCustomersButSamePhone() {
-        CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        customerROSecond.setPhone(customerROFirst.getPhone());
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerROFirst);
-        pages().browser().deleteAllCookies();
-        pages().browser().refreshPage();
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerROSecond);
-        //TODO: check same connections for customers in the DB for the same phone
-    }
-
-    @Test(description = "CTW-17745:Same First and last name")
-    public void validateNoConnectionsInDBForDifferentCustomersWithSameFirstAndLastNames() {
-        CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        customerROSecond.setFirstName(customerROFirst.getFirstName());
-        customerROSecond.setLastName(customerROFirst.getLastName());
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerROFirst);
-        pages().browser().deleteAllCookies();
-        pages().browser().refreshPage();
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerROSecond);
-        //TODO: check no connections for customers in the DB for the same firstname and lastname
-    }
-
-    @Test(description = "CTW-17743:Same Email")
-    public void validateNoConnectionsInDBForDifferentCustomersWithSameEmail() {
-        CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        customerROSecond.setEmail(customerROFirst.getEmail());
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerROFirst);
-        pages().browser().deleteAllCookies();
-        pages().browser().refreshPage();
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerROSecond);
-        //TODO: check no connections for customers in the DB for the same email
-    }
-
-    @Test(description = "CTW-7884:Bulk emails indicator Allow=No by default")
-    public void validateBulkEmailsForNewCreatedCustomer() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerRO);
-        //TODO:
-        /*
-            select bt_acceptbulkemail, c.*
-            from contactextensionbase c
-            where c.bt_username = '<Username>'
-            and c.bt_acceptbulkemail <> '0';
-         */
-    }
-
-    @Test(description = "CTW-9009:Phone calls indicator = Allow by default")
-    public void validatePhoneCallsForNewCreatedCustomer() {
-        CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(customerRO);
-        //TODO:
-        /*
-            select b.DoNotPhone, c.*
-            from contactextensionbase c,
-            contactbase b
-            where c.ContactId = b.ContactId
-            and c.bt_username = '<Username>'
-            and b.DoNotPhone <> '0';
-         */
-    }
-
-
 
     private void passTradingQuestionnaire() {
         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
