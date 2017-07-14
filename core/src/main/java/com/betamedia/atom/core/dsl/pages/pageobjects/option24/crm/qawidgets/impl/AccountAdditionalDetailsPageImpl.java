@@ -1,11 +1,14 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.Reporter;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
@@ -32,7 +35,6 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     private By nationality;
     @StoredId
     private By update;
-
 
     public AccountAdditionalDetailsPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -88,12 +90,62 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     }
     
     public String getBirthDaySelectedItem(){
-    	return waitUntilDisplayed(birthDateDay).getAttribute("value");
+    	return getElementCssValue(birthDateDay,"value");
     }
 
-    public String getColorOfElement(){
-    	String borderColor = waitUntilDisplayed(birthDateDay).getCssValue("border");
+    public String getBirthDateDayElementColor () {
+    	String borderColor = getElementCssValue(birthDateDay, "border");
         return borderColor;	
+    }
+    
+    public void verifyTextDirectionElements (String textDirection) {
+    	List<By> listElements = getDeclaredElements(this);
+        for (By element : listElements) {
+    	    String actualTextDirection = getTextDirectionOfElement(element);        	
+            Assert.assertEquals(textDirection.toLowerCase(), actualTextDirection.toLowerCase());
+        }
+    }
+    
+    /**
+     * Getting declared list of {@link By} elements for given {@link Object} page class
+     *
+     * @param page class for any page 
+     * @return list of elements on a page
+     *
+     */
+
+    protected List<By> getDeclaredElements(Object page) {
+    	Field[] declaredFields = page.getClass().getDeclaredFields();
+    	List<By> listOfElements = new ArrayList<>();
+        for (Field field : declaredFields) {
+        	By element = null;
+        	try {
+				element = (By) field.get(page);
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}        	
+			Reporter.log("Found element : " + element + "<br/>");
+        	
+        	if (element != null) {
+        		listOfElements.add(element);
+        	}
+        }
+        return listOfElements;
+    } 
+    
+    private String getTextDirectionOfElement(By element){
+    	String direction = getElementCssValue(element, "direction");    	    	
+        return direction;	
+    }
+    
+    private String getElementCssValue(By element, String cssValueName){
+    	String cssValue =waitUntilDisplayed(element).getCssValue(cssValueName);
+    	Reporter.log("Processing element: " + element.toString() + ", got CSS Value: " + cssValueName + "=" + cssValue + "<br/>");
+    	return cssValue;
     }
     
     @Override
@@ -133,6 +185,5 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
         inSelect(birthDateYear).selectByValue(info.birthDateYear);
         inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
         inSelect(nationality).selectByValue(info.nationality);
-    }
-    
+    }    
 }

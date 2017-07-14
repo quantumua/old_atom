@@ -7,6 +7,8 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,loginBtn,ID,login_btn
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,myAccountBtn,ID,myaccount_btn
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,homePageLink,XPATH,//*[@id='header']/div[2]/div[1]/a/img
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,languageMenu,ID,language-menu
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,flagLanguage,XPATH,//*[@id='header']/div[@class="flag-menu active"]//a
 2.6.2,2017-05-29 15:24 +0000,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
 2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,amountInput,ID,bmBidAmountInput
 2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame
@@ -237,7 +239,6 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,registrationWidget,ID,OpenFullRegistration
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,submitButton,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,logo,CSS,.pull-left.logo
-2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,languageMenu,ID,language-menu
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,riskWarningFooter,CLASS_NAME,roamin-container
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,liveChat,ID,livechat-compact-view-simulate
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,loginButton,ID,login_btn

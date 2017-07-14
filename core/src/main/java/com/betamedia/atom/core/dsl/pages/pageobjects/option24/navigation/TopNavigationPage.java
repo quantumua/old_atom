@@ -22,4 +22,8 @@ public interface TopNavigationPage {
     void goToHomePage();
     
     List<String> getProducts();
+ 
+    boolean languageExists();
+    
+	void selectLanguage(String language);
 }

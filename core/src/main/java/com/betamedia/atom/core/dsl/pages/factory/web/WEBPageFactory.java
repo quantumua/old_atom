@@ -8,6 +8,7 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.Registr
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.SignatureRiskWarning;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomeBackMessageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
@@ -40,5 +41,7 @@ public interface WEBPageFactory {
     OnBoardingWizard onBoardingWizard();
 
 	SignatureRiskWarning signatureRiskWarning();
+
+	WelcomeBackMessageImpl welcomeBackMessage();
 
 }

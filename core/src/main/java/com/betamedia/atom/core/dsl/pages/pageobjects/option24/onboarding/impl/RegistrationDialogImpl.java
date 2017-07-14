@@ -50,8 +50,6 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @StoredId
     private By logo;
     @StoredId
-    private By languageMenu;
-    @StoredId
     private By riskWarningFooter;
     @StoredId
     private By liveChat;
@@ -112,11 +110,6 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @Override
     public boolean logoExists() {
         return waitUntilDisplayed(logo).isDisplayed();
-    }
-
-    @Override
-    public boolean languageExists() {
-        return waitUntilDisplayed(languageMenu).isDisplayed();
     }
 
     @Override

@@ -20,6 +20,7 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.On
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RegistrationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RiskWarningImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.SignatureRiskWarningImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomeBackMessageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomePageImpl;
 import com.betamedia.atom.core.dsl.pages.type.ProductType;
 import org.springframework.context.annotation.Lazy;
@@ -55,6 +56,12 @@ public class WEBPageFactoryImpl extends AbstractPageFactory implements WEBPageFa
 	public WelcomePage welcomepage() {
 		return creator.getPage(WelcomePageImpl.class);
 	}
+	
+    @Override
+    public WelcomeBackMessageImpl welcomeBackMessage() {
+        return creator.getPage(WelcomeBackMessageImpl.class);
+    }
+	
 	@Override
 	public AccountAdditionalDetailsPage accountAdditionalDetailsPage() {
 		return creator.getPage(AccountAdditionalDetailsPageImpl.class);

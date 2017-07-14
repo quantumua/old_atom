@@ -5,6 +5,8 @@ import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Reporter;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,9 +18,9 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @StoredId
     private By mainMenu;
-    @StoredId("loginBtn")
+    @StoredId
     private By loginBtn;
-    @StoredId("myAccountBtn")
+    @StoredId
     private By myAccountBtn;
     @StoredId
     private By binaryBtn;
@@ -30,6 +32,11 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By homePageLink;
     @StoredId
     private By productButtons;
+    @StoredId
+    private By languageMenu;
+    @StoredId
+    private By flagLanguage;
+    
 
     public TopNavigationPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -76,5 +83,24 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     @Override
     public List<String> getProducts() {
         return findElements(productButtons).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+    
+    @Override
+    public boolean languageExists() {
+        return waitUntilDisplayed(languageMenu).isDisplayed();
+    }
+    
+    /**
+     * Switch whole portal UI to given language
+     * @language - language code like EN for English, DE for German 
+     */
+    @Override    
+    public void selectLanguage(String language) {
+    	Reporter.log("Switching to language: " + language + "<br/>");
+        waitUntilDisplayed(languageMenu).click();
+        findElements(flagLanguage).stream()
+                        .filter(element -> element.getAttribute("data-icl-code").toLowerCase().contains(language.toLowerCase()))
+                        .findFirst().orElse(null)
+                        .click();
     }
 }

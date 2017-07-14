@@ -17,7 +17,8 @@ public interface AccountAdditionalDetailsPage {
 	void clickDropDownButton();
 	List<String> getBirthDayDataList();
 	String getBirthDaySelectedItem();
-	String getColorOfElement();
+	String getBirthDateDayElementColor();
 	void selectBirthDayData();
 	String getElementsBackground();
+	void verifyTextDirectionElements (String textDirection);
 }

@@ -4,11 +4,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
-import com.betamedia.atom.core.api.crm.form.entities.QuestionnaireData;
-import com.betamedia.atom.core.api.crm.form.parsers.PersonalInformationParser;
-import com.betamedia.atom.core.api.crm.form.parsers.TradingExperienceInfoParser;
-import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
 
 /**
@@ -16,7 +11,7 @@ import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
  * @since 7/13/17
  */
 
-public class PersonalDetailsSlideLocalisationTest extends WEBEndToEndTest{
+public class PersonalDetailsSlideLocalisationTest extends WEBEndToEndTest {//AbstractOnboardingUserExperienceTest{
 	/*
 	 *[testlink]  CTW-5680:Verify the slide is translated to all languages
 	 */
@@ -43,7 +38,13 @@ public class PersonalDetailsSlideLocalisationTest extends WEBEndToEndTest{
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5682:Verify the slide turns RTL on AR")
     public void  verifyTheSlideTurnsRTLOnAR(String countrycode) {
-    	
+        pages().topNavigationPage().signUp();
+        pages().registrationPage().register(countrycode);
+        pages().welcomepage().isStartBtnDisplayed();
+        pages().welcomepage().start();
+        pages().topNavigationPage().selectLanguage("AR");
+        pages().welcomeBackMessage().continueQuestionnaire();                
+        pages().accountAdditionalDetailsPage().exists();
+        pages().accountAdditionalDetailsPage().verifyTextDirectionElements("RTL");        
     }
-
 }

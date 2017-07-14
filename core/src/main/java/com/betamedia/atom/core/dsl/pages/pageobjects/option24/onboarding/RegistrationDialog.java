@@ -15,8 +15,6 @@ public interface RegistrationDialog {
 
     boolean logoExists();
 
-    boolean languageExists();
-
     boolean liveChatExists();
 
     boolean riskMessageExists();
@@ -66,4 +64,5 @@ public interface RegistrationDialog {
     boolean submitIsEnabled();
 
     boolean chatLinkDisplayed();
+
 }
