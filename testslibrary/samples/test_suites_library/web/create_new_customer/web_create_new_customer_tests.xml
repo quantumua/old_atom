@@ -14,7 +14,7 @@
                     <include name="countryDropdownFieldSearchEngine"/>
                     <include name="countryDropdownValidations"/>
                     <include name="currencyDropdownFieldValidation"/>
-                    <include name="passwordFieldsValidation"/>  <!-- failed in the 5 chars password -->
+                    <include name="passwordFieldsValidation"/>
                     <include name="agreementCheckboxValidation"/>
                     <include name="submitButtonValidation"/>
                     <include name="validateConnectionInDBForDifferentCustomersButSameCreditCard"/>

@@ -24,7 +24,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     private static final String ONE_SYMBOL = "a";
     private static final String MAX_PLUS_ONE_CHARS = "abcdefghijklmnopqrstu";
     private static final String MAX_CHARS = "abcdefghijklmnopqrst";
-    private static final String FIVE_CHARS = "abcde";
+    private static final String FOUR_CHARS = "abcd";
     private static final String SYMBOLS_AND_DIGITS = "a1b2c3d4e5";
     private static final String SYMBOLS_AND_NO_DIGITS = "abcde";
     private static final String FAIL_NAME_NOTIFICATION = "Enter at least 2 characters";
@@ -231,14 +231,14 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
                 pages().registrationDialog().getPasswordSize());
         pages().browser().refreshPage();
         pages().topNavigationPage().signUp();
-        customerRO.setPassword(FIVE_CHARS);
+        customerRO.setPassword(FOUR_CHARS);
         pages().registrationDialog().register(customerRO);
         assertEquals(NO_ERROR_MESSAGE,
                 "Enter between 5 to 15 characters",
                 pages().registrationDialog().getErrorMessageNotification());
         pages().browser().refreshPage();
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
+        pages().registrationDialog().fillRegisterForm(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
         assertEquals(GREEN_RGB_STYLE,
