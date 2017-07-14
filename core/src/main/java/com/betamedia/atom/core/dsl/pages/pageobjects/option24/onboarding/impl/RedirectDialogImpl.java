@@ -22,7 +22,8 @@ public class RedirectDialogImpl extends AbstractPageObject implements RedirectDi
 
     @Override
     public void startTrade() {
-        waitUntilDisplayed(startTrade).click();
+        waitUntilDisplayed(startTrade);
+        waitUntilClickable(startTrade).click();
         waitUntilPageLoad();
     }
 }

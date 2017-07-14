@@ -105,6 +105,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
 
     @Override
     public boolean exists() {
+        scrollIntoView(waitUntilDisplayed(submitButton));
         return waitUntilDisplayed(caption,submitButton).isDisplayed();
     }
 

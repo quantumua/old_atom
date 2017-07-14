@@ -241,6 +241,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().registrationDialog().fillRegisterForm(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
+        pages().registrationDialog().agreementStatus();
         assertEquals(GREEN_RGB_STYLE,
                 pages().registrationDialog().getBorderColorForPassword());
         pages().registrationDialog().clickAgreement();
@@ -469,6 +470,9 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      */
     private CustomerRO registerCustomer() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
+        operations().customerOperations().updateCustomersOnboardingConditions(
+                operations().customerOperations().register(customerRO),
+                createConditionsToShowOnlyDepositPage());
         pages().topNavigationPage().logIn();
         pages().loginPage().login(customerRO.getEmail(),customerRO.getPassword());
         pages().welcomeBackMessage().exists();
@@ -483,5 +487,14 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
             Reporter.log("Upload documents dialog did not appear");
         }
         return customerRO;
+    }
+
+    private OnboardingWizardConditions createConditionsToShowOnlyDepositPage() {
+        return new OnboardingWizardConditions(true, true, true, true,
+                OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, false,
+                OnboardingWizardConditions.AccountType.REAL,
+                OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED,
+                OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED, true,
+                true, OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED);
     }
 }
