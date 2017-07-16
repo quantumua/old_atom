@@ -21,11 +21,13 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	 private static CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).build(); 	       
 	      
 	 	    	    
-	    @Parameters({"countrycode"}) 
-        @Test(description = "CTW-9050")
+	 @Parameters({"countrycode"}) 
+     @Test(description = "CTW-9050")
 	    public void  scoringTest1(String countrycode) {
+	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
+	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(countrycode);
+	       pages().registrationPage().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -35,7 +37,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	               .withCountryOfBirth("DE")
 	               .withNationality("DE")
 	               .build());
-      
+   
 	       
 	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 	                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
@@ -78,12 +80,15 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	                 .build());
 	       
 	       pages().creditCardDepositPage().waitforCreditCardDepositPage();
+	       operations().onBoardingOperations().assertUsernameScore(userName,Double.valueOf(79));
 	    }
 	    @Parameters({"countrycode"}) 
-        @Test(description = "CTW-9074")
+     @Test(description = "CTW-9074")
 	    public void  scoringTest2(String countrycode) {
+	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
+	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(countrycode);
+	       pages().registrationPage().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -93,7 +98,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	               .withCountryOfBirth("DE")
 	               .withNationality("DE")
 	               .build());
-      
+   
 	       
 	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 	                .withEmploymentStatus(Questions.EmploymentStatus.UNEMPLOYED.get())
@@ -135,14 +140,17 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	                 .build());
 	       
 	       pages().creditCardDepositPage().waitforCreditCardDepositPage();
+	       operations().onBoardingOperations().assertUsernameScore(userName,Double.valueOf(52));
 	    }
 	    
 	    @Parameters({"countrycode"}) 
-        @Test(description = "CTW-9075")
+     @Test(description = "CTW-9075")
 	    public void  scoringTest3(String countrycode) {
+	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
+	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(countrycode);
-	       pages().welcomepage().isStartBtnDisplayed();
+	       pages().registrationPage().register(customerRO, countrycode);
+		   pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
 	               .withBirthDateDay("1")
@@ -151,7 +159,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	               .withCountryOfBirth("DE")
 	               .withNationality("DE")
 	               .build());
-      
+   
 	       
 	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 	                .withEmploymentStatus(Questions.EmploymentStatus.STUDENT.get())
@@ -192,13 +200,16 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	                 .build());
 	       
 	       pages().creditCardDepositPage().waitforCreditCardDepositPage();
+	       operations().onBoardingOperations().assertUsernameScore(userName,Double.valueOf(46));
 	    }
 	    
 	    @Parameters({"countrycode"}) 
-        @Test(description = "CTW-9076")
+     @Test(description = "CTW-9076")
 	    public void  scoringTest4(String countrycode) {
+	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
+	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(countrycode);
+	       pages().registrationPage().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -208,7 +219,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	               .withCountryOfBirth("DE")
 	               .withNationality("DE")
 	               .build());
-      
+   
 	       
 	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 	                .withEmploymentStatus(Questions.EmploymentStatus.RETIRED.get())
@@ -248,13 +259,16 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	                 .build());
 	       
 	       pages().creditCardDepositPage().waitforCreditCardDepositPage();
+	       operations().onBoardingOperations().assertUsernameScore(userName,Double.valueOf(41));
 	    }
 	    
 	    @Parameters({"countrycode"}) 
-        @Test(description = "CTW-9077")
+     @Test(description = "CTW-9077")
 	    public void  scoringTest5(String countrycode) {
+	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
+	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(countrycode);
+	       pages().registrationPage().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -264,7 +278,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	               .withCountryOfBirth("DE")
 	               .withNationality("DE")
 	               .build());
-      
+   
 	       
 	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 	                .withEmploymentStatus(Questions.EmploymentStatus.SELF_EMPLOYED.get())
@@ -307,13 +321,16 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	                 .build());
 	       
 	       pages().creditCardDepositPage().waitforCreditCardDepositPage();
+	       operations().onBoardingOperations().assertUsernameScore(userName,Double.valueOf(45));
 	    }
 	    
 	    @Parameters({"countrycode"}) 
-        @Test(description = "CTW-9078")
+     @Test(description = "CTW-9078")
 	    public void  scoringTest6(String countrycode) {
+	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
+	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(countrycode);
+	       pages().registrationPage().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -323,7 +340,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	               .withCountryOfBirth("DE")
 	               .withNationality("DE")
 	               .build());
-      
+   
 	       
 	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 	                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
@@ -361,6 +378,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	                 .withLossOn1to200Knowledge(Questions.LossOn1to200Knowledge.A2_1200.get())
 	                 .build());
 	       
-	       pages().creditCardDepositPage().waitforCreditCardDepositPage();
+	       pages().riskwarning().waitForRiskWarning();
+	       operations().onBoardingOperations().assertUsernameScore(userName,Double.valueOf(30));
 	    }
 }
