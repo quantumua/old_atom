@@ -1,6 +1,8 @@
 package com.betamedia.atom.core.holders;
 
 import com.google.common.base.Strings;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,9 @@ import java.util.Properties;
  */
 @Component
 public final class ConfigurationPropertiesProvider {
+
+    private static final Logger logger = LogManager.getLogger(ConfigurationPropertiesProvider.class);
+
     public static final String REMOTE_DRIVER_URL = "remote.driver.url";
     public static final String ENVIRONMENT_URL = "environment.url";
     public static final String BROWSER_TYPE = "browser.type";
@@ -48,6 +53,7 @@ public final class ConfigurationPropertiesProvider {
 
     private void putSystemProperty(String key, Properties properties, String defaultValue) {
         String value = env.getProperty(key, defaultValue);
+        logger.info("Test running parameter: " + key + ": " + value);
         if (!Strings.isNullOrEmpty(value)) {
             properties.put(key, value);
         }

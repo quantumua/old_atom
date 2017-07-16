@@ -1,4 +1,4 @@
-package com.betamedia.atom.core.configuration.executors;
+package com.betamedia.atom.app.config.executors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
