@@ -87,10 +87,10 @@ public class PersonalDetailsSlideTest extends WEBEndToEndTest{
     @TestLinkDisplayId(value = "CTW-5660")
     public void verifySelectionChangesDropDownColor(String countrycode){
         registerAndStart(countrycode);
-        String colorOfBorderBeforeClick = pages().accountAdditionalDetailsPage().getColorOfElement();
+        String colorOfBorderBeforeClick = pages().accountAdditionalDetailsPage().getBirthDateDayElementColor();
         pages().accountAdditionalDetailsPage().clickDropDownButton();
         pages().accountAdditionalDetailsPage().selectBirthDayData();
-        String colorOfBorderAfterClick = pages().accountAdditionalDetailsPage().getColorOfElement();
+        String colorOfBorderAfterClick = pages().accountAdditionalDetailsPage().getBirthDateDayElementColor();
         Assert.assertNotEquals(colorOfBorderAfterClick, colorOfBorderBeforeClick);
     }
 

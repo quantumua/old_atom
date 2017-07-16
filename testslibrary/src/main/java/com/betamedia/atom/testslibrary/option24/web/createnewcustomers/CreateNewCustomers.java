@@ -62,7 +62,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     public void applyForAnAccountElementsVerification() {
         pages().topNavigationPage().signUp();
         assertTrue("Logo does not appear.", pages().registrationDialog().logoExists());
-        assertTrue("Registration dialog does not appear.",pages().registrationDialog().languageExists());
+        assertTrue("Registration dialog does not appear.",pages().topNavigationPage().languageExists());
         assertTrue("Login button does not appear.", pages().registrationDialog().loginButtonExists());
         assertTrue("Risk notification does not appear.", pages().registrationDialog().riskMessageExists());
         //assertTrue("Live chat does not appear.", pages().registrationDialog().liveChatExists());
