@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * This class is designed to facilitate the execution of common operations related to customer operations.
@@ -313,21 +314,16 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     }
 
     @Override
-    public Integer findNationality(String contactId) {
+    public ContactExtension getContactExtension(String contactId) {
         ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
-        return contactExtension.getNationality();
+        assertNotNull(contactExtension);
+        return contactExtension;
     }
-    
+
     @Override
-    public Integer findCountryOfBirth(String contactId) {
-        ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
-        return  contactExtension.getCountryOfBirth();
-    }
-    
-    @Override
-    public String findBirthDate(String contactId) {
+    public ContactBase getContactBase(String contactId) {
         ContactBase contactBase = contactBaseRepository.findOne(contactId);
-        return  contactBase.getBirthDate().toString();
+        assertNotNull(contactBase);
+        return contactBase;
     }
-    
 }

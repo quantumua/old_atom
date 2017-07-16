@@ -3,6 +3,7 @@ package com.betamedia.atom.core.dsl.operations;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
+import com.betamedia.atom.core.persistence.entities.ContactBase;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.persistence.entities.TrackingInfo;
 import com.betamedia.atom.core.persistence.entities.TrackingInfoExtension;
@@ -18,7 +19,7 @@ import java.util.List;
  * @author Maksym Tsybulskyy
  *         Date: 3/31/17.
  */
-public interface CustomerOperations <T extends EnvironmentDependent> extends EnvironmentDependent{
+public interface CustomerOperations<T extends EnvironmentDependent> extends EnvironmentDependent {
 
     CRMCustomer register();
 
@@ -26,7 +27,7 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     CRMCustomer register(CustomerRO customerRO, MarketingParametersRO marketingParametersRO);
 
-    List<CRMError>  registerWithErrors(CustomerRO customerRO);
+    List<CRMError> registerWithErrors(CustomerRO customerRO);
 
     CRMCustomer login(String username, String password);
 
@@ -40,7 +41,7 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     CRMDeposit depositByName(MobileDepositRO deposit);
 
-    List<CRMError>  depositByNameWithErrors(MobileDepositRO depositRO);
+    List<CRMError> depositByNameWithErrors(MobileDepositRO depositRO);
 
     TrackingInfoExtension getCustomerTrackingInfoExtensionByCustomerId(String customerId);
 
@@ -60,9 +61,7 @@ public interface CustomerOperations <T extends EnvironmentDependent> extends Env
 
     double findMaximumDepositLimit(String contactId);
 
-    Integer findNationality(String contactId);
+    ContactExtension getContactExtension(String contactId);
 
-    Integer findCountryOfBirth(String contactId);
-
-    String findBirthDate(String contactId);
+    ContactBase getContactBase(String contactId);
 }

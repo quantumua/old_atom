@@ -26,7 +26,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJpaRepositories(
         basePackageClasses = {
-                ContactBase.class,
                 ContactExtension.class,
                 AutomationEnvContactExtensionRepository.class
         },
@@ -48,7 +47,6 @@ public class AutomationPersistenceConfig {
         return builder
                 .dataSource(automationDataSource())
                 .packages(
-                        ContactBase.class,
                         ContactExtension.class,
                         AutomationEnvContactExtensionRepository.class)
                 .persistenceUnit("automationPersistenceUnit")
