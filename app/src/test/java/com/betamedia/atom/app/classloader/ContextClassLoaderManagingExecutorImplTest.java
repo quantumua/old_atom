@@ -1,7 +1,7 @@
 package com.betamedia.atom.app.classloader;
 
 import com.betamedia.atom.app.classloader.impl.ContextClassLoaderManagingExecutorImpl;
-import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
+import com.betamedia.atom.app.storage.TempStorageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -33,7 +33,7 @@ public class ContextClassLoaderManagingExecutorImplTest {
     @InjectMocks
     private ContextClassLoaderManagingExecutorImpl executionHandler;
     @Mock
-    private StorageService storageService;
+    private TempStorageService storageService;
     @Mock
     private URLClassLoaderFactory classLoaderFactory;
     @Mock

@@ -1,9 +1,8 @@
 package com.betamedia.atom;
 
 import com.betamedia.atom.app.AppInfrastructure;
-import com.betamedia.atom.core.CoreInfrastructure;
 import com.betamedia.atom.app.classloader.ContextClassLoaderManagingExecutor;
-import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
+import com.betamedia.atom.app.storage.TempStorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +18,7 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner runner(StorageService storageService,
+    CommandLineRunner runner(TempStorageService storageService,
                              ContextClassLoaderManagingExecutor contextClassLoaderManagingExecutor) {
         return args -> {
             storageService.deleteAll();

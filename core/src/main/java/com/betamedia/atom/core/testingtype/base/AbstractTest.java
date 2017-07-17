@@ -24,14 +24,18 @@ import java.util.List;
  * @author mbelyaev
  * @since 5/23/17
  */
-@Listeners({ExternalExecutionListener.class, ScreenShotListener.class, TestLinkListener.class})
+@Listeners({
+        ExternalExecutionListener.class,
+        ScreenShotListener.class,
+        TestLinkListener.class
+})
 public abstract class AbstractTest {
     protected static final String GENERIC_DATA_PROVIDER = "GenericDataProvider";
     protected static final String GENERIC_PARALLEL_DATA_PROVIDER = "GenericParallelDataProvider";
     protected static final String CACHED_DATA_PROVIDER = "CachedDataProvider";
     protected static final String CACHED_PARALLEL_DATA_PROVIDER = "CachedParallelDataProvider";
     private static final String DATA_PROVIDER_ERROR = "Failed to load data";
-
+    
     private EntityRepository entityRepository = null;
 
     /**
@@ -129,7 +133,7 @@ public abstract class AbstractTest {
                 .map(a -> new Object[]{a})
                 .iterator();
     }
-
+    
     protected final <T> List<T> getResources(Class<T> entity) {
         return getEntityRepository().get(entity);
     }

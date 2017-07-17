@@ -11,37 +11,59 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.testng.IExecutionListener;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Properties;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author Maksym Tsybulskyy
  *         Date: 6/30/17.
  */
 public class ExternalExecutionListener implements IExecutionListener {
-
+    private static final String CONTEXT_FOUND = "Application context found, aborting initialization";
+    private static final String NO_MANAGED_CONTEXT = "No managed context in this listener, exiting";
+    private static final String DESTROYING_MANAGED_CONTEXT = "Destroying listener-managed application context";
     private static final Logger logger = LogManager.getLogger(ExternalExecutionListener.class);
-
+    private static final ReentrantReadWriteLock.WriteLock ctxLock = new ReentrantReadWriteLock().writeLock();
     private ConfigurableApplicationContext context;
 
     @Override
     public void onExecutionStart() {
-        if (isContextExist()) {
-            logger.info("Spring context already exists, abort new initialization");
+        if (isContextPresent()) {
+            logger.debug(CONTEXT_FOUND);
             return;
         }
-        context = SpringApplication.run(CoreInfrastructure.class);
-        ConfigurationPropertiesProvider configProperties = context.getBean(ConfigurationPropertiesProvider.class);
-        TPTestRunningEnvInitializer tpTestRunningEnvInitializer = context.getBean(TPTestRunningEnvInitializer.class);
-        Properties properties = configProperties.getFromSystem();
-        tpTestRunningEnvInitializer.initializeEnvironment(properties);
+        ctxLock.lock();
+        try {
+            if (isContextPresent()) {
+                logger.debug(CONTEXT_FOUND);
+                return;
+            }
+            context = SpringApplication.run(CoreInfrastructure.class);
+            logger.debug("Initialized listener-managed application context");
+        } finally {
+            ctxLock.unlock();
+        }
+        initializeContext();
     }
 
     @Override
     public void onExecutionFinish() {
+        if (isContextPresent()) {
+            logger.debug(NO_MANAGED_CONTEXT);
+            return;
+        }
+        logger.debug(DESTROYING_MANAGED_CONTEXT);
+        context.close();
     }
 
-    private boolean isContextExist() {
+    private static boolean isContextPresent() {
         return Objects.nonNull(AppContextHolder.getContext());
+    }
+
+    private void initializeContext() {
+        ConfigurationPropertiesProvider configProperties = context.getBean(ConfigurationPropertiesProvider.class);
+        TPTestRunningEnvInitializer tpTestRunningEnvInitializer = context.getBean(TPTestRunningEnvInitializer.class);
+        Properties properties = configProperties.getFromSystem();
+        tpTestRunningEnvInitializer.initializeEnvironment(properties);
     }
 }

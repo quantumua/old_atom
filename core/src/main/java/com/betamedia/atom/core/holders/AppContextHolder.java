@@ -31,5 +31,5 @@ public class AppContextHolder {
 
     public static ConfigurableApplicationContext getContext(){
         return context;
-    };
+    }
 }

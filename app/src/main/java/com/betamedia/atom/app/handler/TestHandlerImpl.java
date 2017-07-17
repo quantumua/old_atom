@@ -3,7 +3,7 @@ package com.betamedia.atom.app.handler;
 import com.betamedia.atom.app.entity.TestInformation;
 import com.betamedia.atom.app.executor.AsyncTestExecutor;
 import com.betamedia.atom.app.executor.AsyncTestExecutorImpl;
-import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
+import com.betamedia.atom.app.storage.TempStorageService;
 import com.betamedia.atom.core.utils.PropertiesUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +37,7 @@ public class TestHandlerImpl implements TestHandler {
     private static final Logger logger = LogManager.getLogger(TestHandlerImpl.class);
 
     @Autowired
-    private StorageService storageService;
+    private TempStorageService storageService;
     @Autowired
     private TestInformationHandler testInformationHandler;
     @Autowired

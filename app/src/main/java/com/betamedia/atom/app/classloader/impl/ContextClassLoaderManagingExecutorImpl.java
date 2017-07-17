@@ -2,7 +2,7 @@ package com.betamedia.atom.app.classloader.impl;
 
 import com.betamedia.atom.app.classloader.ContextClassLoaderManagingExecutor;
 import com.betamedia.atom.app.classloader.URLClassLoaderFactory;
-import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
+import com.betamedia.atom.app.storage.TempStorageService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
     private static final Logger logger = LogManager.getLogger(ContextClassLoaderManagingExecutorImpl.class);
 
     @Autowired
-    private StorageService storageService;
+    private TempStorageService storageService;
     @Autowired
     private URLClassLoaderFactory classLoaderFactory;
 
@@ -175,7 +175,7 @@ public class ContextClassLoaderManagingExecutorImpl implements ContextClassLoade
             }
         }
 
-        private void store(MultipartFile jar, StorageService storageService) {
+        private void store(MultipartFile jar, TempStorageService storageService) {
             pathLock.writeLock().lock();
             try {
                 if (jarLock.writeLock().tryLock()) {

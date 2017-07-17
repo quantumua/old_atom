@@ -6,7 +6,7 @@ import com.betamedia.atom.app.handler.TestInformationHandler;
 import com.betamedia.atom.app.reporting.EmailService;
 import com.betamedia.atom.app.scheduling.impl.ContinuousTest;
 import com.betamedia.atom.app.scheduling.impl.ContinuousTestHandlerImpl;
-import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
+import com.betamedia.atom.app.storage.TempStorageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -42,7 +42,7 @@ public class ContinuousTestHandlerImplTest {
     @Mock
     private AsyncTestExecutor asyncTestExecutor;
     @Mock
-    private StorageService storageService;
+    private TempStorageService storageService;
     @Mock
     private EmailService emailService;
     @Mock

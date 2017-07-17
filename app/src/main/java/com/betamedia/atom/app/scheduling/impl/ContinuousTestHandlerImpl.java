@@ -7,7 +7,7 @@ import com.betamedia.atom.app.handler.TestInformationHandler;
 import com.betamedia.atom.app.reporting.EmailService;
 import com.betamedia.atom.app.scheduling.ContinuousTestFactory;
 import com.betamedia.atom.app.scheduling.ContinuousTestHandler;
-import com.betamedia.atom.core.fwtestrunner.storage.StorageService;
+import com.betamedia.atom.app.storage.TempStorageService;
 import com.betamedia.atom.core.utils.PropertiesUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class ContinuousTestHandlerImpl implements ContinuousTestHandler {
     @Autowired
     private AsyncTestExecutor asyncTestExecutor;
     @Autowired
-    private StorageService storageService;
+    private TempStorageService storageService;
     @Autowired
     private EmailService emailService;
     @Autowired
