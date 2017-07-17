@@ -51,29 +51,6 @@
             <artifactId>opencsv</artifactId>
             <version>3.9</version>
         </dependency>
-        <!--gigaspaces-->
-        <dependency>
-            <artifactId>gs-runtime</artifactId>
-            <groupId>com.gigaspaces</groupId>
-            <version>${gs.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>*</artifactId>
-                    <groupId>*</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <artifactId>gs-openspaces</artifactId>
-            <groupId>com.gigaspaces</groupId>
-            <version>${gs.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>*</artifactId>
-                    <groupId>*</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>

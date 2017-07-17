@@ -23,8 +23,6 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     @StoredId
     private By myAccountBtn;
     @StoredId
-    private By binaryBtn;
-    @StoredId
     private By cfdBtn;
     @StoredId
     private By signUpBtn;
@@ -63,13 +61,6 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     }
 
     @Override
-    public void binary() {
-        waitUntilDisplayed(mainMenu);
-        find(mainMenu, binaryBtn).click();
-        waitUntilDisplayed(mainMenu);
-    }
-
-    @Override
     public void cfd() {
         waitUntilDisplayed(mainMenu,cfdBtn).click();
     }
@@ -92,7 +83,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     
     /**
      * Switch whole portal UI to given language
-     * @language - language code like EN for English, DE for German 
+     * @param language - language code like EN for English, DE for German
      */
     @Override    
     public void selectLanguage(String language) {

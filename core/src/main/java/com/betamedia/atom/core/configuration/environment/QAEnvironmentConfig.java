@@ -46,16 +46,6 @@ public class QAEnvironmentConfig {
     }
 
     @Bean
-    public AbstractAccountGroupOperations<QAEnvironment> qaAccountGroupOperations() {
-        return new AbstractAccountGroupOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
     public AbstractAccountOperations<QAEnvironment> qaAccountOperations() {
         return new AbstractAccountOperations<QAEnvironment>() {
 
@@ -66,128 +56,8 @@ public class QAEnvironmentConfig {
     }
 
     @Bean
-    public AbstractAssetOperations<QAEnvironment> qaAssetOperations() {
-        return new AbstractAssetOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
     public AbstractBonusOperations<QAEnvironment> qaBonusOperations() {
         return new AbstractBonusOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractBrandOperations<QAEnvironment> qaBrandOperations() {
-        return new AbstractBrandOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractFeedOperations<QAEnvironment> qaFeedOperations() {
-        return new AbstractFeedOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractOptionOperations<QAEnvironment> qaOptionOperations() {
-        return new AbstractOptionOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractOptionTemplateOperations<QAEnvironment> qaOptionTemplateOperations() {
-        return new AbstractOptionTemplateOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractOrderOperations<QAEnvironment> qaOrderOperations() {
-        return new AbstractOrderOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractPositionOperations<QAEnvironment> qaPositionOperations() {
-        return new AbstractPositionOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractSchedulerOperations<QAEnvironment> qaSchedulerOperations() {
-        return new AbstractSchedulerOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractTagOperations<QAEnvironment> qaTagOperations() {
-        return new AbstractTagOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractTimezoneOperations<QAEnvironment> qaTimezoneOperations() {
-        return new AbstractTimezoneOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractTradingCalendarOperations<QAEnvironment> qaTradingCalendarOperations() {
-        return new AbstractTradingCalendarOperations<QAEnvironment>() {
-
-            public EnvironmentType getEnvironment() {
-                return QAEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractVolatilityUnitOperations<QAEnvironment> qaVolatilityUnitOperations() {
-        return new AbstractVolatilityUnitOperations<QAEnvironment>() {
 
             public EnvironmentType getEnvironment() {
                 return QAEnvironmentConfig.getEnvironment();

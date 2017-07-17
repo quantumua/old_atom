@@ -10,10 +10,6 @@ import com.betamedia.tp.api.model.enums.BonusType;
  */
 public interface BonusOperations <T extends EnvironmentDependent> extends EnvironmentDependent{
 
-    Bonus get(String id);
-
-    Bonus getByDisplayId(String displayId);
-
     Bonus addBonus(String accountId, BonusType bonusType, Double amount, Double wagerAmount);
 
 }

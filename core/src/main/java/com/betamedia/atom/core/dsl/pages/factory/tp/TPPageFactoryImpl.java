@@ -3,12 +3,8 @@ package com.betamedia.atom.core.dsl.pages.factory.tp;
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.Assets;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.impl.AssetsImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.BinaryBidder;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.CfdBidder;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.impl.BinaryBidderImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.impl.CfdBidderImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.binaryselector.BinarySelector;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.binaryselector.impl.BinarySelectorImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.impl.ControlPanelImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.*;
@@ -30,9 +26,7 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavi
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.impl.BinaryPositionsImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.impl.CfdPositionsImpl;
 import com.betamedia.atom.core.dsl.pages.type.ProductType;
 import org.springframework.context.annotation.Lazy;
@@ -49,6 +43,11 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 @Component
 @Scope(SCOPE_PROTOTYPE)
 public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFactory {
+    @Override
+    public ProductType getType() {
+        return ProductType.TP;
+    }
+
     @Override
     public LoginPage loginPage() {
         return creator.getPage(LoginPageImpl.class);
@@ -75,11 +74,6 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public BinaryBidder binaryBidder() {
-        return creator.getPage(BinaryBidderImpl.class);
-    }
-
-    @Override
     public CfdBidder cfdBidder() {
         return creator.getPage(CfdBidderImpl.class);
     }
@@ -90,23 +84,8 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public BinarySelector binarySelector() {
-        return creator.getPage(BinarySelectorImpl.class);
-    }
-
-    @Override
-    public BinaryPositions binaryPositions() {
-        return creator.getPage(BinaryPositionsImpl.class);
-    }
-
-    @Override
     public LandingPage landingPage() {
         return creator.getPage(LandingPageImpl.class);
-    }
-
-    @Override
-    public ProductType getType() {
-        return ProductType.TP;
     }
 
     @Override

@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static com.betamedia.atom.core.api.tp.entities.response.CRMAccount.PlatformType.PANDA;
-import static com.betamedia.atom.core.api.tp.entities.response.CRMAccount.PlatformType.SCIPIO;
 
 /**
  * @author Maksym Tsybulskyy
@@ -118,15 +117,6 @@ public class CRMCustomer {
 
     public void setLanguage(String language) {
         this.language = language;
-    }
-
-    public CRMAccount getBinaryAccount(){
-        return Optional.ofNullable(getAccounts())
-                .map(Arrays::stream)
-                .orElseGet(Stream::empty)
-                .filter(acc-> (SCIPIO.getValue()).equals(acc.getPlatform()))
-                .findFirst()
-                .orElse(null);
     }
 
     public CRMAccount getFXCFDAccount(){

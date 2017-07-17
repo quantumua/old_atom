@@ -1,16 +1,11 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
-import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.core.dsl.operations.TagOperations;
-import com.betamedia.tp.api.model.Asset;
-import com.betamedia.tp.api.model.enums.OptionType;
-import org.testng.Assert;
 
 /**
  * @author  leonid.a
@@ -77,39 +72,6 @@ public class AbstractOnboardingUserExperienceTest extends AbstractOnboardingCond
                 CreditCardDeposit.builder().build());
     }
 
-    /**
-     * Create user via mobile API with parameters:
-     * ExperienceLevel = HIGH_EXPERIENCE
-     * ExperienceScore = HIGH_EXPERIENCE
-     */
-
-    protected CRMCustomer createHighExperiencedUserAndStartBinary() {
-        CRMCustomer crmCustomer = createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE);
-        pages().welcomePage().start();
-        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
-        updateCreditCard();
-        pages().startTradeDialog().startTrade();
-        pages().setLeverageDialog().selectLeverage("100");
-        pages().topNavigationPage().binary();
-        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        return crmCustomer;
-    }
-
-    /**
-     * Asset is ready to trade:
-     * 1. Get asset
-     * 2. Create a option: HILO, SHORT_TERM_60_SEC_GAME_H3_TEXT
-     * 3. Inject Feed for asset with price 1.5d
-     */
-    
-    protected Asset assetIsReadyToTrade(OptionType optionType, TagOperations.TagName tagName, double price) {
-     // TODO: Review Assets creation logic. It currently does not creates any Asset for selection
-     Asset asset = operations().assetOperations().get();
-     operations().optionTemplateOperations().create(asset.getId(), optionType, tagName);
-     operations().feedOperations().injectFeed(asset.getId(), price);
-    return asset;
-    }
-    
     /**
      * enums for experience scores in web test classes 
      */

@@ -253,7 +253,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         ContactExtension contactExtension = contactExtensionRepository.findOne(registeredCustomer.getId());
 
         if (wizardConditions.hasDeposit()) {
-            placeWizardDeposit(registeredCustomer.getBinaryAccount().getExternalId(), contactExtension);
+            //TODO user to deposit to binary, adjust for binary platform deprecation
+            placeWizardDeposit(registeredCustomer.getDisplayId(), contactExtension);
         }
 
         assertNotNull(contactExtension);

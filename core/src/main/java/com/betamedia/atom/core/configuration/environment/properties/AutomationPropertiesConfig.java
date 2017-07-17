@@ -45,14 +45,4 @@ public class AutomationPropertiesConfig {
         return automationEnvironmentProperties().getEntity();
     }
 
-    @Bean
-    public SpaceProperties<AutomationEnvironment> automationSpaceProperties() {
-        return automationEnvironmentProperties().getGigaspaces();
-    }
-
-    @Bean
-    public FeedGatewayProperties<AutomationEnvironment> automationFeedGatewayProperties() {
-        return automationEnvironmentProperties().getFeedGateway();
-    }
-
 }

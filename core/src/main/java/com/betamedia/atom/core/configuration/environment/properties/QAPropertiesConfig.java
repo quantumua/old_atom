@@ -45,14 +45,4 @@ public class QAPropertiesConfig {
         return qaEnvironmentProperties().getEntity();
     }
 
-    @Bean
-    public SpaceProperties<QAEnvironment> qaSpaceProperties() {
-        return qaEnvironmentProperties().getGigaspaces();
-    }
-
-    @Bean
-    public FeedGatewayProperties<QAEnvironment> qaFeedGatewayProperties() {
-        return qaEnvironmentProperties().getFeedGateway();
-    }
-
 }

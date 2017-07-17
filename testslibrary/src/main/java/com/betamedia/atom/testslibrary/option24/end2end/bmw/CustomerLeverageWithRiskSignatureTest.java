@@ -269,44 +269,6 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
      * 1. Create user via mobile api
      * 2. Update user experience level, score and country in the DB
      * 3. Login as created user into web
-     * 4. Verify user was logged in and binary product is available
-     */
-    @Test(description = "crm-NA")
-    @Parameters({"countryCode"})
-    public void checkBinaryProductForNoExperienceCustomer(String countryCode) {
-        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
-        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
-        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
-        updateCreditCard();
-        assertUserLogin();
-        pages().topNavigationPage().binary();
-    }
-
-    /**
-     * Test main actions
-     * 1. Create user via mobile api
-     * 2. Update user experience level, score and country in the DB
-     * 3. Login as created user into web
-     * 4. Verify user was logged in and no binary product is available
-     */
-    @Test(description = "crm-NA")
-    @Parameters({"countryCode"})
-    public void checkNoBinaryProductForNoExperienceCustomer(String countryCode) {
-        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
-        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
-        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
-        updateCreditCard();
-        assertUserLogin();
-        assertFalse(pages().topNavigationPage().getProducts().contains("BINARY"));
-    }
-
-    /**
-     * Test main actions
-     * 1. Create user via mobile api
-     * 2. Update user experience level, score and country in the DB
-     * 3. Login as created user into web
      * 4. Verify user was logged in and cfd product is available
      */
     @Test(description = "crm-NA")

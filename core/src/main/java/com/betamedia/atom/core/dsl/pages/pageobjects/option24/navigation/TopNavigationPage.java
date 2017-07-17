@@ -9,8 +9,6 @@ import java.util.List;
 public interface TopNavigationPage {
     void logIn();
 
-    void binary();
-
     void cfd();
 
     boolean isLoggedIn();

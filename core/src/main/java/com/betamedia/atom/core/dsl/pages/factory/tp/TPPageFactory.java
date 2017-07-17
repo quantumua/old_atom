@@ -2,9 +2,7 @@ package com.betamedia.atom.core.dsl.pages.factory.tp;
 
 
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.Assets;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.BinaryBidder;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.CfdBidder;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.binaryselector.BinarySelector;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.SetLeveragePageImpl;
@@ -18,7 +16,6 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.Landing
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.BinaryPositions;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
 
 /**
@@ -34,15 +31,9 @@ public interface TPPageFactory {
 
     LoginErrorNotification loginErrorNotification();
 
-    BinaryBidder binaryBidder();
-
     CfdBidder cfdBidder();
 
     Assets assets();
-
-    BinarySelector binarySelector();
-
-    BinaryPositions binaryPositions();
 
     LandingPage landingPage();
 

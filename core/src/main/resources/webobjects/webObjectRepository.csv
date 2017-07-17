@@ -10,18 +10,10 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,languageMenu,ID,language-menu
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,flagLanguage,XPATH,//*[@id='header']/div[@class="flag-menu active"]//a
 2.6.2,2017-05-29 15:24 +0000,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,amountInput,ID,bmBidAmountInput
-2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame
-2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,shortTermButton,CSS,.bmSelectItem.bmSelectShortTermGame
-2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,doubleProfitButton,CSS,.bmSelectItem.bmSelectDoubleProfitGame
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,lowButton,CSS,.bmButtonsWrapp.bmSelection2
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,highButton,CSS,.bmButtonsWrapp.bmSelection1
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,closePosition,CSS,.bmButtonWrapp.bmClosePositionDialog
 2.6.2,2017-05-29 15:24 +0000,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
 2.6.2,2017-05-29 15:24 +0000,PositionsImpl,position,CLASS_NAME,bmCellContent
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,binaryBtn,CLASS_NAME,product-binary
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,mainMenu,ID,mainMenu
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
@@ -63,9 +55,6 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,closeButton,XPATH,//*[@id='tradeManagerContainer']/div/div[3]/div/div/div[3]
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorMinAmount,CSS,.bmMessage.bmError.bmMessageMinAmount
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorMaxAmount,CSS,.bmMessage.bmError.bmMessageMaxAmount
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorValidAmount,CSS,.bmMessage.bmError.bmMessageEnterValidAmount
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,loginButton,NAME,btnLoginWidget
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,fnsPersonalInformationButton,NAME,btnFnsPersonalInformationWidget
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,fnsTradingExperienceButton,NAME,btnFnsTradingExperienceWidget
