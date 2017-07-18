@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl;
 
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationDialog;
@@ -159,6 +160,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
         return result;
     }
 
+    //TODO migrate to using CustomerRegistrationInfo
     @Override
     public boolean fillRegisterForm(CustomerRO customerRO) {
         try {
@@ -181,8 +183,22 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
         }
     }
 
-    private void clearPasswordField() {
-        for(int k=0;k<=15;) makeActions().sendKeys(find(passwordWrapper),Keys.BACK_SPACE);
+    @Override
+    public void fillRegisterForm(CustomerRegistrationInfo customerRegistrationInfo) {
+        waitUntilDisplayed(firstName).clear();
+        find(firstName).sendKeys(customerRegistrationInfo.getFirstName());
+        find(lastName).clear();
+        find(lastName).sendKeys(customerRegistrationInfo.getLastName());
+        find(email).clear();
+        find(email).sendKeys(customerRegistrationInfo.getEmail());
+        find(phonePrefix).clear();
+        find(phonePrefix).sendKeys(customerRegistrationInfo.getPhoneCountryPrefix());
+        find(phoneNumber).clear();
+        find(phoneNumber).sendKeys(customerRegistrationInfo.getPhoneNumber());
+        makeActions().sendKeys(find(passwordWrapper),Keys.ENTER).sendKeys(customerRegistrationInfo.getPassword()).build().perform();
+        find(retypePassword).clear();
+        find(retypePassword).sendKeys(customerRegistrationInfo.getPassword());
+        executeScript(SCRIPT_CLICK_FIRST_ELEMENT, find(accountAgree));
     }
 
     @Override
@@ -275,5 +291,4 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
             return false;
         }
     }
-
 }

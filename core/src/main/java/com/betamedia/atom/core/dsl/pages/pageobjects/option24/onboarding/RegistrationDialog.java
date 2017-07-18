@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding;
 
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 
 import java.util.List;
 
@@ -34,6 +35,8 @@ public interface RegistrationDialog {
     boolean register(CustomerRO customerRO);
 
     boolean fillRegisterForm(CustomerRO customerRO);
+
+    void fillRegisterForm(CustomerRegistrationInfo customerRegistrationInfo);
 
     void setCountryPrefix(String country);
 

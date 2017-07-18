@@ -1,20 +1,18 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
-import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
+import com.betamedia.atom.core.dsl.operations.OnBoardingOperations;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
 import com.betamedia.atom.core.persistence.entities.ConnectionBase;
 import com.betamedia.atom.core.persistence.repositories.AbstractConnectionBaseRepository;
 import com.betamedia.atom.core.persistence.repositories.AbstractConnectionRoleBaseRepository;
 import com.betamedia.atom.core.persistence.repositories.AbstractContactBaseRepository;
 import com.betamedia.atom.core.persistence.repositories.AbstractContactExtensionRepository;
-import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
-import com.betamedia.atom.core.dsl.operations.OnBoardingOperations;
-import org.hamcrest.core.IsNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.Objects;
 
 import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.AccessType;
 import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.*;
@@ -125,7 +123,7 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
 
     @Override
     public void assertContactBaseBirthDate(String email, String expectedBirthDate) {
-        assertEquals(expectedBirthDate,contactBaseRepository.findByEmailAddress1(email).getBirthDate());
+        assertEquals(expectedBirthDate, contactBaseRepository.findByEmailAddress1(email).getBirthDate());
     }
 
     @Override
@@ -134,14 +132,14 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
         String secondUserContactID = contactExtensionRepository.findByUsername(secondUser).getContactId();
         List<ConnectionBase> firstUserConnections = connectionBaseRepository.findByRecord1Id(firstUserContactID);
         String actualConnectionName = "";
-        for (ConnectionBase connection:firstUserConnections) {
+        for (ConnectionBase connection : firstUserConnections) {
             if (connection.getRecord2Id().equalsIgnoreCase(secondUserContactID)) {
                 actualConnectionName = connectionRoleBaseRepository
                         .findByConnectionRoleId(connection.getRecord2RoleId()).getName();
                 break;
             }
         }
-        assertEquals(expectedConnectionRoleName,actualConnectionName, actualConnectionName);
+        assertEquals(expectedConnectionRoleName, actualConnectionName, actualConnectionName);
     }
 
     @Override
@@ -160,12 +158,18 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
     @Override
     public void assertBulkEmailHasNotValue(String userLoginName, int notExpectedValue) {
         assertTrue(contactExtensionRepository.findByUsername(userLoginName)
-                .getAcceptbulkemail()!=notExpectedValue);
+                .getAcceptbulkemail() != notExpectedValue);
     }
 
     @Override
     public void assertDoNotPhoneHasNotValue(String userLoginName, String notExpectedDoNotPhoneValue) {
         assertFalse(contactBaseRepository.findByEmailAddress1(userLoginName)
                 .getDoNotPhone().equalsIgnoreCase(notExpectedDoNotPhoneValue));
+    }
+
+    @Override
+    public void assertUserCreatedInDatabase(String userEmail) {
+        assertTrue("User does not exist in database.",
+                Objects.nonNull(contactBaseRepository.findByEmailAddress1(userEmail)));
     }
 }
