@@ -24,7 +24,7 @@ public class TPTemplateProviderImpl implements TPTemplateProvider {
         return templates.get(env);
     }
 
-    @Autowired
+    @Autowired(required = false)
     private void init(List<TPTemplate> templateList) {
         templates = templateList.stream().collect(Collectors.toMap(TPTemplate::getEnvironment, template -> template));
     }

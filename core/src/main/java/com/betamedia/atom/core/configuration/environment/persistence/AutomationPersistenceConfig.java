@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.configuration.environment.persistence;
 
+import com.betamedia.atom.core.configuration.PrimaryDataSourcePostProcessor;
 import com.betamedia.atom.core.configuration.environment.AutomationEnvironmentConfig;
-import com.betamedia.atom.core.persistence.entities.ContactBase;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.persistence.repositories.impl.automation.AutomationEnvContactExtensionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  * Please take care to prefix bean names with <code>automation</code> for post-processing purposes.
  *
  * @author mbelyaev
- * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
+ * @see PrimaryDataSourcePostProcessor
  * @since 7/4/17
  */
 @Configuration
