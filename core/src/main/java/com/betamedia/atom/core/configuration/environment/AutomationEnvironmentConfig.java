@@ -11,10 +11,8 @@ import org.springframework.context.annotation.Profile;
 
 /**
  * Automation Environment-specific bean configuration class.
- * Please take care to prefix bean names with <code>automation</code> for post-processing purposes.
  *
  * @author mbelyaev
- * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 6/29/17
  */
 @Configuration

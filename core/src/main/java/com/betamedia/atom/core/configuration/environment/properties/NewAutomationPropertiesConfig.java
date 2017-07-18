@@ -12,10 +12,8 @@ import org.springframework.context.annotation.PropertySource;
 
 /**
  * New Automation Environment-specific properties configuration class.
- * Please take care to prefix bean names with <code>newAutomation</code> for post-processing purposes.
  *
  * @author mbelyaev
- * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 7/4/17
  */
 @Configuration

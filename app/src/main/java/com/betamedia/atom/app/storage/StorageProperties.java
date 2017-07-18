@@ -1,4 +1,4 @@
-package com.betamedia.atom.core.configuration.properties;
+package com.betamedia.atom.app.storage;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
