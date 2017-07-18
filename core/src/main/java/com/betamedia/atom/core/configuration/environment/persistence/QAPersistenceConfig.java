@@ -26,7 +26,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJpaRepositories(
         basePackageClasses = {
-                ContactBase.class,
                 ContactExtension.class,
                 QAEnvContactExtensionRepository.class
         },
