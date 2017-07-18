@@ -1,13 +1,2 @@
-Language,progressText,chatLink,additionalDetailsTitle,birthDate,birthDateDay,birthDateMonth,birthDateYear,countryOfBirthCodeText,countryOfBirthCode,nationalityCodeText,nationalityCode,submitButton
-EN,% completed,Chat Now,Personal details,Birth Date,Day,Month,Year,Country of Birth,Select A Country,Nationality,Select A Country,Submit
-FR,,,,,,,,,,,,
-DE,,,,,,,,,,,,
-IT,,,,,,,,,,,,
-ES,,,,,,,,,,,,
-RU,,,,,,,,,,,,
-AR,,,,,,,,,,,,
-PR,,,,,,,,,,,,
-SV,,,,,,,,,,,,
-NE,,,,,,,,,,,,
-NO,,,,,,,,,,,,
-PO,,,,,,,,,,,,
+Language,progressText,chatLink,additionalDetailsTitle,birthDateTitle,birthDateDayDropdownCaption,birthDateMonthDropdownCaption,birthDateYearDropdownCaption,countryOfBirthTitle,countryOfBirthDropdownCaption,countryOfBirthDropdownDataError,nationalityTitle,nationalityDropdownCaption,nationalityDropdownDataError,submitButton
+EN,% completed,Chat Now,Personal details,Birth Date,Day,Month,Year,Country of Birth,Select A Country,Please Choose Your Country Of Birth,Nationality,Select A Country,Please Choose Your Nationality,Submit

@@ -1,26 +1,37 @@
 package com.betamedia.atom.testslibrary.option24.web.ctw;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
-import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
+import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
 
 /**
  * @author Leonid Artemiev
  * @since 7/13/17
  */
 
-public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
+public class PersonalDetailsSlideLocalisationTest extends WEBEndToEndTest {
+
+	@Parameters({"countrycode"})
+    @BeforeMethod
+	public void before(String countrycode){
+    	pages().topNavigationPage().signUp();
+        pages().registrationPage().register(countrycode);
+        pages().welcomepage().isStartBtnDisplayed();
+        pages().welcomepage().start();
+	}
+
 	/*
 	 *[testlink]  CTW-5680:Verify the slide is translated to all languages
 	 */
-    @Parameters({"countrycode"}) 
-    @Test(description = "CTW-5680:Verify the slide is translated to all languages", dataProvider = GENERIC_DATA_PROVIDER)
-	  public void  verifyTtheSlideIsTranslatedToAllLanguages(String countrycode, AccountAdditionalDetailsData data) {
-    	
+    @Test(dataProvider = GENERIC_DATA_PROVIDER)
+	  public void  verifyTheSlideIsTranslatedToAllLanguages(AccountAdditionalDetailsData data) {
+    	pages().topNavigationPage().selectLanguage(data.getLanguage());
+        pages().welcomeBackMessage().continueQuestionnaire();                
+        pages().accountAdditionalDetailsPage().exists();
+        pages().accountAdditionalDetailsPage().verifySlideTranslation(data);
     }
     
     @Override
@@ -32,7 +43,6 @@ public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
     protected String getDataSourcePath() {
         return "/data/accountAdditionalDetailsData.csv";
     }
-
     
 	/*
 	 *[testlink]   CTW-5682:Verify the slide turns RTL on AR
@@ -40,14 +50,9 @@ public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5682:Verify the slide turns RTL on AR")
     public void  verifyTheSlideTurnsRTLOnAR(String countrycode) {
-        pages().topNavigationPage().signUp();
-        CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).setCountryCode(countrycode).build();
-        pages().registrationDialog().register(customer);
-        pages().welcomePage().isStartBtnDisplayed();
-        pages().welcomePage().start();
         pages().topNavigationPage().selectLanguage("AR");
         pages().welcomeBackMessage().continueQuestionnaire();
-        pages().accountAdditionalDetails().exists();
-        pages().accountAdditionalDetails().verifyTextDirectionElements("RTL");
+        pages().accountAdditionalDetailsPage().exists();
+        pages().accountAdditionalDetailsPage().verifyTextDirectionElements("RTL");
     }
 }

@@ -74,8 +74,8 @@ public class PersonalDetailsSlideTest extends WEBEndToEndTest{
     @TestLinkDisplayId(value = "CTW-5647") 
     public void VerifyDateOofBirthDropDownFunctionality(String countrycode){
         registerAndStart(countrycode);
-        pages().accountAdditionalDetailsPage().clickDropDownButton();
         Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDayDataList().size(),32);
+        pages().accountAdditionalDetailsPage().selectBirthDayData();
         Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDaySelectedItem(), "3");
     }
  
@@ -88,7 +88,6 @@ public class PersonalDetailsSlideTest extends WEBEndToEndTest{
     public void verifySelectionChangesDropDownColor(String countrycode){
         registerAndStart(countrycode);
         String colorOfBorderBeforeClick = pages().accountAdditionalDetailsPage().getBirthDateDayElementColor();
-        pages().accountAdditionalDetailsPage().clickDropDownButton();
         pages().accountAdditionalDetailsPage().selectBirthDayData();
         String colorOfBorderAfterClick = pages().accountAdditionalDetailsPage().getBirthDateDayElementColor();
         Assert.assertNotEquals(colorOfBorderAfterClick, colorOfBorderBeforeClick);
@@ -103,7 +102,6 @@ public class PersonalDetailsSlideTest extends WEBEndToEndTest{
     public void verifyOpeningDropDownsChangesArrowDirection(String countrycode) {
         registerAndStart(countrycode);
         String backgroundButtonBeforeClick = pages().accountAdditionalDetailsPage().getElementsBackground();
-        pages().accountAdditionalDetailsPage().clickDropDownButton();
         pages().accountAdditionalDetailsPage().selectBirthDayData();
         String backgroundButtonAfterClick = pages().accountAdditionalDetailsPage().getElementsBackground();
         Assert.assertNotEquals(backgroundButtonAfterClick, backgroundButtonBeforeClick);

@@ -3,6 +3,7 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets;
 import java.util.List;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
+import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 
 public interface AccountAdditionalDetailsPage {
 
@@ -14,11 +15,12 @@ public interface AccountAdditionalDetailsPage {
     void SelectCountryOfBirth(AccountAdditionalDetails info);
     void SelectNationality(AccountAdditionalDetails info);
     void SelectAllData(AccountAdditionalDetails info);
-	void clickDropDownButton();
+	void expandDropDownButton();
 	List<String> getBirthDayDataList();
 	String getBirthDaySelectedItem();
 	String getBirthDateDayElementColor();
 	void selectBirthDayData();
 	String getElementsBackground();
 	void verifyTextDirectionElements (String textDirection);
+	void verifySlideTranslation(AccountAdditionalDetailsData data);
 }

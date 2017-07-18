@@ -8,7 +8,7 @@ import com.opencsv.bean.CsvBindByName;
  */
 public class AccountAdditionalDetailsData {
     @CsvBindByName
-    private String employmentStatus;
+    private String Language;
     
     @CsvBindByName
     private String progressText;
@@ -20,82 +20,95 @@ public class AccountAdditionalDetailsData {
     private String additionalDetailsTitle;
     
     @CsvBindByName
-    private String birthDate;
+    private String birthDateTitle;
     
     @CsvBindByName
-    private String birthDateDay;
+    private String birthDateDayDropdownCaption;
 
     @CsvBindByName
-    private String birthDateMonth;
+    private String birthDateMonthDropdownCaption;
     
     @CsvBindByName
-    private String birthDateYear;
+    private String birthDateYearDropdownCaption;
     
     @CsvBindByName
-    private String countryOfBirthCodeText;
+    private String countryOfBirthTitle;
     
     @CsvBindByName
-    private String countryOfBirthCode;
+    private String countryOfBirthDropdownCaption;
+
+	@CsvBindByName
+    private String countryOfBirthDropdownDataError;
     
     @CsvBindByName
-    private String nationalityCodeText;
+    private String nationalityTitle;
     
     @CsvBindByName
-    private String nationalityCode;
+    private String nationalityDropdownCaption;
+    
+    @CsvBindByName
+    private String nationalityDropdownDataError;
     
     @CsvBindByName
     private String submitButton;
 
-    public String getEmploymentStatus() {
-        return employmentStatus;
-    }
+	public String getLanguage() {
+		return Language;
+	}
 
-    public String getProgressText() {
-        return progressText;
-    }
+	public String getProgressText() {
+		return progressText;
+	}
 
-    public String getChatLink() {
-        return chatLink;
-    }
+	public String getChatLink() {
+		return chatLink;
+	}
 
-    public String getAdditionalDetailsTitle() {
-        return additionalDetailsTitle;
-    }
+	public String getAdditionalDetailsTitle() {
+		return additionalDetailsTitle;
+	}
 
-    public String getBirthDate() {
-        return birthDate;
-    }
+	public String getBirthDateTitle() {
+		return birthDateTitle;
+	}
 
-    public String getBirthDateDay() {
-        return birthDateDay;
-    }
+	public String getBirthDateDayDropdownCaption() {
+		return birthDateDayDropdownCaption;
+	}
 
-    public String getBirthDateMonth() {
-        return birthDateMonth;
-    }
+	public String getBirthDateMonthDropdownCaption() {
+		return birthDateMonthDropdownCaption;
+	}
 
-    public String getBirthDateYear() {
-        return birthDateYear;
-    }
+	public String getBirthDateYearDropdownCaption() {
+		return birthDateYearDropdownCaption;
+	}
 
-    public String getCountryOfBirthCodeText() {
-        return countryOfBirthCodeText;
-    }
+	public String getCountryOfBirthTitle() {
+		return countryOfBirthTitle;
+	}
 
-    public String getCountryOfBirthCode() {
-        return countryOfBirthCode;
-    }
+	public String getCountryOfBirthDropdownCaption() {
+		return countryOfBirthDropdownCaption;
+	}
 
-    public String getNationalityCodeText() {
-        return nationalityCodeText;
-    }
+	public String getCountryOfBirthDropdownDataError() {
+		return countryOfBirthDropdownDataError;
+	}
 
-    public String getNationalityCode() {
-        return nationalityCode;
-    }
+	public String getNationalityTitle() {
+		return nationalityTitle;
+	}
 
-    public String getSubmitButton() {
-        return submitButton;
-    }
+	public String getNationalityDropdownCaption() {
+		return nationalityDropdownCaption;
+	}
 
+	public String getNationalityDropdownDataError() {
+		return nationalityDropdownDataError;
+	}
+
+	public String getSubmitButton() {
+		return submitButton;
+	}
 }
