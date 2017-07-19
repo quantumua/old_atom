@@ -1,5 +1,6 @@
 package com.betamedia.atom.testslibrary.option24.web.ctw;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -14,13 +15,25 @@ import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
  */
 
 public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
+	@Parameters({"countrycode"})
+    @BeforeMethod
+	public void before(String countrycode){
+    	pages().topNavigationPage().signUp();
+        CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).setCountryCode(countrycode).build();
+        pages().registrationDialog().register(customer);
+        pages().welcomePage().isStartBtnDisplayed();
+        pages().welcomePage().start();
+	}
+
 	/*
 	 *[testlink]  CTW-5680:Verify the slide is translated to all languages
 	 */
-    @Parameters({"countrycode"}) 
-    @Test(description = "CTW-5680:Verify the slide is translated to all languages", dataProvider = GENERIC_DATA_PROVIDER)
-	  public void  verifyTtheSlideIsTranslatedToAllLanguages(String countrycode, AccountAdditionalDetailsData data) {
-    	
+    @Test(dataProvider = GENERIC_DATA_PROVIDER)
+	  public void  verifyTheSlideIsTranslatedToAllLanguages(AccountAdditionalDetailsData data) {
+    	pages().topNavigationPage().selectLanguage(data.getLanguage());
+        pages().welcomeBackMessage().continueQuestionnaire();
+        pages().accountAdditionalDetails().exists();
+        pages().accountAdditionalDetails().verifySlideTranslation(data);
     }
     
     @Override
@@ -32,7 +45,6 @@ public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
     protected String getDataSourcePath() {
         return "/data/accountAdditionalDetailsData.csv";
     }
-
     
 	/*
 	 *[testlink]   CTW-5682:Verify the slide turns RTL on AR
@@ -40,11 +52,6 @@ public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5682:Verify the slide turns RTL on AR")
     public void  verifyTheSlideTurnsRTLOnAR(String countrycode) {
-        pages().topNavigationPage().signUp();
-        CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).setCountryCode(countrycode).build();
-        pages().registrationDialog().register(customer);
-        pages().welcomePage().isStartBtnDisplayed();
-        pages().welcomePage().start();
         pages().topNavigationPage().selectLanguage("AR");
         pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().exists();

@@ -125,12 +125,27 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayMonth,ID,BirthDateMonth
 2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayYear,ID,BirthDateYear
 2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,update,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,wizardProgressText,XPATH,.//*[@class='wizard-progress']/p[@class='prog-text']
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,chatNow,XPATH,.//*[@id='popup-wizard']//*[@class="chat-link"]/a
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,additionalDetailsTitle,XPATH,.//span[@class="swAdditionalInformationTitle swGroupBoxTitle"]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateTitle,XPATH,.//div[@id='accountAdditionalDetails']//label[@for='Birth_Date']
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateDay,ID,BirthDateDay
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateDayDropDownElements,XPATH,//*[@id='BirthDateDay']/option
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateDayDropdownCaption,XPATH,.//*[@id='BirthDateDay']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDayDropDownSelectItem,XPATH,//*[@id='BirthDateDay']/option[4]
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateMonth,ID,BirthDateMonth
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateMonthDropdownCaption,XPATH,.//*[@id='BirthDateMonth']//option[1]
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateYear,ID,BirthDateYear
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateYearDropdownCaption,XPATH,.//*[@id='BirthDateYear']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,countryOfBirthTitle,XPATH,.//div[@id='accountAdditionalDetails']//label[@for='CountryOfBirthCode']
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,countryOfBirth,ID,CountryOfBirthCode
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,countryOfBirthDropdownCaption,XPATH,.//*[@id='CountryOfBirthCode']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,countryOfBirthDropdownDataError,XPATH,.//*[@id='CountryOfBirthCode']//@data-error
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,nationalityTitle,XPATH,.//*[@id='accountAdditionalDetails']//*[@for='NationalityCode']
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,nationality,ID,NationalityCode
-2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,update,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,nationalityDropdownCaption,XPATH,.//*[@id='NationalityCode']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,nationalityDropdownDataError,XPATH,.//*[@id='NationalityCode']//@data-error
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,submit,NAME,swUpdateCustomerBtn
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,depositAmount,NAME,Amount
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,creditCardNumber,ID,CreditCardNumber
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cvv2,NAME,Cvv2
@@ -182,8 +197,6 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
 2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,closeButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button/span[1]
-2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDayDropDown,XPATH,//*[@id='BirthDateDay']/option
-2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDayDropDownSelectItem,XPATH,//*[@id='BirthDateDay']/option[4]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/div/ul/li[1]/a/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget

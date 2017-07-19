@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.Reporter;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
+import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
@@ -20,35 +21,61 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.Acco
 public class AccountAdditionalDetailsPageImpl extends AbstractPageObject implements AccountAdditionalDetailsPage {
 
     @StoredId
-    private By birthDateDay;
+    private By wizardProgressText;
     @StoredId
-    private By birthDayDropDown;
+    private By chatNow;
+    @StoredId
+    private By additionalDetailsTitle;  
+    @StoredId
+    private By birthDateTitle;
+	@StoredId
+    private By birthDateDay;
+	@StoredId
+    private By birthDateDayDropDownElements;
+	@StoredId
+    private By birthDateDayDropdownCaption;
     @StoredId
     private By birthDayDropDownSelectItem;
     @StoredId
     private By birthDateMonth;
     @StoredId
+    private By birthDateMonthDropdownCaption;
+    @StoredId
     private By birthDateYear;
+    @StoredId
+    private By birthDateYearDropdownCaption;
+    @StoredId
+    private By countryOfBirthTitle;
     @StoredId
     private By countryOfBirth;
     @StoredId
+    private By countryOfBirthDropdownCaption;
+    @StoredId
+    private By countryOfBirthDropdownDataError;
+    @StoredId
+    private By nationalityTitle;    
+    @StoredId
     private By nationality;
     @StoredId
-    private By update;
-
+    private By nationalityDropdownCaption;
+    @StoredId
+    private By nationalityDropdownDataError;   
+    @StoredId
+    private By submit;
+    
     public AccountAdditionalDetailsPageImpl(WebDriver webDriver) {
         super(webDriver);
     }
 
     @Override
     public void update(AccountAdditionalDetails info) {
-        waitUntilDisplayed(birthDateDay);
+        this.exists();
         inSelect(birthDateDay).selectByValue(info.birthDateDay);
         inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
         inSelect(birthDateYear).selectByValue(info.birthDateYear);
         inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
         inSelect(nationality).selectByValue(info.nationality);
-        scrollIntoView(find(update)).click();
+        scrollIntoView(find(submit)).click();
     }
 
     @Override
@@ -64,28 +91,28 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     
     @Override
     public boolean isUpdateBtnEnabled(){
-    	if (waitUntilDisplayed(update).isEnabled())
+    	if (waitUntilDisplayed(submit).isEnabled())
     		return true;
     	return false;
     }
     
     @Override
-    public void clickDropDownButton(){
+    public void expandDropDownButton(){
     	waitUntilDisplayed(birthDateDay).click();
     }
 
     @Override
     public List<String> getBirthDayDataList() {
         List<String> BirthDayDataOptions = new ArrayList<String>();
-        for(WebElement webElement:findElements(birthDayDropDown)) {
+        for(WebElement webElement:findElements(birthDateDayDropDownElements)) {
         	BirthDayDataOptions.add(webElement.getText());
         }
-        selectBirthDayData();
         return BirthDayDataOptions;
     }
     
     @Override
     public void selectBirthDayData() {
+    	this.expandDropDownButton();
     	waitUntilDisplayed(birthDayDropDownSelectItem).click();
     }
     
@@ -148,6 +175,23 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     	return cssValue;
     }
     
+    public void verifySlideTranslation(AccountAdditionalDetailsData data){    	
+    	Assert.assertEquals(waitUntilDisplayed(wizardProgressText).getText(), data.getAdditionalDetailsTitle());
+    	Assert.assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink());
+	    Assert.assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle());	    
+	    Assert.assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle());
+	    Assert.assertEquals(waitUntilDisplayed(birthDateDayDropdownCaption).getText(), data.getBirthDateDayDropdownCaption());
+	    Assert.assertEquals(waitUntilDisplayed(birthDateMonthDropdownCaption).getText(), data.getBirthDateMonthDropdownCaption());
+	    Assert.assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption());
+	    Assert.assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle());
+	    Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption());
+	    Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownDataError).getText(), data.getCountryOfBirthDropdownDataError());
+	    Assert.assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle());
+	    Assert.assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption());
+	    Assert.assertEquals(waitUntilDisplayed(nationalityDropdownDataError).getText(), data.getNationalityDropdownDataError());
+	    Assert.assertEquals(waitUntilDisplayed(submit).getText(), data.getSubmitButton());
+   }
+    
     @Override
     public String getElementsBackground() {
     	String backgroundImage = waitUntilDisplayed(birthDateDay).getCssValue("background-image");
@@ -179,7 +223,7 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     
     @Override
     public void SelectAllData(AccountAdditionalDetails info) {
-        waitUntilDisplayed(birthDateDay);
+        this.exists();
         inSelect(birthDateDay).selectByValue(info.birthDateDay);
         inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
         inSelect(birthDateYear).selectByValue(info.birthDateYear);
