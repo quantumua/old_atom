@@ -14,7 +14,7 @@ public interface AccountAdditionalDetailsPage {
     void SelectBirthDateMonth(AccountAdditionalDetails info);
     void SelectCountryOfBirth(AccountAdditionalDetails info);
     void SelectNationality(AccountAdditionalDetails info);
-    void SelectAllData(AccountAdditionalDetails info);
+    void selectAllFormElements(AccountAdditionalDetails info);
 	void expandDropDownButton();
 	List<String> getBirthDayDataList();
 	String getBirthDaySelectedItem();

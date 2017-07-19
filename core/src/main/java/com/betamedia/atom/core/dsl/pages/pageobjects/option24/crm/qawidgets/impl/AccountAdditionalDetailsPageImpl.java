@@ -59,7 +59,7 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     @StoredId
     private By nationalityDropdownCaption;
     @StoredId
-    private By nationalityDropdownDataError;   
+    private By nationalityDropdownDataError;    
     @StoredId
     private By submit;
     
@@ -69,12 +69,7 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
 
     @Override
     public void update(AccountAdditionalDetails info) {
-        this.exists();
-        inSelect(birthDateDay).selectByValue(info.birthDateDay);
-        inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
-        inSelect(birthDateYear).selectByValue(info.birthDateYear);
-        inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
-        inSelect(nationality).selectByValue(info.nationality);
+    	selectAllFormElements(info);
         scrollIntoView(find(submit)).click();
     }
 
@@ -175,8 +170,8 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     	return cssValue;
     }
     
-    public void verifySlideTranslation(AccountAdditionalDetailsData data){    	
-    	Assert.assertEquals(waitUntilDisplayed(wizardProgressText).getText(), data.getAdditionalDetailsTitle());
+    public void verifySlideTranslation(AccountAdditionalDetailsData data){
+    	Assert.assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText());
     	Assert.assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink());
 	    Assert.assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle());	    
 	    Assert.assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle());
@@ -185,11 +180,11 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
 	    Assert.assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption());
 	    Assert.assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle());
 	    Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption());
-	    Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownDataError).getText(), data.getCountryOfBirthDropdownDataError());
+	    // Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownDataError).getAttribute("data-error"), data.getCountryOfBirthDropdownDataError());
 	    Assert.assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle());
 	    Assert.assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption());
-	    Assert.assertEquals(waitUntilDisplayed(nationalityDropdownDataError).getText(), data.getNationalityDropdownDataError());
-	    Assert.assertEquals(waitUntilDisplayed(submit).getText(), data.getSubmitButton());
+	    // Assert.assertEquals(waitUntilDisplayed(nationalityDropdownDataError).getAttribute("data-error"), data.getNationalityDropdownDataError());
+	    Assert.assertEquals(waitUntilDisplayed(submit).getAttribute("value"), data.getSubmitButton());
    }
     
     @Override
@@ -222,7 +217,7 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     }
     
     @Override
-    public void SelectAllData(AccountAdditionalDetails info) {
+    public void selectAllFormElements(AccountAdditionalDetails info) {
         this.exists();
         inSelect(birthDateDay).selectByValue(info.birthDateDay);
         inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
