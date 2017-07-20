@@ -26,4 +26,6 @@ public interface TopNavigationPage {
     boolean languageExists();
     
 	void selectLanguage(String language);
+
+	void goToMyAccount();
 }

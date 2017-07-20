@@ -224,6 +224,32 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
 2.6.2,2017-05-29 15:24 +0000,RejectMessageOnLoginImpl,rejectCaption,CLASS_NAME,message-title
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogImpl,CSS,.content.mobile-single
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,documents,XPATH,.//*[@id='menu-item-54113']/a
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,uploadDocumentsPageImpl,XPATH,.//*[@id='Upload-Document-SEU']/*[@class="formContainer form-cover"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiTitle,XPATH,.//*[@id='acc']//*[@class="icon poi-icon"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiContainet,XPATH,.//*[@id='poi-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiTypeSelector,XPATH,.//*[@id='poi-container']//*[@class="btn dropdown-toggle btn-default"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiBrowseButton,XPATH,.//*[@id='poi-container']//*[@class="btn btn-inv btn-block browse-file-button"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiDocumentAprroved,XPATH,.//*[@id='poi-container']//*[@class="document-box aprroved-doc"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiDocumentNotAprroved,XPATH,.//*[@id='poi-container']//*[@class="document-box not-aprroved"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porTitle,XPATH,.//*[@id='acc']//*[@class="icon por-icon"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porContainet,XPATH,.//*[@id='por-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porTypeSelector,XPATH,.//*[@id='por-container']//*[@class="btn dropdown-toggle btn-default"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porBrowseButton,XPATH,.//*[@id='por-container']//*[@class="btn btn-inv btn-block browse-file-button"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porDocumentAprroved,XPATH,.//*[@id='por-container']//*[@class="document-box aprroved-doc"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porDocumentNotAprroved,XPATH,.//*[@id='por-container']//*[@class="document-box not-aprroved"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccTitle,XPATH,.//*[@id='acc']//*[@class="icon cc-icon"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccContainet,XPATH,.//*[@id='cc-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccTypeSelector,XPATH,.//*[@id='cc-container']//*[@class="btn dropdown-toggle btn-default"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccBrowseButton,XPATH,.//*[@id='cc-container']//*[@class="btn btn-inv btn-block browse-file-button"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccDocumentAprroved,XPATH,.//*[@id='cc-container']//*[@class="document-box aprroved-doc"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccDocumentNotAprroved,XPATH,.//*[@id='cc-container']//*[@class="document-box not-aprroved"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersTitle,XPATH,.//*[@id='acc']//*[@class="icon others-icon"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersContainet,XPATH,.//*[@id='others-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersTypeSelector,XPATH,.//*[@id='others-container']//*[@class="btn dropdown-toggle btn-default"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersBrowseButton,XPATH,.//*[@id='others-container']//*[@class="btn btn-inv btn-block browse-file-button"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersDocumentAprroved,XPATH,.//*[@id='others-container']//*[@class="document-box aprroved-doc"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersDocumentNotAprroved,XPATH,.//*[@id='others-container']//*[@class="document-box not-aprroved"]
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmCloseMessage,ID,close_dialog
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmImSure,ID,dialog_btn_leave
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmNo,ID,dialog_btn_stay

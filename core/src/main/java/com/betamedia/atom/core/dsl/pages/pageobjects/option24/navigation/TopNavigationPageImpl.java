@@ -53,6 +53,11 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     }
 
     @Override
+    public void goToMyAccount() {
+    	waitUntilDisplayed(myAccountBtn).click();
+    }
+
+    @Override
     public boolean isLoggedOut() {
         return waitUntilDisplayed(loginBtn) != null;
     }

@@ -215,6 +215,11 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
+    public UploadDocumentsPageImpl uploadDocumentsPage() {
+        return creator.getPage(UploadDocumentsPageImpl.class);
+    }
+
+    @Override
     public LeveragePopup leveragePopup() {
         return creator.getPage(LeveragePopupImpl.class);
     }
