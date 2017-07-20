@@ -1,12 +1,10 @@
-package com.betamedia.atom.core.configuration.environment.persistence;
+package com.betamedia.atom.autoconfig.environment.persistence;
 
 import com.betamedia.atom.core.configuration.PrimaryDataSourcePostProcessor;
-import com.betamedia.atom.core.configuration.environment.NewAutomationEnvironmentConfig;
 import com.betamedia.atom.core.persistence.entities.ContactBase;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
-import com.betamedia.atom.core.persistence.repositories.impl.newautomation.NewAutomationEnvTrackingInfoRepository;
+import com.betamedia.atom.core.persistence.repositories.impl.qa.QAEnvContactExtensionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -17,11 +15,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import javax.sql.DataSource;
 
-import static com.betamedia.atom.core.configuration.environment.persistence.StubConfig.DB_ENABLED_PROPERTY;
+import static com.betamedia.atom.autoconfig.StubAutoConfiguration.DB_ENABLED_PROPERTY;
 
 /**
- * New Automation Environment-specific repository configuration class.
- * Please take care to prefix bean names with <code>newAutomation</code> for post-processing purposes.
+ * QA Environment-specific repository configuration class.
+ * Please take care to prefix bean names with <code>qa</code> for post-processing purposes.
  *
  * @author mbelyaev
  * @see PrimaryDataSourcePostProcessor
@@ -31,31 +29,31 @@ import static com.betamedia.atom.core.configuration.environment.persistence.Stub
 @EnableJpaRepositories(
         basePackageClasses = {
                 ContactExtension.class,
-                NewAutomationEnvTrackingInfoRepository.class
+                QAEnvContactExtensionRepository.class
         },
-        entityManagerFactoryRef = "newAutomationEntityManagerFactory"
+        entityManagerFactoryRef = "qaEntityManagerFactory"
 )
 @ConditionalOnProperty(name = DB_ENABLED_PROPERTY, matchIfMissing = true)
-@ConditionalOnBean(NewAutomationEnvironmentConfig.class)
-public class NewAutomationPersistenceConfig {
+public class QAPersistenceConfig {
     @Autowired
-    private DataSourceProperties newAutomationDataSourceProperties;
+    private DataSourceProperties qaDataSourceProperties;
 
     @Bean
-    public DataSource newAutomationDataSource() {
-        return newAutomationDataSourceProperties.initializeDataSourceBuilder().build();
+    public DataSource qaDataSource() {
+        return qaDataSourceProperties.initializeDataSourceBuilder().build();
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean newAutomationEntityManagerFactory(
+    public LocalContainerEntityManagerFactoryBean qaEntityManagerFactory(
             EntityManagerFactoryBuilder builder) {
         return builder
-                .dataSource(newAutomationDataSource())
+                .dataSource(qaDataSource())
                 .packages(
                         ContactBase.class,
                         ContactExtension.class,
-                        NewAutomationEnvTrackingInfoRepository.class)
-                .persistenceUnit("newAutomationPersistenceUnit")
+                        QAEnvContactExtensionRepository.class
+                )
+                .persistenceUnit("qaPersistenceUnit")
                 .build();
     }
 }

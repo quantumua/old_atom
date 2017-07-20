@@ -1,5 +1,8 @@
-package com.betamedia.atom.core.configuration.environment;
+package com.betamedia.atom.autoconfig.environment;
 
+import com.betamedia.atom.autoconfig.environment.connectors.AutomationConnectorsConfig;
+import com.betamedia.atom.autoconfig.environment.persistence.AutomationPersistenceConfig;
+import com.betamedia.atom.autoconfig.environment.properties.AutomationPropertiesConfig;
 import com.betamedia.atom.core.dsl.operations.impl.*;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
@@ -7,6 +10,7 @@ import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
 /**
@@ -17,6 +21,11 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @Profile("automation")
+@Import({
+        AutomationConnectorsConfig.class,
+        AutomationPersistenceConfig.class,
+        AutomationPropertiesConfig.class
+})
 public class AutomationEnvironmentConfig {
 
     public static EnvironmentType getEnvironment() {

@@ -1,9 +1,7 @@
-package com.betamedia.atom.core.configuration.environment.properties;
+package com.betamedia.atom.autoconfig.environment.properties;
 
-import com.betamedia.atom.core.configuration.environment.NewAutomationEnvironmentConfig;
 import com.betamedia.atom.core.configuration.properties.*;
 import com.betamedia.atom.core.environment.tp.NewAutomationEnvironment;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +16,6 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @PropertySource("/config/environment/newAutomation-env.properties")
-@ConditionalOnBean(NewAutomationEnvironmentConfig.class)
 public class NewAutomationPropertiesConfig {
     private static final String NEW_AUTOMATION_TP_PREFIX = "newAutomation.tp";
 

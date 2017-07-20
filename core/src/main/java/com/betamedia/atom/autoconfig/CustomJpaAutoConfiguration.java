@@ -1,5 +1,6 @@
-package com.betamedia.atom.core.configuration.environment.persistence.jpa;
+package com.betamedia.atom.autoconfig;
 
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ConditionalOnBean(DataSource.class)
+@AutoConfigureAfter(EnvironmentAutoConfiguration.class)
 @Import(HibernateJpaAutoConfiguration.class)
-public class CustomJpaConfig {
+public class CustomJpaAutoConfiguration {
 }

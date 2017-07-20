@@ -1,12 +1,19 @@
-package com.betamedia.atom.core.configuration.environment;
+package com.betamedia.atom.autoconfig.environment;
 
-import com.betamedia.atom.core.dsl.operations.impl.*;
+import com.betamedia.atom.autoconfig.environment.connectors.NewAutomationConnectorsConfig;
+import com.betamedia.atom.autoconfig.environment.persistence.NewAutomationPersistenceConfig;
+import com.betamedia.atom.autoconfig.environment.properties.NewAutomationPropertiesConfig;
+import com.betamedia.atom.core.dsl.operations.impl.AbstractAccountOperations;
+import com.betamedia.atom.core.dsl.operations.impl.AbstractBonusOperations;
+import com.betamedia.atom.core.dsl.operations.impl.AbstractCustomerOperations;
+import com.betamedia.atom.core.dsl.operations.impl.AbstractOnBoardingOperations;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
 import com.betamedia.atom.core.environment.tp.NewAutomationEnvironment;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
 /**
@@ -17,6 +24,11 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @Profile("newAutomation")
+@Import({
+        NewAutomationConnectorsConfig.class,
+        NewAutomationPersistenceConfig.class,
+        NewAutomationPropertiesConfig.class
+})
 public class NewAutomationEnvironmentConfig {
 
     public static EnvironmentType getEnvironment() {

@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.betamedia.atom.autoconfig.EnvironmentAutoConfiguration,\
+  com.betamedia.atom.autoconfig.CustomJpaAutoConfiguration,\
+  com.betamedia.atom.autoconfig.StubAutoConfiguration

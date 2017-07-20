@@ -1,4 +1,4 @@
-package com.betamedia.atom.core.configuration.environment.persistence;
+package com.betamedia.atom.autoconfig;
 
 import com.betamedia.atom.core.persistence.repositories.*;
 import net.bytebuddy.ByteBuddy;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 7/18/17
  */
 @Configuration
-public class StubConfig {
+public class StubAutoConfiguration {
     public static final String DB_ENABLED_PROPERTY = "db.enabled";
 
     @Configuration
