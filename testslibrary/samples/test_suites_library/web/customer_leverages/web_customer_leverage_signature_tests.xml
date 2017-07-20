@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite: sequential execution of tests" verbose="1">
+<suite name="sequential execution of tests" verbose="1">
     <test name="Regression leverage">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.end2end.bmw.CustomerLeverageWithRiskSignatureTest" >

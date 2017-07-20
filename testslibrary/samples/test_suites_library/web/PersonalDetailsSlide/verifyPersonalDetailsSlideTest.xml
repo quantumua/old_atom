@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite: verify Personal Details Slide" verbose="1">
+<suite name="verify Personal Details Slide" verbose="1">
     <test name="Tryouts">
         <classes>
                <class name="com.betamedia.atom.testslibrary.option24.web.ctw.PersonalDetailsSlideTest">

@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite: Login Tests - parallel execution of tests" verbose="1" parallel="methods" thread-count="5">
-    <test name="Login Tests - parallel execution of tests">
+<suite name="login-logout-parallel" verbose="1" parallel="methods" thread-count="5">
+    <test name="login-logout-parallel">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.end2end.LoginPageTest">
                 <methods>

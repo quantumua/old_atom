@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite: Login Tests - sequential execution of tests" verbose="1">
+<suite name="login-testlink" verbose="1">
     <parameter name="testlinkBuildId" value="267" />
     <parameter name="testlinkPlanId" value="112063" />
     <test name="Login tests - sequential execution of tests">
