@@ -17,7 +17,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 import javax.sql.DataSource;
 
-import static com.betamedia.atom.core.configuration.environment.persistence.StubConfig.DB_ENABLED_PROPERTY;
+import static com.betamedia.atom.core.configuration.environment.StubConfig.DB_ENABLED_PROPERTY;
 
 /**
  * QA Environment-specific repository configuration class.

@@ -13,8 +13,8 @@ import java.util.Arrays;
 
 
 /**
- * This post-processor looks for any beans that extend EnvironmentDependent and selects the first match to determine the
- * primary environment for application. All bean definitions with prefix matching selected environment will be marked as
+ * This post-processor looks for any DataSources defined in the application, selects one, reads it's environment-specific
+ * prefix and marks the datasource and corresponding EntityManagerFactory (by prefix) as
  * {@link org.springframework.context.annotation.Primary} to satisfy JPA transaction manager and stub configuration.
  *
  * @author mbelyaev
