@@ -5,6 +5,7 @@ import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RedirectDialog;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Reporter;
 
 /**
  * Created by vsnigur on 7/10/17.
@@ -25,5 +26,6 @@ public class RedirectDialogImpl extends AbstractPageObject implements RedirectDi
         waitUntilDisplayed(startTrade);
         waitUntilClickable(startTrade).click();
         waitUntilPageLoad();
+        Reporter.log("Click 'Start Trade' button.<br/>");
     }
 }

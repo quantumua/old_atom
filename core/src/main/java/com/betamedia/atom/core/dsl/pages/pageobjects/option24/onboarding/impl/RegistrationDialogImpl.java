@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
 import java.util.List;
 import java.util.stream.Collectors;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by vsnigur on 7/3/17.
@@ -59,6 +60,8 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @StoredId
     private By firstNameInputError;
     @StoredId
+    private By lastNameInputError;
+    @StoredId
     private By errorMessageHint;
     @StoredId
     private By countryList;
@@ -91,6 +94,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     private final String ATTRIBUTE_TITLE = "title";
     private final String ATTRIBUTE_MAX_LENGTH = "maxlength";
     private final String ATTRIBUTE_STYLE_BORDER = "border-bottom-color";
+    private final String ATTRIBUTE_TEXT_CONTENT = "textContent";
     private final String SCRIPT_CLICK_FIRST_ELEMENT = "arguments[0].click()";
 
     public RegistrationDialogImpl(WebDriver webDriver) {
@@ -139,8 +143,31 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     }
 
     @Override
+    public String getFirstNameStatusError() {
+        String errorText = waitUntilDisplayed(errorMessageHint).getText();
+        assertTrue(errorText
+                .equalsIgnoreCase(find(firstNameInputError).getAttribute(ATTRIBUTE_TEXT_CONTENT)));
+        return errorText;
+    }
+
+    @Override
+    public String getBorderColorFirstName() {
+        return waitUntilDisplayed(firstName).getCssValue(ATTRIBUTE_STYLE_BORDER);
+    }
+
+    @Override
     public String getLastName() {
         return find(lastName).getAttribute(ATTRIBUTE_VALUE);
+    }
+
+    @Override
+    public String getLastNameStatusError() {
+        return waitUntilDisplayed(lastNameInputError).getText();
+    }
+
+    @Override
+    public String getBorderColorLastName() {
+        return waitUntilDisplayed(lastName).getCssValue(ATTRIBUTE_STYLE_BORDER);
     }
 
     @Override
@@ -199,6 +226,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
         find(retypePassword).clear();
         find(retypePassword).sendKeys(customerRegistrationInfo.getPassword());
         executeScript(SCRIPT_CLICK_FIRST_ELEMENT, find(accountAgree));
+        Reporter.log(String.format("Fill register form for customer: %s</br>",customerRegistrationInfo.toString()));
     }
 
     @Override
@@ -209,6 +237,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
                         .filter(element -> element.getText().contains(country))
                         .findFirst().orElse(null)
         ).click();
+        Reporter.log(String.format("Select %s country in prefix field.</br>", country));
     }
 
     @Override
@@ -232,7 +261,9 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
 
     @Override
     public void submitRegisterForm() {
-        waitUntilDisplayed(submitButton).click();
+        waitUntilDisplayed(submitButton);
+        scrollIntoView(find(submitButton)).click();
+        Reporter.log("Submit register form.<br/>");
     }
 
     @Override
@@ -266,6 +297,11 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @Override
     public String getBorderForPrefixField() {
         return waitUntilDisplayed(phonePrefix).getCssValue(ATTRIBUTE_STYLE_BORDER);
+    }
+
+    @Override
+    public String getBorderColorPhone() {
+        return waitUntilDisplayed(phoneNumber).getCssValue(ATTRIBUTE_STYLE_BORDER);
     }
 
     @Override

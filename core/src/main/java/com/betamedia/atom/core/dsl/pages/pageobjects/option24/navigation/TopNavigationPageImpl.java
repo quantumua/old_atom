@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +44,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     @Override
     public void signUp() {
     	waitUntilDisplayed(signUpBtn).click();
+    	Reporter.log("Click 'SIGN UP' button.<br/>");
     }
     
     @Override
