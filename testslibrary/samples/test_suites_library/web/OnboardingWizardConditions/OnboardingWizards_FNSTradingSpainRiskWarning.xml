@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite: parallel execution of tests" verbose="1">
+<suite name="parallel execution of tests" verbose="1">
     <test name="Tryouts">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.OnboardingWebWizardTestSuite">

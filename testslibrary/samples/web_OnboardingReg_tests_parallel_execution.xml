@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="WebSite OnBoarding Wizard Condition with New Users Test Validation" verbose="1" parallel="methods" thread-count="5" data-provider-thread-count="4">
-    <test name="WebSite OnBoarding Wizard Condition with New Users Test Validation">
+<suite name="onboarding with new users validation" verbose="1" parallel="methods" thread-count="5" data-provider-thread-count="4">
+    <test name="onboarding with new users validation">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.OnboardingRegistrationPageTest">
             </class>
