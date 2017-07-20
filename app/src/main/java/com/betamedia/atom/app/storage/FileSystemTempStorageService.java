@@ -1,5 +1,6 @@
 package com.betamedia.atom.app.storage;
 
+import com.betamedia.atom.core.configuration.properties.StorageProperties;
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import com.betamedia.atom.core.fwtestrunner.storage.StorageException;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 /**
  * @author mbelyaev

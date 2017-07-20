@@ -39,11 +39,11 @@ public class ExternalExecutionListener implements IExecutionListener {
                 return;
             }
             context = SpringApplication.run(CoreInfrastructure.class);
-            initializeContext();
             logger.debug("Initialized listener-managed application context");
         } finally {
             ctxLock.unlock();
         }
+        initializeContext();
     }
 
     @Override

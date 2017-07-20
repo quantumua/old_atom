@@ -16,8 +16,10 @@ import static com.betamedia.atom.core.configuration.environment.StubConfig.GIGAS
 
 /**
  * QA Environment-specific connector configuration class.
+ * Please take care to prefix bean names with <code>qa</code> for post-processing purposes.
  *
  * @author mbelyaev
+ * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 7/4/17
  */
 @Configuration

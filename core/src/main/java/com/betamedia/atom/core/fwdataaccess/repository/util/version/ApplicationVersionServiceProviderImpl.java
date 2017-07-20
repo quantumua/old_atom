@@ -22,7 +22,7 @@ public class ApplicationVersionServiceProviderImpl implements ApplicationVersion
         return holders.get(env);
     }
 
-    @Autowired(required = false)
+    @Autowired
     private void init(List<ApplicationVersionService> holders) {
         this.holders = holders.stream().collect(Collectors.toMap(ApplicationVersionService::getEnvironment, Function.identity()));
     }
