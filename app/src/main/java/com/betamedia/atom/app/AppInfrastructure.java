@@ -2,7 +2,6 @@ package com.betamedia.atom.app;
 
 import com.betamedia.atom.app.storage.StorageProperties;
 import com.betamedia.atom.core.CoreInfrastructure;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
@@ -17,7 +16,4 @@ import org.springframework.context.annotation.PropertySource;
 @EnableConfigurationProperties(StorageProperties.class)
 @PropertySource("classpath:config/app.properties")
 public class AppInfrastructure {
-    public static void main(String[] args) {
-        SpringApplication.run(AppInfrastructure.class);
-    }
 }
