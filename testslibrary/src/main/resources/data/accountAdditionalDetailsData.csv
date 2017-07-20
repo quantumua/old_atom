@@ -1,2 +1,13 @@
 Language,progressText,chatLink,additionalDetailsTitle,birthDateTitle,birthDateDayDropdownCaption,birthDateMonthDropdownCaption,birthDateYearDropdownCaption,countryOfBirthTitle,countryOfBirthDropdownCaption,countryOfBirthDropdownDataError,nationalityTitle,nationalityDropdownCaption,nationalityDropdownDataError,submitButton
 EN,% completed,Chat Now,Personal details,Birth Date,Day,Month,Year,Country of Birth,Select A Country,Please Choose Your Country Of Birth,Nationality,Select A Country,Please Choose Your Nationality,Submit
+FR,% complété,Chat en direct,Informations personnelles,Date de naissance,jour,mois,année,Pays de naissance,Sélectionnez un pays,Veuillez sélectionner votre pays de naissance,Nationalité,Sélectionnez un pays,Veuillez sélectionner votre nationalité,Submit
+DE,% abgeschlossen,Chat Starten,Persönliche Angaben,Geburtsdatum,Tag,Monat,Jahr,Geburtsland,Wählen Sie ein Land,Bitte wählen Sie Ihr Geburtsland,Nationalität,Wählen Sie ein Land,Bitte wählen Sie Ihre Staatsangehörigkeit,Submit
+IT,% completato,Chatta Ora,Dati personali,Data di nascita,giorno,mese,anno,Paese di nascita,Scegli un Paese,Selezionare il paese di nascita,Cittadinanza,Scegli un Paese,Selezionare la nazionalità,Submit
+ES,% completado,Chatear Ahora,Información personal,Fecha de nacimiento,Día,Mes,Año,País de nacimiento,Seleccione un país,"Por favor, elija su país de nacimiento",Nacionalidad,Seleccione un país,"Por favor, elija su nacionalidad",Submit
+RU,% заполненный,пообщаться сейчас,Личные данные,Дата рождения,День,Месяц,Год,Страна рождения,Выберите страну,"Пожалуйста, укажите дату страну вашего рождения",Национальность,Выберите страну,"Пожалуйста, укажите вашу национальность",Submit
+AR,% منجز,الدردشة الآن,التفاصيل الشخصية,تاريخ الميلاد,يوم,شهر,سنة,بلد الميلاد,اختر دولة,الرجاء اختيار بلد الميلاد,الجنسية,اختر دولة,الرجاء اختيار جنسيتك,Submit
+PR,% concluído,Conversar agora,Detalhes pessoais,Data de nascimento,Dia,Mês,Ano,País de Nascimento,Selecione um país,Por Favor Escolha Seu País De Nascimento,Nacionalidade,Selecione um país,Por Favor Escolha Sua Nacionalidade,Submit
+SV,% avslutad,Chatta Nu,Personuppgifter,Födelsedatum,Dag,Månad,År,Hemland,Markera land,Välj ditt hemland,Nationalitet,Markera land,Välj din nationalitet,Submit
+NE,% voltooid,Chat nu,Persoonsgegevens,Geboortedatum,Dag,Maand,Jaar,Geboorteland,Selecteer een land,Selecteer uw geboorteland,Nationaliteit,Selecteer een land,Selecteer uw nationaliteit,Submit
+NO,% ferdigstilt,Chat nå,Personlige opplysninger,Fødselsdato,Dag,Måned,År,Fødeland,Velg land,Velg fødeland,Nasjonalitet,Velg land,Velg nasjonalitet,Submit
+PO,% zakończony,Czat teraz,Dane osobowe,Data urodzenia,Dzień,Miesiąc,Rok,Kraj urodzenia,Wybierz kraj,Wybierz kraj urodzenia,Narodowość,Wybierz kraj,Wybierz narodowość,Submit

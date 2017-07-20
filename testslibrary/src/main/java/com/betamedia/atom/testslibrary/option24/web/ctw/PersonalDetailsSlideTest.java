@@ -62,7 +62,7 @@ public class PersonalDetailsSlideTest extends WEBEndToEndTest{
     @TestLinkDisplayId(value = "CTW-5638")
     public void  verifySubmitButtonEnableWhenAllFieldsAreFilled(String countrycode) {
         registerAndStart(countrycode);
-    	pages().accountAdditionalDetailsPage().SelectAllData(AccountAdditionalDetails.builder().build());
+    	pages().accountAdditionalDetailsPage().selectAllFormElements(AccountAdditionalDetails.builder().build());
     	Assert.assertTrue(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
     }
     

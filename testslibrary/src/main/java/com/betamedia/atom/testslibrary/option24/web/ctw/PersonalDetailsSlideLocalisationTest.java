@@ -1,6 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.ctw;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -17,7 +18,7 @@ import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
 	@Parameters({"countrycode"})
     @BeforeMethod
-	public void before(String countrycode){
+	public void before(@Optional("de") String countrycode){
     	pages().topNavigationPage().signUp();
         CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).setCountryCode(countrycode).build();
         pages().registrationDialog().register(customer);
@@ -49,9 +50,8 @@ public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
 	/*
 	 *[testlink]   CTW-5682:Verify the slide turns RTL on AR
 	 */
-    @Parameters({"countrycode"}) 
     @Test(description = "CTW-5682:Verify the slide turns RTL on AR")
-    public void  verifyTheSlideTurnsRTLOnAR(String countrycode) {
+    public void  verifyTheSlideTurnsRTLOnAR() {
         pages().topNavigationPage().selectLanguage("AR");
         pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().exists();
