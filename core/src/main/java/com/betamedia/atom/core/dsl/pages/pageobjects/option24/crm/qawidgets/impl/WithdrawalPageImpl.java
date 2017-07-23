@@ -48,14 +48,14 @@ public class WithdrawalPageImpl extends AbstractPageObject implements Withdrawal
 
 	@Override
 	public void submit(Withdrawal info) {        
-//		logger.info(" Beggining to fill withdrawal page step 1 ");
+    	logger.info(" Beggining to fill withdrawal page step 1 ");
 		waitUntilDisplayed(withdrawalAmount).click();
-//		click(withdrawalAmount);
+		click(withdrawalAmount);
 		find(withdrawalAmount).sendKeys(info.withdrawalAmount);
-//		logger.info(" Succesfully filled withdrawal amount , attempting to reach step 2 ");
-		find(withdrawalBtnStep1).click();
+		logger.info(" Succesfully filled withdrawal amount , attempting to reach step 2 ");
+		waitUntilClickable(withdrawalBtnStep1).click();
 		waitUntilDisplayed(withdrawalbankName).click();
-//		logger.info(" Succesfully reach step2 ");
+		logger.info(" Succesfully reach step2 ");
 		find(withdrawalbankName).sendKeys(info.withdrawalbankName);
 		find(withdrawalBeneficaryCity).sendKeys(info.withdrawalBeneficaryCity);
 		find(withdrawalBeneficaryName).sendKeys(info.withdrawalBeneficaryName);
@@ -65,7 +65,7 @@ public class WithdrawalPageImpl extends AbstractPageObject implements Withdrawal
 		find(withdrawalRoutingNumber).sendKeys(info.withdrawalRoutingNumber);
 		find(withdrawalSwift).sendKeys(info.withdrawalSwift);
 		find(withdrawalComment).sendKeys(info.withdrawalComment);
-		scrollIntoView(find(withdrawalBtnStep2)).click();
+		waitUntilClickable(withdrawalBtnStep2).click();
 
 	}
 
