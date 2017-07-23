@@ -28,4 +28,10 @@ public interface TopNavigationPage {
 	void selectLanguage(String language);
 
 	void goToMyAccount();
+	
+	void bankingDetails();
+
+	void withdrawalTab();
+	
+	
 }

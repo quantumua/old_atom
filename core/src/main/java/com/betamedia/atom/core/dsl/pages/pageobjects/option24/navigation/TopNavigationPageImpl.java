@@ -35,7 +35,10 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By languageMenu;
     @StoredId
     private By flagLanguage;
-    
+    @StoredId
+    private By bankPageLink;
+    @StoredId
+    private By withdrawalTab;
 
     public TopNavigationPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -86,6 +89,12 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     }
 
     @Override
+    public void bankingDetails() {
+        waitUntilDisplayed(bankPageLink).click();
+        waitUntilPageLoad();
+    }
+
+    @Override
     public List<String> getProducts() {
         return findElements(productButtons).stream().map(WebElement::getText).collect(Collectors.toList());
     }
@@ -94,6 +103,16 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     public boolean languageExists() {
         return waitUntilDisplayed(languageMenu).isDisplayed();
     }
+    
+    /*temporal8/
+     * 
+     */
+    @Override
+    public void withdrawalTab() {
+        waitUntilDisplayed(withdrawalTab).click();
+        waitUntilPageLoad();
+    }
+
     
     /**
      * Switch whole portal UI to given language

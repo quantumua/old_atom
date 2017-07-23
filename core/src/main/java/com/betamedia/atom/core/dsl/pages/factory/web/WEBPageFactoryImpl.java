@@ -10,10 +10,14 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.Acco
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.WithdrawalPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.AccountAdditionalDetailsPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.CreditCardDepositPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsPersonalInformationImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsTradingExperienceImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.WithdrawalPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.OnBoardingWizardImpl;
@@ -42,6 +46,11 @@ public class WEBPageFactoryImpl extends AbstractPageFactory implements WEBPageFa
 	public RegistrationPage registrationPage() {
 		return creator.getPage(RegistrationPageImpl.class);
 	}
+	
+	@Override
+    public LoginPage loginPage() {
+        return creator.getPage(LoginPageImpl.class);
+    }
 	
     @Override
     public TopNavigationPage topNavigationPage() {
@@ -91,6 +100,10 @@ public class WEBPageFactoryImpl extends AbstractPageFactory implements WEBPageFa
 	        return creator.getPage(OnBoardingWizardImpl.class);
 	    }
 
+	 @Override
+	    public WithdrawalPage withdrawalPage() {
+	        return creator.getPage(WithdrawalPageImpl.class);
+	    }
 	 @Override
 	    public SignatureRiskWarning signatureRiskWarning() {
 	        return creator.getPage(SignatureRiskWarningImpl.class);

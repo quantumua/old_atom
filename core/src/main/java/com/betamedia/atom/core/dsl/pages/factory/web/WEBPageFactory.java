@@ -13,6 +13,9 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.Acco
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.WithdrawalPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 
 
@@ -23,6 +26,8 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavi
 public interface WEBPageFactory {
 	
 	RegistrationPage registrationPage();
+	
+	LoginPage loginPage();      
 
     TopNavigationPage topNavigationPage();
     
@@ -43,5 +48,7 @@ public interface WEBPageFactory {
 	SignatureRiskWarning signatureRiskWarning();
 
 	WelcomeBackMessageImpl welcomeBackMessage();
+
+	WithdrawalPage withdrawalPage();
 
 }
