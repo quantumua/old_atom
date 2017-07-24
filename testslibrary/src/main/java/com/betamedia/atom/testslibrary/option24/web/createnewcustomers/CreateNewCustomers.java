@@ -3,6 +3,7 @@ package com.betamedia.atom.testslibrary.option24.web.createnewcustomers;
 import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
 import org.testng.Reporter;
@@ -16,29 +17,37 @@ import static org.testng.AssertJUnit.assertTrue;
  */
 public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
 
-    private static final String INCORRECT_CHARS_IN_EMAIL = "`~!#$%^&*()+=<>?,/[]{}";
-    private static final String INCORRECT_EMAIL = "qatest11@@test.com";
-    private static final String CORRECT_EMAIL = "qatest11@test.com";
-    private static final String RED_RGB_STYLE = "rgb(221, 69, 44)";
-    private static final String GREEN_RGB_STYLE = "rgb(101, 204, 10)";
-    private static final String ONE_SYMBOL = "a";
-    private static final String MAX_PLUS_ONE_CHARS = "abcdefghijklmnopqrstu";
-    private static final String MAX_CHARS = "abcdefghijklmnopqrst";
+    /**
+     * Strings for tests
+     */
+    protected static final String INCORRECT_CHARS_IN_EMAIL = "`~!#$%^&*()+=<>?,/[]{}";
+    protected static final String INCORRECT_CHARS = "`~!#$%^&*()+=<>?,/[]{}";
+    protected static final String INCORRECT_EMAIL_TWO_AT = "qatest11@@test.com";
+    protected static final String INCORRECT_EMAIL_NO_AT = "kjfhskj.gmail.com";
+    protected static final String INCORRECT_EMAIL_DIGIT_DOMAIN = "dkjfh@gmail.123";
+    protected static final String INCORRECT_EMAIL = "djfhdjk12312";
+    protected static final String CORRECT_EMAIL = "qatest11@test.com";
+    protected static final String ONE_SYMBOL = "a";
+    protected static final String MAX_PLUS_ONE_CHARS = "abcdefghijklmnopqrstu";
+    protected static final String MAX_CHARS = "abcdefghijklmnopqrst";
+    protected static final String SYMBOLS_AND_DIGITS = "a1b2c3d4e5";
+    protected static final String SYMBOLS_AND_NO_DIGITS = "abcde";
+    protected static final String PHONE_FIVE_DIGITS = "12345";
+    protected static final String PHONE_NO_DIGITS = "phone~!@#$";
     private static final String FOUR_CHARS = "abcd";
-    private static final String SYMBOLS_AND_DIGITS = "a1b2c3d4e5";
-    private static final String SYMBOLS_AND_NO_DIGITS = "abcde";
-    private static final String FAIL_NAME_NOTIFICATION = "Enter at least 2 characters";
-    private static final String JORDAN_COUNTRY = "Jordan";
-    private static final String JORDAN_PHONE_PREFIX = "+962";
-    private static final String ISRAEL_COUNTRY = "Israel";
-    private static final String ISRAEL_PHONE_PREFIX = "+972";
-    private static final String IRELAND_COUNTRY = "Ireland";
-    private static final String PHONE_FIVE_DIGITS = "12345";
-    private static final String PHONE_NO_DIGITS = "phone~!@#$";
     private static final String INCORRECT_PASSWORD = "!@#$%";
-    private static final String NO_ERROR_MESSAGE = "Error message did not appear.";
     private static final int ZERO_VALUE = 0;
     private static final int WEB_SOURCE_ID = 206440004;
+    /**
+     * RGB color constants
+     */
+    protected static final String RED_RGB_STYLE = "rgb(221, 69, 44)";
+    protected static final String GREEN_RGB_STYLE = "rgb(101, 204, 10)";
+    /**
+     * Message notifications for tests
+     */
+    protected final String FAIL_NAME_NOTIFICATION = "Enter at least 2 characters";
+    protected final String NO_ERROR_MESSAGE = "Error message did not appear.";
 
     /**
      * - verify that sign up button opens registration dialog
@@ -138,11 +147,11 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     public void prefixFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().setCountryPrefix(JORDAN_COUNTRY);
+        pages().registrationDialog().setCountryPrefix(Country.JORDAN.getName());
         pages().redirectDialog().startTrade();
         pages().registrationDialog().exists();
-        assertEquals(JORDAN_PHONE_PREFIX, pages().registrationDialog().getCountryPrefix());
-        pages().registrationDialog().setCountryPrefix(ISRAEL_COUNTRY);
+        assertEquals(Country.JORDAN.getPhonePrefix(), pages().registrationDialog().getCountryPrefix());
+        pages().registrationDialog().setCountryPrefix(Country.ISRAEL.getName());
         pages().registrationDialog().register(customerRO);
         assertEquals("Registration Is Not Available In Your Country",
                 pages().registrationDialog().getErrorMessageNotification());
@@ -172,11 +181,11 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     @Test(description = "CTW-5260:country dropdown field search engine")
     public void countryDropdownFieldSearchEngine() {
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().setCountryPrefix(JORDAN_COUNTRY);
+        pages().registrationDialog().setCountryPrefix(Country.JORDAN.getName());
         pages().redirectDialog().startTrade();
         pages().registrationDialog().exists();
         assertEquals("Country was not available in the search result.",
-                IRELAND_COUNTRY, pages().registrationDialog().countrySearch("I", IRELAND_COUNTRY));
+                Country.IRELAND.getName(), pages().registrationDialog().countrySearch("I", Country.IRELAND.getName()));
     }
 
     /**
@@ -186,7 +195,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     @Test(description = "CTW-5261:country dropdown validations")
     public void countryDropdownValidations() {
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().countrySearch("", ISRAEL_COUNTRY);
+        pages().registrationDialog().countrySearch("", Country.ISRAEL.getName());
         pages().redirectDialog().startTrade();
         pages().registrationDialog().fillRegisterForm(
                 CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());

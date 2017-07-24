@@ -82,6 +82,8 @@ public interface TPPageFactory {
     ConfirmCloseMessageImpl confirmCloseMessage();
 
     UploadDocumentDialogImpl uploadDocumentDialog();
+    
+    UploadDocumentsPageImpl uploadDocumentsPage();
 
     SignatureRiskWarning signatureRiskWarning();
 

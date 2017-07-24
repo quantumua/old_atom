@@ -2,7 +2,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding;
 
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
-
 import java.util.List;
 
 /**
@@ -26,7 +25,16 @@ public interface RegistrationDialog {
 
     String getFirstName();
 
+    String getFirstNameStatusError();
+
+    String getBorderColorFirstName();
+
     String getLastName();
+
+    String getLastNameStatusError();
+
+    String getBorderColorLastName();
+
 
     String getEmail();
 
@@ -59,6 +67,8 @@ public interface RegistrationDialog {
     String getBorderColorForAgreement();
 
     String getBorderForPrefixField();
+
+    String getBorderColorPhone();
 
     String getBorderForCountryField();
 

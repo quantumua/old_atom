@@ -3,6 +3,7 @@ package com.betamedia.atom.core.api.web.form;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.UserNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.utils.StringUtils;
+import java.util.Objects;
 
 /**
  * Created by vsnigur on 7/17/17.
@@ -49,6 +50,42 @@ public class CustomerRegistrationInfo {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneCountryPrefix(String phoneCountryPrefix) {
+        this.phoneCountryPrefix = phoneCountryPrefix;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setReceiveNewsLetters(boolean receiveNewsLetters) {
+        this.receiveNewsLetters = receiveNewsLetters;
     }
 
     public boolean isReceiveNewsLetters() {
@@ -136,21 +173,32 @@ public class CustomerRegistrationInfo {
         }
 
         public CustomerRegistrationInfo build() {
-            firstName = userNamingStrategy.getFirstName(firstName);
-            lastName = userNamingStrategy.getLastName(lastName);
-            email = userNamingStrategy.getEmail(email);
-            phoneNumber = StringUtils.generateNumbersSequence(TEN_CHARS_IN_PHONE_NUMBER);
             return new CustomerRegistrationInfo(
-                    firstName,
-                    lastName,
-                    email,
+                    userNamingStrategy.getFirstName(firstName),
+                    userNamingStrategy.getLastName(lastName),
+                    userNamingStrategy.getEmail(email),
                     phoneCountryPrefix,
-                    phoneNumber,
+                    Objects.nonNull(phoneNumber) ? phoneNumber : StringUtils.generateNumbersSequence(TEN_CHARS_IN_PHONE_NUMBER),
                     country,
                     currency,
                     password,
                     receiveNewsLetters
             );
         }
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerRegistrationInfo{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneCountryPrefix='" + phoneCountryPrefix + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", country='" + country + '\'' +
+                ", currency='" + currency + '\'' +
+                ", password='" + password + '\'' +
+                ", receiveNewsLetters=" + receiveNewsLetters +
+                '}';
     }
 }
