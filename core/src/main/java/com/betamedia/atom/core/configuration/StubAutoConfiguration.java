@@ -1,4 +1,4 @@
-package com.betamedia.atom.autoconfig;
+package com.betamedia.atom.core.configuration;
 
 import com.betamedia.atom.core.persistence.repositories.*;
 import net.bytebuddy.ByteBuddy;

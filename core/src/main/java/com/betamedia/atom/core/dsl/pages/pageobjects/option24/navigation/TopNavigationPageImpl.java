@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +51,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     
     @Override
     public boolean isLoggedIn() {
-        return waitUntilDisplayed(myAccountBtn) != null;
+        return maybe(() -> waitUntilDisplayed(myAccountBtn)).isPresent();
     }
 
     @Override
@@ -60,7 +61,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public boolean isLoggedOut() {
-        return waitUntilDisplayed(loginBtn) != null;
+        return maybe(() -> waitUntilDisplayed(loginBtn)).isPresent();
     }
 
     @Override

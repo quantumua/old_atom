@@ -1,8 +1,5 @@
-package com.betamedia.atom.autoconfig.environment;
+package com.betamedia.atom.core.configuration.environment;
 
-import com.betamedia.atom.autoconfig.environment.connectors.QAConnectorsConfig;
-import com.betamedia.atom.autoconfig.environment.persistence.QAPersistenceConfig;
-import com.betamedia.atom.autoconfig.environment.properties.QAPropertiesConfig;
 import com.betamedia.atom.core.dsl.operations.impl.AbstractAccountOperations;
 import com.betamedia.atom.core.dsl.operations.impl.AbstractBonusOperations;
 import com.betamedia.atom.core.dsl.operations.impl.AbstractCustomerOperations;
@@ -13,7 +10,6 @@ import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
 /**
@@ -24,11 +20,6 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @Profile("qa")
-@Import({
-        QAConnectorsConfig.class,
-        QAPersistenceConfig.class,
-        QAPropertiesConfig.class
-})
 public class QAEnvironmentConfig {
 
     public static EnvironmentType getEnvironment() {
