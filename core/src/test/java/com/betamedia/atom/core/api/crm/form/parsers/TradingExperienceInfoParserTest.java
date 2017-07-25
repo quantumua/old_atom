@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 import static org.springframework.test.util.ReflectionTestUtils.getField;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
@@ -24,26 +25,26 @@ public class TradingExperienceInfoParserTest {
 
     private TradingExperienceInfo getExpectedInfo() {
         return TradingExperienceInfo.builder()
-                .withSharesExperience("sampleSharesExperience")
-                .withBinaryExperience("sampleBinaryExperience")
-                .withAverageYearlyBinaryVolume("sampleAverageYearlyBinaryVolume")
-                .withForExExperience("sampleForExExperience")
-                .withAverageYearlyForExVolume("sampleAverageYearlyForExVolume")
-                .withCommonLeverage("sampleCommonLeverage")
-                .withFinancialWorkExperience("sampleFinancialWorkExperience")
-                .withCfdBinaryKnowledge("sampleCfdBinaryKnowledge")
-                .withMainFactorKnowledge("sampleMainFactorKnowledge")
-                .withHowToCloseKnowledge("sampleHowToCloseKnowledge")
-                .withCfdLeverageKnowledge("sampleCfdLeverageKnowledge")
-                .withStopLossKnowledge("sampleStopLossKnowledge")
-                .withRequiredMarginKnowledge("sampleRequiredMarginKnowledge")
-                .withMarginLevelDropKnowledge("sampleMarginLevelDropKnowledge")
-                .withAutomaticStopKnowledge("sampleAutomaticStopKnowledge")
-                .withLossOn1to50Knowledge("sampleLossOn1to50Knowledge")
-                .withLossOn1to200Knowledge("sampleLossOn1to200Knowledge")
-                .withBinaryInvestProfitKnowledge("sampleBinaryInvestProfitKnowledge")
-                .withBinaryInvestLossKnowledge("sampleBinaryInvestLossKnowledge")
-                .withBinaryProbabilityKnowledge("sampleBinaryProbabilityKnowledge")
+                .withSharesExperience(SharesExperience.FREQUENTLY)
+                .withBinaryExperience(BinaryExperience.FREQUENTLY)
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_5K_10K)
+                .withForExExperience(ForExExperience.FREQUENTLY)
+                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_50K_150K)
+                .withCommonLeverage(CommonForExLeverage.LEVERAGE_1TO50_1TO200)
+                .withFinancialWorkExperience(FinancialWorkExperience.BOTH)
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY)
+                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
+                .withHowToCloseKnowledge(HowToCloseKnowledge.CANNOT_SELL)
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.MAGNIFIES)
+                .withStopLossKnowledge(StopLossKnowledge.BUY)
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K)
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.MARGIN_CALL)
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800)
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A1_1800)
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_60)
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_50)
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                 .build();
     }
 

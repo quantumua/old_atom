@@ -1,5 +1,11 @@
 package com.betamedia.atom.core.api.crm.form.entities;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
+
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
+
 /**
  * @author mbelyaev
  * @since 5/18/17
@@ -26,8 +32,9 @@ public class PersonalInformation {
     public final String expectedDepositsPerYear;
     public final String purposeOfTrading;
     public final String purposeOfTradingOther;
+    public final int expectedScore;
 
-    private PersonalInformation(String employmentStatus, String industry, String industryOther, String employerName, String taxResidenceCountry, String isUSReportable, String hasTaxIdentificationNumber, String taxIdentificationNumber, String socialSecurityNumber, String educationLevel, String educationField, String educationFieldOther, String isPoliticallyExposed, String politicalExposureComment, String sourceOfFunds, String sourceOfFundsOther, String annualIncome, String netWealth, String expectedDepositsPerYear, String purposeOfTrading, String purposeOfTradingOther) {
+    private PersonalInformation(String employmentStatus, String industry, String industryOther, String employerName, String taxResidenceCountry, String isUSReportable, String hasTaxIdentificationNumber, String taxIdentificationNumber, String socialSecurityNumber, String educationLevel, String educationField, String educationFieldOther, String isPoliticallyExposed, String politicalExposureComment, String sourceOfFunds, String sourceOfFundsOther, String annualIncome, String netWealth, String expectedDepositsPerYear, String purposeOfTrading, String purposeOfTradingOther, int expectedScore) {
         this.employmentStatus = employmentStatus;
         this.industry = industry;
         this.industryOther = industryOther;
@@ -49,43 +56,45 @@ public class PersonalInformation {
         this.expectedDepositsPerYear = expectedDepositsPerYear;
         this.purposeOfTrading = purposeOfTrading;
         this.purposeOfTradingOther = purposeOfTradingOther;
+        this.expectedScore = expectedScore;
     }
 
-    public static PersonalInformationBuilder builder(){
+    public static PersonalInformationBuilder builder() {
         return new PersonalInformationBuilder();
     }
 
     public static class PersonalInformationBuilder {
-        private String employmentStatus;
-        private String industry;
+        private EmploymentStatus employmentStatus;
+        private Industry industry;
         private String industryOther;
         private String employerName;
         private String taxResidenceCountry;
-        private String isUSReportable;
-        private String hasTaxIdentificationNumber;
+        private IsUSReportable isUSReportable;
+        private HasTaxIdentificationNumber hasTaxIdentificationNumber;
         private String taxIdentificationNumber;
         private String socialSecurityNumber;
-        private String educationLevel;
-        private String educationField;
+        private EducationLevel educationLevel;
+        private EducationField educationField;
         private String educationFieldOther;
-        private String isPoliticallyExposed;
+        private IsPoliticallyExposed isPoliticallyExposed;
         private String politicalExposureComment;
-        private String sourceOfFunds;
+        private SourceOfFunds sourceOfFunds;
         private String sourceOfFundsOther;
-        private String annualIncome;
-        private String netWealth;
-        private String expectedDepositsPerYear;
-        private String purposeOfTrading;
+        private AnnualIncome annualIncome;
+        private NetWealth netWealth;
+        private ExpectedDepositsPerYear expectedDepositsPerYear;
+        private PurposeOfTrading purposeOfTrading;
         private String purposeOfTradingOther;
 
-        private PersonalInformationBuilder(){}
+        private PersonalInformationBuilder() {
+        }
 
-        public PersonalInformationBuilder withEmploymentStatus(String employmentStatus) {
+        public PersonalInformationBuilder withEmploymentStatus(EmploymentStatus employmentStatus) {
             this.employmentStatus = employmentStatus;
             return this;
         }
 
-        public PersonalInformationBuilder withIndustry(String industry) {
+        public PersonalInformationBuilder withIndustry(Industry industry) {
             this.industry = industry;
             return this;
         }
@@ -105,12 +114,12 @@ public class PersonalInformation {
             return this;
         }
 
-        public PersonalInformationBuilder withUSReportabilityStatus(String isUSReportable) {
+        public PersonalInformationBuilder withUSReportabilityStatus(IsUSReportable isUSReportable) {
             this.isUSReportable = isUSReportable;
             return this;
         }
 
-        public PersonalInformationBuilder withTaxIdentificationNumberStatus(String hasTaxIdentificationNumber) {
+        public PersonalInformationBuilder withTaxIdentificationNumberStatus(HasTaxIdentificationNumber hasTaxIdentificationNumber) {
             this.hasTaxIdentificationNumber = hasTaxIdentificationNumber;
             return this;
         }
@@ -125,12 +134,12 @@ public class PersonalInformation {
             return this;
         }
 
-        public PersonalInformationBuilder withEducationLevel(String educationLevel) {
+        public PersonalInformationBuilder withEducationLevel(EducationLevel educationLevel) {
             this.educationLevel = educationLevel;
             return this;
         }
 
-        public PersonalInformationBuilder withEducationField(String educationField) {
+        public PersonalInformationBuilder withEducationField(EducationField educationField) {
             this.educationField = educationField;
             return this;
         }
@@ -141,17 +150,17 @@ public class PersonalInformation {
             return this;
         }
 
-        public PersonalInformationBuilder withPoliticalExposureStatus(String isPoliticallyExposed) {
+        public PersonalInformationBuilder withPoliticalExposureStatus(IsPoliticallyExposed isPoliticallyExposed) {
             this.isPoliticallyExposed = isPoliticallyExposed;
             return this;
         }
 
         public PersonalInformationBuilder withPoliticalExposureComment(String politicalExposureComment) {
             this.politicalExposureComment = politicalExposureComment;
-           return this;
+            return this;
         }
 
-        public PersonalInformationBuilder withSourceOfFunds(String sourceOfFunds) {
+        public PersonalInformationBuilder withSourceOfFunds(SourceOfFunds sourceOfFunds) {
             this.sourceOfFunds = sourceOfFunds;
             return this;
         }
@@ -161,22 +170,22 @@ public class PersonalInformation {
             return this;
         }
 
-        public PersonalInformationBuilder withAnnualIncome(String annualIncome) {
+        public PersonalInformationBuilder withAnnualIncome(AnnualIncome annualIncome) {
             this.annualIncome = annualIncome;
             return this;
         }
 
-        public PersonalInformationBuilder withNetWealth(String netWealth) {
+        public PersonalInformationBuilder withNetWealth(NetWealth netWealth) {
             this.netWealth = netWealth;
             return this;
         }
 
-        public PersonalInformationBuilder withExpectedDepositsPerYear(String expectedDepositsPerYear) {
+        public PersonalInformationBuilder withExpectedDepositsPerYear(ExpectedDepositsPerYear expectedDepositsPerYear) {
             this.expectedDepositsPerYear = expectedDepositsPerYear;
             return this;
         }
 
-        public PersonalInformationBuilder withPurposeOfTrading(String purposeOfTrading) {
+        public PersonalInformationBuilder withPurposeOfTrading(PurposeOfTrading purposeOfTrading) {
             this.purposeOfTrading = purposeOfTrading;
             return this;
         }
@@ -188,27 +197,48 @@ public class PersonalInformation {
 
         public PersonalInformation build() {
             return new PersonalInformation(
-                    employmentStatus,
-                    industry,
+                    valueIfPresent(employmentStatus),
+                    valueIfPresent(industry),
                     industryOther,
                     employerName,
                     taxResidenceCountry,
-                    isUSReportable,
-                    hasTaxIdentificationNumber,
+                    valueIfPresent(isUSReportable),
+                    valueIfPresent(hasTaxIdentificationNumber),
                     taxIdentificationNumber,
                     socialSecurityNumber,
-                    educationLevel,
-                    educationField,
+                    valueIfPresent(educationLevel),
+                    valueIfPresent(educationField),
                     educationFieldOther,
-                    isPoliticallyExposed,
+                    valueIfPresent(isPoliticallyExposed),
                     politicalExposureComment,
-                    sourceOfFunds,
+                    valueIfPresent(sourceOfFunds),
                     sourceOfFundsOther,
-                    annualIncome,
-                    netWealth,
-                    expectedDepositsPerYear,
-                    purposeOfTrading,
-                    purposeOfTradingOther);
+                    valueIfPresent(annualIncome),
+                    valueIfPresent(netWealth),
+                    valueIfPresent(expectedDepositsPerYear),
+                    valueIfPresent(purposeOfTrading),
+                    purposeOfTradingOther,
+                    getExpectedScore());
+        }
+
+        private String valueIfPresent(Answer answer) {
+            return Optional.ofNullable(answer).map(Answer::getValue).orElse(null);
+        }
+
+        private int getExpectedScore() {
+            return Arrays.stream(this.getClass().getDeclaredFields())
+                    .filter(field -> Answer.class.isAssignableFrom(field.getType()))
+                    .map(field -> {
+                        try {
+                            return field.get(this);
+                        } catch (IllegalAccessException e) {
+                            throw new RuntimeException("", e);
+                        }
+                    })
+                    .map(Answer.class::cast)
+                    .filter(Objects::nonNull)
+                    .mapToInt(Answer::getScore)
+                    .sum();
         }
 
     }

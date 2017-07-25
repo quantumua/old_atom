@@ -89,12 +89,13 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         inSelect(employmentStatus).selectByValue(info.employmentStatus);
         inSelect(industry).selectByValue(info.industry);
         if(nonNull(info.industryOther)) {find(industryOther).sendKeys(info.industryOther);}
-        if(nonNull(info.employerName)) find(employerName).sendKeys(info.employerName);
-        inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
-        if(nonNull(info.isUSReportable)) inSelect(isUSReportable).selectByValue(info.isUSReportable);
-        inSelect(hasTaxIdentificationNumber).selectByValue(info.hasTaxIdentificationNumber);
-        if(nonNull(info.taxIdentificationNumber)) find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
-        if(nonNull(info.socialSecurityNumber)) find(socialSecurityNumber).sendKeys(info.socialSecurityNumber);
+//        TODO fields moved to aml questionnaire
+//        if(nonNull(info.employerName)) find(employerName).sendKeys(info.employerName);
+//        inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
+//        if(nonNull(info.isUSReportable)) inSelect(isUSReportable).selectByValue(info.isUSReportable);
+//        inSelect(hasTaxIdentificationNumber).selectByValue(info.hasTaxIdentificationNumber);
+//        if(nonNull(info.taxIdentificationNumber)) find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
+//        if(nonNull(info.socialSecurityNumber)) find(socialSecurityNumber).sendKeys(info.socialSecurityNumber);
         inSelect(educationLevel).selectByValue(info.educationLevel);
         inSelect(educationField).selectByValue(info.educationField);
         if(nonNull(info.educationFieldOther)) find(educationFieldOther).sendKeys(info.educationFieldOther);
