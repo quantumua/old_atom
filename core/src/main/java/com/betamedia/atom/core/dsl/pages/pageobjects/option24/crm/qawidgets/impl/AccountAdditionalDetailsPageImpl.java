@@ -117,7 +117,10 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
                 .stream()
                 .map(this::getTextDirectionOfElement)
                 .forEach(textDirection ->
-                        Assert.assertEquals(textDirection.toLowerCase(), expectedDirection.toLowerCase()));
+                        Assert.assertEquals(
+                                textDirection.toLowerCase(),
+                                expectedDirection.toLowerCase(),
+                                "Text direction verification for: " + this));
     }
 
     @Override
@@ -188,7 +191,9 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
                 .filter(field -> By.class.isAssignableFrom(field.getType()))
                 .map(field -> {
                     try {
-                        return field.get(this);
+                        Object element = field.get(this);
+                        Reporter.log("Found element: " + element);
+                        return element;
                     } catch (IllegalAccessException e) {
                         throw new RuntimeException("", e);
                     }

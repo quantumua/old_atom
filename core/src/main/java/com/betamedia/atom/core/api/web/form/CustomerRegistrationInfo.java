@@ -7,6 +7,7 @@ import java.util.Objects;
 
 /**
  * Created by vsnigur on 7/17/17.
+ * Class for working with Customer Registration UI dialog
  */
 public class CustomerRegistrationInfo {
 
