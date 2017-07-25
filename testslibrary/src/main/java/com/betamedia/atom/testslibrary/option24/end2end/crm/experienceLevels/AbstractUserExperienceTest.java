@@ -1,8 +1,11 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels;
 
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
+import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
+import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
-import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
+
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
  * Created by mbelyaev on 5/22/17.
@@ -10,81 +13,88 @@ import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Qu
 public abstract class AbstractUserExperienceTest extends TPEndToEndTest {
     protected PersonalInformation personalInfoScore10() {
         return PersonalInformation.builder()
-                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
-                .withIndustry(Questions.Industry.FINANCE.get())
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(Industry.FINANCE)
                 .withEmployerName("fgsfds")
                 .withTaxResidenceCountry("JP")
-                .withUSReportabilityStatus(Questions.IsUSReportable.YES.get())
-                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.NO.get())
+                .withUSReportabilityStatus(IsUSReportable.YES)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
                 .withSocialSecurityNumber("123456789")
-                .withEducationLevel(Questions.EducationLevel.POST_GRADUATE.get())
-                .withEducationField(Questions.EducationField.ACCOUNTING.get())
-                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.NO.get())
-                .withSourceOfFunds(Questions.SourceOfFunds.EMPLOYMENT.get())
-                .withAnnualIncome(Questions.AnnualIncome.INCOME_OVER_100K.get())
-                .withNetWealth(Questions.NetWealth.NET_WEALTH_OVER_300K.get())
-                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
-                .withPurposeOfTrading(Questions.PurposeOfTrading.ADDITIONAL_INCOME.get())
+                .withEducationLevel(EducationLevel.POST_GRADUATE)
+                .withEducationField(EducationField.ACCOUNTING)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
                 .build();
     }
 
     protected PersonalInformation personalInfoScoreMax() {
         return PersonalInformation.builder()
-                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
-                .withIndustry(Questions.Industry.ACCOUNTING.get())
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(Industry.ACCOUNTING)
                 .withEmployerName("erter")
                 .withTaxResidenceCountry("JP")
-                .withUSReportabilityStatus(Questions.IsUSReportable.YES.get())
-                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.NO.get())
+                .withUSReportabilityStatus(IsUSReportable.YES)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
                 .withSocialSecurityNumber("123456789")
-                .withEducationLevel(Questions.EducationLevel.POST_GRADUATE.get())
-                .withEducationField(Questions.EducationField.ACCOUNTING.get())
-                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.NO.get())
-                .withSourceOfFunds(Questions.SourceOfFunds.EMPLOYMENT.get())
-                .withAnnualIncome(Questions.AnnualIncome.INCOME_OVER_100K.get())
-                .withNetWealth(Questions.NetWealth.NET_WEALTH_OVER_300K.get())
-                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
-                .withPurposeOfTrading(Questions.PurposeOfTrading.SPECULATIVE.get())
+                .withEducationLevel(EducationLevel.POST_GRADUATE)
+                .withEducationField(EducationField.ACCOUNTING)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
                 .build();
     }
 
     protected PersonalInformation personalInfoScore0() {
         return PersonalInformation.builder()
-                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
-                .withIndustry(Questions.Industry.COMPUTER.get())
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(Industry.COMPUTER)
                 .withEmployerName("fgsfds")
                 .withTaxResidenceCountry("JP")
-                .withUSReportabilityStatus(Questions.IsUSReportable.YES.get())
-                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.NO.get())
+                .withUSReportabilityStatus(IsUSReportable.YES)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
                 .withSocialSecurityNumber("123456789")
-                .withEducationLevel(Questions.EducationLevel.SECONDARY.get())
-                .withEducationField(Questions.EducationField.COMPUTER.get())
-                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.NO.get())
-                .withSourceOfFunds(Questions.SourceOfFunds.EMPLOYMENT.get())
-                .withAnnualIncome(Questions.AnnualIncome.INCOME_OVER_100K.get())
-                .withNetWealth(Questions.NetWealth.NET_WEALTH_OVER_300K.get())
-                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
-                .withPurposeOfTrading(Questions.PurposeOfTrading.ADDITIONAL_INCOME.get())
+                .withEducationLevel(EducationLevel.SECONDARY)
+                .withEducationField(EducationField.COMPUTER)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
                 .build();
     }
 
     protected PersonalInformation personalInfoScore5() {
         return PersonalInformation.builder()
-                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
-                .withIndustry(Questions.Industry.FINANCE.get())
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(Industry.FINANCE)
                 .withEmployerName("fgsfds")
                 .withTaxResidenceCountry("JP")
-                .withUSReportabilityStatus(Questions.IsUSReportable.YES.get())
-                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.NO.get())
+                .withUSReportabilityStatus(IsUSReportable.YES)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
                 .withSocialSecurityNumber("123456789")
-                .withEducationLevel(Questions.EducationLevel.SECONDARY.get())
-                .withEducationField(Questions.EducationField.COMPUTER.get())
-                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.NO.get())
-                .withSourceOfFunds(Questions.SourceOfFunds.EMPLOYMENT.get())
-                .withAnnualIncome(Questions.AnnualIncome.INCOME_OVER_100K.get())
-                .withNetWealth(Questions.NetWealth.NET_WEALTH_OVER_300K.get())
-                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
-                .withPurposeOfTrading(Questions.PurposeOfTrading.ADDITIONAL_INCOME.get())
+                .withEducationLevel(EducationLevel.SECONDARY)
+                .withEducationField(EducationField.COMPUTER)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
                 .build();
+    }
+
+    protected CRMCustomer crmRegisterAndLogIn() {
+        CRMCustomer customer = operations().customerOperations().register();
+        pages().crmNavigation().login();
+        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+        return customer;
     }
 }

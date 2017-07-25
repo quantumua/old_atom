@@ -5,7 +5,7 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobi
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
-import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
+import com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.assertEquals;
@@ -435,41 +435,41 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      */
     private void passQuestionnaire() {
         pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
-                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
-                .withIndustry(Questions.Industry.ACCOUNTING.get())
+                .withEmploymentStatus(QuestionnaireAnswers.EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(QuestionnaireAnswers.Industry.ACCOUNTING)
                 .withEmployerName("testEmployer")
                 .withTaxResidenceCountry("AF")
-                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.YES.get())
+                .withTaxIdentificationNumberStatus(QuestionnaireAnswers.HasTaxIdentificationNumber.YES)
                 .withTaxIdentificationNumber("1111111")
-                .withUSReportabilityStatus(Questions.IsUSReportable.NO.get())
-                .withEducationLevel(Questions.EducationLevel.POST_GRADUATE.get())
-                .withEducationField(Questions.EducationField.ACCOUNTING.get())
-                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.NO.get())
-                .withSourceOfFunds(Questions.SourceOfFunds.EMPLOYMENT.get())
-                .withAnnualIncome(Questions.AnnualIncome.INCOME_OVER_100K.get())
-                .withNetWealth(Questions.NetWealth.NET_WEALTH_OVER_300K.get())
-                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
-                .withPurposeOfTrading(Questions.PurposeOfTrading.SPECULATIVE.get())
+                .withUSReportabilityStatus(QuestionnaireAnswers.IsUSReportable.NO)
+                .withEducationLevel(QuestionnaireAnswers.EducationLevel.POST_GRADUATE)
+                .withEducationField(QuestionnaireAnswers.EducationField.ACCOUNTING)
+                .withPoliticalExposureStatus(QuestionnaireAnswers.IsPoliticallyExposed.NO)
+                .withSourceOfFunds(QuestionnaireAnswers.SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(QuestionnaireAnswers.AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(QuestionnaireAnswers.NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(QuestionnaireAnswers.ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(QuestionnaireAnswers.PurposeOfTrading.SPECULATIVE)
                 .build()
         );
         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
-                .withSharesExperience(Questions.SharesExperience.NEVER.get())
-                .withBinaryExperience(Questions.BinaryExperience.NEVER.get())
-                .withForExExperience(Questions.ForExExperience.NEVER.get())
-                .withFinancialWorkExperience(Questions.FinancialWorkExperience.NEITHER.get())
-                .withCfdBinaryKnowledge(Questions.CfdBinaryKnowledge.NON_RISKY.get())
-                .withMainFactorKnowledge(Questions.MainFactorKnowledge.ANNOUNCEMENT.get())
-                .withHowToCloseKnowledge(Questions.HowToCloseKnowledge.LONDON_STOCK.get())
-                .withCfdLeverageKnowledge(Questions.CfdLeverageKnowledge.PROVIDES.get())
-                .withStopLossKnowledge(Questions.StopLossKnowledge.BUY.get())
-                .withRequiredMarginKnowledge(Questions.RequiredMarginKnowledge.MARGIN_10K.get())
-                .withMarginLevelDropKnowledge(Questions.MarginLevelDropKnowledge.WARNING_CALL.get())
-                .withAutomaticStopKnowledge(Questions.AutomaticStopKnowledge.EARNINGS.get())
-                .withLossOn1to50Knowledge(Questions.LossOn1to50Knowledge.A2_450.get())
-                .withLossOn1to200Knowledge(Questions.LossOn1to200Knowledge.A2_1200.get())
-                .withBinaryInvestProfitKnowledge(Questions.BinaryInvestProfitKnowledge.PROFIT_60.get())
-                .withBinaryInvestLossKnowledge(Questions.BinaryInvestLossKnowledge.LOSS_75.get())
-                .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_35.get())
+                .withSharesExperience(QuestionnaireAnswers.SharesExperience.NEVER)
+                .withBinaryExperience(QuestionnaireAnswers.BinaryExperience.NEVER)
+                .withForExExperience(QuestionnaireAnswers.ForExExperience.NEVER)
+                .withFinancialWorkExperience(QuestionnaireAnswers.FinancialWorkExperience.NEITHER)
+                .withCfdBinaryKnowledge(QuestionnaireAnswers.CfdBinaryKnowledge.NON_RISKY)
+                .withMainFactorKnowledge(QuestionnaireAnswers.MainFactorKnowledge.ANNOUNCEMENT)
+                .withHowToCloseKnowledge(QuestionnaireAnswers.HowToCloseKnowledge.LONDON_STOCK)
+                .withCfdLeverageKnowledge(QuestionnaireAnswers.CfdLeverageKnowledge.PROVIDES)
+                .withStopLossKnowledge(QuestionnaireAnswers.StopLossKnowledge.BUY)
+                .withRequiredMarginKnowledge(QuestionnaireAnswers.RequiredMarginKnowledge.MARGIN_10K)
+                .withMarginLevelDropKnowledge(QuestionnaireAnswers.MarginLevelDropKnowledge.WARNING_CALL)
+                .withAutomaticStopKnowledge(QuestionnaireAnswers.AutomaticStopKnowledge.EARNINGS)
+                .withLossOn1to50Knowledge(QuestionnaireAnswers.LossOn1to50Knowledge.A2_450)
+                .withLossOn1to200Knowledge(QuestionnaireAnswers.LossOn1to200Knowledge.A2_1200)
+                .withBinaryInvestProfitKnowledge(QuestionnaireAnswers.BinaryInvestProfitKnowledge.PROFIT_60)
+                .withBinaryInvestLossKnowledge(QuestionnaireAnswers.BinaryInvestLossKnowledge.LOSS_75)
+                .withBinaryProbabilityKnowledge(QuestionnaireAnswers.BinaryProbabilityKnowledge.MONEY_35)
                 .build());
     }
 

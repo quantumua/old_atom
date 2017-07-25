@@ -2,8 +2,9 @@ package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
-import com.betamedia.atom.testslibrary.option24.end2end.crm.newQuestionnaries.Questions;
 import org.testng.Reporter;
+
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
  * Created by Oleksandr Losiev on 5/29/17.
@@ -62,47 +63,47 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
     private void passPersonalQuestionnaire() {
         pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
-                .withEmploymentStatus(Questions.EmploymentStatus.SALARIED_EMPLOYEE.get())
-                .withIndustry(Questions.Industry.ACCOUNTING.get())
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(Industry.ACCOUNTING)
                 .withEmployerName("testEmployer")
                 .withTaxResidenceCountry("AF")
-                .withTaxIdentificationNumberStatus(Questions.HasTaxIdentificationNumber.YES.get())
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES)
                 .withTaxIdentificationNumber("1111111")
-                .withUSReportabilityStatus(Questions.IsUSReportable.NO.get())
-                .withEducationLevel(Questions.EducationLevel.POST_GRADUATE.get())
-                .withEducationField(Questions.EducationField.ACCOUNTING.get())
-                .withPoliticalExposureStatus(Questions.IsPoliticallyExposed.NO.get())
-                .withSourceOfFunds(Questions.SourceOfFunds.EMPLOYMENT.get())
-                .withAnnualIncome(Questions.AnnualIncome.INCOME_OVER_100K.get())
-                .withNetWealth(Questions.NetWealth.NET_WEALTH_OVER_300K.get())
-                .withExpectedDepositsPerYear(Questions.ExpectedDepositsPerYear.DEPOSITS_OVER_50K.get())
-                .withPurposeOfTrading(Questions.PurposeOfTrading.SPECULATIVE.get())
+                .withUSReportabilityStatus(IsUSReportable.NO)
+                .withEducationLevel(EducationLevel.POST_GRADUATE)
+                .withEducationField(EducationField.ACCOUNTING)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
                 .build()
         );
     }
 
     private void passTradingQuestionnaire() {
         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
-                .withSharesExperience(Questions.SharesExperience.FREQUENTLY.get())
-                .withBinaryExperience(Questions.BinaryExperience.FREQUENTLY.get())
-                .withAverageYearlyBinaryVolume(Questions.AverageYearlyBinaryVolume.VOLUME_ABOVE_10K.get())
-                .withForExExperience(Questions.ForExExperience.FREQUENTLY.get())
-                .withAverageYearlyForExVolume(Questions.AverageYearlyForExVolume.VOLUME_ABOVE_500K.get())
-                .withCommonLeverage(Questions.CommonLeverage.LEVERAGE_ABOVE_1TO500.get())
-                .withFinancialWorkExperience(Questions.FinancialWorkExperience.SEMINARS.get())
-                .withCfdBinaryKnowledge(Questions.CfdBinaryKnowledge.SPECULATIVE.get())
-                .withMainFactorKnowledge(Questions.MainFactorKnowledge.INTEREST_RATES.get())
-                .withHowToCloseKnowledge(Questions.HowToCloseKnowledge.ONLY_PLATFORM.get())
-                .withCfdLeverageKnowledge(Questions.CfdLeverageKnowledge.MAGNIFIES.get())
-                .withStopLossKnowledge(Questions.StopLossKnowledge.MINIMIZE.get())
-                .withRequiredMarginKnowledge(Questions.RequiredMarginKnowledge.MARGIN_1K.get())
-                .withMarginLevelDropKnowledge(Questions.MarginLevelDropKnowledge.MARGIN_CALL.get())
-                .withAutomaticStopKnowledge(Questions.AutomaticStopKnowledge.EQUITY_FALLS.get())
-                .withLossOn1to50Knowledge(Questions.LossOn1to50Knowledge.A1_800.get())
-                .withLossOn1to200Knowledge(Questions.LossOn1to200Knowledge.A1_1800.get())
-                .withBinaryInvestProfitKnowledge(Questions.BinaryInvestProfitKnowledge.PROFIT_75.get())
-                .withBinaryInvestLossKnowledge(Questions.BinaryInvestLossKnowledge.LOSS_100.get())
-                .withBinaryProbabilityKnowledge(Questions.BinaryProbabilityKnowledge.MONEY_25.get())
+                .withSharesExperience(SharesExperience.FREQUENTLY)
+                .withBinaryExperience(BinaryExperience.FREQUENTLY)
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K)
+                .withForExExperience(ForExExperience.FREQUENTLY)
+                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K)
+                .withCommonLeverage(CommonForExLeverage.LEVERAGE_ABOVE_1TO500)
+                .withFinancialWorkExperience(FinancialWorkExperience.SEMINARS)
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE)
+                .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES)
+                .withHowToCloseKnowledge(HowToCloseKnowledge.ONLY_PLATFORM)
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.MAGNIFIES)
+                .withStopLossKnowledge(StopLossKnowledge.MINIMIZE)
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K)
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.MARGIN_CALL)
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EQUITY_FALLS)
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800)
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A1_1800)
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75)
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_100)
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                 .build()
         );
         pages().confirmAnswers().next();

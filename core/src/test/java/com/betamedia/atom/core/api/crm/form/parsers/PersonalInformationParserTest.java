@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 import static org.springframework.test.util.ReflectionTestUtils.getField;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
@@ -24,26 +25,26 @@ public class PersonalInformationParserTest {
 
     private PersonalInformation getExpectedInfo() {
         return PersonalInformation.builder()
-                .withEmploymentStatus("sampleStatus")
-                .withIndustry("sampleIndustry")
+                .withEmploymentStatus(EmploymentStatus.RETIRED)
+                .withIndustry(Industry.ACCOUNTING)
                 .withIndustryOther("sampleIndustryOther")
                 .withEmployerName("sampleEmployerName")
                 .withTaxResidenceCountry("sampleTaxResidenceCountry")
-                .withUSReportabilityStatus("sampleUSReportable")
-                .withTaxIdentificationNumberStatus("sampleTINStatus")
+                .withUSReportabilityStatus(IsUSReportable.NO)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
                 .withTaxIdentificationNumber("sampleTIN")
                 .withSocialSecurityNumber("sampleSSN")
-                .withEducationLevel("sampleEduLevel")
-                .withEducationField("sampleEduField")
+                .withEducationLevel(EducationLevel.BACHELOR)
+                .withEducationField(EducationField.ACCOUNTING)
                 .withEducationFieldOther("sampleEduFieldOther")
-                .withPoliticalExposureStatus("samplePoliticalExposure")
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
                 .withPoliticalExposureComment("samplePoliticalComment")
-                .withSourceOfFunds("sampleSourceOfFunds")
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
                 .withSourceOfFundsOther("sampleSourceOfFundsOther")
-                .withAnnualIncome("sampleAnnualIncome")
-                .withNetWealth("sampleNetWealth")
-                .withExpectedDepositsPerYear("sampleDepositsPerYear")
-                .withPurposeOfTrading("samplePurposeOfTrading")
+                .withAnnualIncome(AnnualIncome.INCOME_15K_25K)
+                .withNetWealth(NetWealth.NET_WEALTH_15K_50K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_10K_15K)
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
                 .withPurposeOfTradingOther("samplePurposeOfTradingOther")
                 .build();
     }

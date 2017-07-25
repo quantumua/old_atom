@@ -83,9 +83,10 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         inSelect(automaticStopKnowledge).selectByValue(info.automaticStopKnowledge);
         inSelect(lossOn1to50Knowledge).selectByValue(info.lossOn1to50Knowledge);
         inSelect(lossOn1to200Knowledge).selectByValue(info.lossOn1to200Knowledge);
-        inSelect(binaryInvestProfitKnowledge).selectByValue(info.binaryInvestProfitKnowledge);
-        inSelect(binaryInvestLossKnowledge).selectByValue(info.binaryInvestLossKnowledge);
-        inSelect(binaryProbabilityKnowledge).selectByValue(info.binaryProbabilityKnowledge);
+//        TODO confirm deprecation, fields absent on crm-widgets form
+//        inSelect(binaryInvestProfitKnowledge).selectByValue(info.binaryInvestProfitKnowledge);
+//        inSelect(binaryInvestLossKnowledge).selectByValue(info.binaryInvestLossKnowledge);
+//        inSelect(binaryProbabilityKnowledge).selectByValue(info.binaryProbabilityKnowledge);
         scrollIntoView(find(submit)).click();
         waitUntil(() -> waitUntilDisplayed(resultPlaceholder).getText().contains("\"HasTradingExperienceAnswers\":true"));
     }

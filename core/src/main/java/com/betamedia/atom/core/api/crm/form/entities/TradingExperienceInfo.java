@@ -1,5 +1,11 @@
 package com.betamedia.atom.core.api.crm.form.entities;
 
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
+
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
+
 /**
  * @author mbelyaev
  * @since 5/17/17
@@ -25,8 +31,9 @@ public class TradingExperienceInfo {
     public final String binaryInvestProfitKnowledge;
     public final String binaryInvestLossKnowledge;
     public final String binaryProbabilityKnowledge;
+    public final int expectedScore;
 
-    private TradingExperienceInfo(String sharesExperience, String binaryExperience, String averageYearlyBinaryVolume, String forExExperience, String averageYearlyForExVolume, String commonLeverage, String financialWorkExperience, String cfdBinaryKnowledge, String mainFactorKnowledge, String howToCloseKnowledge, String cfdLeverageKnowledge, String stopLossKnowledge, String requiredMarginKnowledge, String marginLevelDropKnowledge, String automaticStopKnowledge, String lossOn1to50Knowledge, String lossOn1to200Knowledge, String binaryInvestProfitKnowledge, String binaryInvestLossKnowledge, String binaryProbabilityKnowledge) {
+    private TradingExperienceInfo(String sharesExperience, String binaryExperience, String averageYearlyBinaryVolume, String forExExperience, String averageYearlyForExVolume, String commonLeverage, String financialWorkExperience, String cfdBinaryKnowledge, String mainFactorKnowledge, String howToCloseKnowledge, String cfdLeverageKnowledge, String stopLossKnowledge, String requiredMarginKnowledge, String marginLevelDropKnowledge, String automaticStopKnowledge, String lossOn1to50Knowledge, String lossOn1to200Knowledge, String binaryInvestProfitKnowledge, String binaryInvestLossKnowledge, String binaryProbabilityKnowledge, int expectedScore) {
         this.sharesExperience = sharesExperience;
         this.binaryExperience = binaryExperience;
         this.averageYearlyBinaryVolume = averageYearlyBinaryVolume;
@@ -47,6 +54,7 @@ public class TradingExperienceInfo {
         this.binaryInvestProfitKnowledge = binaryInvestProfitKnowledge;
         this.binaryInvestLossKnowledge = binaryInvestLossKnowledge;
         this.binaryProbabilityKnowledge = binaryProbabilityKnowledge;
+        this.expectedScore = expectedScore;
     }
 
     @Override
@@ -72,6 +80,7 @@ public class TradingExperienceInfo {
                 ", binaryInvestProfitKnowledge='" + binaryInvestProfitKnowledge + '\'' +
                 ", binaryInvestLossKnowledge='" + binaryInvestLossKnowledge + '\'' +
                 ", binaryProbabilityKnowledge='" + binaryProbabilityKnowledge + '\'' +
+                ", expectedScore=" + expectedScore +
                 '}';
     }
 
@@ -80,154 +89,174 @@ public class TradingExperienceInfo {
     }
 
     public static class TradingExperienceInfoBuilder {
-        private String sharesExperience;
-        private String binaryExperience;
-        private String averageYearlyBinaryVolume;
-        private String forExExperience;
-        private String averageYearlyForExVolume;
-        private String commonLeverage;
-        private String financialWorkExperience;
-        private String cfdBinaryKnowledge;
-        private String mainFactorKnowledge;
-        private String howToCloseKnowledge;
-        private String cfdLeverageKnowledge;
-        private String stopLossKnowledge;
-        private String requiredMarginKnowledge;
-        private String marginLevelDropKnowledge;
-        private String automaticStopKnowledge;
-        private String lossOn1to50Knowledge;
-        private String lossOn1to200Knowledge;
-        private String binaryInvestProfitKnowledge;
-        private String binaryInvestLossKnowledge;
-        private String binaryProbabilityKnowledge;
+        private SharesExperience sharesExperience;
+        private BinaryExperience binaryExperience;
+        private AverageYearlyBinaryVolume averageYearlyBinaryVolume;
+        private ForExExperience forExExperience;
+        private AverageYearlyForExVolume averageYearlyForExVolume;
+        private CommonForExLeverage commonLeverage;
+        private FinancialWorkExperience financialWorkExperience;
+        private CfdBinaryKnowledge cfdBinaryKnowledge;
+        private MainFactorKnowledge mainFactorKnowledge;
+        private HowToCloseKnowledge howToCloseKnowledge;
+        private CfdLeverageKnowledge cfdLeverageKnowledge;
+        private StopLossKnowledge stopLossKnowledge;
+        private RequiredMarginKnowledge requiredMarginKnowledge;
+        private MarginLevelDropKnowledge marginLevelDropKnowledge;
+        private AutomaticStopKnowledge automaticStopKnowledge;
+        private LossOn1to50Knowledge lossOn1to50Knowledge;
+        private LossOn1to200Knowledge lossOn1to200Knowledge;
+        private BinaryInvestProfitKnowledge binaryInvestProfitKnowledge;
+        private BinaryInvestLossKnowledge binaryInvestLossKnowledge;
+        private BinaryProbabilityKnowledge binaryProbabilityKnowledge;
 
         private TradingExperienceInfoBuilder(){}
 
-        public TradingExperienceInfoBuilder withSharesExperience(String sharesExperience) {
+        public TradingExperienceInfoBuilder withSharesExperience(SharesExperience sharesExperience) {
             this.sharesExperience = sharesExperience;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withBinaryExperience(String binaryExperience) {
+        public TradingExperienceInfoBuilder withBinaryExperience(BinaryExperience binaryExperience) {
             this.binaryExperience = binaryExperience;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withAverageYearlyBinaryVolume(String averageYearlyBinaryVolume) {
+        public TradingExperienceInfoBuilder withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume averageYearlyBinaryVolume) {
             this.averageYearlyBinaryVolume = averageYearlyBinaryVolume;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withForExExperience(String forExExperience) {
+        public TradingExperienceInfoBuilder withForExExperience(ForExExperience forExExperience) {
             this.forExExperience = forExExperience;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withAverageYearlyForExVolume(String averageYearlyForExVolume) {
+        public TradingExperienceInfoBuilder withAverageYearlyForExVolume(AverageYearlyForExVolume averageYearlyForExVolume) {
             this.averageYearlyForExVolume = averageYearlyForExVolume;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withCommonLeverage(String commonLeverage) {
+        public TradingExperienceInfoBuilder withCommonLeverage(CommonForExLeverage commonLeverage) {
             this.commonLeverage = commonLeverage;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withFinancialWorkExperience(String financialWorkExperience) {
+        public TradingExperienceInfoBuilder withFinancialWorkExperience(FinancialWorkExperience financialWorkExperience) {
             this.financialWorkExperience = financialWorkExperience;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withCfdBinaryKnowledge(String cfdBinaryKnowledge) {
+        public TradingExperienceInfoBuilder withCfdBinaryKnowledge(CfdBinaryKnowledge cfdBinaryKnowledge) {
             this.cfdBinaryKnowledge = cfdBinaryKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withMainFactorKnowledge(String mainFactorKnowledge) {
+        public TradingExperienceInfoBuilder withMainFactorKnowledge(MainFactorKnowledge mainFactorKnowledge) {
             this.mainFactorKnowledge = mainFactorKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withHowToCloseKnowledge(String howToCloseKnowledge) {
+        public TradingExperienceInfoBuilder withHowToCloseKnowledge(HowToCloseKnowledge howToCloseKnowledge) {
             this.howToCloseKnowledge = howToCloseKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withCfdLeverageKnowledge(String cfdLeverageKnowledge) {
+        public TradingExperienceInfoBuilder withCfdLeverageKnowledge(CfdLeverageKnowledge cfdLeverageKnowledge) {
             this.cfdLeverageKnowledge = cfdLeverageKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withStopLossKnowledge(String stopLossKnowledge) {
+        public TradingExperienceInfoBuilder withStopLossKnowledge(StopLossKnowledge stopLossKnowledge) {
             this.stopLossKnowledge = stopLossKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withRequiredMarginKnowledge(String requiredMarginKnowledge) {
+        public TradingExperienceInfoBuilder withRequiredMarginKnowledge(RequiredMarginKnowledge requiredMarginKnowledge) {
             this.requiredMarginKnowledge = requiredMarginKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withMarginLevelDropKnowledge(String marginLevelDropKnowledge) {
+        public TradingExperienceInfoBuilder withMarginLevelDropKnowledge(MarginLevelDropKnowledge marginLevelDropKnowledge) {
             this.marginLevelDropKnowledge = marginLevelDropKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withAutomaticStopKnowledge(String automaticStopKnowledge) {
+        public TradingExperienceInfoBuilder withAutomaticStopKnowledge(AutomaticStopKnowledge automaticStopKnowledge) {
             this.automaticStopKnowledge = automaticStopKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withLossOn1to50Knowledge(String lossOn1to50Knowledge) {
+        public TradingExperienceInfoBuilder withLossOn1to50Knowledge(LossOn1to50Knowledge lossOn1to50Knowledge) {
             this.lossOn1to50Knowledge = lossOn1to50Knowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withLossOn1to200Knowledge(String lossOn1to200Knowledge) {
+        public TradingExperienceInfoBuilder withLossOn1to200Knowledge(LossOn1to200Knowledge lossOn1to200Knowledge) {
             this.lossOn1to200Knowledge = lossOn1to200Knowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withBinaryInvestProfitKnowledge(String binaryInvestProfitKnowledge) {
+        public TradingExperienceInfoBuilder withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge binaryInvestProfitKnowledge) {
             this.binaryInvestProfitKnowledge = binaryInvestProfitKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withBinaryInvestLossKnowledge(String binaryInvestLossKnowledge) {
+        public TradingExperienceInfoBuilder withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge binaryInvestLossKnowledge) {
             this.binaryInvestLossKnowledge = binaryInvestLossKnowledge;
             return this;
         }
 
-        public TradingExperienceInfoBuilder withBinaryProbabilityKnowledge(String binaryProbabilityKnowledge) {
+        public TradingExperienceInfoBuilder withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge binaryProbabilityKnowledge) {
             this.binaryProbabilityKnowledge = binaryProbabilityKnowledge;
             return this;
         }
 
         public TradingExperienceInfo build() {
             return new TradingExperienceInfo(
-                    sharesExperience,
-                    binaryExperience,
-                    averageYearlyBinaryVolume,
-                    forExExperience,
-                    averageYearlyForExVolume,
-                    commonLeverage,
-                    financialWorkExperience,
-                    cfdBinaryKnowledge,
-                    mainFactorKnowledge,
-                    howToCloseKnowledge,
-                    cfdLeverageKnowledge,
-                    stopLossKnowledge,
-                    requiredMarginKnowledge,
-                    marginLevelDropKnowledge,
-                    automaticStopKnowledge,
-                    lossOn1to50Knowledge,
-                    lossOn1to200Knowledge,
-                    binaryInvestProfitKnowledge,
-                    binaryInvestLossKnowledge,
-                    binaryProbabilityKnowledge
+                    valueIfPresent(sharesExperience),
+                    valueIfPresent(binaryExperience),
+                    valueIfPresent(averageYearlyBinaryVolume),
+                    valueIfPresent(forExExperience),
+                    valueIfPresent(averageYearlyForExVolume),
+                    valueIfPresent(commonLeverage),
+                    valueIfPresent(financialWorkExperience),
+                    valueIfPresent(cfdBinaryKnowledge),
+                    valueIfPresent(mainFactorKnowledge),
+                    valueIfPresent(howToCloseKnowledge),
+                    valueIfPresent(cfdLeverageKnowledge),
+                    valueIfPresent(stopLossKnowledge),
+                    valueIfPresent(requiredMarginKnowledge),
+                    valueIfPresent(marginLevelDropKnowledge),
+                    valueIfPresent(automaticStopKnowledge),
+                    valueIfPresent(lossOn1to50Knowledge),
+                    valueIfPresent(lossOn1to200Knowledge),
+                    valueIfPresent(binaryInvestProfitKnowledge),
+                    valueIfPresent(binaryInvestLossKnowledge),
+                    valueIfPresent(binaryProbabilityKnowledge),
+                    getExpectedScore()
             );
         }
 
+        private String valueIfPresent(Answer answer) {
+            return Optional.ofNullable(answer).map(Answer::getValue).orElse(null);
+        }
+
+        private int getExpectedScore() {
+            return Arrays.stream(this.getClass().getDeclaredFields())
+                    .filter(field -> Answer.class.isAssignableFrom(field.getType()))
+                    .map(field -> {
+                        try {
+                            return field.get(this);
+                        } catch (IllegalAccessException e) {
+                            throw new RuntimeException("", e);
+                        }
+                    })
+                    .map(Answer.class::cast)
+                    .filter(Objects::nonNull)
+                    .mapToInt(Answer::getScore)
+                    .sum();
+        }
 
     }
 }
