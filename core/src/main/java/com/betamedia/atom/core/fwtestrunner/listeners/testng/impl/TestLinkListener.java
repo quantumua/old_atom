@@ -66,8 +66,8 @@ public class TestLinkListener implements ITestListener {
             getTestCaseResult(testRes, status)
                     .ifPresent(getTestLinkService()::updateTestCase);
         } catch (Exception e) {
-            logger.error("Failed to update test with result=" + testRes, e);
-            Reporter.log("Failed to update test with result=" + testRes);
+            logger.error(String.format("Failed to update test with result=%s %s<br/>",testRes, e));
+            Reporter.log(String.format("Failed to update test with result=%s<br/>",testRes));
         }
     }
 
@@ -101,7 +101,7 @@ public class TestLinkListener implements ITestListener {
 
     private static TestCaseResult logMissingParameter(String parameter) {
         logger.warn("Failed to update test case because " + parameter + " is missing!");
-        Reporter.log("Failed to update test case because " + parameter + " is missing!");
+        Reporter.log("Failed to update test case because " + parameter + " is missing!</br>");
         return null;
     }
 

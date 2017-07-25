@@ -30,14 +30,17 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected static final String ONE_SYMBOL = "a";
     protected static final String MAX_PLUS_ONE_CHARS = "abcdefghijklmnopqrstu";
     protected static final String MAX_CHARS = "abcdefghijklmnopqrst";
-    private static final String FOUR_CHARS = "abcd";
+    protected static final String FOUR_CHARS = "abcd";
     protected static final String SYMBOLS_AND_DIGITS = "a1b2c3d4e5";
     protected static final String SYMBOLS_AND_NO_DIGITS = "abcde";
     protected static final String PHONE_FIVE_DIGITS = "12345";
     protected static final String PHONE_NO_DIGITS = "phone~!@#$";
-    private static final String INCORRECT_PASSWORD = "!@#$%";
+    protected static final String INCORRECT_PASSWORD = "!@#$%";
     private static final int ZERO_VALUE = 0;
     private static final int WEB_SOURCE_ID = 206440004;
+    protected static final String SEARCH_BY_SYMBOL = "I";
+    protected static final String EMPTY_STRING = "";
+
     /**
      * RGB color constants
      */
@@ -123,15 +126,15 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     @Test(description = "CTW-5209:email field validations")
     public void emailFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
-                .setPassword("").setEmail(INCORRECT_EMAIL).build();
+                .setPassword(EMPTY_STRING).setEmail(INCORRECT_EMAIL).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRO);
         assertEquals("Enter a valid email address.",
                 pages().registrationDialog().getErrorMessageNotification());
         customerRO.setEmail(INCORRECT_CHARS_IN_EMAIL);
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals("", pages().registrationDialog().getEmail());
-        customerRO.setEmail("");
+        assertEquals(EMPTY_STRING, pages().registrationDialog().getEmail());
+        customerRO.setEmail(EMPTY_STRING);
         pages().registrationDialog().register(customerRO);
         assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
         customerRO.setEmail(CORRECT_EMAIL);
@@ -185,7 +188,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().redirectDialog().startTrade();
         pages().registrationDialog().exists();
         assertEquals("Country was not available in the search result.",
-                Country.IRELAND.getName(), pages().registrationDialog().countrySearch("I", Country.IRELAND.getName()));
+                Country.IRELAND.getName(), pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()));
     }
 
     /**
@@ -195,7 +198,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     @Test(description = "CTW-5261:country dropdown validations")
     public void countryDropdownValidations() {
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().countrySearch("", Country.ISRAEL.getName());
+        pages().registrationDialog().countrySearch(EMPTY_STRING, Country.ISRAEL.getName());
         pages().redirectDialog().startTrade();
         pages().registrationDialog().fillRegisterForm(
                 CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
