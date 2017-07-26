@@ -3,6 +3,7 @@ package com.betamedia.atom.core.testingtype.base;
 import com.betamedia.atom.core.fwdataaccess.repository.EntityRepository;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ExternalExecutionListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotListener;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.SoftAssertListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener;
 import com.betamedia.atom.core.holders.AppContextHolder;
 import com.opencsv.CSVReader;
@@ -13,6 +14,7 @@ import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
+import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,7 +29,8 @@ import java.util.List;
 @Listeners({
         ExternalExecutionListener.class,
         ScreenShotListener.class,
-        TestLinkListener.class
+        TestLinkListener.class,
+        SoftAssertListener.class
 })
 public abstract class AbstractTest {
     protected static final String GENERIC_DATA_PROVIDER = "GenericDataProvider";
@@ -35,8 +38,25 @@ public abstract class AbstractTest {
     protected static final String CACHED_DATA_PROVIDER = "CachedDataProvider";
     protected static final String CACHED_PARALLEL_DATA_PROVIDER = "CachedParallelDataProvider";
     private static final String DATA_PROVIDER_ERROR = "Failed to load data";
+
+    private static final ThreadLocal<SoftAssert> softAsserts = ThreadLocal.withInitial(SoftAssert::new);
     
     private EntityRepository entityRepository = null;
+
+    /**
+     * Factory method for managed {@link SoftAssert}s to use inside test lifecycle.
+     */
+    public static SoftAssert softAssert() {
+        return softAsserts.get();
+    }
+
+    /**
+     * Removes {@link SoftAssert} entity for current thread
+     */
+    @AfterMethod
+    public final void removeAssert() {
+        softAsserts.remove();
+    }
 
     /**
      * Test fixture teardown procedure that is invoked by TestNG after each test method invocation. <br/>

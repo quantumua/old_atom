@@ -12,6 +12,7 @@ import org.testng.*;
 import org.testng.internal.ConstructorOrMethod;
 import org.testng.xml.XmlTest;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,10 +32,6 @@ public class TestLinkListener implements ITestListener {
     private TestLinkService testLinkService;
 
     @Override
-    public void onTestStart(ITestResult iTestResult) {
-    }
-
-    @Override
     public void onTestSuccess(ITestResult iTestResult) {
         updateTestCaseWithStatus(iTestResult, ExecutionStatus.PASSED);
     }
@@ -49,25 +46,13 @@ public class TestLinkListener implements ITestListener {
         updateTestCaseWithStatus(iTestResult, ExecutionStatus.NOT_RUN);
     }
 
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-    }
-
-    @Override
-    public void onStart(ITestContext iTestContext) {
-    }
-
-    @Override
-    public void onFinish(ITestContext iTestContext) {
-    }
-
     private void updateTestCaseWithStatus(ITestResult testRes, ExecutionStatus status) {
         try {
             getTestCaseResult(testRes, status)
                     .ifPresent(getTestLinkService()::updateTestCase);
         } catch (Exception e) {
-            logger.error(String.format("Failed to update test with result=%s %s<br/>",testRes, e));
-            Reporter.log(String.format("Failed to update test with result=%s<br/>",testRes));
+            logger.error(MessageFormat.format("Failed to update test with result={0} {1}", testRes, e));
+            Reporter.log(MessageFormat.format("Failed to update test with result={0}<br/>", testRes));
         }
     }
 
@@ -138,4 +123,16 @@ public class TestLinkListener implements ITestListener {
         }
         return testLinkService;
     }
+
+    @Override
+    public void onStart(ITestContext iTestContext) {/* Do nothing */}
+
+    @Override
+    public void onTestStart(ITestResult iTestResult) {/* Do nothing */}
+
+    @Override
+    public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {/* Do nothing */}
+
+    @Override
+    public void onFinish(ITestContext iTestContext) {/* Do nothing */}
 }

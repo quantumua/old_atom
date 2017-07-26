@@ -1,8 +1,9 @@
-package com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels;
+package com.betamedia.atom.testslibrary.samples;
 
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
+import com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.AbstractUserExperienceTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

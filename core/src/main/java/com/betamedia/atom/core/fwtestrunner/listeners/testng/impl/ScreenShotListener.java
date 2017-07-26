@@ -39,14 +39,6 @@ public class ScreenShotListener implements ITestListener {
         this.storageStrategy = FileSystemStorageService::store;
     }
 
-    @Override
-    public void onTestStart(ITestResult result) {
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult result) {
-    }
-
     /**
      * Checks if relevant test class instance is an instance of {@link WebDriverTest},
      * retrieves {@link AbstractPageFactory} and invokes {@link #takeScreenShot}
@@ -66,22 +58,6 @@ public class ScreenShotListener implements ITestListener {
                                 relativize(result.getTestContext().getOutputDirectory()).getParent().toString()));
     }
 
-    @Override
-    public void onTestSkipped(ITestResult result) {
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-    }
-
-    @Override
-    public void onStart(ITestContext context) {
-    }
-
-    @Override
-    public void onFinish(ITestContext context) {
-    }
-
     private void takeScreenShot(AbstractPageFactory pageFactory, String outputDirectory) {
         try {
             File screenShot = pageFactory.browser().takeScreenShot();
@@ -97,7 +73,6 @@ public class ScreenShotListener implements ITestListener {
         return "<a href=\"" + path + "\">" + path + "</a>";
     }
 
-
     private static Path relativize(String path) {
         return Paths.get("")
                 .toAbsolutePath()
@@ -112,4 +87,23 @@ public class ScreenShotListener implements ITestListener {
                 .relativize(path)
                 .toString();
     }
+
+    @Override
+    public void onTestStart(ITestResult result) {/* Do nothing */}
+
+    @Override
+    public void onTestSuccess(ITestResult result) {/* Do nothing */}
+
+    @Override
+    public void onTestSkipped(ITestResult result) {/* Do nothing */}
+
+    @Override
+    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {/* Do nothing */}
+
+    @Override
+    public void onStart(ITestContext context) {/* Do nothing */}
+
+    @Override
+    public void onFinish(ITestContext context) {/* Do nothing */}
+
 }

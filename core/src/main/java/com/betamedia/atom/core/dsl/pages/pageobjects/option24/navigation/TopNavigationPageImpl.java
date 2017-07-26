@@ -46,7 +46,7 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
     @Override
     public void signUp() {
-    	waitUntilDisplayed(signUpBtn).click();
+        waitUntilDisplayed(signUpBtn).click();
     	Reporter.log("Click 'SIGN UP' button.<br/>");
     }
     
