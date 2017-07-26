@@ -7,6 +7,8 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 import static org.springframework.test.util.ReflectionTestUtils.getField;
@@ -50,9 +52,19 @@ public class PersonalInformationParserTest {
     }
 
     private QuestionnaireData createSourceData(PersonalInformation source) {
-        QuestionnaireData data = new QuestionnaireData();
-        Arrays.stream(source.getClass().getFields()).forEach(f -> setField(data, f.getName(), getField(source, f.getName())));
-        return data;
+        QuestionnaireData result = new QuestionnaireData();
+        Arrays.stream(source.getClass().getFields())
+                .filter(notExpectedScore())
+                .forEach(setValue(source, result));
+        return result;
+    }
+
+    private Predicate<Field> notExpectedScore() {
+        return field -> !"expectedScore".equals(field.getName());
+    }
+
+    private Consumer<Field> setValue(PersonalInformation source, QuestionnaireData data) {
+        return field -> setField(data, field.getName(), getField(source, field.getName()));
     }
 
     private void assertEquals(PersonalInformation actual, PersonalInformation expected) {
