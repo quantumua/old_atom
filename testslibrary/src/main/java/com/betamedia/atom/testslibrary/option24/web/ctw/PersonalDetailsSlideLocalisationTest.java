@@ -1,5 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.ctw;
 
+import com.betamedia.atom.core.api.web.form.Country;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -16,13 +18,13 @@ import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
  */
 
 public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
-	@Parameters({"countrycode"})
+
     @BeforeMethod
-	public void before(@Optional("de") String countrycode){
-    	pages().topNavigationPage().signUp();
-        CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).setCountryCode(countrycode).build();
-        pages().registrationDialog().register(customer);
-        pages().welcomePage().isStartBtnDisplayed();
+	public void before(){
+        pages().topNavigationPage().signUp();
+        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build();
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
         pages().welcomePage().start();
 	}
 

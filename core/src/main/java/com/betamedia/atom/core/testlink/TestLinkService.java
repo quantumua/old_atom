@@ -38,7 +38,7 @@ public class TestLinkService {
         api.reportTCResult(testCase.getId(), null,
                 tcRes.getPlanId(), executionStatus,
                 tcRes.getBuildId(), null,
-                tcRes.getParameters(), null, null, null,
+                tcRes.getNotes(), null, null, null,
                 null, null, null);
         log.info("Updated test case result in TestLink " + tcRes);
     }

@@ -2,11 +2,14 @@ package com.betamedia.atom.testslibrary.option24.web.createnewcustomers.european
 
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.web.form.Country;
+import com.betamedia.atom.core.api.web.form.Currency;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -161,7 +164,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      * - generate user account using builder;
      * - validate email name field;
      */
-    @Test(description = "CTW-5209:email field validations")
+    @Test(description = "CTW-5421:Email field validations")
     public void emailFieldValidations() {
         CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
                 .withEmailName(INCORRECT_EMAIL).build();
@@ -191,8 +194,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
 
         customer.setEmail(INCORRECT_CHARS_IN_EMAIL);
         pages().registrationDialog().fillRegisterForm(customer);
-        assertEquals("", pages().registrationDialog().getEmail());
-        customer.setEmail("");
+        assertEquals(EMPTY_STRING, pages().registrationDialog().getEmail());
+        customer.setEmail(EMPTY_STRING);
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
         assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
@@ -227,7 +230,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      * - generate user account using builder;
      * - validate phone field;
      */
-    @Test(description = "CTW-5211:phone number field validations")
+    @Test(description = "CTW-5423:Phone Number field validation")
     public void validateInputsIntoPhoneField() {
         CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
                 .withPhoneNumber(PHONE_NO_DIGITS)
@@ -235,14 +238,148 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
-        validateValue("", pages().registrationDialog().getPhoneNumber(),
+        validateValue(EMPTY_STRING, pages().registrationDialog().getPhoneNumber(),
                 "None digits was accepted into phone field.");
         customer.setPhoneNumber(PHONE_FIVE_DIGITS);
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
         validateValue("Enter between 6 to 15 numbers",pages().registrationDialog().getErrorMessageNotification(),
                 "5 digits were accepted by phone field");
+    }
 
+    /**
+     * - validate search functionality in the country field;
+     */
+    @Test(description = "CTW-5424:Country dropdown field search engine")
+    public void validateSearchFunctionalityInCountry() {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().setCountryPrefix(Country.JORDAN.getName());
+        pages().redirectDialog().startTrade();
+        pages().registrationDialog().exists();
+        assertEquals("Country was not available in the search result.",
+                Country.IRELAND.getName(), pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()));
+    }
+
+    /**
+     * - make sure impossible register customer for avoid countries;
+     */
+    @Test(description = "CTW-5425:Country dropdown validations")
+    public void validateCountryDropDownField() {
+        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+                .withPhoneCountryPrefix(Country.UNITED_KINGDOM.getPhonePrefix())
+                .withCountry(Country.ISRAEL.getName())
+                .build();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().selectCountry(customer.getCountry());
+        pages().redirectDialog().startTrade();
+        pages().registrationDialog().exists();
+        pages().registrationDialog().setPasswordFields(customer.getPassword(),customer.getPassword());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        assertEquals(NO_ERROR_MESSAGE,
+                "Registration Is Not Available In Your Country",
+                pages().registrationDialog().getErrorMessageNotification());
+        pages().registrationDialog().setCountryPrefix(Country.ISRAEL.getName());
+        pages().registrationDialog().submitRegisterForm();
+        assertEquals(NO_ERROR_MESSAGE,
+                "Registration Is Not Available In Your Country",
+                pages().registrationDialog().getErrorMessageNotification());
+    }
+
+    /**
+     * check currency selection is saved
+     * check USD is not available as currency
+     *
+     */
+    @Test(description = "CTW-5426:Currency dropdown field validation")
+    public void validateCurrencyDropDownField() {
+        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+                .withCountry(Country.UNITED_KINGDOM.getName())
+                .withPhoneCountryPrefix(Country.UNITED_KINGDOM.getPhonePrefix())
+                .withCurrency(Currency.EUR.getFullName())
+                .build();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(
+                customer);
+        assertFalse("Currencies are not available",
+                pages().registrationDialog().availableCurrencies().isEmpty());
+        assertFalse("Currency was not saved after selection.",
+                pages().registrationDialog().getCurrency().equalsIgnoreCase(customer.getCurrency()));
+        assertFalse("USD currency is available in the list.",
+                pages().registrationDialog().availableCurrencies().contains(Currency.USD.getShortName()));
+    }
+
+    /**
+     * - check password fields for symbols input
+     */
+    @Test(description = "CTW-5427:Password fields validations")
+    public void validatePasswordsField() {
+        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+                .withPassword(EMPTY_STRING).build();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+        assertEquals(NO_ERROR_MESSAGE,"Incorrect password.",
+                pages().registrationDialog().getErrorMessageNotification());
+        customer.setPassword(INCORRECT_PASSWORD);
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+        assertEquals(NO_ERROR_MESSAGE,"Enter digits and letters only (lower and upper case)",
+                pages().registrationDialog().getErrorMessageNotification());
+        assertEquals("15",
+                pages().registrationDialog().getPasswordSize());
+        pages().browser().refreshPage();
+        pages().topNavigationPage().signUp();
+        customer.setPassword(FOUR_CHARS);
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+        assertEquals(NO_ERROR_MESSAGE, "Enter between 5 to 15 characters",
+                pages().registrationDialog().getErrorMessageNotification());
+        pages().browser().refreshPage();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(
+                CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get()).build());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        pages().registrationDialog().agreementStatus();
+        assertEquals(GREEN_RGB_STYLE,
+                pages().registrationDialog().getBorderColorForPassword());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        assertTrue("Additional details window did not appear.",
+                pages().startTradeDialog().exists());
+    }
+
+    /**
+     * - check adult checkbox confirmation message
+     */
+    @Test(description = "CTW-5428:''I'm over 18'' checkbox validation")
+    public void validateAdultCheckBox() {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(
+                CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get()).build());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        validateValue("You must read and agree to the above terms!",
+                pages().registrationDialog().agreementStatus(),
+                "Adult confirmation message did not appear");
+    }
+
+    /**
+     * - check adult checkbox confirmation message
+     */
+    @Test(description = "CTW-5429:Submit button tests")
+    public void checkSubmitButtonForRegisterNewCustomer() {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(
+                CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get()).build());
+        pages().registrationDialog().submitRegisterForm();
+        assertTrue("Loading popup appeared.", pages().loadingDialog().isDisplayed());
+        assertFalse("Submit button is enabled during customer registration.",
+                pages().registrationDialog().submitIsEnabled());
+        assertTrue("Start Trade dialog did not appear after registration.",
+                pages().welcomePage().isStartBtnDisplayed());
     }
 
     private void validateValue( Object expected, Object actual, String errorMessage) {

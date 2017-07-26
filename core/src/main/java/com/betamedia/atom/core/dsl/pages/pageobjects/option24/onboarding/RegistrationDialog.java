@@ -46,6 +46,8 @@ public interface RegistrationDialog {
 
     void fillRegisterForm(CustomerRegistrationInfo customerRegistrationInfo);
 
+    void setPasswordFields(String password, String confirmPassword);
+
     void setCountryPrefix(String country);
 
     String getCountryPrefix();
@@ -53,6 +55,8 @@ public interface RegistrationDialog {
     String getPhoneNumber();
 
     String countrySearch(String search, String country);
+
+    void selectCountry(String country);
 
     void submitRegisterForm();
 
@@ -77,5 +81,7 @@ public interface RegistrationDialog {
     boolean submitIsEnabled();
 
     boolean chatLinkDisplayed();
+
+    String getCurrency();
 
 }

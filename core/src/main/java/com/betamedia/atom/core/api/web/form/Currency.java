@@ -9,7 +9,8 @@ public enum Currency {
     CHF("CHF", "Swiss franc (CHF)"),
     TRY("TRY", "Turkish lira (TRY)"),
     RUB("RUB", "Russian ruble (RUB)"),
-    ZAR("ZAR", "SA Rand (ZAR)");
+    ZAR("ZAR", "SA Rand (ZAR)"),
+    USD("USD", "US Dollar (USD)");
 
     private String shortName;
     private String fullName;

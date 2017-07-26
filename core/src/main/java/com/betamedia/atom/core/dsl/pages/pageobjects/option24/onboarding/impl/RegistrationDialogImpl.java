@@ -109,6 +109,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @Override
     public boolean exists() {
         scrollIntoView(waitUntilDisplayed(submitButton));
+        Reporter.log("Wait until displayed register from.<br/>");
         return waitUntilDisplayed(caption,submitButton).isDisplayed();
     }
 
@@ -222,11 +223,17 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
         find(phonePrefix).sendKeys(customerRegistrationInfo.getPhoneCountryPrefix());
         find(phoneNumber).clear();
         find(phoneNumber).sendKeys(customerRegistrationInfo.getPhoneNumber());
-        makeActions().sendKeys(find(passwordWrapper),Keys.ENTER).sendKeys(customerRegistrationInfo.getPassword()).build().perform();
-        find(retypePassword).clear();
-        find(retypePassword).sendKeys(customerRegistrationInfo.getPassword());
-        executeScript(SCRIPT_CLICK_FIRST_ELEMENT, find(accountAgree));
+        setPasswordFields(customerRegistrationInfo.getPassword(), customerRegistrationInfo.getPassword());
+        clickAgreement();
         Reporter.log(String.format("Fill register form for customer: %s</br>",customerRegistrationInfo.toString()));
+    }
+
+    @Override
+    public void setPasswordFields(String password, String confirmPassword) {
+        makeActions().sendKeys(find(passwordWrapper),Keys.ENTER).sendKeys(password).build().perform();
+        find(retypePassword).clear();
+        find(retypePassword).sendKeys(confirmPassword);
+        Reporter.log("Update password fields.<br/>");
     }
 
     @Override
@@ -242,7 +249,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
 
     @Override
     public String getCountryPrefix() {
-        System.out.print(waitUntilDisplayed(phonePrefix).isDisplayed());
+        waitUntilDisplayed(phonePrefix).isDisplayed();
         return waitUntilDisplayed(phonePrefix).getAttribute(ATTRIBUTE_VALUE);
     }
 
@@ -254,14 +261,21 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @Override
     public String countrySearch(String search,String country) {
         waitUntilDisplayed(countryComboBox).click();
-        find(countrySearch).sendKeys(search);
+        waitUntilDisplayed(countrySearch).sendKeys(search);
         findElements(countriesList).forEach(el->{if (el.getText().equalsIgnoreCase(country)) scrollIntoView(el).click();});
+        Reporter.log(String.format("Select country %s </br>", country));
         return find(countryComboBox).getAttribute(ATTRIBUTE_TITLE);
+    }
+
+    @Override
+    public void selectCountry(String country) {
+        countrySearch("", country);
     }
 
     @Override
     public void submitRegisterForm() {
         waitUntilDisplayed(submitButton);
+        waitUntilClickable(submitButton);
         scrollIntoView(find(submitButton)).click();
         Reporter.log("Submit register form.<br/>");
     }
@@ -282,6 +296,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @Override
     public void clickAgreement() {
         executeScript(SCRIPT_CLICK_FIRST_ELEMENT, waitUntilDisplayed(accountAgree));
+        Reporter.log("Click agreement checkbox.<br/>");
     }
 
     @Override
@@ -326,5 +341,10 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public String getCurrency() {
+        return find(currencyComboBox).getAttribute(ATTRIBUTE_TITLE);
     }
 }

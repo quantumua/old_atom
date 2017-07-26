@@ -5,9 +5,10 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobi
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
-import com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -30,14 +31,17 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected static final String ONE_SYMBOL = "a";
     protected static final String MAX_PLUS_ONE_CHARS = "abcdefghijklmnopqrstu";
     protected static final String MAX_CHARS = "abcdefghijklmnopqrst";
+    protected static final String FOUR_CHARS = "abcd";
     protected static final String SYMBOLS_AND_DIGITS = "a1b2c3d4e5";
     protected static final String SYMBOLS_AND_NO_DIGITS = "abcde";
     protected static final String PHONE_FIVE_DIGITS = "12345";
     protected static final String PHONE_NO_DIGITS = "phone~!@#$";
-    private static final String FOUR_CHARS = "abcd";
-    private static final String INCORRECT_PASSWORD = "!@#$%";
+    protected static final String INCORRECT_PASSWORD = "!@#$%";
     private static final int ZERO_VALUE = 0;
     private static final int WEB_SOURCE_ID = 206440004;
+    protected static final String SEARCH_BY_SYMBOL = "I";
+    protected static final String EMPTY_STRING = "";
+
     /**
      * RGB color constants
      */
@@ -123,15 +127,15 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     @Test(description = "CTW-5209:email field validations")
     public void emailFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
-                .setPassword("").setEmail(INCORRECT_EMAIL).build();
+                .setPassword(EMPTY_STRING).setEmail(INCORRECT_EMAIL).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRO);
         assertEquals("Enter a valid email address.",
                 pages().registrationDialog().getErrorMessageNotification());
         customerRO.setEmail(INCORRECT_CHARS_IN_EMAIL);
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals("", pages().registrationDialog().getEmail());
-        customerRO.setEmail("");
+        assertEquals(EMPTY_STRING, pages().registrationDialog().getEmail());
+        customerRO.setEmail(EMPTY_STRING);
         pages().registrationDialog().register(customerRO);
         assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
         customerRO.setEmail(CORRECT_EMAIL);
@@ -185,7 +189,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().redirectDialog().startTrade();
         pages().registrationDialog().exists();
         assertEquals("Country was not available in the search result.",
-                Country.IRELAND.getName(), pages().registrationDialog().countrySearch("I", Country.IRELAND.getName()));
+                Country.IRELAND.getName(), pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()));
     }
 
     /**
@@ -195,7 +199,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     @Test(description = "CTW-5261:country dropdown validations")
     public void countryDropdownValidations() {
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().countrySearch("", Country.ISRAEL.getName());
+        pages().registrationDialog().countrySearch(EMPTY_STRING, Country.ISRAEL.getName());
         pages().redirectDialog().startTrade();
         pages().registrationDialog().fillRegisterForm(
                 CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
@@ -435,41 +439,41 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      */
     private void passQuestionnaire() {
         pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
-                .withEmploymentStatus(QuestionnaireAnswers.EmploymentStatus.SALARIED_EMPLOYEE)
-                .withIndustry(QuestionnaireAnswers.Industry.ACCOUNTING)
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(Industry.ACCOUNTING)
                 .withEmployerName("testEmployer")
                 .withTaxResidenceCountry("AF")
-                .withTaxIdentificationNumberStatus(QuestionnaireAnswers.HasTaxIdentificationNumber.YES)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES)
                 .withTaxIdentificationNumber("1111111")
-                .withUSReportabilityStatus(QuestionnaireAnswers.IsUSReportable.NO)
-                .withEducationLevel(QuestionnaireAnswers.EducationLevel.POST_GRADUATE)
-                .withEducationField(QuestionnaireAnswers.EducationField.ACCOUNTING)
-                .withPoliticalExposureStatus(QuestionnaireAnswers.IsPoliticallyExposed.NO)
-                .withSourceOfFunds(QuestionnaireAnswers.SourceOfFunds.EMPLOYMENT)
-                .withAnnualIncome(QuestionnaireAnswers.AnnualIncome.INCOME_OVER_100K)
-                .withNetWealth(QuestionnaireAnswers.NetWealth.NET_WEALTH_OVER_300K)
-                .withExpectedDepositsPerYear(QuestionnaireAnswers.ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
-                .withPurposeOfTrading(QuestionnaireAnswers.PurposeOfTrading.SPECULATIVE)
+                .withUSReportabilityStatus(IsUSReportable.NO)
+                .withEducationLevel(EducationLevel.POST_GRADUATE)
+                .withEducationField(EducationField.ACCOUNTING)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
                 .build()
         );
         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
-                .withSharesExperience(QuestionnaireAnswers.SharesExperience.NEVER)
-                .withBinaryExperience(QuestionnaireAnswers.BinaryExperience.NEVER)
-                .withForExExperience(QuestionnaireAnswers.ForExExperience.NEVER)
-                .withFinancialWorkExperience(QuestionnaireAnswers.FinancialWorkExperience.NEITHER)
-                .withCfdBinaryKnowledge(QuestionnaireAnswers.CfdBinaryKnowledge.NON_RISKY)
-                .withMainFactorKnowledge(QuestionnaireAnswers.MainFactorKnowledge.ANNOUNCEMENT)
-                .withHowToCloseKnowledge(QuestionnaireAnswers.HowToCloseKnowledge.LONDON_STOCK)
-                .withCfdLeverageKnowledge(QuestionnaireAnswers.CfdLeverageKnowledge.PROVIDES)
-                .withStopLossKnowledge(QuestionnaireAnswers.StopLossKnowledge.BUY)
-                .withRequiredMarginKnowledge(QuestionnaireAnswers.RequiredMarginKnowledge.MARGIN_10K)
-                .withMarginLevelDropKnowledge(QuestionnaireAnswers.MarginLevelDropKnowledge.WARNING_CALL)
-                .withAutomaticStopKnowledge(QuestionnaireAnswers.AutomaticStopKnowledge.EARNINGS)
-                .withLossOn1to50Knowledge(QuestionnaireAnswers.LossOn1to50Knowledge.A2_450)
-                .withLossOn1to200Knowledge(QuestionnaireAnswers.LossOn1to200Knowledge.A2_1200)
-                .withBinaryInvestProfitKnowledge(QuestionnaireAnswers.BinaryInvestProfitKnowledge.PROFIT_60)
-                .withBinaryInvestLossKnowledge(QuestionnaireAnswers.BinaryInvestLossKnowledge.LOSS_75)
-                .withBinaryProbabilityKnowledge(QuestionnaireAnswers.BinaryProbabilityKnowledge.MONEY_35)
+                .withSharesExperience(SharesExperience.NEVER)
+                .withBinaryExperience(BinaryExperience.NEVER)
+                .withForExExperience(ForExExperience.NEVER)
+                .withFinancialWorkExperience(FinancialWorkExperience.NEITHER)
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY)
+                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
+                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK)
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES)
+                .withStopLossKnowledge(StopLossKnowledge.BUY)
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_10K)
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL)
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A2_450)
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200)
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_60)
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
                 .build());
     }
 

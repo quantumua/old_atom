@@ -303,3 +303,4 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalComment,ID,Comment
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalBtnStep2,ID,swWithdrawalBtn
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalPrev,ID,swPreviosBtn
+2.6.2,2017-05-29 15:24 +0000,LoadingDialogImpl,loadingPopup,ID,open-account-loading-bar

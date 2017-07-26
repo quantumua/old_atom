@@ -92,4 +92,6 @@ public interface TPPageFactory {
     RegistrationDialog registrationDialog();
 
     RedirectDialog redirectDialog();
+
+    LoadingDialog loadingDialog();
 }
