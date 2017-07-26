@@ -30,7 +30,7 @@ public final class ConfigurationPropertiesProvider {
     public static final String ENVIRONMENT = "environment";
 
     public static final String DEFAULT_ENVIRONMENT_URL = "https://qawww.24option.com/eu/trade/";
-    public static final String DEFAULT_BROWSER_TYPE = "chrome";
+    public static final String DEFAULT_BROWSER_TYPE = "firefox";
     public static final String DEFAULT_ENVIRONMENT = "qa";
 
     private Environment env;

@@ -5,7 +5,7 @@ import com.betamedia.atom.core.holders.AppContextHolder;
 import com.betamedia.atom.core.testlink.TestCaseResult;
 import com.betamedia.atom.core.testlink.TestLinkDisplayIdHolder;
 import com.betamedia.atom.core.testlink.TestLinkService;
-import com.betamedia.atom.core.testlink.annotations.TestLinkDisplayId;
+import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.*;
@@ -15,8 +15,12 @@ import org.testng.xml.XmlTest;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 /**
  * Listener for TestLink integration.
@@ -58,25 +62,49 @@ public class TestLinkListener implements ITestListener {
 
     private static Optional<TestCaseResult> getTestCaseResult(ITestResult testResult, ExecutionStatus status) {
         XmlTest xmlTest = testResult.getTestContext().getCurrentXmlTest();
-        return Optional.of(
-                getIntParameterFromTestXml(xmlTest, TESTLINK_BUILD_ID)
-                        .map(build -> logRetrievedParameter(TESTLINK_BUILD_ID, build))
-                        .map(build -> resultForBuild(testResult, status, xmlTest, build))
-                        .orElseGet(() -> logMissingParameter(TESTLINK_BUILD_ID)));
+        Optional<TestLinkProperties> annotationProperties = getAnnotationProperties(testResult);
+        Optional<Integer> buildId = getXmlParameter(xmlTest, TESTLINK_BUILD_ID, () -> annotationProperties.map(TestLinkProperties::buildId).orElse(null));
+        Optional<Integer> planId = getXmlParameter(xmlTest, TESTLINK_PLAN_ID, () -> annotationProperties.map(TestLinkProperties::planId).orElse(null));
+        Optional<String> displayId = getDisplayId(testResult, () -> annotationProperties.map(TestLinkProperties::displayId).orElse(null));
+        return buildId.flatMap(bid ->
+                planId.flatMap(pid ->
+                        displayId.map(did ->
+                                new TestCaseResult(
+                                        bid,
+                                        pid,
+                                        did,
+                                        formatTestParameters(testResult.getParameters()),
+                                        String.join(System.lineSeparator(), Reporter.getOutput(testResult)),
+                                        status)
+                        )
+                )
+        );
     }
 
-    private static TestCaseResult resultForBuild(ITestResult testResult, ExecutionStatus status, XmlTest xmlTest, Integer build) {
-        return getIntParameterFromTestXml(xmlTest, TESTLINK_PLAN_ID)
-                .map(plan -> logRetrievedParameter(TESTLINK_PLAN_ID, plan))
-                .map(plan -> resultForPlan(testResult, status, build, plan))
-                .orElseGet(() -> logMissingParameter(TESTLINK_PLAN_ID));
+    private static Optional<Integer> getXmlParameter(XmlTest xmlTest, String parameterName, Supplier<Integer> other) {
+        return ofNullable(ofNullable(ofNullable(xmlTest.getParameter(parameterName)).map(Integer::parseInt).orElseGet(other))
+                .filter(value -> value > 0)
+                .map(value -> logRetrievedParameter(parameterName, value))
+                .orElseGet(() -> logMissingParameter(parameterName)));
     }
 
-    private static TestCaseResult resultForPlan(ITestResult testResult, ExecutionStatus status, Integer build, Integer plan) {
-        return getTestDisplayId(testResult)
-                .map(displayId -> logRetrievedParameter(DISPLAY_ID, displayId))
-                .map(displayId -> new TestCaseResult(build, plan, formatTestParameters(testResult.getParameters()), status, displayId))
-                .orElseGet(() -> logMissingParameter(DISPLAY_ID));
+    private static Optional<String> getDisplayId(ITestResult testResult, Supplier<String> other) {
+        return ofNullable(ofNullable(Arrays.stream(testResult.getParameters())
+                .filter(param -> param instanceof TestLinkDisplayIdHolder)
+                .findFirst()
+                .map(TestLinkDisplayIdHolder.class::cast)
+                .map(TestLinkDisplayIdHolder::getDisplayId)
+                .orElseGet(other))
+                .map(display -> logRetrievedParameter(DISPLAY_ID, display))
+                .orElseGet(() -> logMissingParameter(DISPLAY_ID)));
+    }
+
+    private static Optional<TestLinkProperties> getAnnotationProperties(ITestResult testResult) {
+        return of(testResult)
+                .map(ITestResult::getMethod)
+                .map(ITestNGMethod::getConstructorOrMethod)
+                .map(ConstructorOrMethod::getMethod)
+                .map(method -> method.getAnnotation(TestLinkProperties.class));
     }
 
     private static <T> T logRetrievedParameter(String parameter, T value) {
@@ -84,31 +112,10 @@ public class TestLinkListener implements ITestListener {
         return value;
     }
 
-    private static TestCaseResult logMissingParameter(String parameter) {
+    private static <T> T logMissingParameter(String parameter) {
         logger.warn("Failed to update test case because " + parameter + " is missing!");
         Reporter.log("Failed to update test case because " + parameter + " is missing!</br>");
         return null;
-    }
-
-    private static Optional<Integer> getIntParameterFromTestXml(XmlTest xml, String paramName) {
-        return Optional.ofNullable(xml.getParameter(paramName)).map(Integer::parseInt);
-    }
-
-    private static Optional<String> getTestDisplayId(ITestResult iTestResult) {
-        return Optional.of(Arrays.stream(iTestResult.getParameters())
-                .filter(param -> param instanceof TestLinkDisplayIdHolder)
-                .findFirst()
-                .map(TestLinkDisplayIdHolder.class::cast)
-                .map(TestLinkDisplayIdHolder::getDisplayId)
-                .orElseGet(() ->
-                        Optional.of(iTestResult)
-                                .map(ITestResult::getMethod)
-                                .map(ITestNGMethod::getConstructorOrMethod)
-                                .map(ConstructorOrMethod::getMethod)
-                                .map(method -> method.getAnnotation(TestLinkDisplayId.class))
-                                .map(TestLinkDisplayId::value)
-                                .orElse(null)
-                ));
     }
 
     private static String formatTestParameters(Object[] params) {

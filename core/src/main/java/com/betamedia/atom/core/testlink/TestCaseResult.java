@@ -2,6 +2,8 @@ package com.betamedia.atom.core.testlink;
 
 import br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus;
 
+import java.text.MessageFormat;
+
 /**
  * Created by sergeyg on 05.07.17.
  */
@@ -12,12 +14,14 @@ public class TestCaseResult {
     private String parameters;
     private ExecutionStatus status;
     private String displayId;
+    private String log;
 
-    public TestCaseResult(int buildId, int planId, String parameters,
-                           ExecutionStatus status, String displayId) {
+    public TestCaseResult(int buildId, int planId, String displayId, String parameters, String log,
+                          ExecutionStatus status) {
         this.buildId = buildId;
         this.planId = planId;
         this.parameters = parameters;
+        this.log = log;
         this.status = status;
         this.displayId = displayId;
     }
@@ -30,8 +34,8 @@ public class TestCaseResult {
         return planId;
     }
 
-    public String getParameters() {
-        return parameters;
+    public String getNotes() {
+        return MessageFormat.format("Parameters: {0}\nLog:\n{1}", parameters, log);
     }
 
     public ExecutionStatus getStatus() {
@@ -50,6 +54,7 @@ public class TestCaseResult {
                 ", parameters='" + parameters + '\'' +
                 ", status=" + status +
                 ", displayId='" + displayId + '\'' +
+                ", log='" + log + '\'' +
                 '}';
     }
 }
