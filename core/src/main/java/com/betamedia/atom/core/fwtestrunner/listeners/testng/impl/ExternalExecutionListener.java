@@ -20,8 +20,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ExternalExecutionListener implements IExecutionListener {
     private static final String CONTEXT_FOUND = "Application context found, aborting initialization";
-    private static final String NO_MANAGED_CONTEXT = "No managed context in this listener, exiting";
-    private static final String DESTROYING_MANAGED_CONTEXT = "Destroying listener-managed application context";
+    private static final String CONTEXT_INITIALIZED = "Initialized listener-managed application context";
     private static final Logger logger = LogManager.getLogger(ExternalExecutionListener.class);
     private static final ReentrantReadWriteLock.WriteLock ctxLock = new ReentrantReadWriteLock().writeLock();
     private ConfigurableApplicationContext context;
@@ -39,22 +38,15 @@ public class ExternalExecutionListener implements IExecutionListener {
                 return;
             }
             context = SpringApplication.run(CoreInfrastructure.class);
-            logger.debug("Initialized listener-managed application context");
+            initializeContext();
+            logger.debug(CONTEXT_INITIALIZED);
         } finally {
             ctxLock.unlock();
         }
-        initializeContext();
     }
 
     @Override
-    public void onExecutionFinish() {
-        if (isContextPresent()) {
-            logger.debug(NO_MANAGED_CONTEXT);
-            return;
-        }
-        logger.debug(DESTROYING_MANAGED_CONTEXT);
-        context.close();
-    }
+    public void onExecutionFinish() {/*Do nothing*/}
 
     private static boolean isContextPresent() {
         return Objects.nonNull(AppContextHolder.getContext());
