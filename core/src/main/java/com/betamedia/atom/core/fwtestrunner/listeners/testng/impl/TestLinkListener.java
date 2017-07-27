@@ -43,7 +43,11 @@ public class TestLinkListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        updateTestCaseWithStatus(iTestResult, ExecutionStatus.FAILED);
+        updateTestCaseWithStatus(iTestResult,
+                ofNullable(iTestResult)
+                        .map(ITestResult::getThrowable)
+                        .map(t -> t instanceof AssertionError).orElse(false) ? ExecutionStatus.FAILED : ExecutionStatus.BLOCKED
+        );
     }
 
     @Override
