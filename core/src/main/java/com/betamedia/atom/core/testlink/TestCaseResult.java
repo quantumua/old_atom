@@ -9,20 +9,22 @@ import java.text.MessageFormat;
  */
 public class TestCaseResult {
 
-    private int buildId;
-    private int planId;
-    private String parameters;
-    private ExecutionStatus status;
-    private String displayId;
-    private String log;
+    private final int buildId;
+    private final int planId;
+    private final String parameters;
+    private final ExecutionStatus status;
+    private final String displayId;
+    private final String log;
+    private final String stacktrace;
 
-    public TestCaseResult(int buildId, int planId, String displayId, String parameters, String log,
+    public TestCaseResult(int buildId, int planId, String displayId, String parameters, String log, String stacktrace,
                           ExecutionStatus status) {
         this.buildId = buildId;
         this.planId = planId;
         this.parameters = parameters;
         this.log = log;
         this.status = status;
+        this.stacktrace = stacktrace;
         this.displayId = displayId;
     }
 
@@ -35,7 +37,7 @@ public class TestCaseResult {
     }
 
     public String getNotes() {
-        return MessageFormat.format("Parameters: {0}\nLog:\n{1}", parameters, log);
+        return MessageFormat.format("Parameters: {0}\nLog:\n{1}\nStacktrace:\n{2}", parameters, log, stacktrace);
     }
 
     public ExecutionStatus getStatus() {

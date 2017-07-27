@@ -1,4 +1,4 @@
-package com.betamedia.atom;
+package com.betamedia.atom.webservice;
 
 import com.betamedia.atom.app.AppInfrastructure;
 import com.betamedia.atom.app.classloader.ContextClassLoaderManagingExecutor;
