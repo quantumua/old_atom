@@ -1,31 +1,8 @@
 package com.betamedia.atom.core.dsl.operations.impl;
 
-import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.EXPERT;
-import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE;
-import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.LOW_EXPERIENCE;
-import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE;
-import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.REJECTED;
-import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.UNKNOWN;
-import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
-
-import java.util.List;
-import java.util.Objects;
-
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
-
-import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.AccessType;
-import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
-import com.betamedia.atom.core.api.crm.form.entities.Validation;
-import com.betamedia.atom.core.dsl.operations.OnBoardingOperations;
 import com.betamedia.atom.core.dsl.operations.WithdrawalValidation;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.persistence.entities.ConnectionBase;
 import com.betamedia.atom.core.persistence.repositories.AbstractConnectionBaseRepository;
 import com.betamedia.atom.core.persistence.repositories.AbstractConnectionRoleBaseRepository;
 import com.betamedia.atom.core.persistence.repositories.AbstractContactBaseRepository;

@@ -7,7 +7,6 @@ import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -166,7 +165,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-5421:Email field validations")
     public void emailFieldValidations() {
         CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withEmailName(INCORRECT_EMAIL).build();
+                .withEmail(INCORRECT_EMAIL).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
@@ -314,10 +313,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5427:Password fields validations")
     public void validatePasswordsField() {
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withPassword(EMPTY_STRING).build();
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().fillRegisterForm(customer);
+        CustomerRegistrationInfo customer=fillRegisterCustomerDialog();
         pages().registrationDialog().submitRegisterForm();
         assertEquals(NO_ERROR_MESSAGE,"Incorrect password.",
                 pages().registrationDialog().getErrorMessageNotification());
@@ -355,9 +351,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5428:''I'm over 18'' checkbox validation")
     public void validateAdultCheckBox() {
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().fillRegisterForm(
-                CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get()).build());
+        fillRegisterCustomerDialog();
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
         validateValue("You must read and agree to the above terms!",
@@ -366,13 +360,11 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     }
 
     /**
-     * - check adult checkbox confirmation message
+     * - verify Submit button behaviour in the register dialog
      */
     @Test(description = "CTW-5429:Submit button tests")
     public void checkSubmitButtonForRegisterNewCustomer() {
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().fillRegisterForm(
-                CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get()).build());
+        fillRegisterCustomerDialog();
         pages().registrationDialog().submitRegisterForm();
         assertTrue("Loading popup appeared.", pages().loadingDialog().isDisplayed());
         assertFalse("Submit button is enabled during customer registration.",
@@ -381,8 +373,88 @@ public class LongRegistrationWizard extends CreateNewCustomers {
                 pages().welcomePage().isStartBtnDisplayed());
     }
 
+    /**
+     *  register customer
+     *  verify customer for existence in the CRM Database
+     */
+    @Test(description = "CTW-5430:Full registration (including CRM+ email validations)")
+    public void checkValidateEmailForRegisteredNewCustomer() {
+        CustomerRegistrationInfo customer = fillRegisterCustomerDialog();
+        pages().registrationDialog().submitRegisterForm();
+        pages().welcomePage().isStartBtnDisplayed();
+        operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
+    }
+
+    /**
+     *  register customer
+     *  verify customer for existence in the CRM Database
+     */
+    @Test(description = "CTW-5626:SEU: Registration form - Mandatory fields E2E")
+    public void checkCheckMandatoryFieldsInTheCustomerRegistrationForm() {
+        CustomerRegistrationInfo customer = getCustomer();
+        customer.setFirstName(EMPTY_STRING);
+        pages().topNavigationPage().signUp();
+        registerNewCustomer(customer);
+        assertEquals("Enter your first name", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorFirstName());
+
+        customer = getCustomer();
+        customer.setLastName(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter your last name", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorLastName());
+
+        customer = getCustomer();
+        customer.setEmail(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter a valid email address.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
+
+        customer = getCustomer();
+        customer.setPhoneCountryPrefix(EMPTY_PHONE_PREFIX);
+        registerNewCustomer(customer);
+        assertEquals("Country is a mandatory field.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderForPrefixField());
+
+        customer = getCustomer();
+        customer.setPhoneNumber(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter at least 6 characters", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorPhone());
+
+        customer = getCustomer();
+        customer.setPassword(EMPTY_STRING);
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        pages().topNavigationPage().signUp();
+        registerNewCustomer(customer);
+        assertEquals("Incorrect password.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForPassword());
+
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        fillRegisterCustomerDialog(getCustomer());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        validateValue("You must read and agree to the above terms!",
+                pages().registrationDialog().agreementStatus(),
+                "Adult confirmation message did not appear");
+
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        customer=fillRegisterCustomerDialog();
+        pages().registrationDialog().submitRegisterForm();
+        pages().welcomePage().isStartBtnDisplayed();
+        operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
+    }
+
     private void validateValue( Object expected, Object actual, String errorMessage) {
         Reporter.log(String.format("Check expected: '%s' and actual: '%s' <br/>", expected, actual));
         assertEquals(errorMessage, expected, actual);
+    }
+
+    private CustomerRegistrationInfo getCustomer() {
+        return CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+                .build();
     }
 }

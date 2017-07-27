@@ -138,7 +138,7 @@ public class CustomerRegistrationInfo {
             return this;
         }
 
-        public CustomerRegistrationInfoBuilder withEmailName(String email) {
+        public CustomerRegistrationInfoBuilder withEmail(String email) {
             this.email = email;
             return this;
         }
