@@ -4,6 +4,7 @@ import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.Country;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers;
 import org.testng.Reporter;
@@ -27,9 +28,9 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected static final String INCORRECT_EMAIL_DIGIT_DOMAIN = "dkjfh@gmail.123";
     protected static final String INCORRECT_EMAIL = "djfhdjk12312";
     protected static final String CORRECT_EMAIL = "qatest11@test.com";
-    protected static final String ONE_SYMBOL = "a";
-    protected static final String MAX_PLUS_ONE_CHARS = "abcdefghijklmnopqrstu";
-    protected static final String MAX_CHARS = "abcdefghijklmnopqrst";
+    public static final String ONE_SYMBOL = "a";
+    public static final String MAX_PLUS_ONE_CHARS = "abcdefghijklmnopqrstu";
+    public static final String MAX_CHARS = "abcdefghijklmnopqrst";
     protected static final String FOUR_CHARS = "abcd";
     protected static final String SYMBOLS_AND_DIGITS = "a1b2c3d4e5";
     protected static final String SYMBOLS_AND_NO_DIGITS = "abcde";
@@ -40,6 +41,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     private static final int WEB_SOURCE_ID = 206440004;
     protected static final String SEARCH_BY_SYMBOL = "I";
     protected static final String EMPTY_STRING = "";
+    protected static final String EMPTY_PHONE_PREFIX = "+";
 
     /**
      * RGB color constants
@@ -509,4 +511,23 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
                 OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED, true,
                 true, OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED);
     }
+
+    protected CustomerRegistrationInfo fillRegisterCustomerDialog() {
+        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+                .build();
+        fillRegisterCustomerDialog(customer);
+        return customer;
+    }
+
+    protected void fillRegisterCustomerDialog(CustomerRegistrationInfo customer) {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(customer);
+    }
+
+    protected void registerNewCustomer(CustomerRegistrationInfo customer) {
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+    }
+
+
 }
