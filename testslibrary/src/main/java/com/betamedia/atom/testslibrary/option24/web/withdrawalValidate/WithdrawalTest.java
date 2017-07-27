@@ -8,7 +8,10 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -17,6 +20,7 @@ import org.testng.annotations.Test;
  *         Date: 2/15/17.
  */
 public class WithdrawalTest extends WEBEndToEndTest {
+	String expected = "red";
 
     @Test
     public void basicWithdrawalRequest() {
@@ -36,25 +40,19 @@ public class WithdrawalTest extends WEBEndToEndTest {
         		.withwithdrawalSwift("XOXO")
         		.withwithdrawalComment("ERTRTETE")
         		.build())
+             
         );
-    }
         
         
+        String	orange = "orange";
+        Reporter.log(String.format("Check expected: '%s' and actual: '%s' <br/>", expected, orange));
+        assertEquals(" The validation is not correct", expected, orange);
         
-//        pages().creditCardDeposit().submit(
-//                (CreditCardDeposit.builder()
-//                        .withDepositAmount("100")
-//                        .withCreditCardNumber("1234-1234-1234-1234")
-//                        .withCVV2("123")
-//                        .withExpiryDateMonth("1")
-//                        .withExpiryDateYear("2020")
-//                        .withCardHoldersFirstName("CardHoldersFirstName")
-//                        .withCardHoldersLastName("CardHoldersLastName")
-//                        .withBillingAddress("BillingAddress")
-//                        .withCity("City")
-//                        .withZipCode("ZipCode")
-//                        .build())
-        }
+       
+    }  
+   
+        
+  }
       
         
         

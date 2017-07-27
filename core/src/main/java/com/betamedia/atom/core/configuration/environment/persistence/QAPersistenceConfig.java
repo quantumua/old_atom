@@ -3,6 +3,7 @@ package com.betamedia.atom.core.configuration.environment.persistence;
 import com.betamedia.atom.core.configuration.environment.QAEnvironmentConfig;
 import com.betamedia.atom.core.persistence.entities.ContactBase;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
+import com.betamedia.atom.core.persistence.entities.WithdrawalRequest;
 import com.betamedia.atom.core.persistence.repositories.impl.qa.QAEnvContactExtensionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -27,7 +28,8 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(
         basePackageClasses = {
                 ContactExtension.class,
-                QAEnvContactExtensionRepository.class
+                QAEnvContactExtensionRepository.class,
+                WithdrawalRequest.class
         },
         entityManagerFactoryRef = "qaEntityManagerFactory"
 )
@@ -49,7 +51,8 @@ public class QAPersistenceConfig {
                 .packages(
                         ContactBase.class,
                         ContactExtension.class,
-                        QAEnvContactExtensionRepository.class
+                        QAEnvContactExtensionRepository.class,
+                        WithdrawalRequest.class
                 )
                 .persistenceUnit("qaPersistenceUnit")
                 .build();
