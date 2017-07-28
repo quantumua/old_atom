@@ -40,7 +40,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected static final String INCORRECT_PASSWORD = "!@#$%";
     private static final int ZERO_VALUE = 0;
     private static final int WEB_SOURCE_ID = 206440004;
-    protected static final String SEARCH_BY_SYMBOL = "I";
+    public static final String SEARCH_BY_SYMBOL = "I";
     public static final String EMPTY_STRING = "";
     protected static final String EMPTY_PHONE_PREFIX = "+";
 

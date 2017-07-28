@@ -2,12 +2,14 @@ package com.betamedia.atom.testslibrary.option24.web.createnewcustomers.internat
 
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.web.form.Country;
+import com.betamedia.atom.core.api.web.form.Currency;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers.*;
 import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
 
 /**
  * Created by vsnigur on 7/17/17.
@@ -20,8 +22,8 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
         pages().topNavigationPage().signUp();
         pages().registrationDialog().setCountryPrefix(Country.ZAMBIA.getName());
         pages().redirectDialog().startTrade();
+        pages().registrationDialog().exists();
     }
-
 
     /**
      * open register form
@@ -46,7 +48,7 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
     /**
      * try register customer with one char in the last name
      */
-    @Test(description = "CTW-18425:Last Name field validations: No option to fill less than 2 characters")
+    @Test(description = "CTW-18650:Last Name field validations: No option to fill less than 2 characters")
     public void verifyImpossibleInputLessThanTwoCharsIntoLastName() {
         pages().registrationDialog().fillRegisterForm(getCustomerWithLastName(ONE_SYMBOL_NAME));
         pages().registrationDialog().submitRegisterForm();
@@ -71,7 +73,7 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
     public void verifyImpossibleInputSpecialSymbolsIntoLastName() {
         pages().registrationDialog().fillRegisterForm(getCustomerWithLastName(INCORRECT_CHARS_NAME));
         assertEquals("Possible input none char symbols last name field.",
-                MAX_CHARS_NAME, pages().registrationDialog().getLastName());
+                EMPTY_STRING, pages().registrationDialog().getLastName());
     }
 
     /**
@@ -96,12 +98,22 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
     }
 
     /**
+     * verify min input into first name field
+     */
+    @Test(description = "CTW-18644:First Name field validations: No option to insert anything but letters")
+    public void verifyImpossibleInputSpecialSymbolsIntoFirstName() {
+        pages().registrationDialog().fillRegisterForm(getCustomerWithFirstName(INCORRECT_CHARS_NAME));
+        assertEquals("Possible input none char symbols last name field.",
+                EMPTY_STRING, pages().registrationDialog().getFirstName());
+    }
+
+    /**
      *  open register dialog;
      *  submit empty form;
      *  check error notification for first field;
      *  check red border for other not updated fields
      */
-    @Test(description = "CTW-5418:Wizard Registration form: submit empty form")
+    @Test(description = "CTW-5465:Wizard Registration form: submit empty form")
     public void verifyEmptySubmittedForm() {
         pages().registrationDialog().submitRegisterForm();
         assertEquals("Enter your first name", pages().registrationDialog().getFirstNameStatusError());
@@ -117,7 +129,7 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
      * - generate user account using builder;
      * - validate email name field;
      */
-    @Test(description = "CTW-5421:Email field validations")
+    @Test(description = "CTW-5468:Email field validations")
     public void emailFieldValidations() {
 
         pages().registrationDialog().fillRegisterForm(getCustomerWithEmail(INCORRECT_EMAIL));
@@ -157,7 +169,7 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
      * - validate selected prefix saved in the form;
      * - validate registration is not available for Israel country;
      */
-    @Test(description = "CTW-5422:Phone Prefix field validation")
+    @Test(description = "CTW-5469:Phone Prefix field validation")
     public void verifyPhonePrefixFunctionality() {
         pages().registrationDialog().setCountryPrefix(Country.AUSTRALIA.getName());
         assertEquals(Country.AUSTRALIA.getPhonePrefix(), pages().registrationDialog().getCountryPrefix());
@@ -173,7 +185,7 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
      * - generate user account using builder;
      * - validate phone field;
      */
-    @Test(description = "CTW-5423:Phone Number field validation")
+    @Test(description = "CTW-5470:Phone Number field validation")
     public void validateInputsIntoPhoneField() {
         CustomerRegistrationInfo customer = getCustomerWithPhoneNumber(PHONE_NO_DIGITS);
         pages().registrationDialog().fillRegisterForm(customer);
@@ -188,9 +200,22 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
     }
 
     /**
+     * - validate search functionality in the country field;
+     */
+    @Test(description = "CTW-5471:Country dropdown field search engine")
+    public void validateSearchFunctionalityInCountry() {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().setCountryPrefix(Country.JORDAN.getName());
+        pages().redirectDialog().startTrade();
+        pages().registrationDialog().exists();
+        assertEquals("Country was not available in the search result.",
+                Country.IRELAND.getName(), pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()));
+    }
+
+    /**
      * - make sure impossible register customer for avoid countries;
      */
-    @Test(description = "CTW-5425:Country dropdown validations")
+    @Test(description = "CTW-5472:Country dropdown validations")
     public void validateCountryDropDownField() {
         CustomerRegistrationInfo customer = getCustomer();
         customer.setCountry(Country.ISRAEL.getName());
@@ -209,6 +234,24 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
         assertEquals(NO_ERROR_MESSAGE,
                 "Registration Is Not Available In Your Country",
                 pages().registrationDialog().getErrorMessageNotification());
+    }
+
+    /**
+     * check currency selection is saved
+     * check USD is not available as currency
+     *
+     */
+    @Test(description = "CTW-5473:Currency dropdown field validation")
+    public void validateCurrencyDropDownField() {
+        CustomerRegistrationInfo customer = getCustomer();
+        customer.setCurrency(Currency.USD.getFullName());
+        pages().registrationDialog().fillRegisterForm(customer);
+        assertFalse("Currencies are not available",
+                pages().registrationDialog().availableCurrencies().isEmpty());
+        assertFalse("Currency was not saved after selection.",
+                pages().registrationDialog().getCurrency().equalsIgnoreCase(customer.getCurrency()));
+        assertFalse("EUR currency is available in the list.",
+                pages().registrationDialog().availableCurrencies().contains(Currency.EUR.getShortName()));
     }
 
     private CustomerRegistrationInfo getCustomerWithLastName(String lastName) {
