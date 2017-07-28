@@ -2,6 +2,7 @@ package com.betamedia.atom.testslibrary.option24.web.createnewcustomers;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
@@ -21,26 +22,26 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     /**
      * Strings for tests
      */
-    protected static final String INCORRECT_CHARS_IN_EMAIL = "`~!#$%^&*()+=<>?,/[]{}";
-    protected static final String INCORRECT_CHARS = "`~!#$%^&*()+=<>?,/[]{}";
-    protected static final String INCORRECT_EMAIL_TWO_AT = "qatest11@@test.com";
-    protected static final String INCORRECT_EMAIL_NO_AT = "kjfhskj.gmail.com";
-    protected static final String INCORRECT_EMAIL_DIGIT_DOMAIN = "dkjfh@gmail.123";
-    protected static final String INCORRECT_EMAIL = "djfhdjk12312";
-    protected static final String CORRECT_EMAIL = "qatest11@test.com";
-    public static final String ONE_SYMBOL = "a";
-    public static final String MAX_PLUS_ONE_CHARS = "abcdefghijklmnopqrstu";
-    public static final String MAX_CHARS = "abcdefghijklmnopqrst";
+    public static final String INCORRECT_CHARS_IN_EMAIL = "`~!#$%^&*()+=<>?,/[]{}";
+    public static final String INCORRECT_CHARS_NAME = "`~!#$%^&*()+=<>?,/[]{}";
+    public static final String INCORRECT_EMAIL_TWO_AT = "qatest11@@test.com";
+    public static final String INCORRECT_EMAIL_NO_AT = "kjfhskj.gmail.com";
+    public static final String INCORRECT_EMAIL_DIGIT_DOMAIN = "dkjfh@gmail.123";
+    public static final String INCORRECT_EMAIL = "djfhdjk12312";
+    public static final String CORRECT_EMAIL = "qatest11@test.com";
+    public static final String ONE_SYMBOL_NAME = "a";
+    public static final String MAX_PLUS_ONE_CHARS_NAME = "abcdefghijklmnopqrstu";
+    public static final String MAX_CHARS_NAME = "abcdefghijklmnopqrst";
     protected static final String FOUR_CHARS = "abcd";
     protected static final String SYMBOLS_AND_DIGITS = "a1b2c3d4e5";
     protected static final String SYMBOLS_AND_NO_DIGITS = "abcde";
-    protected static final String PHONE_FIVE_DIGITS = "12345";
-    protected static final String PHONE_NO_DIGITS = "phone~!@#$";
+    public static final String PHONE_FIVE_DIGITS = "12345";
+    public static final String PHONE_NO_DIGITS = "phone~!@#$";
     protected static final String INCORRECT_PASSWORD = "!@#$%";
     private static final int ZERO_VALUE = 0;
     private static final int WEB_SOURCE_ID = 206440004;
     protected static final String SEARCH_BY_SYMBOL = "I";
-    protected static final String EMPTY_STRING = "";
+    public static final String EMPTY_STRING = "";
     protected static final String EMPTY_PHONE_PREFIX = "+";
 
     /**
@@ -90,14 +91,14 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     @Test(description = "CTW-5375:first name field validations")
     public void applyForAnAccountFirstNameFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(
-                CRMMobileAPINamingStrategy.get()).setFirstName(MAX_PLUS_ONE_CHARS).build();
+                CRMMobileAPINamingStrategy.get()).setFirstName(MAX_PLUS_ONE_CHARS_NAME).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals(MAX_CHARS, pages().registrationDialog().getFirstName());
+        assertEquals(MAX_CHARS_NAME, pages().registrationDialog().getFirstName());
         customerRO.setFirstName(SYMBOLS_AND_DIGITS);
         pages().registrationDialog().fillRegisterForm(customerRO);
         assertEquals(SYMBOLS_AND_NO_DIGITS, pages().registrationDialog().getFirstName());
-        customerRO.setFirstName(ONE_SYMBOL);
+        customerRO.setFirstName(ONE_SYMBOL_NAME);
         pages().registrationDialog().register(customerRO);
         assertEquals(FAIL_NAME_NOTIFICATION, pages().registrationDialog().getErrorMessageNotification());
     }
@@ -109,14 +110,14 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     @Test(description = "CTW-5208:last name field validations")
     public void applyForAnAccountLastNameFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
-                .setLastName(MAX_PLUS_ONE_CHARS).build();
+                .setLastName(MAX_PLUS_ONE_CHARS_NAME).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals(MAX_CHARS, pages().registrationDialog().getLastName());
+        assertEquals(MAX_CHARS_NAME, pages().registrationDialog().getLastName());
         customerRO.setLastName(SYMBOLS_AND_DIGITS);
         pages().registrationDialog().fillRegisterForm(customerRO);
         assertEquals(SYMBOLS_AND_NO_DIGITS, pages().registrationDialog().getLastName());
-        customerRO.setLastName(ONE_SYMBOL);
+        customerRO.setLastName(ONE_SYMBOL_NAME);
         pages().registrationDialog().register(customerRO);
         assertEquals(FAIL_NAME_NOTIFICATION, pages().registrationDialog().getErrorMessageNotification());
     }
@@ -513,7 +514,8 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     }
 
     protected CustomerRegistrationInfo fillRegisterCustomerDialog() {
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+        CustomerRegistrationInfo customer =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .build();
         fillRegisterCustomerDialog(customer);
         return customer;
@@ -529,5 +531,9 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().registrationDialog().submitRegisterForm();
     }
 
-
+    public static void validateValue(Object expected, Object actual, String errorMessage) {
+        Reporter.log(String.format("Check expected: '%s' and actual: '%s' <br/>",
+                expected, actual));
+        assertEquals(errorMessage, expected, actual);
+    }
 }
