@@ -4,6 +4,8 @@ import com.betamedia.atom.core.fwservices.webdriver.ParametrizedWebDriverFactory
 import com.betamedia.atom.core.fwservices.webdriver.ParametrizedWebDriverFactoryProvider;
 import com.betamedia.atom.core.fwservices.webdriver.WebDriverFactory;
 import com.betamedia.atom.core.fwservices.webdriver.WebDriverFactoryProvider;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
  */
 @Component
 public class WebDriverFactoryProviderImpl implements WebDriverFactoryProvider {
+    private static final Logger logger = LogManager.getLogger(WebDriverFactoryProviderImpl.class);
 
     @Autowired
     private List<ParametrizedWebDriverFactoryProvider> providers;
@@ -39,11 +43,14 @@ public class WebDriverFactoryProviderImpl implements WebDriverFactoryProvider {
         String driverType = remoteDriverUrl == null ? browserType : "remote";
         ParametrizedWebDriverFactory webDriverFactory = providerMap.get(driverType);
         return () -> {
-            WebDriver driver = webDriverFactory.apply(getCapabilities(browserType), remoteDriverUrl);
-            if (driver != null) {
+            try {
+                WebDriver driver = webDriverFactory.apply(getCapabilities(browserType), remoteDriverUrl);
                 driver.get(domainUrl);
+                return driver;
+            } catch (MalformedURLException e) {
+                logger.error("Failed to instantiate WebDriver:", e);
+                throw new RuntimeException(e);
             }
-            return driver;
         };
     }
 

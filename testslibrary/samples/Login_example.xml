@@ -4,7 +4,6 @@
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.end2end.LoginPageTest">
                 <methods>
-                    <include name="loginTest"/>
                     <parameter name="username" value="maksym"/>
                     <parameter name="password" value="password"/>
                 </methods>
