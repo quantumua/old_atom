@@ -64,8 +64,12 @@ public class CreditCardDepositPageImpl extends AbstractPageObject implements Cre
 	}
 
 	@Override
+	public boolean isDisplayed() {
+		return waitUntilDisplayed(creditCardNumber) != null;
+	}
+
+	@Override
 	public void waitforCreditCardDepositPage() {
 		waitUntilDisplayed(depositAmount);
-
 	}
 }

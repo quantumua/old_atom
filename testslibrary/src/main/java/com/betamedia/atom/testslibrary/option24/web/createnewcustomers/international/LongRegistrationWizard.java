@@ -4,18 +4,18 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSite
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.Currency;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
+import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers.*;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Created by vsnigur on 7/17/17.
  * tests for registration dialog
  */
-public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest {
+public class LongRegistrationWizard extends CreateNewCustomers {
 
     @BeforeMethod
     public void beforeTest() {
@@ -238,7 +238,7 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
 
     /**
      * check currency selection is saved
-     * check USD is not available as currency
+     * check EUR is not available as currency
      *
      */
     @Test(description = "CTW-5473:Currency dropdown field validation")
@@ -250,9 +250,75 @@ public class LongRegistrationWizard extends AbstractOnboardingUserExperienceTest
                 pages().registrationDialog().availableCurrencies().isEmpty());
         assertFalse("Currency was not saved after selection.",
                 pages().registrationDialog().getCurrency().equalsIgnoreCase(customer.getCurrency()));
-        assertFalse("EUR currency is available in the list.",
-                pages().registrationDialog().availableCurrencies().contains(Currency.EUR.getShortName()));
+        assertFalse("USD currency is available in the list.",
+                pages().registrationDialog().availableCurrencies().stream().anyMatch(value->value.contains(Currency.USD.getFullName())));
     }
+
+    /**
+     * - check password fields for symbols input
+     */
+    @Test(description = "CTW-5474:Password fields validations")
+    public void validatePasswordsField() {
+        CustomerRegistrationInfo customer = getCustomer();
+        customer.setPassword(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals(NO_ERROR_MESSAGE,"Incorrect password.",
+                pages().registrationDialog().getErrorMessageNotification());
+        customer.setPassword(INCORRECT_PASSWORD);
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+        assertEquals(NO_ERROR_MESSAGE,"Enter digits and letters only (lower and upper case)",
+                pages().registrationDialog().getErrorMessageNotification());
+        assertEquals("15",
+                pages().registrationDialog().getPasswordSize());
+        pages().browser().refreshPage();
+        customer.setPassword(FOUR_CHARS);
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+        assertEquals(NO_ERROR_MESSAGE, "Enter between 5 to 15 characters",
+                pages().registrationDialog().getErrorMessageNotification());
+        pages().browser().refreshPage();
+        pages().registrationDialog().fillRegisterForm(
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        pages().registrationDialog().agreementStatus();
+        assertEquals(GREEN_RGB_STYLE,
+                pages().registrationDialog().getBorderColorForPassword());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        assertTrue("Additional details window did not appear.",
+                pages().startTradeDialog().exists());
+    }
+
+    /**
+     * - check adult checkbox confirmation message
+     */
+    @Test(description = "CTW-5475:''I'm over 18'' checkbox validation")
+    public void validateAdultCheckBox() {
+        pages().registrationDialog().fillRegisterForm(getCustomer());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        validateValue("You must read and agree to the above terms!",
+                pages().registrationDialog().agreementStatus(),
+                "Adult confirmation message did not appear");
+    }
+
+    /**
+     * - verify Submit button behaviour in the register dialog
+     */
+    @Test(description = "CTW-5476:Submit button tests")
+    public void checkSubmitButtonForRegisterNewCustomer() {
+        pages().registrationDialog().fillRegisterForm(getCustomer());
+        pages().registrationDialog().submitRegisterForm();
+        assertTrue("Loading popup appeared.", pages().loadingDialog().isDisplayed());
+        assertFalse("Submit button is enabled during customer registration.",
+                pages().registrationDialog().submitIsEnabled());
+        assertTrue("Start Trade dialog did not appear after registration.",
+                pages().creditCardDeposit().isDisplayed());
+    }
+
+
 
     private CustomerRegistrationInfo getCustomerWithLastName(String lastName) {
         CustomerRegistrationInfo customer=getCustomer();

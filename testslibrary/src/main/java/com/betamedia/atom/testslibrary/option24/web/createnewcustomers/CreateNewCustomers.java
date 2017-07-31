@@ -22,26 +22,26 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     /**
      * Strings for tests
      */
-    public static final String INCORRECT_CHARS_IN_EMAIL = "`~!#$%^&*()+=<>?,/[]{}";
-    public static final String INCORRECT_CHARS_NAME = "`~!#$%^&*()+=<>?,/[]{}";
-    public static final String INCORRECT_EMAIL_TWO_AT = "qatest11@@test.com";
-    public static final String INCORRECT_EMAIL_NO_AT = "kjfhskj.gmail.com";
-    public static final String INCORRECT_EMAIL_DIGIT_DOMAIN = "dkjfh@gmail.123";
-    public static final String INCORRECT_EMAIL = "djfhdjk12312";
-    public static final String CORRECT_EMAIL = "qatest11@test.com";
-    public static final String ONE_SYMBOL_NAME = "a";
-    public static final String MAX_PLUS_ONE_CHARS_NAME = "abcdefghijklmnopqrstu";
-    public static final String MAX_CHARS_NAME = "abcdefghijklmnopqrst";
+    protected static final String INCORRECT_CHARS_IN_EMAIL = "`~!#$%^&*()+=<>?,/[]{}";
+    protected static final String INCORRECT_CHARS_NAME = "`~!#$%^&*()+=<>?,/[]{}";
+    protected static final String INCORRECT_EMAIL_TWO_AT = "qatest11@@test.com";
+    protected static final String INCORRECT_EMAIL_NO_AT = "kjfhskj.gmail.com";
+    protected static final String INCORRECT_EMAIL_DIGIT_DOMAIN = "dkjfh@gmail.123";
+    protected static final String INCORRECT_EMAIL = "djfhdjk12312";
+    protected static final String CORRECT_EMAIL = "qatest11@test.com";
+    protected static final String ONE_SYMBOL_NAME = "a";
+    protected static final String MAX_PLUS_ONE_CHARS_NAME = "abcdefghijklmnopqrstu";
+    protected static final String MAX_CHARS_NAME = "abcdefghijklmnopqrst";
     protected static final String FOUR_CHARS = "abcd";
     protected static final String SYMBOLS_AND_DIGITS = "a1b2c3d4e5";
     protected static final String SYMBOLS_AND_NO_DIGITS = "abcde";
-    public static final String PHONE_FIVE_DIGITS = "12345";
-    public static final String PHONE_NO_DIGITS = "phone~!@#$";
+    protected static final String PHONE_FIVE_DIGITS = "12345";
+    protected static final String PHONE_NO_DIGITS = "phone~!@#$";
     protected static final String INCORRECT_PASSWORD = "!@#$%";
-    private static final int ZERO_VALUE = 0;
-    private static final int WEB_SOURCE_ID = 206440004;
-    public static final String SEARCH_BY_SYMBOL = "I";
-    public static final String EMPTY_STRING = "";
+    protected static final int ZERO_VALUE = 0;
+    protected static final int WEB_SOURCE_ID = 206440004;
+    protected static final String SEARCH_BY_SYMBOL = "I";
+    protected static final String EMPTY_STRING = "";
     protected static final String EMPTY_PHONE_PREFIX = "+";
 
     /**

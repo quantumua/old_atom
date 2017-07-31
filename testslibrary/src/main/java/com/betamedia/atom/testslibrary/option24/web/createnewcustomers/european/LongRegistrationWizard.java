@@ -316,7 +316,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         assertFalse("Currency was not saved after selection.",
                 pages().registrationDialog().getCurrency().equalsIgnoreCase(customer.getCurrency()));
         assertFalse("USD currency is available in the list.",
-                pages().registrationDialog().availableCurrencies().contains(Currency.USD.getShortName()));
+                pages().registrationDialog().availableCurrencies().stream().anyMatch(value->value.contains(Currency.USD.getFullName())));
     }
 
     /**
@@ -324,7 +324,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5427:Password fields validations")
     public void validatePasswordsField() {
-        CustomerRegistrationInfo customer=fillRegisterCustomerDialog();
+        CustomerRegistrationInfo customer=CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build();
+        customer.setPassword(EMPTY_STRING);
+        fillRegisterCustomerDialog(customer);
         pages().registrationDialog().submitRegisterForm();
         assertEquals(NO_ERROR_MESSAGE,"Incorrect password.",
                 pages().registrationDialog().getErrorMessageNotification());
