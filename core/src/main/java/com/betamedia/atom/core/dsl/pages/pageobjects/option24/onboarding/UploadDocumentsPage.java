@@ -5,11 +5,11 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding;
  * @since 7/20/17
  */
 public interface UploadDocumentsPage {
-    public boolean exists();
+    boolean exists();
 
-	void goToDocumentsUpload();
+    void goToDocumentsUpload();
 
-	void selsetPOI();
+    void selsetPOI();
 
-	void browseForFileUpload();
+    void browseForFileUpload();
 }

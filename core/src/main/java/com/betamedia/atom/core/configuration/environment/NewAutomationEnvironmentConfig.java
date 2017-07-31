@@ -1,6 +1,9 @@
 package com.betamedia.atom.core.configuration.environment;
 
-import com.betamedia.atom.core.dsl.operations.impl.*;
+import com.betamedia.atom.core.dsl.operations.impl.AbstractAccountOperations;
+import com.betamedia.atom.core.dsl.operations.impl.AbstractBonusOperations;
+import com.betamedia.atom.core.dsl.operations.impl.AbstractCustomerOperations;
+import com.betamedia.atom.core.dsl.operations.impl.AbstractOnBoardingOperations;
 import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
 import com.betamedia.atom.core.environment.tp.NewAutomationEnvironment;
@@ -11,10 +14,8 @@ import org.springframework.context.annotation.Profile;
 
 /**
  * New Automation Environment-specific bean configuration class.
- * Please take care to prefix bean names with <code>newAutomation</code> for post-processing purposes.
  *
  * @author mbelyaev
- * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 6/29/17
  */
 @Configuration
@@ -44,15 +45,6 @@ public class NewAutomationEnvironmentConfig {
     }
 
     @Bean
-    public AbstractAccountGroupOperations<NewAutomationEnvironment> newAutomationAccountGroupOperations() {
-        return new AbstractAccountGroupOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
     public AbstractAccountOperations<NewAutomationEnvironment> newAutomationAccountOperations() {
         return new AbstractAccountOperations<NewAutomationEnvironment>() {
             public EnvironmentType getEnvironment() {
@@ -62,116 +54,8 @@ public class NewAutomationEnvironmentConfig {
     }
 
     @Bean
-    public AbstractAssetOperations<NewAutomationEnvironment> newAutomationAssetOperations() {
-        return new AbstractAssetOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
     public AbstractBonusOperations<NewAutomationEnvironment> newAutomationBonusOperations() {
         return new AbstractBonusOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractBrandOperations<NewAutomationEnvironment> newAutomationBrandOperations() {
-        return new AbstractBrandOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractFeedOperations<NewAutomationEnvironment> newAutomationFeedOperations() {
-        return new AbstractFeedOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractOptionOperations<NewAutomationEnvironment> newAutomationOptionOperations() {
-        return new AbstractOptionOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractOptionTemplateOperations<NewAutomationEnvironment> newAutomationOptionTemplateOperations() {
-        return new AbstractOptionTemplateOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractOrderOperations<NewAutomationEnvironment> newAutomationOrderOperations() {
-        return new AbstractOrderOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractPositionOperations<NewAutomationEnvironment> newAutomationPositionOperations() {
-        return new AbstractPositionOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractSchedulerOperations<NewAutomationEnvironment> newAutomationSchedulerOperations() {
-        return new AbstractSchedulerOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractTagOperations<NewAutomationEnvironment> newAutomationTagOperations() {
-        return new AbstractTagOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractTimezoneOperations<NewAutomationEnvironment> newAutomationTimezoneOperations() {
-        return new AbstractTimezoneOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractTradingCalendarOperations<NewAutomationEnvironment> newAutomationTradingCalendarOperations() {
-        return new AbstractTradingCalendarOperations<NewAutomationEnvironment>() {
-            public EnvironmentType getEnvironment() {
-                return NewAutomationEnvironmentConfig.getEnvironment();
-            }
-        };
-    }
-
-    @Bean
-    public AbstractVolatilityUnitOperations<NewAutomationEnvironment> newAutomationVolatilityUnitOperations() {
-        return new AbstractVolatilityUnitOperations<NewAutomationEnvironment>() {
             public EnvironmentType getEnvironment() {
                 return NewAutomationEnvironmentConfig.getEnvironment();
             }

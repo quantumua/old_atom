@@ -15,13 +15,13 @@ import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 
 public class DocumentsUploadSlideSanityTest extends TPEndToEndTest{
 
-	/*
-	 *[TestLink] CTW-5765:Successful upload document: POI section - Passport doc
-	 */
-	@Parameters({"countrycode"})
-	@Test(description = "CTW-5765:Successful upload document: POI section - Passport doc")
-	public void successfulUploadDocumentPOISectionPassportDoc(@Optional("de") String countrycode){
-    	pages().topNavigationPage().signUp();
+    /*
+     *[TestLink] CTW-5765:Successful upload document: POI section - Passport doc
+     */
+    @Parameters({"countrycode"})
+    @Test(description = "CTW-5765:Successful upload document: POI section - Passport doc")
+    public void successfulUploadDocumentPOISectionPassportDoc(@Optional("de") String countrycode){
+        pages().topNavigationPage().signUp();
         CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).setCountryCode(countrycode).build();
         pages().registrationDialog().register(customer);
         pages().welcomePage().isStartBtnDisplayed();
@@ -30,5 +30,5 @@ public class DocumentsUploadSlideSanityTest extends TPEndToEndTest{
         pages().uploadDocumentsPage().goToDocumentsUpload();
         pages().uploadDocumentsPage().selsetPOI();
         pages().uploadDocumentsPage().browseForFileUpload();
-	}
+    }
 }

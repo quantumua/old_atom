@@ -9,8 +9,6 @@ import java.util.List;
 public interface TopNavigationPage {
     void logIn();
 
-    void binary();
-
     void cfd();
 
     boolean isLoggedIn();
@@ -22,16 +20,14 @@ public interface TopNavigationPage {
     void goToHomePage();
     
     List<String> getProducts();
- 
+
     boolean languageExists();
-    
-	void selectLanguage(String language);
 
-	void goToMyAccount();
-	
-	void bankingDetails();
+    void selectLanguage(String language);
 
-	void withdrawalTab();
-	
-	
+    void goToMyAccount();
+
+    void bankingDetails();
+
+    void withdrawalTab();
 }

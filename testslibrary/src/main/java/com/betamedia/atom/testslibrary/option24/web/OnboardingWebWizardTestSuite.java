@@ -423,7 +423,7 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
                      .withZipCode("ZipCode")
                      .build()));
 	         
-	         pages().onBoardingWizard().assertOnPOI();
+	         pages().documentUploadForm().uploadIdCard();
 	    }
 	    
 	    

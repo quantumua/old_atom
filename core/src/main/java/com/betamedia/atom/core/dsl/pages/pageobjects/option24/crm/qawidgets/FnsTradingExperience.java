@@ -10,6 +10,4 @@ public interface FnsTradingExperience {
     void submit(TradingExperienceInfo info);
 
     void submitOnWizard(TradingExperienceInfo info);
-
-    void submitOnWizard(String dataValue);
 }

@@ -22,8 +22,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      * register user;
      * make sure user appears in the CRM DataBase;
      */
+    @Override
     @Test(description = "CTW-5416:Verify full registration on SEU")
-    public void verifySignUpButtonRedirectToOnBoardingOpenAccount() {
+    public void verifySignUpButtonRedirectToOnboardingOpenAccount() {
         CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .withPhoneCountryPrefix(Country.UNITED_KINGDOM.getPhonePrefix())
                 .build();

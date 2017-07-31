@@ -14,10 +14,6 @@ public class EnvironmentProperties<T extends EnvironmentDependent> {
     @NestedConfigurationProperty
     private EntityProperties<T> entity;
     @NestedConfigurationProperty
-    private SpaceProperties<T> gigaspaces;
-    @NestedConfigurationProperty
-    private FeedGatewayProperties<T> feedGateway;
-    @NestedConfigurationProperty
     private DataSourceProperties db;
 
     public CRMProperties<T> getCrm() {
@@ -34,22 +30,6 @@ public class EnvironmentProperties<T extends EnvironmentDependent> {
 
     public void setEntity(EntityProperties<T> entity) {
         this.entity = entity;
-    }
-
-    public SpaceProperties<T> getGigaspaces() {
-        return gigaspaces;
-    }
-
-    public void setGigaspaces(SpaceProperties<T> gigaspaces) {
-        this.gigaspaces = gigaspaces;
-    }
-
-    public FeedGatewayProperties<T> getFeedGateway() {
-        return feedGateway;
-    }
-
-    public void setFeedGateway(FeedGatewayProperties<T> feedGateway) {
-        this.feedGateway = feedGateway;
     }
 
     public DataSourceProperties getDb() {

@@ -20,7 +20,7 @@ public class UploadDocumentsPageImpl extends AbstractPageObject implements Uploa
     @StoredId
     private By poiTitle;
     @StoredId
-    private By poiContainet;
+    private By poiContainer;
     @StoredId
     private By poiTypeSelector;
     @StoredId

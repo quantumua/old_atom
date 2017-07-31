@@ -7,9 +7,10 @@ import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
-import com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -47,13 +48,13 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     /**
      * RGB color constants
      */
-    public static final String RED_RGB_STYLE = "rgb(221, 69, 44)";
-    public static final String GREEN_RGB_STYLE = "rgb(101, 204, 10)";
+    protected static final String RED_RGB_STYLE = "rgb(221, 69, 44)";
+    protected static final String GREEN_RGB_STYLE = "rgb(101, 204, 10)";
     /**
      * Message notifications for tests
      */
-    public static final String FAIL_NAME_NOTIFICATION = "Enter at least 2 characters";
-    public static final String NO_ERROR_MESSAGE = "Error message did not appear.";
+    protected final String FAIL_NAME_NOTIFICATION = "Enter at least 2 characters";
+    protected final String NO_ERROR_MESSAGE = "Error message did not appear.";
 
     /**
      * - verify that sign up button opens registration dialog
@@ -441,41 +442,41 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      */
     private void passQuestionnaire() {
         pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
-                .withEmploymentStatus(QuestionnaireAnswers.EmploymentStatus.SALARIED_EMPLOYEE)
-                .withIndustry(QuestionnaireAnswers.Industry.ACCOUNTING)
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(Industry.ACCOUNTING)
                 .withEmployerName("testEmployer")
                 .withTaxResidenceCountry("AF")
-                .withTaxIdentificationNumberStatus(QuestionnaireAnswers.HasTaxIdentificationNumber.YES)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES)
                 .withTaxIdentificationNumber("1111111")
-                .withUSReportabilityStatus(QuestionnaireAnswers.IsUSReportable.NO)
-                .withEducationLevel(QuestionnaireAnswers.EducationLevel.POST_GRADUATE)
-                .withEducationField(QuestionnaireAnswers.EducationField.ACCOUNTING)
-                .withPoliticalExposureStatus(QuestionnaireAnswers.IsPoliticallyExposed.NO)
-                .withSourceOfFunds(QuestionnaireAnswers.SourceOfFunds.EMPLOYMENT)
-                .withAnnualIncome(QuestionnaireAnswers.AnnualIncome.INCOME_OVER_100K)
-                .withNetWealth(QuestionnaireAnswers.NetWealth.NET_WEALTH_OVER_300K)
-                .withExpectedDepositsPerYear(QuestionnaireAnswers.ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
-                .withPurposeOfTrading(QuestionnaireAnswers.PurposeOfTrading.SPECULATIVE)
+                .withUSReportabilityStatus(IsUSReportable.NO)
+                .withEducationLevel(EducationLevel.POST_GRADUATE)
+                .withEducationField(EducationField.ACCOUNTING)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
                 .build()
         );
         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
-                .withSharesExperience(QuestionnaireAnswers.SharesExperience.NEVER)
-                .withBinaryExperience(QuestionnaireAnswers.BinaryExperience.NEVER)
-                .withForExExperience(QuestionnaireAnswers.ForExExperience.NEVER)
-                .withFinancialWorkExperience(QuestionnaireAnswers.FinancialWorkExperience.NEITHER)
-                .withCfdBinaryKnowledge(QuestionnaireAnswers.CfdBinaryKnowledge.NON_RISKY)
-                .withMainFactorKnowledge(QuestionnaireAnswers.MainFactorKnowledge.ANNOUNCEMENT)
-                .withHowToCloseKnowledge(QuestionnaireAnswers.HowToCloseKnowledge.LONDON_STOCK)
-                .withCfdLeverageKnowledge(QuestionnaireAnswers.CfdLeverageKnowledge.PROVIDES)
-                .withStopLossKnowledge(QuestionnaireAnswers.StopLossKnowledge.BUY)
-                .withRequiredMarginKnowledge(QuestionnaireAnswers.RequiredMarginKnowledge.MARGIN_10K)
-                .withMarginLevelDropKnowledge(QuestionnaireAnswers.MarginLevelDropKnowledge.WARNING_CALL)
-                .withAutomaticStopKnowledge(QuestionnaireAnswers.AutomaticStopKnowledge.EARNINGS)
-                .withLossOn1to50Knowledge(QuestionnaireAnswers.LossOn1to50Knowledge.A2_450)
-                .withLossOn1to200Knowledge(QuestionnaireAnswers.LossOn1to200Knowledge.A2_1200)
-                .withBinaryInvestProfitKnowledge(QuestionnaireAnswers.BinaryInvestProfitKnowledge.PROFIT_60)
-                .withBinaryInvestLossKnowledge(QuestionnaireAnswers.BinaryInvestLossKnowledge.LOSS_75)
-                .withBinaryProbabilityKnowledge(QuestionnaireAnswers.BinaryProbabilityKnowledge.MONEY_35)
+                .withSharesExperience(SharesExperience.NEVER)
+                .withBinaryExperience(BinaryExperience.NEVER)
+                .withForExExperience(ForExExperience.NEVER)
+                .withFinancialWorkExperience(FinancialWorkExperience.NEITHER)
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY)
+                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
+                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK)
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES)
+                .withStopLossKnowledge(StopLossKnowledge.BUY)
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_10K)
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL)
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A2_450)
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200)
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_60)
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
                 .build());
     }
 

@@ -4,8 +4,6 @@ import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
 import com.betamedia.atom.core.api.tp.entities.request.AccountRO;
 import com.betamedia.tp.api.model.Account;
 
-import java.util.Set;
-
 /**
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
@@ -13,26 +11,14 @@ import java.util.Set;
 public interface AccountOperations <T extends EnvironmentDependent> extends EnvironmentDependent {
 
     /**
-     * Create new account with default params through GS
-     * @return
-     */
-    Account getTP();
-
-    Account getTP(String id);
-
-    Account updateTP(Account account, Set<String> properties);
-
-    Account updateBalanceTP(String accountId, Double amount);
-
-    /**
      * Create new account with default params through TP CRM API
-     * @return
+     * @return Account
      */
     Account getCRM();
 
     /**
      * Create new account with custom params through TP CRM API
-     * @return
+     * @return Account
      */
     Account getCRM(AccountRO.AccountROBuilder accountROBuilder);
 
@@ -43,4 +29,11 @@ public interface AccountOperations <T extends EnvironmentDependent> extends Envi
      * @return id of transaction
      */
     String depositCRM(String accountId, Double amount);
+
+    /**
+     * Retrieve account by id
+     * @return Account
+     */
+    Account getCRM(String id);
+
 }

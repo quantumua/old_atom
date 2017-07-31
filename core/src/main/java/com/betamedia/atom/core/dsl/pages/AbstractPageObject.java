@@ -40,7 +40,7 @@ public abstract class AbstractPageObject {
      *
      * @param first element locator
      * @param rest  element locator chain
-     * @return located {@link WebElement}
+     * @return located {@link WebElement} (never <code>null</code>)
      */
     protected WebElement waitUntilDisplayed(By first, By... rest) {
         return getWait().until(driver -> ignoringStale(() -> elementIfVisible(find(first, rest))));
@@ -337,6 +337,14 @@ public abstract class AbstractPageObject {
     protected void waitUntilPageLoad() {
         getWait().until(wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+    }
+
+    protected void setDisplayBlock(By first, By... rest) {
+        executeScript("arguments[0].style.display='block'", find(first, rest));
+    }
+
+    protected void uploadFromPath(String path, By first, By... rest) {
+        find(first, rest).sendKeys(path);
     }
 
     private Wait<WebDriver> getWait() {

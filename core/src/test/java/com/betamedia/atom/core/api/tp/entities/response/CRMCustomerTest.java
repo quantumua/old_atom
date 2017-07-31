@@ -15,7 +15,6 @@ public class CRMCustomerTest {
     public void testNullAccounts() {
         CRMCustomer crmCustomer = new CRMCustomer();
         crmCustomer.setAccounts(null);
-        assertNull(crmCustomer.getBinaryAccount());
         assertNull(crmCustomer.getFXCFDAccount());
     }
 
@@ -23,7 +22,6 @@ public class CRMCustomerTest {
     public void testNullFieldValuesAccounts() {
         CRMCustomer crmCustomer = new CRMCustomer();
         crmCustomer.setAccounts(getNullFieldValuesCRMAccounts());
-        assertNull(crmCustomer.getBinaryAccount());
         assertNull(crmCustomer.getFXCFDAccount());
     }
 
@@ -31,7 +29,6 @@ public class CRMCustomerTest {
     public void testShouldCheckBinaryAccountWithIncorrectProduct() {
         CRMCustomer crmCustomer = new CRMCustomer();
         crmCustomer.setAccounts(getCustomCRMAccounts());
-        assertNull(crmCustomer.getBinaryAccount());
         assertNull(crmCustomer.getFXCFDAccount());
     }
 
@@ -44,7 +41,6 @@ public class CRMCustomerTest {
         CRMCustomer crmCustomer = new CRMCustomer();
         crmCustomer.setAccounts(new CRMAccount[]{scipioCRMAccount, pandaCRMAccount});
 
-        checkFields(crmCustomer.getBinaryAccount(), scipioCRMAccount);
         checkFields(crmCustomer.getFXCFDAccount(), pandaCRMAccount);
     }
 

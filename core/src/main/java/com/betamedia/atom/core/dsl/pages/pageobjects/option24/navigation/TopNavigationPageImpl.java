@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +22,6 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By loginBtn;
     @StoredId
     private By myAccountBtn;
-    @StoredId
-    private By binaryBtn;
     @StoredId
     private By cfdBtn;
     @StoredId
@@ -47,34 +46,27 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     @Override
     public void signUp() {
         waitUntilDisplayed(signUpBtn).click();
-    	Reporter.log("Click 'SIGN UP' button.<br/>");
+        Reporter.log("Click 'SIGN UP' button.<br/>");
     }
     
     @Override
     public boolean isLoggedIn() {
-        return waitUntilDisplayed(myAccountBtn) != null;
+        return maybe(() -> waitUntilDisplayed(myAccountBtn)).isPresent();
     }
 
     @Override
     public void goToMyAccount() {
-    	waitUntilDisplayed(myAccountBtn).click();
+        waitUntilDisplayed(myAccountBtn).click();
     }
 
     @Override
     public boolean isLoggedOut() {
-        return waitUntilDisplayed(loginBtn) != null;
+        return maybe(() -> waitUntilDisplayed(loginBtn)).isPresent();
     }
 
     @Override
     public void logIn() {
         waitUntilDisplayed(loginBtn).click();
-    }
-
-    @Override
-    public void binary() {
-        waitUntilDisplayed(mainMenu);
-        find(mainMenu, binaryBtn).click();
-        waitUntilDisplayed(mainMenu);
     }
 
     @Override
@@ -116,11 +108,11 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     
     /**
      * Switch whole portal UI to given language
-     * @language - language code like EN for English, DE for German 
+     * @param language - language code like EN for English, DE for German
      */
     @Override    
     public void selectLanguage(String language) {
-    	Reporter.log("Switching to language: " + language + "<br/>");
+        Reporter.log("Switching to language: " + language + "<br/>");
         waitUntilDisplayed(languageMenu).click();
         findElements(flagLanguage).stream()
                         .filter(element -> element.getAttribute("data-icl-code").toLowerCase().contains(language.toLowerCase()))

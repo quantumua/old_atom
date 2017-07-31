@@ -1,31 +1,14 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.SignatureRiskWarning;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.WithdrawalPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.AccountAdditionalDetailsPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.CreditCardDepositPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsPersonalInformationImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.FnsTradingExperienceImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.WithdrawalPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.OnBoardingWizardImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RegistrationPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RiskWarningImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.SignatureRiskWarningImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomeBackMessageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomePageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.type.ProductType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -96,9 +79,9 @@ public class WEBPageFactoryImpl extends AbstractPageFactory implements WEBPageFa
 	  }
 	 
 	 @Override
-	    public OnBoardingWizard onBoardingWizard() {
-	        return creator.getPage(OnBoardingWizardImpl.class);
-	    }
+     public DocumentUploadForm documentUploadForm() {
+         return creator.getPage(DocumentUploadFormImpl.class);
+     }
 
 	 @Override
 	    public WithdrawalPage withdrawalPage() {

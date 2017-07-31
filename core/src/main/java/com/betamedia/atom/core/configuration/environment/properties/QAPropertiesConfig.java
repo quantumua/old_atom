@@ -1,26 +1,25 @@
 package com.betamedia.atom.core.configuration.environment.properties;
 
-import com.betamedia.atom.core.configuration.environment.QAEnvironmentConfig;
-import com.betamedia.atom.core.configuration.properties.*;
+import com.betamedia.atom.core.configuration.properties.CRMProperties;
+import com.betamedia.atom.core.configuration.properties.EntityProperties;
+import com.betamedia.atom.core.configuration.properties.EnvironmentProperties;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 
 /**
  * QA Environment-specific properties configuration class.
- * Please take care to prefix bean names with <code>qa</code> for post-processing purposes.
  *
  * @author mbelyaev
- * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 7/4/17
  */
 @Configuration
+@Profile("qa")
 @PropertySource("/config/environment/qa-env.properties")
-@ConditionalOnBean(QAEnvironmentConfig.class)
 public class QAPropertiesConfig {
     private static final String QA_TP_PREFIX = "qa.tp";
 
@@ -43,16 +42,6 @@ public class QAPropertiesConfig {
     @Bean
     public EntityProperties<QAEnvironment> qaEntityProperties() {
         return qaEnvironmentProperties().getEntity();
-    }
-
-    @Bean
-    public SpaceProperties<QAEnvironment> qaSpaceProperties() {
-        return qaEnvironmentProperties().getGigaspaces();
-    }
-
-    @Bean
-    public FeedGatewayProperties<QAEnvironment> qaFeedGatewayProperties() {
-        return qaEnvironmentProperties().getFeedGateway();
     }
 
 }

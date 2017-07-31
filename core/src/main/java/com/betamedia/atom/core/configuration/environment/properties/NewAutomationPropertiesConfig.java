@@ -1,26 +1,25 @@
 package com.betamedia.atom.core.configuration.environment.properties;
 
-import com.betamedia.atom.core.configuration.environment.NewAutomationEnvironmentConfig;
-import com.betamedia.atom.core.configuration.properties.*;
+import com.betamedia.atom.core.configuration.properties.CRMProperties;
+import com.betamedia.atom.core.configuration.properties.EntityProperties;
+import com.betamedia.atom.core.configuration.properties.EnvironmentProperties;
 import com.betamedia.atom.core.environment.tp.NewAutomationEnvironment;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 
 /**
  * New Automation Environment-specific properties configuration class.
- * Please take care to prefix bean names with <code>newAutomation</code> for post-processing purposes.
  *
  * @author mbelyaev
- * @see com.betamedia.atom.core.configuration.EnvironmentPropertiesBeanFactoryPostProcessor
  * @since 7/4/17
  */
 @Configuration
+@Profile("newAutomation")
 @PropertySource("/config/environment/newAutomation-env.properties")
-@ConditionalOnBean(NewAutomationEnvironmentConfig.class)
 public class NewAutomationPropertiesConfig {
     private static final String NEW_AUTOMATION_TP_PREFIX = "newAutomation.tp";
 
@@ -43,16 +42,6 @@ public class NewAutomationPropertiesConfig {
     @Bean
     public EntityProperties<NewAutomationEnvironment> newAutomationEntityProperties() {
         return newAutomationEnvironmentProperties().getEntity();
-    }
-
-    @Bean
-    public SpaceProperties<NewAutomationEnvironment> newAutomationSpaceProperties() {
-        return newAutomationEnvironmentProperties().getGigaspaces();
-    }
-
-    @Bean
-    public FeedGatewayProperties<NewAutomationEnvironment> newAutomationFeedGatewayProperties() {
-        return newAutomationEnvironmentProperties().getFeedGateway();
     }
 
 }

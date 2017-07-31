@@ -25,18 +25,6 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
     @StoredId
     private By industryOther;
     @StoredId
-    private By employerName;
-    @StoredId
-    private By taxResidenceCountry;
-    @StoredId
-    private By isUSReportable;
-    @StoredId
-    private By hasTaxIdentificationNumber;
-    @StoredId
-    private By taxIdentificationNumber;
-    @StoredId
-    private By socialSecurityNumber;
-    @StoredId
     private By educationLevel;
     @StoredId
     private By educationField;
@@ -89,13 +77,6 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         inSelect(employmentStatus).selectByValue(info.employmentStatus);
         inSelect(industry).selectByValue(info.industry);
         if(nonNull(info.industryOther)) {find(industryOther).sendKeys(info.industryOther);}
-//        TODO fields moved to aml questionnaire
-//        if(nonNull(info.employerName)) find(employerName).sendKeys(info.employerName);
-//        inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
-//        if(nonNull(info.isUSReportable)) inSelect(isUSReportable).selectByValue(info.isUSReportable);
-//        inSelect(hasTaxIdentificationNumber).selectByValue(info.hasTaxIdentificationNumber);
-//        if(nonNull(info.taxIdentificationNumber)) find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
-//        if(nonNull(info.socialSecurityNumber)) find(socialSecurityNumber).sendKeys(info.socialSecurityNumber);
         inSelect(educationLevel).selectByValue(info.educationLevel);
         inSelect(educationField).selectByValue(info.educationField);
         if(nonNull(info.educationFieldOther)) find(educationFieldOther).sendKeys(info.educationFieldOther);
@@ -118,26 +99,8 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         submitOnWizard(info.industry);
         if(nonNull(info.industryOther)){ 
         	find(industryOther).sendKeys(info.industryOther);
-        	executeScript("arguments[0].click()",find(industryOtherBttn));
+        	executeScript("arguments[0].click()", find(industryOtherBttn));
         }
-
-        waitUntilDisplayed(employerName);
-        find(employerName).sendKeys(info.employerName);
-
-        waitUntilDisplayed(taxResidenceCountry);
-        inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
-
-//        submitOnWizard(info.hasTaxIdentificationNumber);
-//        submitOnWizard(info.hasTaxIdentificationNumber);
-
-//        waitUntilDisplayed(taxIdentificationNumber);
-//        find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
-        submitOnWizardAndWriteValue(info.hasTaxIdentificationNumber, info.taxIdentificationNumber);
-
-        WebElement submitButton = find(By.xpath("//*[@id=\"fns-pi-form-space\"]/div/div[2]/div/div[3]/input"));
-        executeScript("arguments[0].scrollIntoView(true)", submitButton);
-        makeActions().moveToElement(submitButton).click().build().perform();
-
         submitOnWizard(info.educationLevel);
         submitOnWizard(info.educationField);
         if(nonNull(info.educationFieldOther)){ 
@@ -149,8 +112,6 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         	find(politicalExposureComment).sendKeys(info.politicalExposureComment);
         	executeScript("arguments[0].click()",find(politicalExposureBttn));
         }
-        
-
         submitOnWizard(info.sourceOfFunds);
         if(nonNull(info.sourceOfFundsOther)){ 
         	find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
@@ -167,15 +128,8 @@ public class FnsPersonalInformationImpl extends AbstractPageObject implements Fn
         waitUntilExists(By.id("FinancialProducts1Shares"));
     }
 
-    @Override
-    public void submitOnWizard(String dataValue) {
+    private void submitOnWizard(String dataValue) {
         waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
-    }
-
-    public void submitOnWizardAndWriteValue(String dataValue, String numberTaxId) {
-        waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
-        waitUntilDisplayed(By.id(dataValue+"_alternate"));
-        find(By.id(dataValue+"_alternate")).sendKeys(numberTaxId);
     }
 
 }

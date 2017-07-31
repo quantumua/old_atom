@@ -12,18 +12,10 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,flagLanguage,XPATH,"//*[@id='header']/div[@class="flag-menu active"]//a"
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,withdrawalTab,XPATH,"//*[@href="https://qawww.24option.com/eu/withdrawal/"]"
 2.6.2,2017-05-29 15:24 +0000,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,amountInput,ID,bmBidAmountInput
-2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,highLowButton,CSS,.bmSelectItem.bmSelectHighLowGame
-2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,shortTermButton,CSS,.bmSelectItem.bmSelectShortTermGame
-2.6.2,2017-05-29 15:24 +0000,BinarySelectorImpl,doubleProfitButton,CSS,.bmSelectItem.bmSelectDoubleProfitGame
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,lowButton,CSS,.bmButtonsWrapp.bmSelection2
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,highButton,CSS,.bmButtonsWrapp.bmSelection1
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,closePosition,CSS,.bmButtonWrapp.bmClosePositionDialog
 2.6.2,2017-05-29 15:24 +0000,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
 2.6.2,2017-05-29 15:24 +0000,PositionsImpl,position,CLASS_NAME,bmCellContent
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,binaryBtn,CLASS_NAME,product-binary
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,mainMenu,ID,mainMenu
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
@@ -65,9 +57,6 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,closeButton,XPATH,//*[@id='tradeManagerContainer']/div/div[3]/div/div/div[3]
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorMinAmount,CSS,.bmMessage.bmError.bmMessageMinAmount
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorMaxAmount,CSS,.bmMessage.bmError.bmMessageMaxAmount
-2.6.2,2017-05-29 15:24 +0000,BinaryBidderImpl,errorValidAmount,CSS,.bmMessage.bmError.bmMessageEnterValidAmount
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,loginButton,NAME,btnLoginWidget
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,fnsPersonalInformationButton,NAME,btnFnsPersonalInformationWidget
 2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,fnsTradingExperienceButton,NAME,btnFnsTradingExperienceWidget
@@ -90,11 +79,11 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employmentStatus,ID,EmploymentStatus
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employmentStatusSalariedEmployee,XPATH,//*[@id='divQEmploymentStatus']/div/ul/li[@data-value='employmentStatusSalariedEmployee']
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,industry,ID,Industry
-2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employerName,ID,QNameOfEmployer_A0
-2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,taxResidenceCountry,ID,CountryTaxResidence
-2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,hasTaxIdentificationNumber,ID,HaveTin
-2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,taxIdentificationNumber,ID,tinYes_alternate
-2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,socialSecurityNumber,ID,tinNo_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsEmployerInfoImpl,employerName,ID,NameOfEmployer
+2.6.2,2017-05-29 15:24 +0000,FnsEmployerInfoImpl,taxResidenceCountry,ID,CountryTaxResidence
+2.6.2,2017-05-29 15:24 +0000,FnsEmployerInfoImpl,hasTaxIdentificationNumber,ID,HaveTin
+2.6.2,2017-05-29 15:24 +0000,FnsEmployerInfoImpl,taxIdentificationNumber,ID,tinYes_alternate
+2.6.2,2017-05-29 15:24 +0000,FnsEmployerInfoImpl,socialSecurityNumber,ID,tinNo_alternate
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,educationLevel,ID,LevelOfEducation
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,educationField,ID,FieldOfStudy
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,isPoliticallyExposed,ID,PoliticallyExposed
@@ -106,7 +95,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,purposeOfTrading,ID,PurposeOfTrading
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,submit,NAME,swFinancialSuitabilityBtn
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,industryOther,ID,industryOther_alternate
-2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,isUSReportable,ID,IsUSReportablePerson
+2.6.2,2017-05-29 15:24 +0000,FnsEmployerInfoImpl,isUSReportable,ID,IsUSReportablePerson
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,educationFieldOther,ID,fieldOfStudyOther_alternate
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,politicalExposureBttn,XPATH,//*[@id='divQPoliticallyExposed']//*[@class='alternate-submit']
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,sourceOfFundsOther,ID,sourceOfFundsOther_alternate
@@ -205,10 +194,6 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,iAmOver18Statement,CLASS_NAME,swRiskWarningAccountAgree
 2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,updateButton,XPATH,//*[@id='risk-warning-form-space']/div/input
 2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,loginButton,NAME,btnLoginWidget
-2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
-2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
-2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
-2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,closeButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/div/ul/li[1]/a/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
@@ -229,7 +214,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,documents,XPATH,.//*[@id='menu-item-54113']/a
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,uploadDocumentsPageImpl,XPATH,".//*[@id='Upload-Document-SEU']/*[@class="formContainer form-cover"]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiTitle,XPATH,".//*[@id='acc']//*[@class="icon poi-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiContainet,XPATH,.//*[@id='poi-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiContainer,XPATH,.//*[@id='poi-container']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiTypeSelector,XPATH,".//*[@id='poi-container']//*[@class="btn dropdown-toggle btn-default"]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiBrowseButton,XPATH,".//*[@id='poi-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiDocumentAprroved,XPATH,".//*[@id='poi-container']//*[@class="document-box aprroved-doc"]"
@@ -315,3 +300,11 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalBtnStep2,ID,swWithdrawalBtn
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalPrev,ID,swPreviosBtn
 2.6.2,2017-05-29 15:24 +0000,LoadingDialogImpl,loadingPopup,ID,open-account-loading-bar
+2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
+2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiUploadInput,ID,fileUploadDocsPOI
+2.6.2,2017-05-29 15:24 +0000,ThankYouPageImpl,continueButton,ID,thank-you-steps-away-btn
+2.6.2,2017-05-29 15:24 +0000,FnsEmployerInfoImpl,fnsSuitabilityButton,NAME,swFinancialSuitabilityBtn
+2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiHeadline,ID,doc-poi-headline
+2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiWrapper,ID,doc-upload-form-poi-wrapper
+2.6.2,2017-05-29 15:24 +0000,ThankYouPageImpl,startTradeButton,ID,thankyou-btn
+2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiFrontImage,CLASS_NAME,poi-front-image
