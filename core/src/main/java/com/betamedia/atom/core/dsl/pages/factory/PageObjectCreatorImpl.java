@@ -40,7 +40,7 @@ public class PageObjectCreatorImpl implements PageObjectCreator {
     private VersionedWebElementRepository repository;
 
     @Autowired
-    public PageObjectCreatorImpl() throws IOException {
+    public PageObjectCreatorImpl() {
         this.driver = ThreadLocalBeansHolder.getWebDriverFactoryThreadLocal().get();
         this.repository = ThreadLocalBeansHolder.getVersionedWebElementRepositoryThreadLocal();
     }

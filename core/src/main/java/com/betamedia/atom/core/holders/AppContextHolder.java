@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class AppContextHolder {
 
-    private static ConfigurableApplicationContext context;
+    private static volatile ConfigurableApplicationContext context;
 
     @Autowired
     private ConfigurableApplicationContext applicationContext;

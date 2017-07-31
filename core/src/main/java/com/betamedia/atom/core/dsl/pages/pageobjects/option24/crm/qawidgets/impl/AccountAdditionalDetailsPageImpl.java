@@ -5,6 +5,7 @@ import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsDat
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
+import com.betamedia.atom.core.testingtype.base.AbstractTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -125,20 +126,20 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
 
     @Override
     public void verifySlideTranslation(AccountAdditionalDetailsData data) {
-        Assert.assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText());
-        Assert.assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink());
-        Assert.assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle());
-        Assert.assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle());
-        Assert.assertEquals(waitUntilDisplayed(birthDateDayDropdownCaption).getText(), data.getBirthDateDayDropdownCaption());
-	    Assert.assertEquals(waitUntilDisplayed(birthDateMonthDropdownCaption).getText(), data.getBirthDateMonthDropdownCaption());
-	    Assert.assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption());
-	    Assert.assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle());
-	    Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(birthDateDayDropdownCaption).getText(), data.getBirthDateDayDropdownCaption());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(birthDateMonthDropdownCaption).getText(), data.getBirthDateMonthDropdownCaption());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption());
 	    // Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownDataError).getAttribute("data-error"), data.getCountryOfBirthDropdownDataError());
-	    Assert.assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle());
-	    Assert.assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption());
 	    // Assert.assertEquals(waitUntilDisplayed(nationalityDropdownDataError).getAttribute("data-error"), data.getNationalityDropdownDataError());
-	    Assert.assertEquals(waitUntilDisplayed(submit).getAttribute("value"), data.getSubmitButton());
+        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(submit).getAttribute("value"), data.getSubmitButton());
    }
 
     @Override
@@ -147,23 +148,23 @@ public class AccountAdditionalDetailsPageImpl extends AbstractPageObject impleme
     }
 
     @Override
-    public void SelectBirthDateDay(AccountAdditionalDetails info) {
-        inSelect(birthDateDay).selectByValue(info.birthDateDay);
+    public void selectBirthDateDay(String value) {
+        inSelect(birthDateDay).selectByValue(value);
     }
 
     @Override
-    public void SelectBirthDateMonth(AccountAdditionalDetails info) {
-        inSelect(birthDateMonth).selectByValue(info.birthDateMonth);
+    public void selectBirthDateMonth(String value) {
+        inSelect(birthDateMonth).selectByValue(value);
     }
 
     @Override
-    public void SelectCountryOfBirth(AccountAdditionalDetails info) {
-        inSelect(countryOfBirth).selectByValue(info.countryOfBirth);
+    public void selectCountryOfBirth(String value) {
+        inSelect(countryOfBirth).selectByValue(value);
     }
 
     @Override
-    public void SelectNationality(AccountAdditionalDetails info) {
-        inSelect(nationality).selectByValue(info.nationality);
+    public void selectNationality(String value) {
+        inSelect(nationality).selectByValue(value);
     }
 
     @Override

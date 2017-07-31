@@ -283,9 +283,12 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @Override
     public List<String> availableCurrencies() {
         waitUntilDisplayed(currencyComboBox).click();
-        return findElements(currencies).stream()
+        waitUntilDisplayed(currencies);
+        List<String> actualCurrencies = findElements(currencies).stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
+        waitUntilDisplayed(currencyComboBox).click();
+        return actualCurrencies;
     }
 
     @Override

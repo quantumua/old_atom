@@ -44,12 +44,13 @@ public class PersonalDetailsSlideTest extends WEBEndToEndTest{
     @TestLinkProperties("CTW-5630")
     public void  verifyAll3FieldsAreMandatory(String countrycode) {
         registerAndStart(countrycode);
-        pages().accountAdditionalDetailsPage().SelectBirthDateDay(AccountAdditionalDetails.builder().build());
+        AccountAdditionalDetails accountAdditionalDetails = AccountAdditionalDetails.builder().build();
+        pages().accountAdditionalDetailsPage().selectBirthDateDay(accountAdditionalDetails.birthDateDay);
     	Assert.assertFalse(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
-    	pages().accountAdditionalDetailsPage().SelectNationality(AccountAdditionalDetails.builder().build());
+    	pages().accountAdditionalDetailsPage().selectNationality(accountAdditionalDetails.nationality);
     	Assert.assertFalse(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
-    	pages().accountAdditionalDetailsPage().SelectBirthDateMonth(AccountAdditionalDetails.builder().build());
-    	pages().accountAdditionalDetailsPage().SelectCountryOfBirth(AccountAdditionalDetails.builder().build());
+    	pages().accountAdditionalDetailsPage().selectBirthDateMonth(accountAdditionalDetails.birthDateMonth);
+    	pages().accountAdditionalDetailsPage().selectCountryOfBirth(accountAdditionalDetails.countryOfBirth);
     	Assert.assertFalse(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
     	
     }

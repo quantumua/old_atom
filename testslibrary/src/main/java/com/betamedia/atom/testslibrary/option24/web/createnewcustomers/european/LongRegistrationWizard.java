@@ -1,13 +1,12 @@
 package com.betamedia.atom.testslibrary.option24.web.createnewcustomers.european;
 
-import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.Currency;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -26,7 +25,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Override
     @Test(description = "CTW-5416:Verify full registration on SEU")
     public void verifySignUpButtonRedirectToOnboardingOpenAccount() {
-        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .withPhoneCountryPrefix(Country.UNITED_KINGDOM.getPhonePrefix())
                 .build();
         pages().topNavigationPage().signUp();
@@ -62,8 +61,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5419:First Name field validations: No option to insert anything but letters")
     public void verifyNoInputNoneCharsSymbolsIntoFirstName() {
-        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withFirstName(INCORRECT_CHARS)
+        CustomerRegistrationInfo customerRegistrationInfo =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
+                .withFirstName(INCORRECT_CHARS_NAME)
                 .build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
@@ -80,15 +80,16 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-18418:First Name field validations: No option to fill more than 20 characters")
     public void verifyImpossibleInputMoreThanTwentyCharsIntoFirstName() {
-        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withFirstName(MAX_PLUS_ONE_CHARS)
+        CustomerRegistrationInfo customerRegistrationInfo =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
+                .withFirstName(MAX_PLUS_ONE_CHARS_NAME)
                 .build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
         assertEquals("Possible input max+1 chars into first name field.",
-                MAX_CHARS, pages().registrationDialog().getFirstName());
+                MAX_CHARS_NAME, pages().registrationDialog().getFirstName());
     }
 
     /**
@@ -98,8 +99,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-18419:First Name field validations: No option to fill less than 2 characters")
     public void verifyImpossibleInputLessThanTwoCharsIntoFirstName() {
-        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withFirstName(ONE_SYMBOL)
+        CustomerRegistrationInfo customerRegistrationInfo =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
+                .withFirstName(ONE_SYMBOL_NAME)
                 .build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
@@ -116,8 +118,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5420:Last Name field validations: No option to insert anything but letters")
     public void validateImpossibleInputSpecialCharsIntoLastNameField() {
-        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withLastName(INCORRECT_CHARS)
+        CustomerRegistrationInfo customerRegistrationInfo =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
+                .withLastName(INCORRECT_CHARS_NAME)
                 .build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
@@ -134,7 +137,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5420:Last Name field validations: No option to insert anything but letters")
     public void validateImpossibleInputAnyCharsExceptLettersIntoLastName() {
-        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+        CustomerRegistrationInfo customerRegistrationInfo =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .withLastName(SYMBOLS_AND_DIGITS)
                 .build();
         pages().topNavigationPage().signUp();
@@ -150,8 +154,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-18425:Last Name field validations: No option to fill less than 2 characters")
     public void verifyImpossibleInputLessThanTwoCharsIntoLastName() {
-        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withLastName(ONE_SYMBOL)
+        CustomerRegistrationInfo customerRegistrationInfo =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
+                .withLastName(ONE_SYMBOL_NAME)
                 .build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
@@ -166,8 +171,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5421:Email field validations")
     public void emailFieldValidations() {
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withEmailName(INCORRECT_EMAIL).build();
+        CustomerRegistrationInfo customer =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
+                .withEmail(INCORRECT_EMAIL).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
@@ -211,7 +217,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5422:Phone Prefix field validation")
     public void verifyPhonePrefixFunctionality() {
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+        CustomerRegistrationInfo customer =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .withPhoneCountryPrefix(Country.ISRAEL.getPhonePrefix())
                 .build();
         pages().topNavigationPage().signUp();
@@ -232,7 +239,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5423:Phone Number field validation")
     public void validateInputsIntoPhoneField() {
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+        CustomerRegistrationInfo customer =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .withPhoneNumber(PHONE_NO_DIGITS)
                 .build();
         pages().topNavigationPage().signUp();
@@ -265,7 +273,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5425:Country dropdown validations")
     public void validateCountryDropDownField() {
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+        CustomerRegistrationInfo customer =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .withPhoneCountryPrefix(Country.UNITED_KINGDOM.getPhonePrefix())
                 .withCountry(Country.ISRAEL.getName())
                 .build();
@@ -294,7 +303,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5426:Currency dropdown field validation")
     public void validateCurrencyDropDownField() {
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
+        CustomerRegistrationInfo customer =
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .withCountry(Country.UNITED_KINGDOM.getName())
                 .withPhoneCountryPrefix(Country.UNITED_KINGDOM.getPhonePrefix())
                 .withCurrency(Currency.EUR.getFullName())
@@ -307,7 +317,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         assertFalse("Currency was not saved after selection.",
                 pages().registrationDialog().getCurrency().equalsIgnoreCase(customer.getCurrency()));
         assertFalse("USD currency is available in the list.",
-                pages().registrationDialog().availableCurrencies().contains(Currency.USD.getShortName()));
+                pages().registrationDialog().availableCurrencies().stream().anyMatch(value->value.contains(Currency.USD.getFullName())));
     }
 
     /**
@@ -315,10 +325,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5427:Password fields validations")
     public void validatePasswordsField() {
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get())
-                .withPassword(EMPTY_STRING).build();
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().fillRegisterForm(customer);
+        CustomerRegistrationInfo customer=CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build();
+        customer.setPassword(EMPTY_STRING);
+        fillRegisterCustomerDialog(customer);
         pages().registrationDialog().submitRegisterForm();
         assertEquals(NO_ERROR_MESSAGE,"Incorrect password.",
                 pages().registrationDialog().getErrorMessageNotification());
@@ -339,7 +348,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().browser().refreshPage();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(
-                CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get()).build());
+                CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build());
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
         pages().registrationDialog().agreementStatus();
@@ -356,9 +365,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5428:''I'm over 18'' checkbox validation")
     public void validateAdultCheckBox() {
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().fillRegisterForm(
-                CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get()).build());
+        fillRegisterCustomerDialog();
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
         validateValue("You must read and agree to the above terms!",
@@ -367,13 +374,11 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     }
 
     /**
-     * - check adult checkbox confirmation message
+     * - verify Submit button behaviour in the register dialog
      */
     @Test(description = "CTW-5429:Submit button tests")
     public void checkSubmitButtonForRegisterNewCustomer() {
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().fillRegisterForm(
-                CustomerRegistrationInfo.builder(CRMMobileAPINamingStrategy.get()).build());
+        fillRegisterCustomerDialog();
         pages().registrationDialog().submitRegisterForm();
         assertTrue("Loading popup appeared.", pages().loadingDialog().isDisplayed());
         assertFalse("Submit button is enabled during customer registration.",
@@ -382,8 +387,83 @@ public class LongRegistrationWizard extends CreateNewCustomers {
                 pages().welcomePage().isStartBtnDisplayed());
     }
 
-    private void validateValue( Object expected, Object actual, String errorMessage) {
-        Reporter.log(String.format("Check expected: '%s' and actual: '%s' <br/>", expected, actual));
-        assertEquals(errorMessage, expected, actual);
+    /**
+     *  register customer
+     *  verify customer for existence in the CRM Database
+     */
+    @Test(description = "CTW-5430:Full registration (including CRM+ email validations)")
+    public void checkValidateEmailForRegisteredNewCustomer() {
+        CustomerRegistrationInfo customer = fillRegisterCustomerDialog();
+        pages().registrationDialog().submitRegisterForm();
+        pages().welcomePage().isStartBtnDisplayed();
+        operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
+    }
+
+    /**
+     *  register customer
+     *  verify customer for existence in the CRM Database
+     */
+    @Test(description = "CTW-5626:SEU: Registration form - Mandatory fields E2E")
+    public void checkCheckMandatoryFieldsInTheCustomerRegistrationForm() {
+        CustomerRegistrationInfo customer = getCustomer();
+        customer.setFirstName(EMPTY_STRING);
+        pages().topNavigationPage().signUp();
+        registerNewCustomer(customer);
+        assertEquals("Enter your first name", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorFirstName());
+
+        customer = getCustomer();
+        customer.setLastName(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter your last name", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorLastName());
+
+        customer = getCustomer();
+        customer.setEmail(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter a valid email address.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
+
+        customer = getCustomer();
+        customer.setPhoneCountryPrefix(EMPTY_PHONE_PREFIX);
+        registerNewCustomer(customer);
+        assertEquals("Country is a mandatory field.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderForPrefixField());
+
+        customer = getCustomer();
+        customer.setPhoneNumber(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter at least 6 characters", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorPhone());
+
+        customer = getCustomer();
+        customer.setPassword(EMPTY_STRING);
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        pages().topNavigationPage().signUp();
+        registerNewCustomer(customer);
+        assertEquals("Incorrect password.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForPassword());
+
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        fillRegisterCustomerDialog(getCustomer());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        validateValue("You must read and agree to the above terms!",
+                pages().registrationDialog().agreementStatus(),
+                "Adult confirmation message did not appear");
+
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        customer=fillRegisterCustomerDialog();
+        pages().registrationDialog().submitRegisterForm();
+        pages().welcomePage().isStartBtnDisplayed();
+        operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
+    }
+
+    private CustomerRegistrationInfo getCustomer() {
+        return CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
+                .build();
     }
 }

@@ -6,6 +6,7 @@ import com.betamedia.atom.core.testlink.TestCaseResult;
 import com.betamedia.atom.core.testlink.TestLinkDisplayIdHolder;
 import com.betamedia.atom.core.testlink.TestLinkService;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
+import com.google.common.base.Throwables;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.*;
@@ -42,7 +43,11 @@ public class TestLinkListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        updateTestCaseWithStatus(iTestResult, ExecutionStatus.FAILED);
+        updateTestCaseWithStatus(iTestResult,
+                ofNullable(iTestResult)
+                        .map(ITestResult::getThrowable)
+                        .map(t -> t instanceof AssertionError).orElse(false) ? ExecutionStatus.FAILED : ExecutionStatus.BLOCKED
+        );
     }
 
     @Override
@@ -75,6 +80,7 @@ public class TestLinkListener implements ITestListener {
                                         did,
                                         formatTestParameters(testResult.getParameters()),
                                         String.join(System.lineSeparator(), Reporter.getOutput(testResult)),
+                                        ofNullable(testResult.getThrowable()).map(Throwables::getStackTraceAsString).orElse(""),
                                         status)
                         )
                 )

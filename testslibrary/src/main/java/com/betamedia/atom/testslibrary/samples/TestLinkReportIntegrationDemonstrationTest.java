@@ -45,6 +45,6 @@ public class TestLinkReportIntegrationDemonstrationTest extends TPBackEndTest {
                 .collect(Collectors.toList())
                 .isEmpty()
         );
-        Reporter.log("Account list not empty");
+        Reporter.log("Account list not empty  222");
     }
 }

@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.fwtestrunner.listeners.testng.impl;
 
 import com.betamedia.atom.core.CoreInfrastructure;
-import com.betamedia.atom.core.fwtestrunner.environment.impl.TPTestRunningEnvInitializer;
+import com.betamedia.atom.core.fwtestrunner.environment.TestRunningEnvInitializer;
 import com.betamedia.atom.core.holders.AppContextHolder;
 import com.betamedia.atom.core.holders.ConfigurationPropertiesProvider;
 import org.apache.logging.log4j.LogManager;
@@ -20,10 +20,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ExternalExecutionListener implements IExecutionListener {
     private static final String CONTEXT_FOUND = "Application context found, aborting initialization";
-    private static final String NO_MANAGED_CONTEXT = "No managed context in this listener, exiting";
-    private static final String DESTROYING_MANAGED_CONTEXT = "Destroying listener-managed application context";
+    private static final String CONTEXT_INITIALIZED = "Initialized listener-managed application context";
     private static final Logger logger = LogManager.getLogger(ExternalExecutionListener.class);
     private static final ReentrantReadWriteLock.WriteLock ctxLock = new ReentrantReadWriteLock().writeLock();
+    private final Class<?> contextInitializer = CoreInfrastructure.class;
     private ConfigurableApplicationContext context;
 
     @Override
@@ -38,23 +38,16 @@ public class ExternalExecutionListener implements IExecutionListener {
                 logger.debug(CONTEXT_FOUND);
                 return;
             }
-            context = SpringApplication.run(CoreInfrastructure.class);
+            context = SpringApplication.run(contextInitializer);
             initializeContext();
-            logger.debug("Initialized listener-managed application context");
+            logger.debug(CONTEXT_INITIALIZED);
         } finally {
             ctxLock.unlock();
         }
     }
 
     @Override
-    public void onExecutionFinish() {
-        if (isContextPresent()) {
-            logger.debug(NO_MANAGED_CONTEXT);
-            return;
-        }
-        logger.debug(DESTROYING_MANAGED_CONTEXT);
-        context.close();
-    }
+    public void onExecutionFinish() {/*Do nothing*/}
 
     private static boolean isContextPresent() {
         return Objects.nonNull(AppContextHolder.getContext());
@@ -62,8 +55,8 @@ public class ExternalExecutionListener implements IExecutionListener {
 
     private void initializeContext() {
         ConfigurationPropertiesProvider configProperties = context.getBean(ConfigurationPropertiesProvider.class);
-        TPTestRunningEnvInitializer tpTestRunningEnvInitializer = context.getBean(TPTestRunningEnvInitializer.class);
+        TestRunningEnvInitializer testRunningEnvInitializer = context.getBean(TestRunningEnvInitializer.class);
         Properties properties = configProperties.getFromSystem();
-        tpTestRunningEnvInitializer.initializeEnvironment(properties);
+        testRunningEnvInitializer.initializeEnvironment(properties);
     }
 }
