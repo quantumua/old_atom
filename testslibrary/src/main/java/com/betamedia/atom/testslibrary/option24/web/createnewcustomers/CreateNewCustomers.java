@@ -534,6 +534,6 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     public static void validateValue(Object expected, Object actual, String errorMessage) {
         Reporter.log(String.format("Check expected: '%s' and actual: '%s' <br/>",
                 expected, actual));
-        assertEquals(errorMessage, expected, actual);
+        softAssert().assertEquals(actual, expected, errorMessage);
     }
 }

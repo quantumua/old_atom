@@ -7,9 +7,6 @@ import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Created by vsnigur on 7/17/17.
@@ -52,8 +49,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     public void verifyImpossibleInputLessThanTwoCharsIntoLastName() {
         pages().registrationDialog().fillRegisterForm(getCustomerWithLastName(ONE_SYMBOL_NAME));
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Possible input one chars into last name field.",
-                FAIL_NAME_NOTIFICATION, pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(), FAIL_NAME_NOTIFICATION,
+                "Possible input one chars into last name field.");
     }
 
     /**
@@ -62,8 +59,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-18649:Last Name field validations: no option to fill more than 20 characters")
     public void verifyImpossibleInputMaxPlusOneCharsIntoLastName() {
         pages().registrationDialog().fillRegisterForm(getCustomerWithLastName(MAX_PLUS_ONE_CHARS_NAME));
-        assertEquals("Possible input more than 20 chars into last name field.",
-                MAX_CHARS_NAME, pages().registrationDialog().getLastName());
+        softAssert().assertEquals(pages().registrationDialog().getLastName(), MAX_CHARS_NAME,
+                "Possible input more than 20 chars into last name field.");
     }
 
     /**
@@ -72,8 +69,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-18648:Last Name field validations: No option to insert anything but letters")
     public void verifyImpossibleInputSpecialSymbolsIntoLastName() {
         pages().registrationDialog().fillRegisterForm(getCustomerWithLastName(INCORRECT_CHARS_NAME));
-        assertEquals("Possible input none char symbols last name field.",
-                EMPTY_STRING, pages().registrationDialog().getLastName());
+        softAssert().assertEquals(pages().registrationDialog().getLastName(),EMPTY_STRING,
+                "Possible input none char symbols last name field.");
     }
 
     /**
@@ -83,8 +80,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     public void verifyImpossibleRegisterCustomerWithOneLetterFirstName() {
         pages().registrationDialog().fillRegisterForm(getCustomerWithFirstName(ONE_SYMBOL_NAME));
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Possible register customer with one chars in the first name field.",
-                FAIL_NAME_NOTIFICATION, pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(), FAIL_NAME_NOTIFICATION,
+                "Possible register customer with one chars in the first name field.");
     }
 
     /**
@@ -93,8 +90,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-18645:First Name field validations: No option to fill more than 20 characters")
     public void verifyImpossibleInputMaxPlusOneCharsIntoFirstName() {
         pages().registrationDialog().fillRegisterForm(getCustomerWithFirstName(MAX_PLUS_ONE_CHARS_NAME));
-        assertEquals("Possible input more than 20 chars into first name field.",
-                MAX_CHARS_NAME, pages().registrationDialog().getFirstName());
+        softAssert().assertEquals(pages().registrationDialog().getFirstName(), MAX_CHARS_NAME,
+                "Possible input more than 20 chars into first name field.");
     }
 
     /**
@@ -103,8 +100,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-18644:First Name field validations: No option to insert anything but letters")
     public void verifyImpossibleInputSpecialSymbolsIntoFirstName() {
         pages().registrationDialog().fillRegisterForm(getCustomerWithFirstName(INCORRECT_CHARS_NAME));
-        assertEquals("Possible input none char symbols last name field.",
-                EMPTY_STRING, pages().registrationDialog().getFirstName());
+        softAssert().assertEquals(pages().registrationDialog().getFirstName(), EMPTY_STRING,
+                "Possible input none char symbols last name field.");
     }
 
     /**
@@ -116,13 +113,13 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-5465:Wizard Registration form: submit empty form")
     public void verifyEmptySubmittedForm() {
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Enter your first name", pages().registrationDialog().getFirstNameStatusError());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorFirstName());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorLastName());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderForPrefixField());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorPhone());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForPassword());
+        softAssert().assertEquals(pages().registrationDialog().getFirstNameStatusError(),"Enter your first name");
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorFirstName(), RED_RGB_STYLE);
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorLastName(), RED_RGB_STYLE);
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorForEmail(), RED_RGB_STYLE);
+        softAssert().assertEquals(pages().registrationDialog().getBorderForPrefixField(), RED_RGB_STYLE);
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorPhone(), RED_RGB_STYLE);
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorForPassword(), RED_RGB_STYLE);
     }
 
     /**
@@ -134,34 +131,37 @@ public class LongRegistrationWizard extends CreateNewCustomers {
 
         pages().registrationDialog().fillRegisterForm(getCustomerWithEmail(INCORRECT_EMAIL));
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Enter a valid email address.",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter a valid email address.");
 
         pages().registrationDialog().fillRegisterForm(getCustomerWithEmail(INCORRECT_EMAIL_TWO_AT));
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Enter a valid email address.",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter a valid email address.");
 
         pages().registrationDialog().fillRegisterForm(getCustomerWithEmail(INCORRECT_EMAIL_NO_AT));
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Enter a valid email address.",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter a valid email address.");
 
         pages().registrationDialog().fillRegisterForm(getCustomerWithEmail(INCORRECT_EMAIL_DIGIT_DOMAIN));
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Enter a valid email address.",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter a valid email address.");
 
         CustomerRegistrationInfo customerRegistrationInfo= getCustomerWithEmail(INCORRECT_CHARS_IN_EMAIL);
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
-        assertEquals(EMPTY_STRING, pages().registrationDialog().getEmail());
+        softAssert().assertEquals(pages().registrationDialog().getEmail(),
+                EMPTY_STRING);
         customerRegistrationInfo.setEmail(EMPTY_STRING);
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
         pages().registrationDialog().submitRegisterForm();
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorForEmail(),
+                RED_RGB_STYLE);
         customerRegistrationInfo.setEmail(CORRECT_EMAIL);
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
-        assertEquals(GREEN_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorForEmail(),
+                GREEN_RGB_STYLE);
     }
 
     /**
@@ -172,13 +172,15 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-5469:Phone Prefix field validation")
     public void verifyPhonePrefixFunctionality() {
         pages().registrationDialog().setCountryPrefix(Country.AUSTRALIA.getName());
-        assertEquals(Country.AUSTRALIA.getPhonePrefix(), pages().registrationDialog().getCountryPrefix());
+        softAssert().assertEquals(pages().registrationDialog().getCountryPrefix(),
+                Country.AUSTRALIA.getPhonePrefix());
         CustomerRegistrationInfo customerRegistrationInfo = getCustomerWithPrefix(Country.AUSTRALIA.getPhonePrefix());
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Registration Is Not Available In Your Country",
-                pages().registrationDialog().getErrorMessageNotification());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderForCountryField());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Registration Is Not Available In Your Country");
+        softAssert().assertEquals(pages().registrationDialog().getBorderForCountryField(),
+                RED_RGB_STYLE);
     }
 
     /**
@@ -208,8 +210,9 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().registrationDialog().setCountryPrefix(Country.JORDAN.getName());
         pages().redirectDialog().startTrade();
         pages().registrationDialog().exists();
-        assertEquals("Country was not available in the search result.",
-                Country.IRELAND.getName(), pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()));
+        softAssert().assertEquals(pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()),
+                Country.IRELAND.getName(),
+                "Country was not available in the search result.");
     }
 
     /**
@@ -223,17 +226,17 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().selectCountry(customer.getCountry());
         pages().registrationDialog().submitRegisterForm();
-        assertEquals(NO_ERROR_MESSAGE,
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
                 "Registration Is Not Available In Your Country",
-                pages().registrationDialog().getErrorMessageNotification());
+                NO_ERROR_MESSAGE);
         pages().browser().refreshPage();
         pages().registrationDialog().setCountryPrefix(Country.ISRAEL.getName());
         pages().registrationDialog().setPasswordFields(customer.getPassword(),customer.getPassword());
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
-        assertEquals(NO_ERROR_MESSAGE,
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
                 "Registration Is Not Available In Your Country",
-                pages().registrationDialog().getErrorMessageNotification());
+                NO_ERROR_MESSAGE);
     }
 
     /**
@@ -246,12 +249,13 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         CustomerRegistrationInfo customer = getCustomer();
         customer.setCurrency(Currency.USD.getFullName());
         pages().registrationDialog().fillRegisterForm(customer);
-        assertFalse("Currencies are not available",
-                pages().registrationDialog().availableCurrencies().isEmpty());
-        assertFalse("Currency was not saved after selection.",
-                pages().registrationDialog().getCurrency().equalsIgnoreCase(customer.getCurrency()));
-        assertFalse("USD currency is available in the list.",
-                pages().registrationDialog().availableCurrencies().stream().anyMatch(value->value.contains(Currency.USD.getFullName())));
+        softAssert().assertFalse(pages().registrationDialog().availableCurrencies().isEmpty(),
+                "Currencies are not available");
+        softAssert().assertFalse(pages().registrationDialog().getCurrency().equalsIgnoreCase(customer.getCurrency()),
+                "Currency was not saved after selection.");
+        softAssert().assertFalse(pages().registrationDialog().availableCurrencies()
+                        .stream().anyMatch(value->value.contains(Currency.USD.getFullName())),
+                "USD currency is available in the list.");
     }
 
     /**
@@ -262,33 +266,36 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         CustomerRegistrationInfo customer = getCustomer();
         customer.setPassword(EMPTY_STRING);
         registerNewCustomer(customer);
-        assertEquals(NO_ERROR_MESSAGE,"Incorrect password.",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Incorrect password.",
+                 NO_ERROR_MESSAGE);
         customer.setPassword(INCORRECT_PASSWORD);
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
-        assertEquals(NO_ERROR_MESSAGE,"Enter digits and letters only (lower and upper case)",
-                pages().registrationDialog().getErrorMessageNotification());
-        assertEquals("15",
-                pages().registrationDialog().getPasswordSize());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter digits and letters only (lower and upper case)",
+                NO_ERROR_MESSAGE);
+        softAssert().assertEquals(pages().registrationDialog().getPasswordSize(),
+                "15");
         pages().browser().refreshPage();
         customer.setPassword(FOUR_CHARS);
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
-        assertEquals(NO_ERROR_MESSAGE, "Enter between 5 to 15 characters",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter between 5 to 15 characters",
+                NO_ERROR_MESSAGE);
         pages().browser().refreshPage();
         pages().registrationDialog().fillRegisterForm(
                 CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build());
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
         pages().registrationDialog().agreementStatus();
-        assertEquals(GREEN_RGB_STYLE,
-                pages().registrationDialog().getBorderColorForPassword());
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorForPassword(),
+                GREEN_RGB_STYLE);
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
-        assertTrue("Additional details window did not appear.",
-                pages().startTradeDialog().exists());
+        softAssert().assertTrue(pages().startTradeDialog().exists(),
+                "Additional details window did not appear.");
     }
 
     /**
@@ -311,11 +318,11 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     public void checkSubmitButtonForRegisterNewCustomer() {
         pages().registrationDialog().fillRegisterForm(getCustomer());
         pages().registrationDialog().submitRegisterForm();
-        assertTrue("Loading popup appeared.", pages().loadingDialog().isDisplayed());
-        assertFalse("Submit button is enabled during customer registration.",
-                pages().registrationDialog().submitIsEnabled());
-        assertTrue("Start Trade dialog did not appear after registration.",
-                pages().creditCardDeposit().isDisplayed());
+        softAssert().assertTrue(pages().loadingDialog().isDisplayed(), "Loading popup appeared.");
+        softAssert().assertFalse(pages().registrationDialog().submitIsEnabled(),
+                "Submit button is enabled during customer registration.");
+        softAssert().assertTrue(pages().creditCardDeposit().isDisplayed(),
+                "Start Trade dialog did not appear after registration.");
     }
 
 
