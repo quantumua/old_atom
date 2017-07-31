@@ -27,6 +27,24 @@ public final class FileSystemStorageService {
         }
     }
 
+    public static String storeSystemResource(String resource, String filename, String... pathString) {
+        try (InputStream is = ClassLoader.getSystemResourceAsStream(resource)) {
+            return FileSystemStorageService.store(is, filename, pathString);
+        } catch (IOException e) {
+            throw new StorageException("Failed to store file " + filename + " at " + String.join("/", pathString), e);
+        }
+    }
+
+    public static String store(InputStream is, String filename, String... pathString) {
+        try {
+            Path destination = preparePath(filename, "", pathString);
+            Files.copy(is, destination, StandardCopyOption.REPLACE_EXISTING);
+            return destination.toString();
+        } catch (IOException e) {
+            throw new StorageException("Failed to store file " + filename + " at " + String.join("/", pathString), e);
+        }
+    }
+
     public static Path preparePath(String filename, String first, String... more) {
         Path directory = Paths.get(first, more);
         try {

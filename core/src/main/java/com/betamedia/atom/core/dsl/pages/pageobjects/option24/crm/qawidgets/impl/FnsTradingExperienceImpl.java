@@ -1,11 +1,12 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.impl;
 
+import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
-import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import static java.util.Objects.nonNull;
 
 /**
@@ -116,8 +117,7 @@ public class FnsTradingExperienceImpl extends AbstractPageObject implements FnsT
         waitUntilDisplayed(buttonWizardDeclaration).click();
     }
 
-    @Override
-    public void submitOnWizard(String dataValue) {
+    private void submitOnWizard(String dataValue) {
         waitUntilDisplayed(By.cssSelector("li[data-value='"+dataValue+"']")).click();
     }
 

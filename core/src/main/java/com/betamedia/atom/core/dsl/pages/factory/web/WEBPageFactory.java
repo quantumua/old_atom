@@ -1,21 +1,11 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
 
-
-
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.OnBoardingWizard;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RiskWarning;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.SignatureRiskWarning;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.WelcomePage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomeBackMessageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.AccountAdditionalDetailsPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.CreditCardDepositPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsPersonalInformation;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.FnsTradingExperience;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.WithdrawalPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.WelcomeBackMessageImpl;
 
 
 /**
@@ -41,8 +31,8 @@ public interface WEBPageFactory {
     RiskWarning riskwarning();
     
     CreditCardDepositPage creditCardDepositPage();
-    
-    OnBoardingWizard onBoardingWizard();
+
+    DocumentUploadForm documentUploadForm();
 
     SignatureRiskWarning signatureRiskWarning();
 

@@ -65,7 +65,7 @@ public interface TPPageFactory {
 
     RiskWarning riskWarningPage();
 
-    OnBoardingWizard onBoardingWizard();
+    DocumentUploadForm documentUploadForm();
 
     LeveragePopup leveragePopup();
 
@@ -94,4 +94,8 @@ public interface TPPageFactory {
     RedirectDialog redirectDialog();
 
     LoadingDialog loadingDialog();
+
+    ThankYouPage thankYouPage();
+
+    FnsEmployerInfo fnsEmployerInfo();
 }

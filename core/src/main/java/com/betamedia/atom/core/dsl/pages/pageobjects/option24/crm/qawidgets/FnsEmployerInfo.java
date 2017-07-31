@@ -3,12 +3,12 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.crm.qawidgets;
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 
 /**
- * Created by mbelyaev on 5/18/17.
+ * @author mbelyaev
+ * @since 7/31/17
  */
-public interface FnsPersonalInformation {
+public interface FnsEmployerInfo {
+
     void submit(PersonalInformation info);
 
     void submitOnWizard(PersonalInformation info);
-
-    boolean exists();
 }

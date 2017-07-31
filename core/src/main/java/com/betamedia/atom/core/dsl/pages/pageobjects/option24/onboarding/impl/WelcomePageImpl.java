@@ -20,13 +20,12 @@ public class WelcomePageImpl extends AbstractPageObject implements WelcomePage {
 
     @Override
     public void start() {
-        waitUntilDisplayed(startButton);
-        find(startButton).click();
+        waitUntilDisplayed(startButton).click();
     }
     
     @Override
     public boolean isStartBtnDisplayed() {
-        return waitUntilDisplayed(startButton) != null;
+        return maybe(() -> waitUntilDisplayed(startButton)).isPresent();
     }
     
 }

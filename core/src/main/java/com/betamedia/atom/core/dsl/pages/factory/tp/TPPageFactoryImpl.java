@@ -154,8 +154,8 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     }
 
     @Override
-    public OnBoardingWizard onBoardingWizard() {
-        return creator.getPage(OnBoardingWizardImpl.class);
+    public DocumentUploadForm documentUploadForm() {
+        return creator.getPage(DocumentUploadFormImpl.class);
     }
 
     @Override
@@ -220,4 +220,13 @@ public class TPPageFactoryImpl extends AbstractPageFactory implements TPPageFact
     @Override
     public LoadingDialog loadingDialog() { return creator.getPage(LoadingDialogImpl.class); }
 
+    @Override
+    public ThankYouPage thankYouPage() {
+        return creator.getPage(ThankYouPageImpl.class);
+    }
+
+    @Override
+    public FnsEmployerInfo fnsEmployerInfo() {
+        return creator.getPage(FnsEmployerInfoImpl.class);
+    }
 }
