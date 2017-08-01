@@ -1,7 +1,6 @@
 package com.betamedia.atom.core.configuration.environment.persistence;
 
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
-import com.betamedia.atom.core.persistence.entities.WithdrawalRequest;
 import com.betamedia.atom.core.persistence.repositories.impl.qa.QAEnvContactExtensionRepository;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,7 @@ import static com.betamedia.atom.core.configuration.StubConfiguration.DB_ENABLED
 @EnableJpaRepositories(
         basePackageClasses = {
                 ContactExtension.class,
-                QAEnvContactExtensionRepository.class,
-                WithdrawalRequest.class
-        },
+                QAEnvContactExtensionRepository.class},
         entityManagerFactoryRef = "qaEntityManagerFactory"
 )
 @ConditionalOnProperty(name = DB_ENABLED_PROPERTY, matchIfMissing = true)
@@ -53,9 +50,7 @@ public class QAPersistenceConfig {
                 .dataSource(qaDataSource())
                 .packages(
                         ContactExtension.class,
-                        QAEnvContactExtensionRepository.class,
-                        WithdrawalRequest.class
-                )
+                        QAEnvContactExtensionRepository.class)
                 .persistenceUnit("qaPersistenceUnit")
                 .build();
     }

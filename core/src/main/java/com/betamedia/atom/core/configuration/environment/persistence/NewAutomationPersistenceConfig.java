@@ -1,8 +1,7 @@
 package com.betamedia.atom.core.configuration.environment.persistence;
 
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
-import com.betamedia.atom.core.persistence.entities.WithdrawalRequest;
-import com.betamedia.atom.core.persistence.repositories.impl.newautomation.NewAutomationEnvTrackingInfoRepository;
+import com.betamedia.atom.core.persistence.repositories.impl.newautomation.NewAutomationEnvContactExtensionRepository;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -32,9 +31,7 @@ import static com.betamedia.atom.core.configuration.StubConfiguration.DB_ENABLED
 @EnableJpaRepositories(
         basePackageClasses = {
                 ContactExtension.class,
-                NewAutomationEnvTrackingInfoRepository.class,
-                WithdrawalRequest.class
-        },
+                NewAutomationEnvContactExtensionRepository.class},
         entityManagerFactoryRef = "newAutomationEntityManagerFactory"
 )
 @ConditionalOnProperty(name = DB_ENABLED_PROPERTY, matchIfMissing = true)
@@ -53,8 +50,7 @@ public class NewAutomationPersistenceConfig {
                 .dataSource(newAutomationDataSource())
                 .packages(
                         ContactExtension.class,
-                        NewAutomationEnvTrackingInfoRepository.class,
-                        WithdrawalRequest.class)
+                        NewAutomationEnvContactExtensionRepository.class)
                 .persistenceUnit("newAutomationPersistenceUnit")
                 .build();
     }

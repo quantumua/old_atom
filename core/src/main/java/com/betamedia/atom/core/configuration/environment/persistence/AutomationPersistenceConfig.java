@@ -1,8 +1,6 @@
 package com.betamedia.atom.core.configuration.environment.persistence;
 
-import com.betamedia.atom.core.configuration.StubConfiguration;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
-import com.betamedia.atom.core.persistence.entities.WithdrawalRequest;
 import com.betamedia.atom.core.persistence.repositories.impl.automation.AutomationEnvContactExtensionRepository;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +18,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.sql.DataSource;
 
+import static com.betamedia.atom.core.configuration.StubConfiguration.DB_ENABLED_PROPERTY;
+
 /**
  * Automation Environment-specific repository configuration class.
  *
@@ -31,12 +31,10 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(
         basePackageClasses = {
                 ContactExtension.class,
-                AutomationEnvContactExtensionRepository.class,
-                WithdrawalRequest.class
-        },
+                AutomationEnvContactExtensionRepository.class},
         entityManagerFactoryRef = "automationEntityManagerFactory"
 )
-@ConditionalOnProperty(name = StubConfiguration.DB_ENABLED_PROPERTY, matchIfMissing = true)
+@ConditionalOnProperty(name = DB_ENABLED_PROPERTY, matchIfMissing = true)
 public class AutomationPersistenceConfig {
     @Autowired
     private DataSourceProperties automationDataSourceProperties;
@@ -52,9 +50,7 @@ public class AutomationPersistenceConfig {
                 .dataSource(automationDataSource())
                 .packages(
                         ContactExtension.class,
-                        AutomationEnvContactExtensionRepository.class,
-                        WithdrawalRequest.class)
-                        
+                        AutomationEnvContactExtensionRepository.class)
                 .persistenceUnit("automationPersistenceUnit")
                 .build();
     }
