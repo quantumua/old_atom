@@ -1,7 +1,7 @@
 implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
-2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,usernameField,ID,UserName
-2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,passwordField,ID,Password
-2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,submitButton,ID,FormSubmitBtn
+2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,usernameField,ID,UserName
+2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,passwordField,ID,Password
+2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,submitButton,ID,FormSubmitBtn
 2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerCheckbox,ID,checkboxDisclaimer
 2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerSubmitBtn,ID,disclaimer_submit
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,loginBtn,ID,login_btn
@@ -57,13 +57,13 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,closeButton,XPATH,//*[@id='tradeManagerContainer']/div/div[3]/div/div/div[3]
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
-2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,loginButton,NAME,btnLoginWidget
-2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,fnsPersonalInformationButton,NAME,btnFnsPersonalInformationWidget
-2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,fnsTradingExperienceButton,NAME,btnFnsTradingExperienceWidget
-2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,accountDetailsButton,NAME,btnAccountDetailsWidget
-2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,accountAdditionalDetailsButton,NAME,btnAccountAdditionalDetailsWidget
-2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,creditCardDepositButton,NAME,btnCCDepositWidget
-2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,registerButton,NAME,btnRegisterWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,loginButton,NAME,btnLoginWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,fnsPersonalInformationButton,NAME,btnFnsPersonalInformationWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,fnsTradingExperienceButton,NAME,btnFnsTradingExperienceWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,accountDetailsButton,NAME,btnAccountDetailsWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,accountAdditionalDetailsButton,NAME,btnAccountAdditionalDetailsWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,creditCardDepositButton,NAME,btnCCDepositWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,registerButton,NAME,btnRegisterWidget
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,sharesExperience,ID,FinancialProducts1Shares
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,binaryExperience,ID,FinancialProducts1Binary
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,averageYearlyBinaryVolume,ID,FinancialProducts1Volume
@@ -73,9 +73,9 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,financialWorkExperience,ID,SelectIfApplicable
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,cfdBinaryKnowledge,ID,KnowledgeCfdsBinaries
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,submit,NAME,swFinancialSuitabilityBtn
-2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,usernameField,ID,Username
-2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,passwordField,ID,Password
-2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,loginSubmit,NAME,swLoginBtn
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,usernameField,ID,Username
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,passwordField,ID,Password
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,loginSubmit,NAME,swLoginBtn
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employmentStatus,ID,EmploymentStatus
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,employmentStatusSalariedEmployee,XPATH,//*[@id='divQEmploymentStatus']/div/ul/li[@data-value='employmentStatusSalariedEmployee']
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,industry,ID,Industry
@@ -95,7 +95,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,purposeOfTrading,ID,PurposeOfTrading
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,submit,NAME,swFinancialSuitabilityBtn
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,industryOther,ID,industryOther_alternate
-2.6.2,2017-05-29 15:24 +0000,FnsEmployerInfoImpl,isUSReportable,ID,IsUSReportablePerson
+2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,isUSReportable,ID,IsUSReportablePerson
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,educationFieldOther,ID,fieldOfStudyOther_alternate
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,politicalExposureBttn,XPATH,//*[@id='divQPoliticallyExposed']//*[@class='alternate-submit']
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,sourceOfFundsOther,ID,sourceOfFundsOther_alternate
@@ -127,6 +127,27 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayMonth,ID,BirthDateMonth
 2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayYear,ID,BirthDateYear
 2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,update,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,wizardProgressText,XPATH,.//*[@class='wizard-progress']/p[@class='prog-text']
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,chatNow,XPATH,".//*[@id='popup-wizard']//*[@class="chat-link"]/a"
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,additionalDetailsTitle,XPATH,".//span[@class="swAdditionalInformationTitle swGroupBoxTitle"]"
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateTitle,XPATH,.//div[@id='accountAdditionalDetails']//label[@for='Birth_Date']
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateDay,ID,BirthDateDay
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateDayDropDownElements,XPATH,//*[@id='BirthDateDay']/option
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateDayDropdownCaption,XPATH,.//*[@id='BirthDateDay']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDayDropDownSelectItem,XPATH,//*[@id='BirthDateDay']/option[4]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateMonth,ID,BirthDateMonth
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateMonthDropdownCaption,XPATH,.//*[@id='BirthDateMonth']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateYear,ID,BirthDateYear
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateYearDropdownCaption,XPATH,.//*[@id='BirthDateYear']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,countryOfBirthTitle,XPATH,.//div[@id='accountAdditionalDetails']//label[@for='CountryOfBirthCode']
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,countryOfBirth,ID,CountryOfBirthCode
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,countryOfBirthDropdownCaption,XPATH,.//*[@id='CountryOfBirthCode']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,countryOfBirthDropdownDataError,XPATH,.//*[@id='CountryOfBirthCode']//@data-error
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,nationalityTitle,XPATH,.//*[@id='accountAdditionalDetails']//*[@for='NationalityCode']
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,nationality,ID,NationalityCode
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,nationalityDropdownCaption,XPATH,.//*[@id='NationalityCode']//option[1]
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,nationalityDropdownDataError,XPATH,.//*[@id='NationalityCode']//@data-error
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,submit,NAME,swUpdateCustomerBtn
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,wizardProgressText,XPATH,.//*[@class='wizard-progress']/p[@class='prog-text']
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,chatNow,XPATH,".//*[@id='popup-wizard']//*[@class="chat-link"]/a"
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,additionalDetailsTitle,XPATH,".//span[@class="swAdditionalInformationTitle swGroupBoxTitle"]"
@@ -160,6 +181,18 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,zipCode,NAME,Zip
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,country,ID,CountryCode
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,submit,NAME,swCCDepositBtn
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,depositAmount,NAME,Amount
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,creditCardNumber,ID,CreditCardNumber
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,cvv2,NAME,Cvv2
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,expiryDateMonth,NAME,ExpiryDateMonth
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,expiryDateYear,NAME,ExpiryDateYear
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,cardHoldersFirstName,NAME,HolderFirstName
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,cardHoldersLastName,NAME,HolderLastName
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,billingAddress,NAME,BillingAddress
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,city,NAME,City
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,zipCode,NAME,Zip
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,country,ID,CountryCode
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,submit,NAME,swCCDepositBtn
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,title,NAME,Title
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,firstName,NAME,FirstName
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,lastName,NAME,LastName
@@ -175,7 +208,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,startTrading,NAME,swRegisterBtn
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,swProgressImg,ID,swProgressImg
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,resultPlaceHolder,ID,resultPlaceHolder
-2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
 2.6.2,2017-05-29 15:24 +0000,FnsTradingExperienceImpl,resultPlaceholder,ID,resultPlaceHolder
 2.6.2,2017-05-29 15:24 +0000,FnsPersonalInformationImpl,resultPlaceholder,ID,resultPlaceHolder
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,firstNameField,ID,FirstName
@@ -190,14 +223,18 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
-2.6.2,2017-05-29 15:24 +0000,WelcomePageImpl,startButton,ID,welcome-btn
-2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,iAmOver18Statement,CLASS_NAME,swRiskWarningAccountAgree
-2.6.2,2017-05-29 15:24 +0000,RiskWarningImpl,updateButton,XPATH,//*[@id='risk-warning-form-space']/div/input
-2.6.2,2017-05-29 15:24 +0000,CrmLoginPageImpl,loginButton,NAME,btnLoginWidget
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,ID,welcome-btn
+2.6.2,2017-05-29 15:24 +0000,RiskWarningDialogImpl,iAmOver18Statement,CLASS_NAME,swRiskWarningAccountAgree
+2.6.2,2017-05-29 15:24 +0000,RiskWarningDialogImpl,updateButton,XPATH,//*[@id='risk-warning-form-space']/div/input
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,loginButton,NAME,btnLoginWidget
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,closeButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/div/ul/li[1]/a/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
-2.6.2,2017-05-29 15:24 +0000,CrmNavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
 2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeDialog,CLASS_NAME,wizard-container
 2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeButton,ID,thankyou-btn
 2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,setLeverageDialog,CSS,.swSetLeverageContent.swWidget.swGroupBox
@@ -211,32 +248,32 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
 2.6.2,2017-05-29 15:24 +0000,RejectMessageOnLoginImpl,rejectCaption,CLASS_NAME,message-title
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogImpl,CSS,.content.mobile-single
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,documents,XPATH,.//*[@id='menu-item-54113']/a
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,uploadDocumentsPageImpl,XPATH,".//*[@id='Upload-Document-SEU']/*[@class="formContainer form-cover"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiTitle,XPATH,".//*[@id='acc']//*[@class="icon poi-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiContainer,XPATH,.//*[@id='poi-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiTypeSelector,XPATH,".//*[@id='poi-container']//*[@class="btn dropdown-toggle btn-default"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiBrowseButton,XPATH,".//*[@id='poi-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiDocumentAprroved,XPATH,".//*[@id='poi-container']//*[@class="document-box aprroved-doc"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,poiDocumentNotAprroved,XPATH,".//*[@id='poi-container']//*[@class="document-box not-aprroved"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porTitle,XPATH,".//*[@id='acc']//*[@class="icon por-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porContainet,XPATH,.//*[@id='por-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porTypeSelector,XPATH,".//*[@id='por-container']//*[@class="btn dropdown-toggle btn-default"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porBrowseButton,XPATH,".//*[@id='por-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porDocumentAprroved,XPATH,".//*[@id='por-container']//*[@class="document-box aprroved-doc"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,porDocumentNotAprroved,XPATH,".//*[@id='por-container']//*[@class="document-box not-aprroved"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccTitle,XPATH,".//*[@id='acc']//*[@class="icon cc-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccContainet,XPATH,.//*[@id='cc-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccTypeSelector,XPATH,".//*[@id='cc-container']//*[@class="btn dropdown-toggle btn-default"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccBrowseButton,XPATH,".//*[@id='cc-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccDocumentAprroved,XPATH,".//*[@id='cc-container']//*[@class="document-box aprroved-doc"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,ccDocumentNotAprroved,XPATH,".//*[@id='cc-container']//*[@class="document-box not-aprroved"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersTitle,XPATH,".//*[@id='acc']//*[@class="icon others-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersContainet,XPATH,.//*[@id='others-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersTypeSelector,XPATH,".//*[@id='others-container']//*[@class="btn dropdown-toggle btn-default"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersBrowseButton,XPATH,".//*[@id='others-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersDocumentAprroved,XPATH,".//*[@id='others-container']//*[@class="document-box aprroved-doc"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsPageImpl,othersDocumentNotAprroved,XPATH,".//*[@id='others-container']//*[@class="document-box not-aprroved"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documents,XPATH,.//*[@id='menu-item-54113']/a
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentsPageImpl,XPATH,".//*[@id='Upload-Document-SEU']/*[@class="formContainer form-cover"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiTitle,XPATH,".//*[@id='acc']//*[@class="icon poi-icon"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiContainet,XPATH,.//*[@id='poi-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiTypeSelector,XPATH,".//*[@id='poi-container']//*[@class="btn dropdown-toggle btn-default"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiBrowseButton,XPATH,".//*[@id='poi-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentAprroved,XPATH,".//*[@id='poi-container']//*[@class="document-box aprroved-doc"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentNotAprroved,XPATH,".//*[@id='poi-container']//*[@class="document-box not-aprroved"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTitle,XPATH,".//*[@id='acc']//*[@class="icon por-icon"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porContainet,XPATH,.//*[@id='por-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTypeSelector,XPATH,".//*[@id='por-container']//*[@class="btn dropdown-toggle btn-default"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porBrowseButton,XPATH,".//*[@id='por-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentAprroved,XPATH,".//*[@id='por-container']//*[@class="document-box aprroved-doc"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentNotAprroved,XPATH,".//*[@id='por-container']//*[@class="document-box not-aprroved"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccTitle,XPATH,".//*[@id='acc']//*[@class="icon cc-icon"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccContainet,XPATH,.//*[@id='cc-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccTypeSelector,XPATH,".//*[@id='cc-container']//*[@class="btn dropdown-toggle btn-default"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccBrowseButton,XPATH,".//*[@id='cc-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccDocumentAprroved,XPATH,".//*[@id='cc-container']//*[@class="document-box aprroved-doc"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccDocumentNotAprroved,XPATH,".//*[@id='cc-container']//*[@class="document-box not-aprroved"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersTitle,XPATH,".//*[@id='acc']//*[@class="icon others-icon"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersContainet,XPATH,.//*[@id='others-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersTypeSelector,XPATH,".//*[@id='others-container']//*[@class="btn dropdown-toggle btn-default"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersBrowseButton,XPATH,".//*[@id='others-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentAprroved,XPATH,".//*[@id='others-container']//*[@class="document-box aprroved-doc"]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentNotAprroved,XPATH,".//*[@id='others-container']//*[@class="document-box not-aprroved"]"
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmCloseMessage,ID,close_dialog
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmImSure,ID,dialog_btn_leave
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmNo,ID,dialog_btn_stay

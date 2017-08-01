@@ -4,14 +4,14 @@ import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
+import com.betamedia.atom.core.testingtype.widgets.WidgetsEndToEndTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  * Created by vsnigur on 5/29/17.
  */
-public class CustomerLeverageWidgetsTest extends TPEndToEndTest {
+public class CustomerLeverageWidgetsTest extends WidgetsEndToEndTest {
 
     private final int FIRST_AVERAGE = 0;
     private final int SECOND_AVERAGE = 1;
@@ -23,26 +23,26 @@ public class CustomerLeverageWidgetsTest extends TPEndToEndTest {
 
     @Test(description = "crm-9038")
     public void checkRejectedCustomerHasDisabledSelectLeverageComboBox() {
-        pages().crmNavigation().login();
+        pages().navigation().login();
         createUser(OnboardingWizardConditions.ExperienceLevel.REJECTED, ExperienceScore.REJECTED);
-        pages().crmNavigation().setLeverage();
+        pages().navigation().setLeverage();
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),0);
     }
 
     @Test(description = "crm-9039")
     public void checkThatNoExperienceCustomerHasDisabledLeverageComboBox() {
-        pages().crmNavigation().login();
+        pages().navigation().login();
         createUser(OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().crmNavigation().setLeverage();
+        pages().navigation().setLeverage();
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),1);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(FIRST_AVERAGE),AVERAGE1TO50);
     }
 
     @Test(description = "crm-9040")
     public void checkThatLowExperienceCustomerCanSelectLeverage() {
-        pages().crmNavigation().login();
+        pages().navigation().login();
         createUser(OnboardingWizardConditions.ExperienceLevel.LOW_EXPERIENCE, ExperienceScore.LOW_EXPERIENCE);
-        pages().crmNavigation().setLeverage();
+        pages().navigation().setLeverage();
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),2);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(SECOND_AVERAGE),AVERAGE1TO100);
@@ -50,9 +50,9 @@ public class CustomerLeverageWidgetsTest extends TPEndToEndTest {
 
     @Test(description = "crm-9041")
     public void checkThatHighExperienceCustomerCanSelectLeverage() {
-        pages().crmNavigation().login();
+        pages().navigation().login();
         createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE);
-        pages().crmNavigation().setLeverage();
+        pages().navigation().setLeverage();
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),3);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(SECOND_AVERAGE),AVERAGE1TO100);
@@ -61,9 +61,9 @@ public class CustomerLeverageWidgetsTest extends TPEndToEndTest {
 
     @Test(description = "crm-9042")
     public void checkThatExpertCustomerCanSelectLeverage() {
-        pages().crmNavigation().login();
+        pages().navigation().login();
         createUser(OnboardingWizardConditions.ExperienceLevel.EXPERT, ExperienceScore.EXPERT);
-        pages().crmNavigation().setLeverage();
+        pages().navigation().setLeverage();
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),3);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(SECOND_AVERAGE),AVERAGE1TO100);
@@ -73,9 +73,9 @@ public class CustomerLeverageWidgetsTest extends TPEndToEndTest {
     @Test(description = "crm-9144")
     public void checkThatUnknownCustomerCanSelectLeverage() {
         CRMCustomer customer = operations().customerOperations().register();
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        pages().crmNavigation().setLeverage();
+        pages().navigation().login();
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+        pages().navigation().setLeverage();
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().size(),1);
         Assert.assertEquals(pages().setLeveragePage().getLeveragesList().get(FIRST_AVERAGE), AVERAGE1TO50);
     }
@@ -83,9 +83,9 @@ public class CustomerLeverageWidgetsTest extends TPEndToEndTest {
     private CRMCustomer createUser(OnboardingWizardConditions.ExperienceLevel experienceLevel, ExperienceScore experienceScore) {
         CRMCustomer crmCustomer = operations().customerOperations().registerWithWizardConditions(onboardingWizardConditions(experienceLevel));
         operations().customerOperations().updateExperienceScoreInDB(crmCustomer.getId(), experienceScore.get());
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
-        pages().crmNavigation().creditCardDeposit();
+        pages().navigation().login();
+        pages().loginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+        pages().navigation().creditCardDeposit();
         pages().creditCardDeposit().submit(
                 CreditCardDeposit.builder()
                         .withDepositAmount("100")

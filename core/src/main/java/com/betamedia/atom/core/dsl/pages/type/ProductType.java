@@ -7,5 +7,6 @@ package com.betamedia.atom.core.dsl.pages.type;
 public enum ProductType {
     TP,
     CRM,
+    WIDGETS,
 	WEB;
 }

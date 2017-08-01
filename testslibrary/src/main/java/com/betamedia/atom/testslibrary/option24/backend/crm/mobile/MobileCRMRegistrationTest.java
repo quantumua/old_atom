@@ -7,19 +7,16 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.api.tp.entities.response.CRMError;
 import com.betamedia.atom.core.persistence.entities.TrackingInfo;
 import com.betamedia.atom.core.persistence.entities.TrackingInfoExtension;
-import com.betamedia.atom.core.testingtype.tp.TPBackEndTest;
+import com.betamedia.atom.core.testingtype.web.WebBackEndTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import java.util.List;
-
 import static org.junit.Assert.*;
-
 
 /**
  * Created by Oleksandr Losiev on 4/21/17.
  */
-public class MobileCRMRegistrationTest extends TPBackEndTest {
+public class MobileCRMRegistrationTest extends WebBackEndTest {
 
     @DataProvider(name = "registrationCurrencies")
     public static Object[][] currencies() {

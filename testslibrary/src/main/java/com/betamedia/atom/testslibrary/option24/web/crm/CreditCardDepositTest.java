@@ -1,18 +1,18 @@
 package com.betamedia.atom.testslibrary.option24.web.crm;
 
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
-import com.betamedia.atom.core.testingtype.tp.TPClientTest;
+import com.betamedia.atom.core.testingtype.widgets.WidgetsClientTest;
 import org.testng.annotations.Test;
 
 /**
  * Created by vsnigur on 5/19/17.
  */
-public class CreditCardDepositTest extends TPClientTest {
+public class CreditCardDepositTest extends WidgetsClientTest {
 
     @Test
     public void creditCardDepositSubmitInformationTest() {
         pages().registerPage().register();
-        pages().crmNavigation().creditCardDeposit();
+        pages().navigation().creditCardDeposit();
         pages().creditCardDeposit().submit(
                 (CreditCardDeposit.builder()
                         .withDepositAmount("100")

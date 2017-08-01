@@ -4,7 +4,6 @@ import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -22,9 +21,9 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9033")
     public void checkCustomerWithScore51IsHighExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith51Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(51));
@@ -41,9 +40,9 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9072")
     public void checkCustomerWithScore65IsHighExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith65Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(65));
@@ -60,9 +59,9 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9034")
     public void checkCustomerWithScore70IsHighExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith70Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(70));
@@ -78,9 +77,9 @@ public class HighExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9024")
     public void checkHighExperienceCustomerAccessActiveTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith51Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameLoginType(

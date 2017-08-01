@@ -6,7 +6,6 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels.AbstractUserExperienceTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -28,9 +27,9 @@ public class CalculatedExpectedScoreDemonstrationTest extends AbstractUserExperi
         PersonalInformation personalInformation = personalInfoScore10();
         Assert.assertEquals(personalInformation.expectedScore, 10);
 
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingInfo);
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInformation);
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),

@@ -1,0 +1,67 @@
+package com.betamedia.atom.core.dsl.pages.factory.widgets;
+
+import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.impl.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
+import com.betamedia.atom.core.dsl.pages.type.ProductType;
+
+/**
+ * Created by vsnigur on 7/31/17.
+ */
+public class WidgetsPageFactoryImpl extends AbstractPageFactory implements WidgetsPageFactory {
+    @Override
+    public ProductType getType() {
+        return ProductType.WIDGETS;
+    }
+
+    @Override
+    public LoginPage loginPage() {
+        return creator.getPage(LoginPageImpl.class);
+    }
+
+    @Override
+    public Navigation navigation() {
+        return creator.getPage(NavigationImpl.class);
+    }
+
+    @Override
+    public FnsTradingExperience fnsTradingExperience() {
+        return creator.getPage(FnsTradingExperienceImpl.class);
+    }
+
+    @Override
+    public FnsPersonalInformation fnsPersonalInformation() {
+        return null;
+    }
+
+    @Override
+    public RegisterPage registerPage() {
+        return null;
+    }
+
+    @Override
+    public AccountDetailsPage accountDetails() {
+        return creator.getPage(AccountDetailsPageImpl.class);
+    }
+
+    @Override
+    public RegistrationPage registrationPage() {
+        return null;
+    }
+
+    @Override
+    public SetLeveragePageImpl setLeveragePage() {
+        return creator.getPage(SetLeveragePageImpl.class);
+    }
+
+    @Override
+    public CreditCardDepositPage creditCardDeposit() {
+        return creator.getPage(CreditCardDepositPageImpl.class);
+    }
+
+    @Override
+    public AccountAdditionalDetailsPage accountAdditionalDetailsPage() {
+        return creator.getPage(AccountAdditionalDetailsPageImpl.class);
+    }
+}

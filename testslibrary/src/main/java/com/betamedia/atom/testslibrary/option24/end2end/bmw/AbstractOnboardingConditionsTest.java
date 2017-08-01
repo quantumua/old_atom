@@ -1,15 +1,14 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
-import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
+import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import org.testng.Reporter;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
  * Created by Oleksandr Losiev on 5/29/17.
  */
-public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
+public class AbstractOnboardingConditionsTest extends WebEndToEndTest {
 
     protected void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
         if (!conditions.isShowWizard()) {
@@ -19,7 +18,7 @@ public class AbstractOnboardingConditionsTest extends TPEndToEndTest {
 
         if (conditions.isShowWelcome()) {
             Reporter.log("INFO: ShowWelcome should happens.");
-            pages().welcomePage().start();
+            pages().welcomeDialog().start();
         }
 
         if (conditions.isShowWelcomeBack()) {

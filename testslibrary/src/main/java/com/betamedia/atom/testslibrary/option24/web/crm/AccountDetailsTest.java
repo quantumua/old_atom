@@ -3,19 +3,19 @@ package com.betamedia.atom.testslibrary.option24.web.crm;
 import com.betamedia.atom.core.api.crm.form.entities.AccountDetails;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.testingtype.tp.TPClientTest;
+import com.betamedia.atom.core.testingtype.widgets.WidgetsClientTest;
 import org.testng.annotations.Test;
 
 /**
  * Created by vsnigur on 5/19/17.
  */
-public class AccountDetailsTest extends TPClientTest {
+public class AccountDetailsTest extends WidgetsClientTest {
 
     @Test
     public void accountDetailsAddInformationTest() {
-        pages().crmNavigation().register();
+        pages().navigation().register();
         pages().registerPage().register();
-        pages().crmNavigation().accountDetails();
+        pages().navigation().accountDetails();
         pages().accountDetails().update(AccountDetails
                 .builderFor(CustomerRO.builder(WidgetsNamingStrategy.get())
                         .setCity("city")

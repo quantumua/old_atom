@@ -3,16 +3,15 @@ package com.betamedia.atom.testslibrary.option24.web.ctw;
 import org.junit.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
+import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 
 /**
  * @author Leonid Artemiev
  */
 
-public class PersonalDetailsSlideTest extends WEBEndToEndTest{
+public class PersonalDetailsSlideTest extends WebEndToEndTest {
 	/*
 	 *[testlink]  CTW-5624:Verify slide appear after registration and welcome slide
 	 */
@@ -122,7 +121,7 @@ public class PersonalDetailsSlideTest extends WEBEndToEndTest{
     
     private void registerAndStart(String countrycode) {
         pages().topNavigationPage().signUp();
-        pages().registrationPage().register(countrycode);
+        pages().registrationDialog().register(countrycode);
         pages().welcomepage().isStartBtnDisplayed();
         pages().welcomepage().start();
     }

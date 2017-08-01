@@ -4,7 +4,6 @@ import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -22,9 +21,9 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9027")
     public void checkCustomerWithScore16IsNoExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith16Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(16));
@@ -41,9 +40,9 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9070")
     public void checkCustomerWithScore25IsNoExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith25Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(25));
@@ -60,9 +59,9 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9028")
     public void checkCustomerWithScore30IsNoExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith30Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(30));
@@ -78,9 +77,9 @@ public class NoExperienceUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9021")
     public void checkNoExperienceCustomerAccessActiveTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith16Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameLoginType(

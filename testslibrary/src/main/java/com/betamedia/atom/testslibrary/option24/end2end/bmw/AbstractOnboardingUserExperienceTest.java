@@ -47,7 +47,7 @@ public class AbstractOnboardingUserExperienceTest extends AbstractOnboardingCond
         );
         operations().customerOperations().updateExperienceScoreInDB(crmCustomer.getId(), score.get());
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+        pages().loginDialog().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         return crmCustomer;
     }
     /**
@@ -93,5 +93,4 @@ public class AbstractOnboardingUserExperienceTest extends AbstractOnboardingCond
             return score;
         }
     }
-
 }

@@ -1,16 +1,16 @@
 package com.betamedia.atom.testslibrary.option24.web;
 
-
+import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
+import com.betamedia.atom.core.api.web.form.Country;
+import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -18,14 +18,14 @@ import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers
  *         Date: 5/15/17.
  */
 
-public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
+public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 	 private static CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
 
 	 @Parameters({"countrycode"}) 
 	 @Test
 	    public void  onboardingWizardRegistration(String countrycode) {
 	     	pages().topNavigationPage().signUp();
-	        pages().registrationPage().register(countrycode);
+	        pages().registrationDialog().register(countrycode);
 	        pages().welcomepage().isStartBtnDisplayed();
 	        pages().welcomepage().start();	        	       
 	        
@@ -35,7 +35,7 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
          @Test
 		  public void  onboardingWizardAdditionalDetails(String countrycode) {
 		     	pages().topNavigationPage().signUp();
-		        pages().registrationPage().register(countrycode);
+		        pages().registrationDialog().register(countrycode);
 		        pages().welcomepage().isStartBtnDisplayed();
 		        pages().welcomepage().start();
 		        pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -45,16 +45,16 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		                .withCountryOfBirth("DE")
 		                .withNationality("DE")
 		                .build());
-		       
-		        
-		        
+
+
+
 		    }
-	    
-	    @Parameters({"countrycode"}) 
+
+	    @Parameters({"countrycode"})
         @Test
 	    public void  onboardingWizardFNSpersonalLowscore(String countrycode) {
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(countrycode);
+	       pages().registrationDialog().register(countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -64,8 +64,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	               .withCountryOfBirth("DE")
 	               .withNationality("DE")
 	               .build());
-      
-	       
+
+
 	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 	                .withIndustry(Industry.COMPUTER)
@@ -82,14 +82,14 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
 	                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
 	                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
-	                .build());       
-	      
+	                .build());
+
 	    }
-	   @Parameters({"countrycode"})  
+	   @Parameters({"countrycode"})
        @Test
 	    public void  onboardingWizardFNSpersonal(String countrycode) {
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(countrycode);
+	       pages().registrationDialog().register(countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -99,8 +99,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	               .withCountryOfBirth("DE")
 	               .withNationality("DE")
 	               .build());
-      
-	       
+
+
 	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 	                .withIndustry(Industry.FINANCE)
@@ -118,15 +118,15 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
 	                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
 	                .build());
-	       
-	      
+
+
 
 	    }
-	   @Parameters({"countrycode"})  
+	   @Parameters({"countrycode"})
        @Test
 	    public void  onboardingWizardFNSTradingReject(String countrycode) {
 	    	  pages().topNavigationPage().signUp();
-		       pages().registrationPage().register(countrycode);
+		       pages().registrationDialog().register(countrycode);
 		       pages().welcomepage().isStartBtnDisplayed();
 		       pages().welcomepage().start();
 		       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -136,8 +136,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		               .withCountryOfBirth("DE")
 		               .withNationality("DE")
 		               .build());
-	      
-		       
+
+
 		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
@@ -155,8 +155,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
 		                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
 		                .build());
-		       
-		      
+
+
 	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.NEVER)
@@ -176,15 +176,15 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	                 .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
 	                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
 	                 .build());
-	         
+
 	         pages().topNavigationPage().isLoggedOut();
 	    }
-	   
-	    @Parameters({"countrycode"}) 
+
+	    @Parameters({"countrycode"})
         @Test
 	    public void  onboardingWizardFNStradingRisk(String countrycode) {
 	    	  pages().topNavigationPage().signUp();
-		       pages().registrationPage().register(countrycode);
+		       pages().registrationDialog().register(countrycode);
 		       pages().welcomepage().isStartBtnDisplayed();
 		       pages().welcomepage().start();
 		       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -194,8 +194,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		               .withCountryOfBirth("DE")
 		               .withNationality("DE")
 		               .build());
-	      
-		       
+
+
 		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
@@ -213,8 +213,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
 		                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
 		                .build());
-		       
-		      
+
+
 	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.NEVER)
@@ -236,12 +236,12 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 	                 .build());
          pages().riskwarning().waitForRiskWarning();
 	    }
-	    
-	    
+
+
         @Test
 	    public void  onboardingWizardSpainRiskSignature() {
 	    	  pages().topNavigationPage().signUp();
-		       pages().registrationPage().register("es");
+		       pages().registrationDialog().register("es");
 		       pages().welcomepage().isStartBtnDisplayed();
 		       pages().welcomepage().start();
 		       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -251,8 +251,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		               .withCountryOfBirth("DE")
 		               .withNationality("DE")
 		               .build());
-	      
-		       
+
+
 		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
@@ -270,8 +270,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
 		                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
 		                .build());
-		       
-		      
+
+
 	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
 	        		 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.NEVER)
@@ -294,12 +294,12 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 //	         FIXME not implemented
          pages().signatureRiskWarning().waitforRiskSingnature();
 	    }
-	   
-	    @Parameters({"countrycode"}) 
+
+	    @Parameters({"countrycode"})
 	    @Test
 	    public void  onboardingWizardFNStradingNoRisk(String countrycode) {
 	    	  pages().topNavigationPage().signUp();
-		       pages().registrationPage().register(countrycode);
+		       pages().registrationDialog().register(countrycode);
 		       pages().welcomepage().isStartBtnDisplayed();
 		       pages().welcomepage().start();
 		       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -309,8 +309,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		               .withCountryOfBirth("DE")
 		               .withNationality("DE")
 		               .build());
-	      
-		       
+
+
 		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
@@ -328,8 +328,8 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 		                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
 		                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
 		                .build());
-		       
-		      
+
+
 	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
 	        		 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.OCCASIONALLY)
@@ -353,12 +353,12 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 //	         FIXME not implemented
 	         pages().creditCardDepositPage().waitforCreditCardDepositPage();
 	    }
-	    
-	    @Parameters({"countrycode"}) 
+
+	    @Parameters({"countrycode"})
 	    @Test
 	    public void  onboardingWizardDeposit(String countrycode) {
 	    	  pages().topNavigationPage().signUp();
-		       pages().registrationPage().register(countrycode);
+		       pages().registrationDialog().register(countrycode);
 		       pages().welcomepage().isStartBtnDisplayed();
 		       pages().welcomepage().start();
 		       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -433,14 +433,14 @@ public class OnboardingWebWizardTestSuite extends WEBEndToEndTest {
 //	    @Test
 	    public void  onboardingWizardUploadPOI() {
 	     	pages().topNavigationPage().signUp();
-	        pages().registrationPage().register("es");
+	        pages().registrationDialog().register(Country.SPAIN.getName());
 	        
 	    }
 	    
 //	    @Test
 	    public void  onboardingWizardUploadPOR() {
 	     	pages().topNavigationPage().signUp();
-	        pages().registrationPage().register("es");
+	        pages().registrationDialog().register(Country.SPAIN.getName());
 	        
 	    }
 }

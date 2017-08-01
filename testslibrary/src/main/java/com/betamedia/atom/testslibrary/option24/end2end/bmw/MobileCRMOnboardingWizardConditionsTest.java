@@ -81,10 +81,10 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
             e.printStackTrace();
         }
         pages().topNavigationPage().logIn();
-        if (!pages().loginPage().isSubmitBtnExists()) {
+        if (!pages().loginDialog().isSubmitBtnExists()) {
             pages().topNavigationPage().logIn();
         }
-        pages().loginPage().login(username, CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+        pages().loginDialog().login(username, CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         pages().startTradeDialog().exists();
     }
 }

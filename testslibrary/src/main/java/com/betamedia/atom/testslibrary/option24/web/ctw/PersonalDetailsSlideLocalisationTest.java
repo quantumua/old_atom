@@ -1,23 +1,18 @@
 package com.betamedia.atom.testslibrary.option24.web.ctw;
 
-import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
 
 /**
  * @author Leonid Artemiev
  * @since 7/13/17
  */
 
-public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
+public class PersonalDetailsSlideLocalisationTest extends WebEndToEndTest {
 
     @BeforeMethod
 	public void before(){
@@ -25,7 +20,7 @@ public class PersonalDetailsSlideLocalisationTest extends TPEndToEndTest {
         CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build();
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
 	}
 
 	/*

@@ -17,7 +17,7 @@ public class CreateNewCustomersCrm extends CrmUserExperienceTest {
      */
     @Test(description = "CTW-2544: Web widget")
     public void checkTrafficSourceAndMarketingDataValuesInDataBase() {
-        pages().crmNavigation().register();
+        pages().navigation().register();
         CRMCustomer customer = crmRegisterAndLogIn();
         operations().onBoardingOperations().assertTrafficSource(customer.getEmail(), WIDGET_SOURCE_ID);
     }

@@ -7,17 +7,16 @@ import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.atom.core.persistence.entities.TrackingInfoExtension;
-import com.betamedia.atom.core.testingtype.tp.TPBackEndTest;
+import com.betamedia.atom.core.testingtype.web.WebBackEndTest;
 import com.betamedia.atom.core.utils.StringUtils;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import static org.junit.Assert.*;
 
 /**
  * Created by Oleksandr Losiev on 4/27/17.
  */
-public class MobileCRMMarketingParametersTest extends TPBackEndTest {
+public class MobileCRMMarketingParametersTest extends WebBackEndTest {
 
     private String referrer = "http://www.testReferrer.com";
     private String siteId = "https://www.24option.com/landing/competition/index.cshtml?lang%3Dfr";

@@ -1,17 +1,16 @@
 package com.betamedia.atom.testslibrary.option24.backend.crm;
 
-import com.betamedia.atom.core.testingtype.tp.TPBackEndTest;
+import com.betamedia.atom.core.testingtype.web.WebBackEndTest;
 import com.betamedia.tp.api.model.Account;
 import com.betamedia.tp.api.model.enums.BonusType;
 import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertEquals;
 
 /**
  * @author Maksym Tsybulskyy
  *         Date: 3/21/17.
  */
-public class BonusTest extends TPBackEndTest {
+public class BonusTest extends WebBackEndTest {
 
     /**
      * Add a bonus with a very high sum to an account

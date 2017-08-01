@@ -115,7 +115,7 @@ public class MobileDepositRO {
     }
 
     /**
-     * This is a builder for MobileDepositRO, which, in turn, is used by mobile crm adatper.
+     * This is a builder for MobileDepositRO, which, in turn, is used by mobile widgets adatper.
      *
      * Created by Oleksandr Losiev on 4/21/17.
      *

@@ -42,6 +42,8 @@ public interface RegistrationDialog {
 
     boolean register(CustomerRO customerRO);
 
+    void register(CustomerRO customerRO, String countryCode);
+
     boolean fillRegisterForm(CustomerRO customerRO);
 
     void fillRegisterForm(CustomerRegistrationInfo customerRegistrationInfo);
@@ -83,5 +85,7 @@ public interface RegistrationDialog {
     boolean chatLinkDisplayed();
 
     String getCurrency();
+
+    void register(String countryCode);
 
 }

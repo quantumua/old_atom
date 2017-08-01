@@ -3,7 +3,6 @@ package com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -14,7 +13,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9082")
     public void newCustomerExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertCustomerUnknown(customer.getId());
     }
@@ -22,7 +21,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9083")
     public void score10CustomerExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.NEVER)
@@ -45,7 +44,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_45)
                         .build()
         );
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertCustomerRejected(customer.getId());
     }
@@ -53,7 +52,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9084")
     public void score25CustomerExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.NEVER)
@@ -76,7 +75,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                         .build()
         );
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertCustomerNoExperience(customer.getId());
     }
@@ -84,7 +83,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9085")
     public void score45CustomerExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.REGULARLY)
@@ -107,7 +106,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                         .build()
         );
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertCustomerLowExperience(customer.getId());
     }
@@ -115,7 +114,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9086")
     public void score65CustomerExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.REGULARLY)
@@ -139,7 +138,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                         .build()
         );
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore10());
         operations().onBoardingOperations().assertCustomerHighExperience(customer.getId());
     }
@@ -147,7 +146,7 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9087")
     public void score85CustomerExperienceTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.FREQUENTLY)
@@ -172,10 +171,8 @@ public class CrmUserExperienceTest extends AbstractUserExperienceTest {
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                         .build()
         );
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertCustomerExpert(customer.getId());
     }
-
-
 }

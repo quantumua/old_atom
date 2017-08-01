@@ -1,5 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
@@ -188,6 +189,13 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
         return result;
     }
 
+    @Override
+    public void register(CustomerRO customerRO, String countryName) {
+        fillRegisterForm(customerRO);
+        setCountryPrefix(countryName);
+        find(submitButton).click();
+    }
+
     //TODO migrate to using CustomerRegistrationInfo
     @Override
     public boolean fillRegisterForm(CustomerRO customerRO) {
@@ -350,4 +358,12 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     public String getCurrency() {
         return find(currencyComboBox).getAttribute(ATTRIBUTE_TITLE);
     }
+
+    @Override
+    public void register(String countryName) {
+        setCountryPrefix(countryName);
+        register(CustomerRO.builder(WebSiteNamingStrategy.get()).build());
+    }
+
+
 }

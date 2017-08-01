@@ -5,7 +5,6 @@ import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.Currency;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
-import org.testng.Reporter;
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
@@ -31,7 +30,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
         pages().registrationDialog().submitRegisterForm();
-        pages().welcomePage().isStartBtnDisplayed();
+        pages().welcomeDialog().isStartBtnDisplayed();
         operations().onBoardingOperations().assertUserCreatedInDatabase(customerRegistrationInfo.getEmail());
     }
 
@@ -384,7 +383,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         assertFalse("Submit button is enabled during customer registration.",
                 pages().registrationDialog().submitIsEnabled());
         assertTrue("Start Trade dialog did not appear after registration.",
-                pages().welcomePage().isStartBtnDisplayed());
+                pages().welcomeDialog().isStartBtnDisplayed());
     }
 
     /**
@@ -395,7 +394,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     public void checkValidateEmailForRegisteredNewCustomer() {
         CustomerRegistrationInfo customer = fillRegisterCustomerDialog();
         pages().registrationDialog().submitRegisterForm();
-        pages().welcomePage().isStartBtnDisplayed();
+        pages().welcomeDialog().isStartBtnDisplayed();
         operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
     }
 
@@ -458,7 +457,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().browser().refreshPage();
         customer=fillRegisterCustomerDialog();
         pages().registrationDialog().submitRegisterForm();
-        pages().welcomePage().isStartBtnDisplayed();
+        pages().welcomeDialog().isStartBtnDisplayed();
         operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
     }
 

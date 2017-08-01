@@ -3,24 +3,23 @@ package com.betamedia.atom.testslibrary.samples;
 import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.testingtype.tp.TPClientTest;
+import com.betamedia.atom.core.testingtype.web.WebClientTest;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
  * @author mbelyaev
  * @since 7/31/17
  */
-public class RegistrationPOIUploadDemonstrationTest extends TPClientTest {
+public class RegistrationPOIUploadDemonstrationTest extends WebClientTest {
 
     @Test
     public void registrationTest() {
         /*complete web registration flow with POI upload*/
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(CustomerRO.builder(WebSiteNamingStrategy.get()).build());
-        pages().welcomePage().isStartBtnDisplayed();
-        pages().welcomePage().start();
+        pages().welcomeDialog().isStartBtnDisplayed();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder()
                 .withBirthDateDay("1")
                 .withBirthDateMonth("2")

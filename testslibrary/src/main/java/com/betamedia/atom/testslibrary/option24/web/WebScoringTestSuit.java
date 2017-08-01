@@ -6,10 +6,9 @@ import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
+import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -17,7 +16,7 @@ import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers
  *         Date: 5/15/17.
  */
 
-public class WebScoringTestSuit extends WEBEndToEndTest {
+public class WebScoringTestSuit extends WebEndToEndTest {
 	 private static CustomerRO customer = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
 	      
 	 	    	    
@@ -27,7 +26,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
 	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(customerRO, countrycode);
+	       pages().registrationDialog().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -88,7 +87,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
 	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(customerRO, countrycode);
+	       pages().registrationDialog().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -149,7 +148,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
 	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(customerRO, countrycode);
+	       pages().registrationDialog().register(customerRO, countrycode);
 		   pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -209,7 +208,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
 	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(customerRO, countrycode);
+	       pages().registrationDialog().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -268,7 +267,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
 	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(customerRO, countrycode);
+	       pages().registrationDialog().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()
@@ -330,7 +329,7 @@ public class WebScoringTestSuit extends WEBEndToEndTest {
 	    	CustomerRO customerRO = CustomerRO.builder(WebSiteNamingStrategy.get()).build();
 	    	String userName = customerRO.getEmail();
 		   pages().topNavigationPage().signUp();
-	       pages().registrationPage().register(customerRO, countrycode);
+	       pages().registrationDialog().register(customerRO, countrycode);
 	       pages().welcomepage().isStartBtnDisplayed();
 	       pages().welcomepage().start();
 	       pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder()

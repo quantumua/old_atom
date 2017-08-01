@@ -4,7 +4,6 @@ import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -22,9 +21,9 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9025")
     public void checkCustomerWithScore0IsRejectedTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith0Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(0));
@@ -41,9 +40,9 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9069")
     public void checkCustomerWithScore10IsRejectedTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith10Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(10));
@@ -60,9 +59,9 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9026")
     public void checkCustomerWithScore15IsRejectedTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith15Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(15));
@@ -78,9 +77,9 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9019")
     public void checkRejectedCustomerAccessNoLoginTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith0Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameLoginType(

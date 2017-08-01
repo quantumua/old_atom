@@ -3,18 +3,16 @@ package com.betamedia.atom.testslibrary.option24.backend.crm.mobile;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.atom.core.api.tp.entities.response.CRMError;
-import com.betamedia.atom.core.testingtype.tp.TPBackEndTest;
+import com.betamedia.atom.core.testingtype.widgets.WidgetsBackEndTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
  * Created by Oleksandr Losiev on 4/21/17.
  */
-public class MobileCRMDepositTest extends TPBackEndTest {
+public class MobileCRMDepositTest extends WidgetsBackEndTest {
 
     private final String expiryErrorCode = "ExpirationDatePassedEx";
     private final String expiryErrorMessage = "The credit card expired";

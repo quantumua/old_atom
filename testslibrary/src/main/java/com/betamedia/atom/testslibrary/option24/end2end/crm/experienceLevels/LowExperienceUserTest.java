@@ -4,7 +4,6 @@ import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WidgetsNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -20,10 +19,10 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
      */
     @Test(description = "ID:9029")
     public void checkCustomerWithScore31IsLowExperienceTest() {
-        pages().crmNavigation().register();
+        pages().navigation().register();
         CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
         pages().registerPage().register(customer);
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.NEVER)
@@ -46,7 +45,7 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                         .build()
         );
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertUsernameLowExperience(customer.getEmail());
     }
@@ -59,10 +58,10 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
      */
     @Test(description = "ID:9071")
     public void checkCustomerWithScore45IsLowExperienceTest() {
-        pages().crmNavigation().register();
+        pages().navigation().register();
         CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
         pages().registerPage().register(customer);
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.REGULARLY)
@@ -85,7 +84,7 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                         .build()
         );
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
         operations().onBoardingOperations().assertUsernameLowExperience(customer.getEmail());
     }
@@ -98,10 +97,10 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
      */
     @Test(description = "ID:9032")
     public void checkCustomerWithScore50IsLowExperienceTest() {
-        pages().crmNavigation().register();
+        pages().navigation().register();
         CustomerRO customer = CustomerRO.builder(WidgetsNamingStrategy.get()).build();
         pages().registerPage().register(customer);
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(
                 TradingExperienceInfo.builder()
                         .withSharesExperience(SharesExperience.REGULARLY)
@@ -124,7 +123,7 @@ public class LowExperienceUserTest extends AbstractUserExperienceTest {
                         .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
                         .build()
         );
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore5());
         operations().onBoardingOperations().assertUsernameLowExperience(customer.getEmail());
     }

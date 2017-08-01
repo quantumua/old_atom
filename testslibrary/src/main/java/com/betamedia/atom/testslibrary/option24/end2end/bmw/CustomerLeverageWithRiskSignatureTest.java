@@ -72,7 +72,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkCustomerLeverageForNoExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
     }
 
     /**
@@ -86,7 +86,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkIsAbleToLoginForNoExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
         updateCreditCard();
@@ -106,7 +106,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkCustomerLeverageForLowExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.LOW_EXPERIENCE, ExperienceScore.LOW_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_EXPERIENCED);
         updateCreditCard();
@@ -128,7 +128,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkIsAbleToLoginForLowExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.LOW_EXPERIENCE, ExperienceScore.LOW_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText("This is a risky investment but you are an experienced person and you aware to the consequences");
         updateCreditCard();
@@ -147,7 +147,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkCustomerLeverageForHighExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_EXPERIENCED);
         updateCreditCard();
@@ -169,7 +169,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkIsAbleToLoginForHighExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_EXPERIENCED);
         updateCreditCard();
@@ -188,7 +188,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkCustomerLeverageForExpertCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.EXPERT, ExperienceScore.EXPERT);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         //Add message
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_EXPERIENCED);
@@ -211,7 +211,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkIsAbleToLoginLeverageForExpertCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.EXPERT, ExperienceScore.EXPERT);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_EXPERIENCED);
         updateCreditCard();
@@ -232,7 +232,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
             return;
         }
         createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
         updateCreditCard();
@@ -255,7 +255,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
             return;
         }
         createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
         updateCreditCard();
@@ -269,13 +269,51 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
      * 1. Create user via mobile api
      * 2. Update user experience level, score and country in the DB
      * 3. Login as created user into web
+     * 4. Verify user was logged in and binary product is available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode"})
+    public void checkBinaryProductForNoExperienceCustomer(String countryCode) {
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomeDialog().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+//        pages().topNavigationPage().binary();
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
+     * 4. Verify user was logged in and no binary product is available
+     */
+    @Test(description = "crm-NA")
+    @Parameters({"countryCode"})
+    public void checkNoBinaryProductForNoExperienceCustomer(String countryCode) {
+        createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
+        pages().welcomeDialog().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
+        updateCreditCard();
+        assertUserLogin();
+        assertFalse(pages().topNavigationPage().getProducts().contains("BINARY"));
+    }
+
+    /**
+     * Test main actions
+     * 1. Create user via mobile api
+     * 2. Update user experience level, score and country in the DB
+     * 3. Login as created user into web
      * 4. Verify user was logged in and cfd product is available
      */
     @Test(description = "crm-NA")
     @Parameters({"countryCode"})
     public void checkCfdProductForNoExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
         updateCreditCard();
@@ -294,7 +332,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkNoCfdProductForNoExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
         updateCreditCard();
@@ -313,7 +351,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkForexProductForNoExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
         updateCreditCard();
@@ -332,7 +370,7 @@ public class CustomerLeverageWithRiskSignatureTest extends CustomerLeverageTest 
     @Parameters({"countryCode"})
     public void checkNoForexProductForNoExperienceCustomer(String countryCode) {
         createUser(countryCode, ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().signatureRiskWarning().RiskSignatureText(SIGNATURE_RW_NO_EXPERIENCED);
         updateCreditCard();

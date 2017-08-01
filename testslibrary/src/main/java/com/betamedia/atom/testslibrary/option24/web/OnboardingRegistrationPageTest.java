@@ -1,9 +1,8 @@
 package com.betamedia.atom.testslibrary.option24.web;
 
 
-import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
-import com.betamedia.atom.core.testingtype.web.WEBEndToEndTest;
+import com.betamedia.atom.core.api.web.form.Country;
+import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import org.testng.annotations.Test;
 
 /**
@@ -11,14 +10,14 @@ import org.testng.annotations.Test;
  *         Date: 5/15/17.
  */
 
-public class OnboardingRegistrationPageTest extends WEBEndToEndTest {
+public class OnboardingRegistrationPageTest extends WebEndToEndTest {
 	
 
     @Test
     public void registrationTest() {
     	
     	pages().topNavigationPage().signUp();
-    	pages().registrationPage().register("es");
+    	pages().registrationDialog().register(Country.SPAIN.getName());
         
         
     }

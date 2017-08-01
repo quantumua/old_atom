@@ -2,7 +2,7 @@
 <suite name="login-sequential" verbose="1">
     <test name="Login tests - sequential execution of tests">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.end2end.LoginPageTest" >
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.LoginDialogTest" >
                 <methods>
                     <parameter name="username" value="maksym"/>
                     <parameter name="password" value="password"/>

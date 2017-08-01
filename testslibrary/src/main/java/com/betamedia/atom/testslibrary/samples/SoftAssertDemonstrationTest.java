@@ -1,16 +1,15 @@
 package com.betamedia.atom.testslibrary.samples;
 
-import com.betamedia.atom.core.testingtype.tp.TPClientTest;
+import com.betamedia.atom.core.testingtype.web.WebClientTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 
 /**
  * @author mbelyaev
  * @since 7/26/17
  */
-public class SoftAssertDemonstrationTest extends TPClientTest {
+public class SoftAssertDemonstrationTest extends WebClientTest {
     /**
      * {@link SoftAssert#assertAll()} is invoked implicitly on test completion if you have used a soft assert anywhere during test
      */

@@ -3,14 +3,13 @@ package com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels;
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.core.testingtype.tp.TPEndToEndTest;
-
+import com.betamedia.atom.core.testingtype.widgets.WidgetsEndToEndTest;
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
  * Created by mbelyaev on 5/22/17.
  */
-public abstract class AbstractUserExperienceTest extends TPEndToEndTest {
+public abstract class AbstractUserExperienceTest extends WidgetsEndToEndTest {
     protected PersonalInformation personalInfoScore10() {
         return PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
@@ -93,8 +92,8 @@ public abstract class AbstractUserExperienceTest extends TPEndToEndTest {
 
     protected CRMCustomer crmRegisterAndLogIn() {
         CRMCustomer customer = operations().customerOperations().register();
-        pages().crmNavigation().login();
-        pages().crmLoginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
+        pages().navigation().login();
+        pages().loginPage().login(customer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         return customer;
     }
 }

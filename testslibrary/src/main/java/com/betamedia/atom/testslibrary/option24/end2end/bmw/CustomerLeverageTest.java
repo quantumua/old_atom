@@ -2,14 +2,11 @@ package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
-
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.util.Strings;
-
 import java.util.Arrays;
-
 import static com.betamedia.atom.core.utils.StringUtils.COMMA;
 import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
@@ -72,7 +69,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     @Test(description = "crm-9044")
     public void checkCustomerLeverageForNoExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE).getUserName();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
     }
 
     /**
@@ -85,7 +82,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     @Test(description = "crm-9021")
     public void checkIsAbbleToLoginForNoExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE).getUserName();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().riskWarningPage().accept();
         updateCreditCard();
@@ -104,7 +101,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     @Test(description = "crm-9045")
     public void checkCustomerLeverageForLowExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.LOW_EXPERIENCE, ExperienceScore.LOW_EXPERIENCE).getUserName();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         pages().startTradeDialog().startTrade();
@@ -124,7 +121,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     @Test(description = "crm-9022")
     public void checkIsAbbleToLoginForLowExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.LOW_EXPERIENCE, ExperienceScore.LOW_EXPERIENCE).getUserName();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         assertUserLogin();
@@ -141,7 +138,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     @Test(description = "crm-9046")
     public void checkCustomerLeverageForHighExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE).getUserName();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         pages().startTradeDialog().startTrade();
@@ -161,7 +158,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     @Test(description = "crm-9024")
     public void checkIsAbbleToLoginForHighExperienceCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, ExperienceScore.HIGH_EXPERIENCE).getUserName();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         assertUserLogin();
@@ -178,7 +175,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     @Test(description = "crm-9047")
     public void checkCustomerLeverageForExpertCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.EXPERT, ExperienceScore.EXPERT).getUserName();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         pages().startTradeDialog().startTrade();
@@ -198,7 +195,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
     @Test(description = "crm-9023")
     public void checkIsAbbleToLoginLeverageForExpertCustomer() {
         createUser(OnboardingWizardConditions.ExperienceLevel.EXPERT, ExperienceScore.EXPERT).getUserName();
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         updateCreditCard();
         assertUserLogin();
@@ -218,7 +215,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
             return;
         }
         createUser(countryCode, OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().riskWarningPage().accept();
         updateCreditCard();
@@ -241,7 +238,7 @@ public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
             return;
         }
         createUser(countryCode, OnboardingWizardConditions.ExperienceLevel.NO_EXPERIENCE, ExperienceScore.NO_EXPERIENCE);
-        pages().welcomePage().start();
+        pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().riskWarningPage().accept();
         updateCreditCard();

@@ -1,22 +1,20 @@
 package com.betamedia.atom.testslibrary.samples;
 
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.core.testingtype.tp.TPBackEndTest;
+import com.betamedia.atom.core.testingtype.web.WebBackEndTest;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.backend.crm.mobile.UserNamePwdData;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
 /**
  * Created by Oleksandr Losiev on 4/21/17.
  */
-public class TestLinkReportIntegrationDemonstrationTest extends TPBackEndTest {
+public class TestLinkReportIntegrationDemonstrationTest extends WebBackEndTest {
 
     @Override
     protected Class getDataSourceEntity() {

@@ -9,7 +9,6 @@ import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
@@ -323,12 +322,12 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
                 .setPhone(customerROFirst.getPhone()).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerROFirst);
-        pages().welcomePage().isStartBtnDisplayed();
+        pages().welcomeDialog().isStartBtnDisplayed();
         pages().browser().deleteAllCookies();
         pages().browser().refreshPage();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerROSecond);
-        pages().welcomePage().isStartBtnDisplayed();
+        pages().welcomeDialog().isStartBtnDisplayed();
         operations().onBoardingOperations().assertUsersHaveConnection(
                 customerROFirst.getEmail(),
                 customerROSecond.getEmail(),
@@ -434,7 +433,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     private void createCustomer(CustomerRO customerRO) {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRO);
-        pages().welcomePage().isStartBtnDisplayed();
+        pages().welcomeDialog().isStartBtnDisplayed();
     }
 
     /**
@@ -490,7 +489,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
                 operations().customerOperations().register(customerRO),
                 createConditionsToShowOnlyDepositPage());
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(customerRO.getEmail(),customerRO.getPassword());
+        pages().loginDialog().login(customerRO.getEmail(),customerRO.getPassword());
         pages().welcomeBackMessage().exists();
         pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());

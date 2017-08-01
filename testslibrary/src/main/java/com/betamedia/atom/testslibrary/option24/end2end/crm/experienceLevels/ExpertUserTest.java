@@ -4,7 +4,6 @@ import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -22,9 +21,9 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9035")
     public void checkCustomerWithScore71IsExpertTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith71Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore0());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(71));
@@ -41,9 +40,9 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9073")
     public void checkCustomerWithScore85IsExpertTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith85Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore5());
 
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(85));
@@ -60,9 +59,9 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9036")
     public void checkCustomerWithScore100IsExpertTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith100Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScoreMax());
         operations().onBoardingOperations().assertUsernameScore(customer.getUserName(),Double.valueOf(100));
         operations().onBoardingOperations().assertUsernameExpert(customer.getUserName());
@@ -77,9 +76,9 @@ public class ExpertUserTest extends AbstractUserExperienceTest {
     @Test(description = "ID:9023")
     public void checkExpertCustomerAccessActiveTest() {
         CRMCustomer customer = crmRegisterAndLogIn();
-        pages().crmNavigation().fnsTradingExperience();
+        pages().navigation().fnsTradingExperience();
         pages().fnsTradingExperience().submit(tradingExperienceInfoWith71Score());
-        pages().crmNavigation().fnsPersonalInformation();
+        pages().navigation().fnsPersonalInformation();
         pages().fnsPersonalInformation().submit(personalInfoScore5());
 
         operations().onBoardingOperations().assertUsernameLoginType(

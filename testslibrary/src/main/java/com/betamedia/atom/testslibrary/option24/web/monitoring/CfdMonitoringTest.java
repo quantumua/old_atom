@@ -2,15 +2,13 @@ package com.betamedia.atom.testslibrary.option24.web.monitoring;
 
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.fwdataaccess.entities.ExpectedCfdAsset;
-import com.betamedia.atom.core.testingtype.tp.TPClientTest;
+import com.betamedia.atom.core.testingtype.web.WebClientTest;
 import org.testng.Assert;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
@@ -19,7 +17,7 @@ import static org.hamcrest.Matchers.is;
  * @author mbelyaev
  * @since 4/18/17
  */
-public class CfdMonitoringTest extends TPClientTest {
+public class CfdMonitoringTest extends WebClientTest {
     private static final String USERNAME = "QENirShuTest@Test.ru";
     private static final String PASSWORD = CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD;
     private static final String DATA_DRIVEN_MONITORING_TEST_GROUP = "data_driven_monitoring_test_group";
@@ -31,7 +29,7 @@ public class CfdMonitoringTest extends TPClientTest {
     @Test
     public void unexpectedAssetsTest() {
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(USERNAME, PASSWORD);
+        pages().loginDialog().login(USERNAME, PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         List<String> assets = pages().assets().cfdAssetNames();
         assets.removeAll(getExpected());
@@ -54,7 +52,7 @@ public class CfdMonitoringTest extends TPClientTest {
     @BeforeGroups(DATA_DRIVEN_MONITORING_TEST_GROUP)
     public void prepareOnce() {
         pages().topNavigationPage().logIn();
-        pages().loginPage().login(USERNAME, PASSWORD);
+        pages().loginDialog().login(USERNAME, PASSWORD);
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         expectedCurrency = pages().controlPanel().getCurrency();
         pages().assets().switchToPanda();
