@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.factory.widgets;
 
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RegistrationPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
@@ -31,13 +32,11 @@ public class WidgetsPageFactoryImpl extends AbstractPageFactory implements Widge
     }
 
     @Override
-    public FnsPersonalInformation fnsPersonalInformation() {
-        return null;
-    }
+    public FnsPersonalInformation fnsPersonalInformation() { return creator.getPage(FnsPersonalInformationImpl.class); }
 
     @Override
     public RegisterPage registerPage() {
-        return null;
+        return creator.getPage(RegisterPageImpl.class);
     }
 
     @Override
@@ -46,9 +45,7 @@ public class WidgetsPageFactoryImpl extends AbstractPageFactory implements Widge
     }
 
     @Override
-    public RegistrationPage registrationPage() {
-        return null;
-    }
+    public RegistrationPage registrationPage() { return creator.getPage(RegistrationPageImpl.class); }
 
     @Override
     public SetLeveragePageImpl setLeveragePage() {
@@ -61,7 +58,5 @@ public class WidgetsPageFactoryImpl extends AbstractPageFactory implements Widge
     }
 
     @Override
-    public AccountAdditionalDetailsPage accountAdditionalDetailsPage() {
-        return creator.getPage(AccountAdditionalDetailsPageImpl.class);
-    }
+    public AccountAdditionalDetailsPage accountAdditionalDetailsPage() { return creator.getPage(AccountAdditionalDetailsPageImpl.class); }
 }
