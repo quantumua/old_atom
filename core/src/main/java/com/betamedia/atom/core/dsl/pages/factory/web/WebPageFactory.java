@@ -22,23 +22,25 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.*;
  *         Date: 5/11/17.
  */
 public interface WebPageFactory {
-	
+
     TopNavigationPage topNavigationPage();
 
 	LoginDialog loginDialog();
 
     WelcomeDialog welcomepage();
-    
+
     AccountAdditionalDetailsDialog accountAdditionalDetailsPage();
-    
+
     FnsPersonalInformation fnsPersonalInformation();
-    
+
     FnsTradingExperience fnsTradingExperience();
-    
-    RiskWarningDialog riskwarning();
-    
+
+    FnsEmployerInfo fnsEmployerInfo();
+
+    RiskWarningDialog riskWarning();
+
     CreditCardDepositPage creditCardDepositPage();
-    
+
 	SignatureRiskWarning signatureRiskWarning();
 
 	WelcomeBackMessageImpl welcomeBackMessage();
@@ -94,7 +96,5 @@ public interface WebPageFactory {
     LoadingDialog loadingDialog();
 
     ThankYouPage thankYouPage();
-
-    FnsEmployerInfo fnsEmployerInfo();
 
 }

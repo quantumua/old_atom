@@ -2,9 +2,9 @@ package com.betamedia.atom.core.dsl.pages.factory;
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.fwdataaccess.entities.FindBy;
 import com.betamedia.atom.core.fwdataaccess.repository.VersionedWebElementRepository;
 import com.betamedia.atom.core.holders.ThreadLocalBeansHolder;
-import com.betamedia.atom.core.fwdataaccess.entities.FindBy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -15,15 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
+import static org.springframework.util.ReflectionUtils.*;
 
 /**
  * @author Maksym Tsybulskyy
@@ -64,35 +63,28 @@ public class PageObjectCreatorImpl implements PageObjectCreator {
     }
 
     private <T extends AbstractPageObject> void initWebFields(T page) {
-        Field[] declaredFields = page.getClass().getDeclaredFields();
-        for (Field field : declaredFields) {
-            if (field.isAnnotationPresent(StoredId.class) && field.getType().isAssignableFrom(By.class)) {
-                StoredId storedId = field.getAnnotation(StoredId.class);
-                String value = storedId.value().isEmpty() ? field.getName() : storedId.value();
-                FindBy findBy = repository.get(page.getClass().getSimpleName(), value);
-                setField(field, page, by(findBy));
-            }
-        }
+        doWithFields(
+                page.getClass(),
+                field -> {
+                    StoredId storedId = field.getAnnotation(StoredId.class);
+                    String value = storedId.value().isEmpty() ? field.getName() : storedId.value();
+                    FindBy findBy = repository.get(field.getDeclaringClass().getSimpleName(), value);
+                    makeAccessible(field);
+                    setField(field, page, by(findBy));
+                },
+                PageObjectCreatorImpl::isStoredId);
     }
 
-    private By by(FindBy findBy) {
+    private static boolean isStoredId(Field field) {
+        return field.isAnnotationPresent(StoredId.class) && field.getType().isAssignableFrom(By.class);
+    }
+
+    private static By by(FindBy findBy) {
         How how = How.valueOf(findBy.locatorType);
         return byProducer(how).apply(findBy.value);
     }
 
-    private void setField(Field field, Object object, Object value) {
-        try {
-            if (Modifier.isPrivate(field.getModifiers())) {
-                field.setAccessible(true);
-            }
-            field.set(object, value);
-        } catch (IllegalAccessException e) {
-            logger.error("", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    private Function<String, By> byProducer(How how) {
+    private static Function<String, By> byProducer(How how) {
         switch (how) {
             case CLASS_NAME:
                 return By::className;

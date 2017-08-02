@@ -44,8 +44,8 @@ public class RegistrationPOIUploadDemonstrationTest extends WebClientTest {
                 .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
                 .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
                 .build();
-        pages().fnsPersonalInformation().submitOnWizard(personalInfo);
-        pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+        pages().fnsPersonalInformation().submit(personalInfo);
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.NEVER)
                 .withBinaryExperience(BinaryExperience.OCCASIONALLY)
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K)
@@ -78,7 +78,7 @@ public class RegistrationPOIUploadDemonstrationTest extends WebClientTest {
                 .withZipCode("ZipCode")
                 .build()));
         pages().thankYouPage().doContinue();
-        pages().fnsEmployerInfo().submitOnWizard(personalInfo);
+        pages().fnsEmployerInfo().submit(personalInfo);
         pages().documentUploadForm().uploadIdCard();
         pages().thankYouPage().startTrade();
     }

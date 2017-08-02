@@ -61,7 +61,7 @@ public class AbstractOnboardingConditionsTest extends WebEndToEndTest {
     }
 
     private void passPersonalQuestionnaire() {
-        pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
                 .withIndustry(Industry.ACCOUNTING)
                 .withEmployerName("testEmployer")
@@ -82,7 +82,7 @@ public class AbstractOnboardingConditionsTest extends WebEndToEndTest {
     }
 
     private void passTradingQuestionnaire() {
-        pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.FREQUENTLY)
                 .withBinaryExperience(BinaryExperience.FREQUENTLY)
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K)

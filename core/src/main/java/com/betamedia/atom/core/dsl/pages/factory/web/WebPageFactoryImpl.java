@@ -1,5 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
+import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.Assets;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.impl.AssetsImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.CfdBidder;
@@ -7,8 +8,10 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.impl.CfdBid
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.impl.ControlPanelImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginDialog;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.DisclaimerNotificationImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginDialogImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginErrorNotificationImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.DialogBox;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.MessageBox;
@@ -17,12 +20,9 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.impl.Mess
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.impl.RejectMessageOnLoginImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.LandingPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
-import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginDialog;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginDialogImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.impl.CfdPositionsImpl;
@@ -34,6 +34,7 @@ import com.betamedia.atom.core.dsl.pages.type.ProductType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 /**
@@ -46,6 +47,11 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFactory {
 
     @Override
+    public ProductType getType() {
+        return ProductType.WEB;
+    }
+
+    @Override
     public LoginDialog loginDialog() {
         return creator.getPage(LoginDialogImpl.class);
     }
@@ -53,11 +59,6 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     @Override
     public TopNavigationPage topNavigationPage() {
         return creator.getPage(TopNavigationPageImpl.class);
-    }
-
-    @Override
-    public ProductType getType() {
-        return ProductType.WEB;
     }
 
     @Override
@@ -77,16 +78,21 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
 
     @Override
     public FnsPersonalInformation fnsPersonalInformation() {
-        return creator.getPage(FnsPersonalInformationImpl.class);
+        return creator.getPage(WebFnsPersonalInformationImpl.class);
     }
 
     @Override
     public FnsTradingExperience fnsTradingExperience() {
-        return creator.getPage(FnsTradingExperienceImpl.class);
+        return creator.getPage(WebFnsTradingExperienceImpl.class);
     }
 
     @Override
-    public RiskWarningDialog riskwarning() {
+    public FnsEmployerInfo fnsEmployerInfo() {
+        return creator.getPage(WebFnsEmployerInformationImpl.class);
+    }
+
+    @Override
+    public RiskWarningDialog riskWarning() {
         return creator.getPage(RiskWarningDialogImpl.class);
     }
 
@@ -220,11 +226,6 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     @Override
     public ThankYouPage thankYouPage() {
         return creator.getPage(ThankYouPageImpl.class);
-    }
-
-    @Override
-    public FnsEmployerInfo fnsEmployerInfo() {
-        return creator.getPage(FnsEmployerInfoImpl.class);
     }
 }
 

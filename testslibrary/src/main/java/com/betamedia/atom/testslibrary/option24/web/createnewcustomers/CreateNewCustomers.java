@@ -440,7 +440,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * pass questionnaire for newly created user;
      */
     private void passQuestionnaire() {
-        pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
                 .withIndustry(Industry.ACCOUNTING)
                 .withEmployerName("testEmployer")
@@ -458,7 +458,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
                 .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
                 .build()
         );
-        pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
                 .withSharesExperience(SharesExperience.NEVER)
                 .withBinaryExperience(BinaryExperience.NEVER)
                 .withForExExperience(ForExExperience.NEVER)

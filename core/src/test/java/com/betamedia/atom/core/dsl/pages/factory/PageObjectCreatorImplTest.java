@@ -1,9 +1,12 @@
 package com.betamedia.atom.core.dsl.pages.factory;
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.fwdataaccess.entities.FindBy;
 import com.betamedia.atom.core.fwdataaccess.repository.VersionedWebElementRepository;
 import com.betamedia.atom.core.fwservices.webdriver.WebDriverFactory;
 import com.betamedia.atom.core.holders.ThreadLocalBeansHolder;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -83,6 +86,21 @@ public class PageObjectCreatorImplTest {
         );
     }
 
+    @Test
+    public void hierarchicalPageObjectCreationTest() {
+        /*Instantiate Page Object that is inherited from another Page Object that declares its own fields*/
+        VersionedWebElementRepository repoMock = mock(VersionedWebElementRepository.class);
+        ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(repoMock);
+        ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(() -> mock(WebDriver.class));
+        PageObjectCreatorImpl pageObjectCreator = new PageObjectCreatorImpl();
+        when(repoMock.get(AbstractMockPageObject.class.getSimpleName(), "inheritedField")).thenReturn(new FindBy("ID", "mockLocator"));
+        when(repoMock.get(AbstractMockPageObjectImpl.class.getSimpleName(), "declaredField")).thenReturn(new FindBy("ID", "mockLocator"));
+        AbstractMockPageObjectImpl page = pageObjectCreator.getPage(AbstractMockPageObjectImpl.class);
+        Assert.assertNotNull(page.inheritedField);
+        Assert.assertNotNull(page.declaredField);
+        Assert.assertNull(page.notALocator);
+    }
+
     private PageObjectCreatorImpl initializePageObjectCreator() {
         ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(mock(VersionedWebElementRepository.class));
         ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(() -> mock(WebDriver.class));
@@ -100,4 +118,26 @@ public class PageObjectCreatorImplTest {
             super(webDriver);
         }
     }
+
+    private static abstract class AbstractMockPageObject extends AbstractPageObject {
+        @StoredId
+        protected By inheritedField;
+
+        protected Object notALocator;
+
+        protected AbstractMockPageObject(WebDriver webDriver) {
+            super(webDriver);
+        }
+    }
+
+    private static class AbstractMockPageObjectImpl extends AbstractMockPageObject {
+        @StoredId
+        private By declaredField;
+
+        public AbstractMockPageObjectImpl(WebDriver webDriver) {
+            super(webDriver);
+        }
+    }
+
+
 }

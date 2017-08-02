@@ -17,6 +17,8 @@ public interface WidgetsPageFactory {
 
     FnsPersonalInformation fnsPersonalInformation();
 
+    FnsEmployerInfo fnsEmployerInfo();
+
     RegisterPage registerPage();
 
     AccountDetailsPage accountDetails();
@@ -28,5 +30,4 @@ public interface WidgetsPageFactory {
     CreditCardDepositPage creditCardDeposit();
 
     AccountAdditionalDetailsPage accountAdditionalDetailsPage();
-
 }

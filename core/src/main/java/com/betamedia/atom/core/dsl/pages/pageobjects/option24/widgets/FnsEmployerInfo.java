@@ -10,5 +10,4 @@ public interface FnsEmployerInfo {
 
     void submit(PersonalInformation info);
 
-    void submitOnWizard(PersonalInformation info);
 }

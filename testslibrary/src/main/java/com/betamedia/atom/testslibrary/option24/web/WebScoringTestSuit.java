@@ -38,7 +38,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	               .build());
    
 	       
-	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 	                .withIndustry(Industry.ACCOUNTING)
 	                .withEmployerName("fgsfds")
@@ -56,7 +56,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
 	                .build());
 	       
-	       pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	       pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.FREQUENTLY)
 	                 .withBinaryExperience(BinaryExperience.NEVER)
 	                 .withForExExperience(ForExExperience.FREQUENTLY)
@@ -99,7 +99,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	               .build());
    
 	       
-	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.UNEMPLOYED)
 	                .withIndustry(Industry.FINANCE)
 	                .withEmployerName("fgsfds")
@@ -118,7 +118,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
 	                .build());
 	       
-	       pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	       pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.REGULARLY)
 	                 .withBinaryExperience(BinaryExperience.FREQUENTLY)
 	                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K)
@@ -160,7 +160,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	               .build());
    
 	       
-	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.STUDENT)
 	                .withIndustry(Industry.FUNDS)
 	                .withEmployerName("fgsfds")
@@ -178,7 +178,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	                .withPurposeOfTrading(PurposeOfTrading.HEDGING)
 	                .build());
 	       
-	       pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	       pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.OCCASIONALLY)
 	                 .withBinaryExperience(BinaryExperience.REGULARLY)
 	                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_5K_10K)
@@ -220,7 +220,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	               .build());
    
 	       
-	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.RETIRED)
 	                .withIndustry(Industry.ATTORNEYS)
 	                .withEmployerName("fgsfds")
@@ -239,7 +239,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	                .withPurposeOfTradingOther("Training")
 	                .build());
 	       
-	       pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	       pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.OCCASIONALLY)
 	                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K)
@@ -279,7 +279,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	               .build());
    
 	       
-	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.SELF_EMPLOYED)
 	                .withIndustry(Industry.COMPUTER)
 	                .withEmployerName("automation test")
@@ -299,7 +299,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
 	                .build());
 	       
-	       pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	       pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.OCCASIONALLY)
 	                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_UNDER_500)
@@ -341,7 +341,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	               .build());
    
 	       
-	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 	                .withIndustry(Industry.OTHER)
 	                .withIndustryOther("Stadistical area")
@@ -360,7 +360,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
 	                .build());
 	       
-	       pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	       pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.NEVER)
 	                 .withForExExperience(ForExExperience.NEVER)
@@ -377,7 +377,7 @@ public class WebScoringTestSuit extends WebEndToEndTest {
 	                 .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200)
 	                 .build());
 	       
-	       pages().riskwarning().waitForRiskWarning();
+	       pages().riskWarning().waitForRiskWarning();
 	       operations().onBoardingOperations().assertUsernameScore(userName,Double.valueOf(30));
 	    }
 }

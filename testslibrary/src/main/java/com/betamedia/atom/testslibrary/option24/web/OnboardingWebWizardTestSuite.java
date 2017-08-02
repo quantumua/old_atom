@@ -1,7 +1,6 @@
 package com.betamedia.atom.testslibrary.option24.web;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
@@ -66,7 +65,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 	               .build());
 
 
-	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 	                .withIndustry(Industry.COMPUTER)
 	                .withEmployerName("fgsfds")
@@ -101,7 +100,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 	               .build());
 
 
-	       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+	       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 	                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 	                .withIndustry(Industry.FINANCE)
 	                .withEmployerName("fgsfds")
@@ -138,7 +137,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		               .build());
 
 
-		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+		       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
 		                .withEmployerName("fgsfds")
@@ -157,7 +156,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		                .build());
 
 
-	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	         pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.NEVER)
 	                 .withForExExperience(ForExExperience.NEVER)
@@ -196,7 +195,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		               .build());
 
 
-		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+		       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
 		                .withEmployerName("fgsfds")
@@ -215,7 +214,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		                .build());
 
 
-	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	         pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	                 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.NEVER)
 	                 .withForExExperience(ForExExperience.NEVER)
@@ -234,7 +233,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 	                 .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
 	                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
 	                 .build());
-         pages().riskwarning().waitForRiskWarning();
+         pages().riskWarning().waitForRiskWarning();
 	    }
 
 
@@ -253,7 +252,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		               .build());
 
 
-		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+		       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
 		                .withEmployerName("fgsfds")
@@ -272,7 +271,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		                .build());
 
 
-	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	         pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	        		 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.NEVER)
 	                 .withForExExperience(ForExExperience.NEVER)
@@ -311,7 +310,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		               .build());
 
 
-		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+		       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
 		                .withEmployerName("fgsfds")
@@ -330,7 +329,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		                .build());
 
 
-	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	         pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	        		 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.OCCASIONALLY)
 	                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K)
@@ -370,7 +369,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		               .build());
 	      
 		       
-		       pages().fnsPersonalInformation().submitOnWizard(PersonalInformation.builder()
+		       pages().fnsPersonalInformation().submit(PersonalInformation.builder()
 		                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
 		                .withIndustry(Industry.FINANCE)
 		                .withEmployerName("fgsfds")
@@ -389,7 +388,7 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
 		                .build());
 		       
 		      
-	         pages().fnsTradingExperience().submitOnWizard(TradingExperienceInfo.builder()
+	         pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
 	        		 .withSharesExperience(SharesExperience.NEVER)
 	                 .withBinaryExperience(BinaryExperience.OCCASIONALLY)
 	                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K)

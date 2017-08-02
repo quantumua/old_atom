@@ -7,7 +7,5 @@ import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 public interface FnsPersonalInformation {
     void submit(PersonalInformation info);
 
-    void submitOnWizard(PersonalInformation info);
-
     boolean exists();
 }
