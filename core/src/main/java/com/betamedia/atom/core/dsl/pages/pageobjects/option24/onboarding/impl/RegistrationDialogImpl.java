@@ -13,6 +13,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import static org.testng.Assert.assertTrue;
 
 /**
@@ -90,6 +92,10 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     private By agreeStatus;
     @StoredId
     private By chatLink;
+    @StoredId
+    private By phoneField;
+    @StoredId
+    private By currencyField;
 
     private final String ATTRIBUTE_VALUE = "value";
     private final String ATTRIBUTE_TITLE = "title";
@@ -97,6 +103,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     private final String ATTRIBUTE_STYLE_BORDER = "border-bottom-color";
     private final String ATTRIBUTE_TEXT_CONTENT = "textContent";
     private final String SCRIPT_CLICK_FIRST_ELEMENT = "arguments[0].click()";
+    private final String PROPERTY_DIRECTION = "direction";
 
     public RegistrationDialogImpl(WebDriver webDriver) {
         super(webDriver);
@@ -363,6 +370,35 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     public void register(String countryName) {
         setCountryPrefix(countryName);
         register(CustomerRO.builder(WebSiteNamingStrategy.get()).build());
+    }
+
+    @Override
+    public void verifyContentDirection(String expectedDirection) {
+        softAssert().assertEquals(waitUntilDisplayed(caption).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Caption hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(firstName).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "First Name field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(lastName).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Last Name field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(email).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Email field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(phoneField).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Phone prefix field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(phoneNumber).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Phone field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(countryComboBox).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Country hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(currencyField).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Currency field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(passwordWrapper).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Password field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(retypePassword).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Retype password field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(accountAgree).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Account agree field hasn't expected direction");
+        softAssert().assertEquals(waitUntilDisplayed(submitButton).getCssValue(PROPERTY_DIRECTION),expectedDirection,
+                "Submit button hasn't expected direction");
+        softAssert().assertAll();
     }
 
 

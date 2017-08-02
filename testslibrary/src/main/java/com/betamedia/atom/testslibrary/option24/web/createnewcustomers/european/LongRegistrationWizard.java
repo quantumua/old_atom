@@ -400,6 +400,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
 
     /**
      *  register customer
+     *  verify mandatory fields
      *  verify customer for existence in the CRM Database
      */
     @Test(description = "CTW-5626:SEU: Registration form - Mandatory fields E2E")

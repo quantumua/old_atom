@@ -88,4 +88,6 @@ public interface RegistrationDialog {
 
     void register(String countryCode);
 
+    void verifyContentDirection(String expectedDirection);
+
 }

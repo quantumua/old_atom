@@ -315,6 +315,8 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,countriesList,XPATH,//*[@id='Country_wrapper']//span[@class='text']
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,countryComboBox,XPATH,//*[@id='Country_wrapper']//button
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,currencyComboBox,XPATH,//*[@id='Currency_wrapper']//button
+2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,currencyField,XPATH,//*[@id='Currency_wrapper']
+2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,phoneField,XPATH,//*[@id='PhoneNumber_wrapper']
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,currencies,XPATH,//*[@id='Currency_wrapper']//span[@class='text']
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,agreeStatus,ID,AccountAgreeStatus
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,chatLink,XPATH,//*[@class='chat-link']//*[.='Chat Now']

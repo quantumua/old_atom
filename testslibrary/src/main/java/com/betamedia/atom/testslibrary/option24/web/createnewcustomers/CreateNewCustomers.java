@@ -43,6 +43,8 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected static final String SEARCH_BY_SYMBOL = "I";
     protected static final String EMPTY_STRING = "";
     protected static final String EMPTY_PHONE_PREFIX = "+";
+    protected static final String ARABIAN_LANGUAGE = "AR";
+    protected static final String EUROPEAN_LANGUAGE = "EU";
 
     /**
      * RGB color constants

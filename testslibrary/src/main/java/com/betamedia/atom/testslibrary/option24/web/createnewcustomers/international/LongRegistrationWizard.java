@@ -7,12 +7,15 @@ import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * Created by vsnigur on 7/17/17.
  * tests for registration dialog
  */
 public class LongRegistrationWizard extends CreateNewCustomers {
+
+    private static final String RTL_DIRECTION = "rtl";
 
     @BeforeMethod
     public void beforeTest() {
@@ -326,6 +329,93 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     }
 
 
+    /**
+     *  register customer
+     *  verify customer for existence in the CRM Database
+     */
+    @Test(description = "CTW-5477:Full Registration (including CRM+ email validations)")
+    public void checkValidateEmailForRegisteredNewCustomer() {
+        CustomerRegistrationInfo customer =getCustomer();
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+        pages().creditCardDepositPage().isDisplayed();
+        operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
+    }
+
+    /**
+     *  register customer
+     *  verify mandatory fields
+     *  verify customer for existence in the CRM Database
+     */
+    @Test(description = "CTW-5626:SEU: Registration form - Mandatory fields E2E")
+    public void checkCheckMandatoryFieldsInTheCustomerRegistrationForm() {
+        CustomerRegistrationInfo customer = getCustomer();
+        customer.setFirstName(EMPTY_STRING);
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+        assertEquals("Enter your first name", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorFirstName());
+
+        customer = getCustomer();
+        customer.setLastName(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter your last name", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorLastName());
+
+        customer = getCustomer();
+        customer.setEmail(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter a valid email address.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
+
+        customer = getCustomer();
+        customer.setPhoneCountryPrefix(EMPTY_PHONE_PREFIX);
+        registerNewCustomer(customer);
+        assertEquals("Country is a mandatory field.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderForPrefixField());
+
+        customer = getCustomer();
+        customer.setPhoneNumber(EMPTY_STRING);
+        registerNewCustomer(customer);
+        assertEquals("Enter at least 6 characters", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorPhone());
+
+        customer = getCustomer();
+        customer.setPassword(EMPTY_STRING);
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        registerNewCustomer(customer);
+        assertEquals("Incorrect password.", pages().registrationDialog().getErrorMessageNotification());
+        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForPassword());
+
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        pages().registrationDialog().fillRegisterForm(getCustomer());
+        pages().registrationDialog().clickAgreement();
+        pages().registrationDialog().submitRegisterForm();
+        validateValue("You must read and agree to the above terms!",
+                pages().registrationDialog().agreementStatus(),
+                "Adult confirmation message did not appear");
+
+        pages().browser().deleteAllCookies();
+        pages().browser().refreshPage();
+        customer = getCustomer();
+        pages().registrationDialog().fillRegisterForm(customer);
+        pages().registrationDialog().submitRegisterForm();
+        pages().creditCardDepositPage().isDisplayed();
+        operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
+    }
+
+    /**
+     * verify directions in the registration page for mandatory fields
+     */
+    @Test(description = "CTW-5874:AR - Verify when choosing AR language the order of the Registration slide is changing RTL")
+    public void checkRegistrationDialogFieldsDirectionForRightToLeftLanguages() {
+        pages().topNavigationPage().selectLanguage(ARABIAN_LANGUAGE);
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().exists();
+        pages().registrationDialog().verifyContentDirection(RTL_DIRECTION);
+    }
 
     private CustomerRegistrationInfo getCustomerWithLastName(String lastName) {
         CustomerRegistrationInfo customer=getCustomer();
