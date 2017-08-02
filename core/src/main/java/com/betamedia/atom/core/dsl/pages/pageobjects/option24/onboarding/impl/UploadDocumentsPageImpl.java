@@ -18,8 +18,6 @@ public class UploadDocumentsPageImpl extends AbstractPageObject implements Uploa
     @StoredId
     private By documents;
     @StoredId
-    private By poiTitle;
-    @StoredId
     private By poiContainer;
     @StoredId
     private By poiTypeSelector;
@@ -43,12 +41,7 @@ public class UploadDocumentsPageImpl extends AbstractPageObject implements Uploa
     public void goToDocumentsUpload(){
     	waitUntilDisplayed(documents).click();
     }
-    
-    @Override
-    public void selsetPOI(){
-    	waitUntilDisplayed(poiTitle).click();
-    }
-    	
+
     @Override
     public void browseForFileUpload(){
     	waitUntilDisplayed(poiBrowseButton).click();

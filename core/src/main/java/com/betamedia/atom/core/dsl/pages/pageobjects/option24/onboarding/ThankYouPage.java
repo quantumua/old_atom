@@ -8,4 +8,6 @@ public interface ThankYouPage {
     void doContinue();
 
     void startTrade();
+
+    boolean startTradeExists();
 }

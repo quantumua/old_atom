@@ -1,8 +1,8 @@
 package com.betamedia.atom.core.dsl.pages.factory.widgets;
 
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.RegistrationPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.impl.*;
 import com.betamedia.atom.core.dsl.pages.type.ProductType;
@@ -66,4 +66,7 @@ public class WidgetsPageFactoryImpl extends AbstractPageFactory implements Widge
 
     @Override
     public AccountAdditionalDetailsPage accountAdditionalDetailsPage() { return creator.getPage(AccountAdditionalDetailsPageImpl.class); }
+
+    @Override
+    public UploadDocumentsPage uploadDocumentsPage() { return creator.getPage(UploadDocumentsPageImpl.class); }
 }

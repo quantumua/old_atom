@@ -422,13 +422,9 @@ public class OnboardingWebWizardTestSuite extends WebEndToEndTest {
                      .withZipCode("ZipCode")
                      .build()));
 	         
-	         pages().documentUploadForm().uploadIdCard();
+	         pages().uploadDocumentDialog().uploadIdCard();
 	    }
-	    
-	    
-//	  
-	    
-	    
+
 //	    @Test
 	    public void  onboardingWizardUploadPOI() {
 	     	pages().topNavigationPage().signUp();

@@ -197,11 +197,6 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     }
 
     @Override
-    public DocumentUploadForm documentUploadForm() {
-        return creator.getPage(DocumentUploadFormImpl.class);
-    }
-
-    @Override
     public LeveragePopup leveragePopup() {
         return creator.getPage(LeveragePopupImpl.class);
     }

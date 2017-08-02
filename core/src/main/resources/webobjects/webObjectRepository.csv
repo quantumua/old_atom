@@ -1,89 +1,14 @@
 implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
-2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,usernameField,ID,UserName
-2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,passwordField,ID,Password
-2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,submitButton,ID,FormSubmitBtn
-2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerCheckbox,ID,checkboxDisclaimer
-2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerSubmitBtn,ID,disclaimer_submit
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,loginBtn,ID,login_btn
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,myAccountBtn,ID,myaccount_btn
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,homePageLink,XPATH,//*[@id='header']/div[2]/div[1]/a/img
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,bankPageLink,XPATH,"//*[@id="header"]//*[@href="/redirects/my-account/deposit/"]"
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,languageMenu,ID,language-menu
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,flagLanguage,XPATH,"//*[@id='header']/div[@class="flag-menu active"]//a"
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,withdrawalTab,XPATH,"//*[@href="https://qawww.24option.com/eu/withdrawal/"]"
-2.6.2,2017-05-29 15:24 +0000,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
-2.6.2,2017-05-29 15:24 +0000,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
-2.6.2,2017-05-29 15:24 +0000,PositionsImpl,position,CLASS_NAME,bmCellContent
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,mainMenu,ID,mainMenu
-2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
-2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,cfdBtn,CLASS_NAME,product-cfd
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,productButtons,CLASS_NAME,rootMenu
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetContainer,CLASS_NAME,assets-list-container
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetName,CLASS_NAME,list-asset
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,pandaIframe,ID,swPandaIframe
-2.6.2,2017-05-29 15:24 +0000,LandingPageImpl,homepage,CLASS_NAME,homepage-balanced-template
-2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,accountCurrency,CLASS_NAME,swAccountCurrency
-2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,accountListMenu,ID,account_list_menu
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetTooltipIcon,CLASS_NAME,assetTooltip
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetTooltipContent,CLASS_NAME,tooltip-content
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,requiredMarginRow,CSS,div[data-bind='with: $root.investAmountModel.requiredMargin']
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,swapRow,CSS,div[data-bind='with: $root.investAmountModel.swaps']
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,underlyingAssetName,XPATH,.//div[./div='Underlying asset name']
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetNameTitle,CLASS_NAME,assetNameTitle
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,userDataCurrency,CSS,span[data-bind='text: $root.userData.currency']
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,firstRow,CSS,div:nth-of-type(1)
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,secondRow,CSS,div:nth-of-type(2)
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,toolTipName,CSS,span[data-bind='text: toolTipName']
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,selectedAssetCurrency,CSS,span[data-bind='text: $root.assetsListViewModel.selectedAsset().currency']
-2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,volumeInput,CLASS_NAME,investInsert
-2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,buyButton,CLASS_NAME,buyBTN
-2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,sellButton,CLASS_NAME,sellBTN
-2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,tradeButton,CLASS_NAME,buyTrade
-2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,messageBox,CLASS_NAME,messageBox
-2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,okButton,CLASS_NAME,ok-button
-2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
-2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,assetName,CLASS_NAME,assetname
-2.6.2,2017-05-29 15:24 +0000,AssetsImpl,tooltipClose,CSS,.tooltip-close > .icon
-2.6.2,2017-05-29 15:24 +0000,ChartImpl,highChartsRoot,CLASS_NAME,highcharts-root
-2.6.2,2017-05-29 15:24 +0000,ChartImpl,candleSticks,CLASS_NAME,highcharts-candlestick-series
-2.6.2,2017-05-29 15:24 +0000,ChartImpl,candle,TAG,path
-2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,requoteTrade,CLASS_NAME,requote-trade
-2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,buttonsBlock,CLASS_NAME,buttons-block
-2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,firstButton,CSS,button:nth-of-type(1)
-2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
-2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
-2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,closeButton,XPATH,//*[@id='tradeManagerContainer']/div/div[3]/div/div/div[3]
-2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
-2.6.2,2017-05-29 15:24 +0000,NavigationImpl,loginButton,NAME,btnLoginWidget
-2.6.2,2017-05-29 15:24 +0000,NavigationImpl,fnsPersonalInformationButton,NAME,btnFnsPersonalInformationWidget
-2.6.2,2017-05-29 15:24 +0000,NavigationImpl,fnsTradingExperienceButton,NAME,btnFnsTradingExperienceWidget
-2.6.2,2017-05-29 15:24 +0000,NavigationImpl,accountDetailsButton,NAME,btnAccountDetailsWidget
-2.6.2,2017-05-29 15:24 +0000,NavigationImpl,accountAdditionalDetailsButton,NAME,btnAccountAdditionalDetailsWidget
-2.6.2,2017-05-29 15:24 +0000,NavigationImpl,creditCardDepositButton,NAME,btnCCDepositWidget
-2.6.2,2017-05-29 15:24 +0000,NavigationImpl,registerButton,NAME,btnRegisterWidget
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,sharesExperience,ID,FinancialProducts1Shares
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,binaryExperience,ID,FinancialProducts1Binary
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,averageYearlyBinaryVolume,ID,FinancialProducts1Volume
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,forExExperience,ID,FinancialProducts2Forex
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,averageYearlyForExVolume,ID,FinancialProducts2Volume
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,commonLeverage,ID,FinancialProducts2Leverage
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,financialWorkExperience,ID,SelectIfApplicable
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,cfdBinaryKnowledge,ID,KnowledgeCfdsBinaries
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,submit,NAME,swFinancialSuitabilityBtn
-2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,usernameField,ID,Username
-2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,passwordField,ID,Password
-2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,loginSubmit,NAME,swLoginBtn
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,employmentStatus,ID,EmploymentStatus
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,employmentStatusSalariedEmployee,XPATH,//*[@id='divQEmploymentStatus']/div/ul/li[@data-value='employmentStatusSalariedEmployee']
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,industry,ID,Industry
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,employerName,ID,NameOfEmployer
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,taxResidenceCountry,ID,CountryTaxResidence
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,hasTaxIdentificationNumber,ID,HaveTin
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,taxIdentificationNumber,ID,tinYes_alternate
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,socialSecurityNumber,ID,tinNo_alternate
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,isUSReportable,ID,IsUSReportablePerson
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,fnsSuitabilityButton,NAME,swFinancialSuitabilityBtn
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,employmentStatus,ID,EmploymentStatus
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,employmentStatusSalariedEmployee,XPATH,//*[@id='divQEmploymentStatus']/div/ul/li[@data-value='employmentStatusSalariedEmployee']
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,industry,ID,Industry
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,educationLevel,ID,LevelOfEducation
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,educationField,ID,FieldOfStudy
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,isPoliticallyExposed,ID,PoliticallyExposed
@@ -95,7 +20,6 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,purposeOfTrading,ID,PurposeOfTrading
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,submit,NAME,swFinancialSuitabilityBtn
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,industryOther,ID,industryOther_alternate
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,isUSReportable,ID,IsUSReportablePerson
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,educationFieldOther,ID,fieldOfStudyOther_alternate
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,politicalExposureBttn,XPATH,//*[@id='divQPoliticallyExposed']//*[@class='alternate-submit']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,sourceOfFundsOther,ID,sourceOfFundsOther_alternate
@@ -104,6 +28,16 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,industryOtherBttn,XPATH,//*[@id='divQIndustry']//*[@class='alternate-submit']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,purposeOfTradingBttn,XPATH,//*[@id='divQPurposeOfTrading']//*[@class='alternate-submit']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,purposeOfTradingOther,ID,purposeOfTradingOther_alternate
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,resultPlaceholder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,sharesExperience,ID,FinancialProducts1Shares
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,binaryExperience,ID,FinancialProducts1Binary
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,averageYearlyBinaryVolume,ID,FinancialProducts1Volume
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,forExExperience,ID,FinancialProducts2Forex
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,averageYearlyForExVolume,ID,FinancialProducts2Volume
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,commonLeverage,ID,FinancialProducts2Leverage
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,financialWorkExperience,ID,SelectIfApplicable
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,cfdBinaryKnowledge,ID,KnowledgeCfdsBinaries
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,submit,NAME,swFinancialSuitabilityBtn
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,mainFactorKnowledge,ID,KnowledgeMainFactor
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,howToCloseKnowledge,ID,KnowledgeIfYouOpen
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,cfdLeverageKnowledge,ID,KnowledgeLeverageCFD
@@ -114,19 +48,10 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,lossOn1to50Knowledge,ID,KnowledgePositionLoss1to50
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,lossOn1to200Knowledge,ID,KnowledgePositionLoss1to200
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,buttonWizardDeclaration,XPATH,//div[@id='wizard-declaration']//div[@class='message-button']//*[@id='declaration-btn']
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,title,ID,Title
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,street,ID,Street
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,streetNumber,ID,StreetNumber
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,city,ID,City
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,countryPhonePrefix2,ID,PhoneExtention2
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,phone2,ID,Telephone2
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayDay,ID,BirthDateDay
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayMonth,ID,BirthDateMonth
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayYear,ID,BirthDateYear
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,update,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,resultPlaceholder,ID,resultPlaceHolder
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,wizardProgressText,XPATH,.//*[@class='wizard-progress']/p[@class='prog-text']
-2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,chatNow,XPATH,".//*[@id='popup-wizard']//*[@class="chat-link"]/a"
-2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,additionalDetailsTitle,XPATH,".//span[@class="swAdditionalInformationTitle swGroupBoxTitle"]"
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,chatNow,XPATH,".//*[@id='popup-wizard']//*[@class=""chat-link""]/a"
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,additionalDetailsTitle,XPATH,".//span[@class=""swAdditionalInformationTitle swGroupBoxTitle""]"
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateTitle,XPATH,.//div[@id='accountAdditionalDetails']//label[@for='Birth_Date']
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateDay,ID,BirthDateDay
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,birthDateDayDropDownElements,XPATH,//*[@id='BirthDateDay']/option
@@ -146,8 +71,8 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,nationalityDropdownDataError,XPATH,.//*[@id='NationalityCode']//@data-error
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsDialogImpl,submit,NAME,swUpdateCustomerBtn
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,wizardProgressText,XPATH,.//*[@class='wizard-progress']/p[@class='prog-text']
-2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,chatNow,XPATH,".//*[@id='popup-wizard']//*[@class="chat-link"]/a"
-2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,additionalDetailsTitle,XPATH,".//span[@class="swAdditionalInformationTitle swGroupBoxTitle"]"
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,chatNow,XPATH,".//*[@id='popup-wizard']//*[@class=""chat-link""]/a"
+2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,additionalDetailsTitle,XPATH,".//span[@class=""swAdditionalInformationTitle swGroupBoxTitle""]"
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateTitle,XPATH,.//div[@id='accountAdditionalDetails']//label[@for='Birth_Date']
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateDay,ID,BirthDateDay
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,birthDateDayDropDownElements,XPATH,//*[@id='BirthDateDay']/option
@@ -166,18 +91,54 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,nationalityDropdownCaption,XPATH,.//*[@id='NationalityCode']//option[1]
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,nationalityDropdownDataError,XPATH,.//*[@id='NationalityCode']//@data-error
 2.6.2,2017-05-29 15:24 +0000,AccountAdditionalDetailsPageImpl,submit,NAME,swUpdateCustomerBtn
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,depositAmount,NAME,Amount
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,creditCardNumber,ID,CreditCardNumber
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cvv2,NAME,Cvv2
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,expiryDateMonth,NAME,ExpiryDateMonth
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,expiryDateYear,NAME,ExpiryDateYear
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cardHoldersFirstName,NAME,HolderFirstName
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cardHoldersLastName,NAME,HolderLastName
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,billingAddress,NAME,BillingAddress
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,city,NAME,City
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,zipCode,NAME,Zip
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,country,ID,CountryCode
-2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,submit,NAME,swCCDepositBtn
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,title,ID,Title
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,street,ID,Street
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,streetNumber,ID,StreetNumber
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,city,ID,City
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,countryPhonePrefix2,ID,PhoneExtention2
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,phone2,ID,Telephone2
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayDay,ID,BirthDateDay
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayMonth,ID,BirthDateMonth
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayYear,ID,BirthDateYear
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,update,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetContainer,CLASS_NAME,assets-list-container
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetName,CLASS_NAME,list-asset
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,pandaIframe,ID,swPandaIframe
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetTooltipIcon,CLASS_NAME,assetTooltip
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetTooltipContent,CLASS_NAME,tooltip-content
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,requiredMarginRow,CSS,div[data-bind='with: $root.investAmountModel.requiredMargin']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,swapRow,CSS,div[data-bind='with: $root.investAmountModel.swaps']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,underlyingAssetName,XPATH,.//div[./div='Underlying asset name']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetNameTitle,CLASS_NAME,assetNameTitle
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,userDataCurrency,CSS,span[data-bind='text: $root.userData.currency']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,firstRow,CSS,div:nth-of-type(1)
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,secondRow,CSS,div:nth-of-type(2)
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,toolTipName,CSS,span[data-bind='text: toolTipName']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,selectedAssetCurrency,CSS,span[data-bind='text: $root.assetsListViewModel.selectedAsset().currency']
+2.6.2,2017-05-29 15:24 +0000,AssetsImpl,tooltipClose,CSS,.tooltip-close > .icon
+2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,volumeInput,CLASS_NAME,investInsert
+2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,buyButton,CLASS_NAME,buyBTN
+2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,sellButton,CLASS_NAME,sellBTN
+2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,tradeButton,CLASS_NAME,buyTrade
+2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
+2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,assetName,CLASS_NAME,assetname
+2.6.2,2017-05-29 15:24 +0000,ChartImpl,highChartsRoot,CLASS_NAME,highcharts-root
+2.6.2,2017-05-29 15:24 +0000,ChartImpl,candleSticks,CLASS_NAME,highcharts-candlestick-series
+2.6.2,2017-05-29 15:24 +0000,ChartImpl,candle,TAG,path
+2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,confirmTrueAnswers,CSS,.wizard-container
+2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,upButton,CSS,.backward.icon-Up4.disabled
+2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,downButton,CSS,.forward.icon-Down4.disabled
+2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,message,CSS,.message-content
+2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,nextButton,XPATH,//*[@id='wizard-message']/div[3]/button
+2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmCloseMessage,ID,close_dialog
+2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmImSure,ID,dialog_btn_leave
+2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmNo,ID,dialog_btn_stay
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,accountCurrency,CLASS_NAME,swAccountCurrency
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,accountListMenu,ID,account_list_menu
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,depositAmount,NAME,Amount
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,creditCardNumber,ID,CreditCardNumber
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,cvv2,NAME,Cvv2
@@ -190,6 +151,59 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,zipCode,NAME,Zip
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,country,ID,CountryCode
 2.6.2,2017-05-29 15:24 +0000,CreditCardDepositDialogImpl,submit,NAME,swCCDepositBtn
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,depositAmount,NAME,Amount
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,creditCardNumber,ID,CreditCardNumber
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cvv2,NAME,Cvv2
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,expiryDateMonth,NAME,ExpiryDateMonth
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,expiryDateYear,NAME,ExpiryDateYear
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cardHoldersFirstName,NAME,HolderFirstName
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,cardHoldersLastName,NAME,HolderLastName
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,billingAddress,NAME,BillingAddress
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,city,NAME,City
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,zipCode,NAME,Zip
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,country,ID,CountryCode
+2.6.2,2017-05-29 15:24 +0000,CreditCardDepositPageImpl,submit,NAME,swCCDepositBtn
+2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
+2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogTitle,CSS,.bmDialogTitle
+2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,closeButton,XPATH,//*[@id='tradeManagerContainer']/div/div[3]/div/div/div[3]
+2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
+2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerCheckbox,ID,checkboxDisclaimer
+2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerSubmitBtn,ID,disclaimer_submit
+2.6.2,2017-05-29 15:24 +0000,LandingPageImpl,homepage,CLASS_NAME,homepage-balanced-template
+2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button/span[1]
+2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/div/ul/li[1]/a/span[1]
+2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
+2.6.2,2017-05-29 15:24 +0000,LoadingDialogImpl,loadingPopup,ID,open-account-loading-bar
+2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,usernameField,ID,UserName
+2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,passwordField,ID,Password
+2.6.2,2017-05-29 15:24 +0000,LoginDialogImpl,submitButton,ID,FormSubmitBtn
+2.6.2,2017-05-29 15:24 +0000,LoginErrorNotificationImpl,errorNotification,ID,login_deposit_error
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,usernameField,ID,Username
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,passwordField,ID,Password
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,loginSubmit,NAME,swLoginBtn
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,loginButton,NAME,btnLoginWidget
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,messageBox,CLASS_NAME,messageBox
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,okButton,CLASS_NAME,ok-button
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,requoteTrade,CLASS_NAME,requote-trade
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,buttonsBlock,CLASS_NAME,buttons-block
+2.6.2,2017-05-29 15:24 +0000,MessageBoxImpl,firstButton,CSS,button:nth-of-type(1)
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,loginButton,NAME,btnLoginWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,fnsPersonalInformationButton,NAME,btnFnsPersonalInformationWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,fnsTradingExperienceButton,NAME,btnFnsTradingExperienceWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,accountDetailsButton,NAME,btnAccountDetailsWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,accountAdditionalDetailsButton,NAME,btnAccountAdditionalDetailsWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,creditCardDepositButton,NAME,btnCCDepositWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,registerButton,NAME,btnRegisterWidget
+2.6.2,2017-05-29 15:24 +0000,NavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
+2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,closeButton,ID,modal-close
+2.6.2,2017-05-29 15:24 +0000,PositionsImpl,positionList,CSS,.bmPositionList.bmOptionList
+2.6.2,2017-05-29 15:24 +0000,PositionsImpl,position,CLASS_NAME,bmCellContent
+2.6.2,2017-05-29 15:24 +0000,RedirectDialogImpl,redirectDialog,CLASS_NAME,popup_regulation
+2.6.2,2017-05-29 15:24 +0000,RedirectDialogImpl,startTrade,CSS,.btn.btn-block.btn-default.btn-onboard.ok_button_reload_page
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,title,NAME,Title
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,firstName,NAME,FirstName
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,lastName,NAME,LastName
@@ -205,84 +219,6 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,startTrading,NAME,swRegisterBtn
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,swProgressImg,ID,swProgressImg
 2.6.2,2017-05-29 15:24 +0000,RegisterPageImpl,resultPlaceHolder,ID,resultPlaceHolder
-2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,resultPlaceholder,ID,resultPlaceHolder
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,resultPlaceholder,ID,resultPlaceHolder
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,resultPlaceholder,ID,resultPlaceHolder
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,firstNameField,ID,FirstName
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,lastNameField,ID,LastName
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,emailField,ID,Email
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,phoneNumberField,NAME,PhoneNumber.Number
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,selectedFlagField,CLASS_NAME,selected-flag
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,selectCountry,XPATH,.//ul[@class='country-list']//li[@data-country-code='de']
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,passwordRegField,ID,Password
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,reenterPasswordRegField,ID,ReEnterPassword
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,accountAgreeField,ID,AccountAgreeLabel
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
-2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,ID,welcome-btn
-2.6.2,2017-05-29 15:24 +0000,RiskWarningDialogImpl,iAmOver18Statement,CLASS_NAME,swRiskWarningAccountAgree
-2.6.2,2017-05-29 15:24 +0000,RiskWarningDialogImpl,updateButton,XPATH,//*[@id='risk-warning-form-space']/div/input
-2.6.2,2017-05-29 15:24 +0000,LoginPageImpl,loginButton,NAME,btnLoginWidget
-2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,poiDocumentWizard,ID,documents-upload-wrapper
-2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,wizardMessage,ID,wizard-message
-2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,button,CLASS_NAME,btn
-2.6.2,2017-05-29 15:24 +0000,OnBoardingWizardImpl,closeButton,ID,modal-close
-2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button/span[1]
-2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/div/ul/li[1]/a/span[1]
-2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
-2.6.2,2017-05-29 15:24 +0000,NavigationImpl,setLeverageButton,NAME,btnSetLeverageWidget
-2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeDialog,CLASS_NAME,wizard-container
-2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeButton,ID,thankyou-btn
-2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,setLeverageDialog,CSS,.swSetLeverageContent.swWidget.swGroupBox
-2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leverageComboBox,CSS,.dropdown-menu.inner
-2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,okButton,CSS,.swFormControl.swAcceptButton
-2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,cancelButton,CSS,.swFormControl.swCancelButton
-2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesButton,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button
-2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesList,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/div/ul/li[*]/a/span[1]
-2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesPickOption,XPATH,//*[@id='scipioPopupHandler']/div/div[*]/span/ul/li
-2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,closeLeverageDialog,CLASS_NAME,leverage-close-btn
-2.6.2,2017-05-29 15:24 +0000,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
-2.6.2,2017-05-29 15:24 +0000,RejectMessageOnLoginImpl,rejectCaption,CLASS_NAME,message-title
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogImpl,CSS,.content.mobile-single
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documents,XPATH,.//*[@id='menu-item-54113']/a
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentsPageImpl,XPATH,".//*[@id='Upload-Document-SEU']/*[@class="formContainer form-cover"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiTitle,XPATH,".//*[@id='acc']//*[@class="icon poi-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiContainet,XPATH,.//*[@id='poi-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiTypeSelector,XPATH,".//*[@id='poi-container']//*[@class="btn dropdown-toggle btn-default"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiBrowseButton,XPATH,".//*[@id='poi-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentAprroved,XPATH,".//*[@id='poi-container']//*[@class="document-box aprroved-doc"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentNotAprroved,XPATH,".//*[@id='poi-container']//*[@class="document-box not-aprroved"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTitle,XPATH,".//*[@id='acc']//*[@class="icon por-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porContainet,XPATH,.//*[@id='por-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTypeSelector,XPATH,".//*[@id='por-container']//*[@class="btn dropdown-toggle btn-default"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porBrowseButton,XPATH,".//*[@id='por-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentAprroved,XPATH,".//*[@id='por-container']//*[@class="document-box aprroved-doc"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentNotAprroved,XPATH,".//*[@id='por-container']//*[@class="document-box not-aprroved"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccTitle,XPATH,".//*[@id='acc']//*[@class="icon cc-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccContainet,XPATH,.//*[@id='cc-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccTypeSelector,XPATH,".//*[@id='cc-container']//*[@class="btn dropdown-toggle btn-default"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccBrowseButton,XPATH,".//*[@id='cc-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccDocumentAprroved,XPATH,".//*[@id='cc-container']//*[@class="document-box aprroved-doc"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccDocumentNotAprroved,XPATH,".//*[@id='cc-container']//*[@class="document-box not-aprroved"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersTitle,XPATH,".//*[@id='acc']//*[@class="icon others-icon"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersContainet,XPATH,.//*[@id='others-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersTypeSelector,XPATH,".//*[@id='others-container']//*[@class="btn dropdown-toggle btn-default"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersBrowseButton,XPATH,".//*[@id='others-container']//*[@class="btn btn-inv btn-block browse-file-button"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentAprroved,XPATH,".//*[@id='others-container']//*[@class="document-box aprroved-doc"]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentNotAprroved,XPATH,".//*[@id='others-container']//*[@class="document-box not-aprroved"]"
-2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmCloseMessage,ID,close_dialog
-2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmImSure,ID,dialog_btn_leave
-2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmNo,ID,dialog_btn_stay
-2.6.2,2017-05-29 15:24 +0000,WelcomeBackMessageImpl,continueQuestionnaire,ID,welcomeback-btn
-2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,accountAgreeCheckbox,ID,AccountAgree
-2.6.2,2017-05-29 15:24 +0000,SignatureRiskWarningImpl,RiskSignatureTextbox,XPATH,//*[@id='txtareaRiskSignatureText']
-2.6.2,2017-05-29 15:24 +0000,SignatureRiskWarningImpl,RiskSignatureSubmitbtn,XPATH,//*[@id='signature-risk-warning']/div/div[4]/div[2]/input
-2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,confirmTrueAnswers,CSS,.wizard-container
-2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,upButton,CSS,.backward.icon-Up4.disabled
-2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,downButton,CSS,.forward.icon-Down4.disabled
-2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,message,CSS,.message-content
-2.6.2,2017-05-29 15:24 +0000,ConfirmAnswersDialogImpl,nextButton,XPATH,//*[@id='wizard-message']/div[3]/button
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,caption,XPATH,//*[@id='open-account-popup']/div/h1
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,firstName,ID,FirstName
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,lastName,ID,LastName
@@ -320,8 +256,79 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,currencies,XPATH,//*[@id='Currency_wrapper']//span[@class='text']
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,agreeStatus,ID,AccountAgreeStatus
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,chatLink,XPATH,//*[@class='chat-link']//*[.='Chat Now']
-2.6.2,2017-05-29 15:24 +0000,RedirectDialogImpl,redirectDialog,CLASS_NAME,popup_regulation
-2.6.2,2017-05-29 15:24 +0000,RedirectDialogImpl,startTrade,CSS,.btn.btn-block.btn-default.btn-onboard.ok_button_reload_page
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,firstNameField,ID,FirstName
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,lastNameField,ID,LastName
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,emailField,ID,Email
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,phoneNumberField,NAME,PhoneNumber.Number
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,selectedFlagField,CLASS_NAME,selected-flag
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,selectCountry,XPATH,.//ul[@class='country-list']//li[@data-country-code='de']
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,passwordRegField,ID,Password
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,reenterPasswordRegField,ID,ReEnterPassword
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,accountAgreeField,ID,AccountAgreeLabel
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,registrationWidget,ID,OpenFullRegistration
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,submitButtonReg,XPATH,//*[@id='open-account-popup']//*[@id='OpenFullRegistration']//*[@id='FormSubmitBtn']
+2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,accountAgreeCheckbox,ID,AccountAgree
+2.6.2,2017-05-29 15:24 +0000,RejectMessageOnLoginImpl,rejectCaption,CLASS_NAME,message-title
+2.6.2,2017-05-29 15:24 +0000,RiskWarningDialogImpl,iAmOver18Statement,CLASS_NAME,swRiskWarningAccountAgree
+2.6.2,2017-05-29 15:24 +0000,RiskWarningDialogImpl,updateButton,XPATH,//*[@id='risk-warning-form-space']/div/input
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,setLeverageDialog,CSS,.swSetLeverageContent.swWidget.swGroupBox
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leverageComboBox,CSS,.dropdown-menu.inner
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,okButton,CSS,.swFormControl.swAcceptButton
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,cancelButton,CSS,.swFormControl.swCancelButton
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesButton,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesList,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/div/ul/li[*]/a/span[1]
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,leveragesPickOption,XPATH,//*[@id='scipioPopupHandler']/div/div[*]/span/ul/li
+2.6.2,2017-05-29 15:24 +0000,SetLeverageDialogImpl,closeLeverageDialog,CLASS_NAME,leverage-close-btn
+2.6.2,2017-05-29 15:24 +0000,SetLeveragePageImpl,setLeverageComboBox,CSS,.swMandatory.swFormControl
+2.6.2,2017-05-29 15:24 +0000,SignatureRiskWarningImpl,RiskSignatureTextbox,XPATH,//*[@id='txtareaRiskSignatureText']
+2.6.2,2017-05-29 15:24 +0000,SignatureRiskWarningImpl,RiskSignatureSubmitbtn,XPATH,//*[@id='signature-risk-warning']/div/div[4]/div[2]/input
+2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeDialog,CLASS_NAME,wizard-container
+2.6.2,2017-05-29 15:24 +0000,StartTradeDialogImpl,startTradeButton,ID,thankyou-btn
+2.6.2,2017-05-29 15:24 +0000,ThankYouPageImpl,continueButton,ID,thank-you-steps-away-btn
+2.6.2,2017-05-29 15:24 +0000,ThankYouPageImpl,startTradeButton,ID,thankyou-btn
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,loginBtn,ID,login_btn
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,myAccountBtn,ID,myaccount_btn
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,homePageLink,XPATH,//*[@id='header']/div[2]/div[1]/a/img
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,bankPageLink,XPATH,"//*[@id=""header""]//*[@href=""/redirects/my-account/deposit/""]"
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,languageMenu,ID,language-menu
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,flagLanguage,XPATH,"//*[@id='header']/div[@class=""flag-menu active""]//a"
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,withdrawalTab,XPATH,"//*[@href=""https://qawww.24option.com/eu/withdrawal/""]"
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,mainMenu,ID,mainMenu
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,cfdBtn,CLASS_NAME,product-cfd
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,productButtons,CLASS_NAME,rootMenu
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogImpl,CSS,.content.mobile-single
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documents,XPATH,.//*[@id='menu-item-54113']/a
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentsPageImpl,XPATH,".//*[@id='Upload-Document-SEU']/*[@class=""formContainer form-cover""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiContainer,XPATH,.//*[@id='poi-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentAprroved,XPATH,".//*[@id='poi-container']//*[@class=""document-box aprroved-doc""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentNotAprroved,XPATH,".//*[@id='poi-container']//*[@class=""document-box not-aprroved""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTitle,XPATH,".//*[@id='acc']//*[@class=""icon por-icon""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porContainet,XPATH,.//*[@id='por-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTypeSelector,XPATH,".//*[@id='por-container']//*[@class=""btn dropdown-toggle btn-default""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porBrowseButton,XPATH,".//*[@id='por-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentAprroved,XPATH,".//*[@id='por-container']//*[@class=""document-box aprroved-doc""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentNotAprroved,XPATH,".//*[@id='por-container']//*[@class=""document-box not-aprroved""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccTitle,XPATH,".//*[@id='acc']//*[@class=""icon cc-icon""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccContainet,XPATH,.//*[@id='cc-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccTypeSelector,XPATH,".//*[@id='cc-container']//*[@class=""btn dropdown-toggle btn-default""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccBrowseButton,XPATH,".//*[@id='cc-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccDocumentAprroved,XPATH,".//*[@id='cc-container']//*[@class=""document-box aprroved-doc""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccDocumentNotAprroved,XPATH,".//*[@id='cc-container']//*[@class=""document-box not-aprroved""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersTitle,XPATH,".//*[@id='acc']//*[@class=""icon others-icon""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersContainet,XPATH,.//*[@id='others-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersTypeSelector,XPATH,".//*[@id='others-container']//*[@class=""btn dropdown-toggle btn-default""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersBrowseButton,XPATH,".//*[@id='others-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentAprroved,XPATH,".//*[@id='others-container']//*[@class=""document-box aprroved-doc""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentNotAprroved,XPATH,".//*[@id='others-container']//*[@class=""document-box not-aprroved""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiHeader,ID,doc-poi-headline
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiWrapper,ID,doc-upload-form-poi-wrapper
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadInput,ID,fileUploadDocsPOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiFrontImage,CLASS_NAME,poi-front-image
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiBackImage,XPATH,.//*[@class='document-box poi-back-image']
+2.6.2,2017-05-29 15:24 +0000,WelcomeBackMessageImpl,continueQuestionnaire,ID,welcomeback-btn
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,ID,welcome-btn
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalAmount,ID,WithdrawalAmount
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalBtnStep1,ID,swNextBtn
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalbankName,ID,BankName
@@ -335,12 +342,3 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalComment,ID,Comment
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalBtnStep2,ID,swWithdrawalBtn
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalPrev,ID,swPreviosBtn
-2.6.2,2017-05-29 15:24 +0000,LoadingDialogImpl,loadingPopup,ID,open-account-loading-bar
-2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
-2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiUploadInput,ID,fileUploadDocsPOI
-2.6.2,2017-05-29 15:24 +0000,ThankYouPageImpl,continueButton,ID,thank-you-steps-away-btn
-2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,fnsSuitabilityButton,NAME,swFinancialSuitabilityBtn
-2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiHeadline,ID,doc-poi-headline
-2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiWrapper,ID,doc-upload-form-poi-wrapper
-2.6.2,2017-05-29 15:24 +0000,ThankYouPageImpl,startTradeButton,ID,thankyou-btn
-2.6.2,2017-05-29 15:24 +0000,DocumentUploadFormImpl,poiFrontImage,CLASS_NAME,poi-front-image

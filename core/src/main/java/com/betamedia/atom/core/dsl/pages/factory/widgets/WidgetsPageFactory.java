@@ -1,5 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.factory.widgets;
 
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.UploadDocumentsPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.impl.SetLeveragePageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.RegistrationPage;
@@ -30,4 +31,7 @@ public interface WidgetsPageFactory {
     CreditCardDepositPage creditCardDeposit();
 
     AccountAdditionalDetailsPage accountAdditionalDetailsPage();
+
+    UploadDocumentsPage uploadDocumentsPage();
+
 }

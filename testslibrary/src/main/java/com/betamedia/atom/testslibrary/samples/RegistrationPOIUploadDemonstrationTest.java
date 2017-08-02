@@ -79,7 +79,7 @@ public class RegistrationPOIUploadDemonstrationTest extends WebClientTest {
                 .build()));
         pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().submit(personalInfo);
-        pages().documentUploadForm().uploadIdCard();
+        pages().uploadDocumentDialog().uploadIdCard();
         pages().thankYouPage().startTrade();
     }
 }

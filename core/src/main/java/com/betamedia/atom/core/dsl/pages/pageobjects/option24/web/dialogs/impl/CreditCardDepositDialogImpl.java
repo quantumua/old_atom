@@ -7,6 +7,8 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.CreditCard
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.logging.Logger;
+
 /**
  * Created by vsnigur on 5/18/17.
  */

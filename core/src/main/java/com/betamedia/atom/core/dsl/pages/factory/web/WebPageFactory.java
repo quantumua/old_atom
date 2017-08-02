@@ -87,8 +87,6 @@ public interface WebPageFactory {
 
     UploadDocumentDialogImpl uploadDocumentDialog();
 
-    DocumentUploadForm documentUploadForm();
-
     ConfirmAnswersDialog confirmAnswers();
 
     RedirectDialog redirectDialog();

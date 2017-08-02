@@ -9,7 +9,5 @@ public interface UploadDocumentsPage {
 
     void goToDocumentsUpload();
 
-    void selsetPOI();
-
     void browseForFileUpload();
 }
