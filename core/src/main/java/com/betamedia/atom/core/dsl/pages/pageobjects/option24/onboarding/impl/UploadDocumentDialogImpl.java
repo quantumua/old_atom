@@ -16,28 +16,22 @@ import java.util.UUID;
  */
 public class UploadDocumentDialogImpl extends AbstractPageObject implements UploadDocumentDialog {
 
-    private static final String POI_ID_CARD_SELECTION = "li[data-original-index='3']";
     private static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
     private static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
-
-    private static final String POI_PASSPORT_SELECTION = "li[data-original-index='0']";
     private static final String POI_PASSPORT_PATH = "files/sample_passport_tmp.jpg";
-
-    private static final String POI_DRIVER_LICENSE_SELECTION = "li[data-original-index='1']";
     private static final String POI_DRIVER_LICENSE_FRONT_PATH = "files/sample_driver_license_front_tmp.jpg";
     private static final String POI_DRIVER_LICENSE_BACK_PATH = "files/sample_driver_license_back_tmp.jpg";
 
     @StoredId
-    private By uploadDocumentDialogImpl;
+    private By pageRoot;
     @StoredId
     private By documents;
     @StoredId
     private By poiContainer;
     @StoredId
-    private By poiDocumentAprroved;
+    private By poiDocumentApproved;
     @StoredId
-    private By poiDocumentNotAprroved;
-
+    private By poiDocumentNotApproved;
 // ------------
     @StoredId
     private By poiHeader;
@@ -51,6 +45,14 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By poiFrontImage;
     @StoredId
     private By poiBackImage;
+    @StoredId
+    private By idSelection;
+    @StoredId
+    private By passportSelection;
+    @StoredId
+    private By driverLicenseSelection;
+    @StoredId
+    private By documentTypeButton;
 
     public UploadDocumentDialogImpl(WebDriver webDriver) {
         super(webDriver);
@@ -58,7 +60,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
 
     @Override
     public boolean exists() {
-        return waitUntilExists(uploadDocumentDialogImpl).isDisplayed();
+        return waitUntilExists(pageRoot).isDisplayed();
     }
 
     @Override
@@ -78,7 +80,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
 //        setDisplayBlock(poiDocumentTypeSelector);
 //        inSelect(poiDocumentTypeSelector).selectByVisibleText("Identity Card");
         /*click on button and then on option for ID card*/
-        selectPOIDocumentType(POI_ID_CARD_SELECTION);
+        selectPOIDocumentType(idSelection);
         /*make input element visible*/
         setDisplayBlock(poiUploadInput);
         /*upload file*/
@@ -94,7 +96,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void uploadPassport() {
         clickPOIHeader();
-        selectPOIDocumentType(POI_PASSPORT_SELECTION);
+        selectPOIDocumentType(passportSelection);
         /*make input element visible*/
         setDisplayBlock(poiUploadInput);
         /*upload file*/
@@ -105,7 +107,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void uploadDriverLicense() {
         clickPOIHeader();
-        selectPOIDocumentType(POI_DRIVER_LICENSE_SELECTION);
+        selectPOIDocumentType(driverLicenseSelection);
         setDisplayBlock(poiUploadInput);
         uploadFromPath(storeToTemp(POI_DRIVER_LICENSE_FRONT_PATH), poiUploadInput);
         waitUntilExists(poiBackImage).isDisplayed();
@@ -126,9 +128,9 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         return Paths.get(FileSystemStorageService.storeSystemResource(resource, UUID.randomUUID().toString() + ".jpg", "temp")).toAbsolutePath().toString();
     }
 
-    private void selectPOIDocumentType(String cssItemCode) {
-        waitUntilDisplayed(poiWrapper, By.tagName("button")).click();
-        waitUntilDisplayed(poiWrapper, By.cssSelector(cssItemCode)).click();
+    private void selectPOIDocumentType(By locator) {
+        waitUntilDisplayed(poiWrapper, documentTypeButton).click();
+        waitUntilDisplayed(poiWrapper, locator).click();
         /*wait until animation starts*/
         waitUntil(() -> isTransformed(poiFrontImage));
         /*wait until animation ends*/
