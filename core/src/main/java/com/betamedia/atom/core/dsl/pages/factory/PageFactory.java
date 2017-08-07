@@ -12,4 +12,5 @@ public interface PageFactory<E extends ProductType> {
     E getType();
 
     BrowserOperations browser();
+
 }

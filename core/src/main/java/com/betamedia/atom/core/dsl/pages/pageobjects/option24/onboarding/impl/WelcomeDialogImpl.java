@@ -11,6 +11,9 @@ import org.openqa.selenium.WebDriver;
  */
 public class WelcomeDialogImpl extends AbstractPageObject implements WelcomeDialog {
 
+
+    @StoredId
+    private By caption;
     @StoredId
     private By startButton;    
 
@@ -26,5 +29,15 @@ public class WelcomeDialogImpl extends AbstractPageObject implements WelcomeDial
     @Override
     public boolean isStartBtnDisplayed() {
         return maybe(() -> waitUntilDisplayed(startButton)).isPresent();
+    }
+
+    @Override
+    public String getCaption() {
+        return waitUntilDisplayed(caption).getText();
+    }
+
+    @Override
+    public String getStartButtonCaption() {
+        return waitUntilDisplayed(startButton).getText();
     }
 }

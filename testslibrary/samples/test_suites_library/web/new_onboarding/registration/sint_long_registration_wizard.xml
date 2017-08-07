@@ -1,0 +1,35 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="sequential execution of tests" verbose="1" parallel="methods" thread-count="1">
+    <test name="Create New Customer tests web">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.createnewcustomers.international.LongRegistrationWizard" >
+                <methods>
+                    <include name="verifySignUpButtonRedirectToOnBoardingOpenAccount" description="CTW-5764"/>
+                    <include name="verifyRedirectAfterOpenAccountSlideSubmit" description="CTW-5443"/>
+                    <include name="verifyLegalTermsAndConditionsDocument" description="CTW-18622"/>
+                    <include name="verifyBonusTermsConditionsLinks" description="CTW-18623"/>
+                    <include name="verifyCookiePolicyLinks" description="CTW-18624"/>
+                    <include name="verifyImpossibleInputLessThanTwoCharsIntoLastName" description="CTW-18650"/>
+                    <include name="verifyImpossibleInputMaxPlusOneCharsIntoLastName" description="CTW-18649"/>
+                    <include name="verifyImpossibleInputSpecialSymbolsIntoLastName" description="CTW-18648"/>
+                    <include name="verifyImpossibleRegisterCustomerWithOneLetterFirstName" description="CTW-18647"/>
+                    <include name="verifyImpossibleInputMaxPlusOneCharsIntoFirstName" description="CTW-18645"/>
+                    <include name="verifyImpossibleInputSpecialSymbolsIntoFirstName" description="CTW-18644"/>
+                    <include name="verifyEmptySubmittedForm" description="CTW-5465"/>
+                    <include name="emailFieldValidations" description="CTW-5468"/>
+                    <include name="verifyPhonePrefixFunctionality" description="CTW-5469"/>
+                    <include name="validateInputsIntoPhoneField" description="CTW-5470"/>
+                    <include name="validateSearchFunctionalityInCountry" description="CTW-5471"/>
+                    <include name="validateCountryDropDownField" description="CTW-5472"/>
+                    <include name="validateCurrencyDropDownField" description="CTW-5473"/>
+                    <include name="validatePasswordsField" description="CTW-5474"/>
+                    <include name="validateAdultCheckBox" description="CTW-5475"/>
+                    <include name="checkSubmitButtonForRegisterNewCustomer" description="CTW-5476"/>
+                    <include name="checkValidateEmailForRegisteredNewCustomer" description="CTW-5477"/>
+                    <include name="checkCheckMandatoryFieldsInTheCustomerRegistrationForm" description="CTW-5628"/>
+                    <include name="checkRegistrationDialogFieldsDirectionForRightToLeftLanguages" description="CTW-5881"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

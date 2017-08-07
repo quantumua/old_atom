@@ -88,6 +88,17 @@ public interface RegistrationDialog {
 
     void register(String countryCode);
 
-    void verifyContentDirection(String expectedDirection);
+    void verifyContentAlignment(String expectedDirection);
 
+    String getLegallTermsAndConditionsLink();
+
+    void legallTermsAndConditionsLinkOpen();
+
+    String getBonusTermsConditionsLink();
+
+    void bonusTermsConditionsLinkOpen();
+
+    String getCookiePolicyLink();
+
+    void cookiePolicyLinkOpen();
 }

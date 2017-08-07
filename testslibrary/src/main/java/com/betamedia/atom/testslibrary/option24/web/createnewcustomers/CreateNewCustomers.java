@@ -6,9 +6,16 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSite
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import com.betamedia.atom.core.api.web.form.Localization;
+import com.betamedia.atom.core.fwdataaccess.annotations.ClasspathLocation;
+import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
+import com.betamedia.atom.core.holders.ConfigurationPropertiesProvider;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
@@ -44,7 +51,18 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected static final String EMPTY_STRING = "";
     protected static final String EMPTY_PHONE_PREFIX = "+";
     protected static final String ARABIAN_LANGUAGE = "AR";
-    protected static final String EUROPEAN_LANGUAGE = "EU";
+    protected static final String RTL_DIRECTION = "rtl";
+    protected static final String EXPECTED_LEGALL_TERMS_AND_CONDITIONS_LINK = "/terms-and-conditions/";
+    protected static final String EXPECTED_COOKIE_POLICY_LINK = "/terms-and-conditions/privacy-policy/";
+    protected static final String EXPECTED_BONUS_TERMS_CONDITIONS_LINK = "/terms-and-conditions/bonus/";
+    protected static final String QA_PREFIX_IN_DOMAIN = "qawww";
+    protected static final String PRODUCTION_PREFIX = "www";
+    protected static final int FIRST_TAB = 0;
+    protected static final int SECOND_TAB = 1;
+    protected static final String SERVER_DOCUMENT = "https://www.rodelerltd.com/24option";
+    protected final String LICENSE_FOLDER = "/terms-and-conditions/";
+    protected final String BONUS_FOLDER = "/bonus/";
+    protected final String PRIVACY_FOLDER = "/privacy-policy/";
 
     /**
      * RGB color constants
@@ -537,5 +555,44 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         Reporter.log(String.format("Check expected: '%s' and actual: '%s' <br/>",
                 expected, actual));
         softAssert().assertEquals(actual, expected, errorMessage);
+    }
+
+
+    protected List<Localization> getLocalization() {
+        return CsvResourceRepository.getData(Localization.class, Localization.class.getAnnotation(ClasspathLocation.class).value());
+    }
+
+    protected String getCurrentUrl() {
+        URL url = null;
+        try {
+            url=new URL(ConfigurationPropertiesProvider.DEFAULT_ENVIRONMENT_URL);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url.getProtocol() + "://" + url.getAuthority().replace(QA_PREFIX_IN_DOMAIN,PRODUCTION_PREFIX);
+    }
+
+    protected String getLegallTermsAndConditionsExpectedLink() {
+        return getLegallTermsAndConditionsExpectedLink(EMPTY_STRING);
+    }
+
+    protected String getLegallTermsAndConditionsExpectedLink(String locale) {
+        return getCurrentUrl()+locale+EXPECTED_LEGALL_TERMS_AND_CONDITIONS_LINK;
+    }
+
+    protected String getBonusTermsConditionsExpectedLink() {
+        return getBonusTermsConditionsExpectedLink(EMPTY_STRING);
+    }
+
+    protected String getBonusTermsConditionsExpectedLink(String locale) {
+        return getCurrentUrl()+locale+EXPECTED_BONUS_TERMS_CONDITIONS_LINK;
+    }
+
+    protected String getCookiePolicyLinkExpectedLink() {
+        return getCurrentUrl()+EXPECTED_COOKIE_POLICY_LINK;
+    }
+
+    protected String getCookiePolicyLinkExpectedLink(String locale) {
+        return getCurrentUrl()+locale+EXPECTED_COOKIE_POLICY_LINK;
     }
 }

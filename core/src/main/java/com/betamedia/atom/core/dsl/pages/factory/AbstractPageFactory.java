@@ -15,5 +15,6 @@ public abstract class AbstractPageFactory implements PageFactory {
 
     @Override
     public BrowserOperations browser(){
-        return creator.getPage(BrowserOperationsImpl.class);}
+        return creator.getPage(BrowserOperationsImpl.class);
+    }
 }

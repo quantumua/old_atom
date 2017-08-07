@@ -74,4 +74,19 @@ public class BrowserOperationsImpl extends AbstractPageObject implements Browser
     public void waitUntilPageLoad() {
         super.waitUntilPageLoad();
     }
+
+    @Override
+    public String getTabUrl(int tabId) {
+        return super.getTabUrl(tabId);
+    }
+
+    @Override
+    public String getUrl() {
+        return super.getUrlAddress();
+    }
+
+    @Override
+    public void switchToTab(int tabId) {
+        super.switchToTab(tabId);
+    }
 }

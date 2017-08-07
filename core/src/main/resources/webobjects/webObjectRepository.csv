@@ -170,6 +170,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerCheckbox,ID,checkboxDisclaimer
 2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerSubmitBtn,ID,disclaimer_submit
 2.6.2,2017-05-29 15:24 +0000,LandingPageImpl,homepage,CLASS_NAME,homepage-balanced-template
+2.6.2,2017-05-29 15:24 +0000,LandingPageImpl,legalTermsOfUse,XPATH,//*[@class='list-unstyled linkMenu second']/li[2]/a
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageOption,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/div/ul/li[1]/a/span[1]
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,okButton,ID,btnAcceptBtn
@@ -256,6 +257,9 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,currencies,XPATH,//*[@id='Currency_wrapper']//span[@class='text']
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,agreeStatus,ID,AccountAgreeStatus
 2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,chatLink,XPATH,//*[@class='chat-link']//*[.='Chat Now']
+2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,legallTermsAndConditions,XPATH,//*[@id="AccountAgreeLabel"]/p/a[1]
+2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,bonusTermsConditions,XPATH,//*[@id="AccountAgreeLabel"]/p/a[2]
+2.6.2,2017-05-29 15:24 +0000,RegistrationDialogImpl,cookiePolicy,XPATH,//*[@id="AccountAgreeLabel"]/p/a[3]
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,firstNameField,ID,FirstName
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,lastNameField,ID,LastName
 2.6.2,2017-05-29 15:24 +0000,RegistrationPageImpl,emailField,ID,Email
@@ -329,6 +333,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiBackImage,XPATH,.//*[@class='document-box poi-back-image']
 2.6.2,2017-05-29 15:24 +0000,WelcomeBackMessageImpl,continueQuestionnaire,ID,welcomeback-btn
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,ID,welcome-btn
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,XPATH,//*[@id='wizard-welcome']/div[1]
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalAmount,ID,WithdrawalAmount
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalBtnStep1,ID,swNextBtn
 2.6.2,2017-05-29 15:24 +0000,WithdrawalPageImpl,withdrawalbankName,ID,BankName

@@ -2,7 +2,7 @@ package com.betamedia.atom.core.fwdataaccess.repository.impl;
 
 import com.betamedia.atom.core.fwdataaccess.annotations.ClasspathLocation;
 import com.betamedia.atom.core.fwdataaccess.entities.ExpectedCfdAsset;
-import com.betamedia.atom.core.fwdataaccess.repository.EntityRepository;
+import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,8 +22,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by mbelyaev on 4/27/17.
  */
 @Component
-public class EntityRepositoryImpl implements EntityRepository {
-    private static final Logger logger = LogManager.getLogger(EntityRepositoryImpl.class);
+public class CsvResourceRepositoryImpl implements CsvResourceRepository {
+    private static final Logger logger = LogManager.getLogger(CsvResourceRepositoryImpl.class);
 
     private Map<Class, List> repository = new ConcurrentHashMap<>();
 

@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
-
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -359,7 +359,27 @@ public abstract class AbstractPageObject {
         }
     }
 
+    protected String getUrlAddress() {
+        return webDriver.getCurrentUrl();
+    }
+
     private static WebElement elementIfVisible(WebElement element) {
         return element.isDisplayed() ? element : null;
+    }
+
+    protected String getTabUrl(int tabId) {
+        String currentTab = webDriver.getWindowHandle();
+        String result="";
+        ArrayList<String> availableWindows = new ArrayList(webDriver.getWindowHandles());
+        if (!availableWindows.isEmpty()) {
+            result = webDriver.switchTo().window(availableWindows.get(tabId)).getCurrentUrl();
+        }
+        webDriver.switchTo().window(currentTab);
+        return result;
+    }
+
+    protected void switchToTab(int tabId) {
+        ArrayList<String> availableWindows = new ArrayList(webDriver.getWindowHandles());
+        webDriver.switchTo().window(availableWindows.get(tabId));
     }
 }

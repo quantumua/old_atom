@@ -13,7 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import static org.testng.Assert.assertTrue;
 
@@ -96,14 +95,24 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     private By phoneField;
     @StoredId
     private By currencyField;
+    @StoredId
+    private By legallTermsAndConditions;
+    @StoredId
+    private By bonusTermsConditions;
+    @StoredId
+    private By cookiePolicy;
+
+
 
     private final String ATTRIBUTE_VALUE = "value";
     private final String ATTRIBUTE_TITLE = "title";
+    private final String ATTRIBUTE_HREF = "href";
     private final String ATTRIBUTE_MAX_LENGTH = "maxlength";
     private final String ATTRIBUTE_STYLE_BORDER = "border-bottom-color";
     private final String ATTRIBUTE_TEXT_CONTENT = "textContent";
     private final String SCRIPT_CLICK_FIRST_ELEMENT = "arguments[0].click()";
     private final String PROPERTY_DIRECTION = "direction";
+
 
     public RegistrationDialogImpl(WebDriver webDriver) {
         super(webDriver);
@@ -373,7 +382,8 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     }
 
     @Override
-    public void verifyContentDirection(String expectedDirection) {
+    public void verifyContentAlignment(String expectedDirection) {
+        Reporter.log("Make sure all fields have "+expectedDirection+" direction <br/>");
         softAssert().assertEquals(waitUntilDisplayed(caption).getCssValue(PROPERTY_DIRECTION),expectedDirection,
                 "Caption hasn't expected direction");
         softAssert().assertEquals(waitUntilDisplayed(firstName).getCssValue(PROPERTY_DIRECTION),expectedDirection,
@@ -401,5 +411,34 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
         softAssert().assertAll();
     }
 
+    @Override
+    public String getLegallTermsAndConditionsLink() {
+        return scrollIntoView(waitUntilDisplayed(legallTermsAndConditions)).getAttribute(ATTRIBUTE_HREF);
+    }
+
+    @Override
+    public void legallTermsAndConditionsLinkOpen() {
+        scrollIntoView(waitUntilDisplayed(legallTermsAndConditions)).click();
+    }
+
+    @Override
+    public String getBonusTermsConditionsLink() {
+        return scrollIntoView(waitUntilDisplayed(bonusTermsConditions)).getAttribute(ATTRIBUTE_HREF);
+    }
+
+    @Override
+    public void bonusTermsConditionsLinkOpen() {
+        scrollIntoView(waitUntilDisplayed(bonusTermsConditions)).click();
+    }
+
+    @Override
+    public String getCookiePolicyLink() {
+        return scrollIntoView(waitUntilDisplayed(cookiePolicy)).getAttribute(ATTRIBUTE_HREF);
+    }
+
+    @Override
+    public void cookiePolicyLinkOpen() {
+        scrollIntoView(waitUntilDisplayed(cookiePolicy)).click();
+    }
 
 }

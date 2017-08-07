@@ -1,24 +1,15 @@
 package com.betamedia.atom.core.testingtype.base;
 
-import com.betamedia.atom.core.fwdataaccess.repository.EntityRepository;
+import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ExternalExecutionListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.SoftAssertListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener;
 import com.betamedia.atom.core.holders.AppContextHolder;
-import com.opencsv.CSVReader;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.HeaderColumnNameMappingStrategy;
-import org.springframework.core.io.ClassPathResource;
-import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,11 +28,10 @@ public abstract class AbstractTest {
     protected static final String GENERIC_PARALLEL_DATA_PROVIDER = "GenericParallelDataProvider";
     protected static final String CACHED_DATA_PROVIDER = "CachedDataProvider";
     protected static final String CACHED_PARALLEL_DATA_PROVIDER = "CachedParallelDataProvider";
-    private static final String DATA_PROVIDER_ERROR = "Failed to load data";
 
     private static final ThreadLocal<SoftAssert> softAsserts = ThreadLocal.withInitial(SoftAssert::new);
-    
-    private EntityRepository entityRepository = null;
+
+    private CsvResourceRepository csvResourceRepository = null;
 
     /**
      * Factory method for managed {@link SoftAssert}s to use inside test lifecycle.
@@ -108,10 +98,7 @@ public abstract class AbstractTest {
      */
     @DataProvider(name = GENERIC_DATA_PROVIDER)
     public final Iterator<Object[]> genericDataProvider() {
-        return getData(getDataSourceEntity(), getDataSourcePath())
-                .stream()
-                .map(d -> new Object[]{d})
-                .iterator();
+        return readFromClasspath();
     }
 
     /**
@@ -122,40 +109,45 @@ public abstract class AbstractTest {
      */
     @DataProvider(name = GENERIC_PARALLEL_DATA_PROVIDER, parallel = true)
     public final Iterator<Object[]> genericParallelDataProvider() {
-        return getData(getDataSourceEntity(), getDataSourcePath())
-                .stream()
-                .map(d -> new Object[]{d})
-                .iterator();
+        return readFromClasspath();
     }
 
     /**
-     * Generic data provider that attempts to get resources from {@link EntityRepository}
+     * Generic data provider that attempts to get resources from {@link CsvResourceRepository}
      * as entities provided by {@link AbstractTest#getDataSourceEntity()};
      */
     @DataProvider(name = CACHED_DATA_PROVIDER)
     public final Iterator<Object[]> cachedDataProvider() {
-        return getResources(getDataSourceEntity())
-                .stream()
-                .map(a -> new Object[]{a})
-                .iterator();
+        return readCachedFromClasspath();
     }
 
     /**
-     * Generic data provider that attempts to get resources from {@link EntityRepository}
+     * Generic data provider that attempts to get resources from {@link CsvResourceRepository}
      * as entities provided by {@link AbstractTest#getDataSourceEntity()};
      *
      * @implNote TestNG will invoke {@link #runTearDown()} after every execution
      */
     @DataProvider(name = CACHED_PARALLEL_DATA_PROVIDER, parallel = true)
     public final Iterator<Object[]> cachedParallelDataProvider() {
+        return readCachedFromClasspath();
+    }
+
+    private Iterator<Object[]> readCachedFromClasspath() {
         return getResources(getDataSourceEntity())
                 .stream()
                 .map(a -> new Object[]{a})
                 .iterator();
     }
-    
+
+    private Iterator<Object[]> readFromClasspath() {
+        return CsvResourceRepository.getData(getDataSourceEntity(), getDataSourcePath())
+                .stream()
+                .map(d -> new Object[]{d})
+                .iterator();
+    }
+
     protected final <T> List<T> getResources(Class<T> entity) {
-        return getEntityRepository().get(entity);
+        return getCsvResourceRepository().get(entity);
     }
 
     /**
@@ -172,22 +164,10 @@ public abstract class AbstractTest {
         return null;
     }
 
-    private static <T> List<T> getData(Class<T> tClass, String path) {
-        HeaderColumnNameMappingStrategy<T> strategy = new HeaderColumnNameMappingStrategy<>();
-        strategy.setType(tClass);
-        CsvToBean<T> csvToBean = new CsvToBean<>();
-        try (InputStream inputStream = new ClassPathResource(path).getInputStream()) {
-            return csvToBean.parse(strategy, new CSVReader(new InputStreamReader(inputStream)));
-        } catch (IOException e) {
-            Reporter.log(DATA_PROVIDER_ERROR + '\n');
-            throw new RuntimeException(DATA_PROVIDER_ERROR, e);
+    private CsvResourceRepository getCsvResourceRepository() {
+        if (csvResourceRepository == null) {
+            csvResourceRepository = AppContextHolder.getBean(CsvResourceRepository.class);
         }
-    }
-
-    private EntityRepository getEntityRepository() {
-        if (entityRepository == null) {
-            entityRepository = AppContextHolder.getBean(EntityRepository.class);
-        }
-        return entityRepository;
+        return csvResourceRepository;
     }
 }

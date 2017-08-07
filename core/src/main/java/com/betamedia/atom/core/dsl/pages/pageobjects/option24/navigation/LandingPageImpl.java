@@ -11,6 +11,8 @@ import org.openqa.selenium.WebDriver;
 public class LandingPageImpl extends AbstractPageObject implements LandingPage {
     @StoredId
     private By homepage;
+    @StoredId
+    private By legalTermsOfUse;
 
     public LandingPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -19,5 +21,10 @@ public class LandingPageImpl extends AbstractPageObject implements LandingPage {
     @Override
     public boolean isOnPage() {
         return waitUntilDisplayed(homepage) != null;
+    }
+
+    @Override
+    public void legalTermsOfUse() {
+        scrollIntoView(waitUntilDisplayed(legalTermsOfUse)).click();
     }
 }

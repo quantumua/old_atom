@@ -5,9 +5,9 @@ import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.Currency;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
+import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.LocalizationElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * Created by vsnigur on 7/17/17.
@@ -15,7 +15,8 @@ import static org.testng.AssertJUnit.assertEquals;
  */
 public class LongRegistrationWizard extends CreateNewCustomers {
 
-    private static final String RTL_DIRECTION = "rtl";
+    private static final String LOCALE = "/international";
+    private static final String ARABIAN_LANGUAGE = "AR";
 
     @BeforeMethod
     public void beforeTest() {
@@ -43,6 +44,69 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().registrationDialog().submitRegisterForm();
         pages().creditCardDeposit().waitforCreditCardDepositPage();
         operations().onBoardingOperations().assertUserCreatedInDatabase(customerRegistrationInfo.getEmail());
+    }
+
+    /**
+     * verify correct localization after registration for ARABIAN language
+     */
+    @Test(description = "CTW-5443:SINT: Correct redirect after open account slide submit (different languages)")
+    public void verifyRedirectAfterOpenAccountSlideSubmit() {
+        pages().topNavigationPage().selectLanguage(ARABIAN_LANGUAGE);
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        //pages().loadingDialog().isDisplayed();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
+        pages().registrationDialog().submitRegisterForm();
+        pages().welcomeDialog().isStartBtnDisplayed();
+        softAssert().assertEquals(pages().welcomeDialog().getCaption(),
+                getLocalization().stream().filter(l->l.getElement().equalsIgnoreCase(
+                        LocalizationElement.WELCOME_DIALOG_CAPTION)).findFirst().get().getArabian());
+        softAssert().assertEquals(pages().welcomeDialog().getStartButtonCaption(),
+                getLocalization().stream().filter(l->l.getElement().equalsIgnoreCase(
+                        LocalizationElement.WELCOME_DIALOG_START_BUTTON_NAME)).findFirst().get().getArabian());
+    }
+
+    /**
+     * verify legal term and conditions link
+     */
+    @Test(description = "CTW-18622:Legal terms and conditions")
+    public void verifyLegalTermsAndConditionsDocument() {
+        pages().registrationDialog().legallTermsAndConditionsLinkOpen();
+        pages().browser().switchToTab(SECOND_TAB);
+        pages().browser().waitUntilPageLoad();
+        softAssert().assertEquals(pages().browser().getTabUrl(SECOND_TAB), getLegallTermsAndConditionsExpectedLink(LOCALE));
+        pages().browser().switchToTab(FIRST_TAB);
+        softAssert().assertEquals(pages().registrationDialog().getLegallTermsAndConditionsLink(),
+                getLegallTermsAndConditionsExpectedLink());
+    }
+
+    /**
+     * verify BonusTermsConditions link
+     */
+    @Test(description = "CTW-18623:Bonus terms and conditions")
+    public void verifyBonusTermsConditionsLinks() {
+        pages().registrationDialog().bonusTermsConditionsLinkOpen();
+        pages().browser().switchToTab(SECOND_TAB);
+        pages().browser().waitUntilPageLoad();
+        softAssert().assertEquals(pages().browser().getTabUrl(SECOND_TAB), getBonusTermsConditionsExpectedLink(LOCALE));
+        pages().browser().switchToTab(FIRST_TAB);
+        softAssert().assertEquals(pages().registrationDialog().getBonusTermsConditionsLink(),
+                getBonusTermsConditionsExpectedLink());
+    }
+
+    /**
+     * verify CookiePolicy link
+     */
+    @Test(description = "CTW-18624:Cookie policy")
+    public void verifyCookiePolicyLinks() {
+        pages().registrationDialog().cookiePolicyLinkOpen();
+        pages().browser().switchToTab(SECOND_TAB);
+        pages().browser().waitUntilPageLoad();
+        softAssert().assertEquals(pages().browser().getTabUrl(SECOND_TAB), getCookiePolicyLinkExpectedLink(LOCALE));
+        pages().browser().switchToTab(FIRST_TAB);
+        softAssert().assertEquals(pages().registrationDialog().getCookiePolicyLink(),
+                getCookiePolicyLinkExpectedLink());;
     }
 
     /**
@@ -347,46 +411,46 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      *  verify mandatory fields
      *  verify customer for existence in the CRM Database
      */
-    @Test(description = "CTW-5626:SEU: Registration form - Mandatory fields E2E")
+    @Test(description = "CTW-5628:SINT: Registration form - Mandatory fields E2E")
     public void checkCheckMandatoryFieldsInTheCustomerRegistrationForm() {
         CustomerRegistrationInfo customer = getCustomer();
         customer.setFirstName(EMPTY_STRING);
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("Enter your first name", pages().registrationDialog().getErrorMessageNotification());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorFirstName());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),"Enter your first name");
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorFirstName(), RED_RGB_STYLE);
 
         customer = getCustomer();
         customer.setLastName(EMPTY_STRING);
         registerNewCustomer(customer);
-        assertEquals("Enter your last name", pages().registrationDialog().getErrorMessageNotification());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorLastName());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(), "Enter your last name");
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorLastName(), RED_RGB_STYLE);
 
         customer = getCustomer();
         customer.setEmail(EMPTY_STRING);
         registerNewCustomer(customer);
-        assertEquals("Enter a valid email address.", pages().registrationDialog().getErrorMessageNotification());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(), "Enter a valid email address.");
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorForEmail(), RED_RGB_STYLE);
 
         customer = getCustomer();
         customer.setPhoneCountryPrefix(EMPTY_PHONE_PREFIX);
         registerNewCustomer(customer);
-        assertEquals("Country is a mandatory field.", pages().registrationDialog().getErrorMessageNotification());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderForPrefixField());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(), "Country is a mandatory field.");
+        softAssert().assertEquals(pages().registrationDialog().getBorderForPrefixField(), RED_RGB_STYLE);
 
         customer = getCustomer();
         customer.setPhoneNumber(EMPTY_STRING);
         registerNewCustomer(customer);
-        assertEquals("Enter at least 6 characters", pages().registrationDialog().getErrorMessageNotification());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorPhone());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(), "Enter at least 6 characters");
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorPhone(), RED_RGB_STYLE);
 
         customer = getCustomer();
         customer.setPassword(EMPTY_STRING);
         pages().browser().deleteAllCookies();
         pages().browser().refreshPage();
         registerNewCustomer(customer);
-        assertEquals("Incorrect password.", pages().registrationDialog().getErrorMessageNotification());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForPassword());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(), "Incorrect password.");
+        softAssert().assertEquals(pages().registrationDialog().getBorderColorForPassword(), RED_RGB_STYLE);
 
         pages().browser().deleteAllCookies();
         pages().browser().refreshPage();
@@ -407,14 +471,14 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     }
 
     /**
-     * verify directions in the registration page for mandatory fields
+     * verify directions in the registration page for mandatory fields if RTL language was selected
      */
-    @Test(description = "CTW-5874:AR - Verify when choosing AR language the order of the Registration slide is changing RTL")
+    @Test(description = "CTW-5881:SINT: AR - Verify when choosing AR language the order of the Registration slide is changing RTL")
     public void checkRegistrationDialogFieldsDirectionForRightToLeftLanguages() {
         pages().topNavigationPage().selectLanguage(ARABIAN_LANGUAGE);
         pages().topNavigationPage().signUp();
         pages().registrationDialog().exists();
-        pages().registrationDialog().verifyContentDirection(RTL_DIRECTION);
+        pages().registrationDialog().verifyContentAlignment(RTL_DIRECTION);
     }
 
     private CustomerRegistrationInfo getCustomerWithLastName(String lastName) {

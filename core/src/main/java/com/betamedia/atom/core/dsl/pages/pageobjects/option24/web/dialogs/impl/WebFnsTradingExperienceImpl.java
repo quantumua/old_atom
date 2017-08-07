@@ -1,9 +1,9 @@
-package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.impl;
+package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.dialogs.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.impl.AbstractFnsTradingExperience;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import static java.util.Objects.nonNull;
 
 /**

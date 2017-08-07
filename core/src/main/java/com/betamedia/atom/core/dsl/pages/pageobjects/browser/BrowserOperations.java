@@ -19,4 +19,10 @@ public interface BrowserOperations {
     File takeScreenShot();
 
     void waitUntilPageLoad();
+
+    String getTabUrl(int tabId);
+
+    String getUrl();
+
+    void switchToTab(int tabId);
 }

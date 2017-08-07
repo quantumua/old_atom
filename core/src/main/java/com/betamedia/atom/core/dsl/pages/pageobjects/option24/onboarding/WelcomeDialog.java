@@ -6,4 +6,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding;
 public interface WelcomeDialog {
     void start();
     boolean isStartBtnDisplayed();
+    String getCaption();
+    String getStartButtonCaption();
 }

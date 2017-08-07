@@ -5,4 +5,5 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation;
  */
 public interface LandingPage {
     boolean isOnPage();
+    void legalTermsOfUse();
 }

@@ -5,6 +5,7 @@ import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.Currency;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
+import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.LocalizationElement;
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
@@ -15,13 +16,18 @@ import static org.testng.AssertJUnit.assertTrue;
  */
 public class LongRegistrationWizard extends CreateNewCustomers {
 
+    private static final String LOCALE = "/en";
+    private static final String LICENSE_TERMS_DOCUMENT = SERVER_DOCUMENT+LOCALE+"/clientagreement_24option.pdf";
+    private static final String BONUS_TERMS_AND_CONDITIONS_DOCUMENT = SERVER_DOCUMENT+LOCALE+"/bonustermsandconditions_24option.pdf";
+    private static final String PRIVACY_POLICY_DOCUMENT = SERVER_DOCUMENT+LOCALE+"/privacypolicy_24option.pdf";
+    private static final String DEUTSCH_LANGUAGE = "DE";
+
     /**
      * open register form
      * select European country;
      * register user;
      * make sure user appears in the CRM DataBase;
      */
-    @Override
     @Test(description = "CTW-5416:Verify full registration on SEU")
     public void verifySignUpButtonRedirectToOnboardingOpenAccount() {
         CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
@@ -32,6 +38,72 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().registrationDialog().submitRegisterForm();
         pages().welcomeDialog().isStartBtnDisplayed();
         operations().onBoardingOperations().assertUserCreatedInDatabase(customerRegistrationInfo.getEmail());
+    }
+
+    /**
+     * verify correct localization after registration for DEU language
+     */
+    @Test(description = "CTW-5442:SEU: Correct redirect after open account slide submit (different languages)")
+    public void verifyRedirectAfterOpenAccountSlideSubmit() {
+        pages().topNavigationPage().selectLanguage(DEUTSCH_LANGUAGE);
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        pages().loadingDialog().isDisplayed();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
+        pages().registrationDialog().submitRegisterForm();
+        pages().welcomeDialog().isStartBtnDisplayed();
+        softAssert().assertEquals(pages().welcomeDialog().getCaption(),
+                getLocalization().stream().filter(l->l.getElement().equalsIgnoreCase(
+                        LocalizationElement.WELCOME_DIALOG_CAPTION)).findFirst().get().getGerman());
+        softAssert().assertEquals(pages().welcomeDialog().getStartButtonCaption(),
+                getLocalization().stream().filter(l->l.getElement().equalsIgnoreCase(
+                        LocalizationElement.WELCOME_DIALOG_START_BUTTON_NAME)).findFirst().get().getGerman());
+    }
+
+    /**
+     * verify legal term and conditions link
+     */
+    @Test(description = "CTW-18362:Legal terms and conditions")
+    public void verifyLegalTermsAndConditionsDocument() {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().legallTermsAndConditionsLinkOpen();
+        pages().browser().switchToTab(SECOND_TAB);
+        pages().browser().waitUntilPageLoad();
+        softAssert().assertEquals(pages().browser().getTabUrl(SECOND_TAB), LICENSE_TERMS_DOCUMENT);
+        pages().browser().switchToTab(FIRST_TAB);
+        softAssert().assertEquals(pages().registrationDialog().getLegallTermsAndConditionsLink(),
+                getLegallTermsAndConditionsExpectedLink());
+    }
+
+    /**
+     * verify BonusTermsConditions link
+     */
+    @Test(description = "CTW-18365:Bonus terms and conditions")
+    public void verifyBonusTermsConditionsLinks() {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().bonusTermsConditionsLinkOpen();
+        pages().browser().switchToTab(SECOND_TAB);
+        pages().browser().waitUntilPageLoad();
+        softAssert().assertEquals(pages().browser().getTabUrl(SECOND_TAB), BONUS_TERMS_AND_CONDITIONS_DOCUMENT);
+        pages().browser().switchToTab(FIRST_TAB);
+        softAssert().assertEquals(pages().registrationDialog().getBonusTermsConditionsLink(),
+                getBonusTermsConditionsExpectedLink());
+    }
+
+    /**
+     * verify CookiePolicy link
+     */
+    @Test(description = "CTW-18369:Cookie policy")
+    public void verifyCookiePolicyLinks() {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().cookiePolicyLinkOpen();
+        pages().browser().switchToTab(SECOND_TAB);
+        pages().browser().waitUntilPageLoad();
+        softAssert().assertEquals(pages().browser().getTabUrl(SECOND_TAB), PRIVACY_POLICY_DOCUMENT);
+        pages().browser().switchToTab(FIRST_TAB);
+        softAssert().assertEquals(pages().registrationDialog().getCookiePolicyLink(),
+                getCookiePolicyLinkExpectedLink());
     }
 
     /**
@@ -112,8 +184,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
 
     /**
      * open register dialog;
-     * input one char into first name field
-     * check error message that impossible input less than 2 chars as first name
+     * input one char into last name field
+     * check error message that impossible input none alphabetical symbols into last name
      */
     @Test(description = "CTW-5420:Last Name field validations: No option to insert anything but letters")
     public void validateImpossibleInputSpecialCharsIntoLastNameField() {
@@ -130,22 +202,22 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     }
 
     /**
-     * open register dialog;
-     * input chars and digits into last name field;
-     * check error message that possible input only alphabetical chars;
+     *  open register dialog;
+     *  input max+1 chars into last name field
+     *  check that impossible input more than max chars into last name field
      */
-    @Test(description = "CTW-5420:Last Name field validations: No option to insert anything but letters")
-    public void validateImpossibleInputAnyCharsExceptLettersIntoLastName() {
+    @Test(description = "CTW-18422:Last Name field validations: no option to fill more than 20 characters")
+    public void verifyImpossibleInputMoreThanTwentyCharsIntoLastName() {
         CustomerRegistrationInfo customerRegistrationInfo =
                 CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
-                .withLastName(SYMBOLS_AND_DIGITS)
-                .build();
+                        .withLastName(MAX_PLUS_ONE_CHARS_NAME)
+                        .build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
-        assertTrue("Not only letters inputted into last name field.",
-                pages().registrationDialog().getLastName().equalsIgnoreCase(SYMBOLS_AND_NO_DIGITS));
+        assertEquals("Possible input max+1 chars into last name field.",
+                MAX_CHARS_NAME, pages().registrationDialog().getLastName());
     }
 
     /**
@@ -462,8 +534,20 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         operations().onBoardingOperations().assertUserCreatedInDatabase(customer.getEmail());
     }
 
+    /**
+     * verify directions in the registration page for mandatory fields if RTL language was selected
+     */
+    @Test(description = "CTW-5874:AR - Verify when choosing AR language the order of the Registration slide is changing RTL")
+    public void checkRegistrationDialogFieldsDirectionForRightToLeftLanguages() {
+        pages().topNavigationPage().selectLanguage(ARABIAN_LANGUAGE);
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().exists();
+        pages().registrationDialog().verifyContentAlignment(RTL_DIRECTION);
+    }
+
     private CustomerRegistrationInfo getCustomer() {
         return CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .build();
     }
+
 }

@@ -1,6 +1,6 @@
 package com.betamedia.atom.webservice.web.controllers;
 
-import com.betamedia.atom.core.fwdataaccess.repository.EntityRepository;
+import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +16,14 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping
 public class DataController {
     @Autowired
-    private EntityRepository entityRepository;
+    private CsvResourceRepository csvResourceRepository;
 
     @PostMapping("/upload/expectedCfdAssets")
     public ResponseEntity<String> uploadExpectedCfdAssetsCfdAssets(MultipartFile expectedCfdAssets) {
         if (expectedCfdAssets.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        entityRepository.updateExpectedCfdAssets(expectedCfdAssets);
+        csvResourceRepository.updateExpectedCfdAssets(expectedCfdAssets);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
