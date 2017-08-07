@@ -1,15 +1,30 @@
 package com.betamedia.atom.core.dsl.pages.factory.widgets;
 
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.impl.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsEmployerInfo;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsPersonalInformation;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsTradingExperience;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.login.LoginPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.login.impl.LoginPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.impl.AccountDetailsPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.type.ProductType;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 /**
  * Created by vsnigur on 7/31/17.
  */
+@Lazy
+@Component
+@Scope(SCOPE_PROTOTYPE)
 public class WidgetsPageFactoryImpl extends AbstractPageFactory implements WidgetsPageFactory {
     @Override
     public ProductType getType() {
@@ -52,10 +67,7 @@ public class WidgetsPageFactoryImpl extends AbstractPageFactory implements Widge
     }
 
     @Override
-    public RegistrationPage registrationPage() { return creator.getPage(RegistrationPageImpl.class); }
-
-    @Override
-    public SetLeveragePageImpl setLeveragePage() {
+    public SetLeveragePage setLeveragePage() {
         return creator.getPage(SetLeveragePageImpl.class);
     }
 

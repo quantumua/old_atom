@@ -1,38 +1,44 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.Assets;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.impl.AssetsImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.CfdBidder;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.impl.CfdBidderImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.impl.ControlPanelImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginDialog;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.DisclaimerNotificationImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginDialogImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.impl.LoginErrorNotificationImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.DialogBox;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.MessageBox;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.impl.DialogBoxImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.impl.MessageBoxImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.impl.RejectMessageOnLoginImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.LandingPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPageImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.impl.CfdPositionsImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.dialogs.AccountAdditionalDetailsDialog;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.dialogs.impl.AccountAdditionalDetailsDialogImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.dialogs.impl.WebFnsEmployerInformationImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.dialogs.impl.WebFnsPersonalInformationImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.dialogs.impl.WebFnsTradingExperienceImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.impl.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets.Assets;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets.impl.AssetsImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.CfdBidder;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.impl.CfdBidderImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsEmployerInfo;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsPersonalInformation;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsTradingExperience;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.RejectMessageOnLogin;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.usercontrolpanel.ControlPanel;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.usercontrolpanel.impl.ControlPanelImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.withdrawal.WithdrawalPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.withdrawal.impl.WithdrawalPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.DisclaimerNotification;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.LoginDialog;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.LoginErrorNotification;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.impl.DisclaimerNotificationImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.impl.LoginDialogImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.impl.LoginErrorNotificationImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.messages.DialogBox;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.messages.MessageBox;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.messages.impl.DialogBoxImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.messages.impl.MessageBoxImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.impl.RejectMessageOnLoginImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.navigation.LandingPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.navigation.impl.LandingPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.navigation.TopNavigationPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.navigation.impl.TopNavigationPageImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders.CfdPositions;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders.impl.CfdPositionsImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.AccountAdditionalDetailsDialog;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.AccountAdditionalDetailsDialogImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.WebFnsEmployerInformationImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.WebFnsPersonalInformationImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.WebFnsTradingExperienceImpl;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.impl.CreditCardDepositPageImpl;
 import com.betamedia.atom.core.dsl.pages.type.ProductType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
@@ -175,27 +181,27 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     }
 
     @Override
-    public SetLeverageDialogImpl setLeverageDialog() {
+    public SetLeverageDialog setLeverageDialog() {
         return creator.getPage(SetLeverageDialogImpl.class);
     }
 
     @Override
-    public StartTradeDialogImpl startTradeDialog() {
+    public StartTradeDialog startTradeDialog() {
         return creator.getPage(StartTradeDialogImpl.class);
     }
 
     @Override
-    public RejectMessageOnLoginImpl rejectMessage() {
+    public RejectMessageOnLogin rejectMessage() {
         return creator.getPage(RejectMessageOnLoginImpl.class);
     }
 
     @Override
-    public ConfirmCloseMessageImpl confirmCloseMessage() {
+    public ConfirmCloseMessage confirmCloseMessage() {
         return creator.getPage(ConfirmCloseMessageImpl.class);
     }
 
     @Override
-    public UploadDocumentDialogImpl uploadDocumentDialog() {
+    public UploadDocumentDialog uploadDocumentDialog() {
         return creator.getPage(UploadDocumentDialogImpl.class);
     }
 

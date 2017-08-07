@@ -1,21 +1,23 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.assets.Assets;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.bidder.CfdBidder;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.controlpanel.ControlPanel;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.DisclaimerNotification;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginErrorNotification;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.DialogBox;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.MessageBox;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.messages.impl.RejectMessageOnLoginImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.LandingPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.onboarding.impl.*;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.login.LoginDialog;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.navigation.TopNavigationPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.orders.CfdPositions;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.dialogs.AccountAdditionalDetailsDialog;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsEmployerInfo;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsPersonalInformation;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsTradingExperience;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.withdrawal.WithdrawalPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.CfdBidder;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets.Assets;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders.CfdPositions;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.DisclaimerNotification;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.LoginDialog;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.LoginErrorNotification;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.RejectMessageOnLogin;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.messages.DialogBox;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.messages.MessageBox;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.navigation.LandingPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.navigation.TopNavigationPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.*;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.usercontrolpanel.ControlPanel;
 
 /**
  * @author Lilian Medina
@@ -43,7 +45,7 @@ public interface WebPageFactory {
 
 	SignatureRiskWarning signatureRiskWarning();
 
-	WelcomeBackMessageImpl welcomeBackMessage();
+	WelcomeBackMessage welcomeBackMessage();
 
 	WithdrawalPage withdrawalPage();
 
@@ -71,21 +73,21 @@ public interface WebPageFactory {
 
     CreditCardDepositPage creditCardDeposit();
 
-    WelcomeDialogImpl welcomeDialog();
+    WelcomeDialog welcomeDialog();
 
     RiskWarningDialog riskWarningPage();
 
     LeveragePopup leveragePopup();
 
-    SetLeverageDialogImpl setLeverageDialog();
+    SetLeverageDialog setLeverageDialog();
 
-    StartTradeDialogImpl startTradeDialog();
+    StartTradeDialog startTradeDialog();
 
-    RejectMessageOnLoginImpl rejectMessage();
+    RejectMessageOnLogin rejectMessage();
 
-    ConfirmCloseMessageImpl confirmCloseMessage();
+    ConfirmCloseMessage confirmCloseMessage();
 
-    UploadDocumentDialogImpl uploadDocumentDialog();
+    UploadDocumentDialog uploadDocumentDialog();
 
     ConfirmAnswersDialog confirmAnswers();
 
