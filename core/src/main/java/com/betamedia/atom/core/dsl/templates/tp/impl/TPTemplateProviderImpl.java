@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.dsl.templates.tp.impl;
 
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.TPTemplate;
 import com.betamedia.atom.core.dsl.templates.tp.TPTemplateProvider;
 import org.springframework.beans.factory.annotation.Autowired;

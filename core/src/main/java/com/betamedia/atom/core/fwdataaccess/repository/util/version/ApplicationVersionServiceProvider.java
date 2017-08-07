@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.fwdataaccess.repository.util.version;
 
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 
 /**
  * @author mbelyaev

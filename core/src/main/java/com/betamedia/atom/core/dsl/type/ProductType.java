@@ -1,4 +1,4 @@
-package com.betamedia.atom.core.dsl.pages.type;
+package com.betamedia.atom.core.dsl.type;
 
 /**
  * @author Maksym Tsybulskyy

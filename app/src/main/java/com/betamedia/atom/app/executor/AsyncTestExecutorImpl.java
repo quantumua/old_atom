@@ -1,12 +1,11 @@
 package com.betamedia.atom.app.executor;
 
-import com.betamedia.atom.app.entity.TestInformation;
-import com.betamedia.atom.core.dsl.pages.type.ProductType;
 import com.betamedia.atom.app.classloader.ContextClassLoaderManagingExecutor;
+import com.betamedia.atom.app.entity.TestInformation;
 import com.betamedia.atom.app.runner.TestRunner;
-import com.betamedia.atom.core.fwtestrunner.environment.TestRunningEnvInitializer;
 import com.betamedia.atom.app.types.TestRunnerType;
-import com.betamedia.atom.core.holders.ConfigurationPropertiesProvider;
+import com.betamedia.atom.core.dsl.type.ProductType;
+import com.betamedia.atom.core.fwtestrunner.environment.TestRunningEnvInitializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.AsyncListenableTaskExecutor;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,8 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+
+import static com.betamedia.atom.core.dsl.type.TestConfigurationKeys.RUNNER_TYPE;
 
 /**
  * Executes the test run asynchronously, backed by Spring's {@link AsyncListenableTaskExecutor} implementation.
@@ -64,7 +65,7 @@ public class AsyncTestExecutorImpl implements AsyncTestExecutor {
     }
 
     private static TestRunnerType getType(Properties properties) {
-        return TestRunnerType.parse((String) properties.get(ConfigurationPropertiesProvider.RUNNER_TYPE));
+        return TestRunnerType.parse((String) properties.get(RUNNER_TYPE.getKey()));
     }
 
 }

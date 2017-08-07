@@ -4,7 +4,7 @@ import com.betamedia.atom.core.dsl.operations.impl.AbstractAccountOperations;
 import com.betamedia.atom.core.dsl.operations.impl.AbstractBonusOperations;
 import com.betamedia.atom.core.dsl.operations.impl.AbstractCustomerOperations;
 import com.betamedia.atom.core.dsl.operations.impl.AbstractOnBoardingOperations;
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
 import com.betamedia.atom.core.environment.tp.NewAutomationEnvironment;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;

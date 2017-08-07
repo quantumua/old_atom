@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.dsl.templates.tp;
 
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 
 /**
  * @author Maksym Tsybulskyy

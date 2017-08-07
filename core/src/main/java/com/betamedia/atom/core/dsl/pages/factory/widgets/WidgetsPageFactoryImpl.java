@@ -12,7 +12,7 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.login.impl
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.impl.AccountDetailsPageImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.impl.*;
-import com.betamedia.atom.core.dsl.pages.type.ProductType;
+import com.betamedia.atom.core.dsl.type.ProductType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

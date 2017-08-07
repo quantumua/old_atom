@@ -8,7 +8,7 @@ import com.betamedia.atom.core.api.tp.entities.response.CRMError;
 import com.betamedia.atom.core.api.tp.entities.response.CRMRegisterResult;
 import com.betamedia.atom.core.api.tp.entities.response.CRMResponse;
 import com.betamedia.atom.core.configuration.properties.CRMProperties;
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.mockito.InjectMocks;

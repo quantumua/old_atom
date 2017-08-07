@@ -3,7 +3,7 @@ package com.betamedia.atom.core.configuration.environment.connectors;
 import com.betamedia.atom.core.api.tp.adapters.impl.AbstractMobileCRMHTTPAdapter;
 import com.betamedia.atom.core.api.tp.adapters.impl.AbstractTPCRMHttpAdapter;
 import com.betamedia.atom.core.configuration.environment.AutomationEnvironmentConfig;
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

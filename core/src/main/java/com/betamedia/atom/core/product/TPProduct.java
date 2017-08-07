@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.product;
 
-import com.betamedia.atom.core.dsl.pages.type.ProductType;
+import com.betamedia.atom.core.dsl.type.ProductType;
 
 /**
  * @author Maksym Tsybulskyy

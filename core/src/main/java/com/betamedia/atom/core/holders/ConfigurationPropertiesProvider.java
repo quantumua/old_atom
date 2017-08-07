@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+import static com.betamedia.atom.core.dsl.type.TestConfigurationKeys.*;
+
 /**
  * Creates test execution {@link Properties} out of environment properties of the application. Used for running tests
  * through maven surefire.
@@ -20,14 +22,6 @@ import java.util.Properties;
 public final class ConfigurationPropertiesProvider {
 
     private static final Logger logger = LogManager.getLogger(ConfigurationPropertiesProvider.class);
-
-    public static final String REMOTE_DRIVER_URL = "remote.driver.url";
-    public static final String ENVIRONMENT_URL = "environment.url";
-    public static final String BROWSER_TYPE = "browser.type";
-    public static final String IMPLEMENTATION_VERSION = "implementation.version";
-    public static final String REVISION_DATE = "revision.date";
-    public static final String RUNNER_TYPE = "runner.type";
-    public static final String ENVIRONMENT = "environment";
 
     public static final String DEFAULT_ENVIRONMENT_URL = "https://qawww.24option.com/eu/trade/";
     public static final String DEFAULT_BROWSER_TYPE = "firefox";
@@ -42,12 +36,12 @@ public final class ConfigurationPropertiesProvider {
 
     public Properties getFromSystem() {
         Properties properties = new Properties();
-        putSystemProperty(REMOTE_DRIVER_URL, properties, null);
-        putSystemProperty(ENVIRONMENT_URL, properties, DEFAULT_ENVIRONMENT_URL);
-        putSystemProperty(BROWSER_TYPE, properties, DEFAULT_BROWSER_TYPE);
-        putSystemProperty(IMPLEMENTATION_VERSION, properties, null);
-        putSystemProperty(REVISION_DATE, properties, null);
-        putSystemProperty(ENVIRONMENT, properties, DEFAULT_ENVIRONMENT);
+        putSystemProperty(REMOTE_DRIVER_URL.getKey(), properties, null);
+        putSystemProperty(ENVIRONMENT_URL.getKey(), properties, DEFAULT_ENVIRONMENT_URL);
+        putSystemProperty(BROWSER_TYPE.getKey(), properties, DEFAULT_BROWSER_TYPE);
+        putSystemProperty(IMPLEMENTATION_VERSION.getKey(), properties, null);
+        putSystemProperty(REVISION_DATE.getKey(), properties, null);
+        putSystemProperty(ENVIRONMENT.getKey(), properties, DEFAULT_ENVIRONMENT);
         return properties;
     }
 

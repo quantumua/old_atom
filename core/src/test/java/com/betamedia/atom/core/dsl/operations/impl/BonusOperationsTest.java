@@ -3,7 +3,7 @@ package com.betamedia.atom.core.dsl.operations.impl;
 import com.betamedia.atom.core.api.tp.adapters.TPCRMHttpAdapter;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAddBonus;
 import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.tp.api.model.Bonus;
 import com.betamedia.tp.api.model.Brand;

@@ -1,12 +1,12 @@
 package com.betamedia.atom.webservice.utils;
 
-import com.betamedia.atom.core.holders.ConfigurationPropertiesProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.Properties;
 
+import static com.betamedia.atom.core.dsl.type.TestConfigurationKeys.*;
 import static com.betamedia.atom.core.utils.PropertiesUtils.permute;
 import static com.betamedia.atom.core.utils.StringUtils.COMMA;
 
@@ -47,10 +47,10 @@ public class PropertiesUtilsTest {
 
     private Properties get(String browser, String version, String domain, String remoteDriver) {
         Properties properties = new Properties();
-        properties.put(ConfigurationPropertiesProvider.BROWSER_TYPE, browser);
-        properties.put(ConfigurationPropertiesProvider.IMPLEMENTATION_VERSION, version);
-        properties.put(ConfigurationPropertiesProvider.ENVIRONMENT_URL, domain);
-        properties.put(ConfigurationPropertiesProvider.REMOTE_DRIVER_URL, remoteDriver);
+        properties.put(BROWSER_TYPE.getKey(), browser);
+        properties.put(IMPLEMENTATION_VERSION.getKey(), version);
+        properties.put(ENVIRONMENT_URL.getKey(), domain);
+        properties.put(REMOTE_DRIVER_URL.getKey(), remoteDriver);
         return properties;
     }
 }

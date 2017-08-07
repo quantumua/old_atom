@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.fwdataaccess.repository.util.version;
 
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

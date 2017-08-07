@@ -5,7 +5,7 @@ import com.betamedia.atom.core.api.tp.entities.request.AccountRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMAccountCreate;
 import com.betamedia.atom.core.api.tp.entities.response.CRMDeposit;
 import com.betamedia.atom.core.api.tp.entities.response.TPCRMResponse;
-import com.betamedia.atom.core.dsl.pages.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.QAEnvironment;
 import com.betamedia.common.enums.Country;
 import com.betamedia.common.enums.Currency;
