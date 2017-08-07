@@ -10,6 +10,7 @@ import com.betamedia.atom.core.api.web.form.Localization;
 import com.betamedia.atom.core.fwdataaccess.annotations.ClasspathLocation;
 import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
 import com.betamedia.atom.core.holders.ConfigurationPropertiesProvider;
+import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
@@ -80,10 +81,13 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify registration dialog caption
      */
     @Test(description = "CTW-5079:verify sign up button gives you the open account pop up")
+    @TestLinkProperties(displayId = "CTW-5079")
     public void verifySignUpButtonRedirectToOnboardingOpenAccount() {
         pages().topNavigationPage().signUp();
-        assertTrue("Registration dialog does not appear.",pages().registrationDialog().exists());
-        assertEquals("Apply for an account with 24option", pages().registrationDialog().dialogCaption());
+        softAssert().assertTrue(pages().registrationDialog().exists(),
+                "Registration dialog does not appear.");
+        softAssert().assertEquals(pages().registrationDialog().dialogCaption(),
+                "Apply for an account with 24option");
     }
 
     /**
@@ -94,14 +98,15 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - live chat control;
      */
     @Test(description = "CTW-5089:main page elements verification")
+    @TestLinkProperties(displayId = "CTW-5089")
     public void applyForAnAccountElementsVerification() {
         pages().topNavigationPage().signUp();
-        assertTrue("Logo does not appear.", pages().registrationDialog().logoExists());
-        assertTrue("Registration dialog does not appear.",pages().topNavigationPage().languageExists());
-        assertTrue("Login button does not appear.", pages().registrationDialog().loginButtonExists());
-        assertTrue("Risk notification does not appear.", pages().registrationDialog().riskMessageExists());
+        softAssert().assertTrue( pages().registrationDialog().logoExists(), "Logo does not appear.");
+        softAssert().assertTrue( pages().topNavigationPage().languageExists(), "Registration dialog does not appear.");
+        softAssert().assertTrue( pages().registrationDialog().loginButtonExists(), "Login button does not appear.");
+        softAssert().assertTrue( pages().registrationDialog().riskMessageExists(), "Risk notification does not appear.");
         //assertTrue("Live chat does not appear.", pages().registrationDialog().liveChatExists());
-        assertTrue("Live chat link does not appear.", pages().registrationDialog().chatLinkDisplayed());
+        softAssert().assertTrue( pages().registrationDialog().chatLinkDisplayed(), "Live chat link does not appear.");
     }
 
     /**
@@ -109,18 +114,19 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate first name field;
      */
     @Test(description = "CTW-5375:first name field validations")
+    @TestLinkProperties(displayId = "CTW-5375")
     public void applyForAnAccountFirstNameFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(
                 CRMMobileAPINamingStrategy.get()).setFirstName(MAX_PLUS_ONE_CHARS_NAME).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals(MAX_CHARS_NAME, pages().registrationDialog().getFirstName());
+        softAssert().assertEquals( pages().registrationDialog().getFirstName(), MAX_CHARS_NAME);
         customerRO.setFirstName(SYMBOLS_AND_DIGITS);
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals(SYMBOLS_AND_NO_DIGITS, pages().registrationDialog().getFirstName());
+        softAssert().assertEquals( pages().registrationDialog().getFirstName(), SYMBOLS_AND_NO_DIGITS);
         customerRO.setFirstName(ONE_SYMBOL_NAME);
         pages().registrationDialog().register(customerRO);
-        assertEquals(FAIL_NAME_NOTIFICATION, pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(), FAIL_NAME_NOTIFICATION);
     }
 
     /**
@@ -128,18 +134,19 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate last name field;
      */
     @Test(description = "CTW-5208:last name field validations")
+    @TestLinkProperties(displayId = "CTW-5208")
     public void applyForAnAccountLastNameFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                 .setLastName(MAX_PLUS_ONE_CHARS_NAME).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals(MAX_CHARS_NAME, pages().registrationDialog().getLastName());
+        softAssert().assertEquals( pages().registrationDialog().getLastName(), MAX_CHARS_NAME);
         customerRO.setLastName(SYMBOLS_AND_DIGITS);
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals(SYMBOLS_AND_NO_DIGITS, pages().registrationDialog().getLastName());
+        softAssert().assertEquals( pages().registrationDialog().getLastName(), SYMBOLS_AND_NO_DIGITS);
         customerRO.setLastName(ONE_SYMBOL_NAME);
         pages().registrationDialog().register(customerRO);
-        assertEquals(FAIL_NAME_NOTIFICATION, pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals( pages().registrationDialog().getErrorMessageNotification(), FAIL_NAME_NOTIFICATION);
     }
 
     /**
@@ -147,22 +154,23 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate email name field;
      */
     @Test(description = "CTW-5209:email field validations")
+    @TestLinkProperties(displayId = "CTW-5209")
     public void emailFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                 .setPassword(EMPTY_STRING).setEmail(INCORRECT_EMAIL).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRO);
-        assertEquals("Enter a valid email address.",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter a valid email address.");
         customerRO.setEmail(INCORRECT_CHARS_IN_EMAIL);
         pages().registrationDialog().fillRegisterForm(customerRO);
-        assertEquals(EMPTY_STRING, pages().registrationDialog().getEmail());
+        softAssert().assertEquals(pages().registrationDialog().getEmail(), EMPTY_STRING);
         customerRO.setEmail(EMPTY_STRING);
         pages().registrationDialog().register(customerRO);
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
+        softAssert().assertEquals( pages().registrationDialog().getBorderColorForEmail(), RED_RGB_STYLE);
         customerRO.setEmail(CORRECT_EMAIL);
         pages().registrationDialog().register(customerRO);
-        assertEquals(GREEN_RGB_STYLE, pages().registrationDialog().getBorderColorForEmail());
+        softAssert().assertEquals( pages().registrationDialog().getBorderColorForEmail(), GREEN_RGB_STYLE);
     }
 
     /**
@@ -170,18 +178,20 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate prefix field field;
      */
     @Test(description = "CTW-5210:prefix field validations")
+    @TestLinkProperties(displayId = "CTW-5210")
     public void prefixFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().setCountryPrefix(Country.JORDAN.getName());
         pages().redirectDialog().startTrade();
         pages().registrationDialog().exists();
-        assertEquals(Country.JORDAN.getPhonePrefix(), pages().registrationDialog().getCountryPrefix());
+        softAssert().assertEquals( pages().registrationDialog().getCountryPrefix(), Country.JORDAN.getPhonePrefix());
         pages().registrationDialog().setCountryPrefix(Country.ISRAEL.getName());
         pages().registrationDialog().register(customerRO);
-        assertEquals("Registration Is Not Available In Your Country",
-                pages().registrationDialog().getErrorMessageNotification());
-        assertEquals(RED_RGB_STYLE, pages().registrationDialog().getBorderForCountryField());
+        softAssert().assertEquals( pages().registrationDialog().getErrorMessageNotification(),
+                "Registration Is Not Available In Your Country");
+        softAssert().assertEquals( pages().registrationDialog().getBorderForCountryField(),
+                RED_RGB_STYLE);
     }
 
     /**
@@ -189,15 +199,18 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate phone field;
      */
     @Test(description = "CTW-5211:phone number field validations")
+    @TestLinkProperties(displayId = "CTW-5211")
     public void phoneFieldValidations() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                 .setPhone(PHONE_NO_DIGITS).build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRO);
-        assertEquals("", pages().registrationDialog().getPhoneNumber());
+        softAssert().assertEquals(pages().registrationDialog().getPhoneNumber(),
+                EMPTY_STRING);
         customerRO.setPhone(PHONE_FIVE_DIGITS);
         pages().registrationDialog().register(customerRO);
-        assertEquals("Enter between 6 to 15 numbers", pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter between 6 to 15 numbers");
     }
 
     /**
@@ -205,13 +218,14 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate country search functionality for field;
      */
     @Test(description = "CTW-5260:country dropdown field search engine")
+    @TestLinkProperties(displayId = "CTW-5260")
     public void countryDropdownFieldSearchEngine() {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().setCountryPrefix(Country.JORDAN.getName());
         pages().redirectDialog().startTrade();
         pages().registrationDialog().exists();
-        assertEquals("Country was not available in the search result.",
-                Country.IRELAND.getName(), pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()));
+        softAssert().assertEquals(pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()),
+                Country.IRELAND.getName(),"Country was not available in the search result.");
     }
 
     /**
@@ -219,6 +233,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate country field field;
      */
     @Test(description = "CTW-5261:country dropdown validations")
+    @TestLinkProperties(displayId = "CTW-5261")
     public void countryDropdownValidations() {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().countrySearch(EMPTY_STRING, Country.ISRAEL.getName());
@@ -226,9 +241,8 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().registrationDialog().fillRegisterForm(
                 CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         pages().registrationDialog().submitRegisterForm();
-        assertEquals(NO_ERROR_MESSAGE,
-                "Registration Is Not Available In Your Country",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Registration Is Not Available In Your Country", NO_ERROR_MESSAGE);
     }
 
     /**
@@ -236,12 +250,13 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate currency field;
      */
     @Test(description = "CTW-5262:currency dropdown field validation")
+    @TestLinkProperties(displayId = "CTW-5262")
     public void currencyDropdownFieldValidation() {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(
                 CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
-        assertFalse("Currencies are not available",
-                pages().registrationDialog().availableCurrencies().isEmpty());
+        softAssert().assertFalse( pages().registrationDialog().availableCurrencies().isEmpty(),
+                "Currencies are not available");
     }
 
     /**
@@ -249,40 +264,37 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate password field;
      */
     @Test(description = "CTW-5264:password fields validations")
+    @TestLinkProperties(displayId = "CTW-5264")
     public void passwordFieldsValidation() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
                 .setPassword("").build();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRO);
-        assertEquals(NO_ERROR_MESSAGE,
-                "Incorrect password.",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Incorrect password.", NO_ERROR_MESSAGE);
         customerRO.setPassword(INCORRECT_PASSWORD);
         pages().registrationDialog().register(customerRO);
-        assertEquals(NO_ERROR_MESSAGE,
-                "Enter digits and letters only (lower and upper case)",
-                pages().registrationDialog().getErrorMessageNotification());
-        assertEquals("15",
-                pages().registrationDialog().getPasswordSize());
+        assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter digits and letters only (lower and upper case)", NO_ERROR_MESSAGE);
+        softAssert().assertEquals(pages().registrationDialog().getPasswordSize(), "15");
         pages().browser().refreshPage();
         pages().topNavigationPage().signUp();
         customerRO.setPassword(FOUR_CHARS);
         pages().registrationDialog().register(customerRO);
-        assertEquals(NO_ERROR_MESSAGE,
-                "Enter between 5 to 15 characters",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Enter between 5 to 15 characters", NO_ERROR_MESSAGE);
         pages().browser().refreshPage();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
         pages().registrationDialog().agreementStatus();
-        assertEquals(GREEN_RGB_STYLE,
-                pages().registrationDialog().getBorderColorForPassword());
+        softAssert().assertEquals( pages().registrationDialog().getBorderColorForPassword(),
+                GREEN_RGB_STYLE);
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
-        assertTrue("Additional details window did not appear.",
-                pages().startTradeDialog().exists());
+        softAssert().assertTrue( pages().startTradeDialog().exists(),
+                "Additional details window did not appear.");
     }
 
     /**
@@ -290,14 +302,15 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate agreement checkbox for message notification;
      */
     @Test(description = "CTW-5265:checkbox validation")
+    @TestLinkProperties(displayId = "CTW-5265")
     public void agreementCheckboxValidation() {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(
                 CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
         pages().registrationDialog().clickAgreement();
         pages().registrationDialog().submitRegisterForm();
-        assertEquals("You must read and agree to the above terms!",
-                pages().registrationDialog().agreementStatus());
+        softAssert().assertEquals( pages().registrationDialog().agreementStatus(),
+                "You must read and agree to the above terms!");
     }
 
     /**
@@ -305,12 +318,13 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - validate submit button functionality;
      */
     @Test(description = "CTW-5359:submit button")
+    @TestLinkProperties(displayId = "CTW-5359")
     public void submitButtonValidation() {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(
                 CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build());
-        assertFalse(pages().registrationDialog().submitIsEnabled());
-        assertTrue(pages().startTradeDialog().exists());
+        softAssert().assertFalse(pages().registrationDialog().submitIsEnabled());
+        softAssert().assertTrue(pages().startTradeDialog().exists());
     }
 
     /**
@@ -319,6 +333,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify users connection in the DB;
      */
     @Test(description = "CTW-17742:Same Credit Card")
+    @TestLinkProperties(displayId = "CTW-17742")
     public void validateConnectionInDBForDifferentCustomersButSameCreditCard() {
         CustomerRO customerROFirst = registerCustomer();
         pages().browser().deleteAllCookies();
@@ -336,6 +351,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify users connection in the DB;
      */
     @Test(description = "CTW-17744:Same Phone number1")
+    @TestLinkProperties(displayId = "CTW-17744")
     public void validateConnectionInDBForDifferentCustomersButSamePhone() {
         CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
@@ -360,6 +376,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify users are not connected in the DB;
      */
     @Test(description = "CTW-17745:Same First and last name")
+    @TestLinkProperties(displayId = "CTW-17745")
     public void validateNoConnectionsInDBForDifferentCustomersWithSameFirstAndLastNames() {
         CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
@@ -381,6 +398,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify that impossible to create 2 users with the same email;
      */
     @Test(description = "CTW-17743:Same Email")
+    @TestLinkProperties(displayId = "CTW-17743")
     public void validateNoConnectionsInDBForDifferentCustomersWithSameEmail() {
         CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get())
@@ -391,9 +409,8 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         pages().browser().refreshPage();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerROSecond);
-        assertEquals(NO_ERROR_MESSAGE,
-                "Customer with the same user name is already registered",
-                pages().registrationDialog().getErrorMessageNotification());
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+                "Customer with the same user name is already registered", NO_ERROR_MESSAGE);
     }
 
     /**
@@ -401,6 +418,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify users are not connected in the DB;
      */
     @Test(description = "CTW-17746:Same Machine ID -negative")
+    @TestLinkProperties(displayId = "CTW-17746")
     public void validateNoConnectionsInDBForDifferentCustomersWithSameMachineID() {
         CustomerRO customerROFirst = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         CustomerRO customerROSecond = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
@@ -418,6 +436,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify bulkEmail field value for user, it is not 0;
      */
     @Test(description = "CTW-7884:Bulk emails indicator Allow=No by default")
+    @TestLinkProperties(displayId = "CTW-7884")
     public void validateBulkEmailHasNoneZeroForNewCreatedCustomer() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         createCustomer(customerRO);
@@ -429,6 +448,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify phone calls field value for user, it is not 0;
      */
     @Test(description = "CTW-9009:Phone calls indicator = Allow by default")
+    @TestLinkProperties(displayId = "CTW-9009")
     public void validatePhoneCallsForNewCreatedCustomer() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         createCustomer(customerRO);
@@ -440,6 +460,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify customer creation source;
      */
     @Test(description = "CTW-2544: Web page")
+    @TestLinkProperties(displayId = "CTW-2544")
     public void validateCustomerCreationSourceId() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         createCustomer(customerRO);
@@ -524,6 +545,10 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         return customerRO;
     }
 
+    /**
+     * create condition to show only deposit page for registerred customer
+     * @return - condition for customer
+     */
     private OnboardingWizardConditions createConditionsToShowOnlyDepositPage() {
         return new OnboardingWizardConditions(true, true, true, true,
                 OnboardingWizardConditions.ExperienceLevel.HIGH_EXPERIENCE, false,
@@ -533,6 +558,10 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
                 true, OnboardingWizardConditions.DocumentVerificationStatus.VERIFIED);
     }
 
+    /**
+     * generate new customer and register it in the web register form
+     * @return - generated customer
+     */
     protected CustomerRegistrationInfo fillRegisterCustomerDialog() {
         CustomerRegistrationInfo customer =
                 CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
@@ -541,16 +570,30 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         return customer;
     }
 
+    /**
+     * fill register form in the web
+     * @param customer - customer to register
+     */
     protected void fillRegisterCustomerDialog(CustomerRegistrationInfo customer) {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().fillRegisterForm(customer);
     }
 
+    /**
+     * register new customer in the register form and submit
+     * @param customer - customer to register
+     */
     protected void registerNewCustomer(CustomerRegistrationInfo customer) {
         pages().registrationDialog().fillRegisterForm(customer);
         pages().registrationDialog().submitRegisterForm();
     }
 
+    /**
+     * validate for equals 2 objects and report log
+     * @param expected - expected data
+     * @param actual - actual data
+     * @param errorMessage - message to report
+     */
     public static void validateValue(Object expected, Object actual, String errorMessage) {
         Reporter.log(String.format("Check expected: '%s' and actual: '%s' <br/>",
                 expected, actual));
@@ -558,10 +601,18 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     }
 
 
+    /**
+     * get localization collection
+     * @return - collection of the localizations
+     */
     protected List<Localization> getLocalization() {
         return CsvResourceRepository.getData(Localization.class, Localization.class.getAnnotation(ClasspathLocation.class).value());
     }
 
+    /**
+     * get default url for the configured web site
+     * @return - url with domain only
+     */
     protected String getCurrentUrl() {
         URL url = null;
         try {
@@ -572,27 +623,54 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
         return url.getProtocol() + "://" + url.getAuthority().replace(QA_PREFIX_IN_DOMAIN,PRODUCTION_PREFIX);
     }
 
-    protected String getLegallTermsAndConditionsExpectedLink() {
-        return getLegallTermsAndConditionsExpectedLink(EMPTY_STRING);
+    /**
+     * construct legal terms and conditions link
+     * @return egal terms and conditions link
+     */
+    protected String getLegalTermsAndConditionsExpectedLink() {
+        return getLegalTermsAndConditionsExpectedLink(EMPTY_STRING);
     }
 
-    protected String getLegallTermsAndConditionsExpectedLink(String locale) {
+    /**
+     * construct legal terms and conditions link for required locale
+     * @param locale locale to use
+     * @return legal terms and conditions link
+     */
+    protected String getLegalTermsAndConditionsExpectedLink(String locale) {
         return getCurrentUrl()+locale+EXPECTED_LEGALL_TERMS_AND_CONDITIONS_LINK;
     }
 
+    /**
+     * construct bonus terms conditions expected link
+     * @return bonus terms conditions expected link
+     */
     protected String getBonusTermsConditionsExpectedLink() {
         return getBonusTermsConditionsExpectedLink(EMPTY_STRING);
     }
 
+    /**
+     * construct bonus terms conditions expected link for required locale
+     * @param locale - locale to use
+     * @return bonus terms conditions expected link
+     */
     protected String getBonusTermsConditionsExpectedLink(String locale) {
         return getCurrentUrl()+locale+EXPECTED_BONUS_TERMS_CONDITIONS_LINK;
     }
 
-    protected String getCookiePolicyLinkExpectedLink() {
+    /**
+     * construct expected cookie policy link
+     * @return cookie policy expected link
+     */
+    protected String getCookiePolicyExpectedLink() {
         return getCurrentUrl()+EXPECTED_COOKIE_POLICY_LINK;
     }
 
-    protected String getCookiePolicyLinkExpectedLink(String locale) {
+    /**
+     * construct expected cookie link
+     * @param locale - locale for link
+     * @return cookie policy expected link
+     */
+    protected String getCookiePolicyExpectedLink(String locale) {
         return getCurrentUrl()+locale+EXPECTED_COOKIE_POLICY_LINK;
     }
 }
