@@ -64,27 +64,27 @@ public class PersonalInformation {
     }
 
     public static class PersonalInformationBuilder {
-        private EmploymentStatus employmentStatus = EmploymentStatus.SALARIED_EMPLOYEE;
-        private Industry industry = Industry.FINANCE;
+        private EmploymentStatus employmentStatus;
+        private Industry industry;
         private String industryOther;
-        private String employerName = "fgsfds";
-        private String taxResidenceCountry = "DE";
-        private IsUSReportable isUSReportable = IsUSReportable.NO;
-        private HasTaxIdentificationNumber hasTaxIdentificationNumber = HasTaxIdentificationNumber.NO;
-        private String taxIdentificationNumber = "123456789";
-        private String socialSecurityNumber = null;
-        private EducationLevel educationLevel = EducationLevel.POST_GRADUATE;
-        private EducationField educationField = EducationField.ACCOUNTING;
-        private String educationFieldOther = null;
-        private IsPoliticallyExposed isPoliticallyExposed = IsPoliticallyExposed.NO;
-        private String politicalExposureComment = null;
-        private SourceOfFunds sourceOfFunds = SourceOfFunds.EMPLOYMENT;
-        private String sourceOfFundsOther = null;
-        private AnnualIncome annualIncome = AnnualIncome.INCOME_OVER_100K;
-        private NetWealth netWealth = NetWealth.NET_WEALTH_OVER_300K;
-        private ExpectedDepositsPerYear expectedDepositsPerYear = ExpectedDepositsPerYear.DEPOSITS_OVER_50K;
-        private PurposeOfTrading purposeOfTrading = PurposeOfTrading.ADDITIONAL_INCOME;
-        private String purposeOfTradingOther = null;
+        private String employerName;
+        private String taxResidenceCountry;
+        private IsUSReportable isUSReportable;
+        private HasTaxIdentificationNumber hasTaxIdentificationNumber;
+        private String taxIdentificationNumber;
+        private String socialSecurityNumber;
+        private EducationLevel educationLevel;
+        private EducationField educationField;
+        private String educationFieldOther;
+        private IsPoliticallyExposed isPoliticallyExposed;
+        private String politicalExposureComment;
+        private SourceOfFunds sourceOfFunds;
+        private String sourceOfFundsOther;
+        private AnnualIncome annualIncome;
+        private NetWealth netWealth;
+        private ExpectedDepositsPerYear expectedDepositsPerYear;
+        private PurposeOfTrading purposeOfTrading;
+        private String purposeOfTradingOther;
 
         private PersonalInformationBuilder() {
         }

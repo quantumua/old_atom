@@ -89,26 +89,26 @@ public class TradingExperienceInfo {
     }
 
     public static class TradingExperienceInfoBuilder {
-        private SharesExperience sharesExperience = SharesExperience.NEVER;
-        private BinaryExperience binaryExperience = BinaryExperience.OCCASIONALLY;
-        private AverageYearlyBinaryVolume averageYearlyBinaryVolume = AverageYearlyBinaryVolume.VOLUME_500_5K;
-        private ForExExperience forExExperience = ForExExperience.NEVER;
-        private AverageYearlyForExVolume averageYearlyForExVolume = null;
-        private CommonForExLeverage commonLeverage = null;
-        private FinancialWorkExperience financialWorkExperience = FinancialWorkExperience.WORKED;
-        private CfdBinaryKnowledge cfdBinaryKnowledge = CfdBinaryKnowledge.SPECULATIVE;
-        private MainFactorKnowledge mainFactorKnowledge = MainFactorKnowledge.ANNOUNCEMENT;
-        private HowToCloseKnowledge howToCloseKnowledge = HowToCloseKnowledge.LONDON_STOCK;
-        private CfdLeverageKnowledge cfdLeverageKnowledge = CfdLeverageKnowledge.PROVIDES;
-        private StopLossKnowledge stopLossKnowledge = StopLossKnowledge.MINIMIZE;
-        private RequiredMarginKnowledge requiredMarginKnowledge = RequiredMarginKnowledge.MARGIN_1K;
-        private MarginLevelDropKnowledge marginLevelDropKnowledge = MarginLevelDropKnowledge.WARNING_CALL;
-        private AutomaticStopKnowledge automaticStopKnowledge = AutomaticStopKnowledge.EARNINGS;
-        private LossOn1to50Knowledge lossOn1to50Knowledge = LossOn1to50Knowledge.A1_800;
-        private LossOn1to200Knowledge lossOn1to200Knowledge = LossOn1to200Knowledge.A1_1800;
-        private BinaryInvestProfitKnowledge binaryInvestProfitKnowledge = BinaryInvestProfitKnowledge.PROFIT_75;
-        private BinaryInvestLossKnowledge binaryInvestLossKnowledge = BinaryInvestLossKnowledge.LOSS_75;
-        private BinaryProbabilityKnowledge binaryProbabilityKnowledge = BinaryProbabilityKnowledge.MONEY_35;
+        private SharesExperience sharesExperience;
+        private BinaryExperience binaryExperience;
+        private AverageYearlyBinaryVolume averageYearlyBinaryVolume;
+        private ForExExperience forExExperience;
+        private AverageYearlyForExVolume averageYearlyForExVolume;
+        private CommonForExLeverage commonLeverage;
+        private FinancialWorkExperience financialWorkExperience;
+        private CfdBinaryKnowledge cfdBinaryKnowledge;
+        private MainFactorKnowledge mainFactorKnowledge;
+        private HowToCloseKnowledge howToCloseKnowledge;
+        private CfdLeverageKnowledge cfdLeverageKnowledge;
+        private StopLossKnowledge stopLossKnowledge;
+        private RequiredMarginKnowledge requiredMarginKnowledge;
+        private MarginLevelDropKnowledge marginLevelDropKnowledge;
+        private AutomaticStopKnowledge automaticStopKnowledge;
+        private LossOn1to50Knowledge lossOn1to50Knowledge;
+        private LossOn1to200Knowledge lossOn1to200Knowledge;
+        private BinaryInvestProfitKnowledge binaryInvestProfitKnowledge;
+        private BinaryInvestLossKnowledge binaryInvestLossKnowledge;
+        private BinaryProbabilityKnowledge binaryProbabilityKnowledge;
 
         private TradingExperienceInfoBuilder(){}
 
