@@ -63,6 +63,34 @@ public class PersonalInformation {
         return new PersonalInformationBuilder();
     }
 
+    @Override
+    public String toString() {
+        return "PersonalInformation{" +
+                "employmentStatus='" + employmentStatus + '\'' +
+                ", industry='" + industry + '\'' +
+                ", industryOther='" + industryOther + '\'' +
+                ", employerName='" + employerName + '\'' +
+                ", taxResidenceCountry='" + taxResidenceCountry + '\'' +
+                ", isUSReportable='" + isUSReportable + '\'' +
+                ", hasTaxIdentificationNumber='" + hasTaxIdentificationNumber + '\'' +
+                ", taxIdentificationNumber='" + taxIdentificationNumber + '\'' +
+                ", socialSecurityNumber='" + socialSecurityNumber + '\'' +
+                ", educationLevel='" + educationLevel + '\'' +
+                ", educationField='" + educationField + '\'' +
+                ", educationFieldOther='" + educationFieldOther + '\'' +
+                ", isPoliticallyExposed='" + isPoliticallyExposed + '\'' +
+                ", politicalExposureComment='" + politicalExposureComment + '\'' +
+                ", sourceOfFunds='" + sourceOfFunds + '\'' +
+                ", sourceOfFundsOther='" + sourceOfFundsOther + '\'' +
+                ", annualIncome='" + annualIncome + '\'' +
+                ", netWealth='" + netWealth + '\'' +
+                ", expectedDepositsPerYear='" + expectedDepositsPerYear + '\'' +
+                ", purposeOfTrading='" + purposeOfTrading + '\'' +
+                ", purposeOfTradingOther='" + purposeOfTradingOther + '\'' +
+                ", expectedScore=" + expectedScore +
+                '}';
+    }
+
     public static class PersonalInformationBuilder {
         private EmploymentStatus employmentStatus;
         private Industry industry;

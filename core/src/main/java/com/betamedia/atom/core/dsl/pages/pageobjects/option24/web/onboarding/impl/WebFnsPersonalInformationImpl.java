@@ -2,6 +2,8 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractFnsPersonalInformation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import static java.util.Objects.nonNull;
@@ -15,6 +17,8 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
     public WebFnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);
     }
+
+    private static final Logger logger = LogManager.getLogger(WebFnsPersonalInformationImpl.class);
 
     @Override
     public void submit(PersonalInformation info) {
@@ -52,6 +56,7 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
     }
 
     private void submitOnWizard(String dataValue) {
+        logger.info(String.format("filling Fns PersonalInformation wizard value: %s",dataValue));
         waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']")).click();
     }
 }

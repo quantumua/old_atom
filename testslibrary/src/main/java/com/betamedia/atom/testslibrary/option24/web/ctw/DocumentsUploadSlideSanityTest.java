@@ -1,13 +1,13 @@
 package com.betamedia.atom.testslibrary.option24.web.ctw;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
-import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
@@ -19,10 +19,12 @@ import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers
 public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
 
     @BeforeMethod
-    @Parameters({"countrycode"})
-    public void before(@Optional("de") String countrycode) {
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(CustomerRO.builder(WebSiteNamingStrategy.get()).setCountryCode(countrycode).build());
+        pages().registrationDialog().register(CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
+                .withPhoneCountryPrefix(phonecountryprefix)
+                .build());
         pages().welcomeDialog().isStartBtnDisplayed();
         pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
@@ -39,7 +41,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
      */
     @Test(description = "CTW-5765:Successful upload document: POI section - Passport doc")
     public void successfulUploadDocumentPOISectionPassportDoc() {
-        pages().uploadDocumentDialog().uploadPassport();
+        pages().uploadDocumentDialog().poiUploadPassport();
         softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "POI back image should not exists");
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "Passport uploaded and user is ready to start Trade");
     }
@@ -49,7 +51,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
      */
     @Test(description = "CTW-5767:Successful upload document: POI section - Driver license doc")
     public void successfulUploadDocumentPOISectionDriverLicenceDoc() {
-        pages().uploadDocumentDialog().uploadDriverLicense();
+        pages().uploadDocumentDialog().poiUploadDriverLicense();
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "Driver license uploaded and user is ready to start Trade");
     }
 

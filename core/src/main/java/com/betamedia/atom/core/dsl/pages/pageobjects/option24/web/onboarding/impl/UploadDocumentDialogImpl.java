@@ -18,9 +18,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
 
     private static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
     private static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
-    private static final String POI_PASSPORT_PATH = "files/sample_passport_tmp.jpg";
-    private static final String POI_DRIVER_LICENSE_FRONT_PATH = "files/sample_driver_license_front_tmp.jpg";
-    private static final String POI_DRIVER_LICENSE_BACK_PATH = "files/sample_driver_license_back_tmp.jpg";
+
+    private static final String POI_PASSPORT_PATH = "files/sample_passport.jpg";
+
+    private static final String POI_DRIVER_LICENSE_FRONT_PATH = "files/sample_driver_license_front.jpg";
+    private static final String POI_DRIVER_LICENSE_BACK_PATH = "files/sample_driver_license_back.jpg";
 
     @StoredId
     private By pageRoot;
@@ -32,7 +34,8 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By poiDocumentApproved;
     @StoredId
     private By poiDocumentNotApproved;
-// ------------
+
+    /* POI (Proof of identity) Controls*/
     @StoredId
     private By poiHeader;
     @StoredId
@@ -42,15 +45,25 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @StoredId
     private By poiUploadInput;
     @StoredId
+    private By poiIDSelection;
+    @StoredId
+    private By poiPassportSelection;
+    @StoredId
+    private By poiDriverLicenseSelection;
+    @StoredId
     private By poiFrontImage;
     @StoredId
     private By poiBackImage;
+
+    /* POR (Proof of residence) Controls*/
     @StoredId
-    private By idSelection;
+    private By porHeader;
     @StoredId
-    private By passportSelection;
+    private By porDocumentTypeSelector;
     @StoredId
-    private By driverLicenseSelection;
+    private By porWrapper;
+    @StoredId
+    private By porUploadInput;
     @StoredId
     private By documentTypeButton;
 
@@ -69,18 +82,18 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public void clickPOIHeader(){
+    public void poiClickHeader(){
         waitUntilDisplayed(poiHeader).click();
     }
 
     @Override
     public void uploadIdCard() {
-        clickPOIHeader();
+        poiClickHeader();
 //        request removing !important from display:none on document type <select> styling to make selection easier
 //        setDisplayBlock(poiDocumentTypeSelector);
 //        inSelect(poiDocumentTypeSelector).selectByVisibleText("Identity Card");
         /*click on button and then on option for ID card*/
-        selectPOIDocumentType(idSelection);
+        selectPOIDocumentType(poiIDSelection);
         /*make input element visible*/
         setDisplayBlock(poiUploadInput);
         /*upload file*/
@@ -94,9 +107,9 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public void uploadPassport() {
-        clickPOIHeader();
-        selectPOIDocumentType(passportSelection);
+    public void poiUploadPassport() {
+        poiClickHeader();
+        selectPOIDocumentType(poiPassportSelection, false);
         /*make input element visible*/
         setDisplayBlock(poiUploadInput);
         /*upload file*/
@@ -105,9 +118,9 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public void uploadDriverLicense() {
-        clickPOIHeader();
-        selectPOIDocumentType(driverLicenseSelection);
+    public void poiUploadDriverLicense() {
+        poiClickHeader();
+        selectPOIDocumentType(poiDriverLicenseSelection);
         setDisplayBlock(poiUploadInput);
         uploadFromPath(storeToTemp(POI_DRIVER_LICENSE_FRONT_PATH), poiUploadInput);
         waitUntilExists(poiBackImage).isDisplayed();
@@ -120,6 +133,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         return exists(poiBackImage);
     }
 
+    @Override
+    public void porClickHeader(){
+        waitUntilDisplayed(porHeader).click();
+    }
+
     private boolean isTransformed(By locator) {
         return !find(locator).getCssValue("transform").equals("none");
     }
@@ -129,12 +147,17 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     private void selectPOIDocumentType(By locator) {
-        waitUntilDisplayed(poiWrapper, documentTypeButton).click();
-        waitUntilDisplayed(poiWrapper, locator).click();
-        /*wait until animation starts*/
-        waitUntil(() -> isTransformed(poiFrontImage));
-        /*wait until animation ends*/
-        waitUntil(() -> !isTransformed(poiFrontImage));
+        selectPOIDocumentType(locator, true);
     }
 
+    private void selectPOIDocumentType(By locator, Boolean waitForTransformation) {
+        waitUntilDisplayed(poiWrapper, documentTypeButton).click();
+        waitUntilDisplayed(poiWrapper, locator).click();
+        if (waitForTransformation) {
+            /*wait until animation starts*/
+                waitUntil(() -> isTransformed(poiFrontImage));
+            /*wait until animation ends*/
+                waitUntil(() -> !isTransformed(poiFrontImage));
+        }
+    }
 }

@@ -35,6 +35,23 @@ public class CreditCardDeposit {
         return new CreditCardDepositBuilder();
     }
 
+    @Override
+    public String toString() {
+        return "CreditCardDeposit{" +
+                "depositAmount='" + depositAmount + '\'' +
+                ", creditCardNumber='" + creditCardNumber + '\'' +
+                ", cvv2='" + cvv2 + '\'' +
+                ", expiryDateMonth='" + expiryDateMonth + '\'' +
+                ", expiryDateYear='" + expiryDateYear + '\'' +
+                ", cardHoldersFirstName='" + cardHoldersFirstName + '\'' +
+                ", cardHoldersLastName='" + cardHoldersLastName + '\'' +
+                ", billingAddress='" + billingAddress + '\'' +
+                ", city='" + city + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
+
     public static class CreditCardDepositBuilder {
         private static final String DEFAULT_CREDIT_CARD_VISA = "4000027891380961";
 

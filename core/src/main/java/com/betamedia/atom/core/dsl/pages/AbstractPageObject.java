@@ -236,6 +236,7 @@ public abstract class AbstractPageObject {
      * @param element WebElement
      */
     protected WebElement scrollIntoView(WebElement element) {
+        logger.info(String.format("scrolling to element: %s", element));
         executeScript("arguments[0].scrollIntoView()", element);
         return element;
     }

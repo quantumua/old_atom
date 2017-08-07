@@ -2,6 +2,7 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboardin
 
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractCreditCardDeposit;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import org.openqa.selenium.By;
@@ -10,32 +11,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class CreditCardDepositPageImpl extends AbstractPageObject implements CreditCardDepositPage {
-
-	@StoredId
-	private By depositAmount;
-	@StoredId
-	private By creditCardNumber;
-	@StoredId
-	private By cvv2;
-	@StoredId
-	private By expiryDateMonth;
-	@StoredId
-	private By expiryDateYear;
-	@StoredId
-	private By cardHoldersFirstName;
-	@StoredId
-	private By cardHoldersLastName;
-	@StoredId
-	private By billingAddress;
-	@StoredId
-	private By city;
-	@StoredId
-	private By zipCode;
-	@StoredId
-	private By country;
-	@StoredId
-	private By submit;
+public class CreditCardDepositPageImpl extends AbstractCreditCardDeposit implements CreditCardDepositPage {
 
 	public CreditCardDepositPageImpl(WebDriver webDriver) {
 		super(webDriver);

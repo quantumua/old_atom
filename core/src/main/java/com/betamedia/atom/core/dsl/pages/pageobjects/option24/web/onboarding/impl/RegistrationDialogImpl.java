@@ -6,6 +6,8 @@ import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.RegistrationDialog;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -113,6 +115,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     private final String SCRIPT_CLICK_FIRST_ELEMENT = "arguments[0].click()";
     private final String PROPERTY_DIRECTION = "direction";
 
+    private static final Logger logger = LogManager.getLogger(RegistrationDialogImpl.class);
 
     public RegistrationDialogImpl(WebDriver webDriver) {
         super(webDriver);
@@ -228,6 +231,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
             find(retypePassword).clear();
             find(retypePassword).sendKeys(customerRO.getPassword());
             executeScript(SCRIPT_CLICK_FIRST_ELEMENT, find(accountAgree));
+            logger.info(String.format("Fill register form for customer: %s", customerRO.toString()));
             return true;
         } catch (Exception e) {
             Reporter.log("Exception happens during submit new user");
@@ -249,7 +253,13 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
         find(phoneNumber).sendKeys(customerRegistrationInfo.getPhoneNumber());
         setPasswordFields(customerRegistrationInfo.getPassword(), customerRegistrationInfo.getPassword());
         clickAgreement();
+        logger.info(String.format("Fill register form for customer: %s\n",customerRegistrationInfo.toString()));
         Reporter.log(String.format("Fill register form for customer: %s</br>",customerRegistrationInfo.toString()));
+    }
+
+    public void register(CustomerRegistrationInfo customerRegistrationInfo) {
+        fillRegisterForm(customerRegistrationInfo);
+        submitRegisterForm();
     }
 
     @Override

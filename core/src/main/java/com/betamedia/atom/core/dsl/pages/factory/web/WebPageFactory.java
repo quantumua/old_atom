@@ -1,9 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsEmployerInfo;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsPersonalInformation;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsTradingExperience;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.withdrawal.WithdrawalPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.CfdBidder;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets.Assets;

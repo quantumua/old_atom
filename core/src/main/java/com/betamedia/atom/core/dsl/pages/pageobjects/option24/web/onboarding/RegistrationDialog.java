@@ -48,6 +48,8 @@ public interface RegistrationDialog {
 
     void fillRegisterForm(CustomerRegistrationInfo customerRegistrationInfo);
 
+    void register(CustomerRegistrationInfo customerRegistrationInfo);
+
     void setPasswordFields(String password, String confirmPassword);
 
     void setCountryPrefix(String country);

@@ -9,13 +9,15 @@ public interface UploadDocumentDialog {
 
     void goToDocumentsUpload();
 
-    void clickPOIHeader();
+    void poiClickHeader();
 
     void uploadIdCard();
 
-    void uploadPassport();
+    void poiUploadPassport();
 
-    void uploadDriverLicense();
+    void poiUploadDriverLicense();
 
     boolean poiBackImageExists();
+
+    void porClickHeader();
 }

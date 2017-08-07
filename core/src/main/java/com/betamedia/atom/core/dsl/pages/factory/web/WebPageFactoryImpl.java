@@ -1,14 +1,11 @@
 package com.betamedia.atom.core.dsl.pages.factory.web;
 
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets.Assets;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets.impl.AssetsImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.CfdBidder;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.impl.CfdBidderImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsEmployerInfo;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsPersonalInformation;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsTradingExperience;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.login.RejectMessageOnLogin;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.usercontrolpanel.ControlPanel;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.usercontrolpanel.impl.ControlPanelImpl;
@@ -33,7 +30,6 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders.CfdPositions;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders.impl.CfdPositionsImpl;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.AccountAdditionalDetailsDialog;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.AccountAdditionalDetailsDialogImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.WebFnsEmployerInformationImpl;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.WebFnsPersonalInformationImpl;

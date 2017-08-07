@@ -2,6 +2,8 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractFnsTradingExperience;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import static java.util.Objects.nonNull;
@@ -14,6 +16,8 @@ public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience {
     public WebFnsTradingExperienceImpl(WebDriver webDriver) {
         super(webDriver);
     }
+
+    private static final Logger logger = LogManager.getLogger(WebFnsTradingExperienceImpl.class);
 
     @Override
     public void submit(TradingExperienceInfo info) {
@@ -38,6 +42,7 @@ public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience {
     }
 
     private void submitOnWizard(String dataValue) {
+        logger.info(String.format("filling Fns Trading Experience wizard value: %s",dataValue));
         waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']")).click();
     }
 }

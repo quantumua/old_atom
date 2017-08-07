@@ -1,10 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.factory.widgets;
 
 import com.betamedia.atom.core.dsl.pages.factory.AbstractPageFactory;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsEmployerInfo;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsPersonalInformation;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsTradingExperience;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.login.LoginPage;
@@ -77,7 +74,7 @@ public class WidgetsPageFactoryImpl extends AbstractPageFactory implements Widge
     }
 
     @Override
-    public AccountAdditionalDetailsPage accountAdditionalDetailsPage() { return creator.getPage(AccountAdditionalDetailsPageImpl.class); }
+    public AccountAdditionalDetailsDialog accountAdditionalDetailsPage() { return creator.getPage(AccountAdditionalDetailsPageImpl.class); }
 
     @Override
     public UploadDocumentsPage uploadDocumentsPage() { return creator.getPage(UploadDocumentsPageImpl.class); }

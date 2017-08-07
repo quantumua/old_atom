@@ -1,10 +1,11 @@
-package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding;
+package com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding;
+
+import java.util.List;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
-import java.util.List;
 
-public interface AccountAdditionalDetailsPage {
+public interface AccountAdditionalDetailsDialog {
 
     void update(AccountAdditionalDetails info);
 

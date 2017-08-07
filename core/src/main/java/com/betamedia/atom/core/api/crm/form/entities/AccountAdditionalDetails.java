@@ -22,6 +22,17 @@ public class AccountAdditionalDetails {
         return new AccountAdditionalDetailsBuilder();
     }
 
+    @Override
+    public String toString() {
+        return "AccountAdditionalDetails{" +
+                "birthDateDay='" + birthDateDay + '\'' +
+                ", birthDateMonth='" + birthDateMonth + '\'' +
+                ", birthDateYear='" + birthDateYear + '\'' +
+                ", countryOfBirth='" + countryOfBirth + '\'' +
+                ", nationality='" + nationality + '\'' +
+                '}';
+    }
+
     public static class AccountAdditionalDetailsBuilder {
         private String birthDateDay = "2";
         private String birthDateMonth = "2";

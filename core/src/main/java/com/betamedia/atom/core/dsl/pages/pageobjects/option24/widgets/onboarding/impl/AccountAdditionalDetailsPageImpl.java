@@ -2,9 +2,8 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboardin
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
-import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
-import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.AccountAdditionalDetailsPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountAdditionalDetails;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AccountAdditionalDetailsDialog;
 import com.betamedia.atom.core.testingtype.base.AbstractTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,50 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class AccountAdditionalDetailsPageImpl extends AbstractPageObject implements AccountAdditionalDetailsPage {
-
-    @StoredId
-    private By wizardProgressText;
-    @StoredId
-    private By chatNow;
-    @StoredId
-    private By additionalDetailsTitle;
-    @StoredId
-    private By birthDateTitle;
-	@StoredId
-    private By birthDateDay;
-	@StoredId
-    private By birthDateDayDropDownElements;
-	@StoredId
-    private By birthDateDayDropdownCaption;
-    @StoredId
-    private By birthDayDropDownSelectItem;
-    @StoredId
-    private By birthDateMonth;
-    @StoredId
-    private By birthDateMonthDropdownCaption;
-    @StoredId
-    private By birthDateYear;
-    @StoredId
-    private By birthDateYearDropdownCaption;
-    @StoredId
-    private By countryOfBirthTitle;
-    @StoredId
-    private By countryOfBirth;
-    @StoredId
-    private By countryOfBirthDropdownCaption;
-    @StoredId
-    private By countryOfBirthDropdownDataError;
-    @StoredId
-    private By nationalityTitle;
-    @StoredId
-    private By nationality;
-    @StoredId
-    private By nationalityDropdownCaption;
-    @StoredId
-    private By nationalityDropdownDataError;
-    @StoredId
-    private By submit;
+public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalDetails implements AccountAdditionalDetailsDialog {
 
     public AccountAdditionalDetailsPageImpl(WebDriver webDriver) {
         super(webDriver);
