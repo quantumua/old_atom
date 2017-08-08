@@ -6,8 +6,8 @@
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideSanityTest">
                 <methods>
-                    <parameter name="countrycode" value="de"/>
-                    <parameter name="phonecountryprefix" value="de"/>
+                    <parameter name="countrycode" value="Germany"/>
+                    <parameter name="phonecountryprefix" value="+49"/>
                     <include name="successfulUploadDocumentPOISectionPassportDoc" description="CTW-5765" />
                     <include name="successfulUploadDocumentPOISectionDriverLicenceDoc" description="CTW-5767" />
                     <include name="successfulUploadDocumentPOISectionIdentityCardDoc" description="CTW-5768" />
