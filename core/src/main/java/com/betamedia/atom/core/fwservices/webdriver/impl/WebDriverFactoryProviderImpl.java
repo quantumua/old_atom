@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -41,17 +42,20 @@ public class WebDriverFactoryProviderImpl implements WebDriverFactoryProvider {
     @Override
     public WebDriverFactory get(String browserType, String remoteDriverUrl, String domainUrl) {
         String driverType = remoteDriverUrl == null ? browserType : "remote";
-        ParametrizedWebDriverFactory webDriverFactory = providerMap.get(driverType);
-        return () -> {
-            try {
-                WebDriver driver = webDriverFactory.apply(getCapabilities(browserType), remoteDriverUrl);
-                driver.get(domainUrl);
-                return driver;
-            } catch (MalformedURLException e) {
-                logger.error("Failed to instantiate WebDriver:", e);
-                throw new RuntimeException(e);
-            }
-        };
+        return Optional.ofNullable(driverType)
+                .map(providerMap::get)
+                .map(factory ->
+                        (WebDriverFactory) () -> {
+                            try {
+                                WebDriver driver = factory.apply(getCapabilities(browserType), remoteDriverUrl);
+                                driver.get(domainUrl);
+                                return driver;
+                            } catch (MalformedURLException e) {
+                                logger.error("Failed to instantiate WebDriver:", e);
+                                throw new RuntimeException(e);
+                            }
+                        })
+                .orElse(null);
     }
 
     private DesiredCapabilities getCapabilities(String browserType) {

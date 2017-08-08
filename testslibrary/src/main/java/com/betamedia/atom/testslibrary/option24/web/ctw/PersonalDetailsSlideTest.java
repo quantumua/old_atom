@@ -17,7 +17,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
 	 */
     @Parameters({"countrycode"})
     @Test(description = "CTW-5624:Verify slide appear after registration and welcome slide")
-    @TestLinkProperties("CTW-5624")
+    @TestLinkProperties(displayId ="CTW-5624")
 	public void  verifySlideAppearAfterRegistrationAndWelcomeSlide(String countrycode) {
         registerAndStart(countrycode);
         Assert.assertTrue("Additional details page is available right after Welcome page", pages().accountAdditionalDetailsPage().exists());
@@ -28,7 +28,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
 	 */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5625:Verify Submit bttn is mandatory for moving fwd")
-    @TestLinkProperties("CTW-5625")
+    @TestLinkProperties(displayId ="CTW-5625")
     public void  verifySubmitButtonIsMandatoryForMovingFwd(String countrycode) {
         registerAndStart(countrycode);
     	Assert.assertFalse(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
@@ -40,7 +40,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
      */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5630:Verify all 3 fields are mandatory")
-    @TestLinkProperties("CTW-5630")
+    @TestLinkProperties(displayId ="CTW-5630")
     public void  verifyAll3FieldsAreMandatory(String countrycode) {
         registerAndStart(countrycode);
         AccountAdditionalDetails accountAdditionalDetails = AccountAdditionalDetails.builder().build();
@@ -59,7 +59,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
      */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5638:Verify submit bttn enables when all 3 fields are filled")
-    @TestLinkProperties("CTW-5638")
+    @TestLinkProperties(displayId ="CTW-5638")
     public void  verifySubmitButtonEnableWhenAllFieldsAreFilled(String countrycode) {
         registerAndStart(countrycode);
     	pages().accountAdditionalDetailsPage().selectAllFormElements(AccountAdditionalDetails.builder().build());
@@ -71,7 +71,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
      */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5647:Verify date of birth drop down functionality")
-    @TestLinkProperties("CTW-5647")
+    @TestLinkProperties(displayId ="CTW-5647")
     public void VerifyDateOofBirthDropDownFunctionality(String countrycode){
         registerAndStart(countrycode);
         Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDayDataList().size(),32);
@@ -84,7 +84,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
      */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5660:Verify selection changes drop down color")
-    @TestLinkProperties("CTW-5660")
+    @TestLinkProperties(displayId ="CTW-5660")
     public void verifySelectionChangesDropDownColor(String countrycode){
         registerAndStart(countrycode);
         String colorOfBorderBeforeClick = pages().accountAdditionalDetailsPage().getBirthDateDayElementColor();
@@ -98,7 +98,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
      */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5663:Verify opening drop downs changes arrow direction")
-    @TestLinkProperties("CTW-5663")
+    @TestLinkProperties(displayId ="CTW-5663")
     public void verifyOpeningDropDownsChangesArrowDirection(String countrycode) {
         registerAndStart(countrycode);
         String backgroundButtonBeforeClick = pages().accountAdditionalDetailsPage().getElementsBackground();
@@ -112,7 +112,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
      */
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5666:Click on submit moves you to FNS first slide")
-    @TestLinkProperties("CTW-5666")
+    @TestLinkProperties(displayId ="CTW-5666")
     public void clickOnSubmitMovesYouToFNSFirstSlide(String countrycode) {
         registerAndStart(countrycode);
         pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder().build());

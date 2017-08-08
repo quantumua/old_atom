@@ -1,7 +1,7 @@
 package com.betamedia.atom.core.testingtype.base;
 
 import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
-import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ExternalExecutionListener;
+import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ContextInitializingListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.SoftAssertListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener;
@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * @since 5/23/17
  */
 @Listeners({
-        ExternalExecutionListener.class,
+        ContextInitializingListener.class,
         ScreenShotListener.class,
         TestLinkListener.class,
         SoftAssertListener.class

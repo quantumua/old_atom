@@ -43,7 +43,7 @@ public class MobileCRMLoginTest extends WebBackEndTest {
 
     @Test
     @Parameters("customerId")
-    @TestLinkProperties("CTW-11803")
+    @TestLinkProperties(displayId = "CTW-11803")
     public void testLogout(String customerId) {
         operations().customerOperations().logout(customerId);
     }

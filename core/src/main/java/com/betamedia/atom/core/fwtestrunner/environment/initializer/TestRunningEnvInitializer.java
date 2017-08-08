@@ -1,4 +1,4 @@
-package com.betamedia.atom.core.fwtestrunner.environment;
+package com.betamedia.atom.core.fwtestrunner.environment.initializer;
 
 import com.betamedia.atom.core.product.ProductDependent;
 

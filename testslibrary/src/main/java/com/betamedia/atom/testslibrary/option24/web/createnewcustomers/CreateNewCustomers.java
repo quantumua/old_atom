@@ -9,18 +9,17 @@ import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.api.web.form.Localization;
 import com.betamedia.atom.core.fwdataaccess.annotations.ClasspathLocation;
 import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
-import com.betamedia.atom.core.holders.ConfigurationPropertiesProvider;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Created by vsnigur on 7/3/17.
@@ -61,6 +60,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected static final int FIRST_TAB = 0;
     protected static final int SECOND_TAB = 1;
     protected static final String SERVER_DOCUMENT = "https://www.rodelerltd.com/24option";
+    protected static final String DEFAULT_URL = "https://qawww.24option.com/eu/trade/";
     protected final String LICENSE_FOLDER = "/terms-and-conditions/";
     protected final String BONUS_FOLDER = "/bonus/";
     protected final String PRIVACY_FOLDER = "/privacy-policy/";
@@ -616,7 +616,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected String getCurrentUrl() {
         URL url = null;
         try {
-            url=new URL(ConfigurationPropertiesProvider.DEFAULT_ENVIRONMENT_URL);
+            url = new URL(DEFAULT_URL);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

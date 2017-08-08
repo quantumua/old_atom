@@ -1,4 +1,4 @@
-package com.betamedia.atom.core.fwtestrunner.environment.impl;
+package com.betamedia.atom.core.fwtestrunner.environment.initializer.impl;
 
 import com.betamedia.atom.core.dsl.templates.tp.TPTemplate;
 import com.betamedia.atom.core.dsl.templates.tp.TPTemplateProvider;
@@ -11,7 +11,7 @@ import com.betamedia.atom.core.fwdataaccess.repository.util.version.ApplicationV
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.ApplicationVersionServiceProvider;
 import com.betamedia.atom.core.fwservices.webdriver.WebDriverFactory;
 import com.betamedia.atom.core.fwservices.webdriver.WebDriverFactoryProvider;
-import com.betamedia.atom.core.fwtestrunner.environment.TestRunningEnvInitializer;
+import com.betamedia.atom.core.fwtestrunner.environment.initializer.TestRunningEnvInitializer;
 import com.betamedia.atom.core.holders.ThreadLocalBeansHolder;
 import com.betamedia.atom.core.product.TPProduct;
 import com.google.common.base.Strings;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Properties;
 
 import static com.betamedia.atom.core.dsl.type.TestConfigurationKeys.*;
@@ -44,9 +45,15 @@ public class TPTestRunningEnvInitializer implements TestRunningEnvInitializer, T
 
     @Override
     public void initializeEnvironment(Properties properties) {
-        ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(getWebDriverFactory(properties));
-        ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(getAppVersion(properties), webElementRepository));
-        ThreadLocalBeansHolder.setOperationsTemplateThreadLocal(getOperationsTemplate(properties));
+        if (Objects.isNull(ThreadLocalBeansHolder.getWebDriverFactoryThreadLocal())) {
+            ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(getWebDriverFactory(properties));
+        }
+        if (Objects.isNull(ThreadLocalBeansHolder.getVersionedWebElementRepositoryThreadLocal())) {
+            ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(getAppVersion(properties), webElementRepository));
+        }
+        if (Objects.isNull(ThreadLocalBeansHolder.getOperationsTemplateThreadLocal())) {
+            ThreadLocalBeansHolder.setOperationsTemplateThreadLocal(getOperationsTemplate(properties));
+        }
     }
 
     private WebDriverFactory getWebDriverFactory(Properties properties) {
