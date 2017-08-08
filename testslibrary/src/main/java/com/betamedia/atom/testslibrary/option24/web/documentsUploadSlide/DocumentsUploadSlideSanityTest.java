@@ -68,6 +68,16 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "ID Card uploaded and user is ready to start Trade");
     }
 
+    /*
+     *[TestLink] CTW-5769:Successful upload document: Credit Card section
+     */
+    @Test(description = "CTW-5769:Successful upload document: Credit Card section")
+    @TestLinkProperties(displayId = "CTW-5769")
+    public void successfulUploadDocumentCreditCardSection() {
+        closeWizardAndGoToUploadDocumentTab();
+        pages().uploadDocumentsTab().uploadCreditCard();
+        softAssert().assertTrue(pages().uploadDocumentsTab().creditCardImagesSentMsgExists(), "Credit Card uploaded successfully.");
+    }
 
     /*
      *[TestLink] CTW-5770:Failed upload document: POI section - invalid Passport doc
@@ -78,6 +88,13 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
 
     }
 
+
+    private void closeWizardAndGoToUploadDocumentTab() {
+        pages().uploadDocumentDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        pages().topNavigationPage().goToMyAccount();
+        pages().uploadDocumentsTab().goToDocumentsUpload();
+    }
 
     private PersonalInformation getPersonalInformation() {
         return PersonalInformation.builder()

@@ -20,4 +20,6 @@ public interface UploadDocumentDialog {
     boolean poiBackImageExists();
 
     void porClickHeader();
+
+    void close();
 }

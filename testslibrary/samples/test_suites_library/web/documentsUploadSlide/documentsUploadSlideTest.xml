@@ -11,6 +11,7 @@
                     <include name="successfulUploadDocumentPOISectionPassportDoc" description="CTW-5765" />
                     <include name="successfulUploadDocumentPOISectionDriverLicenceDoc" description="CTW-5767" />
                     <include name="successfulUploadDocumentPOISectionIdentityCardDoc" description="CTW-5768" />
+                    <include name="successfulUploadDocumentCreditCardSection" description="CTW-5769" />
                     <include name="failedUploadDocumentPOISectionIinvalidPassportDoc" description="CTW-5770" />
                 </methods>
             </class>

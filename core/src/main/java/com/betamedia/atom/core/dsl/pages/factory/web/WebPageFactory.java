@@ -94,4 +94,5 @@ public interface WebPageFactory {
 
     ThankYouPage thankYouPage();
 
+    UploadDocumentsTab uploadDocumentsTab();
 }

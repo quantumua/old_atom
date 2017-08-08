@@ -227,5 +227,10 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     public ThankYouPage thankYouPage() {
         return creator.getPage(ThankYouPageImpl.class);
     }
+
+    @Override
+    public UploadDocumentsTab uploadDocumentsTab() {
+        return creator.getPage(UploadDocumentsTabImpl.class);
+    }
 }
 
