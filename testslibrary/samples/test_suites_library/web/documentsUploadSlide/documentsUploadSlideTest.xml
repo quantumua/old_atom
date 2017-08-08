@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="verify Personal Details Slide" verbose="1">
+    <parameter name="testlinkBuildId" value="" />
+    <parameter name="testlinkPlanId" value="" />
+    <test name="Documents Upload Slide verifications">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideSanityTest">
+                <methods>
+                    <parameter name="countrycode" value="de"/>
+                    <parameter name="phonecountryprefix" value="de"/>
+                    <include name="successfulUploadDocumentPOISectionPassportDoc" description="CTW-5765" />
+                    <include name="successfulUploadDocumentPOISectionDriverLicenceDoc" description="CTW-5767" />
+                    <include name="successfulUploadDocumentPOISectionIdentityCardDoc" description="CTW-5768" />
+                    <include name="failedUploadDocumentPOISectionIinvalidPassportDoc" description="CTW-5770" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

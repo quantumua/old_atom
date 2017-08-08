@@ -1,7 +1,8 @@
-package com.betamedia.atom.testslibrary.option24.web.ctw;
+package com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide;
 
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
+import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
@@ -27,6 +28,7 @@ public class PersonalDetailsSlideLocalisationTest extends WebEndToEndTest {
 	 *[testlink]  CTW-5680:Verify the slide is translated to all languages
 	 */
     @Test(dataProvider = GENERIC_DATA_PROVIDER)
+    @TestLinkProperties(displayId ="CTW-5680")
 	  public void  verifyTheSlideIsTranslatedToAllLanguages(AccountAdditionalDetailsData data) {
     	pages().topNavigationPage().selectLanguage(data.getLanguage());
         pages().welcomeBackMessage().continueQuestionnaire();
@@ -48,6 +50,7 @@ public class PersonalDetailsSlideLocalisationTest extends WebEndToEndTest {
 	 *[testlink]   CTW-5682:Verify the slide turns RTL on AR
 	 */
     @Test(description = "CTW-5682:Verify the slide turns RTL on AR")
+    @TestLinkProperties(displayId ="CTW-5682")
     public void  verifyTheSlideTurnsRTLOnAR() {
         pages().topNavigationPage().selectLanguage("AR");
         pages().welcomeBackMessage().continueQuestionnaire();

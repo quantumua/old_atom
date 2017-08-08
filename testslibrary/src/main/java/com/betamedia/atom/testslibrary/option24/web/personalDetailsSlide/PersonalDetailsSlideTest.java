@@ -1,4 +1,4 @@
-package com.betamedia.atom.testslibrary.option24.web.ctw;
+package com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide;
 
 import org.junit.Assert;
 import org.testng.annotations.Parameters;

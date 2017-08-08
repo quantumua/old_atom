@@ -1,8 +1,9 @@
-package com.betamedia.atom.testslibrary.option24.web.ctw;
+package com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
+import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -40,6 +41,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
      *[TestLink] CTW-5765:Successful upload document: POI section - Passport doc
      */
     @Test(description = "CTW-5765:Successful upload document: POI section - Passport doc")
+    @TestLinkProperties(displayId = "CTW-5765")
     public void successfulUploadDocumentPOISectionPassportDoc() {
         pages().uploadDocumentDialog().poiUploadPassport();
         softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "POI back image should not exists");
@@ -50,6 +52,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
      *[TestLink] CTW-5767:Successful upload document: POI section - Driver license doc
      */
     @Test(description = "CTW-5767:Successful upload document: POI section - Driver license doc")
+    @TestLinkProperties(displayId = "CTW-5767")
     public void successfulUploadDocumentPOISectionDriverLicenceDoc() {
         pages().uploadDocumentDialog().poiUploadDriverLicense();
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "Driver license uploaded and user is ready to start Trade");
@@ -59,10 +62,22 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
      *[TestLink] CTW-5768:Successful upload document: POI section - Identity card doc
      */
     @Test(description = "CTW-5768:Successful upload document: POI section - Identity card doc")
+    @TestLinkProperties(displayId = "CTW-5768")
     public void successfulUploadDocumentPOISectionIdentityCardDoc() {
         pages().uploadDocumentDialog().uploadIdCard();
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "ID Card uploaded and user is ready to start Trade");
     }
+
+
+    /*
+     *[TestLink] CTW-5770:Failed upload document: POI section - invalid Passport doc
+     */
+    @Test(description = "CTW-5770:Failed upload document: POI section - invalid Passport doc")
+    @TestLinkProperties(displayId = "CTW-5770")
+    public void failedUploadDocumentPOISectionIinvalidPassportDoc () {
+
+    }
+
 
     private PersonalInformation getPersonalInformation() {
         return PersonalInformation.builder()
