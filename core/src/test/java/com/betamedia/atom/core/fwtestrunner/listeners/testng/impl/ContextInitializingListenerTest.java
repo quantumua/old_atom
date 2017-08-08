@@ -7,6 +7,8 @@ import com.betamedia.atom.core.fwtestrunner.environment.configuration.impl.TPTes
 import com.betamedia.atom.core.fwtestrunner.environment.initializer.TestRunningEnvInitializer;
 import com.betamedia.atom.core.holders.AppContextHolder;
 import com.betamedia.atom.core.testingtype.annotations.TestConfigurationProperties;
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +16,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.testng.Assert;
-import org.testng.ITestResult;
+import org.testng.ITestContext;
+import org.testng.ITestNGMethod;
 import org.testng.annotations.Test;
 
 import java.util.Properties;
@@ -37,6 +40,20 @@ public class ContextInitializingListenerTest {
 
     @Test
     public void concurrentInitializationTest() throws Exception {
+        /* TestNG's ITestContext is compiled with provided Google Guice dependencies.
+         * We have to provide runtime definitions for required classes For Mockito to mock the interface correctly.
+         */
+        new ByteBuddy()
+                .subclass(Object.class)
+                .name("com.google.inject.Injector")
+                .make()
+                .load(ITestContext.class.getClassLoader(), ClassLoadingStrategy.Default.INJECTION);
+        new ByteBuddy()
+                .subclass(Object.class)
+                .name("com.google.inject.Module")
+                .make()
+                .load(ITestContext.class.getClassLoader(), ClassLoadingStrategy.Default.INJECTION);
+
         when(mockEnvInitializer.getType()).thenReturn(ProductType.TP);
         int threadNum = 10;
         ExecutorService pool = new ThreadPoolExecutor(0, threadNum, 0, TimeUnit.SECONDS, new SynchronousQueue<>());
@@ -48,9 +65,11 @@ public class ContextInitializingListenerTest {
                             logger.info("Created listener");
                             setField(listener, "contextInitializer", MockContext.class);
                             logger.info("Attempting to initialize shared context");
-                            ITestResult mockTestContext = mock(ITestResult.class);
-                            when(mockTestContext.getInstance()).thenReturn(new MockTestClass());
-                            listener.onTestStart(mockTestContext);
+                            ITestContext mockContext = mock(ITestContext.class, withSettings().stubOnly());
+                            ITestNGMethod mockMethod = mock(ITestNGMethod.class);
+                            when(mockMethod.getRealClass()).thenReturn(MockTestClass.class);
+                            when(mockContext.getAllTestMethods()).thenReturn(new ITestNGMethod[]{mockMethod});
+                            listener.onStart(mockContext);
                             logger.info("Context is present now");
         /*ContextInitializingListener can't exit without functional context available*/
                             Assert.assertNotNull(AppContextHolder.getContext());

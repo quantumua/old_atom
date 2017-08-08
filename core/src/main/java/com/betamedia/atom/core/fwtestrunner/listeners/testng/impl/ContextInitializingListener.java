@@ -3,8 +3,8 @@ package com.betamedia.atom.core.fwtestrunner.listeners.testng.impl;
 import com.betamedia.atom.core.CoreInfrastructure;
 import com.betamedia.atom.core.fwtestrunner.environment.configuration.TestConfigurationPropertiesParser;
 import com.betamedia.atom.core.fwtestrunner.environment.configuration.TestConfigurationPropertiesParserProvider;
-import com.betamedia.atom.core.fwtestrunner.environment.initializer.TestRunningEnvInitializerProvider;
 import com.betamedia.atom.core.fwtestrunner.environment.initializer.TestRunningEnvInitializer;
+import com.betamedia.atom.core.fwtestrunner.environment.initializer.TestRunningEnvInitializerProvider;
 import com.betamedia.atom.core.holders.AppContextHolder;
 import com.betamedia.atom.core.testingtype.annotations.TestConfigurationProperties;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
+import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
 import java.util.Objects;
@@ -29,9 +30,13 @@ public class ContextInitializingListener implements ITestListener {
     private final Class<?> contextInitializer = CoreInfrastructure.class;
 
     @Override
-    public void onTestStart(ITestResult result) {
+    public void onStart(ITestContext context) {
+        ITestNGMethod[] methods = context.getAllTestMethods();
+        if (methods.length == 0) return;
         initializeAppContext();
-        initializeTestEnvironment(result.getInstance().getClass().getAnnotation(TestConfigurationProperties.class));
+        initializeTestEnvironment((TestConfigurationProperties) methods[0]
+                .getRealClass()
+                .getAnnotation(TestConfigurationProperties.class));
     }
 
     private void initializeAppContext() {
@@ -63,6 +68,9 @@ public class ContextInitializingListener implements ITestListener {
     }
 
     @Override
+    public void onTestStart(ITestResult result) {/*Do nothing*/}
+
+    @Override
     public void onTestSuccess(ITestResult result) {/*Do nothing*/}
 
     @Override
@@ -73,9 +81,6 @@ public class ContextInitializingListener implements ITestListener {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {/*Do nothing*/}
-
-    @Override
-    public void onStart(ITestContext context) {/*Do nothing*/}
 
     @Override
     public void onFinish(ITestContext context) {/*Do nothing*/}
