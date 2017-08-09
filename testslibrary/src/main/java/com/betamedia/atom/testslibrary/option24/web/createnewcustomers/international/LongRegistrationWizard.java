@@ -290,10 +290,6 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-5471:Country dropdown field search engine")
     @TestLinkProperties(displayId = "CTW-5471")
     public void validateSearchFunctionalityInCountry() {
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().setCountryPrefix(Country.JORDAN.getName());
-        pages().redirectDialog().startTrade();
-        pages().registrationDialog().exists();
         softAssert().assertEquals(pages().registrationDialog().countrySearch(SEARCH_BY_SYMBOL, Country.IRELAND.getName()),
                 Country.IRELAND.getName(),
                 "Country was not available in the search result.");
@@ -327,7 +323,6 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     /**
      * check currency selection is saved
      * check EUR is not available as currency
-     *
      */
     @Test(description = "CTW-5473:Currency dropdown field validation")
     @TestLinkProperties(displayId = "CTW-5473")

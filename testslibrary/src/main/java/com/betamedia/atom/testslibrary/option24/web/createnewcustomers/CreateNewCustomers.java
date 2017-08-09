@@ -13,13 +13,10 @@ import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
-import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * Created by vsnigur on 7/3/17.
@@ -274,7 +271,7 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
                 "Incorrect password.", NO_ERROR_MESSAGE);
         customerRO.setPassword(INCORRECT_PASSWORD);
         pages().registrationDialog().register(customerRO);
-        assertEquals(pages().registrationDialog().getErrorMessageNotification(),
+        softAssert().assertEquals(pages().registrationDialog().getErrorMessageNotification(),
                 "Enter digits and letters only (lower and upper case)", NO_ERROR_MESSAGE);
         softAssert().assertEquals(pages().registrationDialog().getPasswordSize(), "15");
         pages().browser().refreshPage();

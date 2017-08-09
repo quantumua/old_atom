@@ -8,9 +8,6 @@ import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.LocalizationElement;
 import org.testng.annotations.Test;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Created by vsnigur on 7/17/17.
@@ -566,6 +563,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @TestLinkProperties(displayId = "CTW-5874")
     public void checkRegistrationDialogFieldsDirectionForRightToLeftLanguages() {
         pages().topNavigationPage().selectLanguage(ARABIAN_LANGUAGE);
+        pages().loadingDialog().isDisplayed();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().exists();
         pages().registrationDialog().verifyContentAlignment(RTL_DIRECTION);

@@ -128,6 +128,7 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
 
     @Override
     public boolean exists() {
+        waitUntilDisplayed(caption);
         scrollIntoView(waitUntilDisplayed(submitButton));
         Reporter.log("Wait until displayed register from.<br/>");
         return waitUntilDisplayed(caption,submitButton).isDisplayed();
@@ -294,11 +295,12 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
 
     @Override
     public String countrySearch(String search,String country) {
-        waitUntilDisplayed(countryComboBox).click();
+        waitUntilDisplayed(countryComboBox);
+        waitUntilClickable(countryComboBox).click();
         waitUntilDisplayed(countrySearch).sendKeys(search);
         findElements(countriesList).forEach(el->{if (el.getText().equalsIgnoreCase(country)) scrollIntoView(el).click();});
         Reporter.log(String.format("Select country %s </br>", country));
-        return find(countryComboBox).getAttribute(ATTRIBUTE_TITLE);
+        return waitUntilDisplayed(countryComboBox).getAttribute(ATTRIBUTE_TITLE);
     }
 
     @Override
