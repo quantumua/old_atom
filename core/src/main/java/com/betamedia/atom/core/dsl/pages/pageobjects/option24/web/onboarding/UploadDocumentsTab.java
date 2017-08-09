@@ -9,19 +9,11 @@ public interface UploadDocumentsTab {
 
     boolean creditCardImagesSentMsgExists();
 
-    boolean porImagesSentMsgExists();
-
-    boolean porXImageExists();
-
-    boolean creditCardXImageExists();
+   boolean creditCardXImageExists();
 
     void goToDocumentsUpload();
 
     void clickCreditCardHeader();
-
-    void clickPORHeader();
-
-    void porUploadElectricityBill(String imagePath);
 
     void uploadCreditCard(String frontImagePath, String backImagePath);
 

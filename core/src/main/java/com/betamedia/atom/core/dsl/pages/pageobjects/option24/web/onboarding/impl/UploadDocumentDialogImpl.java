@@ -6,9 +6,12 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.Upl
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Optional;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -52,6 +55,8 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By poiFrontImage;
     @StoredId
     private By poiBackImage;
+    @StoredId
+    private By poiNotApprovedXImage;
 
     /* POR (Proof of residence) Controls*/
     @StoredId
@@ -64,6 +69,12 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By porUploadInput;
     @StoredId
     private By documentTypeButton;
+    @StoredId
+    private By porCheckmarkImage;
+    @StoredId
+    private By porApprovedImage;
+    @StoredId
+    private By porNotApprovedXImage;
 
     public UploadDocumentDialogImpl(WebDriver webDriver) {
         super(webDriver);
@@ -72,6 +83,16 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public boolean exists() {
         return waitUntilExists(pageRoot).isDisplayed();
+    }
+
+    @Override
+    public boolean porXImageExists() {
+        return waitUntilExists(porNotApprovedXImage).isDisplayed();
+    }
+
+    @Override
+    public boolean porCheckmarkImageExists() {
+        return waitUntilExists(porCheckmarkImage).isDisplayed();
     }
 
     @Override
@@ -126,8 +147,8 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public void poiXImageExists() {
-//        TODO: implement when CC registartion is available
+    public boolean poiXImageExists() {
+        return waitUntilExists(poiNotApprovedXImage).isDisplayed();
     }
 
     @Override
@@ -142,6 +163,16 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
+    public void porUploadElectricityBill(String imagePath) {
+        porClickHeader();
+        //Electricity bill selected by default
+        /*make input element visible*/
+        setDisplayBlock(porUploadInput);
+        /*upload file*/
+        uploadFromPath(storeToTemp(imagePath), porUploadInput);
+    }
+
+    @Override
     public boolean poiBackImageExists() {
         return exists(poiBackImage);
     }
@@ -149,6 +180,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void porClickHeader(){
         waitUntilDisplayed(porHeader).click();
+        waitUntilDisplayed(porWrapper);
     }
 
     private boolean isTransformed(By locator) {

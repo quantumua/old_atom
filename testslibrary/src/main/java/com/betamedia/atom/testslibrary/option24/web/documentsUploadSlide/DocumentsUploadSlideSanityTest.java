@@ -68,9 +68,8 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     @Test(description = "CTW-5766:Successful upload document: POR section")
     @TestLinkProperties(displayId = "CTW-5766")
     public void successfulUploadDocumentPORSection() {
-        closeWizardAndGoToUploadDocumentTab();
-        pages().uploadDocumentsTab().porUploadElectricityBill(ELECTRICITY_BILL_PATH);
-        softAssert().assertTrue(pages().uploadDocumentsTab().porImagesSentMsgExists(), "Electricity bill uploaded successfully.");
+        pages().uploadDocumentDialog().porUploadElectricityBill(ELECTRICITY_BILL_PATH);
+        softAssert().assertTrue(pages().uploadDocumentDialog().porCheckmarkImageExists(), "Electricity bill uploaded successfully.");
     }
 
     /*
@@ -111,8 +110,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     @TestLinkProperties(displayId = "CTW-5770")
     public void failedUploadDocumentPOISectionIinvalidPassportDoc () {
         pages().uploadDocumentDialog().poiUploadPassport(WRONG_DOC_PATH);
-//        TODO: implement when CC registartion is available
-//      softAssert().assertFalse(pages().uploadDocumentDialog().poiXImageExists(), "Correct error message is displayed + red X sign");
+        softAssert().assertTrue(pages().uploadDocumentDialog().poiXImageExists(), "Red X sign is available");
         softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "Passport has not uploaded and user is not ready to start Trade.");
     }
 
@@ -123,8 +121,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     @TestLinkProperties(displayId = "CTW-5771")
     public void FailedUploadDocumentPOISectionInvalidDriverLicenseDoc() {
         pages().uploadDocumentDialog().poiUploadDriverLicense(WRONG_DOC_PATH,WRONG_DOC_PATH);
-        //        TODO: implement when CC registartion is available
-        //      softAssert().assertFalse(pages().uploadDocumentDialog().poiXImageExists(), "Correct error message is displayed + red X sign");
+        softAssert().assertTrue(pages().uploadDocumentDialog().poiXImageExists(), "Red X sign is available");
         softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "Driver license has not uploaded and user is not ready to start Trade.");
     }
 
@@ -135,11 +132,9 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     @TestLinkProperties(displayId = "CTW-5772")
     public void failedUploadDocumentPOISectionInvalidIdentityCardDoc() {
         pages().uploadDocumentDialog().uploadIdCard(WRONG_DOC_PATH,WRONG_DOC_PATH);
-        //        TODO: implement when CC registartion is available
-        //      softAssert().assertFalse(pages().uploadDocumentDialog().poiXImageExists(), "Correct error message is displayed + red X sign");
+        softAssert().assertTrue(pages().uploadDocumentDialog().poiXImageExists(), "Red X sign is available");
         softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "ID Card has not uploaded and user is ready to start Trade.");
     }
-
 
     /*
      * [TestLink] CTW-5773:Failed upload document: POR section
@@ -147,11 +142,9 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     @Test(description = "CTW-5773:Failed upload document: POR section")
     @TestLinkProperties(displayId = "CTW-5773")
     public void failedUploadDocumentPORSection() {
-        closeWizardAndGoToUploadDocumentTab();
-        pages().uploadDocumentsTab().porUploadElectricityBill(WRONG_DOC_PATH);
+        pages().uploadDocumentDialog().porUploadElectricityBill(WRONG_DOC_PATH);
         // TODO: This verification is blocked (no error message is available): "a correct red error message is displayed"
-        softAssert().assertFalse(pages().uploadDocumentsTab().porImagesSentMsgExists(), "The invalid document was Not uploaded.");
-        softAssert().assertTrue(pages().uploadDocumentsTab().porXImageExists(), "Failed electricity bill has not uploaded.");
+        softAssert().assertTrue(pages().uploadDocumentDialog().porXImageExists(), "Failed electricity bill has not uploaded.");
     }
 
     /*

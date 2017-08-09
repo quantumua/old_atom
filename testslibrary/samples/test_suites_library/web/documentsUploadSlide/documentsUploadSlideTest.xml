@@ -9,10 +9,15 @@
                     <parameter name="countrycode" value="Germany"/>
                     <parameter name="phonecountryprefix" value="+49"/>
                     <include name="successfulUploadDocumentPOISectionPassportDoc" description="CTW-5765" />
+                    <include name="successfulUploadDocumentPORSection" description="CTW-5766" />
                     <include name="successfulUploadDocumentPOISectionDriverLicenceDoc" description="CTW-5767" />
                     <include name="successfulUploadDocumentPOISectionIdentityCardDoc" description="CTW-5768" />
                     <include name="successfulUploadDocumentCreditCardSection" description="CTW-5769" />
                     <include name="failedUploadDocumentPOISectionIinvalidPassportDoc" description="CTW-5770" />
+                    <include name="FailedUploadDocumentPOISectionInvalidDriverLicenseDoc" description="CTW-5771" />
+                    <include name="failedUploadDocumentPOISectionInvalidIdentityCardDoc" description="CTW-5772" />
+                    <include name="failedUploadDocumentPORSection" description="CTW-5773" />
+                    <include name="failedUploadDocumentCreditCardSection" description="CTW-5774" />
                 </methods>
             </class>
         </classes>

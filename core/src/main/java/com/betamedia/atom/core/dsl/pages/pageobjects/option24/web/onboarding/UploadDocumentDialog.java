@@ -11,6 +11,12 @@ public interface UploadDocumentDialog {
 
     void goToDocumentsUpload();
 
+    boolean porCheckmarkImageExists();
+
+    boolean porXImageExists();
+
+    void porUploadElectricityBill(String imagePath);
+
     void poiClickHeader();
 
     void uploadIdCard();
@@ -19,7 +25,7 @@ public interface UploadDocumentDialog {
 
     void poiUploadPassport(String imagePath);
 
-    void poiXImageExists();
+    boolean poiXImageExists();
 
     void poiUploadDriverLicense(String frontImagePath, String backImagePath);
 

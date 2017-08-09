@@ -37,14 +37,6 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @StoredId
     private By creditCardNotApprovedXImage;
     /* POR (Proof of residence) Controls*/
-    @StoredId
-    private By porHeader;
-    @StoredId
-    private By porUploadInput;
-    @StoredId
-    private By porSentImage;
-    @StoredId
-    private By porNotApprovedXImage;
 
     public UploadDocumentsTabImpl(WebDriver webDriver) {
         super(webDriver);
@@ -53,16 +45,6 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @Override
     public boolean exists() {
         return waitUntilExists(uploadDocumentsTab).isDisplayed();
-    }
-
-    @Override
-    public boolean porXImageExists() {
-        return exists(porNotApprovedXImage);
-    }
-
-    @Override
-    public boolean porImagesSentMsgExists() {
-        return exists(porSentImage);
     }
 
     @Override
@@ -83,22 +65,6 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @Override
     public void clickCreditCardHeader(){
         waitUntilDisplayed(creditCardHeader).click();
-    }
-
-    @Override
-    public void clickPORHeader(){
-        waitUntilDisplayed(porHeader).click();
-    }
-
-    @Override
-    public void porUploadElectricityBill(String imagePath) {
-        clickPORHeader();
-        //Electricity bill selected by default
-        /*make input element visible*/
-        setDisplayBlock(porUploadInput);
-        /*upload file*/
-        uploadFromPath(storeToTemp(imagePath), porUploadInput);
-        /*wait until upload is over and back image is available*/
     }
 
     @Override
