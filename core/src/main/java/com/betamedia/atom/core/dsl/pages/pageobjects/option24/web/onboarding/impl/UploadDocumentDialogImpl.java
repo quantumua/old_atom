@@ -6,6 +6,7 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.Upl
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Optional;
 
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -18,11 +19,6 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
 
     private static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
     private static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
-
-    private static final String POI_PASSPORT_PATH = "files/sample_passport.jpg";
-
-    private static final String POI_DRIVER_LICENSE_FRONT_PATH = "files/sample_driver_license_front.jpg";
-    private static final String POI_DRIVER_LICENSE_BACK_PATH = "files/sample_driver_license_back.jpg";
 
     @StoredId
     private By pageRoot;
@@ -95,6 +91,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
 
     @Override
     public void uploadIdCard() {
+        uploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+    }
+
+    @Override
+    public void uploadIdCard(String frontImagePath, String backImagePath) {
         poiClickHeader();
 //        request removing !important from display:none on document type <select> styling to make selection easier
 //        setDisplayBlock(poiDocumentTypeSelector);
@@ -104,35 +105,40 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         /*make input element visible*/
         setDisplayBlock(poiUploadInput);
         /*upload file*/
-        uploadFromPath(storeToTemp(POI_ID_FRONT_PATH), poiUploadInput);
+        uploadFromPath(storeToTemp(frontImagePath), poiUploadInput);
         /*wait until upload is over and back image is available*/
         waitUntilExists(poiBackImage).isDisplayed();
         /*clear input form*/
         find(poiUploadInput).clear();
         /*upload file*/
-        uploadFromPath(storeToTemp(POI_ID_BACK_PATH), poiUploadInput);
+        uploadFromPath(storeToTemp(backImagePath), poiUploadInput);
     }
 
     @Override
-    public void poiUploadPassport() {
+    public void poiUploadPassport(String imagePath) {
         poiClickHeader();
         selectPOIDocumentType(poiPassportSelection, false);
         /*make input element visible*/
         setDisplayBlock(poiUploadInput);
         /*upload file*/
-        uploadFromPath(storeToTemp(POI_PASSPORT_PATH), poiUploadInput);
+        uploadFromPath(storeToTemp(imagePath), poiUploadInput);
         /*wait until upload is over and back image is available*/
     }
 
     @Override
-    public void poiUploadDriverLicense() {
+    public void poiXImageExists() {
+//        TODO: implement when CC registartion is available
+    }
+
+    @Override
+    public void poiUploadDriverLicense(String frontImagePath, String backImagePath) {
         poiClickHeader();
         selectPOIDocumentType(poiDriverLicenseSelection);
         setDisplayBlock(poiUploadInput);
-        uploadFromPath(storeToTemp(POI_DRIVER_LICENSE_FRONT_PATH), poiUploadInput);
+        uploadFromPath(storeToTemp(frontImagePath), poiUploadInput);
         waitUntilExists(poiBackImage).isDisplayed();
         find(poiUploadInput).clear();
-        uploadFromPath(storeToTemp(POI_DRIVER_LICENSE_BACK_PATH), poiUploadInput);
+        uploadFromPath(storeToTemp(backImagePath), poiUploadInput);
     }
 
     @Override

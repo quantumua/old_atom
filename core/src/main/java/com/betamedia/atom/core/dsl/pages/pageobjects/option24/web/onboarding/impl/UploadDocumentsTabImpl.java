@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentsTab;
-import org.testng.annotations.Optional;
 
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -18,11 +17,9 @@ import java.util.UUID;
  */
 public class UploadDocumentsTabImpl extends AbstractPageObject implements UploadDocumentsTab {
 
-    private static final String CREDIT_CARD_FRONT_PATH = "files/sample_credit_card_front.jpg";
-    private static final String CREDIT_CARD_BACK_PATH = "files/sample_credit_card_back.jpg";
-
     @StoredId
     private By uploadDocumentsTab;
+    /*Credit Card Controls*/
     @StoredId
     private By creditCardHeader;
     @StoredId
@@ -36,7 +33,18 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @StoredId
     private By creditCardSelection;
     @StoredId
-    private By creditCardSentMsg;
+    private By creditCardSentImage;
+    @StoredId
+    private By creditCardNotApprovedXImage;
+    /* POR (Proof of residence) Controls*/
+    @StoredId
+    private By porHeader;
+    @StoredId
+    private By porUploadInput;
+    @StoredId
+    private By porSentImage;
+    @StoredId
+    private By porNotApprovedXImage;
 
     public UploadDocumentsTabImpl(WebDriver webDriver) {
         super(webDriver);
@@ -48,8 +56,23 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
+    public boolean porXImageExists() {
+        return exists(porNotApprovedXImage);
+    }
+
+    @Override
+    public boolean porImagesSentMsgExists() {
+        return exists(porSentImage);
+    }
+
+    @Override
     public boolean creditCardImagesSentMsgExists() {
-        return exists(creditCardSentMsg);
+        return exists(creditCardSentImage);
+    }
+
+    @Override
+    public boolean creditCardXImageExists() {
+        return exists(creditCardNotApprovedXImage);
     }
 
     @Override
@@ -63,14 +86,30 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
-    public void uploadCreditCard() {
+    public void clickPORHeader(){
+        waitUntilDisplayed(porHeader).click();
+    }
+
+    @Override
+    public void porUploadElectricityBill(String imagePath) {
+        clickPORHeader();
+        //Electricity bill selected by default
+        /*make input element visible*/
+        setDisplayBlock(porUploadInput);
+        /*upload file*/
+        uploadFromPath(storeToTemp(imagePath), porUploadInput);
+        /*wait until upload is over and back image is available*/
+    }
+
+    @Override
+    public void uploadCreditCard(String frontImagePath, String backImagePath) {
         clickCreditCardHeader();
         setDisplayBlock(creditCardUploadInput);
-        uploadFromPath(storeToTemp(CREDIT_CARD_FRONT_PATH), creditCardUploadInput);
+        uploadFromPath(storeToTemp(frontImagePath), creditCardUploadInput);
         selectCreditCardDocumentType(creditCardSelection, true);
         waitUntilExists(creditCardBackImage).isDisplayed();
         find(creditCardUploadInput).clear();
-        uploadFromPath(storeToTemp(CREDIT_CARD_BACK_PATH), creditCardUploadInput);
+        uploadFromPath(storeToTemp(backImagePath), creditCardUploadInput);
     }
 
     private boolean isTransformed(By locator) {
