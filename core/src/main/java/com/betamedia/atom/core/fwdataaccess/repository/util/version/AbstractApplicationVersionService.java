@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
@@ -56,7 +57,7 @@ public abstract class AbstractApplicationVersionService<T extends EnvironmentDep
     private ApplicationVersion getAppVersion(String address) {
         try {
             return mapper.readValue(restTemplate.getForObject(address, String.class), ApplicationVersion.class);
-        } catch (IOException e) {
+        } catch (IOException | RestClientException e) {
             logger.error("Could not retrieve application version from server:", e);
             return new ApplicationVersion();
         }
