@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.persistenceunit.PersistenceUnitManager;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -32,7 +33,8 @@ import static com.betamedia.atom.core.configuration.StubConfiguration.DB_ENABLED
         basePackageClasses = {
                 ContactExtension.class,
                 NewAutomationEnvContactExtensionRepository.class},
-        entityManagerFactoryRef = "newAutomationEntityManagerFactory"
+        entityManagerFactoryRef = "newAutomationEntityManagerFactory",
+        transactionManagerRef = "newAutomationTransactionManager"
 )
 @ConditionalOnProperty(name = DB_ENABLED_PROPERTY, matchIfMissing = true)
 public class NewAutomationPersistenceConfig {
@@ -53,6 +55,11 @@ public class NewAutomationPersistenceConfig {
                         NewAutomationEnvContactExtensionRepository.class)
                 .persistenceUnit("newAutomationPersistenceUnit")
                 .build();
+    }
+
+    @Bean
+    public DataSourceTransactionManager newAutomationTransactionManager() {
+        return new DataSourceTransactionManager(newAutomationDataSource());
     }
 
 }

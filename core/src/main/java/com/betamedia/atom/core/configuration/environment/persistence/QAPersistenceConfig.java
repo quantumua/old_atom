@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.persistenceunit.PersistenceUnitManager;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -32,7 +33,8 @@ import static com.betamedia.atom.core.configuration.StubConfiguration.DB_ENABLED
         basePackageClasses = {
                 ContactExtension.class,
                 QAEnvContactExtensionRepository.class},
-        entityManagerFactoryRef = "qaEntityManagerFactory"
+        entityManagerFactoryRef = "qaEntityManagerFactory",
+        transactionManagerRef = "qaTransactionManager"
 )
 @ConditionalOnProperty(name = DB_ENABLED_PROPERTY, matchIfMissing = true)
 public class QAPersistenceConfig {
@@ -53,6 +55,11 @@ public class QAPersistenceConfig {
                         QAEnvContactExtensionRepository.class)
                 .persistenceUnit("qaPersistenceUnit")
                 .build();
+    }
+
+    @Bean
+    public DataSourceTransactionManager qaTransactionManager() {
+        return new DataSourceTransactionManager(qaDataSource());
     }
 
 }
