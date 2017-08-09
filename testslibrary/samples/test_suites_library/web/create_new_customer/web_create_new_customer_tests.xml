@@ -1,30 +1,31 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="sequential execution of tests" verbose="1" parallel="methods" thread-count="1">
+    <parameter name="testlinkBuildId" value="${buildId}" />
+    <parameter name="testlinkPlanId" value="${planId}" />
     <test name="Create New Customer tests web">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers" >
                 <methods>
-                    <include name="verifySignUpButtonRedirectToOnboardingOpenAccount"/>
-                    <include name="applyForAnAccountElementsVerification"/>
-                    <include name="applyForAnAccountFirstNameFieldValidations"/>
-                    <include name="applyForAnAccountLastNameFieldValidations"/>
-                    <include name="emailFieldValidations"/> <!-- fails as email field is not green even if it is valid -->
-                    <include name="prefixFieldValidations"/>
-                    <include name="phoneFieldValidations"/>
-                    <include name="countryDropdownFieldSearchEngine"/>
-                    <include name="countryDropdownValidations"/>
-                    <include name="currencyDropdownFieldValidation"/>
-                    <include name="passwordFieldsValidation"/>
-                    <include name="agreementCheckboxValidation"/>
-                    <include name="submitButtonValidation"/>
-                    <include name="validateConnectionInDBForDifferentCustomersButSameCreditCard"/>
-                    <include name="validateConnectionInDBForDifferentCustomersButSamePhone"/>
-                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameFirstAndLastNames"/>
-                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameEmail"/> <!-- Test fails as impossible create user with the same email -->
-                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameMachineID"/>
-                    <include name="validateBulkEmailHasNoneZeroForNewCreatedCustomer"/>
-                    <include name="validatePhoneCallsForNewCreatedCustomer"/> <!-- Fails as during user creation ContactBase.DoNotPhone = 0 value -->
-                    <include name="validateCustomerCreationSourceId"/>
+                    <include name="verifySignUpButtonRedirectToOnboardingOpenAccount" description="CTW-5079"/>
+                    <include name="applyForAnAccountFirstNameFieldValidations" description="CTW-5375"/>
+                    <include name="applyForAnAccountLastNameFieldValidations" description="CTW-5208"/>
+                    <include name="emailFieldValidations" description="CTW-5209"/> <!-- fails as email field is not green even if it is valid -->
+                    <include name="prefixFieldValidations" description="CTW-5210"/>
+                    <include name="phoneFieldValidations" description="CTW-5211"/>
+                    <include name="countryDropdownFieldSearchEngine" description="CTW-5260"/>
+                    <include name="countryDropdownValidations" description="CTW-5261"/>
+                    <include name="currencyDropdownFieldValidation" description="CTW-5262"/>
+                    <include name="passwordFieldsValidation" description="CTW-5264"/>
+                    <include name="agreementCheckboxValidation" description="CTW-5265"/>
+                    <include name="submitButtonValidation" description="CTW-5359"/>
+                    <include name="validateConnectionInDBForDifferentCustomersButSameCreditCard" description="CTW-17742"/>
+                    <include name="validateConnectionInDBForDifferentCustomersButSamePhone" description="CTW-17744"/>
+                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameFirstAndLastNames" description="CTW-17745"/>
+                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameEmail" description="CTW-17743"/> <!-- Test fails as impossible create user with the same email -->
+                    <include name="validateNoConnectionsInDBForDifferentCustomersWithSameMachineID" description="CTW-17746"/>
+                    <include name="validateBulkEmailHasNoneZeroForNewCreatedCustomer" description="CTW-7884"/>
+                    <include name="validatePhoneCallsForNewCreatedCustomer" description="CTW-9009"/> <!-- Fails as during user creation ContactBase.DoNotPhone = 0 value -->
+                    <include name="validateCustomerCreationSourceId" description="CTW-2544"/>
                 </methods>
             </class>
         </classes>

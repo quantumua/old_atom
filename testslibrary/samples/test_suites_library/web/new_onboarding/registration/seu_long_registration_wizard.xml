@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="sequential execution of tests" verbose="1" parallel="methods" thread-count="1">
-    <parameter name="testlinkBuildId" value="" />
-    <parameter name="testlinkPlanId" value="" />
+    <parameter name="testlinkBuildId" value="${buildId}" />
+    <parameter name="testlinkPlanId" value="${planId}" />
     <test name="Create New Customer tests web">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.createnewcustomers.european.LongRegistrationWizard" >
