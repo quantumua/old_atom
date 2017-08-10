@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -261,6 +262,19 @@ public abstract class AbstractPageObject {
      */
     protected static Select inSelect(WebElement element) {
         return new Select(element);
+    }
+
+    /**
+     * Checks CSS property of {@link WebElement} to be equal to expected value
+     *
+     * @param propertyName CSS property name
+     * @param expectedValue expected property value
+     * @param first element locator
+     * @param rest element locator chain
+     * @return {@link Select} for the element
+     */
+    protected boolean checkCssProperty(String propertyName, String expectedValue, By first, By... rest) {
+        return find(first, rest).getCssValue(propertyName).equals(expectedValue);
     }
 
     /**

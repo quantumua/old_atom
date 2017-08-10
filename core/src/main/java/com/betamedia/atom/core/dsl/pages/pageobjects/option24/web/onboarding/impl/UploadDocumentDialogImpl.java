@@ -183,10 +183,6 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         waitUntilDisplayed(porWrapper);
     }
 
-    private boolean isTransformed(By locator) {
-        return !find(locator).getCssValue("transform").equals("none");
-    }
-
     private static String storeToTemp(String resource) {
         return Paths.get(FileSystemStorageService.storeSystemResource(resource, UUID.randomUUID().toString() + ".jpg", "temp")).toAbsolutePath().toString();
     }

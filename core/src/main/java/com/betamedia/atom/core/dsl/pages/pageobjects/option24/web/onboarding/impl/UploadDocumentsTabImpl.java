@@ -1,12 +1,11 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl;
 
-import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentsTab;
+import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -78,10 +77,6 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         uploadFromPath(storeToTemp(backImagePath), creditCardUploadInput);
     }
 
-    private boolean isTransformed(By locator) {
-        return !find(locator).getCssValue("transform").equals("none");
-    }
-
     private static String storeToTemp(String resource) {
         return Paths.get(FileSystemStorageService.storeSystemResource(resource, UUID.randomUUID().toString() + ".jpg", "temp")).toAbsolutePath().toString();
     }
@@ -91,9 +86,9 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         waitUntilDisplayed(locator).click();
         if (waitForTransformation) {
             /*wait until animation starts*/
-            waitUntil(() -> isTransformed(creditCardFrontImage));
+            waitUntil(() -> !checkCssProperty("transform", "none", creditCardFrontImage));
             /*wait until animation ends*/
-            waitUntil(() -> !isTransformed(creditCardFrontImage));
+            waitUntil(() -> checkCssProperty("transform", "none", creditCardFrontImage));
         }
     }
 }
