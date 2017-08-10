@@ -271,7 +271,7 @@ public abstract class AbstractPageObject {
      * @param expectedValue expected property value
      * @param first element locator
      * @param rest element locator chain
-     * @return {@link Select} for the element
+     * @return <code>true</code> if property value matches expected value, <code>false</code> otherwise
      */
     protected boolean checkCssProperty(String propertyName, String expectedValue, By first, By... rest) {
         return find(first, rest).getCssValue(propertyName).equals(expectedValue);
