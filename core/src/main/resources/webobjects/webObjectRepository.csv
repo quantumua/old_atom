@@ -271,10 +271,14 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,pageRoot,CSS,.content.mobile-single
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documents,XPATH,.//*[@id='menu-item-54113']/a
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiContainer,XPATH,.//*[@id='poi-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadDocumentWrapperOpen,XPATH,.//*[@id='doc-poi-wrapper'][@class="upload-document-wrapper toggleCollapse toggleOpen"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadDocumentWrapperClosed,XPATH,.//*[@id='doc-poi-wrapper'][@class="upload-document-wrapper toggleCollapse toggleClosed"]
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentApproved,XPATH,".//*[@id='poi-container']//*[@class=""document-box aprroved-doc""]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentNotApproved,XPATH,".//*[@id='poi-container']//*[@class=""document-box not-aprroved""]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTitle,XPATH,".//*[@id='acc']//*[@class=""icon por-icon""]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porContainet,XPATH,.//*[@id='por-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porUploadDocumentWrapperOpen,XPATH,.//*[@id='doc-por-wrapper'][@class="upload-document-wrapper toggleCollapse toggleOpen"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porUploadDocumentWrapperClosed,XPATH,.//*[@id='doc-por-wrapper'][@class="upload-document-wrapper toggleCollapse toggleClosed"]
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTypeSelector,XPATH,".//*[@id='por-container']//*[@class=""btn dropdown-toggle btn-default""]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porBrowseButton,XPATH,".//*[@id='por-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentApproved,XPATH,".//*[@id='por-container']//*[@class=""document-box aprroved-doc""]"

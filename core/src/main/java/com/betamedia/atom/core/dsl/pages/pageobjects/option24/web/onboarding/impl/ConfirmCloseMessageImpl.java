@@ -26,6 +26,11 @@ public class ConfirmCloseMessageImpl extends AbstractPageObject implements Confi
     }
 
     @Override
+    public boolean exists(){
+        return waitUntilExists(confirmCloseMessage).isDisplayed();
+    }
+
+    @Override
     public void acceptClose() {
         waitUntilDisplayed(confirmImSure).click();
     }

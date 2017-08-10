@@ -33,5 +33,15 @@ public interface UploadDocumentDialog {
 
     void porClickHeader();
 
+    boolean isExitButtonExists();
+
+    boolean isPoiExpanded();
+
+    boolean isPoiCollapsed();
+
+    boolean isPorExpanded();
+
+    boolean isPorCollapsed();
+
     void close();
 }

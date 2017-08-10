@@ -53,6 +53,10 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By poiBackImage;
     @StoredId
     private By poiNotApprovedXImage;
+    @StoredId
+    private By poiUploadDocumentWrapperOpen;
+    @StoredId
+    private By poiUploadDocumentWrapperClosed;
 
     /* POR (Proof of residence) Controls*/
     @StoredId
@@ -71,6 +75,10 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By porApprovedImage;
     @StoredId
     private By porNotApprovedXImage;
+    @StoredId
+    private By porUploadDocumentWrapperOpen;
+    @StoredId
+    private By porUploadDocumentWrapperClosed;
 
     public UploadDocumentDialogImpl(WebDriver webDriver) {
         super(webDriver);
@@ -89,6 +97,31 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public boolean porCheckmarkImageExists() {
         return waitUntilExists(porCheckmarkImage).isDisplayed();
+    }
+
+    @Override
+    public boolean isExitButtonExists(){
+        return exists(uploadDocumentDialogCloseButton);
+    }
+
+    @Override
+    public boolean isPoiExpanded(){
+        return waitUntilDisplayed(poiUploadDocumentWrapperOpen).isDisplayed();
+    }
+
+    @Override
+    public boolean isPoiCollapsed(){
+        return waitUntilDisplayed(poiUploadDocumentWrapperClosed).isDisplayed();
+    }
+
+    @Override
+    public boolean isPorExpanded(){
+        return waitUntilDisplayed(porUploadDocumentWrapperOpen).isDisplayed();
+    }
+
+    @Override
+    public boolean isPorCollapsed(){
+        return waitUntilDisplayed(porUploadDocumentWrapperClosed).isDisplayed();
     }
 
     @Override
@@ -161,6 +194,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void porUploadElectricityBill(String imagePath) {
         porClickHeader();
+        waitUntilDisplayed(porWrapper);
         //Electricity bill selected by default
         /*make input element visible*/
         setDisplayBlock(porUploadInput);
@@ -176,7 +210,6 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void porClickHeader(){
         waitUntilDisplayed(porHeader).click();
-        waitUntilDisplayed(porWrapper);
     }
 
     private static String storeToTemp(String resource) {

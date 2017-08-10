@@ -20,6 +20,14 @@
                     <include name="failedUploadDocumentCreditCardSection" description="CTW-5774" />
                 </methods>
             </class>
+            <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideFunctionalityTest">
+                <methods>
+                    <parameter name="countrycode" value="Germany"/>
+                    <parameter name="phonecountryprefix" value="+49"/>
+                    <include name="uploadDocumentsSlideContainsExitXButtonTest" description="CTW-5691" />
+                    <include name="eachSlideSectionCanBeCollapsedExpanded" description="CTW-5730" />
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
