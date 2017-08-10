@@ -13,8 +13,13 @@ public interface UploadDocumentsTab {
 
     void goToDocumentsUpload();
 
-    void clickCreditCardHeader();
+    void creditCardClickHeader();
+
+    void porClickHeader();
 
     void uploadCreditCard(String frontImagePath, String backImagePath);
 
+    void verifyPOIDocumentIsUploaded();
+
+    void poiUploadPassport(String poiPassportPath);
 }

@@ -4,6 +4,7 @@ import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentsTab;
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -17,7 +18,48 @@ import java.util.UUID;
 public class UploadDocumentsTabImpl extends AbstractPageObject implements UploadDocumentsTab {
 
     @StoredId
-    private By uploadDocumentsTab;
+    private By winID;
+
+    /*POI (Proof of identity) Controls*/
+    @StoredId
+    private By poiHeader;
+    @StoredId
+    private By poiHeaderCollapsed;
+    @StoredId
+    private By poiDocumentTypeSelector;
+    @StoredId
+    private By poiWrapper;
+    @StoredId
+    private By documentTypeButton;
+    @StoredId
+    private By poiUploadInput;
+    @StoredId
+    private By poiPassportSelection;
+        // POI Document Upload Status controls
+    @StoredId
+    private By poiOveralStatusReviewed;
+    @StoredId
+    private By poiImageSent;
+    @StoredId
+    private By poiImageReviewed;
+    @StoredId
+    private By poiImageApproved;
+
+    /* POR (Proof of residency) Controls*/
+    @StoredId
+    private By porHeader;
+    @StoredId
+    private By porWrapper;
+    @StoredId
+    private By porUploadInput;
+    @StoredId
+    private By porSentImage;
+    @StoredId
+    private By porNotApprovedXImage;
+
+
+
+
     /*Credit Card Controls*/
     @StoredId
     private By creditCardHeader;
@@ -43,7 +85,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
 
     @Override
     public boolean exists() {
-        return waitUntilExists(uploadDocumentsTab).isDisplayed();
+        return waitUntilExists(winID).isDisplayed();
     }
 
     @Override
@@ -58,17 +100,24 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
 
     @Override
     public void goToDocumentsUpload(){
-    	waitUntilDisplayed(uploadDocumentsTab).click();
+    	waitUntilDisplayed(winID).click();
     }
 
     @Override
-    public void clickCreditCardHeader(){
+    public void creditCardClickHeader(){
         waitUntilDisplayed(creditCardHeader).click();
+        waitUntilDisplayed(creditCardWrapper);
+    }
+
+    @Override
+    public void porClickHeader(){
+        waitUntilDisplayed(porHeader).click();
+        waitUntilDisplayed(porWrapper);
     }
 
     @Override
     public void uploadCreditCard(String frontImagePath, String backImagePath) {
-        clickCreditCardHeader();
+        creditCardClickHeader();
         setDisplayBlock(creditCardUploadInput);
         uploadFromPath(storeToTemp(frontImagePath), creditCardUploadInput);
         selectCreditCardDocumentType(creditCardSelection, true);
@@ -77,13 +126,51 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         uploadFromPath(storeToTemp(backImagePath), creditCardUploadInput);
     }
 
+    @Override
+    public void verifyPOIDocumentIsUploaded() {
+//        softAssert().assertTrue(waitUntilExists(poiOveralStatusReviewed).isDisplayed(), "Overal status Reviewed is available");
+        softAssert().assertTrue(waitUntilExists(poiImageSent).isDisplayed(), "Image icon Sent is available");
+        softAssert().assertTrue(waitUntilExists(poiImageReviewed).isDisplayed(), "Image icon Reviewed is available");
+        softAssert().assertTrue(waitUntilExists(poiImageApproved).isDisplayed(), "Image icon Approved is available");
+    }
+
+    @Override
+    public void poiUploadPassport(String imagePath) {
+        poiExpandHeader();
+        selectPOIDocumentType(poiPassportSelection, false);
+        /*make input element visible*/
+        setDisplayBlock(poiUploadInput);
+        /*upload file*/
+        uploadFromPath(storeToTemp(imagePath), poiUploadInput);
+        /*wait until upload is over and back image is available*/
+    }
+
+    private void poiClickHeader(){
+        waitUntilDisplayed(poiHeader).click();
+    }
+
+    private void poiExpandHeader(){
+        if (exists(poiHeaderCollapsed)) {
+            poiClickHeader();
+        }
+        scrollIntoView(waitUntilExists(poiUploadInput));
+    }
+
     private static String storeToTemp(String resource) {
         return Paths.get(FileSystemStorageService.storeSystemResource(resource, UUID.randomUUID().toString() + ".jpg", "temp")).toAbsolutePath().toString();
     }
 
+    private void selectPOIDocumentType(By locator, Boolean waitForTransformation) {
+        selectDocumentType(poiWrapper, locator, waitForTransformation);
+    }
+
     private void selectCreditCardDocumentType(By locator, Boolean waitForTransformation) {
-        waitUntilDisplayed(creditCardWrapper).click();
-        waitUntilDisplayed(locator).click();
+        selectDocumentType(creditCardWrapper, locator, waitForTransformation);
+    }
+
+    private void selectDocumentType(By wrapper, By locator, Boolean waitForTransformation) {
+        waitUntilDisplayed(wrapper, documentTypeButton).click();
+        waitUntilDisplayed(wrapper, locator).click();
         if (waitForTransformation) {
             /*wait until animation starts*/
             waitUntil(() -> !checkCssProperty("transform", "none", creditCardFrontImage));

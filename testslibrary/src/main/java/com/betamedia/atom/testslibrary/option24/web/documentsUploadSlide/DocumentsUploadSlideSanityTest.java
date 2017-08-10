@@ -19,7 +19,7 @@ import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers
 
 public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
 
-    private static final String POI_PASSPORT_PATH = "files/sample_passport.jpg";
+    static final String POI_PASSPORT_PATH = "files/sample_passport.jpg";
 
     private static final String POI_DRIVER_LICENSE_FRONT_PATH = "files/sample_driver_license_front.jpg";
     private static final String POI_DRIVER_LICENSE_BACK_PATH = "files/sample_driver_license_back.jpg";
@@ -160,7 +160,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
         softAssert().assertTrue(pages().uploadDocumentsTab().creditCardXImageExists(), "Red X sign is available");
     }
 
-    private void closeWizardAndGoToUploadDocumentTab() {
+    public void closeWizardAndGoToUploadDocumentTab() {
         pages().uploadDocumentDialog().close();
         pages().confirmCloseMessage().acceptClose();
         pages().topNavigationPage().goToMyAccount();

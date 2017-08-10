@@ -314,7 +314,23 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porNotApprovedXImage,XPATH,.//*[@id='doc-por-form-space']//*[@class='document-box not-aprroved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogCloseButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documentTypeButton,TAG_NAME,button
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,uploadDocumentsTab,XPATH,.//*[@id='menu-item-54113']/a
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,XPATH,.//*[@id='menu-item-54113']/a
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,XPATH,.//*[@id='acc']//div[@data-target='#poi']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeaderCollapsed,XPATH,.//*[@id='acc']//div[@data-target='#poi' and @aria-expanded='false']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiWrapper,XPATH,.//*[@id='poi']//div[@class='btn-group bootstrap-select swMandatory swFormControl']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,documentTypeButton,TAG_NAME,button
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiUploadInput,ID,fileUploadDocsPOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiPassportSelection,CSS,li[data-original-index='0']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiOveralStatusReviewed,XPATH,.//*[@id='acc']//div[@data-target='#poi']//div[@class='reviewed-icon']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiImageSent,XPATH,.//*[@id='poi']//img[@class='sent']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiImageReviewed,XPATH,.//*[@id='poi']//img[@class='reviewed']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiImageApproved,XPATH,.//*[@id='poi']//img[@class='approved']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,XPATH,.//*[@id='acc']//*[@class='icon por-icon']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porWrapper,ID,uploaderPOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porUploadInput,ID,fileUploadDocsPOR
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porSentImage,XPATH,.//*[@id='por']//img[@class='sent']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porNotApprovedXImage,XPATH,.//*[@id='por-container']//*[@class='document-box not-aprroved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardHeader,XPATH,.//*[@id='acc']//*[@class='icon cc-icon']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardWrapper,XPATH,.//*[@id='cc-container']//*[@class='btn dropdown-toggle btn-default']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardUploadInput,ID,fileUploadDocsCC

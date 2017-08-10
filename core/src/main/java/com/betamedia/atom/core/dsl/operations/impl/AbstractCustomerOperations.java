@@ -327,4 +327,11 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         assertNotNull(contactBase);
         return contactBase;
     }
+
+    @Override
+    public ContactBase findByEmailAddress (String emailAddress) {
+        ContactBase contactBase = contactBaseRepository.findByEmailAddress1(emailAddress);
+        assertNotNull(contactBase, "Unable to locate customer by email: " + emailAddress);
+        return contactBase;
+    }
 }

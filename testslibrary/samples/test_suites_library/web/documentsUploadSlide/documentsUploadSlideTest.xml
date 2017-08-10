@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="verify Personal Details Slide" verbose="1">
-    <parameter name="testlinkBuildId" value="" />
-    <parameter name="testlinkPlanId" value="" />
+    <parameter name="testlinkBuildId" value="${buildId}" />
+    <parameter name="testlinkPlanId" value="${planId}" />
     <test name="Documents Upload Slide verifications">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideSanityTest">
@@ -26,6 +26,7 @@
                     <parameter name="phonecountryprefix" value="+49"/>
                     <include name="uploadDocumentsSlideContainsExitXButtonTest" description="CTW-5691" />
                     <include name="eachSlideSectionCanBeCollapsedExpanded" description="CTW-5730" />
+                    <include name="poiUploadPassportSC" description="CTW-5351" />
                 </methods>
             </class>
         </classes>

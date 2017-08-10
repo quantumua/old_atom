@@ -7,7 +7,12 @@ import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.WebFnsPersonalInformationImpl;
+import com.betamedia.atom.core.persistence.entities.ContactBase;
+import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -19,25 +24,21 @@ import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers
  * @author Leonid Artemiev
  * @since 8/10/17
  */
+public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideSanityTest {
 
-public class DocumentsUploadSlideFunctionalityTest extends WebEndToEndTest {
+    /**
+     * Strings for tests
+     */
+    protected static final Integer POI_STATUS_SUCCESS = 100000001;
+    protected static final Integer POI_OCR_STATUS_VERIFIED = 100000003;
+
+
+    private static final Logger logger = LogManager.getLogger(WebFnsPersonalInformationImpl.class);
 
     @BeforeMethod
     @Parameters({"countrycode", "phonecountryprefix"})
     public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
-                .withPhoneCountryPrefix(phonecountryprefix)
-                .build());
-        pages().welcomeDialog().isStartBtnDisplayed();
-        pages().welcomeDialog().start();
-        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
-        PersonalInformation personalInfo = getPersonalInformation();
-        pages().fnsPersonalInformation().submit(personalInfo);
-        pages().fnsTradingExperience().submit(getTradingExperienceInfo());
-        pages().creditCardDeposit().submit((CreditCardDeposit.builder().build()));
-        pages().thankYouPage().doContinue();
-        pages().fnsEmployerInfo().submit(personalInfo);
+         super.before(countrycode, phonecountryprefix);
     }
 
     /*
@@ -73,47 +74,25 @@ public class DocumentsUploadSlideFunctionalityTest extends WebEndToEndTest {
         softAssert().assertTrue(pages().uploadDocumentDialog().isPorCollapsed(), "POR section not collapsed.");
     }
 
-    private PersonalInformation getPersonalInformation() {
-        return PersonalInformation.builder()
-                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
-                .withIndustry(Industry.FINANCE)
-                .withEmployerName("fgsfds")
-                .withTaxResidenceCountry("DE")
-                .withUSReportabilityStatus(IsUSReportable.NO)
-                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
-                .withTaxIdentificationNumber("123456789")
-                .withEducationLevel(EducationLevel.POST_GRADUATE)
-                .withEducationField(EducationField.ACCOUNTING)
-                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
-                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
-                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
-                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
-                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
-                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
-                .build();
-    }
-
-    private TradingExperienceInfo getTradingExperienceInfo(){
-        return TradingExperienceInfo.builder()
-                .withSharesExperience(SharesExperience.NEVER)
-                .withBinaryExperience(BinaryExperience.OCCASIONALLY)
-                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K)
-                .withForExExperience(ForExExperience.NEVER)
-                .withFinancialWorkExperience(FinancialWorkExperience.WORKED)
-                .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE)
-                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
-                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK)
-                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES)
-                .withStopLossKnowledge(StopLossKnowledge.MINIMIZE)
-                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K)
-                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL)
-                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
-                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800)
-                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A1_1800)
-                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75)
-                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
-                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
-                .build();
+    /*
+     *[TestLink] CTW-5351:POI - Upload passport - SC
+     */
+    @Test(description = "CTW-5351:POI - Upload passport - SC")
+    @TestLinkProperties(displayId = "CTW-5351")
+    public void poiUploadPassportSC() {
+//        pages().topNavigationPage().logIn();
+//        pages().loginDialog().login("Web_69s4h9@24options.atom", "123123");
+        closeWizardAndGoToUploadDocumentTab();
+        pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
+        // Document status changed to Sent
+        pages().uploadDocumentsTab().verifyPOIDocumentIsUploaded();
+        softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "There is no prompt to upload Back side of the document");
+        // - Verify in CRM POI OCR Status = Verified
+        // TODO: Implement getting email address from account details in UI
+        final ContactBase customer=operations().customerOperations().findByEmailAddress("Web_o0jv6q@24options.atom");
+        String customerID = customer.getContactId();
+        final ContactExtension contactExtension = operations().customerOperations().getContactExtension(customerID);
+        softAssert().assertEquals(contactExtension.getPOIStatus(), POI_STATUS_SUCCESS);
+        softAssert().assertEquals(contactExtension.getPOIOcrStatus(), POI_OCR_STATUS_VERIFIED);
     }
 }
-

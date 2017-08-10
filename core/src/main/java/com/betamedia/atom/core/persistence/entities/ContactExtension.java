@@ -151,4 +151,12 @@ public class ContactExtension {
     public void setAcceptbulkemail(int acceptbulkemail) {
         this.acceptbulkemail = acceptbulkemail;
     }
+
+    public Integer getPOIStatus() {
+        return poiStatus;
+    }
+
+    public Integer getPOIOcrStatus() {
+        return poiOcrStatus;
+    }
 }

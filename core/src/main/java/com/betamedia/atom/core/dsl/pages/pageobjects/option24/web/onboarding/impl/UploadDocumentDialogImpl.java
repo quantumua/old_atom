@@ -6,8 +6,12 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.Upl
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Optional;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -194,7 +198,6 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void porUploadElectricityBill(String imagePath) {
         porClickHeader();
-        waitUntilDisplayed(porWrapper);
         //Electricity bill selected by default
         /*make input element visible*/
         setDisplayBlock(porUploadInput);
@@ -210,6 +213,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void porClickHeader(){
         waitUntilDisplayed(porHeader).click();
+        waitUntilDisplayed(porWrapper);
     }
 
     private static String storeToTemp(String resource) {
@@ -221,7 +225,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     private void selectPOIDocumentType(By locator, Boolean waitForTransformation) {
-        waitUntilDisplayed(poiWrapper, documentTypeButton).click();
+        scrollIntoView(waitUntilDisplayed(poiWrapper, documentTypeButton)).click();
         waitUntilDisplayed(poiWrapper, locator).click();
         if (waitForTransformation) {
             /*wait until animation starts*/

@@ -60,4 +60,8 @@ public class ContactBase {
     public void setDoNotPhone(String doNotPhone) {
         this.doNotPhone = doNotPhone;
     }
+
+    public String getContactId() {
+        return contactId;
+    }
 }
