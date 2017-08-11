@@ -1,5 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl.WebFnsPersonalInformationImpl;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
@@ -114,6 +116,29 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         pages().uploadDocumentsTab().verifyPOIInvalidDocumentUploaded(1);
         verifyPOIStatusInCRM(POI_OCR_STATUS_EMPTY);
     }
+    /*
+     *[TestLink] CTW-5358:POI Upload then logout/Login
+     */
+    @Test(description = "CTW-5358:POI Upload then logout/Login")
+    @TestLinkProperties(displayId = "CTW-5358")
+    public void poiUploadThenLogoutLogin() {
+        closeWizardAndGoToMyAccount();
+        String userName = pages().accountDetails().getEmail();
+        pages().uploadDocumentsTab().invoke();
+        pages().uploadDocumentsTab().poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+        pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(2);
+        pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
+        softAssert().assertTrue(pages().uploadDocumentsTab().verifyPORsectionExpanded(), "POR section not expanded");
+        pages().controlPanel().logOut();
+        softAssert().assertTrue(pages().topNavigationPage().isLoggedOut(), "Customer still logged in");
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build();
+        pages().topNavigationPage().logIn();
+        pages().loginDialog().login(userName, customerRegistrationInfo.getPassword());
+        pages().topNavigationPage().goToMyAccount();
+        pages().uploadDocumentsTab().invoke();
+        softAssert().assertTrue(pages().uploadDocumentsTab().verifyPORsectionExpanded(), "POR section not expanded after re-login");
+    }
+
 
     private void verifyPOIStatusInCRM (Integer poiOCRStatus) {
         pages().accountDetails().invoke();

@@ -9,8 +9,6 @@ public interface UploadDocumentDialog {
 
     boolean exists();
 
-    void goToDocumentsUpload();
-
     boolean porCheckmarkImageExists();
 
     boolean porXImageExists();

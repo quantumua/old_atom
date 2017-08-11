@@ -129,7 +129,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmImSure,ID,dialog_btn_leave
 2.6.2,2017-05-29 15:24 +0000,ConfirmCloseMessageImpl,confirmNo,ID,dialog_btn_stay
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,userDetailsMenu,ID,user_details_menu
-2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(3) > a
+2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,logoutLink,CSS,ul > li:nth-child(4) > a
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,accountCurrency,CLASS_NAME,swAccountCurrency
 2.6.2,2017-05-29 15:24 +0000,ControlPanelImpl,accountListMenu,ID,account_list_menu
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,dialogBox,XPATH,//div[./div/div = 'Error']
@@ -271,7 +271,6 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,productButtons,CLASS_NAME,rootMenu
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,pageRoot,CSS,.content.mobile-single
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documents,XPATH,.//*[@id='menu-item-54113']/a
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiContainer,XPATH,.//*[@id='poi-container']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadDocumentWrapperOpen,XPATH,.//*[@id='doc-poi-wrapper'][@class="upload-document-wrapper toggleCollapse toggleOpen"]
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadDocumentWrapperClosed,XPATH,.//*[@id='doc-poi-wrapper'][@class="upload-document-wrapper toggleCollapse toggleClosed"]
@@ -336,6 +335,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiBackImage,CLASS_NAME,poi-back-image
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiRedXImage,XPATH,.//*[@id='poi-container']//div[@class='document-box not-aprroved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,XPATH,.//*[@id='acc']//*[@class='icon por-icon']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeaderExpanded,XPATH,.//*[@id='acc']//div[@data-target='#por' and @aria-expanded='true']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porWrapper,ID,por-container
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porUploadInput,ID,fileUploadDocsPOR
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porSentImage,XPATH,.//*[@id='por']//img[@class='sent']

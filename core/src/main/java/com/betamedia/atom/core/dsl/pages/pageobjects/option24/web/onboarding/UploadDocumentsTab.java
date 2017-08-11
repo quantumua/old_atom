@@ -30,4 +30,6 @@ public interface UploadDocumentsTab {
     void verifyPOIDocumentsUploaded(int documentsCount);
 
     void verifyPOIInvalidDocumentUploaded(int documentsCount);
+
+    boolean verifyPORsectionExpanded();
 }

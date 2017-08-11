@@ -64,6 +64,8 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @StoredId
     private By porHeader;
     @StoredId
+    private By porHeaderExpanded;
+    @StoredId
     private By porWrapper;
     @StoredId
     private By porUploadInput;
@@ -182,6 +184,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         selectDocumentType(poiWrapper, documentBackSelection, true, poiBackImage);
         find(poiUploadInput).clear();
         uploadFromPath(storeToTemp(imageBackPath), poiUploadInput);
+        find(poiUploadInput).clear();
     }
 
     @Override
@@ -196,6 +199,11 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         softAssert().assertTrue(waitUntil(() ->
                         findElements(poiRedXImage).size() == documentsCount),
                 "Unable to locate " + documentsCount + " not approved POI Documents");
+    }
+
+    @Override
+    public boolean verifyPORsectionExpanded(){
+        return waitUntilDisplayed(porHeaderExpanded).isDisplayed();
     }
 
     private void poiClickHeader(){

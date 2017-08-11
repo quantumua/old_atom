@@ -27,7 +27,8 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
     static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
 
-    private static final String ELECTRICITY_BILL_PATH = "files/sample_electricity_bill.jpg";
+    private static final String POR_ELECTRICITY_BILL_PATH = "files/sample_electricity_bill.jpg";
+    private static final String POR_GAS_BILL_PATH = "files/sample_gas_bill.jpg";
 
     private static final String CREDIT_CARD_FRONT_PATH = "files/sample_credit_card_front.jpg";
     private static final String CREDIT_CARD_BACK_PATH = "files/sample_credit_card_back.jpg";
@@ -68,7 +69,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     @Test(description = "CTW-5766:Successful upload document: POR section")
     @TestLinkProperties(displayId = "CTW-5766")
     public void successfulUploadDocumentPORSection() {
-        pages().uploadDocumentDialog().porUploadElectricityBill(ELECTRICITY_BILL_PATH);
+        pages().uploadDocumentDialog().porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH);
         softAssert().assertTrue(pages().uploadDocumentDialog().porCheckmarkImageExists(), "Electricity bill uploaded successfully.");
     }
 
@@ -160,10 +161,14 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
         softAssert().assertTrue(pages().uploadDocumentsTab().creditCardXImageExists(), "Red X sign is available");
     }
 
-    public void closeWizardAndGoToUploadDocumentTab() {
+    public void closeWizardAndGoToMyAccount() {
         pages().uploadDocumentDialog().close();
         pages().confirmCloseMessage().acceptClose();
         pages().topNavigationPage().goToMyAccount();
+    }
+
+    public void closeWizardAndGoToUploadDocumentTab() {
+        closeWizardAndGoToMyAccount();
         pages().uploadDocumentsTab().invoke();
     }
 

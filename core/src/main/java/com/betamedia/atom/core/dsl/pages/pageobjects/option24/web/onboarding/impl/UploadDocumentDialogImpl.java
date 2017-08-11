@@ -26,8 +26,6 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @StoredId
     private By pageRoot;
     @StoredId
-    private By documents;
-    @StoredId
     private By uploadDocumentDialogCloseButton;
     @StoredId
     private By poiContainer;
@@ -131,11 +129,6 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void close() {
         waitUntilDisplayed(uploadDocumentDialogCloseButton).click();
-    }
-
-    @Override
-    public void goToDocumentsUpload(){
-        waitUntilDisplayed(documents).click();
     }
 
     @Override
