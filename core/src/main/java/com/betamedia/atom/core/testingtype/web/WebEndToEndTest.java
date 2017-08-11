@@ -22,7 +22,7 @@ import org.openqa.selenium.remote.BrowserType;
 public class WebEndToEndTest extends AbstractEndToEndTest<TPTemplate, WebPageFactoryImpl> {
 	@Override
     public final TPTemplate getOperationTemplate() {
-        return ThreadLocalBeansHolder.getOperationsTemplateThreadLocal();
+        return ThreadLocalBeansHolder.getOperationsTemplate();
     }
 
     @Override

@@ -18,7 +18,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     private static final String LICENSE_TERMS_DOCUMENT = SERVER_DOCUMENT+LOCALE+"/clientagreement_24option.pdf";
     private static final String BONUS_TERMS_AND_CONDITIONS_DOCUMENT = SERVER_DOCUMENT+LOCALE+"/bonustermsandconditions_24option.pdf";
     private static final String PRIVACY_POLICY_DOCUMENT = SERVER_DOCUMENT+LOCALE+"/privacypolicy_24option.pdf";
-    private static final String DEUTSCH_LANGUAGE = "DE";
+    private static final String GERMAN_LANGUAGE = "DE";
 
     /**
      * open register form
@@ -46,7 +46,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-5442:SEU: Correct redirect after open account slide submit (different languages)")
     @TestLinkProperties(displayId = "CTW-5442")
     public void verifyRedirectAfterOpenAccountSlideSubmit() {
-        pages().topNavigationPage().selectLanguage(DEUTSCH_LANGUAGE);
+        pages().topNavigationPage().selectLanguage(GERMAN_LANGUAGE);
         CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
                 .builder(WebSiteNamingStrategy.get()).build();
         pages().loadingDialog().isDisplayed();

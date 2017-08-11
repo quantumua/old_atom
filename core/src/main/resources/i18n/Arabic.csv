@@ -1,0 +1,3 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,text
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,أهلا بك
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,ابدأ

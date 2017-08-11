@@ -51,8 +51,8 @@ public class PageObjectCreatorImplTest {
         int threadNum = 10;
         WebDriverFactory mockFactory = mock(WebDriverFactory.class);
         when(mockFactory.get()).then(i -> mock(WebDriver.class));
-        ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(mockFactory);
-        ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(mock(VersionedWebElementRepository.class));
+        ThreadLocalBeansHolder.setWebDriverFactory(mockFactory);
+        ThreadLocalBeansHolder.setVersionedWebElementRepository(mock(VersionedWebElementRepository.class));
         ExecutorService pool = new ThreadPoolExecutor(0, threadNum, 0, TimeUnit.SECONDS, new SynchronousQueue<>());
 
         /*Instantiate PageObjectCreatorImpl from [threadNum] separate child threads*/
@@ -90,8 +90,8 @@ public class PageObjectCreatorImplTest {
     public void hierarchicalPageObjectCreationTest() {
         /*Instantiate Page Object that is inherited from another Page Object that declares its own fields*/
         VersionedWebElementRepository repoMock = mock(VersionedWebElementRepository.class);
-        ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(repoMock);
-        ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(() -> mock(WebDriver.class));
+        ThreadLocalBeansHolder.setVersionedWebElementRepository(repoMock);
+        ThreadLocalBeansHolder.setWebDriverFactory(() -> mock(WebDriver.class));
         PageObjectCreatorImpl pageObjectCreator = new PageObjectCreatorImpl();
         when(repoMock.get(AbstractMockPageObject.class.getSimpleName(), "inheritedField")).thenReturn(new FindBy("ID", "mockLocator"));
         when(repoMock.get(AbstractMockPageObjectImpl.class.getSimpleName(), "declaredField")).thenReturn(new FindBy("ID", "mockLocator"));
@@ -102,8 +102,8 @@ public class PageObjectCreatorImplTest {
     }
 
     private PageObjectCreatorImpl initializePageObjectCreator() {
-        ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(mock(VersionedWebElementRepository.class));
-        ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(() -> mock(WebDriver.class));
+        ThreadLocalBeansHolder.setVersionedWebElementRepository(mock(VersionedWebElementRepository.class));
+        ThreadLocalBeansHolder.setWebDriverFactory(() -> mock(WebDriver.class));
         return new PageObjectCreatorImpl();
     }
 

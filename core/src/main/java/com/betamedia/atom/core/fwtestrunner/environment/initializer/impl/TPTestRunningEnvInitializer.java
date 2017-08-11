@@ -4,6 +4,8 @@ import com.betamedia.atom.core.dsl.templates.tp.TPTemplate;
 import com.betamedia.atom.core.dsl.templates.tp.TPTemplateProvider;
 import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.fwdataaccess.converters.LocalDateTimeConverter;
+import com.betamedia.atom.core.fwdataaccess.repository.impl.LocalizationRepository;
+import com.betamedia.atom.core.fwdataaccess.repository.impl.VersionedLocalizationRepositoryImpl;
 import com.betamedia.atom.core.fwdataaccess.repository.impl.VersionedWebElementRepositoryImpl;
 import com.betamedia.atom.core.fwdataaccess.repository.impl.WebElementRepository;
 import com.betamedia.atom.core.fwdataaccess.repository.util.RepositoryVersion;
@@ -42,17 +44,22 @@ public class TPTestRunningEnvInitializer implements TestRunningEnvInitializer, T
     private TPTemplateProvider templateProvider;
     @Autowired
     private WebElementRepository webElementRepository;
+    @Autowired
+    private LocalizationRepository localizationRepository;
 
     @Override
     public void initializeEnvironment(Properties properties) {
-        if (Objects.isNull(ThreadLocalBeansHolder.getWebDriverFactoryThreadLocal())) {
-            ThreadLocalBeansHolder.setWebDriverFactoryThreadLocal(getWebDriverFactory(properties));
+        if (Objects.isNull(ThreadLocalBeansHolder.getWebDriverFactory())) {
+            ThreadLocalBeansHolder.setWebDriverFactory(getWebDriverFactory(properties));
         }
-        if (Objects.isNull(ThreadLocalBeansHolder.getVersionedWebElementRepositoryThreadLocal())) {
-            ThreadLocalBeansHolder.setVersionedWebElementRepositoryThreadLocal(new VersionedWebElementRepositoryImpl(getAppVersion(properties), webElementRepository));
+        if (Objects.isNull(ThreadLocalBeansHolder.getVersionedWebElementRepository())) {
+            ThreadLocalBeansHolder.setVersionedWebElementRepository(new VersionedWebElementRepositoryImpl(getAppVersion(properties), webElementRepository));
         }
-        if (Objects.isNull(ThreadLocalBeansHolder.getOperationsTemplateThreadLocal())) {
-            ThreadLocalBeansHolder.setOperationsTemplateThreadLocal(getOperationsTemplate(properties));
+        if (Objects.isNull(ThreadLocalBeansHolder.getVersionedLocalizationRepository())) {
+            ThreadLocalBeansHolder.setVersionedLocalizationRepository(new VersionedLocalizationRepositoryImpl(getAppVersion(properties), localizationRepository));
+        }
+        if (Objects.isNull(ThreadLocalBeansHolder.getOperationsTemplate())) {
+            ThreadLocalBeansHolder.setOperationsTemplate(getOperationsTemplate(properties));
         }
     }
 

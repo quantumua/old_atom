@@ -14,6 +14,6 @@ public abstract class WidgetsBackEndTest extends AbstractBackEndTest<TPTemplate>
 
     @Override
     public final TPTemplate getOperationTemplate() {
-        return ThreadLocalBeansHolder.getOperationsTemplateThreadLocal();
+        return ThreadLocalBeansHolder.getOperationsTemplate();
     }
 }
