@@ -20,7 +20,7 @@ public class AccountDetailsTabImpl extends AbstractAccountDetails {
 
 
     public void invoke() {
-        scrollIntoView(waitUntilDisplayed(winID)).click();
+        waitUntilDisplayed(winID).click();
     }
 
     @Override

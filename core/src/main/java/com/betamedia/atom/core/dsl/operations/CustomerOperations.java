@@ -66,4 +66,6 @@ public interface CustomerOperations<T extends EnvironmentDependent> extends Envi
     ContactBase getContactBase(String contactId);
 
     ContactBase findByEmailAddress(String emailAddress);
+
+    ContactExtension findExtByEmailAddress (String emailAddress);
 }

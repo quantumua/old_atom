@@ -13,6 +13,7 @@ import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -80,9 +81,6 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5351:POI - Upload passport - SC")
     @TestLinkProperties(displayId = "CTW-5351")
     public void poiUploadPassportSC() {
-//        pages().topNavigationPage().logIn();
-//        String TEMP_EMAIL= "Web_g8jj8@24options.atom";
-//        pages().loginDialog().login(TEMP_EMAIL, "123123");
         closeWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
         // Document status changed to Sent
@@ -92,10 +90,15 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         pages().accountDetails().invoke();
         String emailAddress = pages().accountDetails().getEmail();
 //        String emailAddress = TEMP_EMAIL;
-        final ContactBase customer=operations().customerOperations().findByEmailAddress(emailAddress);
-        String customerID = customer.getContactId();
-        final ContactExtension contactExtension = operations().customerOperations().getContactExtension(customerID);
-        softAssert().assertEquals(contactExtension.getPOIStatus(), POI_STATUS_SUCCESS);
-        softAssert().assertEquals(contactExtension.getPOIOcrStatus(), POI_OCR_STATUS_VERIFIED);
+        final ContactExtension contactExtension = operations().customerOperations().findExtByEmailAddress(emailAddress);
+        logger.info("contactExtension.getPOIStatus()=" + contactExtension.getPOIStatus());
+        Reporter.log("contactExtension.getPOIStatus()=" + contactExtension.getPOIStatus());
+        logger.info("contactExtension.getPOIOcrStatus()=" + contactExtension.getPOIOcrStatus());
+        Reporter.log("contactExtension.getPOIOcrStatus()=" + contactExtension.getPOIOcrStatus());
+        softAssert().assertEquals(contactExtension.getPOIStatus(), POI_STATUS_SUCCESS, "Failed to verify POI status, actual status: " + contactExtension.getPOIStatus());
+        softAssert().assertEquals(contactExtension.getPOIOcrStatus(), POI_OCR_STATUS_VERIFIED, "Failed to verify POI Ocr status, actual status: " + contactExtension.getPOIOcrStatus());
     }
+    //        pages().topNavigationPage().logIn();
+    //        String TEMP_EMAIL= "Web_g8jj8@24options.atom";
+    //        pages().loginDialog().login(TEMP_EMAIL, "123123");
 }

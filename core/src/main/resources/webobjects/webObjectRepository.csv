@@ -82,7 +82,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,lossOn1to200Knowledge,ID,KnowledgePositionLoss1to200
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,buttonWizardDeclaration,XPATH,//div[@id='wizard-declaration']//div[@class='message-button']//*[@id='declaration-btn']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,resultPlaceholder,ID,resultPlaceHolder
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsTabImpl,winID,XPATH,.//*[@id='menu-item-50879']/a
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsTabImpl,winID,XPATH,.//li[@id='menu-item-50879']/a
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,title,ID,Title
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,street,ID,Street
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,streetNumber,ID,StreetNumber

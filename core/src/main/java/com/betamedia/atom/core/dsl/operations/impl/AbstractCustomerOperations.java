@@ -318,21 +318,28 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public ContactExtension getContactExtension(String contactId) {
         ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
-        softAssert().assertNotNull(contactExtension);
+        assertNotNull(contactExtension, "Unable to locate customer by ID: " + contactId);
         return contactExtension;
     }
 
     @Override
     public ContactBase getContactBase(String contactId) {
         ContactBase contactBase = contactBaseRepository.findOne(contactId);
-        softAssert().assertNotNull(contactBase);
+        assertNotNull(contactBase, "Unable to locate customer by ID: " + contactId);
         return contactBase;
     }
 
     @Override
     public ContactBase findByEmailAddress (String emailAddress) {
         ContactBase contactBase = contactBaseRepository.findByEmailAddress1(emailAddress);
-        softAssert().assertNotNull(contactBase, "Unable to locate customer by email: " + emailAddress);
+        assertNotNull(contactBase, "Unable to locate customer by email: " + emailAddress);
         return contactBase;
+    }
+
+    @Override
+    public ContactExtension findExtByEmailAddress (String emailAddress) {
+        ContactExtension contactExtension = contactExtensionRepository.findByUsername(emailAddress);
+        assertNotNull(contactExtension, "Unable to locate customer by email: " + emailAddress);
+        return contactExtension;
     }
 }

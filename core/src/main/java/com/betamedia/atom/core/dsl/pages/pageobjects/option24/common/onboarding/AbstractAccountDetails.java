@@ -38,8 +38,10 @@ public abstract class AbstractAccountDetails extends AbstractPageObject implemen
         super(webDriver);
     }
 
+    private final String ATTRIBUTE_VALUE = "value";
+
     @Override
     public String getEmail() {
-        return waitUntilDisplayed(email).getText();
+        return waitUntilDisplayed(email).getAttribute(ATTRIBUTE_VALUE);
     }
 }
