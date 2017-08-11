@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -35,6 +36,18 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private By poiUploadInput;
     @StoredId
     private By poiPassportSelection;
+    @StoredId
+    private By poiFrontImage;
+    @StoredId
+    private By poiBackImage;
+    @StoredId
+    private By poiIdCardFrontSelection;
+    @StoredId
+    private By poiIdCardBackSelection;
+    @StoredId
+    private By poiDriverLicenseFrontSelection;
+    @StoredId
+    private By poiDriverLicenseBackSelection;
         // POI Document Upload Status controls
     @StoredId
     private By poiOveralStatusReviewed;
@@ -44,6 +57,8 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private By poiImageReviewed;
     @StoredId
     private By poiImageApproved;
+    @StoredId
+    private By poiRedXImage;
 
     /* POR (Proof of residency) Controls*/
     @StoredId
@@ -145,6 +160,44 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         /*wait until upload is over and back image is available*/
     }
 
+    @Override
+    public void poiUploadIdCardDocuments(String imageFrontPath, String imageBackPath) {
+        poiUploadTwoSidePOIDocuments(poiIdCardFrontSelection, poiIdCardBackSelection, imageFrontPath, imageBackPath);
+    }
+
+    @Override
+    public void poiUploadDriverLicenseDocuments(String imageFrontPath, String imageBackPath) {
+        poiUploadTwoSidePOIDocuments(poiDriverLicenseFrontSelection, poiDriverLicenseBackSelection, imageFrontPath, imageBackPath);
+    }
+
+    private void poiUploadTwoSidePOIDocuments(By documentFrontSelection, By documentBackSelection, String imageFrontPath, String imageBackPath) {
+        poiExpandHeader();
+        selectDocumentType(poiWrapper, documentFrontSelection, true, poiFrontImage);
+        /*make input element visible*/
+        setDisplayBlock(poiUploadInput);
+        /*upload file*/
+        uploadFromPath(storeToTemp(imageFrontPath), poiUploadInput);
+        /*wait until upload is over and back image is available*/
+        waitUntilDisplayed(poiImageApproved);
+        selectDocumentType(poiWrapper, documentBackSelection, true, poiBackImage);
+        find(poiUploadInput).clear();
+        uploadFromPath(storeToTemp(imageBackPath), poiUploadInput);
+    }
+
+    @Override
+    public void verifyPOIDocumentsUploaded(int documentsCount) {
+        softAssert().assertTrue(waitUntil(() ->
+                findElements(poiImageSent).size() == documentsCount),
+                "Unable to locate " + documentsCount + " submitted POI Documents");
+    }
+
+    @Override
+    public void verifyPOIInvalidDocumentUploaded(int documentsCount) {
+        softAssert().assertTrue(waitUntil(() ->
+                        findElements(poiRedXImage).size() == documentsCount),
+                "Unable to locate " + documentsCount + " not approved POI Documents");
+    }
+
     private void poiClickHeader(){
         waitUntilDisplayed(poiHeader).click();
     }
@@ -154,6 +207,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
             poiClickHeader();
         }
         scrollIntoView(waitUntilExists(poiUploadInput));
+        scrollIntoView(find(poiHeader));
     }
 
     private static String storeToTemp(String resource) {

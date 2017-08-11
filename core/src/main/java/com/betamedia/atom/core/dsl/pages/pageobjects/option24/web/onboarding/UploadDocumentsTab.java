@@ -22,4 +22,12 @@ public interface UploadDocumentsTab {
     void verifyPOIDocumentIsUploaded();
 
     void poiUploadPassport(String poiPassportPath);
+
+    void poiUploadIdCardDocuments(String imageFrontPath, String imageBackPath);
+
+    void poiUploadDriverLicenseDocuments(String imageFrontPath, String imageBackPath);
+
+    void verifyPOIDocumentsUploaded(int documentsCount);
+
+    void verifyPOIInvalidDocumentUploaded(int documentsCount);
 }

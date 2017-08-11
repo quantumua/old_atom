@@ -324,10 +324,17 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,documentTypeButton,TAG_NAME,button
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiUploadInput,ID,fileUploadDocsPOI
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiPassportSelection,CSS,li[data-original-index='0']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiDriverLicenseFrontSelection,CSS,li[data-original-index='1']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiDriverLicenseBackSelection,CSS,li[data-original-index='2']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiIdCardFrontSelection,CSS,li[data-original-index='3']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiIdCardBackSelection,CSS,li[data-original-index='4']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiOveralStatusReviewed,XPATH,.//*[@id='acc']//div[@data-target='#poi']//div[@class='reviewed-icon']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiImageSent,XPATH,.//*[@id='poi']//img[@class='sent']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiImageReviewed,XPATH,.//*[@id='poi']//img[@class='reviewed']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiImageApproved,XPATH,.//*[@id='poi']//img[@class='approved']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiFrontImage,CLASS_NAME,poi-front-image
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiBackImage,CLASS_NAME,poi-back-image
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiRedXImage,XPATH,.//*[@id='poi-container']//div[@class='document-box not-aprroved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,XPATH,.//*[@id='acc']//*[@class='icon por-icon']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porWrapper,ID,por-container
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porUploadInput,ID,fileUploadDocsPOR

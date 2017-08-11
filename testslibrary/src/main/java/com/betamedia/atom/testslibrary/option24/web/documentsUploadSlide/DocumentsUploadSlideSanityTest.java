@@ -21,17 +21,17 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
 
     static final String POI_PASSPORT_PATH = "files/sample_passport.jpg";
 
-    private static final String POI_DRIVER_LICENSE_FRONT_PATH = "files/sample_driver_license_front.jpg";
-    private static final String POI_DRIVER_LICENSE_BACK_PATH = "files/sample_driver_license_back.jpg";
+    static final String POI_DRIVER_LICENSE_FRONT_PATH = "files/sample_driver_license_front.jpg";
+    static final String POI_DRIVER_LICENSE_BACK_PATH = "files/sample_driver_license_back.jpg";
 
-    private static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
-    private static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
+    static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
+    static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
 
     private static final String ELECTRICITY_BILL_PATH = "files/sample_electricity_bill.jpg";
 
     private static final String CREDIT_CARD_FRONT_PATH = "files/sample_credit_card_front.jpg";
     private static final String CREDIT_CARD_BACK_PATH = "files/sample_credit_card_back.jpg";
-    private static final String WRONG_DOC_PATH = "files/sample_wrong_doc.jpg";
+    static final String WRONG_DOC_PATH = "files/sample_wrong_doc.jpg";
 
     @BeforeMethod
     @Parameters({"countrycode", "phonecountryprefix"})

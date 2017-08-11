@@ -27,6 +27,9 @@
                     <include name="uploadDocumentsSlideContainsExitXButtonTest" description="CTW-5691" />
                     <include name="eachSlideSectionCanBeCollapsedExpanded" description="CTW-5730" />
                     <include name="poiUploadPassportSC" description="CTW-5351" />
+                    <include name="uploadIdentityCard" description="CTW-5354" />
+                    <include name="uploadDriverLicense" description="CTW-5355" />
+                    <include name="poiUploadInvalidPassportSC" description="CTW-5356" />
                 </methods>
             </class>
         </classes>
