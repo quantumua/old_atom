@@ -19,6 +19,8 @@ public abstract class AbstractTPTemplate<T extends EnvironmentDependent> impleme
     private CustomerOperations<T> customerOperations;
     @Autowired
     private OnBoardingOperations<T> onBoardingOperations;
+    @Autowired
+    private CrmDBOperations<T> crmDBOperations;
 
     @Override
     public AccountOperations accountOperations() {
@@ -40,5 +42,8 @@ public abstract class AbstractTPTemplate<T extends EnvironmentDependent> impleme
         return onBoardingOperations;
     }
 
-
+    @Override
+    public CrmDBOperations crmDbOperations() {
+        return crmDBOperations;
+    }
 }

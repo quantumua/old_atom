@@ -9,14 +9,18 @@ import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.api.web.form.Localization;
 import com.betamedia.atom.core.fwdataaccess.annotations.ClasspathLocation;
 import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
+import com.betamedia.atom.core.persistence.repositories.AbstractContactExtensionRepository;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 import org.testng.Reporter;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Created by vsnigur on 7/3/17.
@@ -77,6 +81,14 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
      * - verify that sign up button opens registration dialog
      * - verify registration dialog caption
      */
+
+    private AbstractContactExtensionRepository contactExtensionRepository;
+
+    @BeforeClass
+    public void before(){
+        contactExtensionRepository = operations().crmDbOperations().contactExtensionRepository();
+    }
+
     @Test(description = "CTW-5079:verify sign up button gives you the open account pop up")
     @TestLinkProperties(displayId = "CTW-5079")
     public void verifySignUpButtonRedirectToOnboardingOpenAccount() {
@@ -437,7 +449,12 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     public void validateBulkEmailHasNoneZeroForNewCreatedCustomer() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         createCustomer(customerRO);
-        operations().onBoardingOperations().assertBulkEmailHasNotValue(customerRO.getEmail(), ZERO_VALUE);
+        assertBulkEmailHasNotValue(customerRO.getEmail(), ZERO_VALUE);
+    }
+
+    private void assertBulkEmailHasNotValue(String userLoginName, int notExpectedValue) {
+        softAssert().assertTrue(contactExtensionRepository.findByUsername(userLoginName)
+                .getAcceptbulkemail() != notExpectedValue);
     }
 
     /**
@@ -449,7 +466,12 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     public void validatePhoneCallsForNewCreatedCustomer() {
         CustomerRO customerRO = CustomerRO.builder(CRMMobileAPINamingStrategy.get()).build();
         createCustomer(customerRO);
-        operations().onBoardingOperations().assertDoNotPhoneHasNotValue(customerRO.getEmail(), String.valueOf(ZERO_VALUE));
+        assertDoNotPhoneHasNotValue(customerRO.getEmail(), String.valueOf(ZERO_VALUE));
+    }
+
+    private void assertDoNotPhoneHasNotValue(String userLoginName, String notExpectedDoNotPhoneValue) {
+        softAssert().assertFalse(operations().crmDbOperations().contactBaseRepository().findByEmailAddress1(userLoginName)
+                .getDoNotPhone().equalsIgnoreCase(notExpectedDoNotPhoneValue));
     }
 
     /**

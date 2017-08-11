@@ -1,9 +1,6 @@
 package com.betamedia.atom.core.configuration.environment;
 
-import com.betamedia.atom.core.dsl.operations.impl.AbstractAccountOperations;
-import com.betamedia.atom.core.dsl.operations.impl.AbstractBonusOperations;
-import com.betamedia.atom.core.dsl.operations.impl.AbstractCustomerOperations;
-import com.betamedia.atom.core.dsl.operations.impl.AbstractOnBoardingOperations;
+import com.betamedia.atom.core.dsl.operations.impl.*;
 import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
 import com.betamedia.atom.core.environment.tp.AutomationEnvironment;
@@ -79,6 +76,17 @@ public class AutomationEnvironmentConfig {
     public AbstractOnBoardingOperations<AutomationEnvironment> automationOnBoardingOperations() {
         return new AbstractOnBoardingOperations<AutomationEnvironment>() {
 
+            public EnvironmentType getEnvironment() {
+                return AutomationEnvironmentConfig.getEnvironment();
+            }
+        };
+    }
+
+    @Bean
+    public AbstractCrmDBOperations<AutomationEnvironment> automationCrmDBOperations() {
+        return new AbstractCrmDBOperations<AutomationEnvironment>() {
+
+            @Override
             public EnvironmentType getEnvironment() {
                 return AutomationEnvironmentConfig.getEnvironment();
             }

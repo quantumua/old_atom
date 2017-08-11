@@ -46,8 +46,4 @@ public interface OnBoardingOperations<T extends EnvironmentDependent> extends En
 
     void assertUsersHaveNotConnection(String userLoginName, String secondUser);
 
-    void assertBulkEmailHasNotValue(String userLoginName, int notExpectedBulkValue);
-
-    void assertDoNotPhoneHasNotValue(String userLoginName, String notExpectedDoNotPhoneValue);
-
 }

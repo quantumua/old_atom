@@ -151,18 +151,6 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
     }
 
     @Override
-    public void assertBulkEmailHasNotValue(String userLoginName, int notExpectedValue) {
-        softAssert().assertTrue(contactExtensionRepository.findByUsername(userLoginName)
-                .getAcceptbulkemail() != notExpectedValue);
-    }
-
-    @Override
-    public void assertDoNotPhoneHasNotValue(String userLoginName, String notExpectedDoNotPhoneValue) {
-        softAssert().assertFalse(contactBaseRepository.findByEmailAddress1(userLoginName)
-                .getDoNotPhone().equalsIgnoreCase(notExpectedDoNotPhoneValue));
-    }
-
-    @Override
     public void assertUserCreatedInDatabase(String userEmail) {
         softAssert().assertTrue(Objects.nonNull(contactBaseRepository.findByEmailAddress1(userEmail)),
                 "User does not exist in database.");

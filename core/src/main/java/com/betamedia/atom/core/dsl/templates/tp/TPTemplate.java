@@ -17,4 +17,6 @@ public interface TPTemplate<T extends EnvironmentDependent> extends BackEndOpera
     CustomerOperations customerOperations();
 
     OnBoardingOperations onBoardingOperations();
+
+    CrmDBOperations crmDbOperations();
 }

@@ -1,11 +1,8 @@
 package com.betamedia.atom.core.configuration.environment;
 
-import com.betamedia.atom.core.dsl.operations.impl.AbstractAccountOperations;
-import com.betamedia.atom.core.dsl.operations.impl.AbstractBonusOperations;
-import com.betamedia.atom.core.dsl.operations.impl.AbstractCustomerOperations;
-import com.betamedia.atom.core.dsl.operations.impl.AbstractOnBoardingOperations;
-import com.betamedia.atom.core.dsl.type.EnvironmentType;
+import com.betamedia.atom.core.dsl.operations.impl.*;
 import com.betamedia.atom.core.dsl.templates.tp.impl.AbstractTPTemplate;
+import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.environment.tp.NewAutomationEnvironment;
 import com.betamedia.atom.core.fwdataaccess.repository.util.version.AbstractApplicationVersionService;
 import org.springframework.context.annotation.Bean;
@@ -74,6 +71,17 @@ public class NewAutomationEnvironmentConfig {
     @Bean
     public AbstractOnBoardingOperations<NewAutomationEnvironment> newAutomationOnBoardingOperations() {
         return new AbstractOnBoardingOperations<NewAutomationEnvironment>() {
+            public EnvironmentType getEnvironment() {
+                return NewAutomationEnvironmentConfig.getEnvironment();
+            }
+        };
+    }
+
+    @Bean
+    public AbstractCrmDBOperations<NewAutomationEnvironment> newAutomationCrmDBOperations() {
+        return new AbstractCrmDBOperations<NewAutomationEnvironment>() {
+
+            @Override
             public EnvironmentType getEnvironment() {
                 return NewAutomationEnvironmentConfig.getEnvironment();
             }
