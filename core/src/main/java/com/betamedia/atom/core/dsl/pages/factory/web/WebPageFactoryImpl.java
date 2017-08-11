@@ -162,6 +162,11 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     }
 
     @Override
+    public AccountDetailsPage accountDetails() {
+        return creator.getPage(AccountDetailsTabImpl.class);
+    }
+
+    @Override
     public CreditCardDepositPage creditCardDeposit() {
         return creator.getPage(CreditCardDepositPageImpl.class);
     }

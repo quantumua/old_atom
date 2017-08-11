@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit implements CreditCardDepositPage {
+public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 
 	private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(CreditCardDepositDialogImpl.class);
 

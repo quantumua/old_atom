@@ -38,7 +38,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @BeforeMethod
     @Parameters({"countrycode", "phonecountryprefix"})
     public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-         super.before(countrycode, phonecountryprefix);
+          super.before(countrycode, phonecountryprefix);
     }
 
     /*
@@ -81,15 +81,18 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @TestLinkProperties(displayId = "CTW-5351")
     public void poiUploadPassportSC() {
 //        pages().topNavigationPage().logIn();
-//        pages().loginDialog().login("Web_69s4h9@24options.atom", "123123");
+//        String TEMP_EMAIL= "Web_g8jj8@24options.atom";
+//        pages().loginDialog().login(TEMP_EMAIL, "123123");
         closeWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
         // Document status changed to Sent
         pages().uploadDocumentsTab().verifyPOIDocumentIsUploaded();
         softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "There is no prompt to upload Back side of the document");
         // - Verify in CRM POI OCR Status = Verified
-        // TODO: Implement getting email address from account details in UI
-        final ContactBase customer=operations().customerOperations().findByEmailAddress("Web_o0jv6q@24options.atom");
+        pages().accountDetails().invoke();
+        String emailAddress = pages().accountDetails().getEmail();
+//        String emailAddress = TEMP_EMAIL;
+        final ContactBase customer=operations().customerOperations().findByEmailAddress(emailAddress);
         String customerID = customer.getContactId();
         final ContactExtension contactExtension = operations().customerOperations().getContactExtension(customerID);
         softAssert().assertEquals(contactExtension.getPOIStatus(), POI_STATUS_SUCCESS);

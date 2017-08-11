@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import static org.testng.Assert.*;
 import static org.testng.Assert.assertNotNull;
 
@@ -297,7 +298,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     public ContactExtension updateExperienceScoreInDB(String contactId, int experienceScore) {
 
         ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
-        assertNotNull(contactExtension);
+        softAssert().assertNotNull(contactExtension);
         contactExtension.setExperienceScore((double) experienceScore);
         contactExtensionRepository.save(contactExtension);
         return contactExtension;
@@ -309,7 +310,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         String riskLimitsId = contactExtension.getRiskLimitsId();
 
         RiskLimits riskLimits = riskLimitsRepository.findOne(riskLimitsId);
-        assertNotNull(riskLimits);
+        softAssert().assertNotNull(riskLimits);
 
         return riskLimits.getVerifySettleFrom();
     }
@@ -317,21 +318,21 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     @Override
     public ContactExtension getContactExtension(String contactId) {
         ContactExtension contactExtension = contactExtensionRepository.findOne(contactId);
-        assertNotNull(contactExtension);
+        softAssert().assertNotNull(contactExtension);
         return contactExtension;
     }
 
     @Override
     public ContactBase getContactBase(String contactId) {
         ContactBase contactBase = contactBaseRepository.findOne(contactId);
-        assertNotNull(contactBase);
+        softAssert().assertNotNull(contactBase);
         return contactBase;
     }
 
     @Override
     public ContactBase findByEmailAddress (String emailAddress) {
         ContactBase contactBase = contactBaseRepository.findByEmailAddress1(emailAddress);
-        assertNotNull(contactBase, "Unable to locate customer by email: " + emailAddress);
+        softAssert().assertNotNull(contactBase, "Unable to locate customer by email: " + emailAddress);
         return contactBase;
     }
 }

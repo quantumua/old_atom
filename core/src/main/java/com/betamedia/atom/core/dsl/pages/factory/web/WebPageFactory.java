@@ -68,6 +68,8 @@ public interface WebPageFactory {
 
     AccountAdditionalDetailsDialog accountAdditionalDetails();
 
+    AccountDetailsPage accountDetails();
+
     CreditCardDepositPage creditCardDeposit();
 
     WelcomeDialog welcomeDialog();

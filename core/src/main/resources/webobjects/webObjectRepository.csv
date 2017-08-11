@@ -82,16 +82,18 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,lossOn1to200Knowledge,ID,KnowledgePositionLoss1to200
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,buttonWizardDeclaration,XPATH,//div[@id='wizard-declaration']//div[@class='message-button']//*[@id='declaration-btn']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,resultPlaceholder,ID,resultPlaceHolder
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,title,ID,Title
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,street,ID,Street
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,streetNumber,ID,StreetNumber
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,city,ID,City
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,countryPhonePrefix2,ID,PhoneExtention2
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,phone2,ID,Telephone2
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayDay,ID,BirthDateDay
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayMonth,ID,BirthDateMonth
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,birthdayYear,ID,BirthDateYear
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsPageImpl,update,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsTabImpl,winID,XPATH,.//*[@id='menu-item-50879']/a
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,title,ID,Title
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,street,ID,Street
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,streetNumber,ID,StreetNumber
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,city,ID,City
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,countryPhonePrefix2,ID,PhoneExtention2
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,phone2,ID,Telephone2
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,birthdayDay,ID,BirthDateDay
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,birthdayMonth,ID,BirthDateMonth
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,birthdayYear,ID,BirthDateYear
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,email,ID,Email
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,update,NAME,swUpdateCustomerBtn
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetSearchBox,CLASS_NAME,bmUiSelectSearch
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetDropdown,CLASS_NAME,bmCurrentAsset
 2.6.2,2017-05-29 15:24 +0000,AssetsImpl,assetContainer,CLASS_NAME,assets-list-container
@@ -314,11 +316,11 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porNotApprovedXImage,XPATH,.//*[@id='doc-por-form-space']//*[@class='document-box not-aprroved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogCloseButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documentTypeButton,TAG_NAME,button
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,XPATH,.//*[@id='menu-item-54113']/a
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,XPATH,.//li[@id='menu-item-54113']/a
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,XPATH,.//*[@id='acc']//div[@data-target='#poi']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeaderCollapsed,XPATH,.//*[@id='acc']//div[@data-target='#poi' and @aria-expanded='false']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiWrapper,XPATH,.//*[@id='poi']//div[@class='btn-group bootstrap-select swMandatory swFormControl']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiWrapper,ID,poi-container
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,documentTypeButton,TAG_NAME,button
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiUploadInput,ID,fileUploadDocsPOI
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiPassportSelection,CSS,li[data-original-index='0']
@@ -327,7 +329,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiImageReviewed,XPATH,.//*[@id='poi']//img[@class='reviewed']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiImageApproved,XPATH,.//*[@id='poi']//img[@class='approved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,XPATH,.//*[@id='acc']//*[@class='icon por-icon']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porWrapper,ID,uploaderPOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porWrapper,ID,por-container
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porUploadInput,ID,fileUploadDocsPOR
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porSentImage,XPATH,.//*[@id='por']//img[@class='sent']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porNotApprovedXImage,XPATH,.//*[@id='por-container']//*[@class='document-box not-aprroved']

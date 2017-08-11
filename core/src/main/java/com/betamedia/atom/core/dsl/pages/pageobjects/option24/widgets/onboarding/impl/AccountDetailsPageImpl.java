@@ -1,7 +1,8 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.impl;
 
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.AccountDetailsPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountDetails;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AccountDetailsPage;
 import com.betamedia.atom.core.api.crm.form.entities.AccountDetails;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import org.openqa.selenium.By;
@@ -10,33 +11,14 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class AccountDetailsPageImpl extends AbstractPageObject implements AccountDetailsPage {
-
-    @StoredId
-    private By title;
-    @StoredId
-    private By street;
-    @StoredId
-    private By streetNumber;
-    @StoredId
-    private By city;
-    @StoredId
-    //autoselected after choosing the country
-    private By countryPhonePrefix2;
-    @StoredId
-    private By phone2;
-    @StoredId
-    private By birthdayDay;
-    @StoredId
-    private By birthdayMonth;
-    @StoredId
-    private By birthdayYear;
-    @StoredId
-    private By update;
-
+public class AccountDetailsPageImpl extends AbstractAccountDetails {
 
     public AccountDetailsPageImpl(WebDriver webDriver) {
         super(webDriver);
+    }
+
+    public void invoke() {
+        // to implement for widgets
     }
 
     @Override

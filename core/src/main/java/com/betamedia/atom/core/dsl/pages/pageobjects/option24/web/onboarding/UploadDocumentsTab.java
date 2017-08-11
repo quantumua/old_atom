@@ -11,7 +11,7 @@ public interface UploadDocumentsTab {
 
    boolean creditCardXImageExists();
 
-    void goToDocumentsUpload();
+    void invoke();
 
     void creditCardClickHeader();
 

@@ -99,7 +99,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
-    public void goToDocumentsUpload(){
+    public void invoke(){
     	waitUntilDisplayed(winID).click();
     }
 
@@ -120,7 +120,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         creditCardClickHeader();
         setDisplayBlock(creditCardUploadInput);
         uploadFromPath(storeToTemp(frontImagePath), creditCardUploadInput);
-        selectCreditCardDocumentType(creditCardSelection, true);
+        selectDocumentType(creditCardWrapper, creditCardSelection, true, creditCardFrontImage);
         waitUntilExists(creditCardBackImage).isDisplayed();
         find(creditCardUploadInput).clear();
         uploadFromPath(storeToTemp(backImagePath), creditCardUploadInput);
@@ -137,7 +137,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @Override
     public void poiUploadPassport(String imagePath) {
         poiExpandHeader();
-        selectPOIDocumentType(poiPassportSelection, false);
+        selectDocumentType(poiWrapper, poiPassportSelection, false, null);
         /*make input element visible*/
         setDisplayBlock(poiUploadInput);
         /*upload file*/
@@ -160,22 +160,14 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         return Paths.get(FileSystemStorageService.storeSystemResource(resource, UUID.randomUUID().toString() + ".jpg", "temp")).toAbsolutePath().toString();
     }
 
-    private void selectPOIDocumentType(By locator, Boolean waitForTransformation) {
-        selectDocumentType(poiWrapper, locator, waitForTransformation);
-    }
-
-    private void selectCreditCardDocumentType(By locator, Boolean waitForTransformation) {
-        selectDocumentType(creditCardWrapper, locator, waitForTransformation);
-    }
-
-    private void selectDocumentType(By wrapper, By locator, Boolean waitForTransformation) {
+    private void selectDocumentType(By wrapper, By locator, Boolean waitForTransformation, By transformImage) {
         waitUntilDisplayed(wrapper, documentTypeButton).click();
         waitUntilDisplayed(wrapper, locator).click();
         if (waitForTransformation) {
             /*wait until animation starts*/
-            waitUntil(() -> !checkCssProperty("transform", "none", creditCardFrontImage));
+            waitUntil(() -> !checkCssProperty("transform", "none", transformImage));
             /*wait until animation ends*/
-            waitUntil(() -> checkCssProperty("transform", "none", creditCardFrontImage));
+            waitUntil(() -> checkCssProperty("transform", "none", transformImage));
         }
     }
 }

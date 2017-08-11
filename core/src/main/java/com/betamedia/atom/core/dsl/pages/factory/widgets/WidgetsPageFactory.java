@@ -3,7 +3,7 @@ package com.betamedia.atom.core.dsl.pages.factory.widgets;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.*;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.SetLeveragePage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.login.LoginPage;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.AccountDetailsPage;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AccountDetailsPage;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.Navigation;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.RegisterPage;
 

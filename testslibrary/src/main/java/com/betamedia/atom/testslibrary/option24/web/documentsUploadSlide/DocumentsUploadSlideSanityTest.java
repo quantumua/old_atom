@@ -164,7 +164,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
         pages().uploadDocumentDialog().close();
         pages().confirmCloseMessage().acceptClose();
         pages().topNavigationPage().goToMyAccount();
-        pages().uploadDocumentsTab().goToDocumentsUpload();
+        pages().uploadDocumentsTab().invoke();
     }
 
     private PersonalInformation getPersonalInformation() {

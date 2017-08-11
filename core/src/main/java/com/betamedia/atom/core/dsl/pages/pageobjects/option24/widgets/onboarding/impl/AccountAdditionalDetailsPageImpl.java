@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalDetails implements AccountAdditionalDetailsDialog {
+public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalDetails {
 
     public AccountAdditionalDetailsPageImpl(WebDriver webDriver) {
         super(webDriver);

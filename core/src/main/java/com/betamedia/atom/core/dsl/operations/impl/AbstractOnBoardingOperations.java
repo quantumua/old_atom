@@ -9,16 +9,13 @@ import com.betamedia.atom.core.persistence.repositories.AbstractConnectionRoleBa
 import com.betamedia.atom.core.persistence.repositories.AbstractContactBaseRepository;
 import com.betamedia.atom.core.persistence.repositories.AbstractContactExtensionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.Assert;
 
 import java.util.List;
 import java.util.Objects;
 
 import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.AccessType;
 import static com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel.*;
-import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 
 /**
  * Created by mbelyaev on 5/19/17.
@@ -99,31 +96,31 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
     }
 
     private void assertCustomerExperience(String customerId, ExperienceLevel expectedExperience) {
-        assertEquals(contactExtensionRepository.findOne(customerId).getExperienceLevel(), expectedExperience.getLevel());
+        softAssert().assertEquals(contactExtensionRepository.findOne(customerId).getExperienceLevel(), expectedExperience.getLevel());
     }
 
     private void assertUsernameExperience(String username, ExperienceLevel expectedExperience) {
-        assertEquals(contactExtensionRepository.findByUsername(username).getExperienceLevel(), expectedExperience.getLevel());
+        softAssert().assertEquals(contactExtensionRepository.findByUsername(username).getExperienceLevel(), expectedExperience.getLevel());
     }
 
     @Override
     public void assertUsernameScore(String username, Double expectedScore) {
-        Assert.assertEquals(contactExtensionRepository.findByUsername(username).getExperienceScore(), expectedScore);
+        softAssert().assertEquals(contactExtensionRepository.findByUsername(username).getExperienceScore(), expectedScore);
     }
 
     @Override
     public void assertUsernameLoginType(String username, AccessType expectedAccessType) {
-        assertEquals(contactExtensionRepository.findByUsername(username).getAccess(), expectedAccessType.getType());
+        softAssert().assertEquals(contactExtensionRepository.findByUsername(username).getAccess(), expectedAccessType.getType());
     }
 
     @Override
     public void assertTrafficSource(String userLoginName, int expectedTrafficSourceId) {
-        assertEquals(expectedTrafficSourceId, contactExtensionRepository.findByUsername(userLoginName).getTrafficSource());
+        softAssert().assertEquals(expectedTrafficSourceId, contactExtensionRepository.findByUsername(userLoginName).getTrafficSource());
     }
 
     @Override
     public void assertContactBaseBirthDate(String email, String expectedBirthDate) {
-        assertEquals(expectedBirthDate, contactBaseRepository.findByEmailAddress1(email).getBirthDate());
+        softAssert().assertEquals(expectedBirthDate, contactBaseRepository.findByEmailAddress1(email).getBirthDate());
     }
 
     @Override
@@ -139,37 +136,35 @@ public abstract class AbstractOnBoardingOperations<T extends EnvironmentDependen
                 break;
             }
         }
-        assertEquals(expectedConnectionRoleName, actualConnectionName, actualConnectionName);
+        softAssert().assertEquals(expectedConnectionRoleName, actualConnectionName, actualConnectionName);
     }
 
     @Override
     public void assertUsersHaveNotConnection(String firstUser, String secondUser) {
-        assertTrue("Users have connections in the database.",
-                connectionBaseRepository.findByRecord1Id(
-                        contactExtensionRepository.findByUsername(firstUser).getContactId()).isEmpty()
-        );
-        assertTrue("Users have connections in the database.",
-                connectionBaseRepository.findByRecord1Id(
-                        contactExtensionRepository.findByUsername(secondUser).getContactId()).isEmpty()
-        );
+        softAssert().assertTrue(connectionBaseRepository.findByRecord1Id(
+                contactExtensionRepository.findByUsername(firstUser).getContactId()).isEmpty(),
+                "Users have connections in the database.");
+        softAssert().assertTrue(connectionBaseRepository.findByRecord1Id(
+                contactExtensionRepository.findByUsername(secondUser).getContactId()).isEmpty(),
+                "Users have connections in the database.");
 
     }
 
     @Override
     public void assertBulkEmailHasNotValue(String userLoginName, int notExpectedValue) {
-        assertTrue(contactExtensionRepository.findByUsername(userLoginName)
+        softAssert().assertTrue(contactExtensionRepository.findByUsername(userLoginName)
                 .getAcceptbulkemail() != notExpectedValue);
     }
 
     @Override
     public void assertDoNotPhoneHasNotValue(String userLoginName, String notExpectedDoNotPhoneValue) {
-        assertFalse(contactBaseRepository.findByEmailAddress1(userLoginName)
+        softAssert().assertFalse(contactBaseRepository.findByEmailAddress1(userLoginName)
                 .getDoNotPhone().equalsIgnoreCase(notExpectedDoNotPhoneValue));
     }
 
     @Override
     public void assertUserCreatedInDatabase(String userEmail) {
-        assertTrue("User does not exist in database.",
-                Objects.nonNull(contactBaseRepository.findByEmailAddress1(userEmail)));
+        softAssert().assertTrue(Objects.nonNull(contactBaseRepository.findByEmailAddress1(userEmail)),
+                "User does not exist in database.");
     }
 }
