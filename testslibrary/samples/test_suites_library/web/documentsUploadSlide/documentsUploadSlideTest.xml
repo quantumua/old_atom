@@ -14,7 +14,7 @@
                     <include name="successfulUploadDocumentPORSection" description="CTW-5766" />
                     <include name="successfulUploadDocumentCreditCardSection" description="CTW-5769" />
                     <include name="failedUploadDocumentPOISectionIinvalidPassportDoc" description="CTW-5770" />
-                    <include name="FailedUploadDocumentPOISectionInvalidDriverLicenseDoc" description="CTW-5771" />
+                    <include name="failedUploadDocumentPOISectionInvalidDriverLicenseDoc" description="CTW-5771" />
                     <include name="failedUploadDocumentPOISectionInvalidIdentityCardDoc" description="CTW-5772" />
                     <include name="failedUploadDocumentPORSection" description="CTW-5773" />
                     <include name="failedUploadDocumentCreditCardSection" description="CTW-5774" />
@@ -31,6 +31,8 @@
                     <include name="uploadDriverLicense" description="CTW-5355" />
                     <include name="poiUploadInvalidPassportSC" description="CTW-5356" />
                     <include name="poiUploadThenLogoutLogin" description="CTW-5358" />
+                    <include name="poiWith2Sides" description="CTW-5353" />
+                    <include name="porUploadGasBillSC" description="CTW-5340" />
                 </methods>
             </class>
         </classes>

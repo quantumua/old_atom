@@ -139,6 +139,33 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         softAssert().assertTrue(pages().uploadDocumentsTab().verifyPORsectionExpanded(), "POR section not expanded after re-login");
     }
 
+    /*
+     *[TestLink] CTW-5353:POI with 2 sides
+     */
+    @Test(description = "CTW-5353:POI with 2 sides")
+    @TestLinkProperties(displayId = "CTW-5353")
+    public void poiWith2Sides() {
+        closeWizardAndGoToUploadDocumentTab();
+        pages().uploadDocumentsTab().poiUploadDriverLicenseDocuments(POI_DRIVER_LICENSE_FRONT_PATH, POI_DRIVER_LICENSE_BACK_PATH);//  poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+        pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(2);
+    }
+
+    /*
+     *[TestLink] CTW-5340:POR - Upload gas bill - SC
+     */
+    //!!!*Not tested. UploadDocumentsTab is not working correctly!!!
+    @Test(description = "CTW-5340:POR - Upload gas bill - SC")
+    @TestLinkProperties(displayId = "CTW-5340")
+    public void porUploadGasBillSC() {
+        closeWizardAndGoToUploadDocumentTab();
+        pages().uploadDocumentsTab().poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+        pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(2);
+        pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
+        softAssert().assertTrue(pages().uploadDocumentsTab().verifyPORsectionExpanded(), "POR section not expanded");
+        pages().uploadDocumentsTab().porUploadGasBill(POR_GAS_BILL_PATH);
+        pages().uploadDocumentsTab().verifyPORDocumentsUploaded(1);
+    }
+
 
     private void verifyPOIStatusInCRM (Integer poiOCRStatus) {
         pages().accountDetails().invoke();

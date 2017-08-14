@@ -334,11 +334,19 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiFrontImage,CLASS_NAME,poi-front-image
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiBackImage,CLASS_NAME,poi-back-image
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiRedXImage,XPATH,.//*[@id='poi-container']//div[@class='document-box not-aprroved']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,XPATH,.//*[@id='acc']//*[@class='icon por-icon']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,XPATH,.//*[@id='acc']//div[@data-target='#por']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeaderCollapsed,XPATH,.//*[@id='acc']//div[@data-target='#por' and @aria-expanded='false']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeaderExpanded,XPATH,.//*[@id='acc']//div[@data-target='#por' and @aria-expanded='true']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porDocumentTypeSelector,ID,selectDocumentTypePOR
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porWrapper,ID,por-container
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porUploadInput,ID,fileUploadDocsPOR
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porSentImage,XPATH,.//*[@id='por']//img[@class='sent']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porGasBillSelection,CSS,li[data-original-index='1']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porImageSent,XPATH,.//*[@id='por']//img[@class='sent']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porImageReviewed,XPATH,.//*[@id='por']//img[@class='reviewed']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porImageApproved,XPATH,.//*[@id='por']//img[@class='approved']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porFrontImage,CLASS_NAME,por-front-image
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porBackImage,CLASS_NAME,por-back-image
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porRedXImage,XPATH,.//*[@id='por-container']//div[@class='document-box not-aprroved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porNotApprovedXImage,XPATH,.//*[@id='por-container']//*[@class='document-box not-aprroved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardHeader,XPATH,.//*[@id='acc']//*[@class='icon cc-icon']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardWrapper,XPATH,.//*[@id='cc-container']//*[@class='btn dropdown-toggle btn-default']

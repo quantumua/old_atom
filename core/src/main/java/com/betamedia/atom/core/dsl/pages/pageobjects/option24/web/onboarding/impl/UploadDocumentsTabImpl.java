@@ -64,18 +64,23 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @StoredId
     private By porHeader;
     @StoredId
+    private By porHeaderCollapsed;
+    @StoredId
     private By porHeaderExpanded;
     @StoredId
     private By porWrapper;
     @StoredId
     private By porUploadInput;
     @StoredId
-    private By porSentImage;
+    private By porImageSent;
     @StoredId
-    private By porNotApprovedXImage;
-
-
-
+    private By porImageReviewed;
+    @StoredId
+    private By porImageApproved;
+    @StoredId
+    private By porRedXImage;
+    @StoredId
+    private By porGasBillSelection;
 
     /*Credit Card Controls*/
     @StoredId
@@ -152,6 +157,13 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
+    public void verifyPORDocumentIsUploaded() {
+        softAssert().assertTrue(waitUntilExists(porImageSent).isDisplayed(), "Image icon Sent is available");
+        softAssert().assertTrue(waitUntilExists(porImageReviewed).isDisplayed(), "Image icon Reviewed is available");
+        softAssert().assertTrue(waitUntilExists(porImageApproved).isDisplayed(), "Image icon Approved is available");
+    }
+
+    @Override
     public void poiUploadPassport(String imagePath) {
         poiExpandHeader();
         selectDocumentType(poiWrapper, poiPassportSelection, false, null);
@@ -160,6 +172,11 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         /*upload file*/
         uploadFromPath(storeToTemp(imagePath), poiUploadInput);
         /*wait until upload is over and back image is available*/
+    }
+
+    @Override
+    public void porUploadGasBill(String imagePath){
+        porUploadDocument(imagePath, porGasBillSelection);
     }
 
     @Override
@@ -187,6 +204,16 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         find(poiUploadInput).clear();
     }
 
+    private void porUploadDocument(String imagePath, By documentType) {
+        porExpandHeader();
+        selectDocumentType(porWrapper, documentType, false, null);
+        /*make input element visible*/
+        setDisplayBlock(porUploadInput);
+        /*upload file*/
+        uploadFromPath(storeToTemp(imagePath), porUploadInput);
+        /*wait until upload is over and back image is available*/
+    }
+
     @Override
     public void verifyPOIDocumentsUploaded(int documentsCount) {
         softAssert().assertTrue(waitUntil(() ->
@@ -199,6 +226,20 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         softAssert().assertTrue(waitUntil(() ->
                         findElements(poiRedXImage).size() == documentsCount),
                 "Unable to locate " + documentsCount + " not approved POI Documents");
+    }
+
+    @Override
+    public void verifyPORDocumentsUploaded(int documentsCount) {
+        softAssert().assertTrue(waitUntil(() ->
+                        findElements(porImageSent).size() == documentsCount),
+                "Unable to locate " + documentsCount + " submitted POI Documents");
+    }
+
+    @Override
+    public void verifyPORInvalidDocumentUploaded(int documentsCount) {
+        softAssert().assertTrue(waitUntil(() ->
+                        findElements(porRedXImage).size() == documentsCount),
+                "Unable to locate " + documentsCount + " not approved POR Documents");
     }
 
     @Override
@@ -216,6 +257,14 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         }
         scrollIntoView(waitUntilExists(poiUploadInput));
         scrollIntoView(find(poiHeader));
+    }
+
+    private void porExpandHeader(){
+        if (exists(porHeaderCollapsed)) {
+            porClickHeader();
+        }
+        scrollIntoView(waitUntilExists(porUploadInput));
+        scrollIntoView(find(porHeader));
     }
 
     private static String storeToTemp(String resource) {

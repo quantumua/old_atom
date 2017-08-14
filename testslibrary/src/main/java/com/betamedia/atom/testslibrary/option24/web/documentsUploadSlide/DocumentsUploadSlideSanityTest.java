@@ -28,7 +28,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
 
     private static final String POR_ELECTRICITY_BILL_PATH = "files/sample_electricity_bill.jpg";
-    private static final String POR_GAS_BILL_PATH = "files/sample_gas_bill.jpg";
+    static final String POR_GAS_BILL_PATH = "files/sample_gas_bill.jpg";
 
     private static final String CREDIT_CARD_FRONT_PATH = "files/sample_credit_card_front.jpg";
     private static final String CREDIT_CARD_BACK_PATH = "files/sample_credit_card_back.jpg";
@@ -120,7 +120,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
      */
     @Test(description = "CTW-5771:Failed upload document: POI section - invalid Driver license doc")
     @TestLinkProperties(displayId = "CTW-5771")
-    public void FailedUploadDocumentPOISectionInvalidDriverLicenseDoc() {
+    public void failedUploadDocumentPOISectionInvalidDriverLicenseDoc() {
         pages().uploadDocumentDialog().poiUploadDriverLicense(WRONG_DOC_PATH,WRONG_DOC_PATH);
         softAssert().assertTrue(pages().uploadDocumentDialog().poiXImageExists(), "Red X sign is available");
         softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "Driver license has not uploaded and user is not ready to start Trade.");
