@@ -49,4 +49,11 @@ public class WelcomeDialogImpl extends AbstractPageObject implements WelcomeDial
                 waitUntilDisplayed(caption).getText(),
                 getLocalization(caption, language));
     }
+
+    @Override
+    public void validateStartButtonCaption(Language language) {
+        softAssert().assertEquals(
+                waitUntilDisplayed(startButton).getText(),
+                getLocalization(startButton, language));
+    }
 }

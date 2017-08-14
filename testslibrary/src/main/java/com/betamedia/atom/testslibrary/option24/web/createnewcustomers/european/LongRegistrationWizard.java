@@ -4,9 +4,9 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSite
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.Currency;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
-import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.LocalizationElement;
 import org.testng.annotations.Test;
 
 /**
@@ -54,12 +54,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
         pages().registrationDialog().submitRegisterForm();
         pages().welcomeDialog().isStartBtnDisplayed();
-        softAssert().assertEquals(pages().welcomeDialog().getCaption(),
-                getLocalization().stream().filter(l->l.getElement().equalsIgnoreCase(
-                        LocalizationElement.WELCOME_DIALOG_CAPTION)).findFirst().get().getGerman());
-        softAssert().assertEquals(pages().welcomeDialog().getStartButtonCaption(),
-                getLocalization().stream().filter(l->l.getElement().equalsIgnoreCase(
-                        LocalizationElement.WELCOME_DIALOG_START_BUTTON_NAME)).findFirst().get().getGerman());
+        pages().welcomeDialog().validateCaption(Language.GERMAN);
+        pages().welcomeDialog().validateStartButtonCaption(Language.GERMAN);
     }
 
     /**

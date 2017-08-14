@@ -12,4 +12,6 @@ public interface WelcomeDialog {
     String getStartButtonCaption();
 
     void validateCaption(Language language);
+
+    void validateStartButtonCaption(Language language);
 }
