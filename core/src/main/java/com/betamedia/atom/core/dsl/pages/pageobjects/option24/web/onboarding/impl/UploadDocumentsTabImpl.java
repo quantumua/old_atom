@@ -3,14 +3,19 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentsTab;
+import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
-import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Reporter;
 
 import java.nio.file.Paths;
-import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 
 /**
  * @author Leonid Artemiev
@@ -22,7 +27,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private By winID;
 
     /*POI (Proof of identity) Controls*/
-    @StoredId
+    @StoredId (localized = true)
     private By poiHeader;
     @StoredId
     private By poiHeaderCollapsed;
@@ -250,6 +255,43 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private void poiClickHeader(){
         waitUntilDisplayed(poiHeader).click();
     }
+
+    @Override
+    public void verifyTextDirectionElements(String expectedDirection) {
+        getPageElements()
+                .stream()
+                .map(this::getTextDirectionOfElement)
+                .forEach(textDirection ->
+                        softAssert().assertEquals(
+                                textDirection.toLowerCase(),
+                                expectedDirection.toLowerCase(),
+                                "Text direction verification for: " + this));
+    }
+
+    private String getTextDirectionOfElement(By element) {
+        return getCssProperty("direction", element);
+    }
+
+    private List<By> getPageElements() {
+        return Arrays.stream(this.getClass().getDeclaredFields())
+                .filter(field -> By.class.isAssignableFrom(field.getType()))
+                .map(field -> {
+                    try {
+                        Object element = field.get(this);
+                        Reporter.log("Found element: " + element);
+                        return element;
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException("", e);
+                    }
+                })
+                .map(By.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void verifySlideLocalization(Language language) {
+            softAssert().assertEquals(waitUntilDisplayed(poiHeader).getText(), getLocalization(poiHeader, language));
+        }
 
     private void poiExpandHeader(){
         if (exists(poiHeaderCollapsed)) {

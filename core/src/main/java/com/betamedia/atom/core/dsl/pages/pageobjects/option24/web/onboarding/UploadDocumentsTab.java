@@ -1,6 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding;
 
-import org.openqa.selenium.By;
+import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 
 /**
  * @author Leonid Artemiev
@@ -42,4 +42,8 @@ public interface UploadDocumentsTab {
     void verifyPORInvalidDocumentUploaded(int documentsCount);
 
     boolean verifyPORsectionExpanded();
+
+    void verifyTextDirectionElements(String expectedDirection);
+
+    void verifySlideLocalization(Language language);
 }

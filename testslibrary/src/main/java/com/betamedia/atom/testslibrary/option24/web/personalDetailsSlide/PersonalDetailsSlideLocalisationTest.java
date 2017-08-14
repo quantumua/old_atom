@@ -15,6 +15,9 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSite
 
 public class PersonalDetailsSlideLocalisationTest extends WebEndToEndTest {
 
+    private static final String ARABIC_LANGUAGE = "AR";
+    private static final String RTL_DIRECTION = "rtl";
+
     @BeforeMethod
 	public void before(){
         pages().topNavigationPage().signUp();
@@ -52,9 +55,9 @@ public class PersonalDetailsSlideLocalisationTest extends WebEndToEndTest {
     @Test(description = "CTW-5682:Verify the slide turns RTL on AR")
     @TestLinkProperties(displayId ="CTW-5682")
     public void  verifyTheSlideTurnsRTLOnAR() {
-        pages().topNavigationPage().selectLanguage("AR");
+        pages().topNavigationPage().selectLanguage(ARABIC_LANGUAGE);
         pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().exists();
-        pages().accountAdditionalDetails().verifyTextDirectionElements("RTL");
+        pages().accountAdditionalDetails().verifyTextDirectionElements(RTL_DIRECTION);
     }
 }

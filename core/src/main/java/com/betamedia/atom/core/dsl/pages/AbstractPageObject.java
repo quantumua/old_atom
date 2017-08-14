@@ -277,7 +277,21 @@ public abstract class AbstractPageObject {
      * @return <code>true</code> if property value matches expected value, <code>false</code> otherwise
      */
     protected boolean checkCssProperty(String propertyName, String expectedValue, By first, By... rest) {
-        return find(first, rest).getCssValue(propertyName).equals(expectedValue);
+        return getCssProperty(propertyName, first, rest).equals(expectedValue);
+    }
+
+    /**
+     * Gets CSS property of {@link WebElement}
+     *
+     * @param propertyName CSS property name
+     * @param first element locator
+     * @param rest element locator chain
+     * @return found css value
+     */
+    protected String getCssProperty(String propertyName, By first, By... rest) {
+        String cssValue = find(first, rest).getCssValue(propertyName);
+        Reporter.log("Processing element: " + first.toString() + ", got CSS Value: " + propertyName + "=" + cssValue + "<br/>");
+        return cssValue;
     }
 
     /**

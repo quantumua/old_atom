@@ -2,10 +2,7 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
-import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
-import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountAdditionalDetails;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AccountAdditionalDetailsDialog;
 import com.betamedia.atom.core.testingtype.base.AbstractTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,12 +62,12 @@ public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditiona
 
     @Override
     public String getBirthDaySelectedItem(){
-    	return getElementCssValue(birthDateDay,"value");
+    	return getCssProperty("value", birthDateDay);
     }
 
     @Override
     public String getBirthDateDayElementColor () {
-        return getElementCssValue(birthDateDay, "border");
+        return getCssProperty("border", birthDateDay);
     }
 
     @Override
@@ -140,13 +137,7 @@ public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditiona
     }
 
     private String getTextDirectionOfElement(By element) {
-        return getElementCssValue(element, "direction");
-    }
-
-    private String getElementCssValue(By element, String cssValueName) {
-        String cssValue = waitUntilDisplayed(element).getCssValue(cssValueName);
-        Reporter.log("Processing element: " + element.toString() + ", got CSS Value: " + cssValueName + "=" + cssValue + "<br/>");
-        return cssValue;
+        return getCssProperty("direction", element);
     }
 
     private List<By> getPageElements() {

@@ -41,6 +41,8 @@ public class ContactExtension {
     private Boolean customerCompliant;
     @Column(name = "bt_poiocrstatus")
     private Integer poiOcrStatus;
+    @Column(name = "bt_porocrstatus")
+    private Integer porOcrStatus;
     @Column(name = "bt_access")
     private Integer access;
     @Column(name = "bt_ExperienceLevel")
@@ -104,6 +106,10 @@ public class ContactExtension {
         this.poiOcrStatus = poiOcrStatus;
     }
 
+    public void setPorOcrStatus(Integer porOcrStatus) {
+        this.porOcrStatus = porOcrStatus;
+    }
+
     public Integer getCountryOfBirth() {
         return countryOfBirth;
     }
@@ -152,11 +158,15 @@ public class ContactExtension {
         this.acceptbulkemail = acceptbulkemail;
     }
 
-    public Integer getPOIStatus() {
+    public Integer getPoiStatus() {
         return poiStatus;
     }
 
-    public Integer getPOIOcrStatus() {
+    public Integer getPoiOcrStatus() {
         return poiOcrStatus;
+    }
+
+    public Integer getPorOcrStatus() {
+        return porOcrStatus;
     }
 }

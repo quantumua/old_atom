@@ -84,6 +84,17 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     }
 
     /*
+     *[TestLink] CTW-5353:POI with 2 sides
+     */
+    @Test(description = "CTW-5353:POI with 2 sides")
+    @TestLinkProperties(displayId = "CTW-5353")
+    public void poiWith2Sides() {
+        closeWizardAndGoToUploadDocumentTab();
+        pages().uploadDocumentsTab().poiUploadDriverLicenseDocuments(POI_DRIVER_LICENSE_FRONT_PATH, POI_DRIVER_LICENSE_BACK_PATH);//  poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+        pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(2);
+    }
+
+    /*
      *[TestLink] CTW-5354:Upload Identity Card
      */
     @Test(description = "CTW-5354:Upload Identity Card")
@@ -115,6 +126,11 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         pages().uploadDocumentsTab().poiUploadPassport(WRONG_DOC_PATH);
         pages().uploadDocumentsTab().verifyPOIInvalidDocumentUploaded(1);
         verifyPOIStatusInCRM(POI_OCR_STATUS_EMPTY);
+        pages().uploadDocumentsTab().invoke();
+        pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
+        pages().uploadDocumentsTab().verifyPOIDocumentIsUploaded();
+        softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "There is no prompt to upload Back side of the document");
+        verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
     }
     /*
      *[TestLink] CTW-5358:POI Upload then logout/Login
@@ -140,17 +156,6 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     }
 
     /*
-     *[TestLink] CTW-5353:POI with 2 sides
-     */
-    @Test(description = "CTW-5353:POI with 2 sides")
-    @TestLinkProperties(displayId = "CTW-5353")
-    public void poiWith2Sides() {
-        closeWizardAndGoToUploadDocumentTab();
-        pages().uploadDocumentsTab().poiUploadDriverLicenseDocuments(POI_DRIVER_LICENSE_FRONT_PATH, POI_DRIVER_LICENSE_BACK_PATH);//  poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
-        pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(2);
-    }
-
-    /*
      *[TestLink] CTW-5340:POR - Upload gas bill - SC
      */
     //!!!*Not tested. UploadDocumentsTab is not working correctly!!!
@@ -165,18 +170,49 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         pages().uploadDocumentsTab().porUploadGasBill(POR_GAS_BILL_PATH);
         pages().uploadDocumentsTab().verifyPORDocumentsUploaded(1);
     }
+    /*
+    * [TestLink] CTW-5343:POR - Upload invalid document_ SC
+    */
+    @Test(description = "CTW-5343:POR - Upload invalid document_ SC")
+    @TestLinkProperties(displayId = "CTW-5343")
+    public void porUploadInvalidDocumentSC() {
+        closeWizardAndGoToUploadDocumentTab();
+        pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
+        softAssert().assertTrue(pages().uploadDocumentsTab().verifyPORsectionExpanded(), "POR section not expanded");
+        verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
+        pages().uploadDocumentsTab().porUploadGasBill(WRONG_DOC_PATH);
+        pages().uploadDocumentsTab().verifyPORInvalidDocumentUploaded(1);
+        verifyPORStatusInCRM(POI_OCR_STATUS_EMPTY);
+    }
 
+    /*
+    * [TestLink] CTW-5345:POR Upload then logout/Login
+    */
+    @Test(description = "CTW-5345:POR Upload then logout/Login")
+    @TestLinkProperties(displayId = "CTW-5345")
+    public void porUploadThenLogoutLogin() {
+
+    }
 
     private void verifyPOIStatusInCRM (Integer poiOCRStatus) {
+        final ContactExtension contactExtension = getContactExtensionByEmail();
+        softAssert().assertEquals(contactExtension.getPoiOcrStatus(), poiOCRStatus, "Failed to verify POI Ocr status, actual status: " + contactExtension.getPoiOcrStatus());
+    }
+
+    private void verifyPORStatusInCRM (Integer porOCRStatus) {
+        final ContactExtension contactExtension = getContactExtensionByEmail();
+        softAssert().assertEquals(contactExtension.getPorOcrStatus(), porOCRStatus, "Failed to verify POR Ocr status, actual status: " + contactExtension.getPorOcrStatus());
+    }
+
+    private ContactExtension getContactExtensionByEmail () {
         pages().accountDetails().invoke();
         String emailAddress = pages().accountDetails().getEmail();
         final ContactExtension contactExtension = operations().customerOperations().findExtByEmailAddress(emailAddress);
-//        logger.info("contactExtension.getPOIStatus()=" + contactExtension.getPOIStatus());
-//        Reporter.log("contactExtension.getPOIStatus()=" + contactExtension.getPOIStatus());
-        logger.info("contactExtension.getPOIOcrStatus()=" + contactExtension.getPOIOcrStatus());
-        Reporter.log("contactExtension.getPOIOcrStatus()=" + contactExtension.getPOIOcrStatus());
-//        softAssert().assertEquals(contactExtension.getPOIStatus(), poiStatus, "Failed to verify POI status, actual status: " + contactExtension.getPOIStatus());
-        softAssert().assertEquals(contactExtension.getPOIOcrStatus(), poiOCRStatus, "Failed to verify POI Ocr status, actual status: " + contactExtension.getPOIOcrStatus());
+        logger.info("contactExtension.getPoiOcrStatus()=" + contactExtension.getPoiOcrStatus());
+        logger.info("contactExtension.getPorOcrStatus()=" + contactExtension.getPorOcrStatus());
+        Reporter.log("contactExtension.getPoiOcrStatus()=" + contactExtension.getPoiOcrStatus());
+        Reporter.log("contactExtension.getPorOcrStatus()=" + contactExtension.getPorOcrStatus());
+        return contactExtension;
     }
 
     //        pages().topNavigationPage().logIn();
