@@ -13,4 +13,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface StoredId {
     String value() default "";
+
+    boolean localized() default false;
 }

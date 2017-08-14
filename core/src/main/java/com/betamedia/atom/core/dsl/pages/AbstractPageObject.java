@@ -1,11 +1,10 @@
 package com.betamedia.atom.core.dsl.pages;
 
-import com.betamedia.atom.core.dsl.pages.annotation.Localizations;
+import com.betamedia.atom.core.dsl.pages.localization.LocalizationStorage;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -14,7 +13,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -31,8 +33,8 @@ public abstract class AbstractPageObject {
     private static final int MAX_WAIT_SEC = 60;
 
     private WebDriver webDriver;
-    @Localizations
-    private Map<By, Map<Language, String>> localizations;
+    private LocalizationStorage localizations;
+
     protected AbstractPageObject(WebDriver webDriver) {
         this.webDriver = webDriver;
     }

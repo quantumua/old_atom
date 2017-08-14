@@ -1,13 +1,12 @@
 package com.betamedia.atom.core.dsl.pages.factory;
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
-import com.betamedia.atom.core.dsl.pages.annotation.Localizations;
-import com.betamedia.atom.core.dsl.pages.annotation.Localized;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.dsl.pages.localization.LocalizationStorage;
+import com.betamedia.atom.core.dsl.pages.localization.impl.LocalizationStorageImpl;
 import com.betamedia.atom.core.fwdataaccess.entities.FindBy;
 import com.betamedia.atom.core.fwdataaccess.repository.VersionedLocalizationRepository;
 import com.betamedia.atom.core.fwdataaccess.repository.VersionedWebElementRepository;
-import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.holders.ThreadLocalBeansHolder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,10 +20,10 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 import static org.springframework.util.ReflectionUtils.*;
@@ -43,6 +42,8 @@ public class PageObjectCreatorImpl implements PageObjectCreator {
     private WebDriver driver;
     private VersionedWebElementRepository elementRepository;
     private VersionedLocalizationRepository localizationRepository;
+
+    private Supplier<LocalizationStorage> storageFactory = LocalizationStorageImpl::new;
 
     @Autowired
     public PageObjectCreatorImpl() {
@@ -70,37 +71,33 @@ public class PageObjectCreatorImpl implements PageObjectCreator {
     }
 
     private <T extends AbstractPageObject> void initWebFields(T page) {
-        Map<By, Map<Language, String>> localizations = new HashMap<>();
+        LocalizationStorage localizationStorage = storageFactory.get();
         doWithFields(
                 page.getClass(),
-                field -> writeWebLocator(field, page, localizations),
+                field -> writeWebLocator(field, page, localizationStorage),
                 PageObjectCreatorImpl::isStoredId);
         doWithFields(AbstractPageObject.class,
                 field -> {
                     makeAccessible(field);
-                    setField(field, page, localizations);
+                    setField(field, page, localizationStorage);
                 },
-                PageObjectCreatorImpl::isLocalizationsMap);
+                field -> field.getType().isAssignableFrom(LocalizationStorage.class));
     }
 
-    private <T extends AbstractPageObject> void writeWebLocator(Field field, T target, Map<By, Map<Language, String>> localizations) {
+    private <T extends AbstractPageObject> void writeWebLocator(Field field, T target, LocalizationStorage localizations) {
         StoredId storedId = field.getAnnotation(StoredId.class);
         String value = storedId.value().isEmpty() ? field.getName() : storedId.value();
         FindBy findBy = elementRepository.get(field.getDeclaringClass().getSimpleName(), value);
         makeAccessible(field);
         By locator = by(findBy);
         setField(field, target, locator);
-        if (field.isAnnotationPresent(Localized.class)) {
+        if (storedId.localized()) {
             localizations.put(locator, localizationRepository.get(field.getDeclaringClass().getSimpleName(), value));
         }
     }
 
     private static boolean isStoredId(Field field) {
         return field.isAnnotationPresent(StoredId.class) && field.getType().isAssignableFrom(By.class);
-    }
-
-    private static boolean isLocalizationsMap(Field field) {
-        return field.isAnnotationPresent(Localizations.class) && field.getType().isAssignableFrom(Map.class);
     }
 
     private static By by(FindBy findBy) {

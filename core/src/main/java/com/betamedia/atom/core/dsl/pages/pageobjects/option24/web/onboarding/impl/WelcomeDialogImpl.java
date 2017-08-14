@@ -1,7 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl;
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
-import com.betamedia.atom.core.dsl.pages.annotation.Localized;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.WelcomeDialog;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
@@ -15,12 +14,10 @@ import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
  */
 public class WelcomeDialogImpl extends AbstractPageObject implements WelcomeDialog {
 
-    @StoredId
-    @Localized
+    @StoredId(localized = true)
     private By caption;
-    @StoredId
-    @Localized
-    private By startButton;    
+    @StoredId(localized = true)
+    private By startButton;
 
     public WelcomeDialogImpl(WebDriver webDriver) {
         super(webDriver);

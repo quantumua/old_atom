@@ -2,8 +2,10 @@ package com.betamedia.atom.core.dsl.pages.factory;
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.dsl.pages.localization.LocalizationStorage;
 import com.betamedia.atom.core.fwdataaccess.entities.FindBy;
 import com.betamedia.atom.core.fwdataaccess.repository.VersionedWebElementRepository;
+import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.fwservices.webdriver.WebDriverFactory;
 import com.betamedia.atom.core.holders.ThreadLocalBeansHolder;
 import org.openqa.selenium.By;
@@ -11,7 +13,10 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -101,6 +106,45 @@ public class PageObjectCreatorImplTest {
         Assert.assertNull(page.notALocator);
     }
 
+    @Test
+    public void test() {
+        Map<Language, String> field1Localizations = new HashMap<>();
+        Map<Language, String> field2Localizations = new HashMap<>();
+        String english1 = "English 1";
+        String german1 = "German 1";
+        String english2 = "English 2";
+        String german2 = "German 2";
+        field1Localizations.put(Language.ENGLISH, english1);
+        field1Localizations.put(Language.GERMAN, german1);
+        field2Localizations.put(Language.ENGLISH, english2);
+        field2Localizations.put(Language.GERMAN, german2);
+        ThreadLocalBeansHolder.setWebDriverFactory(() -> null);
+        ThreadLocalBeansHolder.setVersionedWebElementRepository((name, id) -> {
+            if ("LocalizedPage1".equals(name) && "field".equals(id)) return new FindBy("ID", "pageField1");
+            else if ("LocalizedPage2".equals(name) && "field".equals(id)) return new FindBy("ID", "pageField2");
+            else return null;
+        });
+        ThreadLocalBeansHolder.setVersionedLocalizationRepository((name, id) -> {
+            if ("LocalizedPage1".equals(name) && "field".equals(id)) return field1Localizations;
+            else if ("LocalizedPage2".equals(name) && "field".equals(id)) return field2Localizations;
+            else return null;
+        });
+        PageObjectCreator creator = new PageObjectCreatorImpl();
+        LocalizedPage1 page1 = creator.getPage(LocalizedPage1.class);
+        LocalizedPage2 page2 = creator.getPage(LocalizedPage2.class);
+        By field1 = page1.getField();
+        By field2 = page2.getField();
+        LocalizationStorage localizations1 = (LocalizationStorage) getField(page1, "localizations");
+        LocalizationStorage localizations2 = (LocalizationStorage) getField(page2, "localizations");
+        Assert.assertNotSame(localizations1, localizations2);
+        Assert.assertEquals(localizations1.get(field1).get(Language.ENGLISH), english1);
+        Assert.assertEquals(localizations1.get(field1).get(Language.GERMAN), german1);
+        Assert.assertEquals(localizations2.get(field2).get(Language.ENGLISH), english2);
+        Assert.assertEquals(localizations2.get(field2).get(Language.GERMAN), german2);
+        Assert.assertSame(localizations1.get(field2), Collections.emptyMap());
+        Assert.assertSame(localizations2.get(field1), Collections.emptyMap());
+    }
+
     private PageObjectCreatorImpl initializePageObjectCreator() {
         ThreadLocalBeansHolder.setVersionedWebElementRepository(mock(VersionedWebElementRepository.class));
         ThreadLocalBeansHolder.setWebDriverFactory(() -> mock(WebDriver.class));
@@ -108,36 +152,65 @@ public class PageObjectCreatorImplTest {
     }
 
     private static class MockPageObject1 extends AbstractPageObject {
+
         public MockPageObject1(WebDriver webDriver) {
             super(webDriver);
         }
     }
 
     private static class MockPageObject2 extends AbstractPageObject {
+
         public MockPageObject2(WebDriver webDriver) {
             super(webDriver);
         }
     }
 
     private static abstract class AbstractMockPageObject extends AbstractPageObject {
+
         @StoredId
         protected By inheritedField;
-
         protected Object notALocator;
 
         protected AbstractMockPageObject(WebDriver webDriver) {
             super(webDriver);
         }
+
     }
 
     private static class AbstractMockPageObjectImpl extends AbstractMockPageObject {
+
         @StoredId
         private By declaredField;
-
         public AbstractMockPageObjectImpl(WebDriver webDriver) {
             super(webDriver);
         }
+
     }
 
+    public static class LocalizedPage1 extends AbstractPageObject {
+        @StoredId(localized = true)
+        private By field;
+
+        public LocalizedPage1(WebDriver webDriver) {
+            super(webDriver);
+        }
+
+        private By getField() {
+            return field;
+        }
+    }
+
+    public static class LocalizedPage2 extends AbstractPageObject {
+        @StoredId(localized = true)
+        private By field;
+
+        public LocalizedPage2(WebDriver webDriver) {
+            super(webDriver);
+        }
+
+        private By getField() {
+            return field;
+        }
+    }
 
 }
