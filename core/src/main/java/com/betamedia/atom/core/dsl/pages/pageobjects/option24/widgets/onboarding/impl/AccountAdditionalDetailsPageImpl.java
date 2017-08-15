@@ -4,13 +4,13 @@ import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountAdditionalDetails;
 import com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils;
-import com.betamedia.atom.core.testingtype.base.AbstractTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 
 /**
  * Created by vsnigur on 5/18/17.
@@ -68,12 +68,11 @@ public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalD
     @Override
     public void verifyTextDirectionElements(String expectedDirection) {
         PageObjectUtils.forPageElements(
-                element -> getCssValue("direction", element),
-                textDirection ->
-                        Assert.assertEquals(
-                                textDirection.toLowerCase(),
+                element ->
+                        softAssert().assertEquals(
+                                getCssValue("direction", element).toLowerCase(),
                                 expectedDirection.toLowerCase(),
-                                "Text direction verification for: " + this),
+                                "Text direction verification for: " + element),
                 field -> true,
                 storedId -> true,
                 this);
@@ -81,20 +80,20 @@ public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalD
 
     @Override
     public void verifySlideTranslation(AccountAdditionalDetailsData data) {
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(birthDateDayDropdownCaption).getText(), data.getBirthDateDayDropdownCaption());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(birthDateMonthDropdownCaption).getText(), data.getBirthDateMonthDropdownCaption());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption());
+        softAssert().assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText());
+        softAssert().assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink());
+        softAssert().assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle());
+        softAssert().assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle());
+        softAssert().assertEquals(waitUntilDisplayed(birthDateDayDropdownCaption).getText(), data.getBirthDateDayDropdownCaption());
+        softAssert().assertEquals(waitUntilDisplayed(birthDateMonthDropdownCaption).getText(), data.getBirthDateMonthDropdownCaption());
+        softAssert().assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption());
+        softAssert().assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle());
+        softAssert().assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption());
 	    // Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownDataError).getAttribute("data-error"), data.getCountryOfBirthDropdownDataError());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption());
+        softAssert().assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle());
+        softAssert().assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption());
 	    // Assert.assertEquals(waitUntilDisplayed(nationalityDropdownDataError).getAttribute("data-error"), data.getNationalityDropdownDataError());
-        AbstractTest.softAssert().assertEquals(waitUntilDisplayed(submit).getAttribute("value"), data.getSubmitButton());
+        softAssert().assertEquals(waitUntilDisplayed(submit).getAttribute("value"), data.getSubmitButton());
    }
 
     @Override

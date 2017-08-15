@@ -59,13 +59,13 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @TestLinkProperties(displayId = "CTW-5730")
     public void eachSlideSectionCanBeCollapsedExpanded() {
         pages().uploadDocumentDialog().poiClickHeader();
-        softAssert().assertTrue(pages().uploadDocumentDialog().isPoiExpanded(), "POI section not expanded.");
+        softAssert().assertTrue(pages().uploadDocumentDialog().isPoiExpanded(), "POI section expand test");
         pages().uploadDocumentDialog().poiClickHeader();
-        softAssert().assertTrue(pages().uploadDocumentDialog().isPoiCollapsed(), "POI section not collapsed.");
+        softAssert().assertTrue(pages().uploadDocumentDialog().isPoiCollapsed(), "POI section collapse test");
         pages().uploadDocumentDialog().porClickHeader();
-        softAssert().assertTrue(pages().uploadDocumentDialog().isPorExpanded(), "POR section not expanded.");
+        softAssert().assertTrue(pages().uploadDocumentDialog().isPorExpanded(), "POR section expand test");
         pages().uploadDocumentDialog().porClickHeader();
-        softAssert().assertTrue(pages().uploadDocumentDialog().isPorCollapsed(), "POR section not collapsed.");
+        softAssert().assertTrue(pages().uploadDocumentDialog().isPorCollapsed(), "POR section collapse test");
     }
 
     /*

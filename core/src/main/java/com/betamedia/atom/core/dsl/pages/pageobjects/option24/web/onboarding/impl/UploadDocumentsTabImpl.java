@@ -3,6 +3,7 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentsTab;
+import com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
@@ -223,28 +224,28 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     public void verifyPOIDocumentsUploaded(int documentsCount) {
         softAssert().assertTrue(waitUntil(() ->
                 findElements(poiImageSent).size() == documentsCount),
-                "Unable to locate " + documentsCount + " submitted POI Documents");
+                "Looking for " + documentsCount + " submitted POI Documents");
     }
 
     @Override
     public void verifyPOIInvalidDocumentUploaded(int documentsCount) {
         softAssert().assertTrue(waitUntil(() ->
                         findElements(poiRedXImage).size() == documentsCount),
-                "Unable to locate " + documentsCount + " not approved POI Documents");
+                "Looking for " + documentsCount + " not approved POI Documents");
     }
 
     @Override
     public void verifyPORDocumentsUploaded(int documentsCount) {
         softAssert().assertTrue(waitUntil(() ->
                         findElements(porImageSent).size() == documentsCount),
-                "Unable to locate " + documentsCount + " submitted POI Documents");
+                "Looking for " + documentsCount + " submitted POI Documents");
     }
 
     @Override
     public void verifyPORInvalidDocumentUploaded(int documentsCount) {
         softAssert().assertTrue(waitUntil(() ->
                         findElements(porRedXImage).size() == documentsCount),
-                "Unable to locate " + documentsCount + " not approved POR Documents");
+                "Looking for " + documentsCount + " not approved POR Documents");
     }
 
     @Override
@@ -258,34 +259,15 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
 
     @Override
     public void verifyTextDirectionElements(String expectedDirection) {
-        getPageElements()
-                .stream()
-                .map(this::getTextDirectionOfElement)
-                .forEach(textDirection ->
+        PageObjectUtils.forPageElements(
+                element ->
                         softAssert().assertEquals(
-                                textDirection.toLowerCase(),
+                                getCssValue("direction", element).toLowerCase(),
                                 expectedDirection.toLowerCase(),
-                                "Text direction verification for: " + this));
-    }
-
-    private String getTextDirectionOfElement(By element) {
-        return getCssValue("direction", element);
-    }
-
-    private List<By> getPageElements() {
-        return Arrays.stream(this.getClass().getDeclaredFields())
-                .filter(field -> By.class.isAssignableFrom(field.getType()))
-                .map(field -> {
-                    try {
-                        Object element = field.get(this);
-                        Reporter.log("Found element: " + element);
-                        return element;
-                    } catch (IllegalAccessException e) {
-                        throw new RuntimeException("", e);
-                    }
-                })
-                .map(By.class::cast)
-                .collect(Collectors.toList());
+                                "Text direction verification for: " + element),
+                field -> true,
+                storedId -> true,
+                this);
     }
 
     @Override

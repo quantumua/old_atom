@@ -202,7 +202,6 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void porClickHeader(){
         waitUntilDisplayed(porHeader).click();
-        waitUntilDisplayed(porWrapper);
     }
 
     private static String storeToTemp(String resource) {
