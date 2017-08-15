@@ -77,7 +77,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         closeWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
         // Document status changed to Sent
-        pages().uploadDocumentsTab().verifyPOIDocumentIsUploaded();
+        pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(1);
         softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "There is no prompt to upload Back side of the document");
         // - Verify in CRM POI OCR Status = Verified
         verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
@@ -90,7 +90,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @TestLinkProperties(displayId = "CTW-5353")
     public void poiWith2Sides() {
         closeWizardAndGoToUploadDocumentTab();
-        pages().uploadDocumentsTab().poiUploadDriverLicenseDocuments(POI_DRIVER_LICENSE_FRONT_PATH, POI_DRIVER_LICENSE_BACK_PATH);//  poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+        pages().uploadDocumentsTab().poiUploadDriverLicenseDocuments(POI_DRIVER_LICENSE_FRONT_PATH, POI_DRIVER_LICENSE_BACK_PATH);
         pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(2);
     }
 
@@ -128,7 +128,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         verifyPOIStatusInCRM(POI_OCR_STATUS_EMPTY);
         pages().uploadDocumentsTab().invoke();
         pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
-        pages().uploadDocumentsTab().verifyPOIDocumentIsUploaded();
+        pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(1);
         softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "There is no prompt to upload Back side of the document");
         verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
     }
@@ -186,12 +186,40 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     }
 
     /*
+     *[TestLink] CTW-5342:POR - choose "Other relevant bill"
+     */
+    //!!!*Not tested. UploadDocumentsTab  POI section is not working correctly!!!
+    @Test(description = "CTW-5342:POR - choose Other relevant bill")
+    @TestLinkProperties(displayId = "CTW-5342")
+    public void porChooseOtherRelevantBill() {
+        closeWizardAndGoToUploadDocumentTab();
+        pages().uploadDocumentsTab().poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+        pages().uploadDocumentsTab().verifyPOIDocumentsUploaded(2);
+        pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
+        softAssert().assertTrue(pages().uploadDocumentsTab().verifyPORsectionExpanded(), "POR section not expanded");
+        pages().uploadDocumentsTab().porUploadOtherRelevantBill(POR_ELECTRICITY_BILL_PATH);
+        pages().uploadDocumentsTab().verifyPORDocumentsUploaded(1);
+    }
+
+    /*
     * [TestLink] CTW-5345:POR Upload then logout/Login
     */
     @Test(description = "CTW-5345:POR Upload then logout/Login")
     @TestLinkProperties(displayId = "CTW-5345")
     public void porUploadThenLogoutLogin() {
-
+        closeWizardAndGoToMyAccount();
+        String userName = pages().accountDetails().getEmail();
+        pages().uploadDocumentsTab().invoke();
+        pages().uploadDocumentsTab().porUploadGasBill(POR_GAS_BILL_PATH);
+        pages().uploadDocumentsTab().verifyPORDocumentsUploaded(1);
+        softAssert().assertTrue(pages().uploadDocumentsTab().isPorHeaderCollapsed(), "POR section still expanded.");
+        pages().controlPanel().logOut();
+        softAssert().assertTrue(pages().topNavigationPage().isLoggedOut(), "Customer still logged in");
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build();
+        pages().topNavigationPage().logIn();
+        pages().loginDialog().login(userName, customerRegistrationInfo.getPassword());
+        closeWizardAndGoToUploadDocumentTab();
+        pages().uploadDocumentsTab().verifyPOROveralStatusReviewed();
     }
 
     private void verifyPOIStatusInCRM (Integer poiOCRStatus) {

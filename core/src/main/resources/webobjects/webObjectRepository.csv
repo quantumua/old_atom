@@ -318,6 +318,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,XPATH,.//li[@id='menu-item-54113']/a
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,XPATH,.//*[@id='acc']//div[@data-target='#poi']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeaderCollapsed,XPATH,.//*[@id='acc']//div[@data-target='#poi' and @aria-expanded='false']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeaderExpanded,XPATH,.//*[@id='acc']//div[@data-target='#poi' and @aria-expanded='true']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiWrapper,ID,poi-container
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,documentTypeButton,TAG_NAME,button
@@ -341,6 +342,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porWrapper,ID,por-container
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porUploadInput,ID,fileUploadDocsPOR
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porGasBillSelection,CSS,li[data-original-index='1']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porOtherRelevantBillSelection,CSS,li[data-original-index='5']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porImageSent,XPATH,.//*[@id='por']//img[@class='sent']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porImageReviewed,XPATH,.//*[@id='por']//img[@class='reviewed']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porImageApproved,XPATH,.//*[@id='por']//img[@class='approved']
@@ -353,6 +355,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardUploadInput,ID,fileUploadDocsCC
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardFrontImage,CLASS_NAME,cc-front-image
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardBackImage,XPATH,.//*[@id='cc-container']//*[@class='document-box cc-back-image']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porOveralStatusReviewed,XPATH,.//*[@id='acc']//div[@data-target='#por']//div[@class='reviewed-icon']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardSelection,XPATH,.//*[@id='cc-container']//li[@data-original-index='1']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardSentImage,XPATH,.//*[@id='cc']//img[@class='sent']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardNotApprovedXImage,XPATH,.//*[@id='cc-container']//*[@class='document-box not-aprroved']

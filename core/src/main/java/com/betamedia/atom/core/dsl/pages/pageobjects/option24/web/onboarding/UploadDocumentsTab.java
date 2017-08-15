@@ -21,17 +21,21 @@ public interface UploadDocumentsTab {
 
     void uploadCreditCard(String frontImagePath, String backImagePath);
 
-    void verifyPOIDocumentIsUploaded();
+    void verifyPOIOveralStatusReviewed();
 
-    void verifyPORDocumentIsUploaded();
+    void verifyPOROveralStatusReviewed();
 
     void poiUploadPassport(String poiPassportPath);
+
+    void porUploadOtherRelevantBill(String imagePath);
 
     void poiUploadIdCardDocuments(String imageFrontPath, String imageBackPath);
 
     void poiUploadDriverLicenseDocuments(String imageFrontPath, String imageBackPath);
 
     void porUploadGasBill(String imagePath);
+
+    boolean isPorHeaderCollapsed();
 
     void verifyPOIDocumentsUploaded(int documentsCount);
 

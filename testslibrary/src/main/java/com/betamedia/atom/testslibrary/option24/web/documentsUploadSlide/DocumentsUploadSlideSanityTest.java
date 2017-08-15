@@ -27,7 +27,7 @@ public class DocumentsUploadSlideSanityTest extends WebEndToEndTest {
     static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
     static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
 
-    private static final String POR_ELECTRICITY_BILL_PATH = "files/sample_electricity_bill.jpg";
+    static final String POR_ELECTRICITY_BILL_PATH = "files/sample_electricity_bill.jpg";
     static final String POR_GAS_BILL_PATH = "files/sample_gas_bill.jpg";
 
     private static final String CREDIT_CARD_FRONT_PATH = "files/sample_credit_card_front.jpg";

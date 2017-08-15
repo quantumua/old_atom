@@ -33,6 +33,8 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @StoredId
     private By poiHeaderCollapsed;
     @StoredId
+    private By poiHeaderExpanded;
+    @StoredId
     private By poiDocumentTypeSelector;
     @StoredId
     private By poiWrapper;
@@ -87,6 +89,10 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private By porRedXImage;
     @StoredId
     private By porGasBillSelection;
+    @StoredId
+    private By porOtherRelevantBillSelection;
+    @StoredId
+    private  By porOveralStatusReviewed;
 
     /*Credit Card Controls*/
     @StoredId
@@ -155,18 +161,13 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
-    public void verifyPOIDocumentIsUploaded() {
-//        softAssert().assertTrue(waitUntilExists(poiOveralStatusReviewed).isDisplayed(), "Overal status Reviewed is available");
-        softAssert().assertTrue(waitUntilExists(poiImageSent).isDisplayed(), "Image icon Sent is available");
-        softAssert().assertTrue(waitUntilExists(poiImageReviewed).isDisplayed(), "Image icon Reviewed is available");
-        softAssert().assertTrue(waitUntilExists(poiImageApproved).isDisplayed(), "Image icon Approved is available");
+    public void verifyPOIOveralStatusReviewed() {
+        softAssert().assertTrue(waitUntilExists(poiOveralStatusReviewed).isDisplayed(), "Overal status Reviewed is available");
     }
 
     @Override
-    public void verifyPORDocumentIsUploaded() {
-        softAssert().assertTrue(waitUntilExists(porImageSent).isDisplayed(), "Image icon Sent is available");
-        softAssert().assertTrue(waitUntilExists(porImageReviewed).isDisplayed(), "Image icon Reviewed is available");
-        softAssert().assertTrue(waitUntilExists(porImageApproved).isDisplayed(), "Image icon Approved is available");
+    public void verifyPOROveralStatusReviewed() {
+        softAssert().assertTrue(waitUntilExists(porOveralStatusReviewed).isDisplayed(), "Overal status Reviewed is available");
     }
 
     @Override
@@ -186,6 +187,11 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
+    public void porUploadOtherRelevantBill(String imagePath){
+        porUploadDocument(imagePath, porOtherRelevantBillSelection);
+    }
+
+    @Override
     public void poiUploadIdCardDocuments(String imageFrontPath, String imageBackPath) {
         poiUploadTwoSidePOIDocuments(poiIdCardFrontSelection, poiIdCardBackSelection, imageFrontPath, imageBackPath);
     }
@@ -193,6 +199,11 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @Override
     public void poiUploadDriverLicenseDocuments(String imageFrontPath, String imageBackPath) {
         poiUploadTwoSidePOIDocuments(poiDriverLicenseFrontSelection, poiDriverLicenseBackSelection, imageFrontPath, imageBackPath);
+    }
+
+    @Override
+    public boolean isPorHeaderCollapsed(){
+        return waitUntilDisplayed(porHeaderCollapsed).isDisplayed();
     }
 
     private void poiUploadTwoSidePOIDocuments(By documentFrontSelection, By documentBackSelection, String imageFrontPath, String imageBackPath) {
@@ -224,7 +235,13 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     public void verifyPOIDocumentsUploaded(int documentsCount) {
         softAssert().assertTrue(waitUntil(() ->
                 findElements(poiImageSent).size() == documentsCount),
-                "Looking for " + documentsCount + " submitted POI Documents");
+                "Looking for " + documentsCount + " 'Sent' POI Documents");
+        softAssert().assertTrue(waitUntil(() ->
+                        findElements(poiImageReviewed).size() == documentsCount),
+                "Looking for " + documentsCount + " 'Reviewed' POI Documents");
+        softAssert().assertTrue(waitUntil(() ->
+                        findElements(poiImageApproved).size() == documentsCount),
+                "Looking for " + documentsCount + " 'Approved' POI Documents");
     }
 
     @Override
@@ -238,7 +255,13 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     public void verifyPORDocumentsUploaded(int documentsCount) {
         softAssert().assertTrue(waitUntil(() ->
                         findElements(porImageSent).size() == documentsCount),
-                "Looking for " + documentsCount + " submitted POI Documents");
+                "Looking for " + documentsCount + " 'Sent' POR Documents");
+        softAssert().assertTrue(waitUntil(() ->
+                        findElements(porImageReviewed).size() == documentsCount),
+                "Looking for " + documentsCount + " 'Reviewed' POR Documents");
+        softAssert().assertTrue(waitUntil(() ->
+                        findElements(porImageApproved).size() == documentsCount),
+                "Looking for " + documentsCount + " 'Approved' POR Documents");
     }
 
     @Override
@@ -283,7 +306,15 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         scrollIntoView(find(poiHeader));
     }
 
+    private void poiCollapseHeader(){
+        waitUntilDisplayed(poiHeaderExpanded);
+        if (exists(poiHeaderExpanded)) {
+            poiClickHeader();
+        }
+    }
+
     private void porExpandHeader(){
+        poiCollapseHeader();
         if (exists(porHeaderCollapsed)) {
             porClickHeader();
         }

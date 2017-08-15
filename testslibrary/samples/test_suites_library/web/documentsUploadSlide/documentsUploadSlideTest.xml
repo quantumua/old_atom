@@ -32,6 +32,8 @@
                     <include name="poiWith2Sides" description="CTW-5353" />
                     <include name="porUploadGasBillSC" description="CTW-5340" />
                     <include name="porUploadInvalidDocumentSC" description="CTW-5343" />
+                    <include name="porChooseOtherRelevantBill" description="CTW-5342" />
+                    <include name="porUploadThenLogoutLogin" description="CTW-5345" />
                 </methods>
             </class>
             <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideLocalizationTest">
