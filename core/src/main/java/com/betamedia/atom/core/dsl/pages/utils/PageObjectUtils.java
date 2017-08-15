@@ -27,6 +27,8 @@ public class PageObjectUtils {
     private static final Logger logger = LogManager.getLogger(PageObjectUtils.class);
     private static final String DOM_UPDATE_MESSAGE = "DOM updated when retrieving value";
 
+    public static final String RTL_DIRECTION = "rtl";
+
     private PageObjectUtils() {
     }
 
@@ -150,6 +152,7 @@ public class PageObjectUtils {
 
     private static <T extends AbstractPageObject> Object getValue(Field field, T target) {
         try {
+            field.setAccessible(true);
             Object element = field.get(target);
             Reporter.log("Found element: " + element);
             return element;

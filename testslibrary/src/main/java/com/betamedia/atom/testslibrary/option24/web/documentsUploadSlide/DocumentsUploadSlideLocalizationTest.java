@@ -10,14 +10,12 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.RTL_DIRECTION;
+
 /**
  * Created by lartemyev on 8/14/17.
  */
 public class DocumentsUploadSlideLocalizationTest extends DocumentsUploadSlideSanityTest {
-
-    private static final String ARABIC_LANGUAGE = "AR";
-    private static final String GERMAN_LANGUAGE = "DE";
-    private static final String RTL_DIRECTION = "rtl";
 
     private static final Logger logger = LogManager.getLogger(WebFnsPersonalInformationImpl.class);
 
@@ -34,8 +32,7 @@ public class DocumentsUploadSlideLocalizationTest extends DocumentsUploadSlideSa
     @TestLinkProperties(displayId = "CTW-5854")
     public void arVerifyWhenChoosingARLanguageTheOrderOfTheUploadDocSlideIsChangingRTL() {
         closeWizardAndGoToUploadDocumentTab();
-        pages().topNavigationPage().selectLanguage(ARABIC_LANGUAGE);
-        pages().uploadDocumentsTab().exists();
+        pages().topNavigationPage().selectLanguage(Language.ARABIC.code);
         pages().uploadDocumentsTab().verifyTextDirectionElements(RTL_DIRECTION);
     }
 
@@ -46,7 +43,7 @@ public class DocumentsUploadSlideLocalizationTest extends DocumentsUploadSlideSa
     @TestLinkProperties(displayId = "CTW-5856")
     public void uploadDocSlideTranslationsMakeSureThatAllLanguagesAreTranslated() {
         closeWizardAndGoToUploadDocumentTab();
-        pages().topNavigationPage().selectLanguage(GERMAN_LANGUAGE);
+        pages().topNavigationPage().selectLanguage(Language.GERMAN.code);
         pages().uploadDocumentsTab().verifySlideLocalization(Language.GERMAN);
     }
     }

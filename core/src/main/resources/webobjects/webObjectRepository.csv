@@ -82,7 +82,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,lossOn1to200Knowledge,ID,KnowledgePositionLoss1to200
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,buttonWizardDeclaration,XPATH,//div[@id='wizard-declaration']//div[@class='message-button']//*[@id='declaration-btn']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,resultPlaceholder,ID,resultPlaceHolder
-2.6.2,2017-05-29 15:24 +0000,AccountDetailsTabImpl,winID,XPATH,.//li[@id='menu-item-50879']/a
+2.6.2,2017-05-29 15:24 +0000,AccountDetailsTabImpl,winID,XPATH,".//ul[contains(@id,'menu-my-account')]//li[1]/a"
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,title,ID,Title
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,street,ID,Street
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,streetNumber,ID,StreetNumber
@@ -264,7 +264,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,homePageLink,XPATH,//*[@id='header']/div[2]/div[1]/a/img
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,bankPageLink,XPATH,"//*[@id=""header""]//*[@href=""/redirects/my-account/deposit/""]"
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,languageMenu,ID,language-menu
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,flagLanguage,XPATH,"//*[@id='header']/div[@class=""flag-menu active""]//a"
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,flagLanguage,XPATH,//*[@id='header']/div[@class='flag-menu active']//a
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,withdrawalTab,XPATH,"//*[@href=""https://qawww.24option.com/eu/withdrawal/""]"
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,mainMenu,ID,mainMenu
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,cfdBtn,CLASS_NAME,product-cfd
@@ -315,7 +315,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentNotAprroved,XPATH,".//*[@id='others-container']//*[@class=""document-box not-aprroved""]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogCloseButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documentTypeButton,TAG_NAME,button
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,XPATH,.//li[@id='menu-item-54113']/a
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,XPATH,".//ul[contains(@id,'menu-my-account')]//li[2]/a"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,XPATH,.//*[@id='acc']//div[@data-target='#poi']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeaderCollapsed,XPATH,.//*[@id='acc']//div[@data-target='#poi' and @aria-expanded='false']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeaderExpanded,XPATH,.//*[@id='acc']//div[@data-target='#poi' and @aria-expanded='true']

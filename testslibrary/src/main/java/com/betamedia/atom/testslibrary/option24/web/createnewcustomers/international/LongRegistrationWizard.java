@@ -10,6 +10,8 @@ import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNew
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.RTL_DIRECTION;
+
 /**
  * Created by vsnigur on 7/17/17.
  * tests for registration dialog

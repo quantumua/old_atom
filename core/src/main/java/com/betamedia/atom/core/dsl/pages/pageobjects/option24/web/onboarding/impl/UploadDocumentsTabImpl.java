@@ -8,13 +8,9 @@ import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Reporter;
 
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 
@@ -295,7 +291,15 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
 
     @Override
     public void verifySlideLocalization(Language language) {
-            softAssert().assertEquals(waitUntilDisplayed(poiHeader).getText(), getLocalization(poiHeader, language));
+        PageObjectUtils.forPageElements(
+                element ->
+                        softAssert().assertEquals(
+                                waitUntilDisplayed(element).getText(),
+                                getLocalization(element, language),
+                                "Text localization verification for: " + element),
+                field -> true,
+                StoredId::localized,
+                this);
         }
 
     private void poiExpandHeader(){

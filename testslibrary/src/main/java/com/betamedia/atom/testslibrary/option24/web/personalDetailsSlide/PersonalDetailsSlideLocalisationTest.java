@@ -1,6 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide;
 
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.annotations.BeforeMethod;
@@ -8,15 +9,14 @@ import org.testng.annotations.Test;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 
+import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.RTL_DIRECTION;
+
 /**
  * @author Leonid Artemiev
  * @since 7/13/17
  */
 
 public class PersonalDetailsSlideLocalisationTest extends WebEndToEndTest {
-
-    private static final String ARABIC_LANGUAGE = "AR";
-    private static final String RTL_DIRECTION = "rtl";
 
     @BeforeMethod
 	public void before(){
@@ -55,7 +55,7 @@ public class PersonalDetailsSlideLocalisationTest extends WebEndToEndTest {
     @Test(description = "CTW-5682:Verify the slide turns RTL on AR")
     @TestLinkProperties(displayId ="CTW-5682")
     public void  verifyTheSlideTurnsRTLOnAR() {
-        pages().topNavigationPage().selectLanguage(ARABIC_LANGUAGE);
+        pages().topNavigationPage().selectLanguage(Language.ARABIC.code);
         pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().exists();
         pages().accountAdditionalDetails().verifyTextDirectionElements(RTL_DIRECTION);
