@@ -195,9 +195,9 @@ public abstract class AbstractTest {
     }
 
     public static class ReportingInterceptor {
-        public static void report(@SuperCall Runnable zuper, @AllArguments Object[] args) {
-            if (args.length > 0 && args[args.length - 1] instanceof String) {
-                Reporter.log((String) args[args.length - 1]);
+        public static void report(@SuperCall Runnable zuper, @AllArguments(AllArguments.Assignment.SLACK) String[] args) {
+            if (args.length == 1 || args.length == 3) { //ignore assert* on two Strings without message
+                Reporter.log(args[args.length - 1]);
             }
             zuper.run();
         }
