@@ -6,6 +6,13 @@ import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.ScreenShotList
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.SoftAssertListener;
 import com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener;
 import com.betamedia.atom.core.holders.AppContextHolder;
+import net.bytebuddy.ByteBuddy;
+import net.bytebuddy.implementation.MethodDelegation;
+import net.bytebuddy.implementation.bind.annotation.AllArguments;
+import net.bytebuddy.implementation.bind.annotation.SuperCall;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -13,6 +20,8 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.Iterator;
 import java.util.List;
+
+import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
 
 /**
  * @author mbelyaev
@@ -29,8 +38,11 @@ public abstract class AbstractTest {
     protected static final String GENERIC_PARALLEL_DATA_PROVIDER = "GenericParallelDataProvider";
     protected static final String CACHED_DATA_PROVIDER = "CachedDataProvider";
     protected static final String CACHED_PARALLEL_DATA_PROVIDER = "CachedParallelDataProvider";
+    private static final Logger logger = LogManager.getLogger(AbstractTest.class);
 
-    private static final ThreadLocal<SoftAssert> softAsserts = ThreadLocal.withInitial(SoftAssert::new);
+    private static final Class<? extends SoftAssert> reportingAssert = getReportingAssertClass();
+
+    private static final ThreadLocal<SoftAssert> softAsserts = ThreadLocal.withInitial(AbstractTest::makeReportingAssert);
 
     private CsvResourceRepository csvResourceRepository = null;
 
@@ -171,4 +183,33 @@ public abstract class AbstractTest {
         }
         return csvResourceRepository;
     }
+
+    private static Class<? extends SoftAssert> getReportingAssertClass() {
+        return new ByteBuddy()
+                .subclass(SoftAssert.class)
+                .method(nameStartsWith("assert"))
+                .intercept(MethodDelegation.to(ReportingInterceptor.class))
+                .make()
+                .load(AbstractTest.class.getClassLoader())
+                .getLoaded();
+    }
+
+    public static class ReportingInterceptor {
+        public static void report(@SuperCall Runnable zuper, @AllArguments Object[] args) {
+            if (args.length > 0 && args[args.length - 1] instanceof String) {
+                Reporter.log((String) args[args.length - 1]);
+            }
+            zuper.run();
+        }
+    }
+
+    private static SoftAssert makeReportingAssert() {
+        try {
+            return reportingAssert.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            logger.error("Failed to instantiate custom SoftAssert", e);
+            return new SoftAssert();
+        }
+    }
+
 }
