@@ -269,7 +269,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     private String getTextDirectionOfElement(By element) {
-        return getCssProperty("direction", element);
+        return getCssValue("direction", element);
     }
 
     private List<By> getPageElements() {
@@ -318,9 +318,9 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         waitUntilDisplayed(wrapper, locator).click();
         if (waitForTransformation) {
             /*wait until animation starts*/
-            waitUntil(() -> !checkCssProperty("transform", "none", transformImage));
+            waitUntil(() -> !checkCssValue("transform", "none", transformImage));
             /*wait until animation ends*/
-            waitUntil(() -> checkCssProperty("transform", "none", transformImage));
+            waitUntil(() -> checkCssValue("transform", "none", transformImage));
         }
     }
 }

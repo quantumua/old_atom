@@ -6,12 +6,8 @@ import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.Upl
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Optional;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -222,9 +218,9 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         waitUntilDisplayed(poiWrapper, locator).click();
         if (waitForTransformation) {
             /*wait until animation starts*/
-            waitUntil(() -> !checkCssProperty("transform", "none", poiFrontImage));
+            waitUntil(() -> !checkCssValue("transform", "none", poiFrontImage));
             /*wait until animation ends*/
-            waitUntil(() -> checkCssProperty("transform", "none", poiFrontImage));
+            waitUntil(() -> checkCssValue("transform", "none", poiFrontImage));
         }
     }
 }

@@ -3,6 +3,7 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets.Assets;
+import com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -149,12 +150,12 @@ public class AssetsImpl extends AbstractPageObject implements Assets {
 
     private void validateSubRows(By row, By currencyType, String expectedCurrency) {
         Assert.assertEquals(
-                retryOnStale(
+                PageObjectUtils.retryOnStale(
                         () -> find(assetTooltipContent, row, firstRow, currencyType),
                         WebElement::getText),
                 expectedCurrency);
         Assert.assertEquals(
-                retryOnStale(
+                PageObjectUtils.retryOnStale(
                         () -> find(assetTooltipContent, row, secondRow, currencyType),
                         WebElement::getText),
                 expectedCurrency);

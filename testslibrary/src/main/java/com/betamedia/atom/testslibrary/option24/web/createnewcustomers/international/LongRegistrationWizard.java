@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 public class LongRegistrationWizard extends CreateNewCustomers {
 
     private static final String LOCALE = "/international";
-    private static final String ARABIC_LANGUAGE = "AR";
 
     @BeforeMethod
     public void beforeTest() {
@@ -36,7 +35,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
      */
     @Test(description = "CTW-5764:Verify full registration on SINT")
     @TestLinkProperties(displayId = "CTW-5764")
-    public void verifySignUpButtonRedirectToOnBoardingOpenAccount() {
+    @Override
+    public void verifySignUpButtonRedirectToOnboardingOpenAccount() {
         CustomerRegistrationInfo customerRegistrationInfo =
                 CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get())
                 .withPhoneCountryPrefix(Country.ZAMBIA.getPhonePrefix())
@@ -54,7 +54,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-5443:SINT: Correct redirect after open account slide submit (different languages)")
     @TestLinkProperties(displayId = "CTW-5443")
     public void verifyRedirectAfterOpenAccountSlideSubmit() {
-        pages().topNavigationPage().selectLanguage(ARABIC_LANGUAGE);
+        Language language = Language.ARABIC;
+        pages().topNavigationPage().selectLanguage(language.code);
         CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
                 .builder(WebSiteNamingStrategy.get()).build();
         //pages().loadingDialog().isDisplayed();
@@ -62,8 +63,8 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
         pages().registrationDialog().submitRegisterForm();
         pages().welcomeDialog().isStartBtnDisplayed();
-        pages().welcomeDialog().validateCaption(Language.ARABIC);
-        pages().welcomeDialog().validateStartButtonCaption(Language.ARABIC);
+        pages().welcomeDialog().validateCaption(language);
+        pages().welcomeDialog().validateStartButtonCaption(language);
     }
 
     /**
@@ -491,7 +492,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
     @Test(description = "CTW-5881:SINT: AR - Verify when choosing AR language the order of the Registration slide is changing RTL")
     @TestLinkProperties(displayId = "CTW-5881")
     public void checkRegistrationDialogFieldsDirectionForRightToLeftLanguages() {
-        pages().topNavigationPage().selectLanguage(ARABIC_LANGUAGE);
+        pages().topNavigationPage().selectLanguage(Language.ARABIC.code);
         pages().topNavigationPage().signUp();
         pages().registrationDialog().exists();
         pages().registrationDialog().verifyContentAlignment(RTL_DIRECTION);

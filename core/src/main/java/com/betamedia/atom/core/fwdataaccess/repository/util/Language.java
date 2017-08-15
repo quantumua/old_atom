@@ -5,7 +5,13 @@ package com.betamedia.atom.core.fwdataaccess.repository.util;
  * @since 8/11/17
  */
 public enum Language {
-    GERMAN,
-    ENGLISH,
-    ARABIC
+    GERMAN("DE"),
+    ENGLISH("EN"),
+    ARABIC("AR");
+    public final String code;
+
+    Language(String code) {
+        this.code = code;
+    }
+
 }

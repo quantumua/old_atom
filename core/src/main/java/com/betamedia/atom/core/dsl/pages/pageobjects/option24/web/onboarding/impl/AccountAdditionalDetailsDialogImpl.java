@@ -3,15 +3,14 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountAdditionalDetails;
+import com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils;
 import com.betamedia.atom.core.testingtype.base.AbstractTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.Reporter;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,15 +19,15 @@ import java.util.stream.Collectors;
  */
 public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditionalDetails {
 
+    private static final Logger logger = LogManager.getLogger(AccountAdditionalDetailsDialogImpl.class);
+
     public AccountAdditionalDetailsDialogImpl(WebDriver webDriver) {
         super(webDriver);
     }
 
-    private static final Logger logger = LogManager.getLogger(AccountAdditionalDetailsDialogImpl.class);
-
     @Override
     public void update(AccountAdditionalDetails info) {
-    	selectAllFormElements(info);
+        selectAllFormElements(info);
         scrollIntoView(find(submit)).click();
     }
 
@@ -62,24 +61,26 @@ public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditiona
 
     @Override
     public String getBirthDaySelectedItem(){
-    	return getCssProperty("value", birthDateDay);
+    	return getCssValue("value", birthDateDay);
     }
 
     @Override
     public String getBirthDateDayElementColor () {
-        return getCssProperty("border", birthDateDay);
+        return getCssValue("border", birthDateDay);
     }
 
     @Override
     public void verifyTextDirectionElements(String expectedDirection) {
-        getPageElements()
-                .stream()
-                .map(this::getTextDirectionOfElement)
-                .forEach(textDirection ->
+        PageObjectUtils.forPageElements(
+                element -> getCssValue( "direction", element),
+                textDirection ->
                         Assert.assertEquals(
                                 textDirection.toLowerCase(),
                                 expectedDirection.toLowerCase(),
-                                "Text direction verification for: " + this));
+                                "Text direction verification for: " + this),
+                field -> true,
+                storedId -> true,
+                this);
     }
 
     @Override
@@ -136,23 +137,4 @@ public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditiona
         logger.info(String.format("Filling Additional Details form: %s", info.toString()));
     }
 
-    private String getTextDirectionOfElement(By element) {
-        return getCssProperty("direction", element);
-    }
-
-    private List<By> getPageElements() {
-        return Arrays.stream(this.getClass().getDeclaredFields())
-                .filter(field -> By.class.isAssignableFrom(field.getType()))
-                .map(field -> {
-                    try {
-                        Object element = field.get(this);
-                        Reporter.log("Found element: " + element);
-                        return element;
-                    } catch (IllegalAccessException e) {
-                        throw new RuntimeException("", e);
-                    }
-                })
-                .map(By.class::cast)
-                .collect(Collectors.toList());
-    }
 }

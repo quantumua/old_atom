@@ -51,7 +51,6 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
     protected static final String SEARCH_BY_SYMBOL = "I";
     protected static final String EMPTY_STRING = "";
     protected static final String EMPTY_PHONE_PREFIX = "+";
-    protected static final String ARABIAN_LANGUAGE = "AR";
     protected static final String RTL_DIRECTION = "rtl";
     protected static final String EXPECTED_LEGALL_TERMS_AND_CONDITIONS_LINK = "/terms-and-conditions/";
     protected static final String EXPECTED_COOKIE_POLICY_LINK = "/terms-and-conditions/privacy-policy/";

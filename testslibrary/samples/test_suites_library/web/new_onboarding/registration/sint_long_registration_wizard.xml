@@ -6,7 +6,7 @@
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.createnewcustomers.international.LongRegistrationWizard" >
                 <methods>
-                    <include name="verifySignUpButtonRedirectToOnBoardingOpenAccount" description="CTW-5764"/>
+                    <include name="verifySignUpButtonRedirectToOnboardingOpenAccount" description="CTW-5764"/>
                     <include name="verifyRedirectAfterOpenAccountSlideSubmit" description="CTW-5443"/>
                     <include name="verifyLegalTermsAndConditionsDocument" description="CTW-18622"/>
                     <include name="verifyBonusTermsConditionsLinks" description="CTW-18623"/>

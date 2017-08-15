@@ -3,14 +3,12 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboardin
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountAdditionalDetails;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AccountAdditionalDetailsDialog;
+import com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils;
 import com.betamedia.atom.core.testingtype.base.AbstractTest;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.Reporter;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,24 +57,26 @@ public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalD
 
     @Override
     public String getBirthDaySelectedItem(){
-    	return getElementCssValue(birthDateDay,"value");
+        return getCssValue("value", birthDateDay);
     }
 
     @Override
     public String getBirthDateDayElementColor () {
-        return getElementCssValue(birthDateDay, "border");
+        return getCssValue("border", birthDateDay);
     }
 
     @Override
     public void verifyTextDirectionElements(String expectedDirection) {
-        getPageElements()
-                .stream()
-                .map(this::getTextDirectionOfElement)
-                .forEach(textDirection ->
+        PageObjectUtils.forPageElements(
+                element -> getCssValue("direction", element),
+                textDirection ->
                         Assert.assertEquals(
                                 textDirection.toLowerCase(),
                                 expectedDirection.toLowerCase(),
-                                "Text direction verification for: " + this));
+                                "Text direction verification for: " + this),
+                field -> true,
+                storedId -> true,
+                this);
     }
 
     @Override
@@ -132,29 +132,4 @@ public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalD
         inSelect(nationality).selectByValue(info.nationality);
     }
 
-    private String getTextDirectionOfElement(By element) {
-        return getElementCssValue(element, "direction");
-    }
-
-    private String getElementCssValue(By element, String cssValueName) {
-        String cssValue = waitUntilDisplayed(element).getCssValue(cssValueName);
-        Reporter.log("Processing element: " + element.toString() + ", got CSS Value: " + cssValueName + "=" + cssValue + "<br/>");
-        return cssValue;
-    }
-
-    private List<By> getPageElements() {
-        return Arrays.stream(this.getClass().getDeclaredFields())
-                .filter(field -> By.class.isAssignableFrom(field.getType()))
-                .map(field -> {
-                    try {
-                        Object element = field.get(this);
-                        Reporter.log("Found element: " + element);
-                        return element;
-                    } catch (IllegalAccessException e) {
-                        throw new RuntimeException("", e);
-                    }
-                })
-                .map(By.class::cast)
-                .collect(Collectors.toList());
-    }
 }
