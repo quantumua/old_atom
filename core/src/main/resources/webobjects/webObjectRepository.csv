@@ -350,7 +350,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porBackImage,CLASS_NAME,por-back-image
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porRedXImage,XPATH,.//*[@id='por-container']//div[@class='document-box not-aprroved']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porNotApprovedXImage,XPATH,.//*[@id='por-container']//*[@class='document-box not-aprroved']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardHeader,XPATH,.//*[@id='acc']//*[@class='icon cc-icon']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardHeader,XPATH,.//*[@id='acc']//div[@data-target='#cc']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardWrapper,XPATH,.//*[@id='cc-container']//*[@class='btn dropdown-toggle btn-default']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardUploadInput,ID,fileUploadDocsCC
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardFrontImage,CLASS_NAME,cc-front-image
@@ -359,6 +359,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardSelection,XPATH,.//*[@id='cc-container']//li[@data-original-index='1']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardSentImage,XPATH,.//*[@id='cc']//img[@class='sent']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardNotApprovedXImage,XPATH,.//*[@id='cc-container']//*[@class='document-box not-aprroved']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,othersHeader,XPATH,.//*[@id='acc']//div[@data-target='#others']
 2.6.2,2017-05-29 15:24 +0000,WelcomeBackMessageImpl,continueQuestionnaire,ID,welcomeback-btn
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,ID,welcome-btn
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,XPATH,//*[@id='wizard-welcome']/div[1]

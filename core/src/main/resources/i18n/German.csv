@@ -1,4 +1,8 @@
 implementationVersion,revisionDate,pageObjectName,locatorId,text
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Herzlich willkommen
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Starten
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,Dokumente
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,POI (Identitätsnachweis)
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,POR (Nachweis des Wohnorts)
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardHeader,Kreditkarte
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,othersHeader,Sonstiges

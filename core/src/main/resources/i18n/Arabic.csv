@@ -1,3 +1,8 @@
 implementationVersion,revisionDate,pageObjectName,locatorId,text
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,أهلا بك
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,ابدأ
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,الوثائق
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,إثبات الهوية
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,إثبات الإقامة
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardHeader,بطاقة الإئتمان
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,othersHeader,أخرى

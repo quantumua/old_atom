@@ -20,7 +20,7 @@ import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
  */
 public class UploadDocumentsTabImpl extends AbstractPageObject implements UploadDocumentsTab {
 
-    @StoredId
+    @StoredId (localized = true)
     private By winID;
 
     /*POI (Proof of identity) Controls*/
@@ -65,7 +65,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private By poiRedXImage;
 
     /* POR (Proof of residency) Controls*/
-    @StoredId
+    @StoredId  (localized = true)
     private By porHeader;
     @StoredId
     private By porHeaderCollapsed;
@@ -91,7 +91,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private  By porOveralStatusReviewed;
 
     /*Credit Card Controls*/
-    @StoredId
+    @StoredId (localized = true)
     private By creditCardHeader;
     @StoredId
     private By creditCardWrapper;
@@ -107,7 +107,10 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private By creditCardSentImage;
     @StoredId
     private By creditCardNotApprovedXImage;
-    /* POR (Proof of residence) Controls*/
+
+    /* Others Controls*/
+    @StoredId (localized = true)
+    private By othersHeader;
 
     public UploadDocumentsTabImpl(WebDriver webDriver) {
         super(webDriver);
