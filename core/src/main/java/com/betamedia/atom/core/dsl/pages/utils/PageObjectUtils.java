@@ -143,7 +143,8 @@ public class PageObjectUtils {
 
     private static <T extends AbstractPageObject, U> Stream<U> getStream(Predicate<Field> fieldPredicate, Predicate<StoredId> storedIdPredicate, Function<? super By, U> mapper, T target) {
         return Arrays.stream(target.getClass().getDeclaredFields())
-                .filter(fieldPredicate.and(field -> By.class.isAssignableFrom(field.getType())))
+                .filter(field -> By.class.isAssignableFrom(field.getType()))
+                .filter(fieldPredicate)
                 .filter(f -> storedIdPredicate.test(f.getAnnotation(StoredId.class)))
                 .map(field -> getValue(field, target))
                 .map(By.class::cast)
