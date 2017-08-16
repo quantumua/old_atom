@@ -285,7 +285,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
                                 expectedDirection.toLowerCase(),
                                 "Text direction verification for: " + element),
                 field -> true,
-                storedId -> true,
+                StoredId::localized,
                 this);
     }
 
