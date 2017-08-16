@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="verify Personal Details Slide" verbose="1">
+    <parameter name="testlinkBuildId" value="267" />
+    <parameter name="testlinkPlanId" value="112063" />
+    <parameter name="countrycode" value="Germany"/>
+    <parameter name="phonecountryprefix" value="+49"/>
+    <test name="Documents Upload Slide verifications">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideFunctionalityTest">
+                <methods>
+                    <include name="uploadDocumentsSlideContainsExitXButtonTest" description="CTW-5691" />
+                    <include name="eachSlideSectionCanBeCollapsedExpanded" description="CTW-5730" />
+                    <include name="poiUploadPassportSC" description="CTW-5351" />
+                    <include name="uploadIdentityCard" description="CTW-5354" />
+                    <include name="uploadDriverLicense" description="CTW-5355" />
+                    <include name="poiUploadInvalidPassportSC" description="CTW-5356" />
+                    <include name="poiUploadThenLogoutLogin" description="CTW-5358" />
+                    <include name="poiWith2Sides" description="CTW-5353" />
+                    <include name="porUploadGasBillSC" description="CTW-5340" />
+                    <include name="porUploadInvalidDocumentSC" description="CTW-5343" />
+                    <include name="porChooseOtherRelevantBill" description="CTW-5342" />
+                    <include name="porUploadThenLogoutLogin" description="CTW-5345" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

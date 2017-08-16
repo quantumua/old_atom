@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="verify Personal Details Slide" verbose="1">
+    <parameter name="testlinkBuildId" value="267" />
+    <parameter name="testlinkPlanId" value="112063" />
+    <parameter name="countrycode" value="Germany"/>
+    <parameter name="phonecountryprefix" value="+49"/>
+    <test name="Documents Upload Slide verifications">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideLocalizationTest">
+                <methods>
+                    <include name="arVerifyWhenChoosingARLanguageTheOrderOfTheUploadDocSlideIsChangingRTL" description="CTW-5854" />
+                    <include name="uploadDocSlideTranslationsMakeSureThatAllLanguagesAreTranslated" description="CTW-5856" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
