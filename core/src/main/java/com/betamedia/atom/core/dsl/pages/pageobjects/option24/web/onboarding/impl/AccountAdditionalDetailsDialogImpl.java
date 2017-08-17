@@ -60,7 +60,7 @@ public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditiona
 
     @Override
     public String getBirthDaySelectedItem(){
-    	return getCssValue("value", birthDateDay);
+    	return getAttribute("value", birthDateDay);
     }
 
     @Override

@@ -84,9 +84,10 @@ public class PersonalDetailsSlideFunctionalityTest extends WebEndToEndTest {
     @Test(description = "CTW-5647:Verify date of birth drop down functionality")
     @TestLinkProperties(displayId ="CTW-5647")
     public void VerifyDateOofBirthDropDownFunctionality(){
-        Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDayDataList().size(),32);
+        pages().accountAdditionalDetailsPage().exists();
+        softAssert().assertEquals(pages().accountAdditionalDetailsPage().getBirthDayDataList().size(),32, "Verify BirthDayDataList size is 32");
         pages().accountAdditionalDetailsPage().selectBirthDayData();
-        Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDaySelectedItem(), "3");
+        softAssert().assertEquals(pages().accountAdditionalDetailsPage().getBirthDaySelectedItem(), "3", "Verify BirthDayList size is 3");
     }
  
     /*
