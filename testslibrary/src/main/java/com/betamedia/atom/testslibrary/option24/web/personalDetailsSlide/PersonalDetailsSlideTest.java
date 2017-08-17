@@ -1,6 +1,10 @@
 package com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide;
 
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import org.junit.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
@@ -12,14 +16,24 @@ import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
  */
 
 public class PersonalDetailsSlideTest extends WebEndToEndTest {
+
+    @BeforeMethod
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().register(CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
+                .withPhoneCountryPrefix(phonecountryprefix)
+                .build());
+        pages().welcomeDialog().isStartBtnDisplayed();
+        pages().welcomeDialog().start();
+    }
 	/*
 	 *[testlink]  CTW-5624:Verify slide appear after registration and welcome slide
 	 */
     @Parameters({"countrycode"})
     @Test(description = "CTW-5624:Verify slide appear after registration and welcome slide")
     @TestLinkProperties(displayId ="CTW-5624")
-	public void  verifySlideAppearAfterRegistrationAndWelcomeSlide(String countrycode) {
-        registerAndStart(countrycode);
+	public void  verifySlideAppearAfterRegistrationAndWelcomeSlide() {
         Assert.assertTrue("Additional details page is available right after Welcome page", pages().accountAdditionalDetailsPage().exists());
     }
     
@@ -29,8 +43,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5625:Verify Submit bttn is mandatory for moving fwd")
     @TestLinkProperties(displayId ="CTW-5625")
-    public void  verifySubmitButtonIsMandatoryForMovingFwd(String countrycode) {
-        registerAndStart(countrycode);
+    public void  verifySubmitButtonIsMandatoryForMovingFwd() {
     	Assert.assertFalse(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
     }
     
@@ -41,8 +54,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5630:Verify all 3 fields are mandatory")
     @TestLinkProperties(displayId ="CTW-5630")
-    public void  verifyAll3FieldsAreMandatory(String countrycode) {
-        registerAndStart(countrycode);
+    public void  verifyAll3FieldsAreMandatory() {
         AccountAdditionalDetails accountAdditionalDetails = AccountAdditionalDetails.builder().build();
         pages().accountAdditionalDetailsPage().selectBirthDateDay(accountAdditionalDetails.birthDateDay);
     	Assert.assertFalse(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
@@ -60,8 +72,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5638:Verify submit bttn enables when all 3 fields are filled")
     @TestLinkProperties(displayId ="CTW-5638")
-    public void  verifySubmitButtonEnableWhenAllFieldsAreFilled(String countrycode) {
-        registerAndStart(countrycode);
+    public void  verifySubmitButtonEnableWhenAllFieldsAreFilled() {
     	pages().accountAdditionalDetailsPage().selectAllFormElements(AccountAdditionalDetails.builder().build());
     	Assert.assertTrue(pages().accountAdditionalDetailsPage().isUpdateBtnEnabled());
     }
@@ -72,8 +83,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5647:Verify date of birth drop down functionality")
     @TestLinkProperties(displayId ="CTW-5647")
-    public void VerifyDateOofBirthDropDownFunctionality(String countrycode){
-        registerAndStart(countrycode);
+    public void VerifyDateOofBirthDropDownFunctionality(){
         Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDayDataList().size(),32);
         pages().accountAdditionalDetailsPage().selectBirthDayData();
         Assert.assertEquals(pages().accountAdditionalDetailsPage().getBirthDaySelectedItem(), "3");
@@ -85,8 +95,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5660:Verify selection changes drop down color")
     @TestLinkProperties(displayId ="CTW-5660")
-    public void verifySelectionChangesDropDownColor(String countrycode){
-        registerAndStart(countrycode);
+    public void verifySelectionChangesDropDownColor(){
         String colorOfBorderBeforeClick = pages().accountAdditionalDetailsPage().getBirthDateDayElementColor();
         pages().accountAdditionalDetailsPage().selectBirthDayData();
         String colorOfBorderAfterClick = pages().accountAdditionalDetailsPage().getBirthDateDayElementColor();
@@ -99,8 +108,7 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5663:Verify opening drop downs changes arrow direction")
     @TestLinkProperties(displayId ="CTW-5663")
-    public void verifyOpeningDropDownsChangesArrowDirection(String countrycode) {
-        registerAndStart(countrycode);
+    public void verifyOpeningDropDownsChangesArrowDirection() {
         String backgroundButtonBeforeClick = pages().accountAdditionalDetailsPage().getElementsBackground();
         pages().accountAdditionalDetailsPage().selectBirthDayData();
         String backgroundButtonAfterClick = pages().accountAdditionalDetailsPage().getElementsBackground();
@@ -113,16 +121,9 @@ public class PersonalDetailsSlideTest extends WebEndToEndTest {
     @Parameters({"countrycode"}) 
     @Test(description = "CTW-5666:Click on submit moves you to FNS first slide")
     @TestLinkProperties(displayId ="CTW-5666")
-    public void clickOnSubmitMovesYouToFNSFirstSlide(String countrycode) {
-        registerAndStart(countrycode);
+    public void clickOnSubmitMovesYouToFNSFirstSlide() {
         pages().accountAdditionalDetailsPage().update(AccountAdditionalDetails.builder().build());
         Assert.assertTrue(pages().fnsPersonalInformation().exists());
     }
     
-    private void registerAndStart(String countrycode) {
-        pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(countrycode);
-        pages().welcomepage().isStartBtnDisplayed();
-        pages().welcomepage().start();
-    }
 }

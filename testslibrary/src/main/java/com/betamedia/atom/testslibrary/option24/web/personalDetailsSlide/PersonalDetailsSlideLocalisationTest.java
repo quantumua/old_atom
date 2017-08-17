@@ -5,6 +5,8 @@ import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
@@ -16,16 +18,13 @@ import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.RTL_DIRECT
  * @since 7/13/17
  */
 
-public class PersonalDetailsSlideLocalisationTest extends WebEndToEndTest {
+public class PersonalDetailsSlideLocalisationTest extends PersonalDetailsSlideTest {
 
     @BeforeMethod
-	public void before(){
-        pages().topNavigationPage().signUp();
-        CustomerRegistrationInfo customer = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build();
-        pages().registrationDialog().fillRegisterForm(customer);
-        pages().registrationDialog().submitRegisterForm();
-        pages().welcomeDialog().start();
-	}
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        super.before(countrycode, phonecountryprefix);
+    }
 
 	/*
 	 *[testlink]  CTW-5680:Verify the slide is translated to all languages

@@ -1,33 +1,35 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="verify Personal Details Slide" verbose="1">
-    <parameter name="testlinkBuildId" value="" />
-    <parameter name="testlinkPlanId" value="" />
+    <parameter name="testlinkBuildId" value="273" />
+    <parameter name="testlinkPlanId" value="118533" />
     <test name="Personal Details Slide verifications">
         <classes>
-               <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideTest">
-                 <methods>
-                 <parameter name="countrycode" value="de"/>
-                     <include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" description="CTW-5624" />
-                     <include name="verifySubmitButtonIsMandatoryForMovingFwd" description="CTW-5625"/>
-                     <include name="verifyAll3FieldsAreMandatory" description="CTW-5630"/>
-                     <include name="verifySubmitButtonEnableWhenAllFieldsAreFilled" description="CTW-5638"/>
-                     <include name="clickOnSubmitMovesYouToFNSFirstSlide" description="CTW-5666"/>
-                     <include name="verifySelectionChangesDropDownColor" description="CTW-5660"/>
-                     <include name="verifyOpeningDropDownsChangesArrowDirection" description="CTW-5663"/>
-                     <include name="VerifyDateOofBirthDropDownFunctionality" description="CTW-5647"/>
+            <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideTest">
+                <methods>
+                    <parameter name="countrycode" value="Germany"/>
+                    <parameter name="phonecountryprefix" value="+49"/>
+                    <include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" description="CTW-5624" />
+                    <include name="verifySubmitButtonIsMandatoryForMovingFwd" description="CTW-5625"/>
+                    <include name="verifyAll3FieldsAreMandatory" description="CTW-5630"/>
+                    <include name="verifySubmitButtonEnableWhenAllFieldsAreFilled" description="CTW-5638"/>
+                    <include name="clickOnSubmitMovesYouToFNSFirstSlide" description="CTW-5666"/>
+                    <include name="verifySelectionChangesDropDownColor" description="CTW-5660"/>
+                    <include name="verifyOpeningDropDownsChangesArrowDirection" description="CTW-5663"/>
+                    <include name="VerifyDateOofBirthDropDownFunctionality" description="CTW-5647"/>
                  </methods>
               </class>
-            <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.ReflectionInCRMTest">
-                 <methods>
-                     <parameter name="countrycode" value="de"/>
-                     <include name="verifyThe3FieldsUpdateInTheCRM" description="CTW-5679"/>
-                 </methods>
-             </class>
             <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideLocalisationTest">
                 <methods>
-                    <parameter name="countrycode" value="de"/>
+                    <parameter name="countrycode" value="Germany"/>
+                    <parameter name="phonecountryprefix" value="+49"/>
                     <include name="verifyTheSlideIsTranslatedToAllLanguages" description="CTW-5680"/>
-                     <include name="verifyTheSlideTurnsRTLOnAR" description="CTW-5682"/>
+                    <include name="verifyTheSlideTurnsRTLOnAR" description="CTW-5682"/>
+                </methods>
+            </class>
+            <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.ReflectionInCRMTest">
+                <methods>
+                    <parameter name="countrycode" value="de"/>
+                    <include name="verifyThe3FieldsUpdateInTheCRM" description="CTW-5679"/>
                 </methods>
             </class>
         </classes>
