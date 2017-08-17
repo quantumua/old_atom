@@ -1,92 +1,35 @@
 package com.betamedia.atom.core.dsl.pages;
 
+import com.betamedia.atom.core.dsl.pages.extensions.WaitOperations;
+import com.betamedia.atom.core.dsl.pages.extensions.WebElementOperations;
+import com.betamedia.atom.core.dsl.pages.extensions.base.*;
 import com.betamedia.atom.core.dsl.pages.localization.LocalizationStorage;
-import com.betamedia.atom.core.dsl.pages.utils.BrowserScriptUtils;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Reporter;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Supplier;
-
-import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.elementIfVisible;
-import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.ignoringStale;
 
 /**
  * @author Maksym Tsybulskyy
  *         Date: 2/24/17.
  */
-public abstract class AbstractPageObject {
-    public static final int MAX_WAIT_SEC = 60;
+public abstract class AbstractPageObject implements Finding, Localizing, Waiting, ExecutesScripts, FrameSwitching, WithActions, Logging, WebElementOperations, WaitOperations {
+    private static final int MAX_WAIT_SEC = 60;
     private static final Logger logger = LogManager.getLogger(AbstractPageObject.class);
-    private static final String EXPECTED_LOOKUP_FAILURE_MESSAGE = "Could not find element";
 
     private WebDriver webDriver;
     private LocalizationStorage localizations;
 
     protected AbstractPageObject(WebDriver webDriver) {
         this.webDriver = webDriver;
-    }
-
-    protected String getLocalization(By key, Language language) {
-        return localizations.get(key).get(language);
-    }
-
-    /**
-     * Wait until element is displayed ({@link WebElement#isDisplayed()})
-     *
-     * @param first element locator
-     * @param rest  element locator chain
-     * @return located {@link WebElement} (never <code>null</code>)
-     */
-    protected WebElement waitUntilDisplayed(By first, By... rest) {
-        return getWait().until(driver -> ignoringStale(() -> elementIfVisible(find(first, rest))));
-    }
-
-    /**
-     * Wait until element exists on page (not necessarily visible)
-     *
-     * @param first element locator
-     * @param rest  element locator chain
-     * @return <code>true</code> when element is found
-     */
-    protected WebElement waitUntilExists(By first, By... rest) {
-        return getWait().until(driver -> ignoringStale(() -> find(first, rest)));
-    }
-
-    protected WebElement waitUntilClickable(By first, By... rest) {
-        return getWait().until(ExpectedConditions.elementToBeClickable(find(first, rest)));
-    }
-
-    /**
-     * Waits until the page is fully loaded.
-     *
-     * @see JavascriptExecutor#executeScript(String, Object...)
-     */
-    protected void waitUntilPageLoad() {
-        getWait().until(wd ->
-                ((JavascriptExecutor) wd).executeScript(BrowserScriptUtils.GET_DOCUMENT_READY_STATE).equals("complete"));
-    }
-
-    /**
-     * Wait until arbitrary condition is not null or false
-     *
-     * @param isValid condition to evaluate
-     * @return return value of condition
-     */
-    protected <T> T waitUntil(Supplier<T> isValid) {
-        return getWait().until(d -> ignoringStale(isValid));
     }
 
     /**
@@ -97,7 +40,8 @@ public abstract class AbstractPageObject {
      * @return The first matching element on the current page
      * @throws NoSuchElementException If no matching elements are found
      */
-    protected WebElement find(By first, By... rest) {
+    @Override
+    public WebElement find(By first, By... rest) {
         WebElement element = webDriver.findElement(first);
         for (By b : rest) {
             element = element.findElement(b);
@@ -111,74 +55,39 @@ public abstract class AbstractPageObject {
      * @param by element locator
      * @return list of detected elements
      */
-    protected List<WebElement> findElements(By by) {
+    @Override
+    public List<WebElement> findElements(By by) {
         return webDriver.findElements(by);
     }
 
-    /**
-     * Check if {@link WebElement} located with {@link By} chain exists on page
-     *
-     * @param first element locator chain
-     * @param rest  element locator chain
-     * @return <code>true</code> if element was found on page, <code>false</code> otherwise
-     */
-    protected boolean exists(By first, By... rest) {
-        try {
-            find(first, rest);
-            return true;
-        } catch (NoSuchElementException e) {
-            logger.debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
-            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
-            return false;
-        }
+    @Override
+    public Wait<WebDriver> getWait() {
+        return new WebDriverWait(webDriver, MAX_WAIT_SEC);
+    }
+
+    @Override
+    public String getLocalization(By key, Language language) {
+        return localizations.get(key).get(language);
     }
 
     /**
-     * A wrapper that handles {@link TimeoutException} and {@link NoSuchElementException} for {@link WebElement} retrieving methods.
+     * Executes the given script
      *
-     * @param supplier supplier of the element
-     * @return {@link Optional<WebElement>} containing element or empty if nothing was located
+     * @see JavascriptExecutor#executeScript(String, Object...)
      */
-    protected Optional<WebElement> maybe(Supplier<WebElement> supplier) {
-        try {
-            return Optional.ofNullable(supplier.get());
-        } catch (TimeoutException | NoSuchElementException e) {
-            logger.debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
-            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
-            return Optional.empty();
-        }
+    @Override
+    public void executeScript(String script, Object... arguments) {
+        ((JavascriptExecutor) webDriver).executeScript(script, arguments);
     }
 
-    /**
-     * Wait until element is displayed and perform {@link WebElement#click()} on it
-     *
-     * @param first element locator
-     * @param rest  element locator chain
-     */
-    protected void click(By first, By... rest) {
-        waitUntilDisplayed(first, rest).click();
+    @Override
+    public Logger getLogger() {
+        return logger;
     }
 
-    /**
-     * Retrieves a <code>select</code> element at the locator and wraps it in {@link Select}
-     *
-     * @param first element locator
-     * @param rest  element locator chain
-     * @return {@link Select} for the element
-     */
-
-    protected Select inSelect(By first, By... rest) {
-        return inSelect(waitUntilDisplayed(first, rest));
-    }
-
-    /**
-     * Creates {@link Select} for a given {@link WebElement}
-     *
-     * @param element source <code>WebElement</code>
-     * @return {@link Select} for the element
-     */
-    protected static Select inSelect(WebElement element) {
-        return new Select(element);
+    @Override
+    public int getTimeout() {
+        return MAX_WAIT_SEC;
     }
 
     /**
@@ -186,28 +95,9 @@ public abstract class AbstractPageObject {
      *
      * @return {@link Actions} object for active {@link WebDriver}
      */
-    protected Actions makeActions() {
+    @Override
+    public Actions makeActions() {
         return new Actions(webDriver);
-    }
-
-    /**
-     * Evaluate {@link Supplier} value for given iFrame located with a {@link By} chain
-     *
-     * @param supplier function to evaluate
-     * @param iFrames  {@link By} locator chain for an iFrame
-     * @return return value of supplier
-     * @throws NoSuchFrameException           If the given element is neither an IFRAME nor a FRAME element.
-     * @throws StaleElementReferenceException If the WebElement has gone stale.
-     */
-    protected <T> T inIFrame(Supplier<T> supplier, By... iFrames) {
-        try {
-            for (By iFrame : iFrames) {
-                switchToFrame(iFrame);
-            }
-            return supplier.get();
-        } finally {
-            leaveFrame();
-        }
     }
 
     /**
@@ -217,51 +107,17 @@ public abstract class AbstractPageObject {
      * @throws NoSuchFrameException           If the given element is neither an IFRAME nor a FRAME element.
      * @throws StaleElementReferenceException If the WebElement has gone stale.
      */
-    protected void switchToFrame(By iFrame) {
+    @Override
+    public void switchToFrame(By iFrame) {
         webDriver.switchTo().frame(waitUntilDisplayed(iFrame));
     }
 
     /**
      * Switch {@link WebDriver} context to default
      */
-    protected void leaveFrame() {
+    @Override
+    public void leaveFrame() {
         webDriver.switchTo().defaultContent();
-    }
-
-    /**
-     * Scroll web page to the element to get visibility of it
-     *
-     * @param element WebElement
-     */
-    protected WebElement scrollIntoView(WebElement element) {
-        logger.info(String.format("scrolling to element: %s", element));
-        executeScript(BrowserScriptUtils.SCROLL_INTO_VIEW, element);
-        return element;
-    }
-
-    /**
-     * Gets CSS property of {@link WebElement}
-     *
-     * @param propertyName CSS property name
-     * @param first element locator
-     * @param rest element locator chain
-     * @return found css value
-     */
-    protected String getCssValue(String propertyName, By first, By... rest) {
-        return waitUntilDisplayed(first, rest).getCssValue(propertyName);
-    }
-
-    /**
-     * Checks CSS property of {@link WebElement} to be equal to expected value
-     *
-     * @param propertyName CSS property name
-     * @param expectedValue expected property value
-     * @param first element locator
-     * @param rest element locator chain
-     * @return <code>true</code> if property value matches expected value, <code>false</code> otherwise
-     */
-    protected boolean checkCssValue(String propertyName, String expectedValue, By first, By... rest) {
-        return getCssValue(propertyName, first, rest).equals(expectedValue);
     }
 
     /**
@@ -313,15 +169,6 @@ public abstract class AbstractPageObject {
     }
 
     /**
-     * Executes the given script
-     *
-     * @see JavascriptExecutor#executeScript(String, Object...)
-     */
-    protected void executeScript(String script, Object... arguments) {
-        ((JavascriptExecutor) webDriver).executeScript(script, arguments);
-    }
-
-    /**
      * Take screen shot of page
      *
      * @return {@link File} screen shot object
@@ -329,10 +176,6 @@ public abstract class AbstractPageObject {
      */
     protected File takeScreenShot() {
         return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
-    }
-
-    protected void setDisplayBlock(By first, By... rest) {
-        executeScript(BrowserScriptUtils.SET_DISPLAY_BLOCK, waitUntilDisplayed(first, rest));
     }
 
     protected void uploadFromPath(String path, By first, By... rest) {
@@ -357,9 +200,5 @@ public abstract class AbstractPageObject {
     protected void switchToTab(int tabId) {
         List<String> availableWindows = new ArrayList<>(webDriver.getWindowHandles());
         webDriver.switchTo().window(availableWindows.get(tabId));
-    }
-
-    private Wait<WebDriver> getWait() {
-        return new WebDriverWait(webDriver, MAX_WAIT_SEC);
     }
 }

@@ -10,7 +10,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.RTL_DIRECTION;
+import static com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations.Direction.RTL;
+
 
 /**
  * Created by lartemyev on 8/14/17.
@@ -33,7 +34,7 @@ public class DocumentsUploadSlideLocalizationTest extends DocumentsUploadSlideSa
     public void arVerifyWhenChoosingARLanguageTheOrderOfTheUploadDocSlideIsChangingRTL() {
         closeWizardAndGoToUploadDocumentTab();
         pages().topNavigationPage().selectLanguage(Language.ARABIC.code);
-        pages().uploadDocumentsTab().verifyTextDirectionElements(RTL_DIRECTION);
+        pages().uploadDocumentsTab().verifyDirection(RTL);
     }
 
     /*
@@ -44,6 +45,6 @@ public class DocumentsUploadSlideLocalizationTest extends DocumentsUploadSlideSa
     public void uploadDocSlideTranslationsMakeSureThatAllLanguagesAreTranslated() {
         closeWizardAndGoToUploadDocumentTab();
         pages().topNavigationPage().selectLanguage(Language.GERMAN.code);
-        pages().uploadDocumentsTab().verifySlideLocalization(Language.GERMAN);
+        pages().uploadDocumentsTab().verifyLocalization(Language.GERMAN);
     }
     }

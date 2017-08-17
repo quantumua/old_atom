@@ -1,17 +1,17 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding;
 
-import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
+import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations;
 
 /**
  * @author Leonid Artemiev
  * @since 7/20/17
  */
-public interface UploadDocumentsTab {
+public interface UploadDocumentsTab extends LocalizationOperations {
     boolean exists();
 
     boolean creditCardImagesSentMsgExists();
 
-   boolean creditCardXImageExists();
+    boolean creditCardXImageExists();
 
     void invoke();
 
@@ -47,7 +47,4 @@ public interface UploadDocumentsTab {
 
     boolean verifyPORsectionExpanded();
 
-    void verifyTextDirectionElements(String expectedDirection);
-
-    void verifySlideLocalization(Language language);
 }

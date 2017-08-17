@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
+import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractFnsPersonalInformation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +13,7 @@ import static java.util.Objects.nonNull;
  * @author mbelyaev
  * @since 8/2/17
  */
-public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformation {
+public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformation implements ScriptOperations {
 
     public WebFnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);

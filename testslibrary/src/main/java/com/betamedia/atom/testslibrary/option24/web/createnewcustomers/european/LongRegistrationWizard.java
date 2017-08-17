@@ -9,7 +9,7 @@ import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import org.testng.annotations.Test;
 
-import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.RTL_DIRECTION;
+import static com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations.Direction.RTL;
 
 /**
  * Created by vsnigur on 7/17/17.
@@ -565,7 +565,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().loadingDialog().isDisplayed();
         pages().topNavigationPage().signUp();
         pages().registrationDialog().exists();
-        pages().registrationDialog().verifyContentAlignment(RTL_DIRECTION);
+        pages().registrationDialog().verifyContentAlignment(RTL);
     }
 
     /**

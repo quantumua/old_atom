@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
+import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractFnsEmployerInformation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +12,7 @@ import org.openqa.selenium.WebDriver;
  * @author mbelyaev
  * @since 8/2/17
  */
-public class WebFnsEmployerInformationImpl extends AbstractFnsEmployerInformation {
+public class WebFnsEmployerInformationImpl extends AbstractFnsEmployerInformation implements ScriptOperations {
     public WebFnsEmployerInformationImpl(WebDriver webDriver) {
         super(webDriver);
     }

@@ -1,18 +1,20 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
+import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractFnsTradingExperience;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import static java.util.Objects.nonNull;
 
 /**
  * @author mbelyaev
  * @since 8/2/17
  */
-public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience {
+public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience implements ScriptOperations {
     public WebFnsTradingExperienceImpl(WebDriver webDriver) {
         super(webDriver);
     }

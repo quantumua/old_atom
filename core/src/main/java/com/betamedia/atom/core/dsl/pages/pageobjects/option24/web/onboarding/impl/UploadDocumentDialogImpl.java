@@ -2,6 +2,8 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.dsl.pages.extensions.CssOperations;
+import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentDialog;
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
@@ -14,7 +16,7 @@ import java.util.UUID;
  * Created by vsnigur on 6/7/17.
  * dialog after questionnaires to upload document scan for identification person
  */
-public class UploadDocumentDialogImpl extends AbstractPageObject implements UploadDocumentDialog {
+public class UploadDocumentDialogImpl extends AbstractPageObject implements UploadDocumentDialog, CssOperations, ScriptOperations {
 
     private static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
     private static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";

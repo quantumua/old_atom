@@ -3,7 +3,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboardin
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountAdditionalDetails;
-import com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -63,19 +62,6 @@ public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalD
     @Override
     public String getBirthDateDayElementColor () {
         return getCssValue("border", birthDateDay);
-    }
-
-    @Override
-    public void verifyTextDirectionElements(String expectedDirection) {
-        PageObjectUtils.forPageElements(
-                element ->
-                        softAssert().assertEquals(
-                                getCssValue("direction", element).toLowerCase(),
-                                expectedDirection.toLowerCase(),
-                                "Text direction verification for: " + element),
-                field -> true,
-                storedId -> true,
-                this);
     }
 
     @Override

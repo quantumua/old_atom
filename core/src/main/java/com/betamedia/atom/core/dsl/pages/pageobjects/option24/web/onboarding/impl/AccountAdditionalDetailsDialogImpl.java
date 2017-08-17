@@ -3,14 +3,10 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountAdditionalDetails;
-import com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils;
-import com.betamedia.atom.core.testingtype.base.AbstractTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +16,7 @@ import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 /**
  * Created by vsnigur on 5/18/17.
  */
-public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditionalDetails {
+public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditionalDetails  {
 
     private static final Logger logger = LogManager.getLogger(AccountAdditionalDetailsDialogImpl.class);
 
@@ -70,19 +66,6 @@ public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditiona
     @Override
     public String getBirthDateDayElementColor () {
         return getCssValue("border", birthDateDay);
-    }
-
-    @Override
-    public void verifyTextDirectionElements(String expectedDirection) {
-        PageObjectUtils.forPageElements(
-                element ->
-                        softAssert().assertEquals(
-                                getCssValue("direction", element).toLowerCase(),
-                                expectedDirection.toLowerCase(),
-                                "Text direction verification for: " + element),
-                field -> true,
-                storedId -> true,
-                this);
     }
 
     @Override

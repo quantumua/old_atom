@@ -1,6 +1,7 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
+import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractFnsTradingExperience;
 import org.openqa.selenium.WebDriver;
 
@@ -10,7 +11,7 @@ import static java.util.Objects.nonNull;
  * @author mbelyaev
  * @since 8/2/17
  */
-public class WidgetFnsTradingExperienceImpl extends AbstractFnsTradingExperience {
+public class WidgetFnsTradingExperienceImpl extends AbstractFnsTradingExperience implements ScriptOperations {
     public WidgetFnsTradingExperienceImpl(WebDriver webDriver) {
         super(webDriver);
     }

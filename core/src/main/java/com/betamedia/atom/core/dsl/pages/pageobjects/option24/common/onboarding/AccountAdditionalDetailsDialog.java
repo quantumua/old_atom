@@ -1,11 +1,12 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding;
 
-import java.util.List;
-
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
+import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations;
 
-public interface AccountAdditionalDetailsDialog {
+import java.util.List;
+
+public interface AccountAdditionalDetailsDialog extends LocalizationOperations {
 
     void update(AccountAdditionalDetails info);
 
@@ -35,7 +36,6 @@ public interface AccountAdditionalDetailsDialog {
 
     String getElementsBackground();
 
-    void verifyTextDirectionElements(String textDirection);
-
     void verifySlideTranslation(AccountAdditionalDetailsData data);
+
 }

@@ -2,6 +2,8 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding;
 
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations.Direction;
+
 import java.util.List;
 
 /**
@@ -90,7 +92,7 @@ public interface RegistrationDialog {
 
     void register(String countryCode);
 
-    void verifyContentAlignment(String expectedDirection);
+    void verifyContentAlignment(Direction expectedDirection);
 
     String getLegallTermsAndConditionsLink();
 

@@ -2,9 +2,10 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
+import com.betamedia.atom.core.dsl.pages.extensions.CssOperations;
+import com.betamedia.atom.core.dsl.pages.extensions.FieldOperations;
+import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentsTab;
-import com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils;
-import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,7 @@ import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
  * @author Leonid Artemiev
  * @since 7/20/17
  */
-public class UploadDocumentsTabImpl extends AbstractPageObject implements UploadDocumentsTab {
+public class UploadDocumentsTabImpl extends AbstractPageObject implements UploadDocumentsTab, CssOperations, FieldOperations, ScriptOperations {
 
     @StoredId (localized = true)
     private By winID;
@@ -278,32 +279,6 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     private void poiClickHeader(){
         waitUntilDisplayed(poiHeader).click();
     }
-
-    @Override
-    public void verifyTextDirectionElements(String expectedDirection) {
-        PageObjectUtils.forPageElements(
-                element ->
-                        softAssert().assertEquals(
-                                getCssValue("direction", element).toLowerCase(),
-                                expectedDirection.toLowerCase(),
-                                "Text direction verification for: " + element),
-                field -> true,
-                StoredId::localized,
-                this);
-    }
-
-    @Override
-    public void verifySlideLocalization(Language language) {
-        PageObjectUtils.forPageElements(
-                element ->
-                        softAssert().assertEquals(
-                                waitUntilDisplayed(element).getText(),
-                                getLocalization(element, language),
-                                "Text localization verification for: " + element),
-                field -> true,
-                StoredId::localized,
-                this);
-        }
 
     private void poiExpandHeader(){
         if (exists(poiHeaderCollapsed)) {

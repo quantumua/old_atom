@@ -1,14 +1,15 @@
 package com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide;
 
+import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 
-import static com.betamedia.atom.core.dsl.pages.utils.PageObjectUtils.RTL_DIRECTION;
+import static com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations.Direction.RTL;
+
 
 /**
  * @author Leonid Artemiev
@@ -54,6 +55,6 @@ public class PersonalDetailsSlideLocalisationTest extends PersonalDetailsSlideFu
         pages().topNavigationPage().selectLanguage(Language.ARABIC.code);
         pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().exists();
-        pages().accountAdditionalDetails().verifyTextDirectionElements(RTL_DIRECTION);
+        pages().accountAdditionalDetails().verifyDirection(RTL);
     }
 }

@@ -2,6 +2,7 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.navigation.im
 
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.navigation.LandingPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by mbelyaev on 4/24/17.
  */
-public class LandingPageImpl extends AbstractPageObject implements LandingPage {
+public class LandingPageImpl extends AbstractPageObject implements LandingPage, ScriptOperations {
     @StoredId
     private By homepage;
     @StoredId

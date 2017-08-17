@@ -1,12 +1,8 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
-import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
-import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractCreditCardDeposit;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
 import org.apache.logging.log4j.LogManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
