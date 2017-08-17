@@ -36,6 +36,6 @@ public interface AccountAdditionalDetailsDialog extends LocalizationOperations {
 
     String getElementsBackground();
 
-    void verifySlideTranslation(AccountAdditionalDetailsData data);
+    void verifySlideTranslation(AccountAdditionalDetailsData data, String language);
 
 }

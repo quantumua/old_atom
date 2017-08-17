@@ -4,7 +4,7 @@
     <parameter name="testlinkPlanId" value="118533" />
     <parameter name="countrycode" value="Germany"/>
     <parameter name="phonecountryprefix" value="+49"/>
-    <test name="Personal Details Slide verifications">
+    <test name="Personal Details Slide Functionality Test">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideFunctionalityTest">
                 <methods>
@@ -12,10 +12,10 @@
                     <include name="verifySubmitButtonIsMandatoryForMovingFwd" description="CTW-5625"/>
                     <include name="verifyAll3FieldsAreMandatory" description="CTW-5630"/>
                     <include name="verifySubmitButtonEnableWhenAllFieldsAreFilled" description="CTW-5638"/>
-                    <include name="clickOnSubmitMovesYouToFNSFirstSlide" description="CTW-5666"/>
+                    <include name="VerifyDateOfBirthDropDownFunctionality" description="CTW-5647"/>
                     <include name="verifySelectionChangesDropDownColor" description="CTW-5660"/>
                     <include name="verifyOpeningDropDownsChangesArrowDirection" description="CTW-5663"/>
-                    <include name="VerifyDateOofBirthDropDownFunctionality" description="CTW-5647"/>
+                    <include name="clickOnSubmitMovesYouToFNSFirstSlide" description="CTW-5666"/>
                  </methods>
               </class>
         </classes>

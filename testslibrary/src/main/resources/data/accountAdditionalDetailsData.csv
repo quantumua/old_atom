@@ -1,5 +1,4 @@
 Language,progressText,chatLink,additionalDetailsTitle,birthDateTitle,birthDateDayDropdownCaption,birthDateMonthDropdownCaption,birthDateYearDropdownCaption,countryOfBirthTitle,countryOfBirthDropdownCaption,countryOfBirthDropdownDataError,nationalityTitle,nationalityDropdownCaption,nationalityDropdownDataError,submitButton
-EN,% completed,Chat Now,Personal details,Birth Date,Day,Month,Year,Country of Birth,Select A Country,Please Choose Your Country Of Birth,Nationality,Select A Country,Please Choose Your Nationality,Submit
 FR,% complété,Chat en direct,Informations personnelles,Date de naissance,jour,mois,année,Pays de naissance,Sélectionnez un pays,Veuillez sélectionner votre pays de naissance,Nationalité,Sélectionnez un pays,Veuillez sélectionner votre nationalité,Submit
 DE,% abgeschlossen,Chat Starten,Persönliche Angaben,Geburtsdatum,Tag,Monat,Jahr,Geburtsland,Wählen Sie ein Land,Bitte wählen Sie Ihr Geburtsland,Nationalität,Wählen Sie ein Land,Bitte wählen Sie Ihre Staatsangehörigkeit,Submit
 IT,% completato,Chatta Ora,Dati personali,Data di nascita,giorno,mese,anno,Paese di nascita,Scegli un Paese,Selezionare il paese di nascita,Cittadinanza,Scegli un Paese,Selezionare la nazionalità,Submit
@@ -11,3 +10,4 @@ SV,% avslutad,Chatta Nu,Personuppgifter,Födelsedatum,Dag,Månad,År,Hemland,Mar
 NE,% voltooid,Chat nu,Persoonsgegevens,Geboortedatum,Dag,Maand,Jaar,Geboorteland,Selecteer een land,Selecteer uw geboorteland,Nationaliteit,Selecteer een land,Selecteer uw nationaliteit,Submit
 NO,% ferdigstilt,Chat nå,Personlige opplysninger,Fødselsdato,Dag,Måned,År,Fødeland,Velg land,Velg fødeland,Nasjonalitet,Velg land,Velg nasjonalitet,Submit
 PO,% zakończony,Czat teraz,Dane osobowe,Data urodzenia,Dzień,Miesiąc,Rok,Kraj urodzenia,Wybierz kraj,Wybierz kraj urodzenia,Narodowość,Wybierz kraj,Wybierz narodowość,Submit
+EN,% completed,Chat Now,Personal details,Birth Date,Day,Month,Year,Country of Birth,Select A Country,Please Choose Your Country Of Birth,Nationality,Select A Country,Please Choose Your Nationality,Submit

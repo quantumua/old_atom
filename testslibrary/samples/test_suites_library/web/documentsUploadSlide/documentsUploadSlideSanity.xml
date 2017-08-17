@@ -4,7 +4,7 @@
     <parameter name="testlinkPlanId" value="118533" />
     <parameter name="countrycode" value="Germany"/>
     <parameter name="phonecountryprefix" value="+49"/>
-    <test name="Documents Upload Slide verifications">
+    <test name="Documents Upload Slide Sanity Test">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideSanityTest">
                 <methods>

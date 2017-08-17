@@ -46,11 +46,11 @@ public class AccountAdditionalDetails {
         	return birthDateMonth + "/" + birthDateDay + "/" + birthDateYear;
         }
         
-        public String getDegaultNationality () {
+        public String getDefaultNationality() {
         	return nationality;
         }
 
-        public String getDegaultCountryOfBirth () {
+        public String getDefaultCountryOfBirth() {
         	return countryOfBirth;
         }
         

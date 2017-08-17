@@ -65,7 +65,7 @@ public class AccountAdditionalDetailsPageImpl extends AbstractAccountAdditionalD
     }
 
     @Override
-    public void verifySlideTranslation(AccountAdditionalDetailsData data) {
+    public void verifySlideTranslation(AccountAdditionalDetailsData data, String language) {
         softAssert().assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText());
         softAssert().assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink());
         softAssert().assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle());

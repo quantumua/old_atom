@@ -36,15 +36,18 @@ public class PersonalDetailsSlideReflectionInCRMTest extends AbstractOnboardingU
 		final ContactBase contactBaseBefore = operations().customerOperations().getContactBase(customerID);
 		final ContactExtension contactExtensionBefore = operations().customerOperations().getContactExtension(customerID);
     	
-    	Assert.assertNotEquals("Account birth date must be different from default",			
-    					AccountAdditionalDetails.builder().getDefaultBirthDate(),
-				contactBaseBefore.getBirthDate());
-    	Assert.assertNotEquals("Account nationality must be different from default",		
-    					AccountAdditionalDetails.builder().getDegaultNationality(), 
-    					contactExtensionBefore.getNationality());
-    	Assert.assertNotEquals("Account country of birth must be different from default",
-    					AccountAdditionalDetails.builder().getDegaultCountryOfBirth(),
-				contactExtensionBefore.getCountryOfBirth());
+    	softAssert().assertNotEquals(
+    	        AccountAdditionalDetails.builder().getDefaultBirthDate(),
+				contactBaseBefore.getBirthDate(),
+                "Account birth date must be different from default");
+        softAssert().assertNotEquals(
+                AccountAdditionalDetails.builder().getDefaultNationality(),
+    			contactExtensionBefore.getNationality(),
+                "Account nationality must be different from default");
+    	softAssert().assertNotEquals(
+    	        AccountAdditionalDetails.builder().getDefaultCountryOfBirth(),
+				contactExtensionBefore.getCountryOfBirth(),
+                "Account country of birth must be different from default");
     	
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         pages().fnsPersonalInformation().exists();
@@ -52,8 +55,8 @@ public class PersonalDetailsSlideReflectionInCRMTest extends AbstractOnboardingU
 		final ContactBase contactBaseAfter = operations().customerOperations().getContactBase(customerID);
 		final ContactExtension contactExtensionAfter = operations().customerOperations().getContactExtension(customerID);
 
-    	Assert.assertNotEquals(contactBaseBefore.getBirthDate(), contactBaseAfter.getBirthDate());
-    	Assert.assertNotEquals(contactExtensionBefore.getNationality(), contactExtensionAfter.getNationality());
-    	Assert.assertNotEquals(contactExtensionBefore.getCountryOfBirth(), contactExtensionAfter.getCountryOfBirth());
+    	softAssert().assertNotEquals(contactBaseBefore.getBirthDate(), contactBaseAfter.getBirthDate(), "Account birth date must be different after Account Additional Details is set");
+        softAssert().assertNotEquals(contactExtensionBefore.getNationality(), contactExtensionAfter.getNationality(), "Account nationality must be different after Account Additional Details is set");
+        softAssert().assertNotEquals(contactExtensionBefore.getCountryOfBirth(), contactExtensionAfter.getCountryOfBirth(), "Account country of birth must be different after Account Additional Details is set");
     }
 }

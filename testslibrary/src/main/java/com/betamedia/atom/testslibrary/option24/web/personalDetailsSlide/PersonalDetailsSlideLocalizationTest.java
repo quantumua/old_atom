@@ -1,6 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
+import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.annotations.BeforeMethod;
@@ -16,24 +17,23 @@ import static com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperation
  * @since 7/13/17
  */
 
-public class PersonalDetailsSlideLocalisationTest extends PersonalDetailsSlideFunctionalityTest {
+public class PersonalDetailsSlideLocalizationTest extends PersonalDetailsSlideFunctionalityTest {
+
 
     @BeforeMethod
-    @Parameters({"countrycode", "phonecountryprefix"})
-    public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        super.before(countrycode, phonecountryprefix);
+    public void before() {
+        // empty
     }
-
 	/*
 	 *[testlink]  CTW-5680:Verify the slide is translated to all languages
 	 */
     @Test(dataProvider = GENERIC_DATA_PROVIDER)
     @TestLinkProperties(displayId ="CTW-5680")
 	  public void  verifyTheSlideIsTranslatedToAllLanguages(AccountAdditionalDetailsData data) {
-    	pages().topNavigationPage().selectLanguage(data.getLanguage());
-        pages().welcomeBackMessage().continueQuestionnaire();
+        pages().topNavigationPage().selectLanguage(data.getLanguage());
+        registedAndStart(Country.GERMANY.getName(), Country.GERMANY.getPhonePrefix());
         pages().accountAdditionalDetails().exists();
-        pages().accountAdditionalDetails().verifySlideTranslation(data);
+        pages().accountAdditionalDetails().verifySlideTranslation(data, data.getLanguage());
     }
     
     @Override
@@ -53,7 +53,7 @@ public class PersonalDetailsSlideLocalisationTest extends PersonalDetailsSlideFu
     @TestLinkProperties(displayId ="CTW-5682")
     public void  verifyTheSlideTurnsRTLOnAR() {
         pages().topNavigationPage().selectLanguage(Language.ARABIC.code);
-        pages().welcomeBackMessage().continueQuestionnaire();
+        registedAndStart(Country.GERMANY.getName(), Country.GERMANY.getPhonePrefix());
         pages().accountAdditionalDetails().exists();
         pages().accountAdditionalDetails().verifyDirection(RTL);
     }

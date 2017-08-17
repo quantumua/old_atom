@@ -3,7 +3,7 @@
     <parameter name="testlinkBuildId" value="273" />
     <parameter name="testlinkPlanId" value="118533" />
     <parameter name="countrycode" value="de"/>
-    <test name="Personal Details Slide verifications">
+    <test name="Personal Details Slide Reflection in CRM Test">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideReflectionInCRMTest">
                 <methods>

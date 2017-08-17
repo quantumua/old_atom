@@ -69,21 +69,21 @@ public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditiona
     }
 
     @Override
-    public void verifySlideTranslation(AccountAdditionalDetailsData data) {
-        softAssert().assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText());
-        softAssert().assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink());
-        softAssert().assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle());
-        softAssert().assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle());
-        softAssert().assertEquals(waitUntilDisplayed(birthDateDayDropdownCaption).getText(), data.getBirthDateDayDropdownCaption());
-        softAssert().assertEquals(waitUntilDisplayed(birthDateMonthDropdownCaption).getText(), data.getBirthDateMonthDropdownCaption());
-        softAssert().assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption());
-        softAssert().assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle());
-        softAssert().assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption());
-	    // Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownDataError).getAttribute("data-error"), data.getCountryOfBirthDropdownDataError());
-        softAssert().assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle());
-        softAssert().assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption());
-	    // Assert.assertEquals(waitUntilDisplayed(nationalityDropdownDataError).getAttribute("data-error"), data.getNationalityDropdownDataError());
-        softAssert().assertEquals(waitUntilDisplayed(submit).getAttribute("value"), data.getSubmitButton());
+    public void verifySlideTranslation(AccountAdditionalDetailsData data, String language) {
+        softAssert().assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText(), "wizardProgressText is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink(), "chatNow is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle(), "additionalDetailsTitle is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle(), "birthDateTitle is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(birthDateDayDropdownCaption).getText(), data.getBirthDateDayDropdownCaption(), "birthDateDayDropdownCaption is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(birthDateMonthDropdownCaption).getText(), data.getBirthDateMonthDropdownCaption(), "birthDateMonthDropdownCaption is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption(), "birthDateYearDropdownCaption is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle(), "countryOfBirthTitle is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption(), "countryOfBirthDropdownCaption is translated to " + language);
+	    // Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownDataError).getAttribute("data-error"), data.getCountryOfBirthDropdownDataError(), "is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle(), "nationalityTitle is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption(), "nationalityDropdownCaption is translated to " + language);
+	    // Assert.assertEquals(waitUntilDisplayed(nationalityDropdownDataError).getAttribute("data-error"), data.getNationalityDropdownDataError(), "is translated to " + language);
+        softAssert().assertEquals(waitUntilDisplayed(submit).getAttribute("value"), data.getSubmitButton(), "submit is translated to " + language);
    }
 
     @Override
