@@ -57,6 +57,6 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
 
     private void submitOnWizard(String dataValue) {
         logger.info(String.format("filling Fns PersonalInformation wizard value: %s",dataValue));
-        waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']")).click();
+        scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']"))).click();
     }
 }
