@@ -18,7 +18,7 @@ import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUs
  * @since 07/12/2017
  */
 
-public class ReflectionInCRMTest extends AbstractOnboardingUserExperienceTest {
+public class PersonalDetailsSlideReflectionInCRMTest extends AbstractOnboardingUserExperienceTest {
 	
     /*
      * Reflection in CRM verification

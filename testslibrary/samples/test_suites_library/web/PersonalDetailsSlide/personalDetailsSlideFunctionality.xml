@@ -2,12 +2,12 @@
 <suite name="verify Personal Details Slide" verbose="1">
     <parameter name="testlinkBuildId" value="273" />
     <parameter name="testlinkPlanId" value="118533" />
+    <parameter name="countrycode" value="Germany"/>
+    <parameter name="phonecountryprefix" value="+49"/>
     <test name="Personal Details Slide verifications">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideTest">
+            <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideFunctionalityTest">
                 <methods>
-                    <parameter name="countrycode" value="Germany"/>
-                    <parameter name="phonecountryprefix" value="+49"/>
                     <include name="verifySlideAppearAfterRegistrationAndWelcomeSlide" description="CTW-5624" />
                     <include name="verifySubmitButtonIsMandatoryForMovingFwd" description="CTW-5625"/>
                     <include name="verifyAll3FieldsAreMandatory" description="CTW-5630"/>
@@ -18,20 +18,6 @@
                     <include name="VerifyDateOofBirthDropDownFunctionality" description="CTW-5647"/>
                  </methods>
               </class>
-            <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideLocalisationTest">
-                <methods>
-                    <parameter name="countrycode" value="Germany"/>
-                    <parameter name="phonecountryprefix" value="+49"/>
-                    <include name="verifyTheSlideIsTranslatedToAllLanguages" description="CTW-5680"/>
-                    <include name="verifyTheSlideTurnsRTLOnAR" description="CTW-5682"/>
-                </methods>
-            </class>
-            <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.ReflectionInCRMTest">
-                <methods>
-                    <parameter name="countrycode" value="de"/>
-                    <include name="verifyThe3FieldsUpdateInTheCRM" description="CTW-5679"/>
-                </methods>
-            </class>
         </classes>
     </test>
 </suite>

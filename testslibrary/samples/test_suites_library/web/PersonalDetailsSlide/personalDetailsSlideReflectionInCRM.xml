@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="verify Personal Details Slide" verbose="1">
+    <parameter name="testlinkBuildId" value="273" />
+    <parameter name="testlinkPlanId" value="118533" />
+    <parameter name="countrycode" value="de"/>
+    <test name="Personal Details Slide verifications">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide.PersonalDetailsSlideReflectionInCRMTest">
+                <methods>
+                    <include name="verifyThe3FieldsUpdateInTheCRM" description="CTW-5679"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

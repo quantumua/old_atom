@@ -15,7 +15,7 @@ import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
  * @author Leonid Artemiev
  */
 
-public class PersonalDetailsSlideTest extends WebEndToEndTest {
+public class PersonalDetailsSlideFunctionalityTest extends WebEndToEndTest {
 
     @BeforeMethod
     @Parameters({"countrycode", "phonecountryprefix"})
