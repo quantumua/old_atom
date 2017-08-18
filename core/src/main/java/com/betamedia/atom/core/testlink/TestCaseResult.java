@@ -11,21 +11,22 @@ public class TestCaseResult {
 
     private final int buildId;
     private final int planId;
-    private final String parameters;
-    private final ExecutionStatus status;
     private final String displayId;
+    private final String configuration;
+    private final String parameters;
     private final String log;
+    private final ExecutionStatus status;
     private final String stacktrace;
 
-    public TestCaseResult(int buildId, int planId, String displayId, String parameters, String log, String stacktrace,
-                          ExecutionStatus status) {
+    public TestCaseResult(int buildId, int planId, String displayId, String configuration, String parameters, String log, ExecutionStatus status, String stacktrace) {
         this.buildId = buildId;
         this.planId = planId;
+        this.displayId = displayId;
+        this.configuration = configuration;
         this.parameters = parameters;
         this.log = log;
         this.status = status;
         this.stacktrace = stacktrace;
-        this.displayId = displayId;
     }
 
     public int getBuildId() {
@@ -37,7 +38,7 @@ public class TestCaseResult {
     }
 
     public String getNotes() {
-        return MessageFormat.format("Parameters: {0}\nLog:\n{1}\nStacktrace:\n{2}", parameters, log, stacktrace);
+        return MessageFormat.format("Configuration:\n{0}\nParameters:\n{1}\nLog:\n{2}\nStacktrace:\n{3}", configuration, parameters, log, stacktrace);
     }
 
     public ExecutionStatus getStatus() {
@@ -53,10 +54,12 @@ public class TestCaseResult {
         return "TestCaseResult{" +
                 "buildId=" + buildId +
                 ", planId=" + planId +
-                ", parameters='" + parameters + '\'' +
-                ", status=" + status +
                 ", displayId='" + displayId + '\'' +
+                ", configuration='" + configuration + '\'' +
+                ", parameters='" + parameters + '\'' +
                 ", log='" + log + '\'' +
+                ", status=" + status +
+                ", stacktrace='" + stacktrace + '\'' +
                 '}';
     }
 }

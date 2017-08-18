@@ -16,7 +16,10 @@ import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
 import java.util.Objects;
+import java.util.Properties;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import static com.betamedia.atom.core.fwtestrunner.listeners.testng.impl.TestLinkListener.CONFIGURATION_KEY;
 
 /**
  * @author Maksym Tsybulskyy
@@ -34,9 +37,13 @@ public class ContextInitializingListener implements ITestListener {
         ITestNGMethod[] methods = context.getAllTestMethods();
         if (methods.length == 0) return;
         initializeAppContext();
-        initializeTestEnvironment((TestConfigurationProperties) methods[0]
+        TestConfigurationProperties testProperties = (TestConfigurationProperties) methods[0]
                 .getRealClass()
-                .getAnnotation(TestConfigurationProperties.class));
+                .getAnnotation(TestConfigurationProperties.class);
+        Properties combinedProperties = getPropertiesParser(testProperties).parse(testProperties);
+        combinedProperties.setProperty("product.type", testProperties.productType().toString());
+        context.setAttribute(CONFIGURATION_KEY, combinedProperties);
+        getInitializer(testProperties).initializeEnvironment(combinedProperties);
     }
 
     private void initializeAppContext() {
@@ -57,14 +64,16 @@ public class ContextInitializingListener implements ITestListener {
         }
     }
 
-    private static void initializeTestEnvironment(TestConfigurationProperties configuration) {
-        TestConfigurationPropertiesParser propertiesParser = AppContextHolder.getBean(TestConfigurationPropertiesParserProvider.class).get(configuration.productType());
-        TestRunningEnvInitializer envInitializer = AppContextHolder.getBean(TestRunningEnvInitializerProvider.class).get(configuration.productType());
-        envInitializer.initializeEnvironment(propertiesParser.parse(configuration));
-    }
-
     private static boolean isContextPresent() {
         return Objects.nonNull(AppContextHolder.getContext());
+    }
+
+    private static TestConfigurationPropertiesParser getPropertiesParser(TestConfigurationProperties testProperties) {
+        return AppContextHolder.getBean(TestConfigurationPropertiesParserProvider.class).get(testProperties.productType());
+    }
+
+    private static TestRunningEnvInitializer getInitializer(TestConfigurationProperties testProperties) {
+        return AppContextHolder.getBean(TestRunningEnvInitializerProvider.class).get(testProperties.productType());
     }
 
     @Override

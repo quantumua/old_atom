@@ -30,6 +30,7 @@ import static java.util.Optional.ofNullable;
  */
 public class TestLinkListener implements ITestListener {
 
+    public static final String CONFIGURATION_KEY = "configuration";
     private static final String TESTLINK_BUILD_ID = "testlinkBuildId";
     private static final String TESTLINK_PLAN_ID = "testlinkPlanId";
     private static final String DISPLAY_ID = "displayId";
@@ -78,10 +79,12 @@ public class TestLinkListener implements ITestListener {
                                         bid,
                                         pid,
                                         did,
+                                        testResult.getTestContext().getAttribute(CONFIGURATION_KEY).toString(),
                                         formatTestParameters(testResult.getParameters()),
                                         String.join(System.lineSeparator(), Reporter.getOutput(testResult)),
-                                        ofNullable(testResult.getThrowable()).map(Throwables::getStackTraceAsString).orElse(""),
-                                        status)
+                                        status,
+                                        ofNullable(testResult.getThrowable()).map(Throwables::getStackTraceAsString).orElse("")
+                                )
                         )
                 )
         );
