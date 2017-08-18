@@ -1,7 +1,5 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding;
 
-import org.testng.annotations.Optional;
-
 /**
  * Created by vsnigur on 6/7/17.
  */
