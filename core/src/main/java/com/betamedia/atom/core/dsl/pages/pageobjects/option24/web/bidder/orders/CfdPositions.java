@@ -5,4 +5,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders
  */
 public interface CfdPositions {
     void validateLatestPosition(String expectedName);
+
+    boolean isAnyPositionOpened();
 }

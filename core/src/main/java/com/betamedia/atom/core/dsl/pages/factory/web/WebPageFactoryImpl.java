@@ -212,6 +212,9 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     }
 
     @Override
+    public InsufficientFundsDialog insufficientFundsDialog() {return  creator.getPage(InsufficientFundsDialogImpl.class);}
+
+    @Override
     public SignatureRiskWarning signatureRiskWarning() {
         return creator.getPage(SignatureRiskWarningImpl.class);
     }

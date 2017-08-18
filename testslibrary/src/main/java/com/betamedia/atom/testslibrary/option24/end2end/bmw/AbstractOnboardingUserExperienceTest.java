@@ -1,11 +1,16 @@
 package com.betamedia.atom.testslibrary.option24.end2end.bmw;
 
-import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
-import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
+import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions.ExperienceLevel;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.CRMMobileAPINamingStrategy;
+import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
+import com.betamedia.atom.core.api.web.form.Currency;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import org.testng.annotations.Optional;
+
+import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
  * @author  leonid.a
@@ -50,6 +55,76 @@ public class AbstractOnboardingUserExperienceTest extends AbstractOnboardingCond
         pages().loginDialog().login(crmCustomer.getUserName(), CustomerRO.CustomerROBuilder.DEFAULT_PASSWORD);
         return crmCustomer;
     }
+
+    /**
+     * Create user via WEB UI using specific parameters
+     *
+     * @param countrycode - country code
+     * @param phonecountryprefix - phone country prefix to use
+     * @param depositAmount - deposit amount to set in credit card deposit slide
+     */
+    public void createUserByUI(String countrycode, String phonecountryprefix, @Optional String depositAmount){
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().register(CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
+                .withPhoneCountryPrefix(phonecountryprefix)
+                .withCurrency(Currency.USD.getFullName())
+                .build());
+        pages().welcomeDialog().isStartBtnDisplayed();
+        pages().welcomeDialog().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        PersonalInformation personalInfo = getPersonalInformation();
+        pages().fnsPersonalInformation().submit(personalInfo);
+        pages().fnsTradingExperience().submit(getTradingExperienceInfo());
+        pages().creditCardDeposit().submit((CreditCardDeposit.builder()
+                .withDepositAmount(depositAmount)
+                .build()));
+        pages().thankYouPage().doContinue();
+        pages().fnsEmployerInfo().submit(personalInfo);
+    }
+
+    private PersonalInformation getPersonalInformation() {
+        return PersonalInformation.builder()
+                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(Industry.FINANCE)
+                .withEmployerName("fgsfds")
+                .withTaxResidenceCountry("DE")
+                .withUSReportabilityStatus(IsUSReportable.NO)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
+                .withTaxIdentificationNumber("123456789")
+                .withEducationLevel(EducationLevel.POST_GRADUATE)
+                .withEducationField(EducationField.ACCOUNTING)
+                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
+                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
+                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
+                .build();
+    }
+
+    private TradingExperienceInfo getTradingExperienceInfo(){
+        return TradingExperienceInfo.builder()
+                .withSharesExperience(SharesExperience.NEVER)
+                .withBinaryExperience(BinaryExperience.OCCASIONALLY)
+                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K)
+                .withForExExperience(ForExExperience.NEVER)
+                .withFinancialWorkExperience(FinancialWorkExperience.WORKED)
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE)
+                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
+                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK)
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES)
+                .withStopLossKnowledge(StopLossKnowledge.MINIMIZE)
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K)
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL)
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800)
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A1_1800)
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75)
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
+                .build();
+    }
+
     /**
      * Build onboarding wizard condition
      * @param experienceLevel - experience level to set into builder

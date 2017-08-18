@@ -49,7 +49,7 @@ public class SetLeverageDialogImpl extends AbstractPageObject implements SetLeve
     public void selectLeverage(String leveregeValue) {
         if (leveregeValue.isEmpty()) {
             leveregeValue = "100"; }
-        find(By.xpath("//*[@id='scipioPopupHandler']//span/ul/li[@data-value='" + leveregeValue + "']")).click();
+        waitUntilDisplayed(By.xpath("//*[@id='scipioPopupHandler']//span/ul/li[@data-value='" + leveregeValue + "']")).click();
 
     }
 
@@ -70,7 +70,7 @@ public class SetLeverageDialogImpl extends AbstractPageObject implements SetLeve
 
     @Override
     public List<String> getLeveragesList() {
-        List<String> leverageOptions = new ArrayList<String>();
+        List<String> leverageOptions = new ArrayList<>();
         for(WebElement webElement:findElements(leveragesList)) {
             leverageOptions.add(webElement.getText());
         }
@@ -79,7 +79,7 @@ public class SetLeverageDialogImpl extends AbstractPageObject implements SetLeve
 
     @Override
     public List<String> getLeveragesPickOptions() {
-        List<String> leverageOptions = new ArrayList<String>();
+        List<String> leverageOptions = new ArrayList<>();
         waitUntilDisplayed(leveragesPickOption);
         for(WebElement webElement:findElements(leveragesPickOption)) {
             leverageOptions.add(webElement.getText());

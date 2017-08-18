@@ -23,6 +23,8 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
 
     @StoredId (localized = true)
     private By winID;
+    @StoredId
+    private By verificationHeader;
 
     /*POI (Proof of identity) Controls*/
     @StoredId (localized = true)
@@ -285,12 +287,11 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
             poiClickHeader();
         }
         scrollIntoView(waitUntilExists(poiUploadInput));
-        scrollIntoView(find(poiHeader));
+        scrollIntoView(find(verificationHeader));
     }
 
     private void poiCollapseHeader(){
-        waitUntilDisplayed(poiHeaderExpanded);
-        if (exists(poiHeaderExpanded)) {
+        if (find(poiHeaderExpanded).isEnabled()) {
             poiClickHeader();
         }
     }
@@ -301,7 +302,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
             porClickHeader();
         }
         scrollIntoView(waitUntilExists(porUploadInput));
-        scrollIntoView(find(porHeader));
+        scrollIntoView(find(verificationHeader));
     }
 
     private static String storeToTemp(String resource) {

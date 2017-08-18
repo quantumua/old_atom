@@ -78,6 +78,8 @@ public interface WebPageFactory {
 
     LeveragePopup leveragePopup();
 
+    InsufficientFundsDialog insufficientFundsDialog();
+
     SetLeverageDialog setLeverageDialog();
 
     StartTradeDialog startTradeDialog();

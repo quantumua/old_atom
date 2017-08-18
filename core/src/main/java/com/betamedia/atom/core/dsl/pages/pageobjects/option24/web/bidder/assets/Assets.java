@@ -39,4 +39,6 @@ public interface Assets {
      * Switches context to Panda CFD iFrame
      */
     void switchToPanda();
+
+    void leavePandaFrame();
 }

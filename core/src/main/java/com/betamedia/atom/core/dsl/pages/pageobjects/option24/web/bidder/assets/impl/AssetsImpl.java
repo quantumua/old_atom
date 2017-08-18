@@ -4,6 +4,7 @@ import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.extensions.FrameOperations;
 import com.betamedia.atom.core.dsl.pages.extensions.StaleElementOperations;
+import com.betamedia.atom.core.dsl.pages.extensions.base.FrameSwitching;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.assets.Assets;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -124,6 +125,11 @@ public class AssetsImpl extends AbstractPageObject implements Assets, StaleEleme
     @Override
     public void switchToPanda() {
         switchToFrame(pandaIframe);
+    }
+
+    @Override
+    public void leavePandaFrame() {
+        leaveFrame();
     }
 
     private void validateFoundAsset(WebElement assetElement, String listName, String symbol, String tooltipName, String expectedCurrency) {

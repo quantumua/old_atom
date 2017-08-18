@@ -138,6 +138,8 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,DialogBoxImpl,bmDialogText,CSS,.bmMessage.bmOn
 2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerCheckbox,ID,checkboxDisclaimer
 2.6.2,2017-05-29 15:24 +0000,DisclaimerNotificationImpl,disclaimerSubmitBtn,ID,disclaimer_submit
+2.6.2,2017-05-29 15:24 +0000,InsufficientFundsDialogImpl,insufficientFundsDialog,ID,insufficientFunds
+2.6.2,2017-05-29 15:24 +0000,InsufficientFundsDialogImpl,closeButton,ID,.//*[@id='wrapper']//*[@class="cmicon-close2 custom-close"]
 2.6.2,2017-05-29 15:24 +0000,LandingPageImpl,homepage,CLASS_NAME,homepage-balanced-template
 2.6.2,2017-05-29 15:24 +0000,LandingPageImpl,legalTermsOfUse,XPATH,//*[@class='list-unstyled linkMenu second']/li[2]/a
 2.6.2,2017-05-29 15:24 +0000,LeveragePopupImpl,leverageDropdown,XPATH,//*[@id='scipioPopupHandler']/div/div[3]/span/div/button/span[1]
@@ -316,6 +318,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogCloseButton,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documentTypeButton,TAG_NAME,button
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,XPATH,".//ul[contains(@id,'menu-my-account')]//li[2]/a"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,verificationHeader,ID,Upload-Document-SEU
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,XPATH,.//*[@id='acc']//div[@data-target='#poi']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeaderCollapsed,XPATH,.//*[@id='acc']//div[@data-target='#poi' and @aria-expanded='false']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeaderExpanded,XPATH,.//*[@id='acc']//div[@data-target='#poi' and @aria-expanded='true']
