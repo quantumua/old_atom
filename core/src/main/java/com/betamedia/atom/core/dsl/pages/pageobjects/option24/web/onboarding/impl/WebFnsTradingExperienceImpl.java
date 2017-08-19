@@ -45,6 +45,6 @@ public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience im
 
     private void submitOnWizard(String dataValue) {
         logger.info(String.format("filling Fns Trading Experience wizard value: %s",dataValue));
-        scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']"))).click();
+        waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']")).click();
     }
 }

@@ -144,20 +144,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @Override
     public void uploadIdCard(String frontImagePath, String backImagePath) {
         poiClickHeader();
-//        request removing !important from display:none on document type <select> styling to make selection easier
-//        setDisplayBlock(poiDocumentTypeSelector);
-//        inSelect(poiDocumentTypeSelector).selectByVisibleText("Identity Card");
-        /*click on button and then on option for ID card*/
         selectPOIDocumentType(poiIDSelection);
-        /*make input element visible*/
         setDisplayBlock(poiUploadInput);
-        /*upload file*/
         uploadFromPath(storeToTemp(frontImagePath), poiUploadInput);
-        /*wait until upload is over and back image is available*/
         waitUntilExists(poiBackImage).isDisplayed();
-        /*clear input form*/
-        find(poiUploadInput).clear();
-        /*upload file*/
+        clearElementText(poiUploadInput);
         uploadFromPath(storeToTemp(backImagePath), poiUploadInput);
     }
 
@@ -184,11 +175,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         setDisplayBlock(poiUploadInput);
         uploadFromPath(storeToTemp(frontImagePath), poiUploadInput);
         waitUntilExists(poiBackImage).isDisplayed();
-        try {
-            find(poiUploadInput).clear();
-        } catch (Exception e) {
-            getLogger().info("Unable to clear text in element: " + poiUploadInput);
-        }
+        clearElementText(poiUploadInput);
         uploadFromPath(storeToTemp(backImagePath), poiUploadInput);
     }
 

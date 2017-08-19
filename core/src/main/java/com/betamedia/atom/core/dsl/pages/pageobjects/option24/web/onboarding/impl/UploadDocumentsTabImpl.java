@@ -158,7 +158,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         uploadFromPath(storeToTemp(frontImagePath), creditCardUploadInput);
         selectDocumentType(creditCardWrapper, creditCardSelection, true, creditCardFrontImage);
         waitUntilExists(creditCardBackImage).isDisplayed();
-        find(creditCardUploadInput).clear();
+        clearElementText(creditCardUploadInput);
         uploadFromPath(storeToTemp(backImagePath), creditCardUploadInput);
     }
 
@@ -218,9 +218,9 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         /*wait until upload is over and back image is available*/
         waitUntilDisplayed(poiImageApproved);
         selectDocumentType(poiWrapper, documentBackSelection, true, poiBackImage);
-        find(poiUploadInput).clear();
+        clearElementText(poiUploadInput);
         uploadFromPath(storeToTemp(imageBackPath), poiUploadInput);
-        find(poiUploadInput).clear();
+        clearElementText(poiUploadInput);
     }
 
     private void porUploadDocument(String imagePath, By documentType) {

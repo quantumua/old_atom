@@ -182,6 +182,19 @@ public abstract class AbstractPageObject implements Finding, Localizing, Waiting
         waitUntilDisplayed(first, rest).sendKeys(path);
     }
 
+
+    /**
+     * This is special method to clear text for editable fields like "Upload Input"
+     * It sometimes doesn't allow to clear as not editable, so we need to catch exception
+     */
+    protected void clearElementText(By element) {
+        try {
+            find(element).clear();
+        } catch (Exception e) {
+            getLogger().info("Unable to clear text in element: " + element);
+        }
+    }
+
     protected String getUrlAddress() {
         return webDriver.getCurrentUrl();
     }
