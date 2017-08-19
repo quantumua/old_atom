@@ -269,7 +269,8 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
 
     @Override
     public void setPasswordFields(String password, String confirmPassword) {
-        makeActions().sendKeys(find(passwordWrapper),Keys.ENTER).sendKeys(password).build().perform();
+        // makeActions().sendKeys(find(passwordWrapper),Keys.ENTER).sendKeys(password).build().perform();
+        makeActions().sendKeys(find(passwordWrapper), password).build().perform();
         find(retypePassword).clear();
         find(retypePassword).sendKeys(confirmPassword);
         Reporter.log("Update password fields.<br/>");

@@ -32,7 +32,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @BeforeMethod
     @Parameters({"countrycode", "phonecountryprefix"})
     public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        createUserByUI(countrycode,phonecountryprefix,null);
+        createUserByUI(countrycode,phonecountryprefix,"50");
     }
 
     /*
@@ -151,8 +151,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     }
 
     public void closeWizardAndGoToMyAccount() {
-        pages().uploadDocumentDialog().close();
-        pages().confirmCloseMessage().acceptClose();
+        closeWizardAndGoTrade();
         pages().topNavigationPage().goToMyAccount();
     }
 

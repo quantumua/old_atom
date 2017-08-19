@@ -282,6 +282,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiWrapper,ID,doc-upload-form-poi-wrapper
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadInput,ID,fileUploadDocsPOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,velocityAnimatingImage,XPATH,".//div[contains(@class,'velocity-animating')]"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiFrontImage,CLASS_NAME,poi-front-image
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiBackImage,XPATH,.//*[@class='document-box poi-back-image']
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiIDSelection,CSS,li[data-original-index='3']

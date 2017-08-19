@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="verify Personal Details Slide" verbose="1">
-    <parameter name="testlinkBuildId" value="273" />
+    <parameter name="testlinkBuildId" value="274" />
     <parameter name="testlinkPlanId" value="118533" />
     <parameter name="countrycode" value="Germany"/>
     <parameter name="phonecountryprefix" value="+49"/>

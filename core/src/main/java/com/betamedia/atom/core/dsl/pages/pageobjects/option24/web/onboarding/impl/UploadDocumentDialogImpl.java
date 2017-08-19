@@ -48,6 +48,8 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @StoredId
     private By poiDriverLicenseSelection;
     @StoredId
+    private By velocityAnimatingImage;
+    @StoredId
     private By poiFrontImage;
     @StoredId
     private By poiBackImage;
@@ -182,7 +184,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         setDisplayBlock(poiUploadInput);
         uploadFromPath(storeToTemp(frontImagePath), poiUploadInput);
         waitUntilExists(poiBackImage).isDisplayed();
-        find(poiUploadInput).clear();
+        try {
+            find(poiUploadInput).clear();
+        } catch (Exception e) {
+            getLogger().info("Unable to clear text in element: " + poiUploadInput);
+        }
         uploadFromPath(storeToTemp(backImagePath), poiUploadInput);
     }
 
@@ -190,6 +196,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     public void porUploadElectricityBill(String imagePath) {
         porClickHeader();
         //Electricity bill selected by default
+        waitUntilDisplayed(porWrapper);
         /*make input element visible*/
         setDisplayBlock(porUploadInput);
         /*upload file*/
@@ -219,9 +226,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         waitUntilDisplayed(poiWrapper, locator).click();
         if (waitForTransformation) {
             /*wait until animation starts*/
-            waitUntil(() -> !checkCssValue("transform", "none", poiFrontImage));
+            // waitUntil(() -> !checkCssValue("transform", "none", poiFrontImage));
+            waitUntil(() -> exists(velocityAnimatingImage));
             /*wait until animation ends*/
-            waitUntil(() -> checkCssValue("transform", "none", poiFrontImage));
+            // waitUntil(() -> checkCssValue("transform", "none", poiFrontImage));
+            waitUntil(() -> !exists(velocityAnimatingImage));
         }
     }
 }
