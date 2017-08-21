@@ -9,6 +9,8 @@ import java.util.List;
 public interface TopNavigationPage {
     void logIn();
 
+    void deposit();
+
     void cfd();
 
     boolean isLoggedIn();
@@ -16,6 +18,8 @@ public interface TopNavigationPage {
     boolean isLoggedOut();
     
     void signUp();
+
+    void trade();
 
     void goToHomePage();
     

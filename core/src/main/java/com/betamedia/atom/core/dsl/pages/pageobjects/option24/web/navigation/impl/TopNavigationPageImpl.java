@@ -26,6 +26,8 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     @StoredId
     private By cfdBtn;
     @StoredId
+    private By tradeBtn;
+    @StoredId
     private By signUpBtn;
     @StoredId
     private By homePageLink;
@@ -39,6 +41,9 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     private By bankPageLink;
     @StoredId
     private By withdrawalTab;
+    @StoredId
+    private By depositBtn;
+
 
     public TopNavigationPageImpl(WebDriver webDriver) {
         super(webDriver);
@@ -71,8 +76,18 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
     }
 
     @Override
+    public void deposit(){
+        waitUntilDisplayed(depositBtn).click();
+    }
+
+    @Override
     public void cfd() {
         waitUntilDisplayed(mainMenu,cfdBtn).click();
+    }
+
+    @Override
+    public void trade(){
+        waitUntilDisplayed(mainMenu,tradeBtn).click();
     }
 
     @Override

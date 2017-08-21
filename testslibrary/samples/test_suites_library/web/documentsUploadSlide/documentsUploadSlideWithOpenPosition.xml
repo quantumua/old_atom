@@ -9,6 +9,7 @@
             <class name="com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide.DocumentsUploadSlideWithOpenPosition">
                 <methods>
                     <include name="depositMoreThan2000RestrictedAccountBeforePOIsubmit" description="CTW-5765" />
+                    <include name="depositMoreThan2000RestrictedAccountBeforePORSubmit" description="CTW-5346" />
                 </methods>
             </class>
         </classes>
