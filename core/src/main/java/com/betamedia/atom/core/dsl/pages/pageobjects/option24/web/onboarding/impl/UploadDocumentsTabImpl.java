@@ -42,6 +42,8 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     @StoredId
     private By poiUploadInput;
     @StoredId
+    private By velocityAnimatingImage;
+    @StoredId
     private By poiPassportSelection;
     @StoredId
     private By poiFrontImage;
@@ -153,9 +155,11 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
 
     @Override
     public void uploadCreditCard(String frontImagePath, String backImagePath) {
+        poiCollapseHeader();
         creditCardClickHeader();
         setDisplayBlock(creditCardUploadInput);
         uploadFromPath(storeToTemp(frontImagePath), creditCardUploadInput);
+        scrollIntoView(find(creditCardHeader));
         selectDocumentType(creditCardWrapper, creditCardSelection, true, creditCardFrontImage);
         waitUntilExists(creditCardBackImage).isDisplayed();
         clearElementText(creditCardUploadInput);
@@ -291,13 +295,12 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     private void poiCollapseHeader(){
-        if (find(poiHeaderExpanded).isEnabled()) {
+        if (exists(poiHeaderExpanded)) {
             poiClickHeader();
         }
     }
 
     private void porExpandHeader(){
-        poiCollapseHeader();
         if (exists(porHeaderCollapsed)) {
             porClickHeader();
         }
@@ -314,9 +317,9 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         waitUntilDisplayed(wrapper, locator).click();
         if (waitForTransformation) {
             /*wait until animation starts*/
-            waitUntil(() -> !checkCssValue("transform", "none", transformImage));
+            waitUntil(() -> exists(velocityAnimatingImage));
             /*wait until animation ends*/
-            waitUntil(() -> checkCssValue("transform", "none", transformImage));
+            waitUntil(() -> !exists(velocityAnimatingImage));
         }
     }
 }
