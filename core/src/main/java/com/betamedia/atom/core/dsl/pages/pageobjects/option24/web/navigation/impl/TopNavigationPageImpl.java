@@ -113,14 +113,16 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
      */
     @Override    
     public void selectLanguage(String language) {
-        Reporter.log("Switching UI to language: " + language + "<br/>");
+        waitUntilPageLoad();
+        Reporter.log("Waiting for switch UI to language: " + language + "<br/>");
         waitUntilDisplayed(languageMenu).click();
+        Reporter.log("Switching UI to language: " + language + "<br/>");
+
         waitUntilDisplayed(flagLanguage).findElements(flagLanguage).stream()
                         .filter(element -> element.getAttribute("data-icl-code").toLowerCase().contains(language.toLowerCase()))
                         .findFirst().orElse(null)
                         .click();
-        waitUntil(() -> maybe(() -> find(languageMenu))
-                .orElseGet(() -> find(languageMenu))
-                .isEnabled());
+
+        waitUntilClickable(languageMenu) ;
     }
 }
