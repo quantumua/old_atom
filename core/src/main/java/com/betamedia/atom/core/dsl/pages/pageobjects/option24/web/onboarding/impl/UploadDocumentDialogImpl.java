@@ -23,6 +23,18 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
 
     @StoredId
     private By pageRoot;
+    /* smsWrapper */
+    @StoredId (localized = true)
+    private By progressBarText;
+    @StoredId (localized = true)
+    private By chatLink;
+    @StoredId (localized = true)
+    private By docHeader;
+    @StoredId (localized = true)
+    private By docDescription;
+    @StoredId (localized = true)
+    private By smsWrapper;
+
     @StoredId
     private By uploadDocumentDialogCloseButton;
     @StoredId
@@ -33,11 +45,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By poiDocumentNotApproved;
 
     /* POI (Proof of identity) Controls*/
-    @StoredId
+    @StoredId (localized = true)
     private By poiHeader;
-    @StoredId
+    @StoredId (localized = true)
     private By poiDocumentTypeSelector;
-    @StoredId
+    @StoredId (localized = true)
     private By poiWrapper;
     @StoredId
     private By poiUploadInput;
@@ -57,11 +69,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By poiNotApprovedXImage;
     @StoredId
     private By poiUploadDocumentWrapperOpen;
-    @StoredId
+    @StoredId (localized = true)
     private By poiUploadDocumentWrapperClosed;
 
     /* POR (Proof of residence) Controls*/
-    @StoredId
+    @StoredId (localized = true)
     private By porHeader;
     @StoredId
     private By porDocumentTypeSelector;

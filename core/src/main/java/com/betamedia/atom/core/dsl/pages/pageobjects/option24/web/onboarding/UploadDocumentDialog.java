@@ -1,9 +1,10 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding;
 
+import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations;
 /**
  * Created by vsnigur on 6/7/17.
  */
-public interface UploadDocumentDialog {
+public interface UploadDocumentDialog extends LocalizationOperations {
 
     boolean exists();
 
