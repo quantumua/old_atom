@@ -54,7 +54,7 @@ public class AbstractOnboardingConditionsTest extends WebEndToEndTest {
         if (conditions.isShowPoiPor()) {
             Reporter.log("INFO: ShowPoiPor should happens.");
 
-            pages().uploadDocumentDialog().uploadIdCard();
+            pages().uploadDocumentDialog().poiUploadIdCard();
             return;
         }
         pages().startTradeDialog().startTrade();

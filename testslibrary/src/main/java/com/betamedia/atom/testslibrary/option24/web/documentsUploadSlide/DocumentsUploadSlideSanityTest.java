@@ -41,8 +41,9 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5765:Successful upload document: POI section - Passport doc")
     @TestLinkProperties(displayId = "CTW-5765")
     public void successfulUploadDocumentPOISectionPassportDoc() {
-        pages().uploadDocumentDialog().poiUploadPassport(POI_PASSPORT_PATH);
-        softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "POI back image should not exists.");
+        softAssert().assertFalse(pages().uploadDocumentDialog()
+                .poiUploadPassport(POI_PASSPORT_PATH)
+                .poiBackImageExists(), "POI back image should not exists.");
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "Passport uploaded and user is ready to start Trade.");
     }
 
@@ -52,8 +53,9 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5766:Successful upload document: POR section")
     @TestLinkProperties(displayId = "CTW-5766")
     public void successfulUploadDocumentPORSection() {
-        pages().uploadDocumentDialog().porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH);
-        softAssert().assertTrue(pages().uploadDocumentDialog().porCheckmarkImageExists(), "Electricity bill uploaded successfully.");
+        softAssert().assertTrue(pages().uploadDocumentDialog()
+                .porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH)
+                .porCheckmarkImageExists(), "Electricity bill uploaded successfully.");
     }
 
     /*
@@ -72,7 +74,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5768:Successful upload document: POI section - Identity card doc")
     @TestLinkProperties(displayId = "CTW-5768")
     public void successfulUploadDocumentPOISectionIdentityCardDoc() {
-        pages().uploadDocumentDialog().uploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+        pages().uploadDocumentDialog().poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "ID Card uploaded and user is ready to start Trade.");
     }
 
@@ -83,8 +85,9 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @TestLinkProperties(displayId = "CTW-5769")
     public void successfulUploadDocumentCreditCardSection() {
         closeWizardAndGoToUploadDocumentTab();
-        pages().uploadDocumentsTab().uploadCreditCard(CREDIT_CARD_FRONT_PATH, CREDIT_CARD_BACK_PATH);
-        softAssert().assertTrue(pages().uploadDocumentsTab().creditCardImagesSentMsgExists(), "Credit Card uploaded successfully.");
+        softAssert().assertTrue(pages().uploadDocumentsTab()
+                .uploadCreditCard(CREDIT_CARD_FRONT_PATH, CREDIT_CARD_BACK_PATH)
+                .creditCardImagesSentMsgExists(), "Credit Card uploaded successfully.");
     }
 
     /*
@@ -93,8 +96,9 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5770:Failed upload document: POI section - invalid Passport doc")
     @TestLinkProperties(displayId = "CTW-5770")
     public void failedUploadDocumentPOISectionIinvalidPassportDoc () {
-        pages().uploadDocumentDialog().poiUploadPassport(WRONG_DOC_PATH);
-        softAssert().assertTrue(pages().uploadDocumentDialog().poiXImageExists(), "Red X sign is available");
+        softAssert().assertTrue(pages().uploadDocumentDialog()
+                .poiUploadPassport(WRONG_DOC_PATH)
+                .poiXImageExists(), "Red X sign is available");
         softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "Passport has not uploaded and user is not ready to start Trade.");
     }
 
@@ -104,8 +108,9 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5771:Failed upload document: POI section - invalid Driver license doc")
     @TestLinkProperties(displayId = "CTW-5771")
     public void failedUploadDocumentPOISectionInvalidDriverLicenseDoc() {
-        pages().uploadDocumentDialog().poiUploadDriverLicense(WRONG_DOC_PATH,WRONG_DOC_PATH);
-        softAssert().assertTrue(pages().uploadDocumentDialog().poiXImageExists(), "Red X sign is available");
+        softAssert().assertTrue(pages().uploadDocumentDialog()
+                .poiUploadDriverLicense(WRONG_DOC_PATH,WRONG_DOC_PATH)
+                .poiXImageExists(), "Red X sign is available");
         softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "Driver license has not uploaded and user is not ready to start Trade.");
     }
 
@@ -115,8 +120,9 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5772:Failed upload document: POI section - invalid Identity card doc")
     @TestLinkProperties(displayId = "CTW-5772")
     public void failedUploadDocumentPOISectionInvalidIdentityCardDoc() {
-        pages().uploadDocumentDialog().uploadIdCard(WRONG_DOC_PATH,WRONG_DOC_PATH);
-        softAssert().assertTrue(pages().uploadDocumentDialog().poiXImageExists(), "Red X sign is available");
+        softAssert().assertTrue(pages().uploadDocumentDialog()
+                .poiUploadIdCard(WRONG_DOC_PATH,WRONG_DOC_PATH)
+                .poiXImageExists(), "Red X sign is available");
         softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "ID Card has not uploaded and user is ready to start Trade.");
     }
 

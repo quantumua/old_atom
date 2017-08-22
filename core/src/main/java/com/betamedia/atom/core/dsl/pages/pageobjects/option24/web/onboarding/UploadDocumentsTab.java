@@ -13,27 +13,27 @@ public interface UploadDocumentsTab extends LocalizationOperations {
 
     boolean creditCardXImageExists();
 
-    void invoke();
+    UploadDocumentsTab invoke();
 
     void creditCardClickHeader();
 
     void porClickHeader();
 
-    void uploadCreditCard(String frontImagePath, String backImagePath);
+    UploadDocumentsTab uploadCreditCard(String frontImagePath, String backImagePath);
 
     void verifyPOIOveralStatusReviewed();
 
     void verifyPOROveralStatusReviewed();
 
-    void poiUploadPassport(String poiPassportPath);
+    UploadDocumentsTab poiUploadPassport(String poiPassportPath);
 
-    void porUploadOtherRelevantBill(String imagePath);
+    UploadDocumentsTab porUploadOtherRelevantBill(String imagePath);
 
-    void poiUploadIdCardDocuments(String imageFrontPath, String imageBackPath);
+    UploadDocumentsTab poiUploadIdCardDocuments(String imageFrontPath, String imageBackPath);
 
-    void poiUploadDriverLicenseDocuments(String imageFrontPath, String imageBackPath);
+    UploadDocumentsTab poiUploadDriverLicenseDocuments(String imageFrontPath, String imageBackPath);
 
-    void porUploadGasBill(String imagePath);
+    UploadDocumentsTab porUploadGasBill(String imagePath);
 
     boolean isPorHeaderCollapsed();
 

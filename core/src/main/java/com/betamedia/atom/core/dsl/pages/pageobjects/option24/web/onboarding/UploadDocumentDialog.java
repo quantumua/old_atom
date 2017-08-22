@@ -12,19 +12,19 @@ public interface UploadDocumentDialog extends LocalizationOperations {
 
     boolean porXImageExists();
 
-    void porUploadElectricityBill(String imagePath);
+    UploadDocumentDialog porUploadElectricityBill(String imagePath);
 
     void poiClickHeader();
 
-    void uploadIdCard();
+    UploadDocumentDialog poiUploadIdCard();
 
-    void uploadIdCard(String frontImagePath, String backImagePath);
+    UploadDocumentDialog poiUploadIdCard(String frontImagePath, String backImagePath);
 
-    void poiUploadPassport(String imagePath);
+    UploadDocumentDialog poiUploadPassport(String imagePath);
 
     boolean poiXImageExists();
 
-    void poiUploadDriverLicense(String frontImagePath, String backImagePath);
+    UploadDocumentDialog poiUploadDriverLicense(String frontImagePath, String backImagePath);
 
     boolean poiBackImageExists();
 

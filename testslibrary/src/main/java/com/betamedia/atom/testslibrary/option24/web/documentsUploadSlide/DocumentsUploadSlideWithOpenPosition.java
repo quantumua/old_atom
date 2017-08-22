@@ -26,21 +26,18 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSa
         closeWizardAndGoTrade();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().assets().switchToPanda();
-
         pages().cfdBidder()
                 .setAmount("0.01")
                 .buy()
                 .confirm();
         pages().messageBox().ok();
-        ExpectedCfdAsset asset= null; //TODO: get from UI
-        softAssert().assertFalse(pages().cfdPositions().isAnyPositionOpened(), "Any position not opened");
-
+        softAssert().assertFalse(pages().cfdPositions().isAnyPositionOpened(), "No any position opened verification");
         pages().assets().leavePandaFrame();
         pages().topNavigationPage().goToMyAccount();
-        pages().uploadDocumentsTab().invoke();
-        pages().uploadDocumentsTab().poiUploadPassport(POI_PASSPORT_PATH);
-        pages().uploadDocumentsTab().porUploadGasBill(POR_GAS_BILL_PATH);
-
+        pages().uploadDocumentsTab()
+                .invoke()
+                .poiUploadPassport(POI_PASSPORT_PATH)
+                .porUploadGasBill(POR_GAS_BILL_PATH);
         pages().topNavigationPage().cfd();
         pages().assets().switchToPanda();
         pages().cfdBidder()
@@ -48,7 +45,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSa
                 .buy()
                 .confirm();
         pages().messageBox().ok();
-        softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "New position opened");
+        softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
     }
 
     /*
@@ -64,19 +61,17 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSa
         pages().setLeverageDialog().selectLeverage("100");
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         pages().assets().switchToPanda();
-
         pages().cfdBidder()
                 .setAmount("0.01")
                 .buy()
                 .confirm();
         pages().messageBox().ok();
-        softAssert().assertFalse(pages().cfdPositions().isAnyPositionOpened(), "Any position not opened");
-
+        softAssert().assertFalse(pages().cfdPositions().isAnyPositionOpened(), "No any position opened verification");
         pages().assets().leavePandaFrame();
         pages().topNavigationPage().goToMyAccount();
-        pages().uploadDocumentsTab().invoke();
-        pages().uploadDocumentsTab().porUploadGasBill(POR_GAS_BILL_PATH);
-
+        pages().uploadDocumentsTab()
+                .invoke()
+                .porUploadGasBill(POR_GAS_BILL_PATH);
         pages().topNavigationPage().trade();
         pages().assets().switchToPanda();
         pages().cfdBidder()
@@ -84,6 +79,6 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSa
                 .buy()
                 .confirm();
         pages().messageBox().ok();
-        softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "New position opened");
+        softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
     }
 }

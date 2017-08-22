@@ -270,7 +270,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,withdrawalTab,XPATH,"//*[@href=""https://qawww.24option.com/eu/withdrawal/""]"
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,mainMenu,ID,mainMenu
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,cfdBtn,CLASS_NAME,product-cfd
-2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,tradeBtn,XPATH,".//ul[contains(@class,'menu mm-listview')]//li[1]/a"
+2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,tradeBtn,XPATH,".//nav[@id='mm-mainMenu']//li[contains(@id,'menu-item') and contains(@class,'m-trade')]/a"
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,productButtons,CLASS_NAME,rootMenu
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,depositBtn,ID,deposit-btn

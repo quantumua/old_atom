@@ -149,12 +149,13 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public void uploadIdCard() {
-        uploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+    public UploadDocumentDialog poiUploadIdCard() {
+        poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
+        return this;
     }
 
     @Override
-    public void uploadIdCard(String frontImagePath, String backImagePath) {
+    public UploadDocumentDialog poiUploadIdCard(String frontImagePath, String backImagePath) {
         poiClickHeader();
         selectPOIDocumentType(poiIDSelection);
         setDisplayBlock(poiUploadInput);
@@ -162,10 +163,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         waitUntilExists(poiBackImage).isDisplayed();
         clearElementText(poiUploadInput);
         uploadFromPath(storeToTemp(backImagePath), poiUploadInput);
+        return this;
     }
 
     @Override
-    public void poiUploadPassport(String imagePath) {
+    public UploadDocumentDialog poiUploadPassport(String imagePath) {
         poiClickHeader();
         selectPOIDocumentType(poiPassportSelection, false);
         /*make input element visible*/
@@ -173,6 +175,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         /*upload file*/
         uploadFromPath(storeToTemp(imagePath), poiUploadInput);
         /*wait until upload is over and back image is available*/
+        return this;
     }
 
     @Override
@@ -181,7 +184,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public void poiUploadDriverLicense(String frontImagePath, String backImagePath) {
+    public UploadDocumentDialog poiUploadDriverLicense(String frontImagePath, String backImagePath) {
         poiClickHeader();
         selectPOIDocumentType(poiDriverLicenseSelection);
         setDisplayBlock(poiUploadInput);
@@ -189,10 +192,11 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         waitUntilExists(poiBackImage).isDisplayed();
         clearElementText(poiUploadInput);
         uploadFromPath(storeToTemp(backImagePath), poiUploadInput);
+        return this;
     }
 
     @Override
-    public void porUploadElectricityBill(String imagePath) {
+    public UploadDocumentDialog porUploadElectricityBill(String imagePath) {
         porClickHeader();
         //Electricity bill selected by default
         waitUntilDisplayed(porWrapper);
@@ -200,6 +204,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         setDisplayBlock(porUploadInput);
         /*upload file*/
         uploadFromPath(storeToTemp(imagePath), porUploadInput);
+        return this;
     }
 
     @Override

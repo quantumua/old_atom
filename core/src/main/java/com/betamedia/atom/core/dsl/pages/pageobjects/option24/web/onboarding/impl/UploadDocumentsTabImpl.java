@@ -137,8 +137,9 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
-    public void invoke(){
+    public UploadDocumentsTab invoke(){
     	waitUntilDisplayed(winID).click();
+    	return this;
     }
 
     @Override
@@ -154,7 +155,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
-    public void uploadCreditCard(String frontImagePath, String backImagePath) {
+    public UploadDocumentsTab uploadCreditCard(String frontImagePath, String backImagePath) {
         poiCollapseHeader();
         creditCardClickHeader();
         setDisplayBlock(creditCardUploadInput);
@@ -164,6 +165,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         waitUntilExists(creditCardBackImage).isDisplayed();
         clearElementText(creditCardUploadInput);
         uploadFromPath(storeToTemp(backImagePath), creditCardUploadInput);
+        return this;
     }
 
     @Override
@@ -177,7 +179,7 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
     }
 
     @Override
-    public void poiUploadPassport(String imagePath) {
+    public UploadDocumentsTab poiUploadPassport(String imagePath) {
         poiExpandHeader();
         selectDocumentType(poiWrapper, poiPassportSelection, false, null);
         /*make input element visible*/
@@ -185,26 +187,31 @@ public class UploadDocumentsTabImpl extends AbstractPageObject implements Upload
         /*upload file*/
         uploadFromPath(storeToTemp(imagePath), poiUploadInput);
         /*wait until upload is over and back image is available*/
+        return this;
     }
 
     @Override
-    public void porUploadGasBill(String imagePath){
+    public UploadDocumentsTab porUploadGasBill(String imagePath){
         porUploadDocument(imagePath, porGasBillSelection);
+        return this;
     }
 
     @Override
-    public void porUploadOtherRelevantBill(String imagePath){
+    public UploadDocumentsTab porUploadOtherRelevantBill(String imagePath){
         porUploadDocument(imagePath, porOtherRelevantBillSelection);
+        return this;
     }
 
     @Override
-    public void poiUploadIdCardDocuments(String imageFrontPath, String imageBackPath) {
+    public UploadDocumentsTab poiUploadIdCardDocuments(String imageFrontPath, String imageBackPath) {
         poiUploadTwoSidePOIDocuments(poiIdCardFrontSelection, poiIdCardBackSelection, imageFrontPath, imageBackPath);
+        return this;
     }
 
     @Override
-    public void poiUploadDriverLicenseDocuments(String imageFrontPath, String imageBackPath) {
+    public UploadDocumentsTab poiUploadDriverLicenseDocuments(String imageFrontPath, String imageBackPath) {
         poiUploadTwoSidePOIDocuments(poiDriverLicenseFrontSelection, poiDriverLicenseBackSelection, imageFrontPath, imageBackPath);
+        return this;
     }
 
     @Override
