@@ -237,14 +237,14 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         pages().uploadDocumentsTab().verifyPOROveralStatusReviewed();
     }
 
-    private void verifyPOIStatusInCRM (Integer poiOCRStatus) {
+    public void verifyPOIStatusInCRM (Integer poiOCRStatus) {
         final ContactExtension contactExtension = getContactExtensionByEmail();
-        softAssert().assertEquals(contactExtension.getPoiOcrStatus(), poiOCRStatus, "Failed to verify POI Ocr status, actual status: " + contactExtension.getPoiOcrStatus());
+        softAssert().assertEquals(contactExtension.getPoiOcrStatus(), poiOCRStatus, "POI Ocr status verification, actual status: " + contactExtension.getPoiOcrStatus());
     }
 
     private void verifyPORStatusInCRM (Integer porOCRStatus) {
         final ContactExtension contactExtension = getContactExtensionByEmail();
-        softAssert().assertEquals(contactExtension.getPorOcrStatus(), porOCRStatus, "Failed to verify POR Ocr status, actual status: " + contactExtension.getPorOcrStatus());
+        softAssert().assertEquals(contactExtension.getPorOcrStatus(), porOCRStatus, "POR Ocr status verification, actual status: " + contactExtension.getPorOcrStatus());
     }
 
     private ContactExtension getContactExtensionByEmail () {

@@ -7,4 +7,6 @@ public interface CfdPositions {
     void validateLatestPosition(String expectedName);
 
     boolean isAnyPositionOpened();
+
+    Integer countOfOpenedPosition();
 }

@@ -108,8 +108,6 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5771:Failed upload document: POI section - invalid Driver license doc")
     @TestLinkProperties(displayId = "CTW-5771")
     public void failedUploadDocumentPOISectionInvalidDriverLicenseDoc() {
-//        pages().topNavigationPage().logIn();
-//        pages().loginDialog().login("Web_u7vb3e@24options.atom", "123123");
         softAssert().assertTrue(pages().uploadDocumentDialog()
                 .poiUploadDriverLicense(WRONG_DOC_PATH,WRONG_DOC_PATH)
                 .poiXImageExists(), "Red X sign is available");
@@ -169,8 +167,14 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     }
 
     public void closeWizardAndGoToUploadDocumentTab() {
-        closeWizardAndGoToMyAccount();
+        closeWizardAndGoTrade();
+        goToUploadDocumentTab();
+    }
+
+    public void goToUploadDocumentTab() {
+        pages().topNavigationPage().goToMyAccount();
         pages().uploadDocumentsTab().invoke();
     }
+
 }
 

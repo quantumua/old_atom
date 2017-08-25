@@ -5,6 +5,8 @@ import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders.CfdPositions;
 import org.openqa.selenium.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import static javax.swing.text.html.HTML.Tag.UL;
 
@@ -34,4 +36,10 @@ public class CfdPositionsImpl extends AbstractPageObject implements CfdPositions
         waitUntilDisplayed(openPositions);
         return exists(openPositions, By.tagName(UL.toString()), assetName);
      }
+
+    @Override
+    public Integer countOfOpenedPosition(){
+        Integer quantity = findElements(openPositions).size();
+        return quantity;
+    }
 }

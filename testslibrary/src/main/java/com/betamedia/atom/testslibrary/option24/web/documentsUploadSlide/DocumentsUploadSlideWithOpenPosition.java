@@ -1,14 +1,11 @@
 package com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide;
 
-import com.betamedia.atom.core.fwdataaccess.entities.ExpectedCfdAsset;
+import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSanityTest {
+public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFunctionalityTest {
 
     @BeforeMethod
     @Parameters({"countrycode", "phonecountryprefix"})
@@ -25,12 +22,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSa
         createUserByUI(countrycode,phonecountryprefix,"1500");
         closeWizardAndGoTrade();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().assets().switchToPanda();
-        pages().cfdBidder()
-                .setAmount("0.01")
-                .buy()
-                .confirm();
-        pages().messageBox().ok();
+        openPosition("0.01");
         softAssert().assertFalse(pages().cfdPositions().isAnyPositionOpened(), "No any position opened verification");
         pages().assets().leavePandaFrame();
         pages().topNavigationPage().goToMyAccount();
@@ -38,14 +30,10 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSa
                 .invoke()
                 .poiUploadPassport(POI_PASSPORT_PATH)
                 .porUploadGasBill(POR_GAS_BILL_PATH);
-        pages().topNavigationPage().cfd();
-        pages().assets().switchToPanda();
-        pages().cfdBidder()
-                .setAmount("0.01")
-                .buy()
-                .confirm();
-        pages().messageBox().ok();
+        pages().topNavigationPage().trade();
+        openPosition("0.01");
         softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
+        pages().assets().leavePandaFrame();
     }
 
     /*
@@ -60,12 +48,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSa
         pages().thankYouPage().startTrade();
         pages().setLeverageDialog().selectLeverage("100");
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
-        pages().assets().switchToPanda();
-        pages().cfdBidder()
-                .setAmount("0.01")
-                .buy()
-                .confirm();
-        pages().messageBox().ok();
+        openPosition("0.01");
         softAssert().assertFalse(pages().cfdPositions().isAnyPositionOpened(), "No any position opened verification");
         pages().assets().leavePandaFrame();
         pages().topNavigationPage().goToMyAccount();
@@ -73,12 +56,86 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideSa
                 .invoke()
                 .porUploadGasBill(POR_GAS_BILL_PATH);
         pages().topNavigationPage().trade();
+        openPosition("0.01");
+        softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
+    }
+
+    /*
+     * [TestLink] CTW-5362:Multiple deposits without POI + POR - amount is less then restriction policy
+     */
+    @Test(description = "CTW-5362:Multiple deposits without POI + POR - amount is less then restriction policy")
+    @TestLinkProperties(displayId = "CTW-5362")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void multipleDepositsWithoutPOIAndPORAmountIsLessThenRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        createUserByUI(countrycode,phonecountryprefix,"390");
+        closeWizardAndGoToMyAccount();
+        String userName = pages().accountDetails().getEmail();
+        //1 - Do not upload a document at POI then make additional deposit amount 500$
+        makeDepositOpenPositionVerifySuccess("390");
+        //      3 - Deposit additional 950$ (QD) than back to trade while amount isn't higher than 2000$ and try to open position
+        makeDepositOpenPositionVerifySuccess("750");
+        //      4 - Deposit additional 950$ (QD) than back to trade while amount isn't higher than 2000$ and tru to open position
+        makeDepositOpenPositionVerifySuccess("40");
+   }
+
+    /*
+     * CTW-5363:Multiple deposits without POI + POR - amount is over than restriction policy
+     */
+    @Test(description = "CTW-5363:Multiple deposits without POI + POR - amount is over than restriction policy")
+    @TestLinkProperties(displayId = "CTW-5363")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void multipleDepositsWithoutPOIAndPORAmountIsOverThanRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        createUserByUI(countrycode,phonecountryprefix,"390");
+        closeWizardAndGoTrade();
+        makeDepositOpenPositionVerifyFailure("2000");
+        pages().topNavigationPage().goToMyAccount();
+        pages().uploadDocumentsTab()
+                .invoke()
+                .poiUploadPassport(POI_PASSPORT_PATH)
+                .verifyPOIDocumentsUploaded(1);
+        pages().uploadDocumentsTab()
+                .porUploadGasBill(POR_GAS_BILL_PATH)
+                .verifyPORDocumentsUploaded(1);
+        verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
+        pages().topNavigationPage().trade();
+        openPosition("0.01");
+        softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
+        pages().assets().leavePandaFrame();
+    }
+
+    private void makeDepositOpenPositionVerifySuccess(String deposit) {
+       // 1 - deposit deposi
+       makeAdditionalDeposit (deposit);
+       // 2 - try to open position
+       openPosition("0.01");
+       // 3 - Verify success
+       softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
+       pages().assets().leavePandaFrame();
+   }
+
+    private void makeDepositOpenPositionVerifyFailure(String deposit) {
+       // 1 - deposit deposi
+       makeAdditionalDeposit (deposit);
+       // 2 - try to open position
+       openPosition("0.01");
+       // 3 - Verify failure
+       softAssert().assertFalse(pages().cfdPositions().isAnyPositionOpened(), "No any new position opened verification");
+       pages().assets().leavePandaFrame();
+    }
+
+    private void makeAdditionalDeposit (String deposit) {
+        pages().topNavigationPage().deposit();
+        pages().creditCardDepositPage().submit(CreditCardDeposit.builder()
+                .withDepositAmount(deposit)
+                .build());
+    }
+
+    private void openPosition (String amount) {
         pages().assets().switchToPanda();
         pages().cfdBidder()
-                .setAmount("0.01")
+                .setAmount(amount)
                 .buy()
                 .confirm();
         pages().messageBox().ok();
-        softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
     }
 }
