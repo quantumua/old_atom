@@ -44,7 +44,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
         softAssert().assertFalse(pages().uploadDocumentDialog()
                 .poiUploadPassport(POI_PASSPORT_PATH)
                 .poiBackImageExists(), "POI back image should not exists.");
-        softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "Passport uploaded and user is ready to start Trade.");
+        softAssert().assertTrue(pages().thankYouPage().waitForStartTrade(), "Passport uploaded and user is ready to start Trade.");
     }
 
     /*
@@ -65,7 +65,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @TestLinkProperties(displayId = "CTW-5767")
     public void successfulUploadDocumentPOISectionDriverLicenceDoc() {
         pages().uploadDocumentDialog().poiUploadDriverLicense(POI_DRIVER_LICENSE_FRONT_PATH, POI_DRIVER_LICENSE_BACK_PATH);
-        softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "Driver license uploaded and user is ready to start Trade.");
+        softAssert().assertTrue(pages().thankYouPage().waitForStartTrade(), "Driver license uploaded and user is ready to start Trade.");
     }
 
     /*
@@ -75,7 +75,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @TestLinkProperties(displayId = "CTW-5768")
     public void successfulUploadDocumentPOISectionIdentityCardDoc() {
         pages().uploadDocumentDialog().poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
-        softAssert().assertTrue(pages().thankYouPage().startTradeExists(), "ID Card uploaded and user is ready to start Trade.");
+        softAssert().assertTrue(pages().thankYouPage().waitForStartTrade(), "ID Card uploaded and user is ready to start Trade.");
     }
 
     /*
@@ -108,6 +108,8 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5771:Failed upload document: POI section - invalid Driver license doc")
     @TestLinkProperties(displayId = "CTW-5771")
     public void failedUploadDocumentPOISectionInvalidDriverLicenseDoc() {
+//        pages().topNavigationPage().logIn();
+//        pages().loginDialog().login("Web_u7vb3e@24options.atom", "123123");
         softAssert().assertTrue(pages().uploadDocumentDialog()
                 .poiUploadDriverLicense(WRONG_DOC_PATH,WRONG_DOC_PATH)
                 .poiXImageExists(), "Red X sign is available");
@@ -123,7 +125,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
         softAssert().assertTrue(pages().uploadDocumentDialog()
                 .poiUploadIdCard(WRONG_DOC_PATH,WRONG_DOC_PATH)
                 .poiXImageExists(), "Red X sign is available");
-        softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "ID Card has not uploaded and user is ready to start Trade.");
+        softAssert().assertFalse(pages().thankYouPage().startTradeExists(), "ID Card has not uploaded and user is not ready to start Trade");
     }
 
     /*
@@ -132,9 +134,12 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @Test(description = "CTW-5773:Failed upload document: POR section")
     @TestLinkProperties(displayId = "CTW-5773")
     public void failedUploadDocumentPORSection() {
-        pages().uploadDocumentDialog().porUploadElectricityBill(WRONG_DOC_PATH);
+        softAssert().assertTrue(pages().uploadDocumentDialog()
+                .porUploadElectricityBill(WRONG_DOC_PATH)
+                .porXImageExists(), "Failed electricity bill has not uploaded");
         // TODO: This verification is blocked (no error message is available): "a correct red error message is displayed"
-        softAssert().assertTrue(pages().uploadDocumentDialog().porXImageExists(), "Failed electricity bill has not uploaded.");
+        softAssert().assertFalse(pages().thankYouPage()
+                .startTradeExists(), "Electricity bill has not uploaded and user is not ready to start Trade");
     }
 
     /*
@@ -144,10 +149,12 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @TestLinkProperties(displayId = "CTW-5774")
     public void failedUploadDocumentCreditCardSection() {
         closeWizardAndGoToUploadDocumentTab();
-        pages().uploadDocumentsTab().uploadCreditCard(WRONG_DOC_PATH, WRONG_DOC_PATH);
+        softAssert().assertFalse(pages().uploadDocumentsTab()
+                .uploadCreditCard(WRONG_DOC_PATH, WRONG_DOC_PATH)
+                .creditCardImagesSentMsgExists(), "The invalid document was Not uploaded.");
         // TODO: This verification is blocked (no error message is available): "a correct red error message is displayed"
-        softAssert().assertFalse(pages().uploadDocumentsTab().creditCardImagesSentMsgExists(), "The invalid document was Not uploaded.");
-        softAssert().assertTrue(pages().uploadDocumentsTab().creditCardXImageExists(), "Red X sign is available");
+        softAssert().assertTrue(pages().uploadDocumentsTab()
+                .creditCardXImageExists(), "Red X sign is available");
     }
 
     public void closeWizardAndGoTrade() {

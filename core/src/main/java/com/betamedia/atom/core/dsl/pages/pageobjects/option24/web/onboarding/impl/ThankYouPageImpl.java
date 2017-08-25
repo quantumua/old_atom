@@ -26,12 +26,17 @@ public class ThankYouPageImpl extends AbstractPageObject implements ThankYouPage
     }
 
     @Override
-    public boolean startTradeExists() {
+    public void startTrade() {
+        click(startTradeButton);
+    }
+
+    @Override
+    public boolean waitForStartTrade() {
         return waitUntilDisplayed(startTradeButton).isDisplayed();
     }
 
     @Override
-    public void startTrade() {
-        click(startTradeButton);
+    public boolean startTradeExists() {
+        return find(startTradeButton).isDisplayed();
     }
 }

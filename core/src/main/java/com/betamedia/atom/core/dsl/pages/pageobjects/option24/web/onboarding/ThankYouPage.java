@@ -9,5 +9,7 @@ public interface ThankYouPage {
 
     void startTrade();
 
+    boolean waitForStartTrade();
+
     boolean startTradeExists();
 }

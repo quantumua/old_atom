@@ -189,7 +189,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
         selectPOIDocumentType(poiDriverLicenseSelection);
         setDisplayBlock(poiUploadInput);
         uploadFromPath(storeToTemp(frontImagePath), poiUploadInput);
-        waitUntilExists(poiBackImage).isDisplayed();
+        waitUntil(() -> maybe(()-> find(poiBackImage)).orElseGet(() -> find(poiNotApprovedXImage)).isDisplayed()); // waitUntilExists(poiBackImage).isDisplayed();
         clearElementText(poiUploadInput);
         uploadFromPath(storeToTemp(backImagePath), poiUploadInput);
         return this;

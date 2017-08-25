@@ -30,8 +30,7 @@ public interface WebElementOperations extends WaitOperations, Logging {
             find(first, rest);
             return true;
         } catch (NoSuchElementException e) {
-            getLogger().debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
-            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
+            getLogger().debug(EXPECTED_LOOKUP_FAILURE_MESSAGE + ": " + first, rest, e);
             return false;
         }
     }
@@ -46,8 +45,8 @@ public interface WebElementOperations extends WaitOperations, Logging {
         try {
             return Optional.ofNullable(supplier.get());
         } catch (TimeoutException | NoSuchElementException e) {
-            getLogger().debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
-            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
+            getLogger().debug(EXPECTED_LOOKUP_FAILURE_MESSAGE + ": " + supplier, e);
+            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + ": " + supplier + '\n');
             return Optional.empty();
         }
     }

@@ -19,7 +19,7 @@ import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
  * @author Leonid Artemiev
  * @since 7/20/17
  */
-public class UploadDocumentsTabImpl extends AbstractPageObject implements UploadDocumentsTab, CssOperations, FieldOperations, ScriptOperations {
+public class UploadDocumentsTabImpl extends AbstractPageObject implements UploadDocumentsTab {
 
     @StoredId (localized = true)
     private By winID;

@@ -1,16 +1,11 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders.impl;
 
-import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
+import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.bidder.orders.CfdPositions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Reporter;
+import org.openqa.selenium.*;
 
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
-
 import static javax.swing.text.html.HTML.Tag.UL;
 
 /**
@@ -37,12 +32,6 @@ public class CfdPositionsImpl extends AbstractPageObject implements CfdPositions
     @Override
     public boolean isAnyPositionOpened() {
         waitUntilDisplayed(openPositions);
-        try{
-            return find(openPositions, By.tagName(UL.toString()), assetName).isDisplayed();
-        }catch (NoSuchElementException e) {
-            getLogger().debug(EXPECTED_LOOKUP_FAILURE_MESSAGE, e);
-            Reporter.log(EXPECTED_LOOKUP_FAILURE_MESSAGE + '\n');
-            return false;
-        }
+        return exists(openPositions, By.tagName(UL.toString()), assetName);
      }
 }

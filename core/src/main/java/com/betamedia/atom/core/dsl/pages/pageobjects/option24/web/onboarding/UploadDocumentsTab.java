@@ -1,12 +1,12 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding;
 
-import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations;
+import com.betamedia.atom.core.dsl.pages.extensions.*;
 
 /**
  * @author Leonid Artemiev
  * @since 7/20/17
  */
-public interface UploadDocumentsTab extends LocalizationOperations {
+public interface UploadDocumentsTab extends LocalizationOperations, CssOperations, FieldOperations, ScriptOperations {
     boolean exists();
 
     boolean creditCardImagesSentMsgExists();
