@@ -69,7 +69,6 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     public void multipleDepositsWithoutPOIAndPORAmountIsLessThenRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         createUserByUI(countrycode,phonecountryprefix,"390");
         closeWizardAndGoToMyAccount();
-        String userName = pages().accountDetails().getEmail();
         //1 - Do not upload a document at POI then make additional deposit amount 500$
         makeDepositOpenPositionVerifySuccess("390");
         //      3 - Deposit additional 950$ (QD) than back to trade while amount isn't higher than 2000$ and try to open position
@@ -96,7 +95,50 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
         pages().uploadDocumentsTab()
                 .porUploadGasBill(POR_GAS_BILL_PATH)
                 .verifyPORDocumentsUploaded(1);
-        verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
+        verifyPOIStatusInCRM(OCR_STATUS_VERIFIED);
+        pages().topNavigationPage().trade();
+        openPosition("0.01");
+        softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
+        pages().assets().leavePandaFrame();
+    }
+
+
+    /*
+     * CTW-5348:Multiple deposits without POI + POR - amount is less then restriction policy
+     */
+    @Test(description = "CTW-5348:Multiple deposits without POI + POR - amount is less then restriction policy")
+    @TestLinkProperties(displayId = "CTW-5348")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void multipleDepositsWithoutPOIandPORAmountIsLessThenRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        createUserByUI(countrycode, phonecountryprefix, "390");
+        pages().uploadDocumentDialog()
+                .poiUploadPassport(POI_PASSPORT_PATH);
+        pages().thankYouPage().startTrade();
+        pages().setLeverageDialog().selectLeverage("100");
+        Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
+        makeDepositOpenPositionVerifySuccess("390");
+        makeDepositOpenPositionVerifySuccess("740");
+        makeDepositOpenPositionVerifySuccess("40");
+    }
+
+    /*
+     * CTW-5349:Multiple deposits without POI + POR - amount is over than restriction policy
+    */
+    @Test(description = "CTW-5349:Multiple deposits without POI + POR - amount is over than restriction policy")
+    @TestLinkProperties(displayId = "CTW-5349")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void multipleDepositsWithoutPOIandPORAmountIsOverThanRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        createUserByUI(countrycode,phonecountryprefix,"390");
+        pages().uploadDocumentDialog()
+                .poiUploadPassport(POI_PASSPORT_PATH);
+        pages().thankYouPage().startTrade();
+        pages().setLeverageDialog().selectLeverage("100");
+        makeDepositOpenPositionVerifyFailure("2000");
+        pages().topNavigationPage().goToMyAccount();
+        pages().uploadDocumentsTab()
+                .porUploadGasBill(POR_GAS_BILL_PATH)
+                .verifyPORDocumentsUploaded(1);
+        verifyPORStatusInCRM(OCR_STATUS_VERIFIED);
         pages().topNavigationPage().trade();
         openPosition("0.01");
         softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");

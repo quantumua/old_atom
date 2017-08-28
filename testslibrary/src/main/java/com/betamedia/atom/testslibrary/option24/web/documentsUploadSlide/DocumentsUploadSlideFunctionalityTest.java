@@ -23,8 +23,8 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
      * Strings for tests
      */
 
-    protected static final Integer POI_OCR_STATUS_EMPTY = 100000001;
-    protected static final Integer POI_OCR_STATUS_VERIFIED = 100000003;
+    protected static final Integer OCR_STATUS_EMPTY = 100000001;
+    protected static final Integer OCR_STATUS_VERIFIED = 100000003;
 
 
     private static final Logger logger = LogManager.getLogger(WebFnsPersonalInformationImpl.class);
@@ -78,7 +78,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
                 .poiUploadPassport(POI_PASSPORT_PATH)
                 .verifyPOIDocumentsUploaded(1);
         softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "There is no prompt to upload Back side of the document");
-        verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
+        verifyPOIStatusInCRM(OCR_STATUS_VERIFIED);
     }
 
     /*
@@ -127,13 +127,13 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         pages().uploadDocumentsTab()
                 .poiUploadPassport(WRONG_DOC_PATH)
                 .verifyPOIInvalidDocumentUploaded(1);
-        verifyPOIStatusInCRM(POI_OCR_STATUS_EMPTY);
+        verifyPOIStatusInCRM(OCR_STATUS_EMPTY);
         pages().uploadDocumentsTab()
                 .invoke()
                 .poiUploadPassport(POI_PASSPORT_PATH)
                 .verifyPOIDocumentsUploaded(1);
         softAssert().assertFalse(pages().uploadDocumentDialog().poiBackImageExists(), "There is no prompt to upload Back side of the document");
-        verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
+        verifyPOIStatusInCRM(OCR_STATUS_VERIFIED);
     }
     /*
      *[TestLink] CTW-5358:POI Upload then logout/Login
@@ -190,11 +190,11 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         softAssert().assertTrue(pages().uploadDocumentsTab()
                 .poiUploadPassport(POI_PASSPORT_PATH)
                 .verifyPORsectionExpanded(), "POR section not expanded");
-        verifyPOIStatusInCRM(POI_OCR_STATUS_VERIFIED);
+        verifyPOIStatusInCRM(OCR_STATUS_VERIFIED);
         pages().uploadDocumentsTab()
                 .porUploadGasBill(WRONG_DOC_PATH)
                 .verifyPORInvalidDocumentUploaded(1);
-        verifyPORStatusInCRM(POI_OCR_STATUS_EMPTY);
+        verifyPORStatusInCRM(OCR_STATUS_EMPTY);
     }
 
     /*
@@ -242,7 +242,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         softAssert().assertEquals(contactExtension.getPoiOcrStatus(), poiOCRStatus, "POI Ocr status verification, actual status: " + contactExtension.getPoiOcrStatus());
     }
 
-    private void verifyPORStatusInCRM (Integer porOCRStatus) {
+    public void verifyPORStatusInCRM (Integer porOCRStatus) {
         final ContactExtension contactExtension = getContactExtensionByEmail();
         softAssert().assertEquals(contactExtension.getPorOcrStatus(), porOCRStatus, "POR Ocr status verification, actual status: " + contactExtension.getPorOcrStatus());
     }
