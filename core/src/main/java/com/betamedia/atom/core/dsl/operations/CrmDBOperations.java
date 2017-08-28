@@ -26,4 +26,6 @@ public interface CrmDBOperations <T extends EnvironmentDependent> extends Enviro
     AbstractTradingAccountExtensionRepository tradingAccountExtensionRepository();
 
     AbstractWithdrawalRequestRepository withdrawalRequestRepository();
+
+    AbstractCreditCardDepositExtensionBase creditCardDepositExtensionBase();
 }

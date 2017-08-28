@@ -3,10 +3,7 @@ package com.betamedia.atom.core.dsl.operations;
 import com.betamedia.atom.core.api.tp.entities.request.MarketingParametersRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.environment.tp.EnvironmentDependent;
-import com.betamedia.atom.core.persistence.entities.ContactBase;
-import com.betamedia.atom.core.persistence.entities.ContactExtension;
-import com.betamedia.atom.core.persistence.entities.TrackingInfo;
-import com.betamedia.atom.core.persistence.entities.TrackingInfoExtension;
+import com.betamedia.atom.core.persistence.entities.*;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.request.MobileDepositRO;
@@ -68,4 +65,6 @@ public interface CustomerOperations<T extends EnvironmentDependent> extends Envi
     ContactBase findByEmailAddress(String emailAddress);
 
     ContactExtension findExtByEmailAddress (String emailAddress);
+
+    CreditCarddepositExtensionBase findDeposit(String customerID);
 }

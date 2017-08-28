@@ -50,6 +50,9 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     private AbstractContactExtensionRepository<T> contactExtensionRepository;
 
     @Autowired
+    private AbstractCreditCardDepositExtensionBase<T> creditCardDepositExtensionBase;
+
+    @Autowired
     private AbstractRiskLimitsRepository<T> riskLimitsRepository;
 
     @Autowired
@@ -341,5 +344,12 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         ContactExtension contactExtension = contactExtensionRepository.findByUsername(emailAddress);
         assertNotNull(contactExtension, "Unable to locate customer by email: " + emailAddress);
         return contactExtension;
+    }
+
+    @Override
+    public CreditCarddepositExtensionBase findDeposit(String customerID){
+        CreditCarddepositExtensionBase ccExtBase = creditCardDepositExtensionBase.findOne(customerID);
+        assertNotNull(ccExtBase, "Unable to locate customer by email: " + customerID);
+        return ccExtBase;
     }
 }

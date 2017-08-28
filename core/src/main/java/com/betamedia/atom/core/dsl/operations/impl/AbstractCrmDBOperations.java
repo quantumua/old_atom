@@ -38,7 +38,8 @@ public abstract class AbstractCrmDBOperations<T extends EnvironmentDependent> im
     @Autowired
     private AbstractWithdrawalRequestRepository<T> withdrawalRequestRepository;
 
-
+    @Autowired
+    private AbstractCreditCardDepositExtensionBase<T> creditCardDepositExtensionBase;
 
     @Override
     public AbstractConnectionBaseRepository connectionBaseRepository() {
@@ -83,5 +84,10 @@ public abstract class AbstractCrmDBOperations<T extends EnvironmentDependent> im
     @Override
     public AbstractWithdrawalRequestRepository withdrawalRequestRepository() {
         return withdrawalRequestRepository;
+    }
+
+    @Override
+    public AbstractCreditCardDepositExtensionBase creditCardDepositExtensionBase() {
+        return creditCardDepositExtensionBase;
     }
 }
