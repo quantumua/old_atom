@@ -1,6 +1,6 @@
 implementationVersion,revisionDate,pageObjectName,locatorId,text
-2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Herzlich willkommen
-2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Starten
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,% completed
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Chat Now
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Documents

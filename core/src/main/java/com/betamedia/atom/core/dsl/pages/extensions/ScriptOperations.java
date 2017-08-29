@@ -16,7 +16,7 @@ import static com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations.Scri
 public interface ScriptOperations extends ExecutesScripts, Logging, WaitOperations {
 
     default void setDisplayBlock(By first, By... rest) {
-        executeScript(SET_DISPLAY_BLOCK, find(first, rest));
+        executeScript(SET_DISPLAY_BLOCK, waitUntilExists(first, rest));
     }
 
     /**
