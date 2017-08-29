@@ -4,7 +4,7 @@ import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.extensions.CssOperations;
 import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentDialog;
+import com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.UploadDocumentsDialog;
 import com.betamedia.atom.core.fwtestrunner.storage.FileSystemStorageService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +16,7 @@ import java.util.UUID;
  * Created by vsnigur on 6/7/17.
  * dialog after questionnaires to upload document scan for identification person
  */
-public class UploadDocumentDialogImpl extends AbstractPageObject implements UploadDocumentDialog, CssOperations, ScriptOperations {
+public class UploadDocumentsDialogImpl extends AbstractPageObject implements UploadDocumentsDialog, CssOperations, ScriptOperations {
 
     private static final String POI_ID_FRONT_PATH = "files/sample_id_front.jpg";
     private static final String POI_ID_BACK_PATH = "files/sample_id_back.jpg";
@@ -34,7 +34,8 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By docDescription;
     @StoredId (localized = true)
     private By smsWrapper;
-
+    @StoredId (localized = true)
+    private By smsWrapperDescription;
     @StoredId
     private By uploadDocumentDialogCloseButton;
     @StoredId
@@ -47,9 +48,9 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     /* POI (Proof of identity) Controls*/
     @StoredId (localized = true)
     private By poiHeader;
-    @StoredId (localized = true)
+    @StoredId //(localized = true)
     private By poiDocumentTypeSelector;
-    @StoredId (localized = true)
+    @StoredId //(localized = true)
     private By poiWrapper;
     @StoredId
     private By poiUploadInput;
@@ -69,7 +70,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     private By poiNotApprovedXImage;
     @StoredId
     private By poiUploadDocumentWrapperOpen;
-    @StoredId (localized = true)
+    @StoredId
     private By poiUploadDocumentWrapperClosed;
 
     /* POR (Proof of residence) Controls*/
@@ -94,7 +95,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     @StoredId
     private By porUploadDocumentWrapperClosed;
 
-    public UploadDocumentDialogImpl(WebDriver webDriver) {
+    public UploadDocumentsDialogImpl(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -149,13 +150,13 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public UploadDocumentDialog poiUploadIdCard() {
+    public UploadDocumentsDialog poiUploadIdCard() {
         poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
         return this;
     }
 
     @Override
-    public UploadDocumentDialog poiUploadIdCard(String frontImagePath, String backImagePath) {
+    public UploadDocumentsDialog poiUploadIdCard(String frontImagePath, String backImagePath) {
         poiClickHeader();
         selectPOIDocumentType(poiIDSelection);
         setDisplayBlock(poiUploadInput);
@@ -167,7 +168,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public UploadDocumentDialog poiUploadPassport(String imagePath) {
+    public UploadDocumentsDialog poiUploadPassport(String imagePath) {
         poiClickHeader();
         selectPOIDocumentType(poiPassportSelection, false);
         /*make input element visible*/
@@ -184,7 +185,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public UploadDocumentDialog poiUploadDriverLicense(String frontImagePath, String backImagePath) {
+    public UploadDocumentsDialog poiUploadDriverLicense(String frontImagePath, String backImagePath) {
         poiClickHeader();
         selectPOIDocumentType(poiDriverLicenseSelection);
         setDisplayBlock(poiUploadInput);
@@ -196,7 +197,7 @@ public class UploadDocumentDialogImpl extends AbstractPageObject implements Uplo
     }
 
     @Override
-    public UploadDocumentDialog porUploadElectricityBill(String imagePath) {
+    public UploadDocumentsDialog porUploadElectricityBill(String imagePath) {
         porClickHeader();
         //Electricity bill selected by default
         waitUntilDisplayed(porWrapper);

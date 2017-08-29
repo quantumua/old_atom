@@ -88,7 +88,7 @@ public interface WebPageFactory {
 
     ConfirmCloseMessage confirmCloseMessage();
 
-    UploadDocumentDialog uploadDocumentDialog();
+    UploadDocumentsDialog uploadDocumentDialog();
 
     ConfirmAnswersDialog confirmAnswers();
 

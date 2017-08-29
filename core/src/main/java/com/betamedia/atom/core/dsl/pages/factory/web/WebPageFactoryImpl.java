@@ -202,8 +202,8 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     }
 
     @Override
-    public UploadDocumentDialog uploadDocumentDialog() {
-        return creator.getPage(UploadDocumentDialogImpl.class);
+    public UploadDocumentsDialog uploadDocumentDialog() {
+        return creator.getPage(UploadDocumentsDialogImpl.class);
     }
 
     @Override

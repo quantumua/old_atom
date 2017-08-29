@@ -1,8 +1,13 @@
 implementationVersion,revisionDate,pageObjectName,locatorId,text
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,أهلا بك
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,ابدأ
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,الوثائق
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,إثبات الهوية
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,porHeader,إثبات الإقامة
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,creditCardHeader,بطاقة الإئتمان
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,othersHeader,أخرى
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% منجز
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,الدردشة الآن
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,الوثائق
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,"التحقق من الهوية - عملية التحقق هذه تؤكد هويتك وهي جزءاً مهماً من إجراءاتنا الأمنية، مما يحافظ على سلامتك وسلامة استثماراتك."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,تحميل بواسطة هاتفك الذكي
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"يمكنك تحميل الوثائق باستخدام هاتفك الجوال.
+                                                                              يرجى تأكيد رقم هاتفك الجوال
+                                                                              تم إرسال رسالة نصية إلى هاتفك الجوال. يرجى النقر على الرابط المرفق ومتابعة تحميل الوثائق."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader, إثبات الهوية (POI)
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,إثبات الإقامة (POR)

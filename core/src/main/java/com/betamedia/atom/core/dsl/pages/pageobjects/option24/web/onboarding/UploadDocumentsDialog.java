@@ -4,7 +4,7 @@ import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations;
 /**
  * Created by vsnigur on 6/7/17.
  */
-public interface UploadDocumentDialog extends LocalizationOperations {
+public interface UploadDocumentsDialog extends LocalizationOperations {
 
     boolean exists();
 
@@ -12,19 +12,19 @@ public interface UploadDocumentDialog extends LocalizationOperations {
 
     boolean porXImageExists();
 
-    UploadDocumentDialog porUploadElectricityBill(String imagePath);
+    UploadDocumentsDialog porUploadElectricityBill(String imagePath);
 
     void poiClickHeader();
 
-    UploadDocumentDialog poiUploadIdCard();
+    UploadDocumentsDialog poiUploadIdCard();
 
-    UploadDocumentDialog poiUploadIdCard(String frontImagePath, String backImagePath);
+    UploadDocumentsDialog poiUploadIdCard(String frontImagePath, String backImagePath);
 
-    UploadDocumentDialog poiUploadPassport(String imagePath);
+    UploadDocumentsDialog poiUploadPassport(String imagePath);
 
     boolean poiXImageExists();
 
-    UploadDocumentDialog poiUploadDriverLicense(String frontImagePath, String backImagePath);
+    UploadDocumentsDialog poiUploadDriverLicense(String frontImagePath, String backImagePath);
 
     boolean poiBackImageExists();
 

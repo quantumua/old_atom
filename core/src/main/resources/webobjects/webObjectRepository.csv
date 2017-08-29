@@ -274,57 +274,58 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,productButtons,CLASS_NAME,rootMenu
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,signUpBtn,XPATH,//*[@id='open-account-btn']
 2.6.2,2017-05-29 15:24 +0000,TopNavigationPageImpl,depositBtn,ID,deposit-btn
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,pageRoot,CSS,.content.mobile-single
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,progressBarText,XPATH,.//*[@id='popup-wizard']/div/div/div/div/header/div/div[2]/p/text()
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,chatLink,XPATH,.//*[@id='popup-wizard']/div/div/div/div/header/div/div[3]/span/a/text()
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,docHeader,XPATH,.//*[@id='doc-header']/h3/text()
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,docDescription,XPATH,.//*[@id='doc-header']/p/text()
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,smsWrapper,XPATH,.//*[@id='doc-sms-wrapper']/h4/text()[1]
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiContainer,XPATH,.//*[@id='poi-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadDocumentWrapperOpen,XPATH,.//*[@id='doc-poi-wrapper'][@class="upload-document-wrapper toggleCollapse toggleOpen"]
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadDocumentWrapperClosed,XPATH,.//*[@id='doc-poi-wrapper'][@class="upload-document-wrapper toggleCollapse toggleClosed"]
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentApproved,XPATH,".//*[@id='poi-container']//*[@class=""document-box aprroved-doc""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentNotApproved,XPATH,".//*[@id='poi-container']//*[@class=""document-box not-aprroved""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiHeader,ID,doc-poi-headline
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiWrapper,ID,doc-upload-form-poi-wrapper
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiUploadInput,ID,fileUploadDocsPOI
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,velocityAnimatingImage,XPATH,".//div[contains(@class,'velocity-animating')]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiFrontImage,CLASS_NAME,poi-front-image
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiBackImage,XPATH,.//*[@class='document-box poi-back-image']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiIDSelection,CSS,li[data-original-index='3']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiPassportSelection,CSS,li[data-original-index='0']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiDriverLicenseSelection,CSS,li[data-original-index='1']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,poiNotApprovedXImage,XPATH,.//*[@id='doc-poi-form-space']//*[@class='document-box not-aprroved']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porHeader,ID,doc-por-headline
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentTypeSelector,ID,selectDocumentTypePOR
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porWrapper,ID,doc-upload-form-por-wrapper
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porUploadInput,ID,fileUploadDocsPOR
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porCheckmarkImage,XPATH,.//*[@id='doc-por-headline']//*[@class='icon-Checkmark']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porApprovedImage,XPATH,.//*[@id='doc-por-form-space']//*[@class='document-box aprroved']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porNotApprovedXImage,XPATH,.//*[@id='doc-por-form-space']//*[@class='document-box not-aprroved']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTitle,XPATH,".//*[@id='acc']//*[@class=""icon por-icon""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porContainet,XPATH,.//*[@id='por-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porUploadDocumentWrapperOpen,XPATH,.//*[@id='doc-por-wrapper'][@class="upload-document-wrapper toggleCollapse toggleOpen"]
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porUploadDocumentWrapperClosed,XPATH,.//*[@id='doc-por-wrapper'][@class="upload-document-wrapper toggleCollapse toggleClosed"]
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porTypeSelector,XPATH,".//*[@id='por-container']//*[@class=""btn dropdown-toggle btn-default""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porBrowseButton,XPATH,".//*[@id='por-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentApproved,XPATH,".//*[@id='por-container']//*[@class=""document-box aprroved-doc""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,porDocumentNotApproved,XPATH,".//*[@id='por-container']//*[@class=""document-box not-aprroved""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccTitle,XPATH,".//*[@id='acc']//*[@class=""icon cc-icon""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccContainet,XPATH,.//*[@id='cc-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccTypeSelector,XPATH,".//*[@id='cc-container']//*[@class=""btn dropdown-toggle btn-default""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccBrowseButton,XPATH,".//*[@id='cc-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccDocumentAprroved,XPATH,".//*[@id='cc-container']//*[@class=""document-box aprroved-doc""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,ccDocumentNotAprroved,XPATH,".//*[@id='cc-container']//*[@class=""document-box not-aprroved""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersTitle,XPATH,".//*[@id='acc']//*[@class=""icon others-icon""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersContainet,XPATH,.//*[@id='others-container']
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersTypeSelector,XPATH,".//*[@id='others-container']//*[@class=""btn dropdown-toggle btn-default""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersBrowseButton,XPATH,".//*[@id='others-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentAprroved,XPATH,".//*[@id='others-container']//*[@class=""document-box aprroved-doc""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,othersDocumentNotAprroved,XPATH,".//*[@id='others-container']//*[@class=""document-box not-aprroved""]"
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,uploadDocumentDialogCloseButton,ID,modal-close
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentDialogImpl,documentTypeButton,TAG_NAME,button
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,pageRoot,CSS,.content.mobile-single
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,XPATH,.//*[@id='popup-wizard']/div/div/div/div/header/div/div[2]/p
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,XPATH,.//*[@id='popup-wizard']/div/div/div/div/header/div/div[3]/span/a
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,XPATH,.//*[@id='doc-header']/h3
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,XPATH,.//*[@id='doc-header']/p
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,XPATH,.//*[@id='doc-sms-wrapper']/h4
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,XPATH,.//*[@id='docsms-collapse-wrapper']/p
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiContainer,XPATH,.//*[@id='poi-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiUploadDocumentWrapperOpen,XPATH,.//*[@id='doc-poi-wrapper'][@class="upload-document-wrapper toggleCollapse toggleOpen"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiUploadDocumentWrapperClosed,XPATH,.//*[@id='doc-poi-wrapper'][@class="upload-document-wrapper toggleCollapse toggleClosed"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiDocumentApproved,XPATH,".//*[@id='poi-container']//*[@class=""document-box aprroved-doc""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiDocumentNotApproved,XPATH,".//*[@id='poi-container']//*[@class=""document-box not-aprroved""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,ID,doc-poi-headline
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiDocumentTypeSelector,ID,selectDocumentTypePOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiWrapper,ID,doc-upload-form-poi-wrapper
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiUploadInput,ID,fileUploadDocsPOI
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,velocityAnimatingImage,XPATH,".//div[contains(@class,'velocity-animating')]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiFrontImage,CLASS_NAME,poi-front-image
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiBackImage,XPATH,.//*[@class='document-box poi-back-image']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiIDSelection,CSS,li[data-original-index='3']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiPassportSelection,CSS,li[data-original-index='0']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiDriverLicenseSelection,CSS,li[data-original-index='1']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiNotApprovedXImage,XPATH,.//*[@id='doc-poi-form-space']//*[@class='document-box not-aprroved']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,ID,doc-por-headline
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porDocumentTypeSelector,ID,selectDocumentTypePOR
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porWrapper,ID,doc-upload-form-por-wrapper
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porUploadInput,ID,fileUploadDocsPOR
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porCheckmarkImage,XPATH,.//*[@id='doc-por-headline']//*[@class='icon-Checkmark']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porApprovedImage,XPATH,.//*[@id='doc-por-form-space']//*[@class='document-box aprroved']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porNotApprovedXImage,XPATH,.//*[@id='doc-por-form-space']//*[@class='document-box not-aprroved']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porTitle,XPATH,".//*[@id='acc']//*[@class=""icon por-icon""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porContainet,XPATH,.//*[@id='por-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porUploadDocumentWrapperOpen,XPATH,.//*[@id='doc-por-wrapper'][@class="upload-document-wrapper toggleCollapse toggleOpen"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porUploadDocumentWrapperClosed,XPATH,.//*[@id='doc-por-wrapper'][@class="upload-document-wrapper toggleCollapse toggleClosed"]
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porTypeSelector,XPATH,".//*[@id='por-container']//*[@class=""btn dropdown-toggle btn-default""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porBrowseButton,XPATH,".//*[@id='por-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porDocumentApproved,XPATH,".//*[@id='por-container']//*[@class=""document-box aprroved-doc""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porDocumentNotApproved,XPATH,".//*[@id='por-container']//*[@class=""document-box not-aprroved""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,ccTitle,XPATH,".//*[@id='acc']//*[@class=""icon cc-icon""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,ccContainet,XPATH,.//*[@id='cc-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,ccTypeSelector,XPATH,".//*[@id='cc-container']//*[@class=""btn dropdown-toggle btn-default""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,ccBrowseButton,XPATH,".//*[@id='cc-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,ccDocumentAprroved,XPATH,".//*[@id='cc-container']//*[@class=""document-box aprroved-doc""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,ccDocumentNotAprroved,XPATH,".//*[@id='cc-container']//*[@class=""document-box not-aprroved""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,othersTitle,XPATH,".//*[@id='acc']//*[@class=""icon others-icon""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,othersContainet,XPATH,.//*[@id='others-container']
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,othersTypeSelector,XPATH,".//*[@id='others-container']//*[@class=""btn dropdown-toggle btn-default""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,othersBrowseButton,XPATH,".//*[@id='others-container']//*[@class=""btn btn-inv btn-block browse-file-button""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,othersDocumentAprroved,XPATH,".//*[@id='others-container']//*[@class=""document-box aprroved-doc""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,othersDocumentNotAprroved,XPATH,".//*[@id='others-container']//*[@class=""document-box not-aprroved""]"
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,uploadDocumentDialogCloseButton,ID,modal-close
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,documentTypeButton,TAG_NAME,button
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,winID,XPATH,".//ul[contains(@id,'menu-my-account')]//li[2]/a"
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,verificationHeader,ID,Upload-Document-SEU
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsTabImpl,poiHeader,XPATH,.//*[@id='acc']//div[@data-target='#poi']
