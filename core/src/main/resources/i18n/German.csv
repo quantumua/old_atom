@@ -5,9 +5,9 @@ implementationVersion,revisionDate,pageObjectName,locatorId,text
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Chat Starten
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Dokumente
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,"Identitätsnachweis - dieser Verifizierungsprozess bestätigt Ihre Identität und ist ein wichtiger Teil unserer Sicherheitsmaßnahmen, um Sie und Ihre Investition zu schützen."
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper, Mit Ihrem Smartphone hochladen
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,Mit Ihrem Smartphone hochladen
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"Sie können Ihre Dokumente mit Ihrem Mobiltelefon hochladen.
 Bestätigen Sie bitte Ihre Mobiltelefonnummer
 Es wurde eine SMS an Ihr Mobiltelefon geschickt. Klicken Sie bitte auf den beigefügten Link und fahren Sie fort, Ihre Dokumente hochzuladen."
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader, Identitätsnachweis
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader, Wohnnachweis
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,Identitätsnachweis
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,Wohnnachweis

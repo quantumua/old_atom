@@ -1,7 +1,7 @@
 implementationVersion,revisionDate,pageObjectName,locatorId,text
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
 2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
-2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,% completed
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% completed
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Chat Now
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Documents
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,"ID Verification - This verification process confirms your identity and is an important part of our security measures, keeping you and your investments safe."
