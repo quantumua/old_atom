@@ -19,8 +19,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
-import static org.testng.AssertJUnit.assertFalse;
-import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Created by vsnigur on 7/3/17.
@@ -534,6 +532,10 @@ public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
                 .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_60)
                 .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
+                .withInstrumentsTradedBefore(QuestionnaireAnswers.InstrumentsTradedBefore.NO_EXPERIENCE)
+                .withFrequencyPastTransactions(QuestionnaireAnswers.FrequencyPastTransactions.OCCASIONALLY)
+                .withVolumePastTransaction(QuestionnaireAnswers.VolumePastTransaction.LESS_THAN_10)
+                .withCommonLevelPastTransaction(QuestionnaireAnswers.CommonLevelPastTransaction.LOWER_THAN_1_50)
                 .build());
     }
 
