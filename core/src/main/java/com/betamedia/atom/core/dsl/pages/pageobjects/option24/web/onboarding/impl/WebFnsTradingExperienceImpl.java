@@ -23,21 +23,16 @@ public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience im
 
     @Override
     public void submit(TradingExperienceInfo info) {
-        submitOnWizard(info.sharesExperience);
-        submitOnWizard(info.binaryExperience);
-        if (nonNull(info.averageYearlyBinaryVolume)) submitOnWizard(info.averageYearlyBinaryVolume);
-        submitOnWizard(info.forExExperience);
-        if (nonNull(info.averageYearlyForExVolume)) submitOnWizard(info.averageYearlyForExVolume);
-        if (nonNull(info.commonLeverage)) submitOnWizard(info.commonLeverage);
+        submitOnWizard(info.instrumentsTradedBefore);
+        submitOnWizard(info.frequencyPastTransactions);
+        submitOnWizard(info.volumePastTransaction);
+        submitOnWizard(info.commonLevelPastTransaction);
         submitOnWizard(info.financialWorkExperience);
         submitOnWizard(info.cfdBinaryKnowledge);
         submitOnWizard(info.mainFactorKnowledge);
         submitOnWizard(info.howToCloseKnowledge);
-        submitOnWizard(info.cfdLeverageKnowledge);
-        submitOnWizard(info.stopLossKnowledge);
         submitOnWizard(info.requiredMarginKnowledge);
         submitOnWizard(info.marginLevelDropKnowledge);
-        submitOnWizard(info.automaticStopKnowledge);
         submitOnWizard(info.lossOn1to50Knowledge);
         submitOnWizard(info.lossOn1to200Knowledge);
         waitUntilDisplayed(buttonWizardDeclaration).click();

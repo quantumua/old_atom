@@ -53,7 +53,6 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
             find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
             executeScript("arguments[0].click()", find(purposeOfTradingBttn));
         }
-        waitUntilExists(By.id("FinancialProducts1Shares"));
     }
 
     private void submitOnWizard(String dataValue) {

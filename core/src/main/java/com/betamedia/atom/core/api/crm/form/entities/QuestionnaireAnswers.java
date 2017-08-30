@@ -575,9 +575,9 @@ public class QuestionnaireAnswers {
     }
 
     public enum CfdBinaryKnowledge implements Answer {
-        SPECULATIVE("knowledgeCfdsBinariesSpeculative", 4),
-        NON_RISKY("knowledgeCfdsBinariesNonRisky", 0),
-        PHYSICALLY_DELIVERING("knowledgeCfdsBinariesPhysicallyDelivering", 0);
+        SPECULATIVE("knowledgeCfdsSpeculative", 4),
+        NON_RISKY("knowledgeCfdsNonRisky", 0),
+        PHYSICALLY_DELIVERING("knowledgeCfdsPhysicallyDelivering", 0);
 
         public final String value;
         public final int score;
@@ -934,6 +934,120 @@ public class QuestionnaireAnswers {
         }
 
         public static BinaryProbabilityKnowledge parse(String input) {
+            return QuestionnaireAnswers.parse(values(), input);
+        }
+    }
+
+    public enum InstrumentsTradedBefore implements Answer {
+        LEVERAGED("productLeveraged", 0),
+        SHARES("productBonds", 0),
+        BINARY("productBinary", 0),
+        NO_EXPERIENCE("productNever", 0);
+
+        public final String value;
+        public final int score;
+
+        InstrumentsTradedBefore(String value, int score) {
+            this.value = value;
+            this.score = score;
+        }
+
+        @Override
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public int getScore() {
+            return score;
+        }
+
+        public static InstrumentsTradedBefore parse(String input) {
+            return QuestionnaireAnswers.parse(values(), input);
+        }
+    }
+
+    public enum FrequencyPastTransactions implements Answer {
+        FREQUENTLY("sharesFrequently", 0),
+        REGULARLY("sharesRegularly", 0),
+        OCCASIONALLY("sharesOccasionally", 0);
+
+        public final String value;
+        public final int score;
+
+        FrequencyPastTransactions(String value, int score) {
+            this.value = value;
+            this.score = score;
+        }
+
+        @Override
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public int getScore() {
+            return score;
+        }
+
+        public static FrequencyPastTransactions parse(String input) {
+            return QuestionnaireAnswers.parse(values(), input);
+        }
+    }
+
+    public enum VolumePastTransaction implements Answer {
+        MORE_THAN_100("volumeMoreThan_100", 0),
+        BETWEEN_10_100("volumeBetween_10-100", 0),
+        LESS_THAN_10("volumeLessThan_10", 0);
+
+        public final String value;
+        public final int score;
+
+        VolumePastTransaction(String value, int score) {
+            this.value = value;
+            this.score = score;
+        }
+
+        @Override
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public int getScore() {
+            return score;
+        }
+
+        public static VolumePastTransaction parse(String input) {
+            return QuestionnaireAnswers.parse(values(), input);
+        }
+    }
+
+    public enum CommonLevelPastTransaction implements Answer {
+        LEVERAGE_1_200_TO_1_500("commonLeverage_1_to_200_or_1_to_500", 0),
+        LEVERAGE_HIGHER_THAN_1_500("commonLeverage_HigherThan_1_to_500", 0),
+        LEVERAGE_1_50_TO_1_200("commonLeverage_1_to_50_or_1_to_200", 0),
+        LOWER_THAN_1_50("commonLeverage_LowerThan_1_to_50", 0);
+
+        public final String value;
+        public final int score;
+
+        CommonLevelPastTransaction(String value, int score) {
+            this.value = value;
+            this.score = score;
+        }
+
+        @Override
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public int getScore() {
+            return score;
+        }
+
+        public static CommonLevelPastTransaction parse(String input) {
             return QuestionnaireAnswers.parse(values(), input);
         }
     }

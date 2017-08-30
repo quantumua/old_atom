@@ -47,6 +47,10 @@ public class TradingExperienceInfoParserTest {
                 .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_60)
                 .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_50)
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
+                .withInstrumentsTradedBefore(InstrumentsTradedBefore.LEVERAGED)
+                .withFrequencyPastTransactions(FrequencyPastTransactions.FREQUENTLY)
+                .withVolumePastTransaction(VolumePastTransaction.LESS_THAN_10)
+                .withCommonLevelPastTransaction(CommonLevelPastTransaction.LOWER_THAN_1_50)
                 .build();
     }
 

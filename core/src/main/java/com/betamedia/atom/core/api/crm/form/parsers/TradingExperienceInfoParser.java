@@ -31,6 +31,10 @@ public class TradingExperienceInfoParser {
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.parse(data.getAverageYearlyBinaryVolume()))
                 .withAverageYearlyForExVolume(AverageYearlyForExVolume.parse(data.getAverageYearlyForExVolume()))
                 .withCommonLeverage(CommonForExLeverage.parse(data.getCommonLeverage()))
+                .withInstrumentsTradedBefore(InstrumentsTradedBefore.parse(data.getInstrumentsTradedBefore()))
+                .withFrequencyPastTransactions(FrequencyPastTransactions.parse(data.getFrequencyPastTransactions()))
+                .withVolumePastTransaction(VolumePastTransaction.parse(data.getVolumePastTransaction()))
+                .withCommonLevelPastTransaction(CommonLevelPastTransaction.parse(data.getCommonLevelPastTransaction()))
                 .build();
     }
 }

@@ -88,6 +88,30 @@ public class QuestionnaireData {
     private String binaryInvestLossKnowledge;
     @CsvBindByName
     private String binaryProbabilityKnowledge;
+    @CsvBindByName
+    private String instrumentsTradedBefore;
+    @CsvBindByName
+    private String frequencyPastTransactions;
+    @CsvBindByName
+    private String volumePastTransaction;
+    @CsvBindByName
+    private String commonLevelPastTransaction;
+
+    public String getFrequencyPastTransactions() {
+        return frequencyPastTransactions;
+    }
+
+    public String getVolumePastTransaction() {
+        return volumePastTransaction;
+    }
+
+    public String getCommonLevelPastTransaction() {
+        return commonLevelPastTransaction;
+    }
+
+    public String getInstrumentsTradedBefore() {
+        return instrumentsTradedBefore;
+    }
 
     public String getEmploymentStatus() {
         return employmentStatus;

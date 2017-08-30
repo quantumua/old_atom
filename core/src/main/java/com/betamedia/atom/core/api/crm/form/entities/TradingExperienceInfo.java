@@ -31,9 +31,15 @@ public class TradingExperienceInfo {
     public final String binaryInvestProfitKnowledge;
     public final String binaryInvestLossKnowledge;
     public final String binaryProbabilityKnowledge;
+
+    public final String instrumentsTradedBefore;
+    public final String frequencyPastTransactions;
+    public final String volumePastTransaction;
+    public final String commonLevelPastTransaction;
+
     public final int expectedScore;
 
-    private TradingExperienceInfo(String sharesExperience, String binaryExperience, String averageYearlyBinaryVolume, String forExExperience, String averageYearlyForExVolume, String commonLeverage, String financialWorkExperience, String cfdBinaryKnowledge, String mainFactorKnowledge, String howToCloseKnowledge, String cfdLeverageKnowledge, String stopLossKnowledge, String requiredMarginKnowledge, String marginLevelDropKnowledge, String automaticStopKnowledge, String lossOn1to50Knowledge, String lossOn1to200Knowledge, String binaryInvestProfitKnowledge, String binaryInvestLossKnowledge, String binaryProbabilityKnowledge, int expectedScore) {
+    public TradingExperienceInfo(String sharesExperience, String binaryExperience, String averageYearlyBinaryVolume, String forExExperience, String averageYearlyForExVolume, String commonLeverage, String financialWorkExperience, String cfdBinaryKnowledge, String mainFactorKnowledge, String howToCloseKnowledge, String cfdLeverageKnowledge, String stopLossKnowledge, String requiredMarginKnowledge, String marginLevelDropKnowledge, String automaticStopKnowledge, String lossOn1to50Knowledge, String lossOn1to200Knowledge, String binaryInvestProfitKnowledge, String binaryInvestLossKnowledge, String binaryProbabilityKnowledge, String instrumentsTradedBefore, String frequencyPastTransactions, String volumePastTransaction, String commonLevelPastTransaction, int expectedScore) {
         this.sharesExperience = sharesExperience;
         this.binaryExperience = binaryExperience;
         this.averageYearlyBinaryVolume = averageYearlyBinaryVolume;
@@ -54,6 +60,10 @@ public class TradingExperienceInfo {
         this.binaryInvestProfitKnowledge = binaryInvestProfitKnowledge;
         this.binaryInvestLossKnowledge = binaryInvestLossKnowledge;
         this.binaryProbabilityKnowledge = binaryProbabilityKnowledge;
+        this.instrumentsTradedBefore = instrumentsTradedBefore;
+        this.frequencyPastTransactions = frequencyPastTransactions;
+        this.volumePastTransaction = volumePastTransaction;
+        this.commonLevelPastTransaction = commonLevelPastTransaction;
         this.expectedScore = expectedScore;
     }
 
@@ -109,7 +119,10 @@ public class TradingExperienceInfo {
         private BinaryInvestProfitKnowledge binaryInvestProfitKnowledge;
         private BinaryInvestLossKnowledge binaryInvestLossKnowledge;
         private BinaryProbabilityKnowledge binaryProbabilityKnowledge;
-
+        private InstrumentsTradedBefore instrumentsTradedBefore;
+        private FrequencyPastTransactions frequencyPastTransactions;
+        private VolumePastTransaction volumePastTransaction;
+        private CommonLevelPastTransaction commonLevelPastTransaction;
         private TradingExperienceInfoBuilder(){}
 
         public TradingExperienceInfoBuilder withSharesExperience(SharesExperience sharesExperience) {
@@ -212,6 +225,26 @@ public class TradingExperienceInfo {
             return this;
         }
 
+        public TradingExperienceInfoBuilder withInstrumentsTradedBefore(InstrumentsTradedBefore instrumentsTradedBefore) {
+            this.instrumentsTradedBefore = instrumentsTradedBefore;
+            return this;
+        }
+
+        public TradingExperienceInfoBuilder withFrequencyPastTransactions(FrequencyPastTransactions frequencyPastTransactions) {
+            this.frequencyPastTransactions = frequencyPastTransactions;
+            return this;
+        }
+
+        public TradingExperienceInfoBuilder withVolumePastTransaction(VolumePastTransaction volumePastTransaction) {
+            this.volumePastTransaction = volumePastTransaction;
+            return this;
+        }
+
+        public TradingExperienceInfoBuilder withCommonLevelPastTransaction(CommonLevelPastTransaction commonLevelPastTransaction) {
+            this.commonLevelPastTransaction = commonLevelPastTransaction;
+            return this;
+        }
+
         public TradingExperienceInfo build() {
             return new TradingExperienceInfo(
                     valueIfPresent(sharesExperience),
@@ -234,6 +267,10 @@ public class TradingExperienceInfo {
                     valueIfPresent(binaryInvestProfitKnowledge),
                     valueIfPresent(binaryInvestLossKnowledge),
                     valueIfPresent(binaryProbabilityKnowledge),
+                    valueIfPresent(instrumentsTradedBefore),
+                    valueIfPresent(frequencyPastTransactions),
+                    valueIfPresent(volumePastTransaction),
+                    valueIfPresent(commonLevelPastTransaction),
                     getExpectedScore()
             );
         }
