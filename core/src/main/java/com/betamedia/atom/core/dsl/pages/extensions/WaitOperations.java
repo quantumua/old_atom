@@ -41,7 +41,7 @@ public interface WaitOperations extends Waiting, Finding {
     }
 
     default WebElement waitUntilClickable(By first, By... rest) {
-        return getWait().until(ExpectedConditions.elementToBeClickable(find(first, rest)));
+        return getWait().until(ExpectedConditions.elementToBeClickable(waitUntilDisplayed(first, rest)));
     }
 
     /**

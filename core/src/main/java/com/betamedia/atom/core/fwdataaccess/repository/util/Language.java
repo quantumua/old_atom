@@ -1,7 +1,5 @@
 package com.betamedia.atom.core.fwdataaccess.repository.util;
 
-import java.util.concurrent.RunnableScheduledFuture;
-
 /**
  * @author mbelyaev
  * @since 8/11/17
