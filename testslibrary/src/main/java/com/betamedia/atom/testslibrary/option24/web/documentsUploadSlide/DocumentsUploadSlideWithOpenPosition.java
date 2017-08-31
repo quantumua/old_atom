@@ -20,7 +20,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @TestLinkProperties(displayId = "CTW-5360")
     @Parameters({"countrycode", "phonecountryprefix"})
     public void depositMoreThan2000RestrictedAccountBeforePOIsubmit(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        createUserByUI(countrycode,phonecountryprefix,"1500");
+        createUser(countrycode,phonecountryprefix,"1500");
         closeWizardAndGoTrade();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         openPosition("0.01");
@@ -44,7 +44,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @TestLinkProperties(displayId = "CTW-5346")
     @Parameters({"countrycode", "phonecountryprefix"})
     public void depositMoreThan2000RestrictedAccountBeforePORSubmit(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        createUserByUI(countrycode,phonecountryprefix,"1500");
+        createUser(countrycode,phonecountryprefix,"1500");
         pages().uploadDocumentDialog().poiUploadPassport(POI_PASSPORT_PATH);
         pages().thankYouPage().startTrade();
         pages().setLeverageDialog().selectLeverage("100");
@@ -68,7 +68,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @TestLinkProperties(displayId = "CTW-5362")
     @Parameters({"countrycode", "phonecountryprefix"})
     public void multipleDepositsWithoutPOIAndPORAmountIsLessThenRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        createUserByUI(countrycode,phonecountryprefix,"390");
+        createUser(countrycode,phonecountryprefix,"390");
         closeWizardAndGoToMyAccount();
         //1 - Do not upload a document at POI then make additional deposit amount 500$
         makeDepositOpenPositionVerifySuccess("390");
@@ -85,7 +85,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @TestLinkProperties(displayId = "CTW-5363")
     @Parameters({"countrycode", "phonecountryprefix"})
     public void multipleDepositsWithoutPOIAndPORAmountIsOverThanRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        createUserByUI(countrycode,phonecountryprefix,"390");
+        createUser(countrycode,phonecountryprefix,"390");
         closeWizardAndGoTrade();
         makeDepositOpenPositionVerifyFailure("2000");
         pages().topNavigationPage().goToMyAccount();
@@ -110,7 +110,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @TestLinkProperties(displayId = "CTW-5348")
     @Parameters({"countrycode", "phonecountryprefix"})
     public void multipleDepositsWithoutPOIAndPORAmountIsLessThenRestrictionPolicy_5348(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        createUserByUI(countrycode, phonecountryprefix, "390");
+        createUser(countrycode, phonecountryprefix, "390");
         pages().uploadDocumentDialog()
                 .poiUploadPassport(POI_PASSPORT_PATH);
         pages().thankYouPage().startTrade();
@@ -128,7 +128,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @TestLinkProperties(displayId = "CTW-5349")
     @Parameters({"countrycode", "phonecountryprefix"})
     public void multipleDepositsWithoutPOIAndPORAmountIsOverThanRestrictionPolicy_5349(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        createUserByUI(countrycode,phonecountryprefix,"390");
+        createUser(countrycode,phonecountryprefix,"390");
         pages().uploadDocumentDialog()
                 .poiUploadPassport(POI_PASSPORT_PATH);
         pages().thankYouPage().startTrade();
@@ -152,7 +152,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @TestLinkProperties(displayId = "CTW-5350")
     @Parameters({"countrycode", "phonecountryprefix"})
     public void setPORBeforeFNSKnowledgeLogoutLogin(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        CustomerRegistrationInfo customerRegistrationInfo = createUserByUI(countrycode,phonecountryprefix,"50");
+        CustomerRegistrationInfo customerRegistrationInfo = createUser(countrycode,phonecountryprefix,"50");
         pages().uploadDocumentDialog()
                 .porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH)
                 .exists();
@@ -172,7 +172,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @TestLinkProperties(displayId = "CTW-5364")
     @Parameters({"countrycode", "phonecountryprefix"})
     public void setPOIBeforeFNSKnowledgeLogoutLogin(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        CustomerRegistrationInfo customerRegistrationInfo = createUserByUI(countrycode,phonecountryprefix,"50");
+        CustomerRegistrationInfo customerRegistrationInfo = createUser(countrycode,phonecountryprefix,"50");
         pages().uploadDocumentDialog()
                 .poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH)
                 .exists();

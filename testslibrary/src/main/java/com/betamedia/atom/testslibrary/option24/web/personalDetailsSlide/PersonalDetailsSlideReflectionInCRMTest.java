@@ -4,21 +4,20 @@ package com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide;
 import com.betamedia.atom.core.persistence.entities.ContactBase;
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
-import org.junit.Assert;
+import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractRestAPICustomerRegistrationTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
 import com.betamedia.atom.core.api.crm.form.entities.OnboardingWizardConditions;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 
 /**
  * @author Leonid Artemiev
  * @since 07/12/2017
  */
 
-public class PersonalDetailsSlideReflectionInCRMTest extends AbstractOnboardingUserExperienceTest {
+public class PersonalDetailsSlideReflectionInCRMTest extends AbstractRestAPICustomerRegistrationTest {
 	
     /*
      * Reflection in CRM verification

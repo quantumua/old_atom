@@ -2,7 +2,7 @@ package com.betamedia.atom.testslibrary.option24.web.depositSlide;
 
 import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
+import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractWebCustomerRegistrationTest;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
@@ -13,12 +13,12 @@ import org.testng.annotations.Test;
  * @author Leonid Artemiev
  * @since 8/28/17
  */
-public class DepositSlideSanityTest extends AbstractOnboardingUserExperienceTest {
+public class DepositSlideSanityTest extends AbstractWebCustomerRegistrationTest {
 
     @BeforeMethod
     @Parameters({"countrycode", "phonecountryprefix"})
     public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-       createUserByUI(countrycode, phonecountryprefix, "500");
+       createUser(countrycode, phonecountryprefix, "500");
     }
 
     /*

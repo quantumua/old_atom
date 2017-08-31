@@ -1,12 +1,12 @@
-package com.betamedia.atom.testslibrary.option24.web.experience;
+package com.betamedia.atom.testslibrary.option24.web.questionnaires;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
+import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractWebCustomerRegistrationTest;
 
 /**
  * Created by vsnigur on 8/29/17.
  */
-public class AbstractExperienceLevelsTests extends AbstractOnboardingUserExperienceTest {
+public class AbstractExperienceLevelsTests extends AbstractWebCustomerRegistrationTest {
 
     protected PersonalInformation getPersonalInformationScore0() {
         return PersonalInformation.builder()

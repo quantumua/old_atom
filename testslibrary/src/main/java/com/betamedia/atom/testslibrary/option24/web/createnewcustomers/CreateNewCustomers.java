@@ -11,7 +11,7 @@ import com.betamedia.atom.core.fwdataaccess.annotations.ClasspathLocation;
 import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
 import com.betamedia.atom.core.persistence.repositories.AbstractContactExtensionRepository;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
+import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingConditionsTest;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -23,7 +23,7 @@ import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers
 /**
  * Created by vsnigur on 7/3/17.
  */
-public class CreateNewCustomers extends AbstractOnboardingUserExperienceTest {
+public class CreateNewCustomers extends AbstractOnboardingConditionsTest {
 
     /**
      * Strings for tests

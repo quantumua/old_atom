@@ -1,7 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide;
 
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
+import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractWebCustomerRegistrationTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @since 7/20/17
  */
 
-public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperienceTest {
+public class DocumentsUploadSlideSanityTest extends AbstractWebCustomerRegistrationTest {
 
     static final String POI_PASSPORT_PATH = "files/sample_passport.jpg";
 
@@ -32,7 +32,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractOnboardingUserExperi
     @BeforeMethod
     @Parameters({"countrycode", "phonecountryprefix"})
     public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        createUserByUI(countrycode,phonecountryprefix,"50");
+        createUser(countrycode,phonecountryprefix,"50");
     }
 
     /*

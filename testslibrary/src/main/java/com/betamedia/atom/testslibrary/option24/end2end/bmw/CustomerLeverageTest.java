@@ -15,7 +15,7 @@ import static org.testng.AssertJUnit.assertTrue;
  * Created by vsnigur on 5/29/17.
  * Updated by Nir Shukrun on 6/6/17.
  */
-public class CustomerLeverageTest extends AbstractOnboardingUserExperienceTest {
+public class CustomerLeverageTest extends AbstractRestAPICustomerRegistrationTest {
 
     private final int FIRST_AVERAGE = 0;
     private final int SECOND_AVERAGE = 1;
