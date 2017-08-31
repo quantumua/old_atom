@@ -238,18 +238,32 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     }
 
     public void verifyPOIStatusInCRM (Integer poiOCRStatus) {
-        final ContactExtension contactExtension = getContactExtensionByEmail();
+        final ContactExtension contactExtension = getContactExtension();
+        softAssert().assertEquals(contactExtension.getPoiOcrStatus(), poiOCRStatus, "POI Ocr status verification, actual status: " + contactExtension.getPoiOcrStatus());
+    }
+
+    public void verifyPOIStatusInCRM (Integer poiOCRStatus, CustomerRegistrationInfo customerRegistrationInfo) {
+        final ContactExtension contactExtension = getContactExtension(customerRegistrationInfo.getEmail());
         softAssert().assertEquals(contactExtension.getPoiOcrStatus(), poiOCRStatus, "POI Ocr status verification, actual status: " + contactExtension.getPoiOcrStatus());
     }
 
     public void verifyPORStatusInCRM (Integer porOCRStatus) {
-        final ContactExtension contactExtension = getContactExtensionByEmail();
+        final ContactExtension contactExtension = getContactExtension();
         softAssert().assertEquals(contactExtension.getPorOcrStatus(), porOCRStatus, "POR Ocr status verification, actual status: " + contactExtension.getPorOcrStatus());
     }
 
-    private ContactExtension getContactExtensionByEmail () {
+    public void verifyPORStatusInCRM (Integer porOCRStatus, CustomerRegistrationInfo customerRegistrationInfo) {
+        final ContactExtension contactExtension = getContactExtension(customerRegistrationInfo.getEmail());
+        softAssert().assertEquals(contactExtension.getPorOcrStatus(), porOCRStatus, "POR Ocr status verification, actual status: " + contactExtension.getPorOcrStatus());
+    }
+
+    private ContactExtension getContactExtension() {
         pages().accountDetails().invoke();
         String emailAddress = pages().accountDetails().getEmail();
+        return getContactExtension(emailAddress);
+    }
+
+    private ContactExtension getContactExtension (String emailAddress) {
         final ContactExtension contactExtension = operations().customerOperations().findExtByEmailAddress(emailAddress);
         logger.info("contactExtension.getPoiOcrStatus()=" + contactExtension.getPoiOcrStatus());
         logger.info("contactExtension.getPorOcrStatus()=" + contactExtension.getPorOcrStatus());

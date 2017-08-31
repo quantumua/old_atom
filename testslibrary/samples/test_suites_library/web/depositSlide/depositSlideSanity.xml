@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Deposit Slide Sanity Test" verbose="1">
+    <parameter name="testlinkBuildId" value="273" />
+    <parameter name="testlinkPlanId" value="118533" />
+    <parameter name="countrycode" value="Germany"/>
+    <parameter name="phonecountryprefix" value="+49"/>
+    <test name="Deposit Slide Sanity Test">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.depositSlide.DepositSlideSanityTest">
+                <methods>
+                    <include name="setPOIBeforeFNSKnowledgeLogoutLogin" description="CTW-5364" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

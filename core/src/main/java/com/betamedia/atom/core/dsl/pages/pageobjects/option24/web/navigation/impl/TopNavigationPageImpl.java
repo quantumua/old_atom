@@ -140,4 +140,10 @@ public class TopNavigationPageImpl extends AbstractPageObject implements TopNavi
 
         waitUntilClickable(languageMenu) ;
     }
+
+    @Override
+    public void waitForLoggedOut() {
+        waitUntilPageLoad();
+        waitUntilDisplayed(signUpBtn);
+    }
 }

@@ -1,6 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide;
 
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
+import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -102,14 +103,13 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
         pages().assets().leavePandaFrame();
     }
 
-
     /*
      * CTW-5348:Multiple deposits without POI + POR - amount is less then restriction policy
      */
     @Test(description = "CTW-5348:Multiple deposits without POI + POR - amount is less then restriction policy")
     @TestLinkProperties(displayId = "CTW-5348")
     @Parameters({"countrycode", "phonecountryprefix"})
-    public void multipleDepositsWithoutPOIandPORAmountIsLessThenRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+    public void multipleDepositsWithoutPOIAndPORAmountIsLessThenRestrictionPolicy_5348(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         createUserByUI(countrycode, phonecountryprefix, "390");
         pages().uploadDocumentDialog()
                 .poiUploadPassport(POI_PASSPORT_PATH);
@@ -127,7 +127,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @Test(description = "CTW-5349:Multiple deposits without POI + POR - amount is over than restriction policy")
     @TestLinkProperties(displayId = "CTW-5349")
     @Parameters({"countrycode", "phonecountryprefix"})
-    public void multipleDepositsWithoutPOIandPORAmountIsOverThanRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+    public void multipleDepositsWithoutPOIAndPORAmountIsOverThanRestrictionPolicy_5349(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         createUserByUI(countrycode,phonecountryprefix,"390");
         pages().uploadDocumentDialog()
                 .poiUploadPassport(POI_PASSPORT_PATH);
@@ -144,6 +144,47 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
         softAssert().assertTrue(pages().cfdPositions().isAnyPositionOpened(), "One new position opened verification");
         pages().assets().leavePandaFrame();
     }
+
+    /*
+     * CTW-5350:Set POR before FNS + Knowledge - Logout/Login
+     */
+    @Test(description = "CTW-5350:Set POR before FNS + Knowledge - Logout/Login")
+    @TestLinkProperties(displayId = "CTW-5350")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void setPORBeforeFNSKnowledgeLogoutLogin(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        CustomerRegistrationInfo customerRegistrationInfo = createUserByUI(countrycode,phonecountryprefix,"50");
+        pages().uploadDocumentDialog()
+                .porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH)
+                .exists();
+        verifyPORStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
+        closeWizardAndGoTrade();
+        pages().controlPanel().logOut();
+        pages().topNavigationPage().waitForLoggedOut();
+        pages().topNavigationPage().logIn();
+        pages().loginDialog().login(customerRegistrationInfo.getEmail(),customerRegistrationInfo.getPassword());
+        softAssert().assertTrue(pages().uploadDocumentDialog().exists(), "Upload Documents page verification availability verification");
+    }
+
+    /*
+     * CTW-5364:Set POI before FNS + Knowledge - Logout/Login
+     */
+    @Test(description = "CTW-5364:Set POI before FNS + Knowledge - Logout/Login")
+    @TestLinkProperties(displayId = "CTW-5364")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void setPOIBeforeFNSKnowledgeLogoutLogin(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        CustomerRegistrationInfo customerRegistrationInfo = createUserByUI(countrycode,phonecountryprefix,"50");
+        pages().uploadDocumentDialog()
+                .poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH)
+                .exists();
+        verifyPOIStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
+        closeWizardAndGoTrade();
+        pages().controlPanel().logOut();
+        pages().topNavigationPage().waitForLoggedOut();
+        pages().topNavigationPage().logIn();
+        pages().loginDialog().login(customerRegistrationInfo.getEmail(),customerRegistrationInfo.getPassword());
+        softAssert().assertTrue(pages().uploadDocumentDialog().exists(), "Upload Documents page verification availability verification");
+    }
+
 
     private void makeDepositOpenPositionVerifySuccess(String deposit) {
        // 1 - deposit deposi

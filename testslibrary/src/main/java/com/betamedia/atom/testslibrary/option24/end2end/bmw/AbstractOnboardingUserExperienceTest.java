@@ -63,66 +63,61 @@ public class AbstractOnboardingUserExperienceTest extends AbstractOnboardingCond
      * @param phonecountryprefix - phone country prefix to use
      * @param depositAmount - deposit amount to set in credit card deposit slide
      */
-    public void createUserByUI(String countrycode, String phonecountryprefix, @Optional String depositAmount){
+
+    public CustomerRegistrationInfo createUserByUI(String countrycode, String phonecountryprefix, @Optional String depositAmount){
         pages().topNavigationPage().signUp();
-        pages().registrationDialog().register(CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
+        CustomerRegistrationInfo customerRegistrationInfo=CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
                 .withPhoneCountryPrefix(phonecountryprefix)
                 .withCurrency(Currency.USD.getFullName())
-                .build());
+                .build();
+        pages().registrationDialog().register(customerRegistrationInfo);
         pages().welcomeDialog().isStartBtnDisplayed();
         pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         PersonalInformation personalInfo = getPersonalInformation();
-        pages().fnsPersonalInformation().submit(personalInfo);
-        pages().fnsTradingExperience().submit(getTradingExperienceInfo());
+        passQuestionnaire(personalInfo, getTradingExperienceInfo());
         pages().creditCardDeposit().submit((CreditCardDeposit.builder()
                 .withDepositAmount(depositAmount)
                 .build()));
         pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().submit(personalInfo);
+        return customerRegistrationInfo;
     }
 
-    private PersonalInformation getPersonalInformation() {
-        return PersonalInformation.builder()
-                .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
-                .withIndustry(Industry.FINANCE)
-                .withEmployerName("fgsfds")
-                .withTaxResidenceCountry("DE")
-                .withUSReportabilityStatus(IsUSReportable.NO)
-                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
-                .withTaxIdentificationNumber("123456789")
-                .withEducationLevel(EducationLevel.POST_GRADUATE)
-                .withEducationField(EducationField.ACCOUNTING)
-                .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
-                .withSourceOfFunds(SourceOfFunds.EMPLOYMENT)
-                .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
-                .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
-                .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
-                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
-                .build();
+    /**
+     * Create user via WEB UI
+     * pass all questionnaires using provided information
+     * @param personalInformation - personal information for answers
+     * @param tradingExperienceInfo - trading experience for answers
+     * @return - created customer object
+     */
+    protected CustomerRegistrationInfo createUserByUI(
+            PersonalInformation personalInformation, TradingExperienceInfo tradingExperienceInfo, boolean riskWarning) {
+        CustomerRegistrationInfo customerRegistrationInfo = getCustomerRegistrationInfo();
+        pages().welcomeDialog().start();
+        pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
+        passQuestionnaire(personalInformation,tradingExperienceInfo);
+        if (riskWarning) pages().riskWarning().accept();
+        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().thankYouPage().doContinue();
+        return customerRegistrationInfo;
     }
 
-    private TradingExperienceInfo getTradingExperienceInfo(){
-        return TradingExperienceInfo.builder()
-                .withSharesExperience(SharesExperience.NEVER)
-                .withBinaryExperience(BinaryExperience.OCCASIONALLY)
-                .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_500_5K)
-                .withForExExperience(ForExExperience.NEVER)
-                .withFinancialWorkExperience(FinancialWorkExperience.WORKED)
-                .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE)
-                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
-                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK)
-                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES)
-                .withStopLossKnowledge(StopLossKnowledge.MINIMIZE)
-                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K)
-                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL)
-                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
-                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800)
-                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A1_1800)
-                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75)
-                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
-                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
-                .build();
+    private void passQuestionnaire(PersonalInformation personalInformation, TradingExperienceInfo tradingExperienceInfo) {
+        pages().fnsPersonalInformation().submit(personalInformation);
+        pages().fnsTradingExperience().submit(tradingExperienceInfo);
+    }
+
+    /**
+     * make customer through the web
+     * @return customer info object used for customer creation
+     */
+    private CustomerRegistrationInfo getCustomerRegistrationInfo() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        pages().topNavigationPage().signUp();
+        pages().registrationDialog().register(customerRegistrationInfo);
+        return customerRegistrationInfo;
     }
 
     /**

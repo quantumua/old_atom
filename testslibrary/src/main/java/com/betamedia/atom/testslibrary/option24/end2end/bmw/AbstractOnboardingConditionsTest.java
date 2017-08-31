@@ -10,6 +10,11 @@ import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers
  */
 public class AbstractOnboardingConditionsTest extends WebEndToEndTest {
 
+    public static final String EMPLOYER_NAME = "testEmployer";
+    public static final String TAX_RESIDENCE_COUNTRY = "DE";
+    public static final String TAX_IDENTIFICATION_NUMBER = "123456789";
+    public static final String SOCIAL_SECURITY_NUMBER = "1234567890";
+
     protected void verifyResultingSlidesShown(OnboardingWizardConditions conditions) {
         if (!conditions.isShowWizard()) {
             Reporter.log("INFO: ShowWizard should happens.");
@@ -60,15 +65,16 @@ public class AbstractOnboardingConditionsTest extends WebEndToEndTest {
         pages().startTradeDialog().startTrade();
     }
 
-    private void passPersonalQuestionnaire() {
-        pages().fnsPersonalInformation().submit(PersonalInformation.builder()
+    public PersonalInformation getPersonalInformation() {
+        return PersonalInformation.builder()
                 .withEmploymentStatus(EmploymentStatus.SALARIED_EMPLOYEE)
-                .withIndustry(Industry.ACCOUNTING)
-                .withEmployerName("testEmployer")
-                .withTaxResidenceCountry("AF")
-                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.YES)
-                .withTaxIdentificationNumber("1111111")
+                .withIndustry(Industry.FINANCE)
+                .withEmployerName(EMPLOYER_NAME)
+                .withTaxResidenceCountry(TAX_RESIDENCE_COUNTRY)
                 .withUSReportabilityStatus(IsUSReportable.NO)
+                .withTaxIdentificationNumberStatus(HasTaxIdentificationNumber.NO)
+                .withTaxIdentificationNumber(TAX_IDENTIFICATION_NUMBER)
+                .withSocialSecurityNumber(SOCIAL_SECURITY_NUMBER)
                 .withEducationLevel(EducationLevel.POST_GRADUATE)
                 .withEducationField(EducationField.ACCOUNTING)
                 .withPoliticalExposureStatus(IsPoliticallyExposed.NO)
@@ -76,35 +82,44 @@ public class AbstractOnboardingConditionsTest extends WebEndToEndTest {
                 .withAnnualIncome(AnnualIncome.INCOME_OVER_100K)
                 .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
                 .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
-                .withPurposeOfTrading(PurposeOfTrading.SPECULATIVE)
-                .build()
-        );
+                .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
+                .build();
     }
 
-    private void passTradingQuestionnaire() {
-        pages().fnsTradingExperience().submit(TradingExperienceInfo.builder()
-                .withSharesExperience(SharesExperience.FREQUENTLY)
-                .withBinaryExperience(BinaryExperience.FREQUENTLY)
+    public TradingExperienceInfo getTradingExperienceInfo(){
+        return TradingExperienceInfo.builder()
+                .withSharesExperience(SharesExperience.NEVER)
+                .withBinaryExperience(BinaryExperience.OCCASIONALLY)
                 .withAverageYearlyBinaryVolume(AverageYearlyBinaryVolume.VOLUME_ABOVE_10K)
                 .withForExExperience(ForExExperience.FREQUENTLY)
-                .withAverageYearlyForExVolume(AverageYearlyForExVolume.VOLUME_ABOVE_500K)
-                .withCommonLeverage(CommonForExLeverage.LEVERAGE_ABOVE_1TO500)
-                .withFinancialWorkExperience(FinancialWorkExperience.SEMINARS)
+                .withFinancialWorkExperience(FinancialWorkExperience.WORKED)
                 .withCfdBinaryKnowledge(CfdBinaryKnowledge.SPECULATIVE)
-                .withMainFactorKnowledge(MainFactorKnowledge.INTEREST_RATES)
-                .withHowToCloseKnowledge(HowToCloseKnowledge.ONLY_PLATFORM)
-                .withCfdLeverageKnowledge(CfdLeverageKnowledge.MAGNIFIES)
+                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
+                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK)
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES)
                 .withStopLossKnowledge(StopLossKnowledge.MINIMIZE)
                 .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_1K)
-                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.MARGIN_CALL)
-                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EQUITY_FALLS)
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL)
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
                 .withLossOn1to50Knowledge(LossOn1to50Knowledge.A1_800)
                 .withLossOn1to200Knowledge(LossOn1to200Knowledge.A1_1800)
                 .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_75)
-                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_100)
-                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_25)
-                .build()
-        );
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
+
+                .withInstrumentsTradedBefore(QuestionnaireAnswers.InstrumentsTradedBefore.NO_EXPERIENCE)
+                .withFrequencyPastTransactions(QuestionnaireAnswers.FrequencyPastTransactions.OCCASIONALLY)
+                .withVolumePastTransaction(QuestionnaireAnswers.VolumePastTransaction.LESS_THAN_10)
+                .withCommonLevelPastTransaction(QuestionnaireAnswers.CommonLevelPastTransaction.LOWER_THAN_1_50)
+                .build();
+    }
+
+    private void passPersonalQuestionnaire() {
+        pages().fnsPersonalInformation().submit(getPersonalInformation());
+    }
+
+    private void passTradingQuestionnaire() {
+        pages().fnsTradingExperience().submit(getTradingExperienceInfo());
         pages().confirmAnswers().next();
     }
 
