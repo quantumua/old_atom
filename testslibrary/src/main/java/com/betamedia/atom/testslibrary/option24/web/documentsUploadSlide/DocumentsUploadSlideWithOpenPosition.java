@@ -154,7 +154,8 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     public void setPORBeforeFNSKnowledgeLogoutLogin(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         CustomerRegistrationInfo customerRegistrationInfo = createUserByUI(countrycode,phonecountryprefix,"50");
         pages().uploadDocumentDialog()
-                .porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH);
+                .porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH)
+                .exists();
         verifyPORStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
         closeWizardAndGoTrade();
         pages().controlPanel().logOut();
@@ -173,8 +174,9 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     public void setPOIBeforeFNSKnowledgeLogoutLogin(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         CustomerRegistrationInfo customerRegistrationInfo = createUserByUI(countrycode,phonecountryprefix,"50");
         pages().uploadDocumentDialog()
-                .poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
-        verifyPORStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
+                .poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH)
+                .exists();
+        verifyPOIStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
         closeWizardAndGoTrade();
         pages().controlPanel().logOut();
         pages().topNavigationPage().waitForLoggedOut();

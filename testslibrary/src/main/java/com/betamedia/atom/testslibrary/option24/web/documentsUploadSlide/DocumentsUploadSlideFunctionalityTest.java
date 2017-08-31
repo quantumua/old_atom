@@ -242,6 +242,11 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         softAssert().assertEquals(contactExtension.getPoiOcrStatus(), poiOCRStatus, "POI Ocr status verification, actual status: " + contactExtension.getPoiOcrStatus());
     }
 
+    public void verifyPOIStatusInCRM (Integer poiOCRStatus, CustomerRegistrationInfo customerRegistrationInfo) {
+        final ContactExtension contactExtension = getContactExtension(customerRegistrationInfo.getEmail());
+        softAssert().assertEquals(contactExtension.getPoiOcrStatus(), poiOCRStatus, "POI Ocr status verification, actual status: " + contactExtension.getPoiOcrStatus());
+    }
+
     public void verifyPORStatusInCRM (Integer porOCRStatus) {
         final ContactExtension contactExtension = getContactExtension();
         softAssert().assertEquals(contactExtension.getPorOcrStatus(), porOCRStatus, "POR Ocr status verification, actual status: " + contactExtension.getPorOcrStatus());
