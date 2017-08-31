@@ -1,17 +1,12 @@
 package com.betamedia.atom.testslibrary.option24.web.experience;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingConditionsTest;
+import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingUserExperienceTest;
 
 /**
  * Created by vsnigur on 8/29/17.
  */
-public class AbstractExperienceLevelsTests extends AbstractOnboardingConditionsTest {
-
-    private static final String EMPLOYER_NAME = "testEmployer";
-    private static final String TAX_RESIDENCE_COUNTRY = "JP";
-    private static final String TAX_IDENTIFICATION_NUMBER = "1111111";
-    private static final String SOCIAL_SECURITY_NUMBER = "1234567890";
+public class AbstractExperienceLevelsTests extends AbstractOnboardingUserExperienceTest {
 
     protected PersonalInformation getPersonalInformationScore0() {
         return PersonalInformation.builder()
@@ -193,10 +188,5 @@ public class AbstractExperienceLevelsTests extends AbstractOnboardingConditionsT
                 .withVolumePastTransaction(QuestionnaireAnswers.VolumePastTransaction.LESS_THAN_10)
                 .withCommonLevelPastTransaction(QuestionnaireAnswers.CommonLevelPastTransaction.LOWER_THAN_1_50)
                 .build();
-    }
-
-    protected void passQuestionnaire(PersonalInformation personalInformation, TradingExperienceInfo tradingExperienceInfo) {
-        pages().fnsPersonalInformation().submit(personalInformation);
-        pages().fnsTradingExperience().submit(tradingExperienceInfo);
     }
 }

@@ -48,9 +48,9 @@ public class UploadDocumentsDialogImpl extends AbstractPageObject implements Upl
     /* POI (Proof of identity) Controls*/
     @StoredId (localized = true)
     private By poiHeader;
-    @StoredId //(localized = true)
+    @StoredId (localized = true)
     private By poiDocumentTypeSelector;
-    @StoredId //(localized = true)
+    @StoredId (localized = true)
     private By poiWrapper;
     @StoredId
     private By poiUploadInput;
@@ -70,7 +70,7 @@ public class UploadDocumentsDialogImpl extends AbstractPageObject implements Upl
     private By poiNotApprovedXImage;
     @StoredId
     private By poiUploadDocumentWrapperOpen;
-    @StoredId
+    @StoredId (localized = true)
     private By poiUploadDocumentWrapperClosed;
 
     /* POR (Proof of residence) Controls*/
