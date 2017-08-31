@@ -156,7 +156,9 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
         pages().uploadDocumentDialog()
                 .porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH);
         verifyPORStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
+        closeWizardAndGoTrade();
         pages().controlPanel().logOut();
+        pages().topNavigationPage().waitForLoggedOut();
         pages().topNavigationPage().logIn();
         pages().loginDialog().login(customerRegistrationInfo.getEmail(),customerRegistrationInfo.getPassword());
         softAssert().assertTrue(pages().uploadDocumentDialog().exists(), "Upload Documents page verification availability verification");
@@ -173,7 +175,9 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
         pages().uploadDocumentDialog()
                 .poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH);
         verifyPORStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
+        closeWizardAndGoTrade();
         pages().controlPanel().logOut();
+        pages().topNavigationPage().waitForLoggedOut();
         pages().topNavigationPage().logIn();
         pages().loginDialog().login(customerRegistrationInfo.getEmail(),customerRegistrationInfo.getPassword());
         softAssert().assertTrue(pages().uploadDocumentDialog().exists(), "Upload Documents page verification availability verification");

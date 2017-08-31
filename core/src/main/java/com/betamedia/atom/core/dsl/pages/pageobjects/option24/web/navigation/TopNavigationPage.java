@@ -34,4 +34,6 @@ public interface TopNavigationPage {
     void bankingDetails();
 
     void withdrawalTab();
+
+    void waitForLoggedOut();
 }
