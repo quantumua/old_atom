@@ -1,0 +1,13 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,text
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% omplété
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Chat en direct
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Documents
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,Vérification d’identité - Cette procédure de vérification confirme votre identité. C’est une partie importante des mesures de sécurité permettant de veiller à votre sûreté et à celle de vos investissements.
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,Transférer avec votre smartphone
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"Vous pouvez transférer vos documents depuis votre téléphone mobile.
+Veuillez confirmer votre numéro de téléphone mobile
+Un message texte a été envoyé à votre téléphone mobile. Veuillez cliquer sur le lien attaché et continuer de transférer vos documents."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,PI (Preuve d’identité)
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,PR (Preuve de Résidence)

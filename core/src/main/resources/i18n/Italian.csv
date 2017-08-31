@@ -1,0 +1,13 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,text
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% completato
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Chatta Ora
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Documenti
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,"Verifica dell’identità - Questo processo di verifica mira a confermare la tua identità ed è una parte importante delle nostre misure di sicurezza, volte a proteggere te e i tuoi investimenti."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,Carica con il tuo smartphone
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"Puoi caricare i documenti utilizzando il tuo smartphone.
+Conferma il tuo numero di cellulare
+Invieremo un SMS sul tuo cellulare. Clicca sul link riportato e procedi al caricamento dei tuoi documenti."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,Prova d’identità
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,Prova di residenza

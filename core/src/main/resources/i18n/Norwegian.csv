@@ -1,0 +1,13 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,text
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% ferdigstilt
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Chat nå
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Dokumenter
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,"ID-verifisering – Denne verifiseringsprosessen bekrefter identiteten din og er en viktig del av våre sikkerhetstiltak, slik at du og dine investeringer er trygge."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,Last opp med smarttelefonen din
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"Du kan laste opp dokumentene dine ved hjelp av mobiltelefonen din.
+Vennligst bekreft ditt mobilnummer
+En tekstmelding har blitt sendt til mobiltelefonen din. Klikk på linken som er vedlagt og fortsett å laste opp dokumentene dine."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,POI (identitetsbevis)
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,POR (bostedsbevis)

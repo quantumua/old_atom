@@ -1,0 +1,13 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,text
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% zakończony
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Czat teraz
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Dokumenty
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,"Weryfikacja tożsamości – ten proces weryfikacji potwierdza Twoją tożsamość. To ważny element naszych środków bezpieczeństwa, który gwarantuje bezpieczeństwo Tobie i Twoim inwestycjom."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,Prześlij przez smartfona
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"Możesz przesłać swoje dokumenty, korzystając z telefonu.
+Potwierdź swój numer telefonu
+Na Twój telefon wysłano wiadomość tekstową. Kliknij załączony link i kontynuuj, by przesłać swoje dokumenty."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,POI (dokument tożsamości)
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,POR (dokument potwierdzający adres zamieszkania)

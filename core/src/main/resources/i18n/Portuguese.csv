@@ -1,0 +1,13 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,text
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% concluído
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Conversar agora
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Documentos
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,"Verificação de Identidade - Esse processo de verificação confirma sua identidade e é uma parte importante de nossas medidas de segurança, mantendo você e seus investimentos seguros."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,Carregue com o seu smartphone
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"Você pode carregar seus documentos usando seu celular.
+Por favor confirme seu número de telefone
+Foi enviada uma mensagem de texto para seu celular. Por favor clique no link em anexo e continue para carregar seus documentos."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,POI (Prova de identidade)
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,POR (Prova de residência)

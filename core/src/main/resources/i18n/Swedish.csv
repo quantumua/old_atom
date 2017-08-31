@@ -1,0 +1,13 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,text
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% avslutad
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Chatta Nu
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Dokument
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,Verifiering av ID - Denna verifieringsprocess bekräftar din identitet och är en viktig del av våra säkerhetsåtgärder för att se till att du och dina investeringar är säkra.
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,Ladda upp med din smartphone
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"Du kan ladda upp dina dokument med hjälp av din mobiltelefon.
+Bekräfta ditt mobilnummer
+Ett textmeddelande har skickats till din mobiltelefon. Klicka på den bifogade länken och fortsätt ladda upp dina dokument."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,Identitetsbevis
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,Bevis om hemvist

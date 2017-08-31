@@ -1,0 +1,13 @@
+implementationVersion,revisionDate,pageObjectName,locatorId,text
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,caption,Welcome
+2.6.2,2017-05-29 15:24 +0000,WelcomeDialogImpl,startButton,Start
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,progressBarText,98% voltooid
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,chatLink,Chat nu
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docHeader,Documenten
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,docDescription,"Identiteitsverificatie - Dit verificatieproces bevestigt uw identiteit en is een belangrijk onderdeel van onze veiligheidsmaatregelen, waarmee we u en uw investeringen beschermen."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapper,Via uw smartphone uploaden
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,smsWrapperDescription,"U kunt de documenten uploaden met behulp van uw mobiele telefoon.
+Uw mobiele telefoonnummer bevestigen
+Er is een sms naar uw mobiele telefoon gestuurd. Klik op de link in de bijlage en upload uw documenten."
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,Bewijs van identiteit
+2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,Bewijs van woonadres
