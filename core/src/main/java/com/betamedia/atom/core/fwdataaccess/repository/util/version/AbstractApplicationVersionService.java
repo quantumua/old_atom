@@ -65,10 +65,8 @@ public abstract class AbstractApplicationVersionService<T extends EnvironmentDep
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class ApplicationVersion {
-        private String revisionDate = "2017-05-29 15:24 +0000";
-        private String implementationVersion = "2.6.2";
-        // private String revisionDate = null;
-        // private String implementationVersion = null;
+        private String revisionDate = null;
+        private String implementationVersion = null;
 
         public void setRevisionDate(String revisionDate) {
             this.revisionDate = revisionDate == null ? null : trimQuotes(revisionDate);
