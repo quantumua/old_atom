@@ -1,10 +1,7 @@
 package com.betamedia.atom.core.persistence.entities;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Leonid Artemiev
@@ -15,18 +12,25 @@ import javax.persistence.Table;
 public class CreditCarddepositExtensionBase {
 
     @Id
-    @Column(name = "bt_AmountToTransfer")
-    private float amountToTransfer;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ROWGUID", columnDefinition = "uniqueidentifier")
+    private String rowguid;
+
     @Column(name = "bt_CustomerId")
     private String customerId;
+    @Column(name = "bt_RequestedAmount")
+    private Float amountToTransfer;
 
 
+    public String getccId() {
+        return rowguid;
+    }
 
     public String getCustomerId() {
         return customerId;
     }
 
-    public float getAmountToTransfer() {
+    public Float getRequestedAmount() {
         return amountToTransfer;
     }
 }

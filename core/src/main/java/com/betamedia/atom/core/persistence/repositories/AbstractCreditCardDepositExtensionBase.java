@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since 8/28/17
  */
 public interface AbstractCreditCardDepositExtensionBase <T extends EnvironmentDependent> extends JpaRepository<CreditCarddepositExtensionBase, String> {
-    String findByCustomerId(String customerId);
+    CreditCarddepositExtensionBase findByCustomerId(String customerId);
 }

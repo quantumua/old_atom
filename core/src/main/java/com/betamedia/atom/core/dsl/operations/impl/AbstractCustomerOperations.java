@@ -348,7 +348,7 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Override
     public CreditCarddepositExtensionBase findDeposit(String customerID){
-        CreditCarddepositExtensionBase ccExtBase = creditCardDepositExtensionBase.findOne(customerID);
+        CreditCarddepositExtensionBase ccExtBase = creditCardDepositExtensionBase.findByCustomerId(customerID);
         assertNotNull(ccExtBase, "Unable to locate customer by email: " + customerID);
         return ccExtBase;
     }

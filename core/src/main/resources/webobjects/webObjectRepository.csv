@@ -117,6 +117,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,CfdBidderImpl,tradeButton,CLASS_NAME,buyTrade
 2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,openPositions,CLASS_NAME,openPositionsContent
 2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,assetName,CLASS_NAME,assetname
+2.6.2,2017-05-29 15:24 +0000,CfdPositionsImpl,accountBalance,XPATH,.//*[@id='info-area']/ul[2]/li[1]/span[2]
 2.6.2,2017-05-29 15:24 +0000,ChartImpl,highChartsRoot,CLASS_NAME,highcharts-root
 2.6.2,2017-05-29 15:24 +0000,ChartImpl,candleSticks,CLASS_NAME,highcharts-candlestick-series
 2.6.2,2017-05-29 15:24 +0000,ChartImpl,candle,TAG,path

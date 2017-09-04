@@ -19,6 +19,8 @@ public class CfdPositionsImpl extends AbstractPageObject implements CfdPositions
     private By openPositions;
     @StoredId
     private By assetName;
+    @StoredId
+    private By accountBalance;
 
     public CfdPositionsImpl(WebDriver webDriver) {
         super(webDriver);
@@ -41,5 +43,10 @@ public class CfdPositionsImpl extends AbstractPageObject implements CfdPositions
     public Integer countOfOpenedPosition(){
         Integer quantity = findElements(openPositions).size();
         return quantity;
+    }
+
+    @Override
+    public String getAccountBalance(){
+        return waitUntilDisplayed(accountBalance).getText();
     }
 }

@@ -9,4 +9,6 @@ public interface CfdPositions {
     boolean isAnyPositionOpened();
 
     Integer countOfOpenedPosition();
+
+    String getAccountBalance();
 }
