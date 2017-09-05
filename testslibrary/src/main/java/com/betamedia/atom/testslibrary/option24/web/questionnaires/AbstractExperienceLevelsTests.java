@@ -8,6 +8,8 @@ import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractWebCustomerR
  */
 public class AbstractExperienceLevelsTests extends AbstractWebCustomerRegistrationTest {
 
+    private final static String OTHER_TEXT = "other answer";
+
     protected PersonalInformation getPersonalInformationScore0() {
         return PersonalInformation.builder()
                 .withEmploymentStatus(QuestionnaireAnswers.EmploymentStatus.SALARIED_EMPLOYEE)
@@ -189,4 +191,50 @@ public class AbstractExperienceLevelsTests extends AbstractWebCustomerRegistrati
                 .withCommonLevelPastTransaction(QuestionnaireAnswers.CommonLevelPastTransaction.LOWER_THAN_1_50)
                 .build();
     }
+
+    protected PersonalInformation getPersonalInformationOtherAnswers() {
+        return PersonalInformation.builder()
+                .withEmploymentStatus(QuestionnaireAnswers.EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(QuestionnaireAnswers.Industry.OTHER)
+                .withIndustryOther(OTHER_TEXT)
+                .withEmployerName(EMPLOYER_NAME)
+                .withTaxResidenceCountry(TAX_RESIDENCE_COUNTRY)
+                .withTaxIdentificationNumberStatus(QuestionnaireAnswers.HasTaxIdentificationNumber.YES)
+                .withTaxIdentificationNumber(TAX_IDENTIFICATION_NUMBER)
+                .withUSReportabilityStatus(QuestionnaireAnswers.IsUSReportable.YES)
+                .withEducationLevel(QuestionnaireAnswers.EducationLevel.PRIMARY)
+                .withEducationField(QuestionnaireAnswers.EducationField.OTHER)
+                .withEducationFieldOther(OTHER_TEXT)
+                .withPoliticalExposureStatus(QuestionnaireAnswers.IsPoliticallyExposed.YES)
+                .withPoliticalExposureComment(OTHER_TEXT)
+                .withSourceOfFunds(QuestionnaireAnswers.SourceOfFunds.OTHER)
+                .withSourceOfFundsOther(OTHER_TEXT)
+                .withAnnualIncome(QuestionnaireAnswers.AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(QuestionnaireAnswers.NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(QuestionnaireAnswers.ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(QuestionnaireAnswers.PurposeOfTrading.OTHER)
+                .withPurposeOfTradingOther(OTHER_TEXT)
+                .build();
+    }
+
+    protected PersonalInformation getPersonalInformationAnswersDependOfPrevious() {
+        return PersonalInformation.builder()
+                .withEmploymentStatus(QuestionnaireAnswers.EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(QuestionnaireAnswers.Industry.OTHER)
+                .withEmployerName(EMPLOYER_NAME)
+                .withTaxResidenceCountry(TAX_RESIDENCE_COUNTRY)
+                .withTaxIdentificationNumberStatus(QuestionnaireAnswers.HasTaxIdentificationNumber.YES)
+                .withTaxIdentificationNumber(TAX_IDENTIFICATION_NUMBER)
+                .withUSReportabilityStatus(QuestionnaireAnswers.IsUSReportable.YES)
+                .withEducationLevel(QuestionnaireAnswers.EducationLevel.PRIMARY)
+                .withEducationField(QuestionnaireAnswers.EducationField.OTHER)
+                .withPoliticalExposureStatus(QuestionnaireAnswers.IsPoliticallyExposed.YES)
+                .withSourceOfFunds(QuestionnaireAnswers.SourceOfFunds.OTHER)
+                .withAnnualIncome(QuestionnaireAnswers.AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(QuestionnaireAnswers.NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(QuestionnaireAnswers.ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(QuestionnaireAnswers.PurposeOfTrading.OTHER)
+                .build();
+    }
+
 }

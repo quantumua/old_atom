@@ -8,4 +8,6 @@ public interface FnsPersonalInformation {
     void submit(PersonalInformation info);
 
     boolean exists();
+
+    void assertControlsUsability(PersonalInformation info, String expectedItemsBackgroundColor, String expectedAnswerColor, String expectedHoverAnswersColor, String expectedSelectionColor);
 }

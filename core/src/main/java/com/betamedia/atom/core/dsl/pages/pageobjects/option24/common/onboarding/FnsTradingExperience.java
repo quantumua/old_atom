@@ -8,4 +8,5 @@ import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 public interface FnsTradingExperience {
 
     void submit(TradingExperienceInfo info);
+    void checkDependsQuestions(TradingExperienceInfo info);
 }

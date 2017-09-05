@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="sequential execution of tests" verbose="1" parallel="methods" thread-count="1">
+    <parameter name="testlinkBuildId" value="${buildId}" />
+    <parameter name="testlinkPlanId" value="${planId}" />
+    <test name="Experience Levels, Usability">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.questionnaires.ExperienceLevelsTests" >
+                <methods>
+                    <include name="verifyExperienceLevelRejected" description="CTW-5508"/>
+                    <include name="verifyExperienceLevelNoExperience" description="CTW-5514"/>
+                    <include name="verifyExperienceLevelLowExperience" description="CTW-5510"/>
+                    <include name="verifyExperienceLevelHighExperience" description="CTW-5511"/>
+                    <include name="verifyExperienceLevelExpertExperience" description="CTW-5515"/>
+                </methods>
+            </class>
+            <class name="com.betamedia.atom.testslibrary.option24.web.questionnaires.UsabilityTests" >
+                <methods>
+                    <include name="verifySlideWithMultipleChoiceTest" description="CTW-5885"/>
+                    <include name="verifySlideTextFieldFunctionalityTest" description="CTW-5886"/>
+                    <include name="slideDependOnPreviousQuestionTest" description="CTW-5887"/>
+                    <include name="verifySlideWithSubQuestionsOpensDependOnPreviousQuestionTest" description="CTW-5889"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

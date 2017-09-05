@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import static java.util.Objects.nonNull;
 
 /**
@@ -14,6 +15,9 @@ import static java.util.Objects.nonNull;
  * @since 8/2/17
  */
 public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformation implements ScriptOperations {
+
+    private static final String CSS_COLOR = "color";
+    private static final String CSS_BACKGROUND_COLOR = "background-color";
 
     public WebFnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);
@@ -55,8 +59,73 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
         }
     }
 
+    @Override
+    public void assertControlsUsability(PersonalInformation info, String expectedItemsBackgroundColor, String expectedAnswerColor, String expectedHoverAnswersColor, String expectedSelectionColor) {
+
+        By employmentStatusItem = By.cssSelector("li[data-value='" + info.employmentStatus + "']");
+        By answerOption = By.cssSelector("option[value='" + info.employmentStatus + "']");
+        By industryItem = By.cssSelector("li[data-value='" + info.industry + "']");
+
+        waitUntilDisplayed(employmentStatusItem);
+        softAssert().assertEquals(find(answerOption)
+                .getCssValue(CSS_COLOR), expectedItemsBackgroundColor,
+                "assert background colors for answers");
+
+        softAssert().assertEquals(find(employmentStatusItem)
+                        .getCssValue(CSS_COLOR),
+                expectedAnswerColor,"assert border line and font colors for answers");
+        makeActions().moveToElement(find(employmentStatusItem))
+                .build().perform();
+        softAssert().assertEquals(find(employmentStatusItem)
+                        .getCssValue(CSS_COLOR),
+                expectedHoverAnswersColor, "assert border line and font colors for answers if hover happens");
+
+        find(employmentStatusItem).click();
+        waitUntilDisplayed(industryItem);
+        softAssert().assertEquals(find(employmentStatusItem)
+                        .getCssValue(CSS_BACKGROUND_COLOR),
+                expectedSelectionColor, "assert background colors for answers after click answer");
+
+    }
+
+    public void assertControlsUsability(PersonalInformation info, String expectedAnswerColor, String expectedHoverStateColor, String expectedSelectionColor) {
+
+
+        System.out.println(find(By.cssSelector("li[data-value='" + info.employmentStatus + "']")).getCssValue("color"));
+
+        softAssert().assertEquals(find(By.cssSelector("option[value='" + info.employmentStatus + "']"))
+                .getCssValue("border-bottom-color"), "rgb(153, 153, 153)");
+
+        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
+                .getCssValue("text-decoration-color"), "rgb(180, 180, 180)");
+
+
+        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
+                .getCssValue("color"), "rgb(180, 180, 180)");
+        softAssert().assertEquals(find(By.cssSelector("option[value='" + info.employmentStatus + "']"))
+                .getCssValue("border-bottom-color"), "rgb(180, 180, 180)");
+        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
+                .getCssValue("border-right-color:"), "rgb(180, 180, 180)");
+        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
+                .getCssValue("border-left-color"), "rgb(180, 180, 180)");
+        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
+                .getCssValue("border-top-color"), "rgb(180, 180, 180)");
+
+        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
+                .getCssValue("lighting-color"), "rgb(255, 255, 255)");
+
+
+        softAssert().assertEquals(find(employmentStatus).getCssValue("border-bottom-color"),"rgba(0, 0, 0, 0)");
+    }
+
+    private void checkAnswerColor(PersonalInformation info, String expectedAnswerColor) {
+
+
+    }
+
     private void submitOnWizard(String dataValue) {
         logger.info(String.format("filling Fns PersonalInformation wizard value: %s",dataValue));
         scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']"))).click();
     }
+
 }

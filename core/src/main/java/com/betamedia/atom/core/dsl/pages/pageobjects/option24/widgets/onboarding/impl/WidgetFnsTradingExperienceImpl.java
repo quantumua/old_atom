@@ -4,7 +4,6 @@ import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractFnsTradingExperience;
 import org.openqa.selenium.WebDriver;
-
 import static java.util.Objects.nonNull;
 
 /**
@@ -39,6 +38,11 @@ public class WidgetFnsTradingExperienceImpl extends AbstractFnsTradingExperience
         inSelect(lossOn1to200Knowledge).selectByValue(info.lossOn1to200Knowledge);
         scrollIntoView(find(submit)).click();
         waitUntil(() -> waitUntilDisplayed(resultPlaceholder).getText().contains("\"HasTradingExperienceAnswers\":true"));
+    }
+
+    @Override
+    public void checkDependsQuestions(TradingExperienceInfo info) {
+
     }
 
 

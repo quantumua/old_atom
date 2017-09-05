@@ -2,7 +2,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
-import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -51,6 +50,16 @@ public abstract class AbstractFnsTradingExperience extends AbstractPageObject im
     protected By resultPlaceholder;
     @StoredId
     protected By buttonWizardDeclaration;
+    @StoredId
+    protected By divQFinancialProductsFrequency;
+    @StoredId
+    protected By divQFinancialProductsVolume;
+    @StoredId
+    protected By divQFinancialProductsCommonLeverage;
+    @StoredId
+    protected By divQKnowledgePositionLoss1to50;
+    @StoredId
+    protected By divQKnowledgePositionLoss1to200;
 
     protected AbstractFnsTradingExperience(WebDriver webDriver) {
         super(webDriver);

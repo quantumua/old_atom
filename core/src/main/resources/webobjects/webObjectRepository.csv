@@ -82,6 +82,11 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,lossOn1to200Knowledge,ID,KnowledgePositionLoss1to200
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,buttonWizardDeclaration,XPATH,//div[@id='wizard-declaration']//div[@class='message-button']//*[@id='declaration-btn']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,resultPlaceholder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,divQFinancialProductsFrequency,ID,divQFinancialProductsFrequency
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,divQFinancialProductsVolume,ID,divQFinancialProductsVolume
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,divQFinancialProductsCommonLeverage,ID,divQFinancialProductsCommonLeverage
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,divQKnowledgePositionLoss1to50,ID,divQKnowledgePositionLoss1to50
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,divQKnowledgePositionLoss1to200,ID,divQKnowledgePositionLoss1to200
 2.6.2,2017-05-29 15:24 +0000,AccountDetailsTabImpl,winID,XPATH,".//ul[contains(@id,'menu-my-account')]//li[1]/a"
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,title,ID,Title
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,street,ID,Street

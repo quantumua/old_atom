@@ -38,4 +38,10 @@ public class WidgetFnsPersonalInformationImpl extends AbstractFnsPersonalInforma
         waitUntil(() -> waitUntilDisplayed(resultPlaceholder).getText().contains("\"HasPersonalInformationAnswers\":true"));
     }
 
+    @Override
+    public void assertControlsUsability(PersonalInformation info, String expectedItemsBackgroundColor, String expectedAnswerColor, String expectedHoverAnswersColor, String expectedSelectionColor) {
+
+    }
+
+
 }
