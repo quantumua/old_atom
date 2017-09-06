@@ -1,6 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.questionnaires;
 
 import com.betamedia.atom.core.api.crm.form.entities.*;
+import com.betamedia.atom.core.utils.StringUtils;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractWebCustomerRegistrationTest;
 
 /**
@@ -8,7 +9,8 @@ import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractWebCustomerR
  */
 public class AbstractExperienceLevelsTests extends AbstractWebCustomerRegistrationTest {
 
-    private final static String OTHER_TEXT = "other answer";
+    private final static int OTHER_TEXT_LENGTH = 100;
+    private final static int MAX_CHARS_IN_OTHER_ANSWER = 102;
 
     protected PersonalInformation getPersonalInformationScore0() {
         return PersonalInformation.builder()
@@ -196,7 +198,7 @@ public class AbstractExperienceLevelsTests extends AbstractWebCustomerRegistrati
         return PersonalInformation.builder()
                 .withEmploymentStatus(QuestionnaireAnswers.EmploymentStatus.SALARIED_EMPLOYEE)
                 .withIndustry(QuestionnaireAnswers.Industry.OTHER)
-                .withIndustryOther(OTHER_TEXT)
+                .withIndustryOther(StringUtils.generateNumbersSequence(OTHER_TEXT_LENGTH))
                 .withEmployerName(EMPLOYER_NAME)
                 .withTaxResidenceCountry(TAX_RESIDENCE_COUNTRY)
                 .withTaxIdentificationNumberStatus(QuestionnaireAnswers.HasTaxIdentificationNumber.YES)
@@ -204,16 +206,44 @@ public class AbstractExperienceLevelsTests extends AbstractWebCustomerRegistrati
                 .withUSReportabilityStatus(QuestionnaireAnswers.IsUSReportable.YES)
                 .withEducationLevel(QuestionnaireAnswers.EducationLevel.PRIMARY)
                 .withEducationField(QuestionnaireAnswers.EducationField.OTHER)
-                .withEducationFieldOther(OTHER_TEXT)
+                .withEducationFieldOther(StringUtils.generateNumbersSequence(OTHER_TEXT_LENGTH))
                 .withPoliticalExposureStatus(QuestionnaireAnswers.IsPoliticallyExposed.YES)
-                .withPoliticalExposureComment(OTHER_TEXT)
+                .withPoliticalExposureComment(StringUtils.generateNumbersSequence(OTHER_TEXT_LENGTH))
                 .withSourceOfFunds(QuestionnaireAnswers.SourceOfFunds.OTHER)
-                .withSourceOfFundsOther(OTHER_TEXT)
+                .withSourceOfFundsOther(StringUtils.generateNumbersSequence(OTHER_TEXT_LENGTH))
                 .withAnnualIncome(QuestionnaireAnswers.AnnualIncome.INCOME_OVER_100K)
                 .withNetWealth(QuestionnaireAnswers.NetWealth.NET_WEALTH_OVER_300K)
                 .withExpectedDepositsPerYear(QuestionnaireAnswers.ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
                 .withPurposeOfTrading(QuestionnaireAnswers.PurposeOfTrading.OTHER)
-                .withPurposeOfTradingOther(OTHER_TEXT)
+                .withPurposeOfTradingOther(StringUtils.generateNumbersSequence(OTHER_TEXT_LENGTH))
+
+                .build();
+    }
+
+    protected PersonalInformation getPersonalInformationOtherAnswersMaxText() {
+        return PersonalInformation.builder()
+                .withEmploymentStatus(QuestionnaireAnswers.EmploymentStatus.SALARIED_EMPLOYEE)
+                .withIndustry(QuestionnaireAnswers.Industry.OTHER)
+                .withIndustryOther(StringUtils.generateNumbersSequence(MAX_CHARS_IN_OTHER_ANSWER))
+                .withIndustryOther(StringUtils.generateNumbersSequence(MAX_CHARS_IN_OTHER_ANSWER))
+                .withEmployerName(EMPLOYER_NAME)
+                .withTaxResidenceCountry(TAX_RESIDENCE_COUNTRY)
+                .withTaxIdentificationNumberStatus(QuestionnaireAnswers.HasTaxIdentificationNumber.YES)
+                .withTaxIdentificationNumber(TAX_IDENTIFICATION_NUMBER)
+                .withUSReportabilityStatus(QuestionnaireAnswers.IsUSReportable.YES)
+                .withEducationLevel(QuestionnaireAnswers.EducationLevel.PRIMARY)
+                .withEducationField(QuestionnaireAnswers.EducationField.OTHER)
+                .withEducationFieldOther(StringUtils.generateNumbersSequence(MAX_CHARS_IN_OTHER_ANSWER))
+                .withPoliticalExposureStatus(QuestionnaireAnswers.IsPoliticallyExposed.YES)
+                .withPoliticalExposureComment(StringUtils.generateNumbersSequence(MAX_CHARS_IN_OTHER_ANSWER))
+                .withSourceOfFunds(QuestionnaireAnswers.SourceOfFunds.OTHER)
+                .withSourceOfFundsOther(StringUtils.generateNumbersSequence(MAX_CHARS_IN_OTHER_ANSWER))
+                .withAnnualIncome(QuestionnaireAnswers.AnnualIncome.INCOME_OVER_100K)
+                .withNetWealth(QuestionnaireAnswers.NetWealth.NET_WEALTH_OVER_300K)
+                .withExpectedDepositsPerYear(QuestionnaireAnswers.ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
+                .withPurposeOfTrading(QuestionnaireAnswers.PurposeOfTrading.OTHER)
+                .withPurposeOfTradingOther(StringUtils.generateNumbersSequence(MAX_CHARS_IN_OTHER_ANSWER))
+
                 .build();
     }
 
@@ -237,4 +267,35 @@ public class AbstractExperienceLevelsTests extends AbstractWebCustomerRegistrati
                 .build();
     }
 
+    /**
+     * Build trading experience info with 0 score
+     * @return - TradingExperienceInfo instance
+     */
+    protected TradingExperienceInfo tradingExperienceInfoWith0Score() {
+        return TradingExperienceInfo.builder()
+                .withSharesExperience(QuestionnaireAnswers.SharesExperience.NEVER)
+                .withBinaryExperience(QuestionnaireAnswers.BinaryExperience.NEVER)
+                .withForExExperience(QuestionnaireAnswers.ForExExperience.NEVER)
+                .withFinancialWorkExperience(QuestionnaireAnswers.FinancialWorkExperience.NEITHER)
+                .withCfdBinaryKnowledge(QuestionnaireAnswers.CfdBinaryKnowledge.NON_RISKY)
+                .withMainFactorKnowledge(QuestionnaireAnswers.MainFactorKnowledge.ANNOUNCEMENT)
+                .withHowToCloseKnowledge(QuestionnaireAnswers.HowToCloseKnowledge.LONDON_STOCK)
+                .withCfdLeverageKnowledge(QuestionnaireAnswers.CfdLeverageKnowledge.PROVIDES)
+                .withStopLossKnowledge(QuestionnaireAnswers.StopLossKnowledge.BUY)
+                .withRequiredMarginKnowledge(QuestionnaireAnswers.RequiredMarginKnowledge.MARGIN_10K)
+                .withMarginLevelDropKnowledge(QuestionnaireAnswers.MarginLevelDropKnowledge.WARNING_CALL)
+                .withAutomaticStopKnowledge(QuestionnaireAnswers.AutomaticStopKnowledge.EARNINGS)
+                .withLossOn1to50Knowledge(QuestionnaireAnswers.LossOn1to50Knowledge.A2_450)
+                .withLossOn1to200Knowledge(QuestionnaireAnswers.LossOn1to200Knowledge.A2_1200)
+                .withBinaryInvestProfitKnowledge(QuestionnaireAnswers.BinaryInvestProfitKnowledge.PROFIT_60)
+                .withBinaryInvestLossKnowledge(QuestionnaireAnswers.BinaryInvestLossKnowledge.LOSS_75)
+                .withBinaryProbabilityKnowledge(QuestionnaireAnswers.BinaryProbabilityKnowledge.MONEY_35)
+
+                .withFinancialWorkExperience(QuestionnaireAnswers.FinancialWorkExperience.SEMINARS)
+                .withInstrumentsTradedBefore(QuestionnaireAnswers.InstrumentsTradedBefore.NO_EXPERIENCE)
+                .withFrequencyPastTransactions(QuestionnaireAnswers.FrequencyPastTransactions.OCCASIONALLY)
+                .withVolumePastTransaction(QuestionnaireAnswers.VolumePastTransaction.LESS_THAN_10)
+                .withCommonLevelPastTransaction(QuestionnaireAnswers.CommonLevelPastTransaction.LOWER_THAN_1_50)
+                .build();
+    }
 }

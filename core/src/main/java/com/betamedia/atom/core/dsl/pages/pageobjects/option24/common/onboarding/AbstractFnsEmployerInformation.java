@@ -2,7 +2,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding
 
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
-import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.FnsEmployerInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -25,6 +24,8 @@ public abstract class AbstractFnsEmployerInformation extends AbstractPageObject 
     protected By socialSecurityNumber;
     @StoredId
     protected By fnsSuitabilityButton;
+    @StoredId
+    protected By modalClose;
 
     protected AbstractFnsEmployerInformation(WebDriver webDriver) {
         super(webDriver);

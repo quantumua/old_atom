@@ -1,6 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.end2end.crm.experienceLevels;
 
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
+import com.betamedia.atom.core.api.crm.form.entities.TradingExperienceInfo;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.testingtype.widgets.WidgetsEndToEndTest;
@@ -87,6 +88,32 @@ public abstract class AbstractUserExperienceTest extends WidgetsEndToEndTest {
                 .withNetWealth(NetWealth.NET_WEALTH_OVER_300K)
                 .withExpectedDepositsPerYear(ExpectedDepositsPerYear.DEPOSITS_OVER_50K)
                 .withPurposeOfTrading(PurposeOfTrading.ADDITIONAL_INCOME)
+                .build();
+    }
+
+    /**
+     * Build trading experience info with 0 score
+     * @return - TradingExperienceInfo instance
+     */
+    protected TradingExperienceInfo tradingExperienceInfoWith0Score() {
+        return TradingExperienceInfo.builder()
+                .withSharesExperience(SharesExperience.NEVER)
+                .withBinaryExperience(BinaryExperience.NEVER)
+                .withForExExperience(ForExExperience.NEVER)
+                .withFinancialWorkExperience(FinancialWorkExperience.NEITHER)
+                .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY)
+                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
+                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK)
+                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES)
+                .withStopLossKnowledge(StopLossKnowledge.BUY)
+                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_10K)
+                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL)
+                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
+                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A2_450)
+                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200)
+                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_60)
+                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
+                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
                 .build();
     }
 

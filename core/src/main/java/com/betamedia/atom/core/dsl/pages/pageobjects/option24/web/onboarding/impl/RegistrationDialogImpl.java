@@ -15,10 +15,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import static org.testng.Assert.assertTrue;
 
@@ -141,6 +139,11 @@ public class RegistrationDialogImpl extends AbstractPageObject implements Regist
     @Override
     public boolean logoExists() {
         return waitUntilDisplayed(logo).isDisplayed();
+    }
+
+    @Override
+    public void clickLogo() {
+        waitUntilDisplayed(logo).click();
     }
 
     @Override

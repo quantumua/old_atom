@@ -3,7 +3,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboardin
 import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractFnsEmployerInformation;
 import org.openqa.selenium.WebDriver;
-
 import static java.util.Objects.nonNull;
 
 /**
@@ -23,5 +22,15 @@ public class WidgetFnsEmployerInformationImpl extends AbstractFnsEmployerInforma
         inSelect(hasTaxIdentificationNumber).selectByValue(info.hasTaxIdentificationNumber);
         if (nonNull(info.taxIdentificationNumber)) find(taxIdentificationNumber).sendKeys(info.taxIdentificationNumber);
         if (nonNull(info.socialSecurityNumber)) find(socialSecurityNumber).sendKeys(info.socialSecurityNumber);
+    }
+
+    @Override
+    public void assertCloseNotExist(PersonalInformation info) {
+        //not necessary implementation for widgets
+    }
+
+    @Override
+    public void assertPersonalInformationExists() {
+        //not necessary implementation for widgets
     }
 }

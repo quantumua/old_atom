@@ -39,6 +39,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,socialSecurityNumber,ID,tinNo_alternate
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,isUSReportable,ID,IsUSReportablePerson
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,fnsSuitabilityButton,NAME,swFinancialSuitabilityBtn
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,modalClose,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,employmentStatus,ID,EmploymentStatus
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,employmentStatusSalariedEmployee,XPATH,//*[@id='divQEmploymentStatus']/div/ul/li[@data-value='employmentStatusSalariedEmployee']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,industry,ID,Industry
@@ -62,6 +63,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,purposeOfTradingBttn,XPATH,//*[@id='divQPurposeOfTrading']//*[@class='alternate-submit']
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,purposeOfTradingOther,ID,purposeOfTradingOther_alternate
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,resultPlaceholder,ID,resultPlaceHolder
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,modalClose,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,sharesExperience,ID,FinancialProducts1Shares
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,binaryExperience,ID,FinancialProducts1Binary
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,averageYearlyBinaryVolume,ID,FinancialProducts1Volume
@@ -87,6 +89,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,divQFinancialProductsCommonLeverage,ID,divQFinancialProductsCommonLeverage
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,divQKnowledgePositionLoss1to50,ID,divQKnowledgePositionLoss1to50
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,divQKnowledgePositionLoss1to200,ID,divQKnowledgePositionLoss1to200
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,modalClose,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,AccountDetailsTabImpl,winID,XPATH,".//ul[contains(@id,'menu-my-account')]//li[1]/a"
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,title,ID,Title
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountDetails,street,ID,Street

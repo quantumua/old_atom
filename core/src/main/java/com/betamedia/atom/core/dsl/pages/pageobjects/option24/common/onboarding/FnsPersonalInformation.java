@@ -10,4 +10,8 @@ public interface FnsPersonalInformation {
     boolean exists();
 
     void assertControlsUsability(PersonalInformation info, String expectedItemsBackgroundColor, String expectedAnswerColor, String expectedHoverAnswersColor, String expectedSelectionColor);
+
+    void assertBoundaryFields(PersonalInformation info);
+
+    void assertCloseNotExist(PersonalInformation info);
 }

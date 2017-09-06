@@ -9,4 +9,6 @@ public interface FnsTradingExperience {
 
     void submit(TradingExperienceInfo info);
     void checkDependsQuestions(TradingExperienceInfo info);
+    void assertBoundaryFields(TradingExperienceInfo info);
+    void assertCloseNotExist(TradingExperienceInfo info);
 }

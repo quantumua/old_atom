@@ -7,9 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
-import static java.util.Objects.nonNull;
 
 /**
  * @author mbelyaev
@@ -79,6 +77,52 @@ public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience im
         isExpanded(divQKnowledgePositionLoss1to200);
         submitOnWizard(info.lossOn1to200Knowledge);
 
+        waitUntilDisplayed(buttonWizardDeclaration).click();
+    }
+
+    @Override
+    public void assertBoundaryFields(TradingExperienceInfo info) {
+        submitOnWizard(info.instrumentsTradedBefore);
+        submitOnWizard(info.frequencyPastTransactions);
+        submitOnWizard(info.volumePastTransaction);
+        submitOnWizard(info.commonLevelPastTransaction);
+        submitOnWizard(info.financialWorkExperience);
+        submitOnWizard(info.cfdBinaryKnowledge);
+        submitOnWizard(info.mainFactorKnowledge);
+        submitOnWizard(info.howToCloseKnowledge);
+        submitOnWizard(info.requiredMarginKnowledge);
+        submitOnWizard(info.marginLevelDropKnowledge);
+        submitOnWizard(info.lossOn1to50Knowledge);
+        submitOnWizard(info.lossOn1to200Knowledge);
+        waitUntilDisplayed(buttonWizardDeclaration).click();
+    }
+
+    @Override
+    public void assertCloseNotExist(TradingExperienceInfo info) {
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.instrumentsTradedBefore);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.frequencyPastTransactions);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.volumePastTransaction);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.commonLevelPastTransaction);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.financialWorkExperience);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.cfdBinaryKnowledge);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.mainFactorKnowledge);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.howToCloseKnowledge);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.requiredMarginKnowledge);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.marginLevelDropKnowledge);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.lossOn1to50Knowledge);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.lossOn1to200Knowledge);
         waitUntilDisplayed(buttonWizardDeclaration).click();
     }
 

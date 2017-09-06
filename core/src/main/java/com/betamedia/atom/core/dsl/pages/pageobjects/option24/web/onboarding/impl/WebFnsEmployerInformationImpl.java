@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 
 /**
  * @author mbelyaev
@@ -26,7 +27,22 @@ public class WebFnsEmployerInformationImpl extends AbstractFnsEmployerInformatio
         inSelect(taxResidenceCountry).selectByValue(info.taxResidenceCountry);
         submitOnWizardAndWriteValue(info.hasTaxIdentificationNumber, info.taxIdentificationNumber);
         logger.info(String.format("filling Fns Employer Information wizard with values: %s", info.toString()));
-        click(fnsSuitabilityButton);
+        scrollIntoView(find(fnsSuitabilityButton)).click();
+
+    }
+
+    @Override
+    public void assertCloseNotExist(PersonalInformation info) {
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+    }
+
+    @Override
+    public void assertPersonalInformationExists() {
+        softAssert().assertTrue(waitUntilDisplayed(employerName).isDisplayed(),
+                employerName + " does not exists");
+        softAssert().assertTrue(waitUntilDisplayed(taxResidenceCountry).isDisplayed(),
+                taxResidenceCountry + " does not exists");
+
     }
 
     private void submitOnWizardAndWriteValue(String dataValue, String numberTaxId) {

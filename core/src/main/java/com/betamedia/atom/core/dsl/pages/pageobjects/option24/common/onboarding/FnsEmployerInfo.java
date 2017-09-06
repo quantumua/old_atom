@@ -9,5 +9,7 @@ import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
 public interface FnsEmployerInfo {
 
     void submit(PersonalInformation info);
+    void assertCloseNotExist(PersonalInformation info);
+    void assertPersonalInformationExists();
 
 }

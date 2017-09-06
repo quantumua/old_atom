@@ -6,9 +6,6 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSite
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.Country;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
-import com.betamedia.atom.core.api.web.form.Localization;
-import com.betamedia.atom.core.fwdataaccess.annotations.ClasspathLocation;
-import com.betamedia.atom.core.fwdataaccess.repository.CsvResourceRepository;
 import com.betamedia.atom.core.persistence.repositories.AbstractContactExtensionRepository;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractOnboardingConditionsTest;
@@ -17,7 +14,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 import static com.betamedia.atom.core.api.crm.form.entities.QuestionnaireAnswers.*;
 
 /**
@@ -617,15 +613,6 @@ public class CreateNewCustomers extends AbstractOnboardingConditionsTest {
         Reporter.log(String.format("Check expected: '%s' and actual: '%s' <br/>",
                 expected, actual));
         softAssert().assertEquals(actual, expected, errorMessage);
-    }
-
-
-    /**
-     * get localization collection
-     * @return - collection of the localizations
-     */
-    protected List<Localization> getLocalization() {
-        return CsvResourceRepository.getData(Localization.class, Localization.class.getAnnotation(ClasspathLocation.class).value());
     }
 
     /**

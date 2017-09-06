@@ -42,7 +42,17 @@ public class WidgetFnsTradingExperienceImpl extends AbstractFnsTradingExperience
 
     @Override
     public void checkDependsQuestions(TradingExperienceInfo info) {
+        //not necessary implementation for widgets
+    }
 
+    @Override
+    public void assertBoundaryFields(TradingExperienceInfo info) {
+        //not necessary implementation for widgets
+    }
+
+    @Override
+    public void assertCloseNotExist(TradingExperienceInfo info) {
+        //not necessary implementation for widgets
     }
 
 

@@ -18,6 +18,7 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
 
     private static final String CSS_COLOR = "color";
     private static final String CSS_BACKGROUND_COLOR = "background-color";
+    private static final int MAX_CHARS_IN_OTHER_ANSWER = 101;
 
     public WebFnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);
@@ -88,39 +89,97 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
 
     }
 
-    public void assertControlsUsability(PersonalInformation info, String expectedAnswerColor, String expectedHoverStateColor, String expectedSelectionColor) {
-
-
-        System.out.println(find(By.cssSelector("li[data-value='" + info.employmentStatus + "']")).getCssValue("color"));
-
-        softAssert().assertEquals(find(By.cssSelector("option[value='" + info.employmentStatus + "']"))
-                .getCssValue("border-bottom-color"), "rgb(153, 153, 153)");
-
-        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
-                .getCssValue("text-decoration-color"), "rgb(180, 180, 180)");
-
-
-        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
-                .getCssValue("color"), "rgb(180, 180, 180)");
-        softAssert().assertEquals(find(By.cssSelector("option[value='" + info.employmentStatus + "']"))
-                .getCssValue("border-bottom-color"), "rgb(180, 180, 180)");
-        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
-                .getCssValue("border-right-color:"), "rgb(180, 180, 180)");
-        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
-                .getCssValue("border-left-color"), "rgb(180, 180, 180)");
-        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
-                .getCssValue("border-top-color"), "rgb(180, 180, 180)");
-
-        softAssert().assertEquals(scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + info.employmentStatus + "']")))
-                .getCssValue("lighting-color"), "rgb(255, 255, 255)");
-
-
-        softAssert().assertEquals(find(employmentStatus).getCssValue("border-bottom-color"),"rgba(0, 0, 0, 0)");
+    @Override
+    public void assertBoundaryFields(PersonalInformation info) {
+        submitOnWizard(info.employmentStatus);
+        submitOnWizard(info.industry);
+        if (nonNull(info.industryOther)) {
+            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            find(industryOther).sendKeys(info.industryOther);
+            softAssert().assertEquals(find(industryOther).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+                    industryOther+"Contains more chars than maximum");
+            executeScript("arguments[0].click()", find(industryOtherBttn));
+        }
+        submitOnWizard(info.educationLevel);
+        submitOnWizard(info.educationField);
+        if (nonNull(info.educationFieldOther)) {
+            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            find(educationFieldOther).sendKeys(info.educationFieldOther);
+            softAssert().assertEquals(find(educationFieldOther).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+                    educationFieldOther+"Contains more chars than maximum");
+            executeScript("arguments[0].click()", find(educationFieldBttn));
+        }
+        submitOnWizard(info.isPoliticallyExposed);
+        if (nonNull(info.politicalExposureComment)) {
+            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            find(politicalExposureComment).sendKeys(info.politicalExposureComment);
+            softAssert().assertEquals(find(politicalExposureComment).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+                    politicalExposureComment+"Contains more chars than maximum");
+            executeScript("arguments[0].click()", find(politicalExposureBttn));
+        }
+        submitOnWizard(info.sourceOfFunds);
+        if (nonNull(info.sourceOfFundsOther)) {
+            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
+            softAssert().assertEquals(find(sourceOfFundsOther).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+                    sourceOfFundsOther+"Contains more chars than maximum");
+            executeScript("arguments[0].click()", find(sourceOfFundsBttn));
+        }
+        submitOnWizard(info.annualIncome);
+        submitOnWizard(info.netWealth);
+        submitOnWizard(info.expectedDepositsPerYear);
+        submitOnWizard(info.purposeOfTrading);
+        if (nonNull(info.purposeOfTradingOther)) {
+            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
+            softAssert().assertEquals(find(purposeOfTradingOther).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+                    purposeOfTradingOther+"Contains more chars than maximum");
+            executeScript("arguments[0].click()", find(purposeOfTradingBttn));
+        }
     }
 
-    private void checkAnswerColor(PersonalInformation info, String expectedAnswerColor) {
-
-
+    @Override
+    public void assertCloseNotExist(PersonalInformation info) {
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.employmentStatus);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.industry);
+        if (nonNull(info.industryOther)) {
+            find(industryOther).sendKeys(info.industryOther);
+            executeScript("arguments[0].click()", find(industryOtherBttn));
+        }
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.educationLevel);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.educationField);
+        if (nonNull(info.educationFieldOther)) {
+            find(educationFieldOther).sendKeys(info.educationFieldOther);
+            executeScript("arguments[0].click()", find(educationFieldBttn));
+        }
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.isPoliticallyExposed);
+        if (nonNull(info.politicalExposureComment)) {
+            find(politicalExposureComment).sendKeys(info.politicalExposureComment);
+            executeScript("arguments[0].click()", find(politicalExposureBttn));
+        }
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.sourceOfFunds);
+        if (nonNull(info.sourceOfFundsOther)) {
+            find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
+            executeScript("arguments[0].click()", find(sourceOfFundsBttn));
+        }
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.annualIncome);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.netWealth);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.expectedDepositsPerYear);
+        softAssert().assertFalse(find(modalClose).isDisplayed());
+        submitOnWizard(info.purposeOfTrading);
+        if (nonNull(info.purposeOfTradingOther)) {
+            find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
+            executeScript("arguments[0].click()", find(purposeOfTradingBttn));
+        }
     }
 
     private void submitOnWizard(String dataValue) {

@@ -89,32 +89,6 @@ public class RejectedUserTest extends AbstractUserExperienceTest {
     }
 
     /**
-     * Build trading experience info with 0 score
-     * @return - TradingExperienceInfo instance
-     */
-    private TradingExperienceInfo tradingExperienceInfoWith0Score() {
-        return TradingExperienceInfo.builder()
-                .withSharesExperience(SharesExperience.NEVER)
-                .withBinaryExperience(BinaryExperience.NEVER)
-                .withForExExperience(ForExExperience.NEVER)
-                .withFinancialWorkExperience(FinancialWorkExperience.NEITHER)
-                .withCfdBinaryKnowledge(CfdBinaryKnowledge.NON_RISKY)
-                .withMainFactorKnowledge(MainFactorKnowledge.ANNOUNCEMENT)
-                .withHowToCloseKnowledge(HowToCloseKnowledge.LONDON_STOCK)
-                .withCfdLeverageKnowledge(CfdLeverageKnowledge.PROVIDES)
-                .withStopLossKnowledge(StopLossKnowledge.BUY)
-                .withRequiredMarginKnowledge(RequiredMarginKnowledge.MARGIN_10K)
-                .withMarginLevelDropKnowledge(MarginLevelDropKnowledge.WARNING_CALL)
-                .withAutomaticStopKnowledge(AutomaticStopKnowledge.EARNINGS)
-                .withLossOn1to50Knowledge(LossOn1to50Knowledge.A2_450)
-                .withLossOn1to200Knowledge(LossOn1to200Knowledge.A2_1200)
-                .withBinaryInvestProfitKnowledge(BinaryInvestProfitKnowledge.PROFIT_60)
-                .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
-                .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
-                .build();
-    }
-
-    /**
      * Build trading experience info with 10 score
      * @return - TradingExperienceInfo instance
      */

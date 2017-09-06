@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
  */
 public class ExperienceLevelsTests extends AbstractExperienceLevelsTests {
 
-    private static final boolean RISK_WARNING = true;
+    protected static final boolean RISK_WARNING = true;
     private static final boolean NO_RISK_WARNING = false;
 
     @Test(description = "CTW-5508:Experience level - Rejected")

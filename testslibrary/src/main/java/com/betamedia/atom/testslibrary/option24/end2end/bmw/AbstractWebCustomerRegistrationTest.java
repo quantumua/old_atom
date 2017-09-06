@@ -61,6 +61,4 @@ public class AbstractWebCustomerRegistrationTest extends AbstractCustomerRegistr
         return customerRegistrationInfo;
     }
 
-
-
 }

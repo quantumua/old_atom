@@ -39,9 +39,34 @@ public class WidgetFnsPersonalInformationImpl extends AbstractFnsPersonalInforma
     }
 
     @Override
-    public void assertControlsUsability(PersonalInformation info, String expectedItemsBackgroundColor, String expectedAnswerColor, String expectedHoverAnswersColor, String expectedSelectionColor) {
-
+    public void assertBoundaryFields(PersonalInformation info) {
+        inSelect(employmentStatus).selectByValue(info.employmentStatus);
+        inSelect(industry).selectByValue(info.industry);
+        if(nonNull(info.industryOther)) {find(industryOther).sendKeys(info.industryOther);}
+        inSelect(educationLevel).selectByValue(info.educationLevel);
+        inSelect(educationField).selectByValue(info.educationField);
+        if(nonNull(info.educationFieldOther)) find(educationFieldOther).sendKeys(info.educationFieldOther);
+        inSelect(isPoliticallyExposed).selectByValue(info.isPoliticallyExposed);
+        if(nonNull(info.politicalExposureComment)) find(politicalExposureComment).sendKeys(info.politicalExposureComment);
+        inSelect(sourceOfFunds).selectByValue(info.sourceOfFunds);
+        if(nonNull(info.sourceOfFundsOther)) find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
+        inSelect(annualIncome).selectByValue(info.annualIncome);
+        inSelect(netWealth).selectByValue(info.netWealth);
+        inSelect(expectedDepositsPerYear).selectByValue(info.expectedDepositsPerYear);
+        inSelect(purposeOfTrading).selectByValue(info.purposeOfTrading);
+        if(nonNull(info.purposeOfTradingOther)) find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
+        scrollIntoView(find(submit)).click();
+        waitUntil(() -> waitUntilDisplayed(resultPlaceholder).getText().contains("\"HasPersonalInformationAnswers\":true"));
     }
 
+    @Override
+    public void assertCloseNotExist(PersonalInformation info) {
+        //not necessary implementation for widgets
+    }
+
+    @Override
+    public void assertControlsUsability(PersonalInformation info, String expectedItemsBackgroundColor, String expectedAnswerColor, String expectedHoverAnswersColor, String expectedSelectionColor) {
+        //not necessary implementation for widgets
+    }
 
 }

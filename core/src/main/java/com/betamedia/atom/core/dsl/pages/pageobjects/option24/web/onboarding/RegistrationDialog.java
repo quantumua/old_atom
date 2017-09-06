@@ -3,7 +3,6 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding;
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations.Direction;
-
 import java.util.List;
 
 /**
@@ -16,6 +15,8 @@ public interface RegistrationDialog {
     boolean exists();
 
     boolean logoExists();
+
+    void clickLogo();
 
     boolean liveChatExists();
 
