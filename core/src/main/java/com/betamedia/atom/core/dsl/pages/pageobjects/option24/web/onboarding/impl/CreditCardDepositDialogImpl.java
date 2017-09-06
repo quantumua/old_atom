@@ -49,4 +49,10 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 	public void waitforCreditCardDepositPage() {
 		waitUntilDisplayed(depositAmount);
 	}
+
+	@Override
+	public boolean invalidCreditCardNumberErrorExists() {
+		return waitUntilDisplayed(invalidCreditCardNumberError) != null;
+	}
+
 }

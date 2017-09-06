@@ -35,6 +35,8 @@ public abstract class AbstractCreditCardDeposit extends AbstractPageObject imple
     protected By country;
     @StoredId
     protected By submit;
+    @StoredId
+    protected By invalidCreditCardNumberError;
 
     protected AbstractCreditCardDeposit(WebDriver webDriver) {
         super(webDriver);

@@ -14,17 +14,9 @@ import org.testng.annotations.Optional;
  */
 public class AbstractWebCustomerRegistrationTest extends AbstractCustomerRegistrationTest {
 
-    /**
-     * Create user via WEB UI using specific parameters
-     *
-     * @param countrycode - country code
-     * @param phoneCountryPrefix - phone country prefix to use
-     * @param depositAmount - deposit amount to set in credit card deposit slide
-     */
-
-    public CustomerRegistrationInfo createUser(String countrycode, String phoneCountryPrefix, @Optional String depositAmount){
+    public CustomerRegistrationInfo invokeDepositSlide (String countrycode, String phoneCountryPrefix) {
         pages().topNavigationPage().signUp();
-        CustomerRegistrationInfo customerRegistrationInfo=CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
                 .withPhoneCountryPrefix(phoneCountryPrefix)
                 .withCurrency(Currency.USD.getFullName())
                 .build();
@@ -34,11 +26,25 @@ public class AbstractWebCustomerRegistrationTest extends AbstractCustomerRegistr
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         PersonalInformation personalInfo = getPersonalInformation();
         passQuestionnaire(personalInfo, getTradingExperienceInfo());
+        pages().creditCardDeposit().waitforCreditCardDepositPage();
+        return customerRegistrationInfo;
+    }
+
+    /**
+     * Create user via WEB UI using specific parameters
+     *
+     * @param countrycode - country code
+     * @param phoneCountryPrefix - phone country prefix to use
+     * @param depositAmount - deposit amount to set in credit card deposit slide
+     */
+
+    public CustomerRegistrationInfo createUser(String countrycode, String phoneCountryPrefix, @Optional String depositAmount){
+        CustomerRegistrationInfo customerRegistrationInfo=invokeDepositSlide(countrycode, phoneCountryPrefix);
         pages().creditCardDeposit().submit((CreditCardDeposit.builder()
                 .withDepositAmount(depositAmount)
                 .build()));
         pages().thankYouPage().doContinue();
-        pages().fnsEmployerInfo().submit(personalInfo);
+        pages().fnsEmployerInfo().submit(getPersonalInformation());
         return customerRegistrationInfo;
     }
 
