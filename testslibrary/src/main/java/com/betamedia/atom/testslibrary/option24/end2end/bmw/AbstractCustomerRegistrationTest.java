@@ -5,7 +5,9 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSite
 import com.betamedia.atom.core.api.tp.entities.request.CustomerRO;
 import com.betamedia.atom.core.api.tp.entities.response.CRMCustomer;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import com.betamedia.atom.core.persistence.entities.ContactExtension;
 import com.betamedia.atom.core.testingtype.web.WebEndToEndTest;
+import org.testng.Reporter;
 
 /**
  * Created by vsnigur on 8/31/17.
@@ -68,6 +70,18 @@ public class AbstractCustomerRegistrationTest extends WebEndToEndTest {
         return customerRegistrationInfo;
     }
 
+    protected ContactExtension getContactExtension() {
+        pages().accountDetails().invoke();
+        String emailAddress = pages().accountDetails().getEmail();
+        return getContactExtension(emailAddress);
+    }
+
+    protected ContactExtension getContactExtension (String emailAddress) {
+        final ContactExtension contactExtension = operations().customerOperations().getContactExtensionByEmailAddress(emailAddress);
+        Reporter.log("contactExtension.getPoiOcrStatus()=" + contactExtension.getPoiOcrStatus());
+        Reporter.log("contactExtension.getPorOcrStatus()=" + contactExtension.getPorOcrStatus());
+        return contactExtension;
+    }
 
     /**
      * Method to update credit card for current logged in user

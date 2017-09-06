@@ -1,7 +1,7 @@
 package com.betamedia.atom.testslibrary.option24.web.documentsUploadSlide;
 
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
-import com.betamedia.atom.testslibrary.option24.end2end.bmw.AbstractWebCustomerRegistrationTest;
+import com.betamedia.atom.testslibrary.option24.web.AbstractWebNavigationTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * @since 7/20/17
  */
 
-public class DocumentsUploadSlideSanityTest extends AbstractWebCustomerRegistrationTest {
+public class DocumentsUploadSlideSanityTest extends AbstractWebNavigationTest {
 
     static final String POI_PASSPORT_PATH = "files/sample_passport.jpg";
 
@@ -84,7 +84,7 @@ public class DocumentsUploadSlideSanityTest extends AbstractWebCustomerRegistrat
     @Test(description = "CTW-5769:Successful upload document: Credit Card section")
     @TestLinkProperties(displayId = "CTW-5769")
     public void successfulUploadDocumentCreditCardSection() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         softAssert().assertTrue(pages().uploadDocumentsTab()
                 .uploadCreditCard(CREDIT_CARD_FRONT_PATH, CREDIT_CARD_BACK_PATH)
                 .creditCardImagesSentMsgExists(), "Credit Card uploaded successfully.");
@@ -146,34 +146,13 @@ public class DocumentsUploadSlideSanityTest extends AbstractWebCustomerRegistrat
     @Test(description = "CTW-5774:Failed upload document: Credit Card section")
     @TestLinkProperties(displayId = "CTW-5774")
     public void failedUploadDocumentCreditCardSection() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         softAssert().assertFalse(pages().uploadDocumentsTab()
                 .uploadCreditCard(WRONG_DOC_PATH, WRONG_DOC_PATH)
                 .creditCardImagesSentMsgExists(), "The invalid document was Not uploaded.");
         // TODO: This verification is blocked (no error message is available): "a correct red error message is displayed"
         softAssert().assertTrue(pages().uploadDocumentsTab()
                 .creditCardXImageExists(), "Red X sign is available");
-    }
-
-    public void closeWizardAndGoTrade() {
-        pages().uploadDocumentDialog().close();
-        pages().confirmCloseMessage().acceptClose();
-        pages().setLeverageDialog().selectLeverage("100");
-    }
-
-    public void closeWizardAndGoToMyAccount() {
-        closeWizardAndGoTrade();
-        pages().topNavigationPage().goToMyAccount();
-    }
-
-    public void closeWizardAndGoToUploadDocumentTab() {
-        closeWizardAndGoTrade();
-        goToUploadDocumentTab();
-    }
-
-    public void goToUploadDocumentTab() {
-        pages().topNavigationPage().goToMyAccount();
-        pages().uploadDocumentsTab().invoke();
     }
 
 }

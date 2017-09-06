@@ -8,11 +8,6 @@ import org.testng.annotations.*;
 
 public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFunctionalityTest {
 
-    @BeforeMethod
-    @Parameters({"countrycode", "phonecountryprefix"})
-    public void before(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-    }
-
     /*
     * [TestLink] CTW-5360:Deposit > 2000$ restricted account before POI submit
     */
@@ -21,7 +16,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @Parameters({"countrycode", "phonecountryprefix"})
     public void depositMoreThan2000RestrictedAccountBeforePOIsubmit(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         createUser(countrycode,phonecountryprefix,"1500");
-        closeWizardAndGoTrade();
+        closeOnboardingWizardAndGoTrade();
         Assert.assertTrue(pages().topNavigationPage().isLoggedIn());
         openPosition("0.01");
         softAssert().assertFalse(pages().cfdPositions().isAnyPositionOpened(), "No any position opened verification");
@@ -69,7 +64,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @Parameters({"countrycode", "phonecountryprefix"})
     public void multipleDepositsWithoutPOIAndPORAmountIsLessThenRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         createUser(countrycode,phonecountryprefix,"390");
-        closeWizardAndGoToMyAccount();
+        closeOnboardingWizardAndGoToMyAccount();
         //1 - Do not upload a document at POI then make additional deposit amount 500$
         makeDepositOpenPositionVerifySuccess("390");
         //      3 - Deposit additional 950$ (QD) than back to trade while amount isn't higher than 2000$ and try to open position
@@ -86,7 +81,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
     @Parameters({"countrycode", "phonecountryprefix"})
     public void multipleDepositsWithoutPOIAndPORAmountIsOverThanRestrictionPolicy(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         createUser(countrycode,phonecountryprefix,"390");
-        closeWizardAndGoTrade();
+        closeOnboardingWizardAndGoTrade();
         makeDepositOpenPositionVerifyFailure("2000");
         pages().topNavigationPage().goToMyAccount();
         pages().uploadDocumentsTab()
@@ -157,7 +152,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
                 .porUploadElectricityBill(POR_ELECTRICITY_BILL_PATH)
                 .exists();
         verifyPORStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
-        closeWizardAndGoTrade();
+        closeOnboardingWizardAndGoTrade();
         pages().controlPanel().logOut();
         pages().topNavigationPage().waitForLoggedOut();
         pages().topNavigationPage().logIn();
@@ -177,7 +172,7 @@ public class DocumentsUploadSlideWithOpenPosition extends DocumentsUploadSlideFu
                 .poiUploadIdCard(POI_ID_FRONT_PATH, POI_ID_BACK_PATH)
                 .exists();
         verifyPOIStatusInCRM(OCR_STATUS_VERIFIED, customerRegistrationInfo);
-        closeWizardAndGoTrade();
+        closeOnboardingWizardAndGoTrade();
         pages().controlPanel().logOut();
         pages().topNavigationPage().waitForLoggedOut();
         pages().topNavigationPage().logIn();

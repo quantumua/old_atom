@@ -73,7 +73,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5351:POI - Upload passport - SC")
     @TestLinkProperties(displayId = "CTW-5351")
     public void poiUploadPassportSC() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab()
                 .poiUploadPassport(POI_PASSPORT_PATH)
                 .verifyPOIDocumentsUploaded(1);
@@ -87,7 +87,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5353:POI with 2 sides")
     @TestLinkProperties(displayId = "CTW-5353")
     public void poiWith2Sides() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab()
                 .poiUploadDriverLicenseDocuments(POI_DRIVER_LICENSE_FRONT_PATH, POI_DRIVER_LICENSE_BACK_PATH)
                 .verifyPOIDocumentsUploaded(2);
@@ -99,7 +99,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5354:Upload Identity Card")
     @TestLinkProperties(displayId = "CTW-5354")
     public void uploadIdentityCard() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab()
                 .poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH)
                 .verifyPOIDocumentsUploaded(2);
@@ -111,7 +111,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5355:Upload Driver License")
     @TestLinkProperties(displayId = "CTW-5355")
     public void uploadDriverLicense() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab()
                 .poiUploadDriverLicenseDocuments(POI_DRIVER_LICENSE_FRONT_PATH, POI_DRIVER_LICENSE_BACK_PATH)
                 .verifyPOIDocumentsUploaded(2);
@@ -123,7 +123,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5356:POI - Upload invalid passport _SC")
     @TestLinkProperties(displayId = "CTW-5356")
     public void poiUploadInvalidPassportSC() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab()
                 .poiUploadPassport(WRONG_DOC_PATH)
                 .verifyPOIInvalidDocumentUploaded(1);
@@ -141,7 +141,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5358:POI Upload then logout/Login")
     @TestLinkProperties(displayId = "CTW-5358")
     public void poiUploadThenLogoutLogin() {
-        closeWizardAndGoToMyAccount();
+        closeOnboardingWizardAndGoToMyAccount();
         String userName = pages().accountDetails().getEmail();
         pages().uploadDocumentsTab()
                 .invoke()
@@ -170,7 +170,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5340:POR - Upload gas bill - SC")
     @TestLinkProperties(displayId = "CTW-5340")
     public void porUploadGasBillSC() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab()
                 .poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH)
                 .verifyPOIDocumentsUploaded(2);
@@ -186,7 +186,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5343:POR - Upload invalid document_ SC")
     @TestLinkProperties(displayId = "CTW-5343")
     public void porUploadInvalidDocumentSC() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         softAssert().assertTrue(pages().uploadDocumentsTab()
                 .poiUploadPassport(POI_PASSPORT_PATH)
                 .verifyPORsectionExpanded(), "POR section not expanded");
@@ -204,7 +204,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5342:POR - choose Other relevant bill")
     @TestLinkProperties(displayId = "CTW-5342")
     public void porChooseOtherRelevantBill() {
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab()
                 .poiUploadIdCardDocuments(POI_ID_FRONT_PATH, POI_ID_BACK_PATH)
                 .verifyPOIDocumentsUploaded(2);
@@ -222,7 +222,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     @Test(description = "CTW-5345:POR Upload then logout/Login")
     @TestLinkProperties(displayId = "CTW-5345")
     public void porUploadThenLogoutLogin() {
-        closeWizardAndGoToMyAccount();
+        closeOnboardingWizardAndGoToMyAccount();
         String userName = pages().accountDetails().getEmail();
         pages().uploadDocumentsTab().invoke()
                 .porUploadGasBill(POR_GAS_BILL_PATH)
@@ -233,7 +233,7 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
         CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).build();
         pages().topNavigationPage().logIn();
         pages().loginDialog().login(userName, customerRegistrationInfo.getPassword());
-        closeWizardAndGoToUploadDocumentTab();
+        closeOnboardingWizardAndGoToUploadDocumentTab();
         pages().uploadDocumentsTab().verifyPOROveralStatusReviewed();
     }
 
@@ -255,20 +255,5 @@ public class DocumentsUploadSlideFunctionalityTest extends DocumentsUploadSlideS
     public void verifyPORStatusInCRM (Integer porOCRStatus, CustomerRegistrationInfo customerRegistrationInfo) {
         final ContactExtension contactExtension = getContactExtension(customerRegistrationInfo.getEmail());
         softAssert().assertEquals(contactExtension.getPorOcrStatus(), porOCRStatus, "POR Ocr status verification, actual status: " + contactExtension.getPorOcrStatus());
-    }
-
-    private ContactExtension getContactExtension() {
-        pages().accountDetails().invoke();
-        String emailAddress = pages().accountDetails().getEmail();
-        return getContactExtension(emailAddress);
-    }
-
-    private ContactExtension getContactExtension (String emailAddress) {
-        final ContactExtension contactExtension = operations().customerOperations().findExtByEmailAddress(emailAddress);
-        logger.info("contactExtension.getPoiOcrStatus()=" + contactExtension.getPoiOcrStatus());
-        logger.info("contactExtension.getPorOcrStatus()=" + contactExtension.getPorOcrStatus());
-        Reporter.log("contactExtension.getPoiOcrStatus()=" + contactExtension.getPoiOcrStatus());
-        Reporter.log("contactExtension.getPorOcrStatus()=" + contactExtension.getPorOcrStatus());
-        return contactExtension;
     }
 }

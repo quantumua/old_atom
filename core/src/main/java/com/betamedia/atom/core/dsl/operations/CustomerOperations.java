@@ -64,7 +64,9 @@ public interface CustomerOperations<T extends EnvironmentDependent> extends Envi
 
     ContactBase findByEmailAddress(String emailAddress);
 
-    ContactExtension findExtByEmailAddress (String emailAddress);
+    ContactExtension getContactExtensionByEmailAddress(String emailAddress);
 
-    CreditCarddepositExtensionBase findDeposit(String customerID);
+    CreditCardDepositExtensionBase getCreditCardDepositExtBase(String customerID);
+
+    CreditCardDepositExtensionBase getCreditCardDepositExtBaseByEmailAddress (String emailAddress);
 }

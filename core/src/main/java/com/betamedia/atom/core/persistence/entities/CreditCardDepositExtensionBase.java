@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "bt_creditcarddepositExtensionBase")
-public class CreditCarddepositExtensionBase {
+public class CreditCardDepositExtensionBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

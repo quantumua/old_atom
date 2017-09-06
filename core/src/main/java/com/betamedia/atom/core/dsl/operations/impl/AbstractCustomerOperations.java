@@ -340,16 +340,25 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
     }
 
     @Override
-    public ContactExtension findExtByEmailAddress (String emailAddress) {
+    public ContactExtension getContactExtensionByEmailAddress(String emailAddress) {
         ContactExtension contactExtension = contactExtensionRepository.findByUsername(emailAddress);
         assertNotNull(contactExtension, "Unable to locate customer by email: " + emailAddress);
         return contactExtension;
     }
 
     @Override
-    public CreditCarddepositExtensionBase findDeposit(String customerID){
-        CreditCarddepositExtensionBase ccExtBase = creditCardDepositExtensionBase.findByCustomerId(customerID);
-        assertNotNull(ccExtBase, "Unable to locate customer by email: " + customerID);
+    public CreditCardDepositExtensionBase getCreditCardDepositExtBase(String customerID){
+        CreditCardDepositExtensionBase ccExtBase = creditCardDepositExtensionBase.findByCustomerId(customerID);
+        assertNotNull(ccExtBase, "Unable to locate customer by customer ID: " + customerID);
         return ccExtBase;
     }
+
+    @Override
+    public CreditCardDepositExtensionBase getCreditCardDepositExtBaseByEmailAddress (String emailAddress){
+        ContactExtension contactExtension = contactExtensionRepository.findByUsername(emailAddress);
+        CreditCardDepositExtensionBase ccExtBase = creditCardDepositExtensionBase.findByCustomerId(contactExtension.getContactId());
+        assertNotNull(ccExtBase, "Unable to locate customer by email: " + emailAddress);
+        return ccExtBase;
+    }
+
 }
