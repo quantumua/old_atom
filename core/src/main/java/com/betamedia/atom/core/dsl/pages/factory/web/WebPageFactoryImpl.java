@@ -39,7 +39,6 @@ import com.betamedia.atom.core.dsl.type.ProductType;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 /**
@@ -167,8 +166,8 @@ public class WebPageFactoryImpl extends AbstractPageFactory implements WebPageFa
     }
 
     @Override
-    public CreditCardDepositPage creditCardDeposit() {
-        return creator.getPage(CreditCardDepositPageImpl.class);
+    public CreditCardDepositPage creditCardDepositDialog() {
+        return creator.getPage(CreditCardDepositDialogImpl.class);
     }
 
     @Override

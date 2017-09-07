@@ -65,7 +65,7 @@ public abstract class AbstractFnsPersonalInformation extends AbstractPageObject 
 
     @Override
     public boolean exists() {
-    	return waitUntilDisplayed(employmentStatusSalariedEmployee).isDisplayed();
+    	return find(employmentStatusSalariedEmployee).isDisplayed();
     }
 
 }

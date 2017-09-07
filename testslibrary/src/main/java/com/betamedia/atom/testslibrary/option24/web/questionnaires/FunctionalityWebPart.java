@@ -1,21 +1,23 @@
 package com.betamedia.atom.testslibrary.option24.web.questionnaires;
 
-import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
-import com.betamedia.atom.core.api.crm.form.entities.PersonalInformation;
+import com.betamedia.atom.core.api.crm.form.entities.*;
 import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSiteNamingStrategy;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import com.betamedia.atom.core.persistence.entities.RegulationAnswerExtensionBase;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.annotations.Test;
+import java.util.List;
 
 /**
  * Created by vsnigur on 9/5/17.
  */
 public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
 
+    private static final int EXPECTED_ANSWERS_COUNT = 22;
+
     /*
-    Personal information
-     */
+        Personal information
+         */
     @Test(description = "CTW-5890:Questionnaires Free text box: boundary values validation")
     @TestLinkProperties(displayId = "CTW-5890")
     public void boundaryValuesValidationForPersonalInformationQuestions() {
@@ -45,7 +47,7 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
         pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
         pages().riskWarning().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().assertCloseNotExist(personalInformation);
         pages().fnsEmployerInfo().submit(personalInformation);
@@ -62,7 +64,7 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
         pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
         pages().riskWarning().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().assertPersonalInformationExists();
         pages().browser().refreshPage();
@@ -81,7 +83,7 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
         pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
         pages().riskWarning().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().assertPersonalInformationExists();
         pages().registrationDialog().clickLogo();
@@ -101,7 +103,7 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
         pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
         pages().riskWarning().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().assertPersonalInformationExists();
         pages().registrationDialog().clickLogo();
@@ -121,7 +123,7 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
         pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
         pages().riskWarning().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().assertPersonalInformationExists();
         pages().registrationDialog().clickLogo();
@@ -141,7 +143,7 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
         pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
         pages().riskWarning().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().submit(personalInformation);
         softAssert().assertTrue(pages().uploadDocumentDialog().exists(),"POI / POR did not appear");
@@ -169,14 +171,73 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"Thank you 1 did not appear");
     }
 
+    @Test(description = "CTW-5891:Free text box fields: data saved and updated in CRM (test depend on web test at first)")
+    @TestLinkProperties(displayId = "CTW-5891")
+    public void dataSavedAndUpdatedInCRM() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(getPersonalInformationScore0(), tradingExperienceInfoWith0Score());
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        assertAnswersInCRMDB(customerRegistrationInfo, personalInformation, tradingExperienceInfo);
+
+    }
+    private void assertAnswersInCRMDB(CustomerRegistrationInfo customerRegistrationInfo, PersonalInformation personalInformation, TradingExperienceInfo tradingExperienceInfo ) {
+        List<RegulationAnswerExtensionBase> answers = operations().customerOperations()
+                .findCustomerAnswers(operations().customerOperations()
+                        .findByEmailAddress(customerRegistrationInfo.getEmail()).getContactId());
+        softAssert().assertEquals(answers.size(), EXPECTED_ANSWERS_COUNT);
+        checkAnswerExisting(answers, personalInformation.employmentStatus, personalInformation.industry,
+                personalInformation.educationLevel,
+                personalInformation.educationField,
+                personalInformation.isPoliticallyExposed,
+                personalInformation.sourceOfFunds,
+                personalInformation.annualIncome,
+                personalInformation.netWealth,
+                personalInformation.expectedDepositsPerYear,
+                personalInformation.purposeOfTrading,
+                tradingExperienceInfo.financialWorkExperience,
+                tradingExperienceInfo.cfdBinaryKnowledge,
+                tradingExperienceInfo.mainFactorKnowledge,
+                tradingExperienceInfo.howToCloseKnowledge,
+                tradingExperienceInfo.requiredMarginKnowledge,
+                tradingExperienceInfo.marginLevelDropKnowledge,
+                tradingExperienceInfo.lossOn1to50Knowledge,
+                tradingExperienceInfo.lossOn1to200Knowledge,
+                tradingExperienceInfo.financialWorkExperience,
+                tradingExperienceInfo.instrumentsTradedBefore,
+                tradingExperienceInfo.frequencyPastTransactions,
+                tradingExperienceInfo.volumePastTransaction,
+                tradingExperienceInfo.commonLevelPastTransaction);
+
+    }
+
+    private void checkAnswerExisting(List<RegulationAnswerExtensionBase> answers, String... expectedAnswer) {
+        for (String answerToDetect:expectedAnswer) {
+            softAssert().assertNotNull(answers.stream()
+                            .filter(answer-> answer.getAnswerKey().equalsIgnoreCase(answerToDetect))
+                            .findFirst().orElse(null),
+                    answerToDetect + " was not detected in the list");
+        }
+    }
+
     private void invokeSlideFNS() {
         CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
                 .builder(WebSiteNamingStrategy.get()).build();
+        invokeSlideFNS(customerRegistrationInfo);
+    }
+
+    private void invokeSlideFNS(CustomerRegistrationInfo customerRegistrationInfo) {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRegistrationInfo);
         pages().welcomeDialog().start();
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
     }
+
 
     private PersonalInformation invokePOIPORDialog() {
         invokeSlideFNS();
@@ -184,19 +245,8 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
         pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
         pages().riskWarning().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         pages().thankYouPage().doContinue();
         return personalInformation;
     }
-
-    @Test(description = "CTW-5891:Free text box fields: data saved and updated in CRM (test depend on web test at first)")
-    @TestLinkProperties(displayId = "CTW-5891")
-    public void dataSavedAndUpdatedInCRM() {
-        invokeSlideFNS();
-        passQuestionnaire(getPersonalInformationOtherAnswers(), tradingExperienceInfoWith0Score());
-        //TODO: check updated fields in the CRM PersonalInformation page
-        //TODO: check updated fields in the CRM TradingExperience page
-
-    }
-
 }

@@ -14,6 +14,12 @@ import org.testng.annotations.Optional;
  */
 public class AbstractWebCustomerRegistrationTest extends AbstractCustomerRegistrationTest {
 
+    /**
+     * Create user via WEB UI using specific parameters
+     *
+     * @param countrycode - country code
+     * @param phoneCountryPrefix - phone country prefix to use
+     */
     public CustomerRegistrationInfo invokeDepositSlide (String countrycode, String phoneCountryPrefix) {
         pages().topNavigationPage().signUp();
         CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo.builder(WebSiteNamingStrategy.get()).withCountry(countrycode)
@@ -26,7 +32,7 @@ public class AbstractWebCustomerRegistrationTest extends AbstractCustomerRegistr
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         PersonalInformation personalInfo = getPersonalInformation();
         passQuestionnaire(personalInfo, getTradingExperienceInfo());
-        pages().creditCardDeposit().waitforCreditCardDepositPage();
+        pages().creditCardDepositDialog().waitforCreditCardDepositPage();
         return customerRegistrationInfo;
     }
 
@@ -40,7 +46,7 @@ public class AbstractWebCustomerRegistrationTest extends AbstractCustomerRegistr
 
     public CustomerRegistrationInfo createUser(String countrycode, String phoneCountryPrefix, @Optional String depositAmount){
         CustomerRegistrationInfo customerRegistrationInfo=invokeDepositSlide(countrycode, phoneCountryPrefix);
-        pages().creditCardDeposit().submit((CreditCardDeposit.builder()
+        pages().creditCardDepositDialog().submit((CreditCardDeposit.builder()
                 .withDepositAmount(depositAmount)
                 .build()));
         pages().thankYouPage().doContinue();
@@ -62,7 +68,7 @@ public class AbstractWebCustomerRegistrationTest extends AbstractCustomerRegistr
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         passQuestionnaire(personalInformation,tradingExperienceInfo);
         if (riskWarning) pages().riskWarning().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         pages().thankYouPage().doContinue();
         return customerRegistrationInfo;
     }

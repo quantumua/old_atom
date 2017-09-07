@@ -65,7 +65,7 @@ public class RegistrationPOIUploadDemonstrationTest extends WebClientTest {
                 .withBinaryInvestLossKnowledge(BinaryInvestLossKnowledge.LOSS_75)
                 .withBinaryProbabilityKnowledge(BinaryProbabilityKnowledge.MONEY_35)
                 .build());
-        pages().creditCardDeposit().submit((CreditCardDeposit.builder()
+        pages().creditCardDepositDialog().submit((CreditCardDeposit.builder()
                 .withDepositAmount("50")
                 .withCreditCardNumber("4543130000001116")
                 .withCVV2("092")

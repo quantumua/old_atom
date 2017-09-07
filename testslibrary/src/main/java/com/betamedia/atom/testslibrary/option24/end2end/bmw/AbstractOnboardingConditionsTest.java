@@ -46,7 +46,7 @@ public class AbstractOnboardingConditionsTest extends AbstractCustomerRegistrati
 
         if (conditions.isShowDeposit()) {
             Reporter.log("INFO: ShowDeposit should happens.");
-            pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+            pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         }
 
         if (conditions.isShowPoiPor()) {

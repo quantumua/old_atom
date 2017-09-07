@@ -51,6 +51,11 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 	}
 
 	@Override
+	public void close() {
+		waitUntilDisplayed(modalClose).click();
+	}
+
+	@Override
 	public boolean invalidCreditCardNumberErrorExists() {
 		return waitUntilDisplayed(invalidCreditCardNumberError) != null;
 	}

@@ -60,7 +60,7 @@ public class MobileCRMOnboardingWizardConditionsTest extends AbstractOnboardingC
             pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         }
         double depositLimit = operations().customerOperations().findMaximumDepositLimit(customer.getId());
-        pages().creditCardDeposit().submit(
+        pages().creditCardDepositDialog().submit(
                 CreditCardDeposit.builder()
                         .withDepositAmount(((Double) (depositLimit + 3000)).toString())
                         .build());

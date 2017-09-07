@@ -70,7 +70,7 @@ public interface WebPageFactory {
 
     AccountDetailsPage accountDetails();
 
-    CreditCardDepositPage creditCardDeposit();
+    CreditCardDepositPage creditCardDepositDialog();
 
     WelcomeDialog welcomeDialog();
 

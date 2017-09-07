@@ -9,7 +9,6 @@ import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.web.createnewcustomers.CreateNewCustomers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import static com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations.Direction.RTL;
 
 /**
@@ -46,7 +45,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         pages().registrationDialog().exists();
         pages().registrationDialog().fillRegisterForm(customerRegistrationInfo);
         pages().registrationDialog().submitRegisterForm();
-        pages().creditCardDeposit().waitforCreditCardDepositPage();
+        pages().creditCardDepositDialog().waitforCreditCardDepositPage();
         operations().onBoardingOperations().assertUserCreatedInDatabase(customerRegistrationInfo.getEmail());
     }
 
@@ -404,7 +403,7 @@ public class LongRegistrationWizard extends CreateNewCustomers {
         softAssert().assertTrue(pages().loadingDialog().isDisplayed(), "Loading popup appeared.");
         softAssert().assertFalse(pages().registrationDialog().submitIsEnabled(),
                 "Submit button is enabled during customer registration.");
-        softAssert().assertTrue(pages().creditCardDeposit().isDisplayed(),
+        softAssert().assertTrue(pages().creditCardDepositDialog().isDisplayed(),
                 "Start Trade dialog did not appear after registration.");
     }
 

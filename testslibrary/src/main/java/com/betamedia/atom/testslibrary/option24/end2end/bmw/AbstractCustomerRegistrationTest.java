@@ -87,7 +87,7 @@ public class AbstractCustomerRegistrationTest extends WebEndToEndTest {
      * Method to update credit card for current logged in user
      */
     protected void updateCreditCard() {
-        pages().creditCardDeposit().submit(
+        pages().creditCardDepositDialog().submit(
                 CreditCardDeposit.builder().build());
     }
 

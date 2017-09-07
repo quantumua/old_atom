@@ -7,5 +7,7 @@ public interface CreditCardDepositPage {
     void submit(CreditCardDeposit info);
     boolean isDisplayed();
     void waitforCreditCardDepositPage();
+    void close();
+
     boolean invalidCreditCardNumberErrorExists();
 }

@@ -45,4 +45,5 @@ public class ExperienceLevelsTests extends AbstractExperienceLevelsTests {
         operations().onBoardingOperations().assertUsernameExpert(
                 createUser(getPersonalInformationScoreMaximum(),getExpertTradingExperienceInfo(),NO_RISK_WARNING).getEmail());
     }
+
 }

@@ -59,11 +59,11 @@ public class DepositSlideSanityTest extends AbstractWebNavigationTest {
 
     private void depositE2EFailureTest(String countrycode, String phonecountryprefix) {
         invokeDepositSlide(countrycode, phonecountryprefix);
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder()
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
                 .withCreditCardNumber(FAILED_CREDIT_CARD_VISA)
                 .build());
         softAssert().assertTrue(
-                pages().creditCardDeposit().invalidCreditCardNumberErrorExists(),
+                pages().creditCardDepositDialog().invalidCreditCardNumberErrorExists(),
                 "Verification for Invalid Credit Card Number error message");
     }
 

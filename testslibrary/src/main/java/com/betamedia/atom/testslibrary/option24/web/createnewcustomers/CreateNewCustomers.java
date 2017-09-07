@@ -551,7 +551,7 @@ public class CreateNewCustomers extends AbstractOnboardingConditionsTest {
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
         passQuestionnaire();
         pages().riskWarningPage().accept();
-        pages().creditCardDeposit().submit(CreditCardDeposit.builder().build());
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
         try {
             pages().uploadDocumentDialog().exists();
         } catch (Exception e) {

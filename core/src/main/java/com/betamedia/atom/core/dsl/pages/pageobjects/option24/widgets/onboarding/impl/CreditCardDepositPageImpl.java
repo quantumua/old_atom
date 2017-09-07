@@ -1,11 +1,8 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.widgets.onboarding.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
-import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractCreditCardDeposit;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.CreditCardDepositPage;
-import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -46,6 +43,10 @@ public class CreditCardDepositPageImpl extends AbstractCreditCardDeposit impleme
 	@Override
 	public void waitforCreditCardDepositPage() {
 		waitUntilDisplayed(depositAmount);
+	}
+
+	@Override
+	public void close() {
 	}
 
 	@Override

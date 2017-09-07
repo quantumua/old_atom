@@ -15,9 +15,7 @@ import com.betamedia.atom.core.persistence.repositories.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
-
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import static org.testng.Assert.*;
 import static org.testng.Assert.assertNotNull;
@@ -57,6 +55,9 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
 
     @Autowired
     private AbstractTradingAccountExtensionRepository<T> tradingAccountExtensionRepository;
+
+    @Autowired
+    private AbstractRegulationAnswerExtensionBase<T> regulationAnswerExtensionBase;
 
     /**
      * Registers new CRM customer with default customer builder
@@ -361,4 +362,8 @@ public abstract class AbstractCustomerOperations<T extends EnvironmentDependent>
         return ccExtBase;
     }
 
+    @Override
+    public List<RegulationAnswerExtensionBase> findCustomerAnswers(String customerID){
+        return regulationAnswerExtensionBase.findByCustomerId(customerID);
+    }
 }
