@@ -39,6 +39,9 @@ public abstract class AbstractCreditCardDeposit extends AbstractPageObject imple
     protected By modalClose;
     @StoredId
     protected By invalidCreditCardNumberError;
+    @StoredId
+    protected By errorMessageHint;
+
 
     protected AbstractCreditCardDeposit(WebDriver webDriver) {
         super(webDriver);

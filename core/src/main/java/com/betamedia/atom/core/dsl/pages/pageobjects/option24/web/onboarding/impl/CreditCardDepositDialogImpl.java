@@ -60,4 +60,14 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 		return waitUntilDisplayed(invalidCreditCardNumberError) != null;
 	}
 
+	@Override
+	public String getErrorMessageHint() {
+		return waitUntilDisplayed(errorMessageHint).getText();
+	}
+
+	@Override
+	public String getCreditCardNumber(){
+		return  waitUntilDisplayed(creditCardNumber).getText();
+	}
+
 }

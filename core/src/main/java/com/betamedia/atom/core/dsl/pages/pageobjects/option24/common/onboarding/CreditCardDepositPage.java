@@ -10,4 +10,6 @@ public interface CreditCardDepositPage {
     void close();
 
     boolean invalidCreditCardNumberErrorExists();
+    String getErrorMessageHint();
+    String getCreditCardNumber();
 }
