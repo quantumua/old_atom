@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Deposit Slide Functionality Test" verbose="1">
+    <parameter name="testlinkBuildId" value="273" />
+    <parameter name="testlinkPlanId" value="118533" />
+    <parameter name="countrycode" value="Germany"/>
+    <parameter name="phonecountryprefix" value="+49"/>
+    <test name="Deposit Slide Functionality Test">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.depositSlide.DepositSlideSanityTest">
+                <methods>
+                    <include name="amountCharLimitation" description="CTW-19425" />
+                    <include name="digitsInsertionToAmountField" description="CTW-19429" />
+                    <include name="ccNumberInputType" description="CTW-19430" />
+                    <include name="ccFieldSeparators" description="CTW-19432" />
+                    <include name="monthDropDown" description="CTW-19434" />
+                    <include name="yearDropDown" description="CTW-19435" />
+                    <include name="cvvDigits" description="CTW-19436" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
