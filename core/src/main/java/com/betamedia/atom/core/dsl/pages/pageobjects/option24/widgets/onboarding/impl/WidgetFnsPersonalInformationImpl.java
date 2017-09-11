@@ -65,6 +65,11 @@ public class WidgetFnsPersonalInformationImpl extends AbstractFnsPersonalInforma
     }
 
     @Override
+    public void assertProgressBar(PersonalInformation personalInformation, String... expectedProgress) {
+
+    }
+
+    @Override
     public void assertControlsUsability(PersonalInformation info, String expectedItemsBackgroundColor, String expectedAnswerColor, String expectedHoverAnswersColor, String expectedSelectionColor) {
         //not necessary implementation for widgets
     }

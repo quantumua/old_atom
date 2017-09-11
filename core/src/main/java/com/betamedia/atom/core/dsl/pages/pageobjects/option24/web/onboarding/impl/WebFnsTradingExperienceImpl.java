@@ -126,6 +126,35 @@ public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience im
         waitUntilDisplayed(buttonWizardDeclaration).click();
     }
 
+    @Override
+    public void assertProgressBar(TradingExperienceInfo tradingExperienceInfo, String... expectedProgress) {
+        softAssert().assertEquals(find(progressValue).getText(), expectedProgress[0]);
+        submitOnWizard(tradingExperienceInfo.instrumentsTradedBefore);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[1]);
+        submitOnWizard(tradingExperienceInfo.frequencyPastTransactions);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[2]);
+        submitOnWizard(tradingExperienceInfo.volumePastTransaction);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[3]);
+        submitOnWizard(tradingExperienceInfo.commonLevelPastTransaction);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[4]);
+        submitOnWizard(tradingExperienceInfo.financialWorkExperience);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[5]);
+        submitOnWizard(tradingExperienceInfo.cfdBinaryKnowledge);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[6]);
+        submitOnWizard(tradingExperienceInfo.mainFactorKnowledge);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[7]);
+        submitOnWizard(tradingExperienceInfo.howToCloseKnowledge);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[8]);
+        submitOnWizard(tradingExperienceInfo.requiredMarginKnowledge);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[9]);
+        submitOnWizard(tradingExperienceInfo.marginLevelDropKnowledge);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[10]);
+        submitOnWizard(tradingExperienceInfo.lossOn1to50Knowledge);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[11]);
+        submitOnWizard(tradingExperienceInfo.lossOn1to200Knowledge);
+        waitUntilDisplayed(buttonWizardDeclaration).click();
+    }
+
     private void isCollapsed(By element) {
         softAssert().assertTrue(find(element).getAttribute(ATTRIBUTE_CLASS).contains(COLLAPSED),
                 element.toString()+" is not collapsed!");

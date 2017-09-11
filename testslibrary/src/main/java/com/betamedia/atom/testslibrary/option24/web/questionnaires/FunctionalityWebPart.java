@@ -5,24 +5,45 @@ import com.betamedia.atom.core.api.tp.entities.namingstrategies.customer.WebSite
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
 import com.betamedia.atom.core.persistence.entities.RegulationAnswerExtensionBase;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vsnigur on 9/5/17.
  */
 public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
 
-    private static final int EXPECTED_ANSWERS_COUNT = 22;
-
+    private static final String[] PERSONAL_PERCENTAGES={"15","20","28","40","45","50","54","57","61","64"};
+    private static final String[] EXPERIENCE_PERCENTAGES={"67","70","73","73","73","76","79","81","84","86","88","91"};
+    private static final int EXPECTED_ANSWERS_COUNT = PERSONAL_PERCENTAGES.length+EXPERIENCE_PERCENTAGES.length;
     /*
         Personal information
-         */
+    */
     @Test(description = "CTW-5890:Questionnaires Free text box: boundary values validation")
     @TestLinkProperties(displayId = "CTW-5890")
     public void boundaryValuesValidationForPersonalInformationQuestions() {
         invokeSlideFNS();
         pages().fnsPersonalInformation().assertBoundaryFields(getPersonalInformationOtherAnswersMaxText());
+    }
+
+    @Test(description = "CTW-5891:Free text box fields: data saved and updated in CRM (test depend on web test at first)")
+    @TestLinkProperties(displayId = "CTW-5891")
+    public void dataSavedAndUpdatedInCRM() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        assertAnswersInCRMDB(customerRegistrationInfo, personalInformation, tradingExperienceInfo);
+
     }
 
     /*
@@ -36,9 +57,66 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().fnsTradingExperience().assertBoundaryFields(tradingExperienceInfoWith0Score());
     }
 
+    @Test(description = "CTW-5893:Free text box fields: data saved and updated in CRM")
+    @TestLinkProperties(displayId = "CTW-5893")
+    public void verifyFreeTextBoxFieldsDataValuesSavedAndUpdatedInCRM() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationOtherAnswers();
+        TradingExperienceInfo tradingExperienceInfo = getRejectedTradingExperienceInfo();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        assertAnswersInCRMDBOtherAnswers(customerRegistrationInfo, personalInformation, tradingExperienceInfo);
+    }
+
     /*
     AML Slide
     */
+    @Test(description = "CTW-19108:AML Slide loads properly")
+    @TestLinkProperties(displayId = "CTW-19108")
+    public void verifyAMLSlideLoadsProperly() {
+        invokeSlideFNS();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
+        pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
+        pages().thankYouPage().doContinue();
+        pages().fnsEmployerInfo().assertPersonalInformationExists();
+        pages().fnsEmployerInfo().submit(personalInformation);
+    }
+
+    @Test(description = "CTW-19418:AML questions")
+    @TestLinkProperties(displayId = "CTW-19418")
+    public void verifyAMLQuestions() {
+        invokeSlideFNS();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        pages().fnsPersonalInformation().assertCloseNotExist(personalInformation);
+        pages().fnsTradingExperience().assertCloseNotExist(tradingExperienceInfoWith0Score());
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
+        pages().thankYouPage().doContinue();
+        pages().fnsEmployerInfo().submit(personalInformation);
+    }
+
+    @Test(description = "CTW-19118:Progress bar correct percentage")
+    @TestLinkProperties(displayId = "CTW-19118")
+    @Parameters({"expectedPersonalPercentages", "expectedExperiencePercentages"})
+    public void verifyProgressBarCorrectPercentage(@Optional() String[] expectedPersonalPercentages,
+                                                   @Optional() String[] expectedExperiencePercentages) {
+
+        if (expectedPersonalPercentages==null) expectedPersonalPercentages = PERSONAL_PERCENTAGES;
+        if (expectedExperiencePercentages==null) expectedExperiencePercentages = EXPERIENCE_PERCENTAGES;
+        invokeSlideFNS();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        pages().fnsPersonalInformation().assertProgressBar(personalInformation, expectedPersonalPercentages);
+        pages().fnsTradingExperience().assertProgressBar(tradingExperienceInfoWith0Score(), expectedExperiencePercentages);
+
+    }
+
     @Test(description = "CTW-19119:Exit point absence")
     @TestLinkProperties(displayId = "CTW-19119")
     public void verifyAMLSlideExitPointAbsence() {
@@ -168,29 +246,20 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
     public void verifyThankYouLoadsAfterPOIandPOR() {
         pages().fnsEmployerInfo().submit(invokePOIPORDialog());
         pages().uploadDocumentDialog().poiUploadIdCard();
-        softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"Thank you 1 did not appear");
+        softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"Thank you '1' did not appear");
     }
 
-    @Test(description = "CTW-5891:Free text box fields: data saved and updated in CRM (test depend on web test at first)")
-    @TestLinkProperties(displayId = "CTW-5891")
-    public void dataSavedAndUpdatedInCRM() {
-        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
-                .builder(WebSiteNamingStrategy.get()).build();
-        PersonalInformation personalInformation = getPersonalInformationScore0();
-        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
-        invokeSlideFNS(customerRegistrationInfo);
-        passQuestionnaire(getPersonalInformationScore0(), tradingExperienceInfoWith0Score());
-        pages().riskWarning().accept();
-        pages().creditCardDepositDialog().close();
-        pages().confirmCloseMessage().acceptClose();
-        assertAnswersInCRMDB(customerRegistrationInfo, personalInformation, tradingExperienceInfo);
-
-    }
+    /**
+     * check FNS answers in the CRM DB
+     * @param customerRegistrationInfo - customer information
+     * @param personalInformation - personal information filled in the FNS UI
+     * @param tradingExperienceInfo - experience information filled in the FNS UI
+     */
     private void assertAnswersInCRMDB(CustomerRegistrationInfo customerRegistrationInfo, PersonalInformation personalInformation, TradingExperienceInfo tradingExperienceInfo ) {
         List<RegulationAnswerExtensionBase> answers = operations().customerOperations()
                 .findCustomerAnswers(operations().customerOperations()
                         .findByEmailAddress(customerRegistrationInfo.getEmail()).getContactId());
-        softAssert().assertEquals(answers.size(), EXPECTED_ANSWERS_COUNT);
+        softAssert().assertEquals(answers.size(), PERSONAL_PERCENTAGES.length+EXPERIENCE_PERCENTAGES.length);
         checkAnswerExisting(answers, personalInformation.employmentStatus, personalInformation.industry,
                 personalInformation.educationLevel,
                 personalInformation.educationField,
@@ -216,6 +285,51 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
 
     }
 
+    /**
+     * check FNS answers in the CRM DB if other fields were selected
+     * @param customerRegistrationInfo - customer information
+     * @param personalInformation - personal information filled in the FNS UI
+     * @param tradingExperienceInfo - experience information filled in the FNS UI
+     */
+    private void assertAnswersInCRMDBOtherAnswers(CustomerRegistrationInfo customerRegistrationInfo, PersonalInformation personalInformation, TradingExperienceInfo tradingExperienceInfo ) {
+        List<RegulationAnswerExtensionBase> answers = operations().customerOperations()
+                .findCustomerAnswers(operations().customerOperations()
+                        .findByEmailAddress(customerRegistrationInfo.getEmail()).getContactId());
+        softAssert().assertEquals(answers.size(), EXPECTED_ANSWERS_COUNT);
+        Map<String,String> expectedAnswer = new HashMap<>();
+        expectedAnswer.put(personalInformation.employmentStatus, null );
+        expectedAnswer.put(personalInformation.industry, personalInformation.industryOther );
+        expectedAnswer.put(personalInformation.educationLevel, personalInformation.educationFieldOther);
+        expectedAnswer.put(personalInformation.educationField , null);
+        expectedAnswer.put(personalInformation.isPoliticallyExposed , personalInformation.politicalExposureComment);
+        expectedAnswer.put(personalInformation.sourceOfFunds , personalInformation.sourceOfFundsOther);
+        expectedAnswer.put(personalInformation.annualIncome , null);
+        expectedAnswer.put(personalInformation.netWealth , null);
+        expectedAnswer.put(personalInformation.expectedDepositsPerYear, null);
+        expectedAnswer.put(personalInformation.purposeOfTrading , personalInformation.purposeOfTradingOther);
+        expectedAnswer.put(tradingExperienceInfo.financialWorkExperience , null);
+        expectedAnswer.put(tradingExperienceInfo.cfdBinaryKnowledge , null);
+        expectedAnswer.put(tradingExperienceInfo.mainFactorKnowledge , null);
+        expectedAnswer.put(tradingExperienceInfo.howToCloseKnowledge , null);
+        expectedAnswer.put(tradingExperienceInfo.requiredMarginKnowledge , null);
+        expectedAnswer.put(tradingExperienceInfo.marginLevelDropKnowledge , null);
+        expectedAnswer.put(tradingExperienceInfo.lossOn1to50Knowledge , null);
+        expectedAnswer.put(tradingExperienceInfo.lossOn1to200Knowledge , null);
+        expectedAnswer.put(tradingExperienceInfo.financialWorkExperience , null);
+        expectedAnswer.put(tradingExperienceInfo.instrumentsTradedBefore , null);
+        expectedAnswer.put(tradingExperienceInfo.frequencyPastTransactions , null);
+        expectedAnswer.put(tradingExperienceInfo.volumePastTransaction , null);
+        expectedAnswer.put(tradingExperienceInfo.commonLevelPastTransaction , null);
+
+        checkAnswerOtherExisting(answers, expectedAnswer);
+
+    }
+
+    /**
+     * check answers in the CRM DB after fill them in the UI FNS forms
+     * @param answers - answers to check
+     * @param expectedAnswer - expected answers in the CRM DB
+     */
     private void checkAnswerExisting(List<RegulationAnswerExtensionBase> answers, String... expectedAnswer) {
         for (String answerToDetect:expectedAnswer) {
             softAssert().assertNotNull(answers.stream()
@@ -225,12 +339,39 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         }
     }
 
+    /**
+     * verify other answers in the DB after adding then in the FNS forms
+     * @param answers - answers to check in the CRM DB
+     * @param expectedAnswer - expected other answers in the CRM DB
+     */
+    private void checkAnswerOtherExisting(List<RegulationAnswerExtensionBase> answers, Map<String,String> expectedAnswer) {
+        expectedAnswer.forEach((answerToDetect, answerText)-> {
+            softAssert().assertNotNull(answers.stream()
+                            .filter(answer-> answer.getAnswerKey().equalsIgnoreCase(answerToDetect))
+                            .findFirst().orElse(null),
+                    answerToDetect + " was not detected in the list");
+            if  (answerText != null) {
+                softAssert().assertNotNull(answers.stream()
+                                .filter(answer-> answer.getAnswerText().equalsIgnoreCase(answerText))
+                                .findFirst().orElse(null),
+                        answerText + " was not detected for "+ answerToDetect);
+            }
+        });
+    }
+
+    /**
+     * register random customer and navigate to the FNS first slide
+     */
     private void invokeSlideFNS() {
         CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
                 .builder(WebSiteNamingStrategy.get()).build();
         invokeSlideFNS(customerRegistrationInfo);
     }
 
+    /**
+     * Register user using UI, fill all forms until FNS
+     * @param customerRegistrationInfo - customer to register
+     */
     private void invokeSlideFNS(CustomerRegistrationInfo customerRegistrationInfo) {
         pages().topNavigationPage().signUp();
         pages().registrationDialog().register(customerRegistrationInfo);
@@ -238,6 +379,11 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().accountAdditionalDetails().update(AccountAdditionalDetails.builder().build());
     }
 
+
+    /**
+     * Register user using UI, pass all slides until POI POR
+     * @return Personal information object
+     */
 
     private PersonalInformation invokePOIPORDialog() {
         invokeSlideFNS();

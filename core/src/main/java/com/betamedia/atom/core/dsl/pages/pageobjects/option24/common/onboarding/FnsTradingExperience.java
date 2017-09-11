@@ -11,4 +11,5 @@ public interface FnsTradingExperience {
     void checkDependsQuestions(TradingExperienceInfo info);
     void assertBoundaryFields(TradingExperienceInfo info);
     void assertCloseNotExist(TradingExperienceInfo info);
+    void assertProgressBar(TradingExperienceInfo tradingExperienceInfo, String... expectedProgress);
 }

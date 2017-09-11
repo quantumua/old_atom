@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import javax.swing.text.html.HTML;
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 import static java.util.Objects.nonNull;
 
@@ -18,7 +19,7 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
 
     private static final String CSS_COLOR = "color";
     private static final String CSS_BACKGROUND_COLOR = "background-color";
-    private static final int MAX_CHARS_IN_OTHER_ANSWER = 101;
+    private static final int MAX_CHARS_IN_OTHER_ANSWER = 100;
 
     public WebFnsPersonalInformationImpl(WebDriver webDriver) {
         super(webDriver);
@@ -94,34 +95,34 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
         submitOnWizard(info.employmentStatus);
         submitOnWizard(info.industry);
         if (nonNull(info.industryOther)) {
-            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            softAssert().assertFalse(find(industryOtherBttn).isEnabled());
             find(industryOther).sendKeys(info.industryOther);
-            softAssert().assertEquals(find(industryOther).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+            softAssert().assertEquals(find(industryOther).getAttribute(HTML.Attribute.VALUE.toString()).length(), MAX_CHARS_IN_OTHER_ANSWER,
                     industryOther+"Contains more chars than maximum");
             executeScript("arguments[0].click()", find(industryOtherBttn));
         }
         submitOnWizard(info.educationLevel);
         submitOnWizard(info.educationField);
         if (nonNull(info.educationFieldOther)) {
-            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            softAssert().assertFalse(find(educationFieldBttn).isEnabled());
             find(educationFieldOther).sendKeys(info.educationFieldOther);
-            softAssert().assertEquals(find(educationFieldOther).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+            softAssert().assertEquals(find(educationFieldOther).getAttribute(HTML.Attribute.VALUE.toString()).length(), MAX_CHARS_IN_OTHER_ANSWER,
                     educationFieldOther+"Contains more chars than maximum");
             executeScript("arguments[0].click()", find(educationFieldBttn));
         }
         submitOnWizard(info.isPoliticallyExposed);
         if (nonNull(info.politicalExposureComment)) {
-            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            softAssert().assertFalse(find(politicalExposureBttn).isEnabled());
             find(politicalExposureComment).sendKeys(info.politicalExposureComment);
-            softAssert().assertEquals(find(politicalExposureComment).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+            softAssert().assertEquals(find(politicalExposureComment).getAttribute(HTML.Attribute.VALUE.toString()).length(), MAX_CHARS_IN_OTHER_ANSWER,
                     politicalExposureComment+"Contains more chars than maximum");
             executeScript("arguments[0].click()", find(politicalExposureBttn));
         }
         submitOnWizard(info.sourceOfFunds);
         if (nonNull(info.sourceOfFundsOther)) {
-            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            softAssert().assertFalse(find(sourceOfFundsBttn).isEnabled());
             find(sourceOfFundsOther).sendKeys(info.sourceOfFundsOther);
-            softAssert().assertEquals(find(sourceOfFundsOther).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+            softAssert().assertEquals(find(sourceOfFundsOther).getAttribute(HTML.Attribute.VALUE.toString()).length(), MAX_CHARS_IN_OTHER_ANSWER,
                     sourceOfFundsOther+"Contains more chars than maximum");
             executeScript("arguments[0].click()", find(sourceOfFundsBttn));
         }
@@ -130,9 +131,9 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
         submitOnWizard(info.expectedDepositsPerYear);
         submitOnWizard(info.purposeOfTrading);
         if (nonNull(info.purposeOfTradingOther)) {
-            softAssert().assertTrue(find(purposeOfTradingBttn).isDisplayed());
+            softAssert().assertFalse(find(purposeOfTradingBttn).isEnabled());
             find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
-            softAssert().assertEquals(find(purposeOfTradingOther).getText().length(), MAX_CHARS_IN_OTHER_ANSWER,
+            softAssert().assertEquals(find(purposeOfTradingOther).getAttribute(HTML.Attribute.VALUE.toString()).length(), MAX_CHARS_IN_OTHER_ANSWER,
                     purposeOfTradingOther+"Contains more chars than maximum");
             executeScript("arguments[0].click()", find(purposeOfTradingBttn));
         }
@@ -178,6 +179,50 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
         submitOnWizard(info.purposeOfTrading);
         if (nonNull(info.purposeOfTradingOther)) {
             find(purposeOfTradingOther).sendKeys(info.purposeOfTradingOther);
+            executeScript("arguments[0].click()", find(purposeOfTradingBttn));
+        }
+    }
+
+    @Override
+    public void assertProgressBar(PersonalInformation personalInformation, String... expectedProgress) {
+        softAssert().assertEquals(find(progressValue).getText(), expectedProgress[0]);
+        submitOnWizard(personalInformation.employmentStatus);
+        softAssert().assertEquals(find(progressValue).getText(), expectedProgress[1]);
+        submitOnWizard(personalInformation.industry);
+        if (nonNull(personalInformation.industryOther)) {
+            find(industryOther).sendKeys(personalInformation.industryOther);
+            executeScript("arguments[0].click()", find(industryOtherBttn));
+        }
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[2]);
+        submitOnWizard(personalInformation.educationLevel);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[3]);
+        submitOnWizard(personalInformation.educationField);
+        if (nonNull(personalInformation.educationFieldOther)) {
+            find(educationFieldOther).sendKeys(personalInformation.educationFieldOther);
+            executeScript("arguments[0].click()", find(educationFieldBttn));
+        }
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[4]);
+        submitOnWizard(personalInformation.isPoliticallyExposed);
+        if (nonNull(personalInformation.politicalExposureComment)) {
+            find(politicalExposureComment).sendKeys(personalInformation.politicalExposureComment);
+            executeScript("arguments[0].click()", find(politicalExposureBttn));
+        }
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[5]);
+        submitOnWizard(personalInformation.sourceOfFunds);
+        if (nonNull(personalInformation.sourceOfFundsOther)) {
+            find(sourceOfFundsOther).sendKeys(personalInformation.sourceOfFundsOther);
+            executeScript("arguments[0].click()", find(sourceOfFundsBttn));
+        }
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[6]);
+        submitOnWizard(personalInformation.annualIncome);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[7]);
+        submitOnWizard(personalInformation.netWealth);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[8]);
+        submitOnWizard(personalInformation.expectedDepositsPerYear);
+        softAssert().assertEquals(find(progressValue).getText(),expectedProgress[9]);
+        submitOnWizard(personalInformation.purposeOfTrading);
+        if (nonNull(personalInformation.purposeOfTradingOther)) {
+            find(purposeOfTradingOther).sendKeys(personalInformation.purposeOfTradingOther);
             executeScript("arguments[0].click()", find(purposeOfTradingBttn));
         }
     }

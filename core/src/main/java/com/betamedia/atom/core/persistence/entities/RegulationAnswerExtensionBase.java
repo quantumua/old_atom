@@ -31,6 +31,9 @@ public class RegulationAnswerExtensionBase {
     @Column(name = "bt_QuestionKey")
     private String questionKey;
 
+    @Column(name = "bt_AnswerText")
+    private String answerText;
+
     public String getRegulationAnswerId() {
         return regulationAnswerId;
     }
@@ -77,5 +80,13 @@ public class RegulationAnswerExtensionBase {
 
     public void setQuestionKey(String questionKey) {
         this.questionKey = questionKey;
+    }
+
+    public String getAnswerText() {
+        return answerText;
+    }
+
+    public void setAnswerText(String answerText) {
+        this.answerText = answerText;
     }
 }

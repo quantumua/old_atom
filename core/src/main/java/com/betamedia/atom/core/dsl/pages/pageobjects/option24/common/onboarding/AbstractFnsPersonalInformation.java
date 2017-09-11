@@ -58,6 +58,8 @@ public abstract class AbstractFnsPersonalInformation extends AbstractPageObject 
     protected By industryOtherBttn;
     @StoredId
     protected By modalClose;
+    @StoredId
+    protected By progressValue;
 
     public AbstractFnsPersonalInformation(WebDriver webDriver) {
         super(webDriver);

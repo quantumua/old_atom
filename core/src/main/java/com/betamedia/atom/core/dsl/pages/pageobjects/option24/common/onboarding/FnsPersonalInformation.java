@@ -14,4 +14,6 @@ public interface FnsPersonalInformation {
     void assertBoundaryFields(PersonalInformation info);
 
     void assertCloseNotExist(PersonalInformation info);
+
+    void assertProgressBar(PersonalInformation personalInformation, String... expectedProgress);
 }
