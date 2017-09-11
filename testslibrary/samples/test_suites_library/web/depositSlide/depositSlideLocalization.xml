@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Deposit Slide Localization Test" verbose="1">
+    <parameter name="testlinkBuildId" value="273" />
+    <parameter name="testlinkPlanId" value="118533" />
+    <parameter name="countrycode" value="Germany"/>
+    <parameter name="phonecountryprefix" value="+49"/>
+    <test name="Deposit Slide Localization Test">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.web.depositSlide.DepositSlideLocalizationTest">
+                <methods>
+                    <include name="depositSlideOnRussian" description="CTW-19441" />
+                    <include name="depositSlideOnGerman" description="CTW-19442" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

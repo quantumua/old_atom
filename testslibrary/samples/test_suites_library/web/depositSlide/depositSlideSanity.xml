@@ -2,13 +2,14 @@
 <suite name="Deposit Slide Sanity Test" verbose="1">
     <parameter name="testlinkBuildId" value="273" />
     <parameter name="testlinkPlanId" value="118533" />
-    <parameter name="countrycode" value="Germany"/>
-    <parameter name="phonecountryprefix" value="+49"/>
     <test name="Deposit Slide Sanity Test">
         <classes>
             <class name="com.betamedia.atom.testslibrary.option24.web.depositSlide.DepositSlideSanityTest">
                 <methods>
-                    <include name="setPOIBeforeFNSKnowledgeLogoutLogin" description="CTW-5364" />
+                    <include name="depositE2EEU" description="CTW-19424" />
+                    <include name="depositE2EEUfailure" description="CTW-19439" />
+                    <include name="depositE2EINT" description="CTW-19438" />
+                    <include name="depositE2EINTfailure" description="CTW-19423" />
                 </methods>
             </class>
         </classes>

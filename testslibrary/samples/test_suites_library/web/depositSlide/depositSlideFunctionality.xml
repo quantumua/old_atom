@@ -6,7 +6,7 @@
     <parameter name="phonecountryprefix" value="+49"/>
     <test name="Deposit Slide Functionality Test">
         <classes>
-            <class name="com.betamedia.atom.testslibrary.option24.web.depositSlide.DepositSlideSanityTest">
+            <class name="com.betamedia.atom.testslibrary.option24.web.depositSlide.DepositSlideFunctionalityTest">
                 <methods>
                     <include name="amountCharLimitation" description="CTW-19425" />
                     <include name="digitsInsertionToAmountField" description="CTW-19429" />

@@ -13,9 +13,7 @@ import org.testng.annotations.Test;
  * @since 9/08/17
  */
 
-public class OnboardingDepositSlideLocalizationTest extends DepositSlideSanityTest {
-    final private static String DEPOSIT = "500";
-    final private static String FAILED_CREDIT_CARD_VISA = "4000027891380962";
+public class DepositSlideLocalizationTest extends DepositSlideSanityTest {
 
     /*
      *[TestLink]CTW-19441:Slide on RU
@@ -23,16 +21,23 @@ public class OnboardingDepositSlideLocalizationTest extends DepositSlideSanityTe
     @Test(description = "CTW-19441:Slide on RU")
     @TestLinkProperties(displayId = "CTW-19441")
     @Parameters({"countrycode", "phonecountryprefix"})
-    public void onboardingDepositSlideIsTranslated(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
-        onboardingDepositSlideIsTranslatedTest(countrycode, phonecountryprefix);
-    }
-
-    private void onboardingDepositSlideIsTranslatedTest(String countrycode, String phonecountryprefix) {
-        CustomerRegistrationInfo customerRegistrationInfo = createUserWithoutSubmitedDeposit(countrycode,phonecountryprefix);
+    public void depositSlideOnRussian(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        createUserWithoutSubmitedDeposit(countrycode,phonecountryprefix);
         pages().topNavigationPage().selectLanguage(Language.RUSSIAN.code);
         pages().creditCardDepositDialog().verifyLocalization(Language.RUSSIAN);
         pages().topNavigationPage().selectLanguage(Language.DUTCH.code);
         pages().creditCardDepositDialog().verifyLocalization(Language.DUTCH);
     }
 
+    /*
+     *[TestLink]CTW-19442:Slide on DE
+     */
+    @Test(description = "CTW-19442:Slide on DE")
+    @TestLinkProperties(displayId = "CTW-19442")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void depositSlideOnGerman(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        createUserWithoutSubmitedDeposit(countrycode,phonecountryprefix);
+        pages().topNavigationPage().selectLanguage(Language.GERMAN.code);
+        pages().creditCardDepositDialog().verifyLocalization(Language.GERMAN);
+    }
 }
