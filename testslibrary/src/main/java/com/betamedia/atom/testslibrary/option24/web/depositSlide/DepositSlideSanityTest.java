@@ -15,11 +15,6 @@ import org.testng.annotations.*;
  * @since 8/28/17
  */
 
-@TestConfigurationProperties(
-        productType = ProductType.TP,
-        environment = EnvironmentType.QA,
-        environmentUrl = "https://qawww.24option.com/eu/trade/",
-        browserType = BrowserType.CHROME)
 public class DepositSlideSanityTest extends AbstractWebNavigationTest {
 
     final private static String DEPOSIT = "500";
@@ -27,7 +22,8 @@ public class DepositSlideSanityTest extends AbstractWebNavigationTest {
     final private static String FAILED_DEPOSIT_WITH_CHAR = "50cd";
     final private static String FAILED_CC_WITH_CHAR = "CREDITCARD";
     final private static String FAILED_CREDIT_CARD_VISA = "4000027891380962";
-    final private static String CREDIT_CARD_REGULAR_EXPRESSION  = "\\d\\d\\d\\d+\\-\\d\\d\\d\\d\\-\\d\\d\\d\\d+\\-\\d\\d\\d\\d";
+    final private static String FAILED_CVV_LONG = "12345";
+    final private static String CREDIT_CARD_REGULAR_EXPRESSION  = "\\d{4}-\\d{4}-\\d{4}-\\d{4}";
 
 
     /*
@@ -76,7 +72,7 @@ public class DepositSlideSanityTest extends AbstractWebNavigationTest {
     @Test(description = "CTW-19425:Amount char limitation")
     @TestLinkProperties(displayId = "CTW-19425")
     @Parameters({"countrycode", "phonecountryprefix"})
-    public void amountCharLimitation(@Optional("Zambia") String countrycode, @Optional("+260") String phonecountryprefix){
+    public void amountCharLimitation(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
         invokeDepositSlide(countrycode, phonecountryprefix);
         pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
                 .withDepositAmount(FAILED_DEPOSIT)
@@ -91,7 +87,7 @@ public class DepositSlideSanityTest extends AbstractWebNavigationTest {
     @Test(description = "CTW-19429:Digits insertion to amount field")
     @TestLinkProperties(displayId = "CTW-19429")
     @Parameters({"countrycode", "phonecountryprefix"})
-    public void digitsInsertionToAmountField(@Optional("Zambia") String countrycode, @Optional("+260") String phonecountryprefix){
+    public void digitsInsertionToAmountField(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
         invokeDepositSlide(countrycode, phonecountryprefix);
         pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
                 .withDepositAmount(FAILED_DEPOSIT_WITH_CHAR)
@@ -106,7 +102,7 @@ public class DepositSlideSanityTest extends AbstractWebNavigationTest {
     @Test(description = "CTW-19430:CC number input type")
     @TestLinkProperties(displayId = "CTW-19430")
     @Parameters({"countrycode", "phonecountryprefix"})
-    public void ccNumberInputType(@Optional("Zambia") String countrycode, @Optional("+260") String phonecountryprefix){
+    public void ccNumberInputType(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
         invokeDepositSlide(countrycode, phonecountryprefix);
         pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
                 .withCreditCardNumber(FAILED_CC_WITH_CHAR)
@@ -121,7 +117,7 @@ public class DepositSlideSanityTest extends AbstractWebNavigationTest {
     @Test(description = "CTW-19432:CC field seperators")
     @TestLinkProperties(displayId = "CTW-19432")
     @Parameters({"countrycode", "phonecountryprefix"})
-    public void ccFieldSeparators(@Optional("Zambia") String countrycode, @Optional("+260") String phonecountryprefix){
+    public void ccFieldSeparators(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
         invokeDepositSlide(countrycode, phonecountryprefix);
         pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
                 .withDepositAmount(FAILED_DEPOSIT_WITH_CHAR)
@@ -130,6 +126,51 @@ public class DepositSlideSanityTest extends AbstractWebNavigationTest {
                 "Verification for CC field seperators");
     }
 
+
+    /*
+     * [TestLink] CTW-19434:Month Drop down
+     */
+    @Test(description = "CTW-19434:Month Drop down")
+    @TestLinkProperties(displayId = "CTW-19434")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void monthDropDown(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
+        invokeDepositSlide(countrycode, phonecountryprefix);
+        softAssert().assertEquals(pages().creditCardDepositDialog().getExpiryDateMonthList().size(),13,
+                "Verification expiry month drop down contains 1-12 month");
+        pages().creditCardDepositDialog().selectExpiryDateMonth();
+        softAssert().assertEquals(pages().creditCardDepositDialog().getExpiryDateMonthSelectedItem(),3,
+                "Verification expiry month drop down is clicable");
+    }
+
+    /*
+     * [TestLink] CTW-19435:Year Drop down
+     */
+    @Test(description = "CTW-19435:Year Drop down")
+    @TestLinkProperties(displayId = "CTW-19435")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void yearDropDown(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
+        invokeDepositSlide(countrycode, phonecountryprefix);
+        softAssert().assertEquals(pages().creditCardDepositDialog().getExpiryDateYearList().size(),16,
+                "Verification expiry years drop down contains data");
+        pages().creditCardDepositDialog().selectExpiryDateYear();
+        softAssert().assertEquals(pages().creditCardDepositDialog().getExpiryDateYearSelectedItem(),2019,
+                "Verification expiry year drop down is clicable");
+    }
+
+    /*
+     * [TestLink] CTW-19436:CVV digits
+     */
+    @Test(description = "CTW-19436:CVV digits")
+    @TestLinkProperties(displayId = "CTW-19436")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void cvvDigits(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
+        invokeDepositSlide(countrycode, phonecountryprefix);
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
+                .withCVV2(FAILED_CVV_LONG)
+                .build());
+        softAssert().assertEquals(pages().creditCardDepositDialog().getErrorMessageHint(),"Invalid code, please enter the last 3 digits written on the back of your card",
+                "Verification for long CVV code");
+    }
 
 
     // private test methods

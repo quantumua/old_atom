@@ -21,7 +21,15 @@ public abstract class AbstractCreditCardDeposit extends AbstractPageObject imple
     @StoredId (localized = true)
     protected By expiryDateMonth;
     @StoredId
+    protected By expiryDateMonthDropDownElements;
+    @StoredId
+    protected By expiryDateMonthDropDownSelectItem;
+    @StoredId
     protected By expiryDateYear;
+    @StoredId
+    protected By expiryDateYearDropDownElements;
+    @StoredId
+    protected By expiryDateYearDropDownSelectItem;
     @StoredId
     protected By cardHoldersFirstName;
     @StoredId

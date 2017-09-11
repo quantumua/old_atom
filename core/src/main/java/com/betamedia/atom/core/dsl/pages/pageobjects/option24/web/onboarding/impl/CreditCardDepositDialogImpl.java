@@ -3,7 +3,14 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractCreditCardDeposit;
 import org.apache.logging.log4j.LogManager;
+import org.apache.xalan.templates.ElemValueOf;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import javax.xml.stream.events.Attribute;
+import java.util.List;
+import java.util.jar.Attributes;
+import java.util.stream.Collectors;
 
 /**
  * Created by vsnigur on 5/18/17.
@@ -67,7 +74,52 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 
 	@Override
 	public String getCreditCardNumber(){
-		return  waitUntilDisplayed(creditCardNumber).getText();
+		return  waitUntilDisplayed(creditCardNumber).getAttribute("value");
 	}
+
+	@Override
+	public List<String> getExpiryDateMonthList() {
+		return findElements(expiryDateMonthDropDownElements).stream()
+				.map(WebElement::getText)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public void expandDropDownButton(){
+		waitUntilDisplayed(expiryDateMonth).click();
+	}
+	@Override
+	public void selectExpiryDateMonth() {
+		expandDropDownButton();
+		waitUntilDisplayed(expiryDateMonthDropDownSelectItem).click();
+	}
+
+	@Override
+	public int getExpiryDateMonthSelectedItem(){
+		return Integer.valueOf(getAttribute("value", expiryDateMonth));
+	}
+
+	@Override
+	public List<String> getExpiryDateYearList() {
+		return findElements(expiryDateYearDropDownElements).stream()
+				.map(WebElement::getText)
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public void expandYearDropDownButton(){
+		waitUntilDisplayed(expiryDateYear).click();
+	}
+	@Override
+	public void selectExpiryDateYear() {
+		expandYearDropDownButton();
+		waitUntilDisplayed(expiryDateYearDropDownSelectItem).click();
+	}
+
+	@Override
+	public int getExpiryDateYearSelectedItem(){
+		return Integer.valueOf(getAttribute("value", expiryDateYear));
+	}
+
 
 }

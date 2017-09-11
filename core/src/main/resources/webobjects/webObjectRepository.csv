@@ -24,7 +24,11 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,creditCardNumber,ID,CreditCardNumber
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cvv2,NAME,Cvv2
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonth,NAME,ExpiryDateMonth
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonthDropDownElements,XPATH,.//*[@id='ExpiryDateMonth']/option
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonthDropDownSelectItem,XPATH,.//*[@id='ExpiryDateMonth']/option[4]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYear,NAME,ExpiryDateYear
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYearDropDownElements,XPATH,.//*[@id='ExpiryDateYear']/option
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYearDropDownSelectItem,XPATH,.//*[@id='ExpiryDateYear']/option[4]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersFirstName,NAME,HolderFirstName
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersLastName,NAME,HolderLastName
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,billingAddress,NAME,BillingAddress
