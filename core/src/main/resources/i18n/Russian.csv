@@ -11,3 +11,15 @@ implementationVersion,revisionDate,pageObjectName,locatorId,text
 На ваш мобильный телефон было отправлено сообщение. Пожалуйста, нажмите на прилагаемую ссылку и продолжите загрузку документов."
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,Подтверждение личности
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,Подтверждение места жительства
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositAmount,Einzahlungsbetrag (£)
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,creditCardNumber,Kredit / debit kartennummer
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cvv2,CVV2
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonth,Monat
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYear,Jahr
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersFirstName,Vorname des Karteninhabers
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersLastName,Nachname des Karteninhabers
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,billingAddress,Rechnungsanschrift
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,Stadt
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,PLZ
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,country,Land des ständigen Wohnsitzes
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,submit,Absenden

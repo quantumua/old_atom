@@ -1,5 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding;
 
+import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.dsl.pages.AbstractPageObject;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.extensions.ScriptOperations;
@@ -11,13 +12,13 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class AbstractCreditCardDeposit extends AbstractPageObject implements CreditCardDepositPage, ScriptOperations {
 
-    @StoredId
+    @StoredId (localized = true)
     protected By depositAmount;
-    @StoredId
+    @StoredId (localized = true)
     protected By creditCardNumber;
-    @StoredId
+    @StoredId (localized = true)
     protected By cvv2;
-    @StoredId
+    @StoredId (localized = true)
     protected By expiryDateMonth;
     @StoredId
     protected By expiryDateYear;

@@ -55,6 +55,18 @@ public class AbstractWebCustomerRegistrationTest extends AbstractCustomerRegistr
     }
 
     /**
+     * Create user via WEB UI using specific parameters before submiting Deposit amount
+     *
+     * @param countrycode - country code
+     * @param phoneCountryPrefix - phone country prefix to use
+     */
+
+    public CustomerRegistrationInfo createUserWithoutSubmitedDeposit(String countrycode, String phoneCountryPrefix){
+        CustomerRegistrationInfo customerRegistrationInfo = invokeDepositSlide(countrycode, phoneCountryPrefix);
+        return customerRegistrationInfo;
+    }
+
+    /**
      * Create user via WEB UI
      * pass all questionnaires using provided information
      * @param personalInformation - personal information for answers
