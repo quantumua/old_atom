@@ -11,15 +11,15 @@ Uw mobiele telefoonnummer bevestigen
 Er is een sms naar uw mobiele telefoon gestuurd. Klik op de link in de bijlage en upload uw documenten."
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,Bewijs van identiteit
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,Bewijs van woonadres
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositAmount,Сумма депозита111
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,creditCardNumber,Номер кредитной / дебет карты1
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cvv2,CVV222
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonth,Месяц1
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYear,Год1
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersFirstName,Имя держателя карты
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersLastName,Фамилия держателя карты
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,billingAddress,Адрес
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,Город
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,Почтовый индекс
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,country,Страна
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,submit,Внести депозит
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositAmount,Stortingsbedrag (£)
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,creditCardNumber,Credit / Debetcardnummer
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cvv2,CVV2
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonth,Maand
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYear,Jaar
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersFirstName,Voornaam kaarthouder
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersLastName,Achternaam kaarthouder
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,billingAddress,Factuuradres
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,Plaats
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,Postcode
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,country,Land van verblijf
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,submit,Verzenden
