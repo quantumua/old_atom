@@ -26,6 +26,8 @@ public abstract class AbstractFnsEmployerInformation extends AbstractPageObject 
     protected By fnsSuitabilityButton;
     @StoredId
     protected By modalClose;
+    @StoredId
+    protected By progressBar;
 
     protected AbstractFnsEmployerInformation(WebDriver webDriver) {
         super(webDriver);

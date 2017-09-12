@@ -45,6 +45,11 @@ public class WebFnsEmployerInformationImpl extends AbstractFnsEmployerInformatio
 
     }
 
+    @Override
+    public boolean progressBarExists() {
+        return maybe(() -> find(progressBar)).get().isDisplayed();
+    }
+
     private void submitOnWizardAndWriteValue(String dataValue, String numberTaxId) {
         waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']")).click();
         waitUntilDisplayed(By.id(dataValue + "_alternate"));

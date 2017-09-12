@@ -33,4 +33,9 @@ public class WidgetFnsEmployerInformationImpl extends AbstractFnsEmployerInforma
     public void assertPersonalInformationExists() {
         //not necessary implementation for widgets
     }
+
+    @Override
+    public boolean progressBarExists() {
+        return false;
+    }
 }

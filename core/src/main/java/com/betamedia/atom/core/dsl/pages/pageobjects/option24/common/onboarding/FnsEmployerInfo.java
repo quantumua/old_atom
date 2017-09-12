@@ -11,5 +11,6 @@ public interface FnsEmployerInfo {
     void submit(PersonalInformation info);
     void assertCloseNotExist(PersonalInformation info);
     void assertPersonalInformationExists();
+    boolean progressBarExists();
 
 }

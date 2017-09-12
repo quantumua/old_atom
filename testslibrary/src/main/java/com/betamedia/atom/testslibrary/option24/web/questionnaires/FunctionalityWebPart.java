@@ -43,7 +43,6 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().creditCardDepositDialog().close();
         pages().confirmCloseMessage().acceptClose();
         assertAnswersInCRMDB(customerRegistrationInfo, personalInformation, tradingExperienceInfo);
-
     }
 
     /*
@@ -249,6 +248,121 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"Thank you '1' did not appear");
     }
 
+    @Test(description = "CTW-19138:Slide loads after skipping deposit")
+    @TestLinkProperties(displayId = "CTW-19138")
+    public void verifyAMLSlideLoadsAfterSkippingDeposit() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        pages().fnsEmployerInfo().assertPersonalInformationExists();
+    }
+
+    @Test(description = "CTW-19139:POI / POR loads after AML finished")
+    @TestLinkProperties(displayId = "CTW-19139")
+    public void verifyPOIPOURLoadsAfterSkipDepositAndAMLUpdate() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        pages().fnsEmployerInfo().submit(personalInformation);
+        softAssert().assertTrue(pages().uploadDocumentDialog().exists(),"POI / POR did not appear after skip deposit");
+    }
+
+    @Test(description = "CTW-19140:poi / por function properly after AML slide")
+    @TestLinkProperties(displayId = "CTW-19140")
+    public void verifyPOIPORFunctionProperlyAfterSkipDepositAndFillAMLSlide() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        pages().fnsEmployerInfo().submit(personalInformation);
+        pages().uploadDocumentDialog().poiUploadIdCard();
+        softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"'Thank you' two did not appear");
+    }
+
+    @Test(description = "CTW-19146:Thank you 2 loads once poi / por succeed")
+    @TestLinkProperties(displayId = "CTW-19146")
+    public void verifyThankYouTwoLoadsAfterSkipDepositAndPassAMLPassPOIPOR() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        pages().fnsEmployerInfo().submit(personalInformation);
+        pages().uploadDocumentDialog().poiUploadIdCard();
+        softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"'Thank you' did not appear");
+    }
+
+    @Test(description = "CTW-19147:Deposit slide loads when clicking deposit")
+    @TestLinkProperties(displayId = "CTW-19147")
+    public void verifyDepositSlideLoadsWhenClickingDepositButton() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        pages().topNavigationPage().deposit();
+        softAssert().assertTrue(pages().creditCardDepositDialog().isDisplayed(),"'Credit card deposit' has not appeared");
+    }
+
+    @Test(description = "CTW-19148:Thank you 1 loads when deposit succeed")
+    @TestLinkProperties(displayId = "CTW-19148")
+    public void verifyThankYouOneLoadsWhenDepositsucceed() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().close();
+        pages().confirmCloseMessage().acceptClose();
+        pages().topNavigationPage().deposit();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
+        softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"'Thank you' dialog has not appeared");
+    }
+
+    @Test(description = "CTW-19149:Progress bar removed from AML slide")
+    @TestLinkProperties(displayId = "CTW-19149")
+    public void verifyProgressBarRemovedFromAML() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        passQuestionnaire(personalInformation, tradingExperienceInfo);
+        pages().riskWarning().accept();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
+        pages().thankYouPage().doContinue();
+        softAssert().assertFalse(pages().fnsEmployerInfo().progressBarExists(),"Progress bar exists in the AML dialog");
+    }
+
+
+
     /**
      * check FNS answers in the CRM DB
      * @param customerRegistrationInfo - customer information
@@ -384,7 +498,6 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
      * Register user using UI, pass all slides until POI POR
      * @return Personal information object
      */
-
     private PersonalInformation invokePOIPORDialog() {
         invokeSlideFNS();
         PersonalInformation personalInformation = getPersonalInformationScore0();

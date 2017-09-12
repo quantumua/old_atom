@@ -64,6 +64,8 @@ public abstract class AbstractFnsTradingExperience extends AbstractPageObject im
     protected By modalClose;
     @StoredId
     protected By progressValue;
+    @StoredId
+    protected By progressBar;
 
 
     protected AbstractFnsTradingExperience(WebDriver webDriver) {
