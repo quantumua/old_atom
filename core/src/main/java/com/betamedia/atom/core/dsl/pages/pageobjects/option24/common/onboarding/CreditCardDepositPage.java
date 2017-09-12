@@ -15,6 +15,8 @@ public interface CreditCardDepositPage extends LocalizationOperations {
     boolean invalidCreditCardNumberErrorExists();
     String getErrorMessageHint();
     String getCreditCardNumber();
+    String getCreditCardCity();
+    String getCreditCardZipCode();
     List<String> getExpiryDateMonthList();
     void selectExpiryDateMonth();
     void expandDropDownButton();
@@ -23,4 +25,8 @@ public interface CreditCardDepositPage extends LocalizationOperations {
     void expandYearDropDownButton();
     void selectExpiryDateYear();
     int getExpiryDateYearSelectedItem();
+    String getSelectedCountryName();
+    void scrollToCountry();
+    void moveCursorToSubmitButton();
+    String getSubmitButtonCollor();
 }

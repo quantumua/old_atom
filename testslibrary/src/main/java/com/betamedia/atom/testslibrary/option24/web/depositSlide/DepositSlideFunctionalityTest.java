@@ -16,6 +16,9 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
     final private static String FAILED_DEPOSIT_WITH_CHAR = "50cd";
     final private static String FAILED_CC_WITH_CHAR = "CREDITCARD";
     final private static String FAILED_CVV_LONG = "12345";
+    final private static String FAILED_CREDIT_CARD_HOLDER_NAME = "Васичка";
+    final private static String CITY = "NY123";
+    final private static String ZIP_CODE = "zip123";
     final private static String CVV_INVALID_CODE_MESSAGE = "Invalid code, please enter the last 3 digits written on the back of your card";
     final private static String CREDIT_CARD_REGULAR_EXPRESSION  = "\\d{4}-\\d{4}-\\d{4}-\\d{4}";
 
@@ -134,5 +137,74 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
                 pages().creditCardDepositDialog().getErrorMessageHint(),
                 CVV_INVALID_CODE_MESSAGE,
                 "Verification for long CVV code");
+    }
+
+    /*
+     * [TestLink] CTW-19437:Card holders's name / last name
+     */
+    @Test(description = "CTW-19437:Card holders's name / last name")
+    @TestLinkProperties(displayId = "CTW-19437")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void cardHoldersNameLastName(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
+        invokeDepositSlide(countrycode, phonecountryprefix);
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
+                .withCardHoldersFirstName(FAILED_CREDIT_CARD_HOLDER_NAME)
+                .build());
+        softAssert().assertEquals(pages().creditCardDepositDialog().getErrorMessageHint(),"Please Enter Only English characters",
+                "Verification for wrong language in Card Holder`s First Name");
+        pages().browser().refreshPage();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
+                .withCardHoldersLastName(FAILED_CREDIT_CARD_HOLDER_NAME)
+                .build());
+        softAssert().assertEquals(pages().creditCardDepositDialog().getErrorMessageHint(),"Please Enter Only English characters",
+                "Verification for wrong language in Card Holder`s Last Name");
+    }
+
+
+    /*
+     * [TestLink] CTW-19440:City + zip code Text fields
+     */
+    @Test(description = "CTW-19440:City + zip code Text fields")
+    @TestLinkProperties(displayId = "CTW-19440")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void cityAndZipCodeTextFields(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
+        invokeDepositSlide(countrycode, phonecountryprefix);
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
+                .withCity(CITY)
+                .withZipCode(ZIP_CODE)
+                .build());
+        softAssert().assertEquals(pages().creditCardDepositDialog().getCreditCardCity(), CITY,
+                "Verification for City field is text field");
+        softAssert().assertEquals(pages().creditCardDepositDialog().getCreditCardZipCode(), ZIP_CODE,
+                "Verification for Zip Code field is text field");
+    }
+
+    /*
+     * [TestLink] CTW-19446:Country of residence drop down
+     */
+    @Test(description = "CTW-19446:Country of residence drop down")
+    @TestLinkProperties(displayId = "CTW-19446")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void countryOfResidenceDropDown(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        invokeDepositSlide(countrycode, phonecountryprefix);
+        String beforeCountry = pages().creditCardDepositDialog().getSelectedCountryName();
+        pages().creditCardDepositDialog().scrollToCountry();
+        String afterCountry = pages().creditCardDepositDialog().getSelectedCountryName();
+        softAssert().assertNotEquals(beforeCountry,afterCountry,
+                "Verification for select country name is scrollable");
+    }
+
+    /*
+     * [TestLink] CTW-19447 : Submit button Hover
+     */
+    @Test(description = "CTW-19447:Submit button Hover")
+    @TestLinkProperties(displayId = "CTW-19447")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void submitButtonHover(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        invokeDepositSlide(countrycode, phonecountryprefix);
+        String beforeColor = pages().creditCardDepositDialog().getSubmitButtonCollor();
+        pages().creditCardDepositDialog().moveCursorToSubmitButton();
+        String afterColor = pages().creditCardDepositDialog().getSubmitButtonCollor();
+        softAssert().assertNotEquals(beforeColor,afterColor, "Verification submit button change background collor");
     }
 }

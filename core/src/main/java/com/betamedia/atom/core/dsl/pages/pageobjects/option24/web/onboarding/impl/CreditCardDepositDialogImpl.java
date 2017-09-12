@@ -3,13 +3,10 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractCreditCardDeposit;
 import org.apache.logging.log4j.LogManager;
-import org.apache.xalan.templates.ElemValueOf;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import javax.xml.stream.events.Attribute;
 import java.util.List;
-import java.util.jar.Attributes;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +15,8 @@ import java.util.stream.Collectors;
 public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 
 	private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(CreditCardDepositDialogImpl.class);
+	private static final String CSS_BACKGROUND_COLOR = "background-color";
+
 
 	public CreditCardDepositDialogImpl(WebDriver webDriver) {
 		super(webDriver);
@@ -43,7 +42,7 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 			find(country).sendKeys(info.country);
 		}
 
-		logger.info(String.format("filling Credit Card Deposit wizard with values: %s", info. toString()));
+		logger.info(String.format("filling Credit Card Deposit wizard with values: %s", info.toString()));
 		scrollIntoView(find(submit)).click();
 	}
 
@@ -73,8 +72,18 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 	}
 
 	@Override
-	public String getCreditCardNumber(){
-		return  waitUntilDisplayed(creditCardNumber).getAttribute("value");
+	public String getCreditCardNumber() {
+		return waitUntilDisplayed(creditCardNumber).getAttribute("value");
+	}
+
+	@Override
+	public String getCreditCardCity() {
+		return waitUntilDisplayed(city).getAttribute("value");
+	}
+
+	@Override
+	public String getCreditCardZipCode() {
+		return waitUntilDisplayed(zipCode).getAttribute("value");
 	}
 
 	@Override
@@ -110,6 +119,7 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 	public void expandYearDropDownButton(){
 		waitUntilDisplayed(expiryDateYear).click();
 	}
+
 	@Override
 	public void selectExpiryDateYear() {
 		expandYearDropDownButton();
@@ -121,5 +131,26 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 		return Integer.valueOf(getAttribute("value", expiryDateYear));
 	}
 
+	@Override
+	public void scrollToCountry() {
+		waitUntilDisplayed(country).click();
+		scrollIntoView(find(countryScrollToElement)).click();
+	}
 
+	@Override
+	public String getSelectedCountryName(){
+		return waitUntilDisplayed(country).getAttribute("value");
+	}
+
+	@Override
+	public void moveCursorToSubmitButton() {
+		makeActions().moveToElement(find(submit))
+				.build()
+				.perform();
+	}
+
+	@Override
+	public String getSubmitButtonCollor() {
+		return find(submit).getCssValue(CSS_BACKGROUND_COLOR);
+	}
 }

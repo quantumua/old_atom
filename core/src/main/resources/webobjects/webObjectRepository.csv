@@ -35,6 +35,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,NAME,City
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,NAME,Zip
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,country,ID,CountryCode
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,countryScrollToElement,XPATH,.//*[@id='CountryCode']/option[248]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,submit,NAME,swCCDepositBtn
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,modalClose,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,invalidCreditCardNumberError,XPATH,.//*[@id='creditcard']//span[@class='error-input']

@@ -43,6 +43,8 @@ public abstract class AbstractCreditCardDeposit extends AbstractPageObject imple
     @StoredId
     protected By country;
     @StoredId
+    protected By countryScrollToElement;
+    @StoredId
     protected By submit;
     @StoredId
     protected By modalClose;

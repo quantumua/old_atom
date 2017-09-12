@@ -17,6 +17,7 @@ public class CreditCardDepositPageImpl extends AbstractCreditCardDeposit impleme
 	public CreditCardDepositPageImpl(WebDriver webDriver) {
 		super(webDriver);
 	}
+	private static final String CSS_BACKGROUND_COLOR = "background-color";
 
 	@Override
 	public void submit(CreditCardDeposit info) {
@@ -69,6 +70,16 @@ public class CreditCardDepositPageImpl extends AbstractCreditCardDeposit impleme
 	}
 
 	@Override
+	public String getCreditCardCity(){
+		return  waitUntilDisplayed(city).getAttribute("value");
+	}
+
+	@Override
+	public String getCreditCardZipCode(){
+		return  waitUntilDisplayed(zipCode).getAttribute("value");
+	}
+
+	@Override
 	public List<String> getExpiryDateMonthList() {
 		return findElements(expiryDateMonth).stream()
 				.map(WebElement::getText)
@@ -110,5 +121,29 @@ public class CreditCardDepositPageImpl extends AbstractCreditCardDeposit impleme
 	@Override
 	public int getExpiryDateYearSelectedItem(){
 		return Integer.valueOf(getAttribute("value", expiryDateYear));
+	}
+
+	@Override
+	public void scrollToCountry() {
+		waitUntilDisplayed(country).click();
+		scrollIntoView(find(countryScrollToElement)).click();
+	}
+
+	@Override
+	public String getSelectedCountryName(){
+		return waitUntilDisplayed(country).getAttribute("value");
+	}
+
+	@Override
+	public void moveCursorToSubmitButton() {
+		makeActions().moveToElement(find(submit))
+				.build()
+				.perform();
+	}
+
+	@Override
+	public String getSubmitButtonCollor() {
+		String s = find(submit).getCssValue(CSS_BACKGROUND_COLOR);
+		return s;
 	}
 }
