@@ -3,6 +3,8 @@ package com.betamedia.atom.core.dsl.pages.extensions;
 import com.betamedia.atom.core.dsl.pages.annotation.StoredId;
 import com.betamedia.atom.core.dsl.pages.extensions.base.Localizing;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
+import org.apache.logging.log4j.util.Strings;
+import org.openqa.selenium.By;
 
 import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 
@@ -28,7 +30,8 @@ public interface LocalizationOperations extends FieldOperations, CssOperations, 
         forPageElements(
                 element ->
                         softAssert().assertEquals(
-                                waitUntilDisplayed(element).getText(),
+                                waitUntilDisplayed(element).getText().equals(Strings.EMPTY)
+                                        ? waitUntilDisplayed(element).getAttribute("placeholder") : waitUntilDisplayed(element).getText(),
                                 getLocalization(element, language),
                                 "Text localization verification for: " + element),
                 field -> true,
