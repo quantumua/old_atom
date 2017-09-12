@@ -15,6 +15,10 @@
                     <include name="monthDropDown" description="CTW-19434" />
                     <include name="yearDropDown" description="CTW-19435" />
                     <include name="cvvDigits" description="CTW-19436" />
+                    <include name="cardHoldersNameLastName" description="CTW-19437" />
+                    <include name="cityAndZipCodeTextFields" description="CTW-19440" />
+                    <include name="countryOfResidenceDropDown" description="CTW-19446" />
+                    <include name="submitButtonHover" description="CTW-19447" />
                 </methods>
             </class>
         </classes>
