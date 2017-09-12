@@ -21,6 +21,7 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
     final private static String ZIP_CODE = "zip123";
     final private static String CVV_INVALID_CODE_MESSAGE = "Invalid code, please enter the last 3 digits written on the back of your card";
     final private static String CREDIT_CARD_REGULAR_EXPRESSION  = "\\d{4}-\\d{4}-\\d{4}-\\d{4}";
+    final private static String FIRST_LAST_NAME_ERROR_MESSAGE = "Please Enter Only English characters";
 
     /*
      *[TestLink] CTW-19425:Amount char limitation
@@ -99,11 +100,13 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
     public void monthDropDown(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
         invokeDepositSlide(countrycode, phonecountryprefix);
         softAssert().assertEquals(
-                pages().creditCardDepositDialog().getExpiryDateMonthList().size(),13,
+                pages().creditCardDepositDialog().getExpiryDateMonthList().size(),
+                13,
                 "Verification expiry month drop down contains 1-12 month");
         pages().creditCardDepositDialog().selectExpiryDateMonth();
         softAssert().assertEquals(
-                pages().creditCardDepositDialog().getExpiryDateMonthSelectedItem(),3,
+                pages().creditCardDepositDialog().getExpiryDateMonthSelectedItem(),
+                3,
                 "Verification expiry month drop down is clicable");
     }
 
@@ -115,10 +118,14 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
     @Parameters({"countrycode", "phonecountryprefix"})
     public void yearDropDown(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix){
         invokeDepositSlide(countrycode, phonecountryprefix);
-        softAssert().assertEquals(pages().creditCardDepositDialog().getExpiryDateYearList().size(),16,
+        softAssert().assertEquals(
+                pages().creditCardDepositDialog().getExpiryDateYearList().size(),
+                16,
                 "Verification expiry years drop down contains data");
         pages().creditCardDepositDialog().selectExpiryDateYear();
-        softAssert().assertEquals(pages().creditCardDepositDialog().getExpiryDateYearSelectedItem(),2019,
+        softAssert().assertEquals(
+                pages().creditCardDepositDialog().getExpiryDateYearSelectedItem(),
+                2019,
                 "Verification expiry year drop down is clicable");
     }
 
@@ -150,13 +157,17 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
         pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
                 .withCardHoldersFirstName(FAILED_CREDIT_CARD_HOLDER_NAME)
                 .build());
-        softAssert().assertEquals(pages().creditCardDepositDialog().getErrorMessageHint(),"Please Enter Only English characters",
+        softAssert().assertEquals(
+                pages().creditCardDepositDialog().getErrorMessageHint(),
+                FIRST_LAST_NAME_ERROR_MESSAGE,
                 "Verification for wrong language in Card Holder`s First Name");
         pages().browser().refreshPage();
         pages().creditCardDepositDialog().submit(CreditCardDeposit.builder()
                 .withCardHoldersLastName(FAILED_CREDIT_CARD_HOLDER_NAME)
                 .build());
-        softAssert().assertEquals(pages().creditCardDepositDialog().getErrorMessageHint(),"Please Enter Only English characters",
+        softAssert().assertEquals(
+                pages().creditCardDepositDialog().getErrorMessageHint(),
+                FIRST_LAST_NAME_ERROR_MESSAGE,
                 "Verification for wrong language in Card Holder`s Last Name");
     }
 
@@ -173,9 +184,13 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
                 .withCity(CITY)
                 .withZipCode(ZIP_CODE)
                 .build());
-        softAssert().assertEquals(pages().creditCardDepositDialog().getCreditCardCity(), CITY,
+        softAssert().assertEquals(
+                pages().creditCardDepositDialog().getCreditCardCity(),
+                CITY,
                 "Verification for City field is text field");
-        softAssert().assertEquals(pages().creditCardDepositDialog().getCreditCardZipCode(), ZIP_CODE,
+        softAssert().assertEquals(
+                pages().creditCardDepositDialog().getCreditCardZipCode(),
+                ZIP_CODE,
                 "Verification for Zip Code field is text field");
     }
 
@@ -190,7 +205,9 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
         String beforeCountry = pages().creditCardDepositDialog().getSelectedCountryName();
         pages().creditCardDepositDialog().scrollToCountry();
         String afterCountry = pages().creditCardDepositDialog().getSelectedCountryName();
-        softAssert().assertNotEquals(beforeCountry,afterCountry,
+        softAssert().assertNotEquals(
+                beforeCountry,
+                afterCountry,
                 "Verification for select country name is scrollable");
     }
 
@@ -205,6 +222,9 @@ public class DepositSlideFunctionalityTest extends  DepositSlideSanityTest {
         String beforeColor = pages().creditCardDepositDialog().getSubmitButtonCollor();
         pages().creditCardDepositDialog().moveCursorToSubmitButton();
         String afterColor = pages().creditCardDepositDialog().getSubmitButtonCollor();
-        softAssert().assertNotEquals(beforeColor,afterColor, "Verification submit button change background collor");
+        softAssert().assertNotEquals(
+                beforeColor,
+                afterColor,
+                "Verification submit button change background collor");
     }
 }
