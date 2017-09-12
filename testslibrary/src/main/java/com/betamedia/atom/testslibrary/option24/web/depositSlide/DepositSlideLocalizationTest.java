@@ -1,9 +1,8 @@
 package com.betamedia.atom.testslibrary.option24.web.depositSlide;
 
-import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
+import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
-import com.betamedia.atom.testslibrary.option24.web.AbstractWebNavigationTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -24,9 +23,9 @@ public class DepositSlideLocalizationTest extends DepositSlideSanityTest {
     public void depositSlideOnRussian(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         createUserWithoutSubmitedDeposit(countrycode,phonecountryprefix);
         pages().topNavigationPage().selectLanguage(Language.RUSSIAN.code);
-        pages().creditCardDepositDialog().verifyLocalization(Language.RUSSIAN);
+        pages().creditCardDepositDialog().verifyLocalization(Language.RUSSIAN, LocalizationOperations::getTextOrPlaceholder);
         pages().topNavigationPage().selectLanguage(Language.DUTCH.code);
-        pages().creditCardDepositDialog().verifyLocalization(Language.DUTCH);
+        pages().creditCardDepositDialog().verifyLocalization(Language.DUTCH, LocalizationOperations::getTextOrPlaceholder);
     }
 
     /*
@@ -38,6 +37,6 @@ public class DepositSlideLocalizationTest extends DepositSlideSanityTest {
     public void depositSlideOnGerman(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
         createUserWithoutSubmitedDeposit(countrycode,phonecountryprefix);
         pages().topNavigationPage().selectLanguage(Language.GERMAN.code);
-        pages().creditCardDepositDialog().verifyLocalization(Language.GERMAN);
+        pages().creditCardDepositDialog().verifyLocalization(Language.GERMAN, LocalizationOperations::getTextOrPlaceholder);
     }
 }
