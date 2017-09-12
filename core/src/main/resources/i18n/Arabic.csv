@@ -11,3 +11,17 @@ implementationVersion,revisionDate,pageObjectName,locatorId,text
 تم إرسال رسالة نصية إلى هاتفك الجوال. يرجى النقر على الرابط المرفق ومتابعة تحميل الوثائق."
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,إثبات الهوية (POI)
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,إثبات الإقامة (POR)
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,chatLink,الدردشة الآن
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositColumn,إيداع لدى 24option
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositColumnDescription,في بضع خطوات قصيرة يمكنك البدء بالتداول على منصة 24option الحاصدة للجوائز.
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositAmount,مبلغ الإيداع (£)
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,creditCardNumber,رقم بطاقة  الائتمان / مدين
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cvv2,كود التحقق من البطاقة
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonthCaption,شهر
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYearCaption,سنة
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersFirstName,الاسم الأول لحامل البطاقة
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersLastName,اسم العائلة لحامل البطاقة
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,billingAddress,عنوان إرسال الفواتير
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,المدينة
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,الرمز البريدي
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,countryCaption,اختر دولة

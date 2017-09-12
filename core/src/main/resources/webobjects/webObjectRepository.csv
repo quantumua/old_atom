@@ -20,13 +20,18 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,XPATH,.//*[@id='NationalityCode']//option[1]
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownDataError,XPATH,.//*[@id='NationalityCode']//@data-error
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,submit,NAME,swUpdateCustomerBtn
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,chatLink,XPATH,.//*[@id='popup-wizard']/div/div/div/div/header/div/div[3]/span/a
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositColumn,XPATH,.//*[@id='deposit-popup']/div[1]/h1
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositColumnDescription,XPATH,.//*[@id='deposit-popup']/div[1]/p[2]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositAmount,NAME,Amount
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,creditCardNumber,ID,CreditCardNumber
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cvv2,NAME,Cvv2
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonth,NAME,ExpiryDateMonth
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonthCaption,XPATH,.//*[@id='ExpiryDateMonth']/option[1]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonthDropDownElements,XPATH,.//*[@id='ExpiryDateMonth']/option
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonthDropDownSelectItem,XPATH,.//*[@id='ExpiryDateMonth']/option[4]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYear,NAME,ExpiryDateYear
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYearCaption,XPATH,.//*[@id='ExpiryDateYear']/option[1]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYearDropDownElements,XPATH,.//*[@id='ExpiryDateYear']/option
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYearDropDownSelectItem,XPATH,.//*[@id='ExpiryDateYear']/option[4]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersFirstName,NAME,HolderFirstName
@@ -34,6 +39,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,billingAddress,NAME,BillingAddress
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,NAME,City
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,NAME,Zip
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,countryCaption,XPATH,.//*[@id='CountryCode']/option[1]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,country,ID,CountryCode
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,countryScrollToElement,XPATH,.//*[@id='CountryCode']/option[248]
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,submit,NAME,swCCDepositBtn

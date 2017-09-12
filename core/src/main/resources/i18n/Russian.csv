@@ -11,15 +11,17 @@ implementationVersion,revisionDate,pageObjectName,locatorId,text
 На ваш мобильный телефон было отправлено сообщение. Пожалуйста, нажмите на прилагаемую ссылку и продолжите загрузку документов."
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,Подтверждение личности
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,Подтверждение места жительства
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositAmount,Сумма депозита111
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,creditCardNumber,Номер кредитной / дебет карты1
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cvv2,CVV222
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonth,Месяц1
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYear,Год1
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,chatLink,пообщаться сейчас
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositColumn,Внести депозит на 24option
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositColumnDescription,Всего несколько коротких шагов — и вы сможете торговать на удостоенной наград платформе 24option!
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,depositAmount,Сумма депозита (£)
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,creditCardNumber,Номер кредитной / дебет карты
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cvv2,CVV2
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateMonthCaption,Месяц
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,expiryDateYearCaption,Год
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersFirstName,Имя держателя карты
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,cardHoldersLastName,Фамилия держателя карты
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,billingAddress,Адрес
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,Город
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,Почтовый индекс
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,country,Страна
-2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,submit,Внести депозит
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,countryCaption,Выберите страну

@@ -13,35 +13,47 @@ import org.openqa.selenium.WebDriver;
 public abstract class AbstractCreditCardDeposit extends AbstractPageObject implements CreditCardDepositPage, ScriptOperations {
 
     @StoredId (localized = true)
+    protected By chatLink;
+    @StoredId (localized = true)
+    protected By depositColumn;
+    @StoredId (localized = true)
+    protected By depositColumnDescription;
+    @StoredId (localized = true)
     protected By depositAmount;
     @StoredId (localized = true)
     protected By creditCardNumber;
     @StoredId (localized = true)
     protected By cvv2;
-    @StoredId (localized = true)
+    @StoredId
     protected By expiryDateMonth;
+    @StoredId (localized = true)
+    protected By expiryDateMonthCaption; // the first element of DropDown menu
     @StoredId
     protected By expiryDateMonthDropDownElements;
     @StoredId
     protected By expiryDateMonthDropDownSelectItem;
     @StoredId
     protected By expiryDateYear;
+    @StoredId (localized = true)
+    protected By expiryDateYearCaption; // the first element of DropDown menu
     @StoredId
     protected By expiryDateYearDropDownElements;
     @StoredId
     protected By expiryDateYearDropDownSelectItem;
-    @StoredId
+    @StoredId (localized = true)
     protected By cardHoldersFirstName;
-    @StoredId
+    @StoredId (localized = true)
     protected By cardHoldersLastName;
-    @StoredId
+    @StoredId (localized = true)
     protected By billingAddress;
-    @StoredId
+    @StoredId (localized = true)
     protected By city;
-    @StoredId
+    @StoredId (localized = true)
     protected By zipCode;
     @StoredId
     protected By country;
+    @StoredId (localized = true)
+    protected By countryCaption; // the first element of DropDown menu
     @StoredId
     protected By countryScrollToElement;
     @StoredId

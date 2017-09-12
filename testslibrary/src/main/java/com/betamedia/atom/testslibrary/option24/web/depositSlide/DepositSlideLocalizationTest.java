@@ -7,6 +7,9 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import static com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations.Direction.LTR;
+import static com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations.Direction.RTL;
+
 /**
  * @author Leonid Artemiev
  * @since 9/08/17
@@ -24,8 +27,6 @@ public class DepositSlideLocalizationTest extends DepositSlideSanityTest {
         createUserWithoutSubmitedDeposit(countrycode,phonecountryprefix);
         pages().topNavigationPage().selectLanguage(Language.RUSSIAN.code);
         pages().creditCardDepositDialog().verifyLocalization(Language.RUSSIAN, LocalizationOperations::getTextOrPlaceholder);
-        pages().topNavigationPage().selectLanguage(Language.DUTCH.code);
-        pages().creditCardDepositDialog().verifyLocalization(Language.DUTCH, LocalizationOperations::getTextOrPlaceholder);
     }
 
     /*
@@ -38,5 +39,18 @@ public class DepositSlideLocalizationTest extends DepositSlideSanityTest {
         createUserWithoutSubmitedDeposit(countrycode,phonecountryprefix);
         pages().topNavigationPage().selectLanguage(Language.GERMAN.code);
         pages().creditCardDepositDialog().verifyLocalization(Language.GERMAN, LocalizationOperations::getTextOrPlaceholder);
+    }
+
+    /*
+    *[TestLink]CTW-19443:Slide on AR
+    */
+    @Test(description = "CTW-19443:Slide on AR")
+    @TestLinkProperties(displayId = "CTW-19443")
+    @Parameters({"countrycode", "phonecountryprefix"})
+    public void depositSlideOnArabic(@Optional("Germany") String countrycode, @Optional("+49") String phonecountryprefix) {
+        createUserWithoutSubmitedDeposit(countrycode,phonecountryprefix);
+        pages().topNavigationPage().selectLanguage(Language.ARABIC.code);
+        pages().creditCardDepositDialog().verifyLocalization(Language.ARABIC,LocalizationOperations::getTextOrPlaceholder);
+        pages().creditCardDepositDialog().verifyDirection(RTL);
     }
 }
