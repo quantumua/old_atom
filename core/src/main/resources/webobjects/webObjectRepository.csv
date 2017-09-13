@@ -2,7 +2,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,XPATH,.//*[@class='wizard-progress']/p[@class='prog-text']
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,XPATH,".//*[@id='popup-wizard']//*[@class=""chat-link""]/a"
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,XPATH,".//span[@class=""swAdditionalInformationTitle swGroupBoxTitle""]"
-2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,XPATH,.//div[@id='accountAdditionalDetails']//label[@for='Birth_Date']
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,XPATH,.//*[@id='accountAdditionalDetails']/div/div[1]/label
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDay,ID,BirthDateDay
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropDownElements,XPATH,//*[@id='BirthDateDay']/option
 2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,XPATH,.//*[@id='BirthDateDay']//option[1]

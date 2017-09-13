@@ -25,3 +25,14 @@ Es wurde eine SMS an Ihr Mobiltelefon geschickt. Klicken Sie bitte auf den beige
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,Stadt
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,PLZ
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,countryCaption,Wählen Sie ein Land
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,15% abgeschlossen
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,Chat Starten
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,Persönliche Angaben
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,Geburtsdatum
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,Tag
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateMonthDropdownCaption,Monat
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateYearDropdownCaption,Jahr
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthTitle,Geburtsland
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthDropdownCaption,Wählen Sie ein Land
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityTitle,Nationalität
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,Wählen Sie ein Land

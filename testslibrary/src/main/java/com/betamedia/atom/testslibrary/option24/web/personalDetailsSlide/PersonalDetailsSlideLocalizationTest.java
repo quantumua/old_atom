@@ -2,6 +2,7 @@ package com.betamedia.atom.testslibrary.option24.web.personalDetailsSlide;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.api.web.form.Country;
+import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations;
 import com.betamedia.atom.core.fwdataaccess.repository.util.Language;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import org.testng.annotations.BeforeMethod;
@@ -19,22 +20,21 @@ import static com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperation
 
 public class PersonalDetailsSlideLocalizationTest extends PersonalDetailsSlideFunctionalityTest {
 
-
+/*
     @BeforeMethod
     public void before() {
         // empty
     }
+    */
 	/*
 	 *[testlink]  CTW-5680:Verify the slide is translated to all languages
 	 */
-    @Test(dataProvider = GENERIC_DATA_PROVIDER)
+    @Test(description ="CTW-5680:Verify the slide is translated to all languages" )
     @TestLinkProperties(displayId ="CTW-5680")
-	  public void  verifyTheSlideIsTranslatedToAllLanguages(AccountAdditionalDetailsData data) {
-        pages().controlPanel().logOut();
-        pages().topNavigationPage().selectLanguage(data.getLanguage());
-        registedAndStart(Country.GERMANY.getName(), Country.GERMANY.getPhonePrefix());
-        pages().accountAdditionalDetails().exists();
-        pages().accountAdditionalDetails().verifySlideTranslation(data, data.getLanguage());
+	  public void  verifyTheSlideIsTranslatedToAllLanguages() {
+        pages().topNavigationPage().selectLanguage(Language.GERMAN.code);
+        pages().welcomeBackMessage().continueQuestionnaire();
+        pages().accountAdditionalDetails().verifyLocalization(Language.GERMAN, LocalizationOperations::getTextOrPlaceholder);
     }
     
     @Override

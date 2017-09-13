@@ -14,43 +14,43 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class AbstractAccountAdditionalDetails extends AbstractPageObject implements AccountAdditionalDetailsDialog, CssOperations, FieldOperations, ScriptOperations, LocalizationOperations {
 
-    @StoredId
+    @StoredId (localized = true)
     protected By wizardProgressText;
-    @StoredId
+    @StoredId (localized = true)
     protected By chatNow;
-    @StoredId
+    @StoredId (localized = true)
     protected By additionalDetailsTitle;
-    @StoredId
+    @StoredId (localized = true)
     protected By birthDateTitle;
     @StoredId
     protected By birthDateDay;
     @StoredId
     protected By birthDateDayDropDownElements;
-    @StoredId
+    @StoredId (localized = true)
     protected By birthDateDayDropdownCaption;
     @StoredId
     protected By birthDayDropDownSelectItem;
     @StoredId
     protected By birthDateMonth;
-    @StoredId
+    @StoredId (localized = true)
     protected By birthDateMonthDropdownCaption;
     @StoredId
     protected By birthDateYear;
-    @StoredId
+    @StoredId (localized = true)
     protected By birthDateYearDropdownCaption;
-    @StoredId
+    @StoredId (localized = true)
     protected By countryOfBirthTitle;
     @StoredId
     protected By countryOfBirth;
-    @StoredId
+    @StoredId (localized = true)
     protected By countryOfBirthDropdownCaption;
     @StoredId
     protected By countryOfBirthDropdownDataError;
-    @StoredId
+    @StoredId (localized = true)
     protected By nationalityTitle;
     @StoredId
     protected By nationality;
-    @StoredId
+    @StoredId (localized = true)
     protected By nationalityDropdownCaption;
     @StoredId
     protected By nationalityDropdownDataError;
