@@ -12,4 +12,6 @@ public interface ThankYouPage {
     boolean waitForStartTrade();
 
     boolean startTradeExists();
+
+    boolean thankYouMessageExists();
 }

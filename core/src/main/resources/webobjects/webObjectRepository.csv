@@ -46,6 +46,7 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,modalClose,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,invalidCreditCardNumberError,XPATH,.//*[@id='creditcard']//span[@class='error-input']
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,errorMessageHint,XPATH,"//*[contains(@class, 'tooltip error')]"
+2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,infoMessageHint,XPATH,"//*[contains(@class, 'tooltip info top')]"
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,employerName,ID,NameOfEmployer
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,taxResidenceCountry,ID,CountryTaxResidence
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsEmployerInformation,hasTaxIdentificationNumber,ID,HaveTin

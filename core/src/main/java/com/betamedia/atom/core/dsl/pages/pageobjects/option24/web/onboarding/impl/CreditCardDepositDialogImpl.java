@@ -3,11 +3,13 @@ package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.im
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractCreditCardDeposit;
 import org.apache.logging.log4j.LogManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 
 /**
  * Created by vsnigur on 5/18/17.
@@ -16,7 +18,15 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 
 	private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(CreditCardDepositDialogImpl.class);
 	private static final String CSS_BACKGROUND_COLOR = "background-color";
-
+	final private static String  DEPOSIT_AMOUNT= "Deposit Amount";
+	final private static String  CREDIT_CARD_NUMBER = "Credit Card Number";
+	final private static String  CVV2= "Last 3 digits written on the back of your card.";
+	final private static String  FIRST_NAME= "Card Holder's First Name";
+	final private static String  LAST_NAME= "Card Holder's Last Name";
+	final private static String  BILLING_ADDRESS= "Billing Address";
+	final private static String  CITY= "City";
+	final private static String  ZIP_CODE= "Zip Code";
+	final private static String  COUNTRY= "Country of Residence";
 
 	public CreditCardDepositDialogImpl(WebDriver webDriver) {
 		super(webDriver);
@@ -69,6 +79,11 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 	@Override
 	public String getErrorMessageHint() {
 		return waitUntilDisplayed(errorMessageHint).getText();
+	}
+
+	@Override
+	public String getInfoMessageHint() {
+		return waitUntilDisplayed(infoMessageHint).getText();
 	}
 
 	@Override
@@ -144,13 +159,89 @@ public class CreditCardDepositDialogImpl extends AbstractCreditCardDeposit {
 
 	@Override
 	public void moveCursorToSubmitButton() {
-		makeActions().moveToElement(find(submit))
-				.build()
-				.perform();
+		moveCursorToElement(submit);
 	}
 
 	@Override
 	public String getSubmitButtonCollor() {
 		return find(submit).getCssValue(CSS_BACKGROUND_COLOR);
 	}
+
+	@Override
+	public void assertToolTipVisibilyty(){
+		moveCursorToElement(depositAmount);
+		softAssert().assertEquals(getInfoMessageHint(), DEPOSIT_AMOUNT,"Verification for tooltip deposit amount");
+		moveCursorToElement(creditCardNumber);
+		softAssert().assertEquals(getInfoMessageHint(), CREDIT_CARD_NUMBER,"Verification for tooltip credit card number");
+		moveCursorToElement(cvv2);
+		softAssert().assertEquals(getInfoMessageHint(), CVV2,"Verification for tooltip CVV2 code");
+		moveCursorToElement(cardHoldersFirstName);
+		softAssert().assertEquals(getInfoMessageHint(), FIRST_NAME,"Verification for tooltip first name");
+		moveCursorToElement(cardHoldersLastName);
+		softAssert().assertEquals(getInfoMessageHint(), LAST_NAME,"Verification for tooltip last name");
+		moveCursorToElement(billingAddress);
+		softAssert().assertEquals(getInfoMessageHint(), BILLING_ADDRESS,"Verification for tooltip billing address");
+		moveCursorToElement(city);
+		softAssert().assertEquals(getInfoMessageHint(), CITY,"Verification for tooltip city");
+		moveCursorToElement(zipCode);
+		softAssert().assertEquals(getInfoMessageHint(), ZIP_CODE,"Verification for tooltip zip code");
+		moveCursorToElement(country);
+		softAssert().assertEquals(getInfoMessageHint(), COUNTRY,"Verification for tooltip country");
+	}
+
+	@Override
+	public void assertEmptyFieldTooltipError(CreditCardDeposit info){
+		find(cardHoldersFirstName).clear();
+		find(cardHoldersLastName).clear();
+		scrollIntoView(find(submit)).click();
+
+		softAssert().assertEquals(getErrorMessageHint(), "Please Enter Only Numbers","Verification for deposit amount");
+		find(depositAmount).sendKeys(info.depositAmount);
+
+		scrollIntoView(find(submit)).click();
+
+		softAssert().assertEquals(getErrorMessageHint(), "Invalid Credit Card Number","Verification for credit card number");
+		find(creditCardNumber).sendKeys(info.creditCardNumber);
+
+		scrollIntoView(find(submit)).click();
+
+		softAssert().assertEquals(getErrorMessageHint(), "Please Enter Only Numbers","Verification for CVV2");
+		find(cvv2).sendKeys(info.cvv2);
+		inSelect(expiryDateMonth).selectByValue(info.expiryDateMonth);
+		inSelect(expiryDateYear).selectByValue(info.expiryDateYear);
+
+		scrollIntoView(find(submit)).click();
+
+		softAssert().assertEquals(getErrorMessageHint(), "Please Enter Only English characters","Verification for card holder name");
+		find(cardHoldersFirstName).sendKeys(info.cardHoldersFirstName);
+		find(cardHoldersLastName).sendKeys(info.cardHoldersLastName);
+
+		scrollIntoView(find(submit)).click();
+
+		softAssert().assertEquals(getErrorMessageHint(), "Please Enter A Billing Address","Verification for billing address");
+		find(billingAddress).sendKeys(info.billingAddress);
+
+		scrollIntoView(find(submit)).click();
+
+		softAssert().assertEquals(getErrorMessageHint(), "Please Enter A City","Verification for city");
+		find(city).sendKeys(info.city);
+
+		scrollIntoView(find(submit)).click();
+
+		softAssert().assertEquals(getErrorMessageHint(), "Please Enter A Zip Code","Verification for zip code");
+		find(zipCode).sendKeys(info.zipCode);
+
+		if (info.country != null) {
+			find(country).sendKeys(info.country);
+		}
+
+		scrollIntoView(find(submit)).click();
+	}
+
+	private void moveCursorToElement(By element) {
+		makeActions().moveToElement(find(element))
+				.build()
+				.perform();
+	}
+
 }

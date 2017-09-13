@@ -14,6 +14,7 @@ public interface CreditCardDepositPage extends LocalizationOperations {
 
     boolean invalidCreditCardNumberErrorExists();
     String getErrorMessageHint();
+    String getInfoMessageHint();
     String getCreditCardNumber();
     String getCreditCardCity();
     String getCreditCardZipCode();
@@ -29,4 +30,6 @@ public interface CreditCardDepositPage extends LocalizationOperations {
     void scrollToCountry();
     void moveCursorToSubmitButton();
     String getSubmitButtonCollor();
+    void assertToolTipVisibilyty();
+    void assertEmptyFieldTooltipError(CreditCardDeposit info);
 }
