@@ -32,9 +32,11 @@ public class PersonalDetailsSlideLocalizationTest extends PersonalDetailsSlideFu
     @Test(description ="CTW-5680:Verify the slide is translated to all languages" )
     @TestLinkProperties(displayId ="CTW-5680")
 	  public void  verifyTheSlideIsTranslatedToAllLanguages() {
-        pages().topNavigationPage().selectLanguage(Language.GERMAN.code);
-        pages().welcomeBackMessage().continueQuestionnaire();
-        pages().accountAdditionalDetails().verifyLocalization(Language.GERMAN, LocalizationOperations::getTextOrPlaceholder);
+        for (Language language : Language.values()) {
+            pages().topNavigationPage().selectLanguage(language.code);
+            pages().welcomeBackMessage().continueQuestionnaire();
+            pages().accountAdditionalDetails().verifyLocalization(language);
+        }
     }
     
     @Override

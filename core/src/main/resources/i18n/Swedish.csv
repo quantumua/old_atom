@@ -11,3 +11,14 @@ Bekräfta ditt mobilnummer
 Ett textmeddelande har skickats till din mobiltelefon. Klicka på den bifogade länken och fortsätt ladda upp dina dokument."
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,Identitetsbevis
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,Bevis om hemvist
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,15% avslutad
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,Chatta Nu
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,Personuppgifter
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,Födelsedatum
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,Dag
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateMonthDropdownCaption,Månad
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateYearDropdownCaption,År
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthTitle,Hemland
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthDropdownCaption,Markera land
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityTitle,Nationalitet
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,Markera land

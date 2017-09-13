@@ -11,3 +11,14 @@ Vennligst bekreft ditt mobilnummer
 En tekstmelding har blitt sendt til mobiltelefonen din. Klikk på linken som er vedlagt og fortsett å laste opp dokumentene dine."
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,POI (identitetsbevis)
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,POR (bostedsbevis)
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,15% ferdigstilt
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,Chat nå
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,Personlige opplysninger
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,Fødselsdato
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,Dag
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateMonthDropdownCaption,Måned
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateYearDropdownCaption,År
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthTitle,Fødeland
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthDropdownCaption,Velg land
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityTitle,Nasjonalitet
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,Velg land

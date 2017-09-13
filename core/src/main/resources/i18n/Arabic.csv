@@ -25,3 +25,14 @@ implementationVersion,revisionDate,pageObjectName,locatorId,text
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,المدينة
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,الرمز البريدي
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,countryCaption,اختر دولة
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,15% منجز
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,الدردشة الآن
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,التفاصيل الشخصية
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,تاريخ الميلاد
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,يوم
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateMonthDropdownCaption,شهر
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateYearDropdownCaption,سنة
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthTitle,بلد الميلاد
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthDropdownCaption,اختر دولة
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityTitle,الجنسية
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,اختر دولة

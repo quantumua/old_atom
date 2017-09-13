@@ -11,3 +11,14 @@ Veuillez confirmer votre numéro de téléphone mobile
 Un message texte a été envoyé à votre téléphone mobile. Veuillez cliquer sur le lien attaché et continuer de transférer vos documents."
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,PI (Preuve d’identité)
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,PR (Preuve de Résidence)
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,15% omplété
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,Chat en direct
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,Informations personnelles
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,Date de naissance
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,jour
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateMonthDropdownCaption,mois
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateYearDropdownCaption,année
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthTitle,Pays de naissance
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthDropdownCaption,Sélectionnez un pays
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityTitle,Nationalité
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,Sélectionnez un pays

@@ -11,3 +11,14 @@ Por favor, confirme su número móvil.
 Se le ha enviado un mensaje de texto a su teléfono móvil. Por favor, haga clic en el enlace adjunto y continúe con el fin de cargar sus documentos."
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,poiHeader,POI (Prueba de identidad)
 2.6.2,2017-05-29 15:24 +0000,UploadDocumentsDialogImpl,porHeader,POR (Prueba de residencia)
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,15% completado
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,Chatear Ahora
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,Información personal
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,Fecha de nacimiento
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,Día
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateMonthDropdownCaption,Mes
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateYearDropdownCaption,Año
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthTitle,País de nacimiento
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthDropdownCaption,Seleccione un país
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityTitle,Nacionalidad
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,Seleccione un país

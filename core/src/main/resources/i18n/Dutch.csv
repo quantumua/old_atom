@@ -23,3 +23,14 @@ Er is een sms naar uw mobiele telefoon gestuurd. Klik op de link in de bijlage e
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,Postcode
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,country,Land van verblijf
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,submit,Verzenden
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,15% voltooid
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,Chat nu
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,Persoonsgegevens
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,Geboortedatum
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,Dag
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateMonthDropdownCaption,Maand
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateYearDropdownCaption,Jaar
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthTitle,Geboorteland
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthDropdownCaption,Selecteer een land
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityTitle,Nationaliteit
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,Selecteer een land

@@ -25,3 +25,14 @@ implementationVersion,revisionDate,pageObjectName,locatorId,text
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,city,Город
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,zipCode,Почтовый индекс
 2.6.2,2017-05-29 15:24 +0000,AbstractCreditCardDeposit,countryCaption,Выберите страну
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,wizardProgressText,15% заполненный
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,chatNow,пообщаться сейчас
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,additionalDetailsTitle,Личные данные
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateTitle,Дата рождения
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateDayDropdownCaption,День
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateMonthDropdownCaption,Месяц
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,birthDateYearDropdownCaption,Год
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthTitle,Страна рождения
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,countryOfBirthDropdownCaption,Выберите страну
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityTitle,Национальность
+2.6.2,2017-05-29 15:24 +0000,AbstractAccountAdditionalDetails,nationalityDropdownCaption,Выберите страну
