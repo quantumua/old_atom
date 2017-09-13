@@ -53,9 +53,8 @@ public class PersonalDetailsSlideLocalizationTest extends PersonalDetailsSlideFu
     @Test(description = "CTW-5682:Verify the slide turns RTL on AR")
     @TestLinkProperties(displayId ="CTW-5682")
     public void  verifyTheSlideTurnsRTLOnAR() {
-        pages().controlPanel().logOut();
         pages().topNavigationPage().selectLanguage(Language.ARABIC.code);
-        registedAndStart(Country.GERMANY.getName(), Country.GERMANY.getPhonePrefix());
+        pages().welcomeBackMessage().continueQuestionnaire();
         pages().accountAdditionalDetails().exists();
         pages().accountAdditionalDetails().verifyDirection(RTL);
     }
