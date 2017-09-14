@@ -8,7 +8,7 @@ import org.testng.annotations.*;
  * Created by lartemyev on 9/13/17.
  */
 
-public class DepositSlideMandatoryFieldsValidation extends  DepositSlideSanityTest{
+public class DepositSlideMandatoryFieldsValidationTest extends  DepositSlideSanityTest{
 
     /*
      * [TestLink] CTW-19444:Tooltips on Hover

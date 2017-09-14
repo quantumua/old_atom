@@ -1,7 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.web.onboarding.impl;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding.AbstractAccountAdditionalDetails;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,8 +9,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.betamedia.atom.core.testingtype.base.AbstractTest.softAssert;
 
 /**
  * Created by vsnigur on 5/18/17.
@@ -67,24 +64,6 @@ public class AccountAdditionalDetailsDialogImpl extends AbstractAccountAdditiona
     public String getBirthDateDayElementColor () {
         return getCssValue("border", birthDateDay);
     }
-
-    @Override
-    public void verifySlideTranslation(AccountAdditionalDetailsData data, String language) {
-        softAssert().assertEquals(waitUntilDisplayed(wizardProgressText).getText().replaceAll("[0-9]", ""), data.getProgressText(), "wizardProgressText is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(chatNow).getText(), data.getChatLink(), "chatNow is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(additionalDetailsTitle).getText(), data.getAdditionalDetailsTitle(), "additionalDetailsTitle is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(birthDateTitle).getText(), data.getBirthDateTitle(), "birthDateTitle is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(birthDateDayDropdownCaption).getText(), data.getBirthDateDayDropdownCaption(), "birthDateDayDropdownCaption is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(birthDateMonthDropdownCaption).getText(), data.getBirthDateMonthDropdownCaption(), "birthDateMonthDropdownCaption is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(birthDateYearDropdownCaption).getText(), data.getBirthDateYearDropdownCaption(), "birthDateYearDropdownCaption is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(countryOfBirthTitle).getText(), data.getCountryOfBirthTitle(), "countryOfBirthTitle is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(countryOfBirthDropdownCaption).getText(), data.getCountryOfBirthDropdownCaption(), "countryOfBirthDropdownCaption is translated to " + language);
-	    // Assert.assertEquals(waitUntilDisplayed(countryOfBirthDropdownDataError).getAttribute("data-error"), data.getCountryOfBirthDropdownDataError(), "is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(nationalityTitle).getText(), data.getNationalityTitle(), "nationalityTitle is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(nationalityDropdownCaption).getText(), data.getNationalityDropdownCaption(), "nationalityDropdownCaption is translated to " + language);
-	    // Assert.assertEquals(waitUntilDisplayed(nationalityDropdownDataError).getAttribute("data-error"), data.getNationalityDropdownDataError(), "is translated to " + language);
-        softAssert().assertEquals(waitUntilDisplayed(submit).getAttribute("value"), data.getSubmitButton(), "submit is translated to " + language);
-   }
 
     @Override
     public String getElementsBackground() {

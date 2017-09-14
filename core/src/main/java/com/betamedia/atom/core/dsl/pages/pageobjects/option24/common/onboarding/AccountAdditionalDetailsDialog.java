@@ -1,7 +1,6 @@
 package com.betamedia.atom.core.dsl.pages.pageobjects.option24.common.onboarding;
 
 import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetails;
-import com.betamedia.atom.core.api.crm.form.entities.AccountAdditionalDetailsData;
 import com.betamedia.atom.core.dsl.pages.extensions.LocalizationOperations;
 
 import java.util.List;
@@ -35,7 +34,4 @@ public interface AccountAdditionalDetailsDialog extends LocalizationOperations {
     void selectBirthDayData();
 
     String getElementsBackground();
-
-    void verifySlideTranslation(AccountAdditionalDetailsData data, String language);
-
 }
