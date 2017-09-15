@@ -2,12 +2,8 @@ package com.betamedia.atom.testslibrary.option24.web.depositSlide;
 
 import com.betamedia.atom.core.api.crm.form.entities.CreditCardDeposit;
 import com.betamedia.atom.core.api.web.form.CustomerRegistrationInfo;
-import com.betamedia.atom.core.dsl.type.EnvironmentType;
-import com.betamedia.atom.core.dsl.type.ProductType;
-import com.betamedia.atom.core.testingtype.annotations.TestConfigurationProperties;
 import com.betamedia.atom.core.testlink.annotations.TestLinkProperties;
 import com.betamedia.atom.testslibrary.option24.web.AbstractWebNavigationTest;
-import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.*;
 
 /**

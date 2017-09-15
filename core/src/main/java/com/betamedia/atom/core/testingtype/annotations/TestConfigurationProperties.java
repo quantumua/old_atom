@@ -3,7 +3,6 @@ package com.betamedia.atom.core.testingtype.annotations;
 
 import com.betamedia.atom.core.dsl.type.EnvironmentType;
 import com.betamedia.atom.core.dsl.type.ProductType;
-
 import java.lang.annotation.*;
 
 /**

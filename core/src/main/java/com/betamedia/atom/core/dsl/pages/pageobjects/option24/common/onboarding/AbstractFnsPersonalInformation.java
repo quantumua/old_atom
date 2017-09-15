@@ -62,7 +62,10 @@ public abstract class AbstractFnsPersonalInformation extends AbstractPageObject 
     protected By progressValue;
     @StoredId
     protected By progressBar;
-
+    @StoredId
+    protected By backwardButton;
+    @StoredId
+    protected By forwardButton;
 
     public AbstractFnsPersonalInformation(WebDriver webDriver) {
         super(webDriver);

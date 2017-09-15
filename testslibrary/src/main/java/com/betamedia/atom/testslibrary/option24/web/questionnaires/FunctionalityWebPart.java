@@ -260,6 +260,9 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().riskWarning().accept();
         pages().creditCardDepositDialog().close();
         pages().confirmCloseMessage().acceptClose();
+        pages().topNavigationPage().deposit();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
+        pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().assertPersonalInformationExists();
     }
 
@@ -275,6 +278,9 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().riskWarning().accept();
         pages().creditCardDepositDialog().close();
         pages().confirmCloseMessage().acceptClose();
+        pages().topNavigationPage().deposit();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
+        pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().submit(personalInformation);
         softAssert().assertTrue(pages().uploadDocumentDialog().exists(),"POI / POR did not appear after skip deposit");
     }
@@ -291,6 +297,9 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().riskWarning().accept();
         pages().creditCardDepositDialog().close();
         pages().confirmCloseMessage().acceptClose();
+        pages().topNavigationPage().deposit();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
+        pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().submit(personalInformation);
         pages().uploadDocumentDialog().poiUploadIdCard();
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"'Thank you' two did not appear");
@@ -308,6 +317,9 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         pages().riskWarning().accept();
         pages().creditCardDepositDialog().close();
         pages().confirmCloseMessage().acceptClose();
+        pages().topNavigationPage().deposit();
+        pages().creditCardDepositDialog().submit(CreditCardDeposit.builder().build());
+        pages().thankYouPage().doContinue();
         pages().fnsEmployerInfo().submit(personalInformation);
         pages().uploadDocumentDialog().poiUploadIdCard();
         softAssert().assertTrue(pages().thankYouPage().startTradeExists(),"'Thank you' did not appear");
@@ -361,7 +373,36 @@ public class FunctionalityWebPart extends AbstractExperienceLevelsTests {
         softAssert().assertFalse(pages().fnsEmployerInfo().progressBarExists(),"Progress bar exists in the AML dialog");
     }
 
+    @Test(description = "CTW-19109:Slide was removed")
+    @TestLinkProperties(displayId = "CTW-1910")
+    public void verifySlidesQueueRegression() {
+        registerAndPassSlidesAsExpected();
+    }
 
+    @Test(description = "CTW-19110:User can continue without slide 3")
+    @TestLinkProperties(displayId = "CTW-19110")
+    public void verifySlidesCanBePassedForRegression() {
+        registerAndPassSlidesAsExpected();
+    }
+
+    @Test(description = "CTW-19111:User can go back using the arrows")
+    @TestLinkProperties(displayId = "CTW-19111")
+    public void verifyUserCanNavigateFromSlideToSlideUsingArrows() {
+        CustomerRegistrationInfo customerRegistrationInfo = CustomerRegistrationInfo
+                .builder(WebSiteNamingStrategy.get()).build();
+        PersonalInformation personalInformation = getPersonalInformationScore0();
+        TradingExperienceInfo tradingExperienceInfo = tradingExperienceInfoWith0Score();
+        invokeSlideFNS(customerRegistrationInfo);
+        pages().fnsPersonalInformation().assertNavigationPossibilityBetweenSlides(personalInformation);
+        pages().fnsTradingExperience().assertNavigationPossibilityBetweenSlides(tradingExperienceInfo);
+
+    }
+
+    private void registerAndPassSlidesAsExpected() {
+        pages().fnsEmployerInfo().submit(invokePOIPORDialog());
+        pages().uploadDocumentDialog().poiUploadIdCard();
+        pages().thankYouPage().startTrade();
+    }
 
     /**
      * check FNS answers in the CRM DB

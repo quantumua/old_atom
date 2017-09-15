@@ -227,6 +227,99 @@ public class WebFnsPersonalInformationImpl extends AbstractFnsPersonalInformatio
         }
     }
 
+    @Override
+    public void assertNavigationPossibilityBetweenSlides(PersonalInformation personalInformation) {
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertFalse(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.employmentStatus);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.industry);
+        if (nonNull(personalInformation.industryOther)) {
+            find(industryOther).sendKeys(personalInformation.industryOther);
+            executeScript("arguments[0].click()", find(industryOtherBttn));
+        }
+        // check returning action functionality
+        find(backwardButton).click();
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertTrue(find(forwardButton).isEnabled());
+        // check forward action functionality
+        find(forwardButton).click();
+        find(backwardButton).click();
+        submitOnWizard(personalInformation.industry);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.educationLevel);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.educationField);
+        if (nonNull(personalInformation.educationFieldOther)) {
+            find(educationFieldOther).sendKeys(personalInformation.educationFieldOther);
+            executeScript("arguments[0].click()", find(educationFieldBttn));
+        }
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.isPoliticallyExposed);
+        if (nonNull(personalInformation.politicalExposureComment)) {
+            find(politicalExposureComment).sendKeys(personalInformation.politicalExposureComment);
+            executeScript("arguments[0].click()", find(politicalExposureBttn));
+        }
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.sourceOfFunds);
+        if (nonNull(personalInformation.sourceOfFundsOther)) {
+            find(sourceOfFundsOther).sendKeys(personalInformation.sourceOfFundsOther);
+            executeScript("arguments[0].click()", find(sourceOfFundsBttn));
+        }
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.annualIncome);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.netWealth);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.expectedDepositsPerYear);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(personalInformation.purposeOfTrading);
+        if (nonNull(personalInformation.purposeOfTradingOther)) {
+            find(purposeOfTradingOther).sendKeys(personalInformation.purposeOfTradingOther);
+            executeScript("arguments[0].click()", find(purposeOfTradingBttn));
+        }
+    }
+
     private void submitOnWizard(String dataValue) {
         logger.info(String.format("filling Fns PersonalInformation wizard value: %s",dataValue));
         scrollIntoView(waitUntilDisplayed(By.cssSelector("li[data-value='" + dataValue + "']"))).click();

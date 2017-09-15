@@ -83,6 +83,8 @@ implementationVersion,revisionDate,pageObjectName,locatorId,locatorType,value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,modalClose,ID,modal-close
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,progressValue,ID,progress-value
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,progressBar,CLASS_NAME,popup-progress-bar
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,backwardButton,XPATH,//div[@class='arrow-nav desktop-show']/span[1]
+2.6.2,2017-05-29 15:24 +0000,AbstractFnsPersonalInformation,forwardButton,XPATH,//div[@class='arrow-nav desktop-show']/span[2]
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,sharesExperience,ID,FinancialProducts1Shares
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,binaryExperience,ID,FinancialProducts1Binary
 2.6.2,2017-05-29 15:24 +0000,AbstractFnsTradingExperience,averageYearlyBinaryVolume,ID,FinancialProducts1Volume

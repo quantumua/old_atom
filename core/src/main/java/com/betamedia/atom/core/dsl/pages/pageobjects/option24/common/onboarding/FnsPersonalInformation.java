@@ -16,4 +16,7 @@ public interface FnsPersonalInformation {
     void assertCloseNotExist(PersonalInformation info);
 
     void assertProgressBar(PersonalInformation personalInformation, String... expectedProgress);
+
+    void assertNavigationPossibilityBetweenSlides(PersonalInformation personalInformation);
+
 }

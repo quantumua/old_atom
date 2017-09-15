@@ -66,7 +66,12 @@ public class WidgetFnsPersonalInformationImpl extends AbstractFnsPersonalInforma
 
     @Override
     public void assertProgressBar(PersonalInformation personalInformation, String... expectedProgress) {
+        //not necessary implementation for widgets
+    }
 
+    @Override
+    public void assertNavigationPossibilityBetweenSlides(PersonalInformation personalInformation) {
+        //not necessary implementation for widgets
     }
 
     @Override

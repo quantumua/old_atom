@@ -155,6 +155,85 @@ public class WebFnsTradingExperienceImpl extends AbstractFnsTradingExperience im
         waitUntilDisplayed(buttonWizardDeclaration).click();
     }
 
+    @Override
+    public void assertNavigationPossibilityBetweenSlides(TradingExperienceInfo tradingExperienceInfo) {
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertFalse(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.instrumentsTradedBefore);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.frequencyPastTransactions);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.volumePastTransaction);
+        find(backwardButton).click();
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertTrue(find(forwardButton).isEnabled());
+        find(forwardButton).click();
+        submitOnWizard(tradingExperienceInfo.commonLevelPastTransaction);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.financialWorkExperience);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.cfdBinaryKnowledge);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.mainFactorKnowledge);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.howToCloseKnowledge);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.requiredMarginKnowledge);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.marginLevelDropKnowledge);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.lossOn1to50Knowledge);
+
+        softAssert().assertTrue(waitUntilDisplayed(backwardButton).isDisplayed());
+        softAssert().assertTrue(find(forwardButton).isDisplayed());
+        softAssert().assertTrue(find(backwardButton).isEnabled());
+        softAssert().assertFalse(find(forwardButton).isEnabled());
+        submitOnWizard(tradingExperienceInfo.lossOn1to200Knowledge);
+
+        waitUntilDisplayed(buttonWizardDeclaration).click();
+    }
+
     private void isCollapsed(By element) {
         softAssert().assertTrue(find(element).getAttribute(ATTRIBUTE_CLASS).contains(COLLAPSED),
                 element.toString()+" is not collapsed!");

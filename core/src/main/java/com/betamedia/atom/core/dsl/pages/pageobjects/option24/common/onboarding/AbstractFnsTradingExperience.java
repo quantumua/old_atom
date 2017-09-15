@@ -66,6 +66,10 @@ public abstract class AbstractFnsTradingExperience extends AbstractPageObject im
     protected By progressValue;
     @StoredId
     protected By progressBar;
+    @StoredId
+    protected By backwardButton;
+    @StoredId
+    protected By forwardButton;
 
 
     protected AbstractFnsTradingExperience(WebDriver webDriver) {

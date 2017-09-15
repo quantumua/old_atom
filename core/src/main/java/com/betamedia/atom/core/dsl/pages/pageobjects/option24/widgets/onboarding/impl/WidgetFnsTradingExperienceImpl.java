@@ -57,7 +57,12 @@ public class WidgetFnsTradingExperienceImpl extends AbstractFnsTradingExperience
 
     @Override
     public void assertProgressBar(TradingExperienceInfo tradingExperienceInfo, String... expectedProgress) {
+        //not necessary implementation for widgets
+    }
 
+    @Override
+    public void assertNavigationPossibilityBetweenSlides(TradingExperienceInfo tradingExperienceInfo) {
+        //not necessary implementation for widgets
     }
 
 
