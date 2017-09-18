@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="failed-login" verbose="1" parallel="methods" thread-count="5">
+    <test name="failed-login">
+        <classes>
+            <class name="com.betamedia.atom.testslibrary.option24.end2end.LoginPageTest">
+                <methods>
+                    <include name="parametrizedLoginTest"/>
+                    <parameter name="username" value="vasichka"/>
+                    <parameter name="password" value="123123"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
